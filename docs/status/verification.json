@@ -1,14 +1,15 @@
 {
   "date": "2026-10-12",
-  "status": "local_refined_draft_with_deployment_and_efficacy_gaps",
+  "status": "published_source_with_unsigned_preview_and_open_release_operations",
   "tests": {
     "command": "python3 -m unittest discover -s tests -p 'test_*.py'",
     "exit_code": 0,
-    "passed": 134,
+    "passed": 150,
     "runtime": 78,
     "validation": 43,
     "evaluation_runner": 8,
-    "distribution": 5
+    "distribution": 7,
+    "launcher": 14
   },
   "schema": {
     "tool": "jsonschema",
@@ -62,9 +63,7 @@
     "expert consultation",
     "live signed HTTPS release publication",
     "launchctl registration",
-    "real user global installation",
-    "commit",
-    "push"
+    "real user global installation"
   ],
   "source_sha256": {
     "specification/rules.json": "c3be69747df248d6ec76f00788cc38a6e72ff5bc952ad73f0c2a8f8a106e736c",
@@ -257,5 +256,22 @@
     "actual_extracted_install_smoke": "pass",
     "current_profile_loader_rules": 72,
     "current_profile_sha256": "282cbdcea153cf6eec5361eda2431c7d2ee2c66d04e71c3fca19639a875c46ee"
+  },
+  "publication": {
+    "first_system_commit": "24fab97a0444dbea8f50946fa362e312ace9e4dd",
+    "repository": "project820/korean-protocol",
+    "branch": "main",
+    "repository_private": true,
+    "user_authorized_commit_and_push_on": "2026-10-13"
+  },
+  "convenience_preview_package": {
+    "evidence": "../distribution/convenience-package-smoke.json",
+    "archive_sha256": "60ac5f76032d06477115a1e0cbe5ade8a9722c1325f8e984cd676032a1443c74",
+    "members": 25,
+    "signed": false,
+    "menu_tests": 14,
+    "distribution_tests": 7,
+    "chat_attachment": "KOREAN-PROTOCOL.md",
+    "chat_actual_account_setup_tested": false
   }
 }

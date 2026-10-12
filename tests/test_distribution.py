@@ -39,6 +39,21 @@ class DistributionTests(unittest.TestCase):
         build(self.root,other)
         self.assertEqual(self.output.read_bytes(),other.read_bytes())
 
+    def test_chat_attachment_preserves_full_rules_and_dictionaries(self):
+        build(self.root,self.output)
+        with zipfile.ZipFile(self.output) as archive:
+            name = next(n for n in archive.namelist() if n.endswith('/KOREAN-PROTOCOL.md'))
+            content = archive.read(name)
+            for source in ('pack/protocol.md','lexicon/core.json','lexicon/domains/software.json'):
+                self.assertIn((self.root/source).read_bytes(),content)
+
+    def test_launcher_is_next_to_runtime_in_archive(self):
+        build(self.root,self.output)
+        with zipfile.ZipFile(self.output) as archive:
+            entry = next(n for n in archive.namelist() if n.endswith('/runtime/kproto.py'))
+            start = entry.removesuffix('runtime/kproto.py')+'start.py'
+            self.assertIn(start,archive.namelist())
+
     def test_existing_output_is_preserved(self):
         self.output.write_bytes(b'existing')
         with self.assertRaises(FileExistsError):

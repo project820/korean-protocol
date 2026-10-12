@@ -1,0 +1,30 @@
+{
+  "archive_sha256": "60ac5f76032d06477115a1e0cbe5ade8a9722c1325f8e984cd676032a1443c74",
+  "archive_bytes": 369314,
+  "signed": false,
+  "steps": [
+    {
+      "step": "cancel-without-state",
+      "exit_code": 0
+    },
+    {
+      "step": "default-path-install-and-status",
+      "exit_code": 0
+    },
+    {
+      "step": "default-path-uninstall",
+      "exit_code": 0
+    }
+  ],
+  "scope": "temporary isolated default HOME and CODEX_HOME; no model calls",
+  "result": "pass",
+  "archive_members": 25,
+  "checksums_and_sources_match": true,
+  "chat_attachment_preserves_sources": true,
+  "relative_links_pass": true,
+  "version": "0.2.0",
+  "cache_files": 7,
+  "original_and_later_content_preserved": true,
+  "default_state_path_was_under_temporary_home": true,
+  "temporary_material_removed": true
+}
