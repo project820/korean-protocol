@@ -1,0 +1,5 @@
+{
+  "purpose": "Schema bytes added after refinement, verified identical to original frozen lexicon audit hash; original14-file manifest unchanged",
+  "path": "schemas/lexicon.schema.json",
+  "sha256": "bc19159b3216efbfddff2d1e69c4747718bc936dbe5217fe14d76004c1a55898"
+}

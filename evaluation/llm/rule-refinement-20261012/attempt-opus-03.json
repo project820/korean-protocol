@@ -1,0 +1,17 @@
+{
+  "condition_call": 3,
+  "original_entry": {
+    "call": 3,
+    "directory": "03-supplement6-baseline",
+    "condition": "baseline",
+    "gold": "supplement6-gold.json",
+    "prompt": "supplement6-prompt.txt",
+    "mode": "edit",
+    "scope": "reused supplement6 targeted candidate diagnostic; not independent efficacy"
+  },
+  "attempt_started_at": "2026-10-12T14:17:19.972710+00:00",
+  "replacement_model": "anthropic/claude-opus-5-5",
+  "replacement_effort": "high",
+  "fixed_total_attempt_limit": 5,
+  "original_sol_service_failure_count": 1
+}

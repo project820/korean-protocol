@@ -1,0 +1,216 @@
+{
+  "ok": true,
+  "errors": [],
+  "gaps": [
+    {
+      "path": "specification/ste-crosswalk.json.items[0]",
+      "message": "Rule KP-WRD-001 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[0]",
+      "message": "Source function is partial."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[0]",
+      "message": "세 진입 경로와 뜻·범위·결합 기록은 생겼지만 미등록 일반 표현도 문맥이 명확하면 유지 후보로 둔다. 원본의 승인 어휘 집합 안에서만 작성하는 폐쇄 통제는 수행하지 않는다. 미등록 의미를 추측하지 않는 사례는 충족하나 어휘 사용 범위의 통제 강도가 달라 부분 대응이다."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[4]",
+      "message": "Rule KP-WRD-004 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[5]",
+      "message": "Rule KP-WRD-004 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[5]",
+      "message": "Rule KP-WRD-007 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[11]",
+      "message": "Rule KP-WRD-007 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[17]",
+      "message": "Rule KP-NUM-006 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[19]",
+      "message": "Rule KP-KO-004 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[20]",
+      "message": "Rule KP-VER-005 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[22]",
+      "message": "Rule KP-NAM-003 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[24]",
+      "message": "Rule KP-KO-002 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[24]",
+      "message": "Rule KP-TXT-006 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[27]",
+      "message": "Rule KP-TXT-005 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[28]",
+      "message": "Source function is partial."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[28]",
+      "message": "독립 행동 단위와 30어절·절·주체 트리거는 구체적으로 정의됐다. 그러나 원본의 강제 문장 길이 제한을 수동 재검토 신호로 바꾸며 기준을 넘겨도 유지할 수 있으므로 동일한 상한 통제 기능은 완전 대응으로 계산하지 않는다."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[30]",
+      "message": "Rule KP-PROC-006 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[30]",
+      "message": "Rule KP-WARN-004 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[31]",
+      "message": "Rule KP-PROC-006 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[31]",
+      "message": "Rule KP-WARN-002 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[34]",
+      "message": "Rule KP-TXT-006 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[34]",
+      "message": "Rule KP-NUM-003 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[35]",
+      "message": "Source function is partial."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[35]",
+      "message": "설명문은 어절·절·수식·주체를 재현 가능한 절차로 검토하지만 원본의 강제 길이 상한 대신 초과 시 수동 검토를 사용한다. 짧은 모호 문장을 잡는 장점과 별개로 상한을 보장하지 않으므로 부분 대응이다."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[37]",
+      "message": "Rule KP-DESC-005 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[38]",
+      "message": "Source function is partial."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[38]",
+      "message": "여섯 문장 초과를 검토 신호로 정의하고 유지 이유를 기록하지만 원본의 강제 문단 길이 제한과 달리 예외적으로 초과를 허용한다. 구조 검토의 존재만으로 상한 통제까지 완전 대응했다고 계산하지 않는다."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[40]",
+      "message": "Rule KP-PROC-007 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[47]",
+      "message": "Rule KP-NUM-002 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[47]",
+      "message": "Rule KP-NUM-003 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[47]",
+      "message": "Rule KP-NUM-004 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[47]",
+      "message": "Rule KP-NUM-005 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[47]",
+      "message": "Rule KP-NUM-006 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[49]",
+      "message": "Rule KP-EDIT-003 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[49]",
+      "message": "Rule KP-SYN-004 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[49]",
+      "message": "Rule KP-KO-003 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[50]",
+      "message": "Rule KP-EDIT-004 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[50]",
+      "message": "Rule KP-EDIT-005 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[50]",
+      "message": "Rule KP-WRD-002 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[50]",
+      "message": "Rule KP-KO-002 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[50]",
+      "message": "Rule KP-KO-006 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[50]",
+      "message": "Rule KP-PROC-006 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[50]",
+      "message": "Rule KP-NUM-004 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[51]",
+      "message": "Rule KP-EDIT-004 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[52]",
+      "message": "Rule KP-EDIT-005 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[52]",
+      "message": "Rule KP-KO-006 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[52]",
+      "message": "Rule KP-DESC-005 has a related source reference but is not selected as an actual functional contribution."
+    },
+    {
+      "path": "specification/ste-crosswalk.json.items[52]",
+      "message": "Rule KP-TXT-006 has a related source reference but is not selected as an actual functional contribution."
+    }
+  ],
+  "coverage": {
+    "designed_count": 49,
+    "verified_count": 49,
+    "partial_count": 4,
+    "unmapped_count": 0,
+    "source_count": 53,
+    "designed_ratio": 0.9245283018867925,
+    "verified_ratio": 0.9245283018867925,
+    "unconfirmed_count": 4,
+    "semantically_unconfirmed_count": 53,
+    "verified_kind": "verified_functional_design"
+  },
+  "semantic_verified": false,
+  "limitations": [
+    "Static validation checks structure, references, and case invariants only.",
+    "verified_functional_design validates a recorded review artifact; it does not independently repeat that review.",
+    "LLM meaning preservation, reader comprehension, and 90% semantic performance require separate execution and human evaluation."
+  ]
+}

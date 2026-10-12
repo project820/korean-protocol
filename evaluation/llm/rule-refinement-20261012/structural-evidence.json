@@ -1,0 +1,75 @@
+{
+  "original_freeze_hashes_match": true,
+  "capacity_amendment_hashes_match": true,
+  "profile_sha256": "282cbdcea153cf6eec5361eda2431c7d2ee2c66d04e71c3fca19639a875c46ee",
+  "profile_bytes": 28627,
+  "total_actual_attempts": 5,
+  "sol_service_capacity_failures_without_output": 1,
+  "opus_output_captures": 4,
+  "original_four_attempt_cap_was_amended": true,
+  "no_extra_probes": true,
+  "original_runner_sha256_matches": true,
+  "supplement_baseline_treatment_prompt_bytes_equal": true,
+  "prompt_gold_field_names_absent": true,
+  "captured_runs": [
+    {
+      "directory": "opus-01-edit26-treatment",
+      "case_count": 26,
+      "condition": "treatment",
+      "exit_code": 0,
+      "structure_valid": true,
+      "requested_model": "anthropic/claude-opus-5-5",
+      "effort": "high",
+      "FALLBACK_label_present": false,
+      "prompt_sha256": "942818e70955703ce88f2a1e767b46934f617dcc5f800c84fc58d3f820208c5a",
+      "final_sha256": "5f1591e66f67e8b8b765da5731bb3f12aa22a0fa1a613a6f04120486644d4af8",
+      "upstream_provider_observed": null
+    },
+    {
+      "directory": "opus-02-validation12-treatment",
+      "case_count": 12,
+      "condition": "treatment",
+      "exit_code": 0,
+      "structure_valid": true,
+      "requested_model": "anthropic/claude-opus-5-5",
+      "effort": "high",
+      "FALLBACK_label_present": false,
+      "prompt_sha256": "6f2de705cfe4c6edf110a3b4f8e27168be65595c48cc215f7cc5b79c4967e96c",
+      "final_sha256": "41e9199708adc2f5866a5c61e04b28faf2375f1c51e6619ab92bb609f0d00283",
+      "upstream_provider_observed": null
+    },
+    {
+      "directory": "opus-03-supplement6-baseline",
+      "case_count": 6,
+      "condition": "baseline",
+      "exit_code": 0,
+      "structure_valid": true,
+      "requested_model": "anthropic/claude-opus-5-5",
+      "effort": "high",
+      "FALLBACK_label_present": false,
+      "prompt_sha256": "852243a6babf8d512514cc65705b37a348929724b2a7128c59465e852a0bb4ab",
+      "final_sha256": "ff1202ddbc0e52c0288bef34e6d7daa1739e3e8b6ccf1e768103c9ed64ef4ede",
+      "upstream_provider_observed": null
+    },
+    {
+      "directory": "opus-04-supplement6-treatment",
+      "case_count": 6,
+      "condition": "treatment",
+      "exit_code": 0,
+      "structure_valid": true,
+      "requested_model": "anthropic/claude-opus-5-5",
+      "effort": "high",
+      "FALLBACK_label_present": false,
+      "prompt_sha256": "852243a6babf8d512514cc65705b37a348929724b2a7128c59465e852a0bb4ab",
+      "final_sha256": "f368d432138f8a1a40b4685f616138808cafbe505af621ac6e106045729c9552",
+      "upstream_provider_observed": null
+    }
+  ],
+  "semantic_pass_claimed": false,
+  "overall_accuracy": null,
+  "limitations": [
+    "Upstream/fallback provider identity is not returned by CLI; no FALLBACK label observed in captures.",
+    "Edit26 andvalidation12 are reused regression criteria checks; historical Sol comparisons are not causal.",
+    "Supplement6 pair is reused-case targeted diagnostic, not new independent efficacy."
+  ]
+}

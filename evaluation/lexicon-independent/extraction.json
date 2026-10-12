@@ -1,0 +1,5638 @@
+{
+  "source_root": "/Users/m5max/.codex/worktrees/korean-protocol-integration/ASD-STE100 Kor",
+  "sources": [
+    {
+      "path": "schemas/lexicon.schema.json",
+      "sha256": "bc19159b3216efbfddff2d1e69c4747718bc936dbe5217fe14d76004c1a55898",
+      "bytes": 7417
+    },
+    {
+      "path": "lexicon/core.json",
+      "sha256": "92ae772abcb40267e562fe3c7e8bceec8d0a9479de96cb48d9f1401cfff15e27",
+      "bytes": 287492
+    },
+    {
+      "path": "lexicon/domains/software.json",
+      "sha256": "43c0d51aa1ec6dc2edddd0ff1b1efbd88711cd0638e1666fc258c0e5db3de767",
+      "bytes": 41950
+    },
+    {
+      "path": "docs/spec/lexicon.md",
+      "sha256": "f0690e21da862a5cb24637c925d18a2d9ea252644c8015397eb779a49ba7e7b7",
+      "bytes": 35143
+    },
+    {
+      "path": "docs/spec/korean-rules.md",
+      "sha256": "10aa7cd07fab89505fdbdc95e3948c721655f8ca7a0378b73deac0286d1ee9ae",
+      "bytes": 171426
+    }
+  ],
+  "entries": [
+    {
+      "id": "KPL-0001",
+      "lemma": "저장하다",
+      "sense_id": "persist",
+      "pos": "동사",
+      "meaning": "파일이나 설정을 다시 사용할 수 있는 저장소에 기록하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "저장하다",
+        "저장합니다",
+        "저장했습니다",
+        "저장하세요"
+      ],
+      "frames": [
+        "대상을 저장소에 저장하다"
+      ],
+      "conditions": [
+        "저장소가 문맥에서 하나로 식별되면 생략한다."
+      ],
+      "avoid_senses": [
+        "서버 적용이나 외부 공개가 끝났다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/0",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0002",
+      "lemma": "보존하다",
+      "sense_id": "retain",
+      "pos": "동사",
+      "meaning": "정한 대상의 내용이나 상태를 훼손하지 않고 남겨 두다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "보존하다",
+        "보존합니다",
+        "보존했습니다",
+        "보존하세요"
+      ],
+      "frames": [
+        "대상의 내용을 보존하다"
+      ],
+      "conditions": [
+        "보존할 범위가 전체인지 일부인지 구별한다."
+      ],
+      "avoid_senses": [
+        "그 대상을 현재 상태로 계속 작동시킨다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/1",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0003",
+      "lemma": "유지하다",
+      "sense_id": "maintain",
+      "pos": "동사",
+      "meaning": "대상의 상태나 수준을 지정한 기간 또는 조건 동안 이어 가다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "유지하다",
+        "유지합니다",
+        "유지했습니다",
+        "유지하세요"
+      ],
+      "frames": [
+        "상태를 유지하다"
+      ],
+      "conditions": [
+        "지속해야 하는 상태와 끝나는 조건을 함께 읽는다."
+      ],
+      "avoid_senses": [
+        "새로 생성하거나 원래 상태로 돌린다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/2",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0004",
+      "lemma": "변경하다",
+      "sense_id": "change",
+      "pos": "동사",
+      "meaning": "현재 값이나 상태를 다른 값이나 상태로 바꾸다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "변경하다",
+        "변경합니다",
+        "변경했습니다",
+        "변경하세요"
+      ],
+      "frames": [
+        "대상을 새 값으로 변경하다"
+      ],
+      "conditions": [
+        "보고에서는 변경한 범위를 식별한다."
+      ],
+      "avoid_senses": [
+        "변경을 계획했다는 뜻과 구별한다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/3",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0005",
+      "lemma": "수정하다",
+      "sense_id": "edit",
+      "pos": "동사",
+      "meaning": "대상의 일부 내용을 고치다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "수정하다",
+        "수정합니다",
+        "수정했습니다",
+        "수정하세요"
+      ],
+      "frames": [
+        "문서의 부분을 수정하다"
+      ],
+      "conditions": [
+        "새 문서를 만드는 행동과 구별한다."
+      ],
+      "avoid_senses": [
+        "수정 결과가 옳다고 검증됐다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/4",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0006",
+      "lemma": "추가하다",
+      "sense_id": "add",
+      "pos": "동사",
+      "meaning": "기존 대상이나 집합에 새 요소를 넣다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "추가하다",
+        "추가합니다",
+        "추가했습니다",
+        "추가하세요"
+      ],
+      "frames": [
+        "집합에 요소를 추가하다"
+      ],
+      "conditions": [
+        "요소의 추가와 기존 요소의 대체를 구별한다."
+      ],
+      "avoid_senses": [
+        "기존 요소를 없앤다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/5",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0007",
+      "lemma": "제거하다",
+      "sense_id": "remove",
+      "pos": "동사",
+      "meaning": "대상에서 요소를 떼거나 없애다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "제거하다",
+        "제거합니다",
+        "제거했습니다",
+        "제거하세요"
+      ],
+      "frames": [
+        "대상에서 요소를 제거하다"
+      ],
+      "conditions": [
+        "제거 위치를 문맥으로 식별한다."
+      ],
+      "avoid_senses": [
+        "모든 사본을 영구 삭제한다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/6",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0008",
+      "lemma": "삭제하다",
+      "sense_id": "delete",
+      "pos": "동사",
+      "meaning": "파일이나 기록 등의 대상을 해당 저장 위치에서 없애다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "삭제하다",
+        "삭제합니다",
+        "삭제했습니다",
+        "삭제하세요"
+      ],
+      "frames": [
+        "저장 위치에서 대상을 삭제하다"
+      ],
+      "conditions": [
+        "영구 삭제 여부는 저장소의 실제 동작에 따른다."
+      ],
+      "avoid_senses": [
+        "연결 해제나 화면 숨김과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/7",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0009",
+      "lemma": "대체하다",
+      "sense_id": "replace",
+      "pos": "동사",
+      "meaning": "기존 요소가 맡던 자리에 다른 요소를 넣다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "대체하다",
+        "대체합니다",
+        "대체했습니다",
+        "대체하세요"
+      ],
+      "frames": [
+        "기존 요소를 새 요소로 대체하다"
+      ],
+      "conditions": [
+        "원래 요소와 새 요소를 구별한다."
+      ],
+      "avoid_senses": [
+        "새 요소를 별도로 추가하는 뜻과 구별한다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/8",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0010",
+      "lemma": "복사하다",
+      "sense_id": "copy",
+      "pos": "동사",
+      "meaning": "원래 대상을 남기고 그와 같은 내용의 사본을 만들다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "복사하다",
+        "복사합니다",
+        "복사했습니다",
+        "복사하세요"
+      ],
+      "frames": [
+        "대상을 위치로 복사하다"
+      ],
+      "conditions": [
+        "사본의 범위와 위치가 작업에 필요하면 남긴다."
+      ],
+      "avoid_senses": [
+        "원본을 옮기거나 삭제한다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/9",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0011",
+      "lemma": "이동하다",
+      "sense_id": "move",
+      "pos": "동사",
+      "meaning": "대상의 위치를 다른 곳으로 바꾸다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "이동하다",
+        "이동합니다",
+        "이동했습니다",
+        "이동하세요"
+      ],
+      "frames": [
+        "대상을 위치로 이동하다"
+      ],
+      "conditions": [
+        "자료 이동에서는 원래 위치에 남는지 실제 동작을 확인한다."
+      ],
+      "avoid_senses": [
+        "복사본 생성만으로 이동 완료를 말하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/10",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0012",
+      "lemma": "복원하다",
+      "sense_id": "restore",
+      "pos": "동사",
+      "meaning": "없어지거나 바뀐 대상을 식별된 이전 상태로 돌리다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "복원하다",
+        "복원합니다",
+        "복원했습니다",
+        "복원하세요"
+      ],
+      "frames": [
+        "대상을 기준 상태로 복원하다"
+      ],
+      "conditions": [
+        "기준 시점이나 사본이 여러 개면 밝힌다."
+      ],
+      "avoid_senses": [
+        "임의의 초기 상태로 바꾸는 뜻과 구별한다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/11",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0013",
+      "lemma": "초기화하다",
+      "sense_id": "initialize",
+      "pos": "동사",
+      "meaning": "대상을 지정된 초기 상태로 설정하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "초기화하다",
+        "초기화합니다",
+        "초기화했습니다",
+        "초기화하세요"
+      ],
+      "frames": [
+        "대상을 초기 상태로 초기화하다"
+      ],
+      "conditions": [
+        "지워지는 사용자 값이 있으면 관련 절차에서 밝힌다."
+      ],
+      "avoid_senses": [
+        "이전 사용자 상태를 복구하는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/12",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0014",
+      "lemma": "열다",
+      "sense_id": "open_document",
+      "pos": "동사",
+      "meaning": "문서나 화면의 내용을 사용할 수 있게 표시하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "열다",
+        "엽니다",
+        "열었습니다",
+        "여세요",
+        "열면"
+      ],
+      "frames": [
+        "파일이나 화면을 열다"
+      ],
+      "conditions": [
+        "물리적 개방 뜻은 별도 의미로 관리한다."
+      ],
+      "avoid_senses": [
+        "파일 접근 권한을 부여하는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/13",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0015",
+      "lemma": "열다",
+      "sense_id": "open_cover",
+      "pos": "동사",
+      "meaning": "닫힌 덮개나 통로를 움직여 개방하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "열다",
+        "엽니다",
+        "열었습니다",
+        "여세요",
+        "열면"
+      ],
+      "frames": [
+        "덮개나 문을 열다"
+      ],
+      "conditions": [
+        "열 때 유지해야 하는 조건을 보존한다."
+      ],
+      "avoid_senses": [
+        "전자 문서를 표시하는 뜻과 구별한다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/14",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0016",
+      "lemma": "닫다",
+      "sense_id": "close_view",
+      "pos": "동사",
+      "meaning": "사용 중인 화면이나 문서의 표시를 끝내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "닫다",
+        "닫습니다",
+        "닫았습니다",
+        "닫으세요",
+        "닫으면"
+      ],
+      "frames": [
+        "화면이나 문서를 닫다"
+      ],
+      "conditions": [
+        "저장 여부는 닫기 동작과 별도로 판단한다."
+      ],
+      "avoid_senses": [
+        "문서 삭제나 작업 완료라는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/15",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0017",
+      "lemma": "닫다",
+      "sense_id": "close_cover",
+      "pos": "동사",
+      "meaning": "열린 문이나 덮개를 움직여 막힌 상태로 만들다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "닫다",
+        "닫습니다",
+        "닫았습니다",
+        "닫으세요",
+        "닫으면"
+      ],
+      "frames": [
+        "문이나 덮개를 닫다"
+      ],
+      "conditions": [
+        "잠금이 별도 행동이면 구별한다."
+      ],
+      "avoid_senses": [
+        "잠금까지 끝났다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/16",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0018",
+      "lemma": "연결하다",
+      "sense_id": "connect",
+      "pos": "동사",
+      "meaning": "두 대상을 서로 통하거나 함께 사용할 수 있도록 잇다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "연결하다",
+        "연결합니다",
+        "연결했습니다",
+        "연결하세요"
+      ],
+      "frames": [
+        "대상을 다른 대상에 연결하다"
+      ],
+      "conditions": [
+        "물리 연결과 서비스 연결의 범위를 문맥에서 정한다."
+      ],
+      "avoid_senses": [
+        "접속 성공이나 인증 완료를 보장하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/17",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0019",
+      "lemma": "분리하다",
+      "sense_id": "disconnect",
+      "pos": "동사",
+      "meaning": "이어진 대상의 연결을 끊거나 붙어 있는 부분을 떼다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "분리하다",
+        "분리합니다",
+        "분리했습니다",
+        "분리하세요"
+      ],
+      "frames": [
+        "대상을 다른 대상에서 분리하다"
+      ],
+      "conditions": [
+        "분리할 연결을 하나로 식별한다."
+      ],
+      "avoid_senses": [
+        "대상을 폐기한다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/18",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0020",
+      "lemma": "설치하다",
+      "sense_id": "install",
+      "pos": "동사",
+      "meaning": "장치나 프로그램을 사용할 위치에 갖추어 놓다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "설치하다",
+        "설치합니다",
+        "설치했습니다",
+        "설치하세요"
+      ],
+      "frames": [
+        "대상을 위치에 설치하다"
+      ],
+      "conditions": [
+        "설치와 작동 확인을 별도 단계로 보고한다."
+      ],
+      "avoid_senses": [
+        "정상 동작 검증을 마쳤다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/19",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0021",
+      "lemma": "실행하다",
+      "sense_id": "run",
+      "pos": "동사",
+      "meaning": "정한 프로그램이나 행동을 실제로 수행하기 시작하거나 수행하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "실행하다",
+        "실행합니다",
+        "실행했습니다",
+        "실행하세요"
+      ],
+      "frames": [
+        "명령이나 절차를 실행하다"
+      ],
+      "conditions": [
+        "시작·종료·성공 중 무엇을 확인했는지 구별한다."
+      ],
+      "avoid_senses": [
+        "성공이나 완료를 자동으로 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/20",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0022",
+      "lemma": "시작하다",
+      "sense_id": "start",
+      "pos": "동사",
+      "meaning": "아직 하지 않던 활동의 첫 단계에 들어가다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "시작하다",
+        "시작합니다",
+        "시작했습니다",
+        "시작하세요"
+      ],
+      "frames": [
+        "활동을 시작하다"
+      ],
+      "conditions": [
+        "시작 사실만 알려졌으면 종료를 추가하지 않는다."
+      ],
+      "avoid_senses": [
+        "활동을 마쳤다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/21",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0023",
+      "lemma": "진행하다",
+      "sense_id": "carry_out",
+      "pos": "동사",
+      "meaning": "활동이나 행사를 이끌어 수행하거나 이어 가다. 완료 여부는 이 말만으로 정해지지 않는다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "진행하다",
+        "진행합니다",
+        "진행했습니다",
+        "진행하세요"
+      ],
+      "frames": [
+        "활동을 진행하다"
+      ],
+      "conditions": [
+        "완료 여부는 활동의 종류와 문맥으로 판단하며 일부만 수행했다고도 단정하지 않는다."
+      ],
+      "avoid_senses": [
+        "이 말만으로 모든 단계의 완료 또는 일부 수행만을 확정하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/22",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0024",
+      "lemma": "중단하다",
+      "sense_id": "interrupt",
+      "pos": "동사",
+      "meaning": "이어지는 활동을 완료 전에 멈추다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "중단하다",
+        "중단합니다",
+        "중단했습니다",
+        "중단하세요"
+      ],
+      "frames": [
+        "활동을 중단하다"
+      ],
+      "conditions": [
+        "일시 중단인지 최종 종료인지 필요할 때 밝힌다."
+      ],
+      "avoid_senses": [
+        "성공적으로 마쳤다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/23",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0025",
+      "lemma": "재개하다",
+      "sense_id": "resume",
+      "pos": "동사",
+      "meaning": "멈춘 활동을 이어서 다시 수행하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "재개하다",
+        "재개합니다",
+        "재개했습니다",
+        "재개하세요"
+      ],
+      "frames": [
+        "중단한 활동을 재개하다"
+      ],
+      "conditions": [
+        "처음부터 새로 수행하는 행동과 구별한다."
+      ],
+      "avoid_senses": [
+        "새 작업을 시작한다는 뜻과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/24",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0026",
+      "lemma": "종료하다",
+      "sense_id": "end",
+      "pos": "동사",
+      "meaning": "진행 중인 활동이나 연결을 끝내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "종료하다",
+        "종료합니다",
+        "종료했습니다",
+        "종료하세요"
+      ],
+      "frames": [
+        "활동이나 연결을 종료하다"
+      ],
+      "conditions": [
+        "종료가 성공인지 실패인지 따로 알린다."
+      ],
+      "avoid_senses": [
+        "요구 결과를 달성했다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/25",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0027",
+      "lemma": "완료하다",
+      "sense_id": "complete",
+      "pos": "동사",
+      "meaning": "정해진 범위의 활동을 끝까지 수행하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "완료하다",
+        "완료합니다",
+        "완료했습니다",
+        "완료하세요"
+      ],
+      "frames": [
+        "정한 활동을 완료하다"
+      ],
+      "conditions": [
+        "범위의 모든 필수 단계가 끝났을 때 쓴다."
+      ],
+      "avoid_senses": [
+        "시작·부분 수행·단순 종료를 완료로 부르지 않는다."
+      ],
+      "alternatives": [
+        {
+          "entry_id": "KPL-0028",
+          "relation": "contextual",
+          "condition": "완료가 확인된 일반 서술 문장에서 활동의 끝을 직접 말할 때 선택한다. 화면의 상태명이나 규정의 용어인 완료는 바꾸지 않는다."
+        }
+      ],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/26",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0028",
+      "lemma": "마치다",
+      "sense_id": "finish",
+      "pos": "동사",
+      "meaning": "정한 활동의 끝에 이르러 더 수행할 부분이 없게 하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "마치다",
+        "마칩니다",
+        "마쳤습니다",
+        "마치세요"
+      ],
+      "frames": [
+        "활동을 마치다"
+      ],
+      "conditions": [
+        "정한 범위가 독자에게 알려져 있어야 한다."
+      ],
+      "avoid_senses": [
+        "진행 보고의 간결한 대체어로 자동 사용하지 않는다."
+      ],
+      "alternatives": [
+        {
+          "entry_id": "KPL-0027",
+          "relation": "contextual",
+          "condition": "필수 단계 종료가 확인됐으며 해당 절차 문서가 완료라는 상태 용어를 일관되게 쓰는 경우 선택한다."
+        }
+      ],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/27",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0029",
+      "lemma": "확인하다",
+      "sense_id": "check",
+      "pos": "동사",
+      "meaning": "대상을 살펴 특정 사실이나 상태가 맞는지 알아보다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "확인하다",
+        "확인합니다",
+        "확인했습니다",
+        "확인하세요"
+      ],
+      "frames": [
+        "대상의 상태를 확인하다"
+      ],
+      "conditions": [
+        "무엇을 확인했는지 결과 문맥에서 식별한다."
+      ],
+      "avoid_senses": [
+        "합격 기준의 충족을 모두 검증했다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/28",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0030",
+      "lemma": "검증하다",
+      "sense_id": "verify",
+      "pos": "동사",
+      "meaning": "대상이 명시된 요구나 기준을 충족하는지 근거로 판단하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "검증하다",
+        "검증합니다",
+        "검증했습니다",
+        "검증하세요"
+      ],
+      "frames": [
+        "대상을 기준에 따라 검증하다"
+      ],
+      "conditions": [
+        "기준과 근거가 실제로 있어야 한다."
+      ],
+      "avoid_senses": [
+        "잠깐 보거나 실행만 한 행동을 검증이라 하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/29",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0031",
+      "lemma": "검토하다",
+      "sense_id": "review",
+      "pos": "동사",
+      "meaning": "판단이나 수정이 필요한지 내용을 살펴 따져 보다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "검토하다",
+        "검토합니다",
+        "검토했습니다",
+        "검토하세요"
+      ],
+      "frames": [
+        "자료나 제안을 검토하다"
+      ],
+      "conditions": [
+        "검토와 승인 결정을 구별한다."
+      ],
+      "avoid_senses": [
+        "검토 대상이 승인됐다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/30",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0032",
+      "lemma": "시험하다",
+      "sense_id": "test",
+      "pos": "동사",
+      "meaning": "조건을 정해 대상을 작동시키거나 조사해 결과를 얻다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "시험하다",
+        "시험합니다",
+        "시험했습니다",
+        "시험하세요"
+      ],
+      "frames": [
+        "대상을 조건에서 시험하다"
+      ],
+      "conditions": [
+        "실행한 조건과 관찰한 결과를 구별한다."
+      ],
+      "avoid_senses": [
+        "한 조건의 결과를 모든 조건으로 확대하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/31",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0033",
+      "lemma": "측정하다",
+      "sense_id": "measure",
+      "pos": "동사",
+      "meaning": "대상의 양이나 정도를 정한 방법으로 수치화하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "측정하다",
+        "측정합니다",
+        "측정했습니다",
+        "측정하세요"
+      ],
+      "frames": [
+        "대상의 양을 단위로 측정하다"
+      ],
+      "conditions": [
+        "수치에는 필요한 단위와 측정 조건을 남긴다."
+      ],
+      "avoid_senses": [
+        "추정값을 직접 측정값으로 부르지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/32",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0034",
+      "lemma": "관찰하다",
+      "sense_id": "observe",
+      "pos": "동사",
+      "meaning": "대상의 실제 상태나 변화를 살펴 기록하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "관찰하다",
+        "관찰합니다",
+        "관찰했습니다",
+        "관찰하세요"
+      ],
+      "frames": [
+        "대상의 현상을 관찰하다"
+      ],
+      "conditions": [
+        "관찰한 현상과 원인 추론을 구별한다."
+      ],
+      "avoid_senses": [
+        "원인을 입증했다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/33",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0035",
+      "lemma": "비교하다",
+      "sense_id": "compare",
+      "pos": "동사",
+      "meaning": "둘 이상의 대상에서 같은 기준에 따른 같고 다른 점을 살피다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "비교하다",
+        "비교합니다",
+        "비교했습니다",
+        "비교하세요"
+      ],
+      "frames": [
+        "대상들을 기준으로 비교하다"
+      ],
+      "conditions": [
+        "단위와 비교 기준을 맞춘다."
+      ],
+      "avoid_senses": [
+        "차이만으로 원인을 확정하는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/34",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0036",
+      "lemma": "판단하다",
+      "sense_id": "judge",
+      "pos": "동사",
+      "meaning": "근거나 기준에 따라 대상의 상태나 선택을 정하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "판단하다",
+        "판단합니다",
+        "판단했습니다",
+        "판단하세요"
+      ],
+      "frames": [
+        "대상을 상태로 판단하다"
+      ],
+      "conditions": [
+        "판단 결과와 관찰 사실을 구별한다."
+      ],
+      "avoid_senses": [
+        "직접 관찰된 사실 자체를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/35",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0037",
+      "lemma": "추정하다",
+      "sense_id": "estimate",
+      "pos": "동사",
+      "meaning": "직접 확인하지 못한 값이나 상태를 근거를 이용해 어림하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "추정하다",
+        "추정합니다",
+        "추정했습니다",
+        "추정하세요"
+      ],
+      "frames": [
+        "대상의 값이나 상태를 추정하다"
+      ],
+      "conditions": [
+        "추정임을 결과에도 유지한다."
+      ],
+      "avoid_senses": [
+        "청구 금액이나 측정 사실로 바꾸지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/36",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0038",
+      "lemma": "예상하다",
+      "sense_id": "predict",
+      "pos": "동사",
+      "meaning": "앞으로의 상태나 결과를 미리 판단하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "예상하다",
+        "예상합니다",
+        "예상했습니다",
+        "예상하세요"
+      ],
+      "frames": [
+        "미래 상태를 예상하다"
+      ],
+      "conditions": [
+        "예상 시점과 확정된 약속을 구별한다."
+      ],
+      "avoid_senses": [
+        "일정 확정이나 결과 보장과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/37",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0039",
+      "lemma": "알다",
+      "sense_id": "know",
+      "pos": "동사",
+      "meaning": "사실이나 정보를 이해하거나 알고 있는 상태에 있다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "알다",
+        "압니다",
+        "알았습니다",
+        "알지 못합니다"
+      ],
+      "frames": [
+        "대상의 사실을 알다"
+      ],
+      "conditions": [
+        "알지 못하는 내용을 아는 것으로 쓰지 않는다."
+      ],
+      "avoid_senses": [
+        "추정만 가진 상태를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/38",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0040",
+      "lemma": "찾다",
+      "sense_id": "locate",
+      "pos": "동사",
+      "meaning": "자료나 위치를 살펴 원하는 대상을 발견하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "찾다",
+        "찾습니다",
+        "찾았습니다",
+        "찾으세요"
+      ],
+      "frames": [
+        "대상이나 위치를 찾다"
+      ],
+      "conditions": [
+        "찾는 행동과 실제 발견 결과를 구별한다."
+      ],
+      "avoid_senses": [
+        "대상의 적합성 확인을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/39",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0041",
+      "lemma": "참조하다",
+      "sense_id": "refer",
+      "pos": "동사",
+      "meaning": "다른 자료나 위치를 판단 또는 행동의 근거로 살펴보다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "참조하다",
+        "참조합니다",
+        "참조했습니다",
+        "참조하세요"
+      ],
+      "frames": [
+        "식별된 자료를 참조하다"
+      ],
+      "conditions": [
+        "자료가 여럿이면 제목이나 위치를 밝힌다."
+      ],
+      "avoid_senses": [
+        "참조 자료를 그대로 적용해야 한다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/40",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0042",
+      "lemma": "인용하다",
+      "sense_id": "quote",
+      "pos": "동사",
+      "meaning": "다른 자료의 표현을 출처를 밝히며 가져오다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "인용하다",
+        "인용합니다",
+        "인용했습니다",
+        "인용하세요"
+      ],
+      "frames": [
+        "출처의 표현을 인용하다"
+      ],
+      "conditions": [
+        "원문의 범위와 자체 해석을 구별한다."
+      ],
+      "avoid_senses": [
+        "내용을 직접 검증했다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/41",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0043",
+      "lemma": "기록하다",
+      "sense_id": "record",
+      "pos": "동사",
+      "meaning": "관찰하거나 전달한 내용을 나중에 확인할 수 있게 남기다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "기록하다",
+        "기록합니다",
+        "기록했습니다",
+        "기록하세요"
+      ],
+      "frames": [
+        "내용을 기록 위치에 기록하다"
+      ],
+      "conditions": [
+        "사실과 의견을 서로 식별할 수 있게 적는다."
+      ],
+      "avoid_senses": [
+        "기록 내용의 참됨을 검증하는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/42",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0044",
+      "lemma": "보고하다",
+      "sense_id": "report",
+      "pos": "동사",
+      "meaning": "확인한 상태나 판단을 담당 독자에게 알리다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "보고하다",
+        "보고합니다",
+        "보고했습니다",
+        "보고하세요"
+      ],
+      "frames": [
+        "상태나 결과를 담당자에게 보고하다"
+      ],
+      "conditions": [
+        "관찰 범위와 판단 근거를 필요 수준으로 남긴다."
+      ],
+      "avoid_senses": [
+        "외부 공개나 상대의 승인을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/43",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0045",
+      "lemma": "알리다",
+      "sense_id": "notify",
+      "pos": "동사",
+      "meaning": "상대가 특정 사실이나 상태를 알 수 있게 전달하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "알리다",
+        "알립니다",
+        "알렸습니다",
+        "알리세요"
+      ],
+      "frames": [
+        "내용을 상대에게 알리다"
+      ],
+      "conditions": [
+        "전달과 상대의 수신 확인을 구별한다."
+      ],
+      "avoid_senses": [
+        "상대가 읽거나 동의했다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/44",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0046",
+      "lemma": "요청하다",
+      "sense_id": "request",
+      "pos": "동사",
+      "meaning": "상대에게 행동이나 응답을 해 달라고 전달하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "요청하다",
+        "요청합니다",
+        "요청했습니다",
+        "요청하세요"
+      ],
+      "frames": [
+        "상대에게 행동을 요청하다"
+      ],
+      "conditions": [
+        "요청과 승인 또는 실제 수행을 구별한다."
+      ],
+      "avoid_senses": [
+        "행동을 강제하는 명령으로 자동 바꾸지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/45",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0047",
+      "lemma": "승인하다",
+      "sense_id": "approve",
+      "pos": "동사",
+      "meaning": "권한자가 정한 대상이나 행동을 허용하는 결정을 내리다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "승인하다",
+        "승인합니다",
+        "승인했습니다",
+        "승인하세요"
+      ],
+      "frames": [
+        "권한자가 대상을 승인하다"
+      ],
+      "conditions": [
+        "검토한 사실과 승인 결정을 구별한다."
+      ],
+      "avoid_senses": [
+        "결정만으로 실행 완료를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/46",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0048",
+      "lemma": "거부하다",
+      "sense_id": "reject",
+      "pos": "동사",
+      "meaning": "제안이나 요청을 받아들이지 않는 결정을 내리다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "거부하다",
+        "거부합니다",
+        "거부했습니다",
+        "거부하세요"
+      ],
+      "frames": [
+        "요청이나 제안을 거부하다"
+      ],
+      "conditions": [
+        "기술적 실패와 권한자의 거부 결정을 구별한다."
+      ],
+      "avoid_senses": [
+        "수행할 수 없다는 능력 부족과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/47",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0049",
+      "lemma": "허용하다",
+      "sense_id": "permit",
+      "pos": "동사",
+      "meaning": "정한 조건 안에서 행동이나 상태를 받아들이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "허용하다",
+        "허용합니다",
+        "허용했습니다",
+        "허용하세요"
+      ],
+      "frames": [
+        "조건에서 행동을 허용하다"
+      ],
+      "conditions": [
+        "허용 주체나 정책이 문맥에서 식별돼야 한다."
+      ],
+      "avoid_senses": [
+        "기술적으로 실행 가능하다는 뜻과 구별한다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/48",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0050",
+      "lemma": "금지하다",
+      "sense_id": "prohibit",
+      "pos": "동사",
+      "meaning": "규정이나 권한에 따라 특정 행동을 하지 못하게 정하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "금지하다",
+        "금지합니다",
+        "금지했습니다",
+        "금지하세요"
+      ],
+      "frames": [
+        "조건에서 행동을 금지하다"
+      ],
+      "conditions": [
+        "금지 범위와 예외가 있으면 연결한다."
+      ],
+      "avoid_senses": [
+        "기능이 없거나 실패한다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/49",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0051",
+      "lemma": "필요하다",
+      "sense_id": "necessary",
+      "pos": "형용사",
+      "meaning": "목적이나 조건을 충족하기 위해 대상이나 행동이 있어야 한다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "필요하다",
+        "필요합니다",
+        "필요한"
+      ],
+      "frames": [
+        "목적에는 대상이 필요하다"
+      ],
+      "conditions": [
+        "필수 조건인지 편의상 권장인지 구별한다."
+      ],
+      "avoid_senses": [
+        "단지 좋다는 권장 평가와 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/50",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0052",
+      "lemma": "가능하다",
+      "sense_id": "feasible",
+      "pos": "형용사",
+      "meaning": "정한 조건에서 행동이나 결과가 실현될 수 있다.",
+      "status": "allowed",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "가능하다",
+        "가능합니다",
+        "가능한"
+      ],
+      "frames": [
+        "조건에서 행동이 가능하다"
+      ],
+      "conditions": [
+        "허락과 기술적 실현 가능성을 문맥에서 구별한다."
+      ],
+      "avoid_senses": [
+        "이미 실행됐다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/51",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0053",
+      "lemma": "안전하다",
+      "sense_id": "safe",
+      "pos": "형용사",
+      "meaning": "정한 위험 평가와 사용 조건에서 허용한 안전 기준을 충족한다.",
+      "status": "restricted",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "안전하다",
+        "안전합니다",
+        "안전한"
+      ],
+      "frames": [
+        "조건에서 대상이 안전하다"
+      ],
+      "conditions": [
+        "평가 범위나 실제 사용 조건이 벗어나면 확대하지 않는다."
+      ],
+      "avoid_senses": [
+        "아무 위험도 존재하지 않는다는 절대 보장은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/52",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0054",
+      "lemma": "위험하다",
+      "sense_id": "hazardous",
+      "pos": "형용사",
+      "meaning": "행동이나 상태가 손상 또는 피해로 이어질 우려가 있다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "위험하다",
+        "위험합니다",
+        "위험한"
+      ],
+      "frames": [
+        "조건에서 행동이 위험하다"
+      ],
+      "conditions": [
+        "위험 대상과 조건이 문맥에서 식별되면 유지한다."
+      ],
+      "avoid_senses": [
+        "손상이 이미 발생했다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/53",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0055",
+      "lemma": "정확하다",
+      "sense_id": "accurate",
+      "pos": "형용사",
+      "meaning": "대상의 내용이나 값이 정한 사실 또는 기준과 맞는다.",
+      "status": "restricted",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "정확하다",
+        "정확합니다",
+        "정확한"
+      ],
+      "frames": [
+        "대상의 값이 정확하다"
+      ],
+      "conditions": [
+        "정확도 범위가 한정되면 그 범위를 보존한다."
+      ],
+      "avoid_senses": [
+        "추정 범위를 없앤 무오류 보장과 구별한다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/54",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0056",
+      "lemma": "충분하다",
+      "sense_id": "sufficient",
+      "pos": "형용사",
+      "meaning": "주어진 목적을 충족할 만큼의 양이나 정도가 있다.",
+      "status": "restricted",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "충분하다",
+        "충분합니다",
+        "충분한"
+      ],
+      "frames": [
+        "목적에 대상의 양이 충분하다"
+      ],
+      "conditions": [
+        "수량이 충분한 목적을 밝혀 읽는다."
+      ],
+      "avoid_senses": [
+        "모든 목적에 넉넉하다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/55",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0057",
+      "lemma": "부족하다",
+      "sense_id": "insufficient",
+      "pos": "형용사",
+      "meaning": "주어진 목적에 필요한 양이나 정도에 못 미친다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "부족하다",
+        "부족합니다",
+        "부족한"
+      ],
+      "frames": [
+        "목적에 대상이 부족하다"
+      ],
+      "conditions": [
+        "무엇을 충족하지 못하는지 식별한다."
+      ],
+      "avoid_senses": [
+        "전혀 없다는 뜻과 구별한다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/56",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0058",
+      "lemma": "같다",
+      "sense_id": "equal",
+      "pos": "형용사",
+      "meaning": "비교하는 대상의 정한 속성이나 값에 차이가 없다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "같다",
+        "같습니다",
+        "같은"
+      ],
+      "frames": [
+        "기준에서 두 대상이 같다"
+      ],
+      "conditions": [
+        "일치 범위가 일부이면 전체 동일로 확대하지 않는다."
+      ],
+      "avoid_senses": [
+        "서로 다른 객체가 하나라는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/57",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0059",
+      "lemma": "다르다",
+      "sense_id": "different",
+      "pos": "형용사",
+      "meaning": "비교하는 대상의 정한 속성이나 값에 차이가 있다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "다르다",
+        "다릅니다",
+        "다른"
+      ],
+      "frames": [
+        "기준에서 두 대상이 다르다"
+      ],
+      "conditions": [
+        "차이를 판단한 기준을 문맥에서 식별한다."
+      ],
+      "avoid_senses": [
+        "한 대상이 틀렸다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/58",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0060",
+      "lemma": "적절하다",
+      "sense_id": "appropriate",
+      "pos": "형용사",
+      "meaning": "공유된 목적과 기준 또는 맡겨진 재량에 맞는다.",
+      "status": "restricted",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "적절하다",
+        "적절합니다",
+        "적절한"
+      ],
+      "frames": [
+        "목적에 방법이 적절하다"
+      ],
+      "conditions": [
+        "독자가 행동을 정해야 하는데 기준이 없으면 확인한다."
+      ],
+      "avoid_senses": [
+        "특정 복구 행동이나 수치를 임의로 정하는 말은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/59",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0061",
+      "lemma": "대상",
+      "sense_id": "target",
+      "pos": "명사",
+      "meaning": "행동이나 판단이 향하는 사람·물건·자료의 범위이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "대상",
+        "대상을",
+        "대상이"
+      ],
+      "frames": [
+        "행동의 대상",
+        "대상을 검토하다",
+        "대상이 동작하다"
+      ],
+      "conditions": [
+        "범위에 포함하는 요소를 실제 문맥에서 식별한다."
+      ],
+      "avoid_senses": [
+        "비슷한 다른 대상을 암묵적으로 포함하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/60",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0062",
+      "lemma": "범위",
+      "sense_id": "scope",
+      "pos": "명사",
+      "meaning": "작업이나 판단에 포함하는 대상·부분·조건의 경계이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "범위",
+        "범위를",
+        "범위가"
+      ],
+      "frames": [
+        "대상 또는 작업의 범위"
+      ],
+      "conditions": [
+        "전체 완료 여부는 정한 범위로 판단한다."
+      ],
+      "avoid_senses": [
+        "문서에 없는 대상을 자동 포함하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/61",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0063",
+      "lemma": "조건",
+      "sense_id": "condition",
+      "pos": "명사",
+      "meaning": "행동이나 판단의 적용 여부를 결정하는 상태 또는 요건이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "조건",
+        "조건을",
+        "조건이"
+      ],
+      "frames": [
+        "조건을 충족하다",
+        "조건에서 행동하다"
+      ],
+      "conditions": [
+        "조건이 연결되는 행동을 유지한다."
+      ],
+      "avoid_senses": [
+        "단순한 배경 설명과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/62",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0064",
+      "lemma": "기준",
+      "sense_id": "criterion",
+      "pos": "명사",
+      "meaning": "값이나 판단의 옳고 그름 또는 허용 여부를 가르는 근거이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "기준",
+        "기준을",
+        "기준이"
+      ],
+      "frames": [
+        "기준에 따라 판단하다"
+      ],
+      "conditions": [
+        "실제 규정·수치·절차 또는 공유 판단을 가리킨다."
+      ],
+      "avoid_senses": [
+        "모든 판단에 숫자 기준을 강제하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/63",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0065",
+      "lemma": "근거",
+      "sense_id": "evidence",
+      "pos": "명사",
+      "meaning": "주장이나 판단을 뒷받침하는 관찰·자료·규칙이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "근거",
+        "근거를",
+        "근거가"
+      ],
+      "frames": [
+        "판단의 근거",
+        "근거로 판단하다"
+      ],
+      "conditions": [
+        "출처의 주장과 직접 확인한 사실을 구별한다."
+      ],
+      "avoid_senses": [
+        "자료가 존재한다는 사실만으로 주장을 입증하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/64",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0066",
+      "lemma": "결과",
+      "sense_id": "result",
+      "pos": "명사",
+      "meaning": "행동이나 과정 뒤에 얻은 상태 또는 산출물이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "결과",
+        "결과를",
+        "결과가"
+      ],
+      "frames": [
+        "행동의 결과",
+        "결과를 확인하다"
+      ],
+      "conditions": [
+        "의도한 결과와 실제 관찰 결과를 구별한다."
+      ],
+      "avoid_senses": [
+        "계획이나 예상 상태를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/65",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0067",
+      "lemma": "상태",
+      "sense_id": "state",
+      "pos": "명사",
+      "meaning": "정한 시점에서 대상이 놓인 모습이나 진행 단계이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "상태",
+        "상태를",
+        "상태가"
+      ],
+      "frames": [
+        "대상의 상태",
+        "상태를 확인하다"
+      ],
+      "conditions": [
+        "관찰한 시점이 중요한 경우 남긴다."
+      ],
+      "avoid_senses": [
+        "앞으로 유지될 상태를 보장하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/66",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0068",
+      "lemma": "오류",
+      "sense_id": "error",
+      "pos": "명사",
+      "meaning": "규칙이나 기대한 동작에서 벗어난 값·상태·동작이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "오류",
+        "오류를",
+        "오류가"
+      ],
+      "frames": [
+        "대상에 오류가 있다",
+        "오류가 나다"
+      ],
+      "conditions": [
+        "판단의 기준이나 오류 신호를 실제 문맥에서 식별한다."
+      ],
+      "avoid_senses": [
+        "모든 불편이나 잠재적 위험과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/67",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0069",
+      "lemma": "문제",
+      "sense_id": "problem",
+      "pos": "명사",
+      "meaning": "작업이나 판단에서 해결하거나 주의해야 하는 상태이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "문제",
+        "문제를",
+        "문제가"
+      ],
+      "frames": [
+        "대상에 문제가 있다"
+      ],
+      "conditions": [
+        "대상이 공유된 경고에서는 일반 표현을 유지한다."
+      ],
+      "avoid_senses": [
+        "원인·고장·피해를 특정하지 않은 상태에서 지어내지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/68",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0070",
+      "lemma": "위험",
+      "sense_id": "risk",
+      "pos": "명사",
+      "meaning": "특정 조건에서 피해나 손상이 발생할 우려이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "위험",
+        "위험을",
+        "위험이"
+      ],
+      "frames": [
+        "대상에 위험이 있다",
+        "위험을 평가하다"
+      ],
+      "conditions": [
+        "가능한 결과와 발생 사실을 구별한다."
+      ],
+      "avoid_senses": [
+        "이미 발생한 사고와 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/69",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0071",
+      "lemma": "예외",
+      "sense_id": "exception",
+      "pos": "명사",
+      "meaning": "일반 규칙을 적용하지 않거나 다르게 적용하는 명시된 경우이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "예외",
+        "예외를",
+        "예외가"
+      ],
+      "frames": [
+        "규칙의 예외",
+        "예외를 적용하다"
+      ],
+      "conditions": [
+        "예외가 일반 규칙의 어느 부분을 바꾸는지 밝힌다."
+      ],
+      "avoid_senses": [
+        "근거 없는 임의 허용은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/70",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0072",
+      "lemma": "권한",
+      "sense_id": "authority",
+      "pos": "명사",
+      "meaning": "정책이나 역할에 따라 대상에게 허용된 행동의 범위이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "권한",
+        "권한을",
+        "권한이"
+      ],
+      "frames": [
+        "권한이 있다",
+        "권한을 부여하다"
+      ],
+      "conditions": [
+        "기술적 능력과 역할상의 허용을 구별한다."
+      ],
+      "avoid_senses": [
+        "작동 가능한 기능 전체를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/71",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0073",
+      "lemma": "책임",
+      "sense_id": "responsibility",
+      "pos": "명사",
+      "meaning": "업무의 수행이나 결과에 대해 맡은 의무이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "책임",
+        "책임을",
+        "책임이"
+      ],
+      "frames": [
+        "책임을 맡다",
+        "책임자가 행동하다"
+      ],
+      "conditions": [
+        "담당 주체가 여러 명이면 범위를 구별한다."
+      ],
+      "avoid_senses": [
+        "직접 수행자와 언제나 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/72",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0074",
+      "lemma": "담당자",
+      "sense_id": "assignee",
+      "pos": "명사",
+      "meaning": "정한 작업이나 역할을 맡은 사람이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "담당자",
+        "담당자를",
+        "담당자가"
+      ],
+      "frames": [
+        "작업의 담당자",
+        "담당자에게 요청하다"
+      ],
+      "conditions": [
+        "앞 문맥에서 한 명으로 식별되면 이름 반복을 줄인다."
+      ],
+      "avoid_senses": [
+        "실제 담당자를 추정해 새로 넣지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/73",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0075",
+      "lemma": "사용자",
+      "sense_id": "user",
+      "pos": "명사",
+      "meaning": "정한 제품이나 서비스를 사용하는 사람 또는 계정 주체이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "사용자",
+        "사용자를",
+        "사용자가"
+      ],
+      "frames": [
+        "사용자가 행동하다",
+        "사용자에게 알리다"
+      ],
+      "conditions": [
+        "제품에서 사람과 계정을 구분해야 하면 용어를 따로 정한다."
+      ],
+      "avoid_senses": [
+        "담당자나 관리자와 자동으로 같은 뜻이 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/74",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0076",
+      "lemma": "문서",
+      "sense_id": "document",
+      "pos": "명사",
+      "meaning": "정보를 읽거나 전달할 수 있게 정리한 기록물이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "문서",
+        "문서를",
+        "문서가"
+      ],
+      "frames": [
+        "문서를 작성하다",
+        "문서의 부분"
+      ],
+      "conditions": [
+        "기능명이나 문서명이 있으면 해당 이름을 유지한다."
+      ],
+      "avoid_senses": [
+        "문서의 사본이나 개정판을 자동으로 같은 객체로 보지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/75",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0077",
+      "lemma": "파일",
+      "sense_id": "file",
+      "pos": "명사",
+      "meaning": "저장소에서 하나의 이름이나 식별자로 관리하는 데이터 단위이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "파일",
+        "파일을",
+        "파일이"
+      ],
+      "frames": [
+        "파일을 열다",
+        "파일의 위치"
+      ],
+      "conditions": [
+        "독자가 찾는 데 필요한 이름을 보존한다."
+      ],
+      "avoid_senses": [
+        "서버의 모든 사본을 하나의 파일 상태로 합치지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/76",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0078",
+      "lemma": "항목",
+      "sense_id": "item",
+      "pos": "명사",
+      "meaning": "목록·표·사전에서 따로 구별하는 한 단위이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "항목",
+        "항목을",
+        "항목이"
+      ],
+      "frames": [
+        "목록의 항목",
+        "항목을 추가하다"
+      ],
+      "conditions": [
+        "하나의 단위가 여러 뜻을 담으면 구분이 필요한지 본다."
+      ],
+      "avoid_senses": [
+        "문장 전체나 문서 전체와 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/77",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0079",
+      "lemma": "값",
+      "sense_id": "value",
+      "pos": "명사",
+      "meaning": "변수·설정·측정에 배정되거나 얻어진 내용이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "값",
+        "값을",
+        "값이"
+      ],
+      "frames": [
+        "대상의 값",
+        "값을 설정하다"
+      ],
+      "conditions": [
+        "수치이면 단위와 기준을 보존한다."
+      ],
+      "avoid_senses": [
+        "숫자에만 한정하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/78",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0080",
+      "lemma": "단위",
+      "sense_id": "unit",
+      "pos": "명사",
+      "meaning": "수량이나 측정값을 나타낼 때 기준으로 삼는 크기이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "단위",
+        "단위를",
+        "단위가"
+      ],
+      "frames": [
+        "단위를 표기하다",
+        "값과 단위"
+      ],
+      "conditions": [
+        "단위가 바뀌면 실제 환산 여부를 확인한다."
+      ],
+      "avoid_senses": [
+        "표기만 바꿔 같은 숫자를 유지하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/79",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0081",
+      "lemma": "버전",
+      "sense_id": "version",
+      "pos": "명사",
+      "meaning": "대상의 내용이나 동작을 구별하는 개정 식별이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "버전",
+        "버전을",
+        "버전이"
+      ],
+      "frames": [
+        "대상의 버전",
+        "버전을 비교하다"
+      ],
+      "conditions": [
+        "초안과 승인판을 구별하는 식별을 보존한다."
+      ],
+      "avoid_senses": [
+        "최신이라는 이유만으로 배포판을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/80",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0082",
+      "lemma": "사본",
+      "sense_id": "copy",
+      "pos": "명사",
+      "meaning": "원본과 구별되는 복사된 대상이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "사본",
+        "사본을",
+        "사본이"
+      ],
+      "frames": [
+        "대상의 사본",
+        "사본을 보관하다"
+      ],
+      "conditions": [
+        "어느 원본의 어느 시점인지 필요할 때 밝힌다."
+      ],
+      "avoid_senses": [
+        "내용이 같다는 사실만으로 원본이 되지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/81",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0083",
+      "lemma": "원본",
+      "sense_id": "original",
+      "pos": "명사",
+      "meaning": "사본이나 변형본과 비교할 때 기준이 되는 대상이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "원본",
+        "원본을",
+        "원본이"
+      ],
+      "frames": [
+        "대상의 원본",
+        "원본을 보존하다"
+      ],
+      "conditions": [
+        "비교 관계에서 기준을 하나로 정한다."
+      ],
+      "avoid_senses": [
+        "모든 업무에서 가장 오래된 자료를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/82",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0084",
+      "lemma": "요구사항",
+      "sense_id": "requirement",
+      "pos": "명사",
+      "meaning": "대상이나 작업이 충족해야 한다고 정한 조건이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "요구사항",
+        "요구사항을",
+        "요구사항이"
+      ],
+      "frames": [
+        "요구사항을 충족하다"
+      ],
+      "conditions": [
+        "필수 조건과 참고 제안을 구별한다."
+      ],
+      "avoid_senses": [
+        "단순한 선호나 아이디어와 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/83",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0085",
+      "lemma": "절차",
+      "sense_id": "procedure",
+      "pos": "명사",
+      "meaning": "목적을 수행하기 위해 정한 행동과 그 연결이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "절차",
+        "절차를",
+        "절차가"
+      ],
+      "frames": [
+        "절차에 따라 행동하다"
+      ],
+      "conditions": [
+        "순서·동시 조건·예외를 함께 보존한다."
+      ],
+      "avoid_senses": [
+        "단계 목록의 나열만으로 원래 조건을 없애지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/84",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0086",
+      "lemma": "단계",
+      "sense_id": "step",
+      "pos": "명사",
+      "meaning": "과정에서 구별되는 한 행동 또는 진행 구간이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "단계",
+        "단계를",
+        "단계가"
+      ],
+      "frames": [
+        "단계를 수행하다",
+        "다음 단계"
+      ],
+      "conditions": [
+        "여러 행동을 함께 해야 하면 동시 조건을 유지한다."
+      ],
+      "avoid_senses": [
+        "단계가 끝났다고 전체 작업이 끝난 것은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/85",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0087",
+      "lemma": "완료",
+      "sense_id": "completed_state",
+      "pos": "명사",
+      "meaning": "정한 범위의 활동을 끝까지 수행한 상태이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "완료",
+        "완료를",
+        "완료가"
+      ],
+      "frames": [
+        "작업 완료",
+        "완료 상태"
+      ],
+      "conditions": [
+        "화면 상태나 표에서는 짧은 명사형을 허용한다."
+      ],
+      "avoid_senses": [
+        "일부 진행이나 실행 시작을 나타내지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/86",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0088",
+      "lemma": "진행 중",
+      "sense_id": "ongoing",
+      "pos": "서술표현",
+      "meaning": "활동이 시작됐으며 아직 끝나지 않은 상태이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "진행 중",
+        "진행 중이다",
+        "진행 중입니다"
+      ],
+      "frames": [
+        "작업이 진행 중이다"
+      ],
+      "conditions": [
+        "진행 상태가 확인된 시점에 적용한다."
+      ],
+      "avoid_senses": [
+        "완료 상태로 단정하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/87",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0089",
+      "lemma": "대기",
+      "sense_id": "waiting",
+      "pos": "명사",
+      "meaning": "작업을 시작하거나 이어 갈 조건을 기다리는 상태이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "대기",
+        "대기를",
+        "대기가"
+      ],
+      "frames": [
+        "작업 대기",
+        "승인 대기"
+      ],
+      "conditions": [
+        "무엇을 기다리는지 행동에 필요하면 밝힌다."
+      ],
+      "avoid_senses": [
+        "실패나 취소로 자동 분류하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/88",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0090",
+      "lemma": "실패",
+      "sense_id": "failure",
+      "pos": "명사",
+      "meaning": "수행한 행동이 정한 성공 조건을 충족하지 못한 결과이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "실패",
+        "실패를",
+        "실패가"
+      ],
+      "frames": [
+        "작업 실패",
+        "실패 원인"
+      ],
+      "conditions": [
+        "실패 판정 기준과 실행 안 됨을 구별한다."
+      ],
+      "avoid_senses": [
+        "실행 전 차단이나 단순 경고와 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/89",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0091",
+      "lemma": "성공",
+      "sense_id": "success",
+      "pos": "명사",
+      "meaning": "수행한 행동이 정한 성공 조건을 충족한 결과이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "성공",
+        "성공을",
+        "성공이"
+      ],
+      "frames": [
+        "작업 성공",
+        "성공 조건"
+      ],
+      "conditions": [
+        "조건 밖의 성능이나 안전까지 확대하지 않는다."
+      ],
+      "avoid_senses": [
+        "명령을 실행했다는 사실만을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/90",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0092",
+      "lemma": "전체",
+      "sense_id": "whole",
+      "pos": "명사",
+      "meaning": "문맥에서 정한 집합이나 대상의 모든 부분이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "전체",
+        "전체를",
+        "전체가"
+      ],
+      "frames": [
+        "전체를 검토하다",
+        "대상 전체"
+      ],
+      "conditions": [
+        "경계를 밝힌 집합에 적용한다."
+      ],
+      "avoid_senses": [
+        "그 집합 밖의 대상까지 포함하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/91",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0093",
+      "lemma": "일부",
+      "sense_id": "part",
+      "pos": "명사",
+      "meaning": "문맥에서 정한 전체 가운데 전체를 이루지는 않는 부분이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "일부",
+        "일부를",
+        "일부가"
+      ],
+      "frames": [
+        "전체의 일부",
+        "일부를 변경하다"
+      ],
+      "conditions": [
+        "전체 작업 완료로 확대하지 않는다."
+      ],
+      "avoid_senses": [
+        "수량이 알려지지 않았다고 임의 숫자로 바꾸지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/92",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0094",
+      "lemma": "최소",
+      "sense_id": "minimum",
+      "pos": "명사",
+      "meaning": "정한 범위에서 가장 작은 값 또는 허용한 하한이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "최소",
+        "최소를",
+        "최소가"
+      ],
+      "frames": [
+        "최소 수량",
+        "최솟값을 확인하다",
+        "하한을 충족하다"
+      ],
+      "conditions": [
+        "측정 최솟값과 정책 하한을 문맥에서 구별한다."
+      ],
+      "avoid_senses": [
+        "평균이나 목표값과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/93",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0095",
+      "lemma": "최대",
+      "sense_id": "maximum",
+      "pos": "명사",
+      "meaning": "정한 범위에서 가장 큰 값 또는 허용한 상한이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "최대",
+        "최대를",
+        "최대가"
+      ],
+      "frames": [
+        "최대 수량",
+        "최댓값을 확인하다",
+        "상한을 넘다"
+      ],
+      "conditions": [
+        "측정 최댓값과 정책 상한을 구별한다."
+      ],
+      "avoid_senses": [
+        "항상 발생하는 값과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/94",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0096",
+      "lemma": "평균",
+      "sense_id": "mean",
+      "pos": "명사",
+      "meaning": "정한 자료 집합의 값을 합해 개수로 나눈 수치이다.",
+      "status": "restricted",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "평균",
+        "평균을",
+        "평균이"
+      ],
+      "frames": [
+        "평균값을 계산하다"
+      ],
+      "conditions": [
+        "집합과 기간이 달라지면 동일 평균으로 취급하지 않는다."
+      ],
+      "avoid_senses": [
+        "개별 최댓값이나 대표 시험 한 건과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/95",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0097",
+      "lemma": "이상",
+      "sense_id": "at_least",
+      "pos": "명사",
+      "meaning": "비교 기준과 같거나 그보다 큰 범위이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "이상",
+        "이상을",
+        "이상이"
+      ],
+      "frames": [
+        "수량 이상"
+      ],
+      "conditions": [
+        "기준값을 범위에 포함한다."
+      ],
+      "avoid_senses": [
+        "초과와 바꾸면 경계가 달라진다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/96",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0098",
+      "lemma": "이하",
+      "sense_id": "at_most",
+      "pos": "명사",
+      "meaning": "비교 기준과 같거나 그보다 작은 범위이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "이하",
+        "이하를",
+        "이하가"
+      ],
+      "frames": [
+        "수량 이하"
+      ],
+      "conditions": [
+        "기준값을 범위에 포함한다."
+      ],
+      "avoid_senses": [
+        "미만과 바꾸면 경계가 달라진다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/97",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0099",
+      "lemma": "초과",
+      "sense_id": "above",
+      "pos": "명사",
+      "meaning": "비교 기준보다 큰 범위이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "초과",
+        "초과를",
+        "초과가"
+      ],
+      "frames": [
+        "수량 초과",
+        "수량을 초과하다"
+      ],
+      "conditions": [
+        "기준값을 범위에 포함하지 않는다."
+      ],
+      "avoid_senses": [
+        "이상과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/98",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0100",
+      "lemma": "미만",
+      "sense_id": "below",
+      "pos": "명사",
+      "meaning": "비교 기준보다 작은 범위이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "미만",
+        "미만을",
+        "미만이"
+      ],
+      "frames": [
+        "수량 미만"
+      ],
+      "conditions": [
+        "기준값을 범위에 포함하지 않는다."
+      ],
+      "avoid_senses": [
+        "이하와 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/99",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0101",
+      "lemma": "약",
+      "sense_id": "approximately",
+      "pos": "관형표현",
+      "meaning": "수량이 제시된 값에 가까우며 정확히 일치한다고 확정하지 않는 표현이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "약"
+      ],
+      "frames": [
+        "약 수량"
+      ],
+      "conditions": [
+        "오차 범위가 필요하고 알려졌으면 실제 범위를 함께 둔다."
+      ],
+      "avoid_senses": [
+        "편집자가 임의 오차율을 추가하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/100",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0102",
+      "lemma": "각",
+      "sense_id": "each",
+      "pos": "관형표현",
+      "meaning": "집합에 속한 요소를 하나씩 나누어 적용하는 표현이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "각"
+      ],
+      "frames": [
+        "각 대상에 행동하다"
+      ],
+      "conditions": [
+        "전체 합계와 요소별 수량을 구별한다."
+      ],
+      "avoid_senses": [
+        "합계 수량을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/101",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0103",
+      "lemma": "모두",
+      "sense_id": "all",
+      "pos": "부사",
+      "meaning": "정한 집합의 어느 요소도 빠뜨리지 않는 표현이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "모두"
+      ],
+      "frames": [
+        "대상을 모두 처리하다"
+      ],
+      "conditions": [
+        "집합의 범위가 문맥에서 식별돼야 한다."
+      ],
+      "avoid_senses": [
+        "대표 표본만 확인한 것을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/102",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0104",
+      "lemma": "하나씩",
+      "sense_id": "one_by_one",
+      "pos": "부사",
+      "meaning": "대상이나 행동을 한 번에 한 단위로 나누는 표현이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "하나씩"
+      ],
+      "frames": [
+        "대상을 하나씩 처리하다"
+      ],
+      "conditions": [
+        "동시 처리와 순차 처리를 구별한다."
+      ],
+      "avoid_senses": [
+        "한 번만 처리하라는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/103",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0105",
+      "lemma": "먼저",
+      "sense_id": "first",
+      "pos": "부사",
+      "meaning": "이어지는 다른 행동보다 앞서 행동하게 하는 표현이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "먼저"
+      ],
+      "frames": [
+        "먼저 행동하다"
+      ],
+      "conditions": [
+        "선후 관계가 필요한 실제 절차에 쓴다."
+      ],
+      "avoid_senses": [
+        "다른 행동의 생략이나 취소를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/104",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0106",
+      "lemma": "다음",
+      "sense_id": "next",
+      "pos": "명사",
+      "meaning": "정한 순서에서 현재 항목 뒤에 오는 항목이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "다음",
+        "다음을",
+        "다음이"
+      ],
+      "frames": [
+        "다음 단계",
+        "다음에 행동하다"
+      ],
+      "conditions": [
+        "순서 기준이 문맥에서 식별돼야 한다."
+      ],
+      "avoid_senses": [
+        "무조건 바로 이어지는 시간을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/105",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0107",
+      "lemma": "이전",
+      "sense_id": "before",
+      "pos": "명사",
+      "meaning": "정한 시점이나 순서보다 앞선 구간이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "이전",
+        "이전을",
+        "이전이"
+      ],
+      "frames": [
+        "시점 이전",
+        "이전 버전"
+      ],
+      "conditions": [
+        "시간 기준인지 개정 순서인지 구별한다."
+      ],
+      "avoid_senses": [
+        "기준 시점을 포함하는지는 실제 정책에서 확인한다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/106",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0108",
+      "lemma": "이후",
+      "sense_id": "after",
+      "pos": "명사",
+      "meaning": "정한 시점이나 사건 뒤의 구간이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "이후",
+        "이후를",
+        "이후가"
+      ],
+      "frames": [
+        "시점 이후",
+        "행동 이후"
+      ],
+      "conditions": [
+        "정확한 경계 포함 여부가 중요하면 기준을 명시한다."
+      ],
+      "avoid_senses": [
+        "사건이 반드시 완료됐다는 사실을 새로 만들지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/107",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0109",
+      "lemma": "동안",
+      "sense_id": "during",
+      "pos": "명사",
+      "meaning": "정한 시간 또는 활동이 이어지는 구간이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "동안",
+        "동안을",
+        "동안이"
+      ],
+      "frames": [
+        "시간 동안",
+        "행동하는 동안"
+      ],
+      "conditions": [
+        "해당 구간 전체에 적용할 조건을 보존한다."
+      ],
+      "avoid_senses": [
+        "구간 뒤의 행동으로 바꾸지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/108",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0110",
+      "lemma": "까지",
+      "sense_id": "until_limit",
+      "pos": "의존표현",
+      "meaning": "시간·위치·범위의 끝을 정하는 조사 결합이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "까지"
+      ],
+      "frames": [
+        "시점까지",
+        "대상까지"
+      ],
+      "conditions": [
+        "마감의 구체 시각이 중요하면 실제 시각을 남긴다."
+      ],
+      "avoid_senses": [
+        "이후나 시작점과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/109",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0111",
+      "lemma": "부터",
+      "sense_id": "from_start",
+      "pos": "의존표현",
+      "meaning": "시간·위치·순서의 시작을 정하는 조사 결합이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "부터"
+      ],
+      "frames": [
+        "시점부터",
+        "대상부터"
+      ],
+      "conditions": [
+        "시작점이 어느 행동에 걸리는지 유지한다."
+      ],
+      "avoid_senses": [
+        "종료 시점을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/110",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0112",
+      "lemma": "즉시",
+      "sense_id": "immediately",
+      "pos": "부사",
+      "meaning": "지시된 조건이 생기면 지체 없이 행동하게 하는 표현이다.",
+      "status": "restricted",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "즉시"
+      ],
+      "frames": [
+        "조건이 생기면 즉시 행동하다"
+      ],
+      "conditions": [
+        "실제 긴급성이 있는 지시에 쓰며 임의 초 수를 넣지 않는다."
+      ],
+      "avoid_senses": [
+        "언제나 같은 수치의 응답 시간을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/111",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0113",
+      "lemma": "현재",
+      "sense_id": "now",
+      "pos": "명사",
+      "meaning": "발화나 자료가 기준으로 삼는 지금의 시점이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "현재",
+        "현재를",
+        "현재가"
+      ],
+      "frames": [
+        "현재 상태",
+        "현재는 대상이 특정 상태에 있다"
+      ],
+      "conditions": [
+        "오래 보관하는 보고에서는 기준 일시를 함께 남긴다."
+      ],
+      "avoid_senses": [
+        "앞으로 계속되는 사실을 보장하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/112",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0114",
+      "lemma": "아직",
+      "sense_id": "not_yet",
+      "pos": "부사",
+      "meaning": "예상하거나 기다리는 상태에 기준 시점까지 이르지 못했음을 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "아직"
+      ],
+      "frames": [
+        "아직 행동하지 않았다"
+      ],
+      "conditions": [
+        "미완료 상태와 영구 불가능을 구별한다."
+      ],
+      "avoid_senses": [
+        "앞으로 반드시 끝난다는 약속은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/113",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0115",
+      "lemma": "이미",
+      "sense_id": "already",
+      "pos": "부사",
+      "meaning": "기준 시점에 앞서 상태나 행동이 성립했음을 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "이미"
+      ],
+      "frames": [
+        "이미 행동했다"
+      ],
+      "conditions": [
+        "완료 사실이 확인됐을 때 쓴다."
+      ],
+      "avoid_senses": [
+        "계획만 정한 것을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/114",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0116",
+      "lemma": "반복하다",
+      "sense_id": "repeat",
+      "pos": "동사",
+      "meaning": "같은 종류의 행동을 다시 수행하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "반복하다",
+        "반복합니다",
+        "반복했습니다",
+        "반복하세요"
+      ],
+      "frames": [
+        "행동을 조건에 따라 반복하다"
+      ],
+      "conditions": [
+        "횟수나 종료 조건이 필요하면 실제 절차를 따른다."
+      ],
+      "avoid_senses": [
+        "임의 재시도 횟수를 추가하는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/115",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0117",
+      "lemma": "늘다",
+      "sense_id": "increase",
+      "pos": "동사",
+      "meaning": "수량이나 정도가 이전 기준보다 커지다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "늘다",
+        "늡니다",
+        "늘었습니다",
+        "늘면"
+      ],
+      "frames": [
+        "대상의 양이 늘다"
+      ],
+      "conditions": [
+        "비교 기준과 단위를 보존한다."
+      ],
+      "avoid_senses": [
+        "개선이라는 가치 판단을 자동으로 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/116",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0118",
+      "lemma": "줄다",
+      "sense_id": "decrease",
+      "pos": "동사",
+      "meaning": "수량이나 정도가 이전 기준보다 작아지다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "줄다",
+        "줍니다",
+        "줄었습니다",
+        "줄면"
+      ],
+      "frames": [
+        "대상의 양이 줄다"
+      ],
+      "conditions": [
+        "비교 기준과 단위를 보존한다."
+      ],
+      "avoid_senses": [
+        "원인을 입증하거나 항상 개선됨을 뜻하지 않는다."
+      ],
+      "alternatives": [
+        {
+          "entry_id": "KPL-0155",
+          "relation": "contextual",
+          "condition": "수량 감소가 확인됐고 현재형 줍니다가 주다의 뜻과 경쟁하는 실제 문맥에서 독자의 이해를 위해 선택할 수 있다. 줍니다의 일괄 금지 조건은 아니다."
+        }
+      ],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/117",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0119",
+      "lemma": "높다",
+      "sense_id": "high",
+      "pos": "형용사",
+      "meaning": "정한 기준에 비해 수량이나 수준이 위에 있다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "높다",
+        "높습니다",
+        "높은"
+      ],
+      "frames": [
+        "기준보다 값이 높다"
+      ],
+      "conditions": [
+        "비교 기준이 공유되면 수치 설명을 반복하지 않는다."
+      ],
+      "avoid_senses": [
+        "정확한 수치나 위험 판정을 자동으로 담지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/118",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0120",
+      "lemma": "낮다",
+      "sense_id": "low",
+      "pos": "형용사",
+      "meaning": "정한 기준에 비해 수량이나 수준이 아래에 있다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "낮다",
+        "낮습니다",
+        "낮은"
+      ],
+      "frames": [
+        "기준보다 값이 낮다"
+      ],
+      "conditions": [
+        "비교 기준이 필요한 판단에서는 해당 기준을 둔다."
+      ],
+      "avoid_senses": [
+        "낮으면 언제나 안전하다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/119",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0121",
+      "lemma": "빠르다",
+      "sense_id": "fast",
+      "pos": "형용사",
+      "meaning": "정한 기준보다 시간이 짧거나 진행 속도가 크다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "빠르다",
+        "빠릅니다",
+        "빠른"
+      ],
+      "frames": [
+        "기준보다 행동이 빠르다"
+      ],
+      "conditions": [
+        "응답 시간과 실행 속도를 섞어 비교하지 않는다."
+      ],
+      "avoid_senses": [
+        "정확한 배율을 임의로 담지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/120",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0122",
+      "lemma": "느리다",
+      "sense_id": "slow",
+      "pos": "형용사",
+      "meaning": "정한 기준보다 시간이 길거나 진행 속도가 작다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "느리다",
+        "느립니다",
+        "느린"
+      ],
+      "frames": [
+        "기준보다 행동이 느리다"
+      ],
+      "conditions": [
+        "독자의 행동에 기준이 필요하면 실제 기준을 남긴다."
+      ],
+      "avoid_senses": [
+        "작동 실패와 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/121",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0123",
+      "lemma": "수 있다",
+      "sense_id": "possibility",
+      "pos": "의존표현",
+      "meaning": "사건이나 상태의 발생 가능성을 열어 두는 표현이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "수 있다",
+        "있을 수 있습니다",
+        "생길 수 있습니다",
+        "발생할 수 있다"
+      ],
+      "frames": [
+        "대상이 상태일 수 있다",
+        "행동할 수 있다"
+      ],
+      "conditions": [
+        "가능성 경고의 대상이 문맥에 있으면 그대로 쓴다."
+      ],
+      "avoid_senses": [
+        "발생 사실·능력·허락과 뜻을 섞지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/122",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0124",
+      "lemma": "수 있다",
+      "sense_id": "ability",
+      "pos": "의존표현",
+      "meaning": "대상에게 특정 행동을 수행하는 능력이나 기능이 있음을 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "수 있다",
+        "읽을 수 있습니다",
+        "실행할 수 있다"
+      ],
+      "frames": [
+        "대상은 행동할 수 있다"
+      ],
+      "conditions": [
+        "조건이나 지원 범위를 문맥과 함께 해석한다."
+      ],
+      "avoid_senses": [
+        "행동 허락이나 실행 완료를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/123",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0125",
+      "lemma": "수 있다",
+      "sense_id": "permission",
+      "pos": "의존표현",
+      "meaning": "권한이나 규정에 따라 행동을 허락함을 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "수 있다",
+        "수정할 수 있습니다",
+        "열람할 수 있습니다"
+      ],
+      "frames": [
+        "권한자는 행동할 수 있다"
+      ],
+      "conditions": [
+        "허락 문맥이 분명할 때 쓰며 능력과 혼동되면 확인한다."
+      ],
+      "avoid_senses": [
+        "기술적 실행 가능성과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/124",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0126",
+      "lemma": "수 없다",
+      "sense_id": "inability",
+      "pos": "의존표현",
+      "meaning": "정한 조건에서 대상이 행동을 수행할 능력이나 기능이 없음을 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "수 없다",
+        "할 수 없습니다"
+      ],
+      "frames": [
+        "대상은 행동할 수 없다"
+      ],
+      "conditions": [
+        "기능 제한과 접근 금지 정책을 구별한다."
+      ],
+      "avoid_senses": [
+        "행동을 금지하는 명령과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/125",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0127",
+      "lemma": "해도 되다",
+      "sense_id": "permission",
+      "pos": "의존표현",
+      "meaning": "특정 행동을 해도 규정이나 허용 조건에 어긋나지 않음을 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "해도 되다",
+        "해도 됩니다",
+        "삭제해도 됩니다"
+      ],
+      "frames": [
+        "행동해도 된다"
+      ],
+      "conditions": [
+        "상대가 선택할 수 있는 허락의 기능을 유지한다."
+      ],
+      "avoid_senses": [
+        "반드시 실행하라는 지시로 바꾸지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/126",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0128",
+      "lemma": "해야 하다",
+      "sense_id": "obligation",
+      "pos": "의존표현",
+      "meaning": "목적이나 규정에 따라 행동을 수행할 필요 또는 의무를 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "해야 하다",
+        "해야 합니다",
+        "꺼야 합니다"
+      ],
+      "frames": [
+        "조건이면 행동해야 한다"
+      ],
+      "conditions": [
+        "필요성이나 의무의 근거가 문맥에서 식별돼야 한다."
+      ],
+      "avoid_senses": [
+        "선택 가능한 허락이나 단순 권장과 구별한다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/127",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0129",
+      "lemma": "하지 말다",
+      "sense_id": "prohibition",
+      "pos": "의존표현",
+      "meaning": "상대에게 특정 행동을 하지 않도록 지시하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "하지 말다",
+        "하지 마세요",
+        "열지 마세요"
+      ],
+      "frames": [
+        "조건에서는 행동하지 말다"
+      ],
+      "conditions": [
+        "금지되는 행동과 적용 조건을 함께 읽는다."
+      ],
+      "avoid_senses": [
+        "기능이 없다는 설명으로 바꾸지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/128",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0130",
+      "lemma": "할 필요가 없다",
+      "sense_id": "not_required",
+      "pos": "의존표현",
+      "meaning": "해당 행동이 목적이나 의무의 충족에 요구되지 않음을 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "할 필요가 없다",
+        "할 필요가 없습니다"
+      ],
+      "frames": [
+        "대상은 행동할 필요가 없다"
+      ],
+      "conditions": [
+        "필수 아님과 금지를 구별한다."
+      ],
+      "avoid_senses": [
+        "행동하면 안 된다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/129",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0131",
+      "lemma": "때",
+      "sense_id": "when",
+      "pos": "의존표현",
+      "meaning": "사건이나 상태가 성립하는 시점 또는 상황을 연결하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "때"
+      ],
+      "frames": [
+        "행동할 때 다음 행동을 하다"
+      ],
+      "conditions": [
+        "시간 연결과 적용 조건이 겹치면 원문 범위를 보존한다."
+      ],
+      "avoid_senses": [
+        "원문에 없는 인과 관계를 추가하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/130",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0132",
+      "lemma": "경우",
+      "sense_id": "if_case",
+      "pos": "의존표현",
+      "meaning": "특정 상태나 사건에 해당하는 조건을 연결하다.",
+      "status": "allowed",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "경우"
+      ],
+      "frames": [
+        "상태인 경우 행동하다"
+      ],
+      "conditions": [
+        "조건의 예외가 있으면 같은 행동과 연결한다."
+      ],
+      "avoid_senses": [
+        "모든 경우에 적용되는 지시로 바꾸지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/131",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0133",
+      "lemma": "-(으)면",
+      "sense_id": "if",
+      "pos": "접속표현",
+      "meaning": "앞 절의 조건이 성립할 때 뒤 절이 적용됨을 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "-면",
+        "-으면"
+      ],
+      "frames": [
+        "받침 없는 어간이나 ㄹ 받침 어간 + -면",
+        "그 밖의 받침 어간 + -으면"
+      ],
+      "conditions": [
+        "필요조건과 충분조건을 임의로 뒤집지 않는다."
+      ],
+      "avoid_senses": [
+        "원문에 없는 양방향 조건을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/132",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0134",
+      "lemma": "때만",
+      "sense_id": "only_when",
+      "pos": "의존표현",
+      "meaning": "뒤 행동의 적용을 앞 조건이 성립하는 상황으로 제한하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "때만"
+      ],
+      "frames": [
+        "조건일 때만 행동하다"
+      ],
+      "conditions": [
+        "만의 제한 범위를 유지한다."
+      ],
+      "avoid_senses": [
+        "조건이 성립하면 반드시 실행한다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/133",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0135",
+      "lemma": "-는 한",
+      "sense_id": "as_long_as",
+      "pos": "의존표현",
+      "meaning": "앞 조건이 이어지는 범위 안에서 뒤 상태가 적용됨을 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "-는 한",
+        "-(으)ㄴ 한",
+        "인 한"
+      ],
+      "frames": [
+        "동사 어간 + -는 한",
+        "형용사 어간 + -(으)ㄴ 한",
+        "명사 + 인 한"
+      ],
+      "conditions": [
+        "조건의 지속과 단 한 번 성립을 구별한다."
+      ],
+      "avoid_senses": [
+        "조건이 끝난 뒤까지 효력을 확대하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/134",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0136",
+      "lemma": "아니면",
+      "sense_id": "otherwise",
+      "pos": "접속표현",
+      "meaning": "앞 조건이 성립하지 않는 경우의 대안이나 결과를 연결하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "아니면"
+      ],
+      "frames": [
+        "조건이면 A",
+        "아니면 B"
+      ],
+      "conditions": [
+        "어느 앞 조건의 부정인지 명확해야 한다."
+      ],
+      "avoid_senses": [
+        "서로 독립인 선택지를 임의로 배타적으로 만들지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/135",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0137",
+      "lemma": "또는",
+      "sense_id": "or",
+      "pos": "접속표현",
+      "meaning": "둘 이상의 선택지 가운데 하나 이상을 고르는 관계를 나타내다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "또는"
+      ],
+      "frames": [
+        "A 또는 B"
+      ],
+      "conditions": [
+        "오직 하나만 허용한다면 실제 제한을 별도로 남긴다."
+      ],
+      "avoid_senses": [
+        "항상 배타적 선택이라는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/136",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0138",
+      "lemma": "및",
+      "sense_id": "and",
+      "pos": "접속표현",
+      "meaning": "열거한 대상을 함께 포함하는 관계를 나타내다.",
+      "status": "allowed",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "및"
+      ],
+      "frames": [
+        "A 및 B"
+      ],
+      "conditions": [
+        "동시 수행인지 단순 포함인지 실제 문맥으로 구별한다."
+      ],
+      "avoid_senses": [
+        "두 행동이 반드시 동시에 수행됨을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/137",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0139",
+      "lemma": "만",
+      "sense_id": "only",
+      "pos": "의존표현",
+      "meaning": "결합한 대상이나 범위로 적용을 제한하는 조사이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "만"
+      ],
+      "frames": [
+        "대상만",
+        "조건에서만"
+      ],
+      "conditions": [
+        "조사가 붙는 위치에 따른 범위를 유지한다."
+      ],
+      "avoid_senses": [
+        "모든 다른 조건까지 임의로 배제하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/138",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0140",
+      "lemma": "제외하다",
+      "sense_id": "exclude",
+      "pos": "동사",
+      "meaning": "집합이나 적용 범위에서 지정한 대상을 빼다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "제외하다",
+        "제외합니다",
+        "제외했습니다",
+        "제외하세요"
+      ],
+      "frames": [
+        "집합에서 대상을 제외하다"
+      ],
+      "conditions": [
+        "제외 대상과 남는 전체를 구별한다."
+      ],
+      "avoid_senses": [
+        "그 대상을 삭제하거나 폐기하는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/139",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0141",
+      "lemma": "포함하다",
+      "sense_id": "include",
+      "pos": "동사",
+      "meaning": "집합이나 적용 범위 안에 지정한 대상을 넣다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "포함하다",
+        "포함합니다",
+        "포함했습니다",
+        "포함하세요"
+      ],
+      "frames": [
+        "집합에 대상을 포함하다"
+      ],
+      "conditions": [
+        "포함 관계와 동일 관계를 구별한다."
+      ],
+      "avoid_senses": [
+        "열거가 항상 전체 목록이라는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/140",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0142",
+      "lemma": "관련이 있다",
+      "sense_id": "relate",
+      "pos": "서술표현",
+      "meaning": "대상 사이에 판단에 필요한 관계가 있다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "관련이 있다",
+        "관련이 있습니다",
+        "관련이 있었습니다"
+      ],
+      "frames": [
+        "A는 B와 관련이 있다"
+      ],
+      "conditions": [
+        "관계가 있다는 주장과 인과 입증을 구별한다.",
+        "관계의 존재를 서술하며 표제 관련이 있다의 종결형을 사용한다. 관련하다의 관형·연결형은 이 표제의 활용형으로 등록하지 않는다."
+      ],
+      "avoid_senses": [
+        "관련성만으로 원인이나 책임을 확정하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/141",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0143",
+      "lemma": "원인",
+      "sense_id": "cause",
+      "pos": "명사",
+      "meaning": "현상이나 결과를 발생시키는 요인이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "원인",
+        "원인을",
+        "원인이"
+      ],
+      "frames": [
+        "현상의 원인",
+        "원인을 확인하다"
+      ],
+      "conditions": [
+        "근거로 확인한 요인과 후보를 구별한다."
+      ],
+      "avoid_senses": [
+        "같이 발생했다는 사실만으로 원인이라 하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/142",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0144",
+      "lemma": "영향",
+      "sense_id": "effect",
+      "pos": "명사",
+      "meaning": "다른 대상의 상태나 결과를 바꾸는 작용이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "영향",
+        "영향을",
+        "영향이"
+      ],
+      "frames": [
+        "대상에 영향을 주다"
+      ],
+      "conditions": [
+        "영향의 범위와 방향은 확인한 수준으로 쓴다."
+      ],
+      "avoid_senses": [
+        "관련성만으로 확인된 영향이라 하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/143",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0145",
+      "lemma": "제한",
+      "sense_id": "constraint",
+      "pos": "명사",
+      "meaning": "허용하거나 지원하는 행동·값·범위의 경계이다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "제한",
+        "제한을",
+        "제한이"
+      ],
+      "frames": [
+        "대상에 제한이 있다"
+      ],
+      "conditions": [
+        "정책 제한인지 기능 제한인지 구별한다."
+      ],
+      "avoid_senses": [
+        "실패 결과나 임의 금지와 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/144",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0146",
+      "lemma": "보류하다",
+      "sense_id": "defer",
+      "pos": "동사",
+      "meaning": "결정이나 실행을 하지 않고 다음 판단까지 미루다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "보류하다",
+        "보류합니다",
+        "보류했습니다",
+        "보류하세요"
+      ],
+      "frames": [
+        "결정이나 작업을 보류하다"
+      ],
+      "conditions": [
+        "기다리는 조건이 판단에 필요하면 알린다."
+      ],
+      "avoid_senses": [
+        "거부나 취소가 확정됐다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/145",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0147",
+      "lemma": "취소하다",
+      "sense_id": "cancel",
+      "pos": "동사",
+      "meaning": "계획된 행동이나 이미 한 결정을 유효하지 않게 하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "취소하다",
+        "취소합니다",
+        "취소했습니다",
+        "취소하세요"
+      ],
+      "frames": [
+        "예약이나 작업을 취소하다"
+      ],
+      "conditions": [
+        "수행 중 중단과 계획 취소를 실제 상태에 맞춰 구별한다."
+      ],
+      "avoid_senses": [
+        "이미 생긴 결과를 복원한다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/146",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0148",
+      "lemma": "선택하다",
+      "sense_id": "select",
+      "pos": "동사",
+      "meaning": "후보 가운데 정한 대상을 고르다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "선택하다",
+        "선택합니다",
+        "선택했습니다",
+        "선택하세요"
+      ],
+      "frames": [
+        "후보에서 대상을 선택하다"
+      ],
+      "conditions": [
+        "선택과 승인·구매·실행을 별도 상태로 다룬다."
+      ],
+      "avoid_senses": [
+        "선택만으로 외부 행동 완료를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/147",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0149",
+      "lemma": "적용하다",
+      "sense_id": "apply",
+      "pos": "동사",
+      "meaning": "정한 규칙·설정·변경을 대상에 실제로 사용하거나 효력을 갖게 하다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "적용하다",
+        "적용합니다",
+        "적용했습니다",
+        "적용하세요"
+      ],
+      "frames": [
+        "규칙이나 변경을 대상에 적용하다"
+      ],
+      "conditions": [
+        "검토·저장·실제 효력 발생을 구별한다."
+      ],
+      "avoid_senses": [
+        "저장만 하고 반영하지 않은 상태를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/148",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0150",
+      "lemma": "발생하다",
+      "sense_id": "occur",
+      "pos": "동사",
+      "meaning": "사건이나 현상이 실제로 생기다.",
+      "status": "preferred",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "발생하다",
+        "발생합니다",
+        "발생했습니다"
+      ],
+      "frames": [
+        "현상이 발생하다"
+      ],
+      "conditions": [
+        "가능성 문맥에서는 양태 표현을 보존한다.",
+        "이 항목은 비의지적 현상의 성립을 서술하며 명령형을 쓰지 않는다. 의도적 변화 유도는 다른 행동 뜻으로 구별한다."
+      ],
+      "avoid_senses": [
+        "발생 우려만으로 실제 사건을 확정하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/149",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0151",
+      "lemma": "증가하다",
+      "sense_id": "increase_quantity",
+      "pos": "동사",
+      "meaning": "수량이나 정도가 비교 기준보다 커지다.",
+      "status": "allowed",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "증가하다",
+        "증가합니다",
+        "증가했습니다"
+      ],
+      "frames": [
+        "대상의 양이 증가하다"
+      ],
+      "conditions": [
+        "한자어라는 이유로 강제 대체하지 않는다.",
+        "이 항목은 비의지적 현상의 성립을 서술하며 명령형을 쓰지 않는다. 의도적 변화 유도는 다른 행동 뜻으로 구별한다."
+      ],
+      "avoid_senses": [
+        "증가가 개선이나 악화를 자동으로 뜻하지 않는다."
+      ],
+      "alternatives": [
+        {
+          "entry_id": "KPL-0117",
+          "relation": "contextual",
+          "condition": "증가하다와 늘다가 동일한 대상의 수량 증가와 동일한 비교 기준을 뜻하며, 원문 표현이 측정 항목명이나 문서의 고정 용어가 아닐 때 선택한다."
+        }
+      ],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/150",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0152",
+      "lemma": "감소하다",
+      "sense_id": "decrease_quantity",
+      "pos": "동사",
+      "meaning": "수량이나 정도가 비교 기준보다 작아지다.",
+      "status": "allowed",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "감소하다",
+        "감소합니다",
+        "감소했습니다"
+      ],
+      "frames": [
+        "대상의 양이 감소하다"
+      ],
+      "conditions": [
+        "같은 문서의 측정 용어와 기준을 유지한다.",
+        "이 항목은 비의지적 현상의 성립을 서술하며 명령형을 쓰지 않는다. 의도적 변화 유도는 다른 행동 뜻으로 구별한다."
+      ],
+      "avoid_senses": [
+        "수치가 줄었다는 이유만으로 원인을 확정하지 않는다."
+      ],
+      "alternatives": [
+        {
+          "entry_id": "KPL-0118",
+          "relation": "contextual",
+          "condition": "감소하다와 줄다가 동일한 대상의 수량 감소와 동일한 비교 기준을 뜻하며, 원문 표현이 측정 항목명이나 문서의 고정 용어가 아닐 때 선택한다."
+        }
+      ],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/151",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0153",
+      "lemma": "것 같다",
+      "sense_id": "inference",
+      "pos": "의존표현",
+      "meaning": "확정하지 않은 상태나 원인에 대해 근거를 바탕으로 추측하는 표현이다.",
+      "status": "allowed",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "것 같다",
+        "-(으)ㄴ 것 같다",
+        "-는 것 같다",
+        "-(으)ㄹ 것 같다",
+        "인 것 같습니다"
+      ],
+      "frames": [
+        "명사 + 인 것 같다",
+        "용언의 관형형 + 것 같다"
+      ],
+      "conditions": [
+        "추측과 단순 동일 비교를 문맥으로 구별하며 확실성을 유지한다.",
+        "이 항목은 근거를 바탕으로 한 불확실한 판단만 다룬다. 의견을 누그러뜨리는 완곡 기능은 같은 뜻으로 승인하지 않으며 현재 재고에 등록하지 않았다."
+      ],
+      "avoid_senses": [
+        "원인이 확인됐다는 사실이나 동일성 판단으로 바꾸지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/152",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0154",
+      "lemma": "수 없다",
+      "sense_id": "not_permitted",
+      "pos": "의존표현",
+      "meaning": "권한이나 규정에 따라 행동을 허용하지 않음을 나타내는 표현이다.",
+      "status": "allowed",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "수 없다",
+        "배포할 수 없습니다",
+        "수정할 수 없다"
+      ],
+      "frames": [
+        "규정에 따라 행동할 수 없다"
+      ],
+      "conditions": [
+        "기술적 수행 능력이 있어도 정책상 불허할 수 있으므로 둘을 구별한다."
+      ],
+      "avoid_senses": [
+        "능력이 없다는 뜻이나 아직 실행하지 않았다는 뜻으로 바꾸지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/153",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-0155",
+      "lemma": "줄어들다",
+      "sense_id": "shrink_over_time",
+      "pos": "동사",
+      "meaning": "수량이나 정도가 이전보다 작아지는 변화를 나타내다.",
+      "status": "allowed",
+      "domains": [
+        "general"
+      ],
+      "forms": [
+        "줄어들다",
+        "줄어듭니다",
+        "줄어들었습니다",
+        "줄어들면"
+      ],
+      "frames": [
+        "대상의 양이 줄어들다"
+      ],
+      "conditions": [
+        "현재형 줄다와 주다의 뜻을 실제 문맥에서 구별하기 어려우면 수량 감소 뜻이 확인된 범위에서 선택할 수 있다."
+      ],
+      "avoid_senses": [
+        "대상을 의도적으로 줄이는 행위나 누군가에게 주는 행위와 구별한다."
+      ],
+      "alternatives": [
+        {
+          "entry_id": "KPL-0118",
+          "relation": "contextual",
+          "condition": "수량 감소라는 뜻과 주체가 명확하며 해당 문서가 줄다를 일관되게 사용하는 경우 선택할 수 있다."
+        }
+      ],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/154",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0001",
+      "lemma": "배포하다",
+      "sense_id": "deploy",
+      "pos": "동사",
+      "meaning": "프로그램이나 변경 내용을 지정한 운영 또는 시험 환경에서 사용할 수 있게 전달하고 적용하다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "배포하다",
+        "배포합니다",
+        "배포했습니다"
+      ],
+      "frames": [
+        "변경을 환경에 배포하다"
+      ],
+      "conditions": [
+        "배포 환경과 실제 적용 여부를 구별한다."
+      ],
+      "avoid_senses": [
+        "로컬 저장이나 배포 준비만을 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/0",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0002",
+      "lemma": "빌드하다",
+      "sense_id": "build",
+      "pos": "동사",
+      "meaning": "소스와 설정을 입력으로 실행 또는 배포용 산출물을 생성하다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "빌드하다",
+        "빌드합니다",
+        "빌드했습니다"
+      ],
+      "frames": [
+        "소스를 설정으로 빌드하다"
+      ],
+      "conditions": [
+        "산출물 생성과 시험 통과를 별도로 보고한다."
+      ],
+      "avoid_senses": [
+        "실행 중인 서비스가 갱신됐다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/1",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0003",
+      "lemma": "업로드하다",
+      "sense_id": "upload",
+      "pos": "동사",
+      "meaning": "로컬이나 출발 저장소의 데이터를 지정한 원격 저장소로 전송하다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "업로드하다",
+        "업로드합니다",
+        "업로드했습니다"
+      ],
+      "frames": [
+        "파일을 서버에 업로드하다"
+      ],
+      "conditions": [
+        "화면 기능명이 업로드이면 그 이름을 유지한다."
+      ],
+      "avoid_senses": [
+        "외부 공개나 처리 완료를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/2",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0004",
+      "lemma": "다운로드하다",
+      "sense_id": "download",
+      "pos": "동사",
+      "meaning": "원격 저장소의 데이터를 지정한 로컬 또는 수신 저장소로 전송받다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "다운로드하다",
+        "다운로드합니다",
+        "다운로드했습니다"
+      ],
+      "frames": [
+        "파일을 위치에 다운로드하다"
+      ],
+      "conditions": [
+        "전송 결과와 파일 열람 성공을 구별한다."
+      ],
+      "avoid_senses": [
+        "원본이 제거된다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/3",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0005",
+      "lemma": "병합하다",
+      "sense_id": "merge",
+      "pos": "동사",
+      "meaning": "서로 구별하던 변경이나 자료를 정한 기준 대상에 합치다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "병합하다",
+        "병합합니다",
+        "병합했습니다"
+      ],
+      "frames": [
+        "변경을 기준 대상에 병합하다"
+      ],
+      "conditions": [
+        "어느 기준 대상에 합쳤는지 식별한다."
+      ],
+      "avoid_senses": [
+        "배포나 검토 승인까지 끝났다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/4",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0006",
+      "lemma": "반영하다",
+      "sense_id": "incorporate",
+      "pos": "동사",
+      "meaning": "변경이나 의견이 대상의 내용 또는 동작에 실제로 들어가게 하다.",
+      "status": "allowed",
+      "domains": [
+        "software",
+        "document_management"
+      ],
+      "forms": [
+        "반영하다",
+        "반영합니다",
+        "반영했습니다"
+      ],
+      "frames": [
+        "변경을 대상에 반영하다"
+      ],
+      "conditions": [
+        "반영 위치와 상태가 여러 개면 구별한다."
+      ],
+      "avoid_senses": [
+        "의견을 검토했거나 파일만 저장했다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/5",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0007",
+      "lemma": "인증하다",
+      "sense_id": "authenticate",
+      "pos": "동사",
+      "meaning": "제시된 자격 정보로 대상의 신원을 확인하다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "인증하다",
+        "인증합니다",
+        "인증했습니다"
+      ],
+      "frames": [
+        "대상을 자격 정보로 인증하다"
+      ],
+      "conditions": [
+        "신원 확인과 행동 권한 판정을 구별한다."
+      ],
+      "avoid_senses": [
+        "모든 행동을 허용했다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/6",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0008",
+      "lemma": "권한을 확인하다",
+      "sense_id": "check_authorization",
+      "pos": "서술표현",
+      "meaning": "정한 대상이 특정 행동을 허용받았는지 정책에 따라 판단하다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "권한을 확인하다",
+        "권한을 확인합니다",
+        "권한을 확인했습니다"
+      ],
+      "frames": [
+        "대상의 행동 권한을 확인하다"
+      ],
+      "conditions": [
+        "인증된 신원과 요청 행동을 연결한다."
+      ],
+      "avoid_senses": [
+        "신원이 확인됐다는 사실만으로 권한을 통과시키지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/7",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0009",
+      "lemma": "백업하다",
+      "sense_id": "backup",
+      "pos": "동사",
+      "meaning": "복구에 사용할 수 있도록 정한 시점의 자료 사본을 별도 위치에 보관하다.",
+      "status": "allowed",
+      "domains": [
+        "software",
+        "document_management"
+      ],
+      "forms": [
+        "백업하다",
+        "백업합니다",
+        "백업했습니다"
+      ],
+      "frames": [
+        "자료를 백업 위치에 백업하다"
+      ],
+      "conditions": [
+        "백업 생성과 복구 가능성 시험을 구별한다."
+      ],
+      "avoid_senses": [
+        "현재 원본이 올바르거나 복원이 검증됐다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/8",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0010",
+      "lemma": "커밋하다",
+      "sense_id": "commit",
+      "pos": "동사",
+      "meaning": "선택한 변경을 저장소의 로컬 변경 이력에 기록하다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "커밋하다",
+        "커밋합니다",
+        "커밋했습니다"
+      ],
+      "frames": [
+        "변경을 저장소에 커밋하다"
+      ],
+      "conditions": [
+        "로컬 이력과 원격 전송을 구별한다."
+      ],
+      "avoid_senses": [
+        "원격 서버 전송이나 배포 완료를 뜻하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/9",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0011",
+      "lemma": "푸시하다",
+      "sense_id": "push",
+      "pos": "동사",
+      "meaning": "로컬 변경 이력을 지정한 원격 저장소로 전송하다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "푸시하다",
+        "푸시합니다",
+        "푸시했습니다"
+      ],
+      "frames": [
+        "브랜치를 원격 저장소에 푸시하다"
+      ],
+      "conditions": [
+        "원격 수신과 병합·배포를 구별한다."
+      ],
+      "avoid_senses": [
+        "원격 기본 브랜치에 병합됐다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/10",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0012",
+      "lemma": "프로젝트",
+      "sense_id": "project_container",
+      "pos": "명사",
+      "meaning": "이 제품에서 문서와 참여자를 함께 관리하는 상위 작업 단위이다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "프로젝트"
+      ],
+      "frames": [
+        "프로젝트에 문서를 추가하다"
+      ],
+      "conditions": [
+        "예시 제품의 화면 기능명과 일치하는 범위에서만 쓴다."
+      ],
+      "avoid_senses": [
+        "이 제품의 작업 공간과 임의로 같은 이름으로 취급하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/11",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0013",
+      "lemma": "작업 공간",
+      "sense_id": "workspace_view",
+      "pos": "명사",
+      "meaning": "이 예시 제품에서 개인 편집 상태를 관리하는 영역이다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "작업 공간"
+      ],
+      "frames": [
+        "작업 공간에서 편집하다"
+      ],
+      "conditions": [
+        "프로젝트와 별개의 기능이라는 제품 정의를 전제로 한다."
+      ],
+      "avoid_senses": [
+        "프로젝트의 단순 동의어로 쓰지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/12",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0014",
+      "lemma": "브랜치",
+      "sense_id": "branch",
+      "pos": "명사",
+      "meaning": "변경 이력을 정한 줄기로 구별하는 저장소 참조이다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "브랜치"
+      ],
+      "frames": [
+        "브랜치를 선택하다",
+        "브랜치에 병합하다"
+      ],
+      "conditions": [
+        "화면이나 저장소의 실제 이름을 그대로 식별한다."
+      ],
+      "avoid_senses": [
+        "서로 다른 브랜치가 같은 상태라고 가정하지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/13",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0015",
+      "lemma": "세션",
+      "sense_id": "session",
+      "pos": "명사",
+      "meaning": "정한 사용자나 작업의 연속된 실행 또는 접속 상태를 관리하는 단위이다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "세션"
+      ],
+      "frames": [
+        "세션을 시작하다",
+        "세션이 만료되다"
+      ],
+      "conditions": [
+        "서비스가 정한 범위와 유효 조건을 함께 읽는다."
+      ],
+      "avoid_senses": [
+        "로그인 계정이나 영구 권한과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/14",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0016",
+      "lemma": "토큰",
+      "sense_id": "credential_token",
+      "pos": "명사",
+      "meaning": "접근 또는 신원 확인에 사용하는 값이다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "토큰"
+      ],
+      "frames": [
+        "토큰을 발급하다",
+        "토큰이 만료되다"
+      ],
+      "conditions": [
+        "인증용 토큰이라는 문맥에 적용한다."
+      ],
+      "avoid_senses": [
+        "LLM 처리량 단위인 토큰과 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/15",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0017",
+      "lemma": "토큰",
+      "sense_id": "language_token",
+      "pos": "명사",
+      "meaning": "언어 모델이 입력이나 출력을 처리할 때 구별하는 단위이다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "토큰"
+      ],
+      "frames": [
+        "토큰 수",
+        "토큰을 처리하다"
+      ],
+      "conditions": [
+        "모델의 분할 방식에 따라 수량이 달라진다."
+      ],
+      "avoid_senses": [
+        "한국어 글자 수나 어절 수와 고정 비율로 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/16",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0018",
+      "lemma": "개정판",
+      "sense_id": "revision",
+      "pos": "명사",
+      "meaning": "이전 문서의 내용을 변경해 별도로 식별한 문서판이다.",
+      "status": "allowed",
+      "domains": [
+        "software",
+        "document_management"
+      ],
+      "forms": [
+        "개정판"
+      ],
+      "frames": [
+        "문서의 개정판",
+        "개정판을 검토하다"
+      ],
+      "conditions": [
+        "작성·검토·승인 상태를 개정 식별과 구별한다."
+      ],
+      "avoid_senses": [
+        "개정됐다는 사실만으로 승인판이 되지 않는다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/17",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0019",
+      "lemma": "승인판",
+      "sense_id": "approved_revision",
+      "pos": "명사",
+      "meaning": "정한 승인 절차를 통과한 문서판이다.",
+      "status": "allowed",
+      "domains": [
+        "software",
+        "document_management"
+      ],
+      "forms": [
+        "승인판"
+      ],
+      "frames": [
+        "문서의 승인판",
+        "승인판을 사용하다"
+      ],
+      "conditions": [
+        "승인 주체와 유효한 판을 관리 기록으로 식별한다."
+      ],
+      "avoid_senses": [
+        "최신 파일이 항상 승인판이라는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/18",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0020",
+      "lemma": "폐기하다",
+      "sense_id": "retire_revision",
+      "pos": "동사",
+      "meaning": "정한 문서판이나 설정의 사용 효력을 종료하다.",
+      "status": "allowed",
+      "domains": [
+        "software",
+        "document_management"
+      ],
+      "forms": [
+        "폐기하다",
+        "폐기합니다",
+        "폐기했습니다"
+      ],
+      "frames": [
+        "문서판을 폐기하다"
+      ],
+      "conditions": [
+        "이력 보존 여부와 사용 효력 종료를 구별한다."
+      ],
+      "avoid_senses": [
+        "파일 자체를 영구 삭제한다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/19",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0021",
+      "lemma": "로그",
+      "sense_id": "event_log",
+      "pos": "명사",
+      "meaning": "프로그램의 사건이나 상태를 시간과 함께 남기는 기록이다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "로그"
+      ],
+      "frames": [
+        "로그를 기록하다",
+        "로그에서 확인하다"
+      ],
+      "conditions": [
+        "기록하지 않는 사건은 로그 부재만으로 부정하지 않는다."
+      ],
+      "avoid_senses": [
+        "실제 행동의 모든 이력을 완전히 담는다는 뜻은 아니다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/20",
+      "dataset_version": "0.2.0-draft"
+    },
+    {
+      "id": "KPL-SW-0022",
+      "lemma": "롤백하다",
+      "sense_id": "rollback",
+      "pos": "동사",
+      "meaning": "적용된 변경을 정한 이전 배포 또는 데이터 상태로 되돌리다.",
+      "status": "allowed",
+      "domains": [
+        "software"
+      ],
+      "forms": [
+        "롤백하다",
+        "롤백합니다",
+        "롤백했습니다"
+      ],
+      "frames": [
+        "배포를 기준 버전으로 롤백하다"
+      ],
+      "conditions": [
+        "되돌리는 기준과 데이터 영향은 실제 절차로 정한다."
+      ],
+      "avoid_senses": [
+        "일반 문장 편집의 되돌리기나 모든 복구와 같지 않다."
+      ],
+      "alternatives": [],
+      "since": "0.2.0",
+      "deprecated_since": null,
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/21",
+      "dataset_version": "0.2.0-draft"
+    }
+  ],
+  "approval_policy_extract": {
+    "path": "docs/spec/lexicon.md",
+    "line": 42,
+    "text": "어떤 상태도 전문가의 최종 승인이나 독자 실험의 통과를 뜻하지 않는다. 첫 재고에는 폐기 항목이 없으나 스키마는 폐기 시점과 기존 식별자의 이력 보존을 지원한다. 새 이름의 적용을 승인했을 때 기존 뜻 항목을 폐기 상태로 남기고 대체 항목의 식별자를 기록한다. `since`를 고쳐 과거의 뜻이나 도입 시점을 지우지 않는다."
+  },
+  "extraction_method": "Read all177 entries; preserve all fields relevant to sense, scope, frames, forms, editorial status. Exclude authored examples from matching evidence."
+}

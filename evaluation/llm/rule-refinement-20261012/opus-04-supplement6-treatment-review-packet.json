@@ -1,0 +1,208 @@
+{
+  "scope": "reused supplement6 targeted candidate diagnostic; not independent efficacy",
+  "condition": "treatment",
+  "requested_model": "anthropic/claude-opus-5-5",
+  "criteria_only": true,
+  "historical_Sol_comparison_is_not_causal": true,
+  "structure": {
+    "valid": true,
+    "errors": []
+  },
+  "cases": [
+    {
+      "case": {
+        "id": "KI-SUP-ASP-01",
+        "family": "aspect_and_modality",
+        "case_type": "normal",
+        "explicit_context": "가상의 도형 연습이다. 루미는 지금 점 세 개를 그리는 작업을 하고 있다. 작업은 시작되었고 아직 끝나지 않았다. 완성된 점의 수는 정하지 않았다.",
+        "source": "루미는 지금 점 세 개를 그리는 중이다. 아직 그리기를 마치지 않았다.",
+        "candidate": "루미는 지금 점 세 개를 그리고 있다. 아직 그리기를 마치지 않았다.",
+        "expected_decision": "accept",
+        "acceptable_output": "루미는 지금 점 세 개를 그리고 있다. 아직 그리기를 마치지 않았다.",
+        "rejected_output": "루미는 지금 점 세 개를 다 그렸다.",
+        "rationale": "이 맥락에서 그리는 중이다와 그리고 있다는 진행 중인 같은 작업을 나타낸다. 다 그렸다는 완료 주장으로 바뀌어 아직 마치지 않았다는 사실과 충돌한다.",
+        "preserved_facts": [
+          "행위자는 루미다.",
+          "작업 대상은 점 세 개다.",
+          "그리기 작업이 현재 진행 중이다.",
+          "그리기 작업은 아직 끝나지 않았다.",
+          "이미 완성한 점의 수는 제시되지 않았다."
+        ],
+        "prohibited_changes": [
+          "진행을 완료로 바꾸지 않는다.",
+          "점의 완성 수나 진행률을 추가하지 않는다.",
+          "그리기의 진행 해석을 모든 고 있다 표현의 유일한 해석으로 일반화하지 않는다."
+        ]
+      },
+      "actual_output": {
+        "id": "KI-SUP-ASP-01",
+        "action": "keep",
+        "text": "루미는 지금 점 세 개를 그리고 있다. 아직 그리기를 마치지 않았다.",
+        "reason": "'그리다'에 붙은 '-고 있다'는 동작이 진행 중임을 나타낸다. 후보는 '그리는 중이다'의 진행 의미를 유지하고, 미완료 문장도 그대로 둔다."
+      },
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "KI-SUP-ASP-02",
+        "family": "aspect_and_modality",
+        "case_type": "failure",
+        "explicit_context": "가상의 인물 관찰 기록이다. 지호는 조금 전에 안경을 썼고 지금도 안경을 착용한 상태다. 관찰 순간에는 안경을 얼굴에 올리는 동작을 하고 있지 않다.",
+        "source": "지호는 지금 안경을 쓰고 있다.",
+        "candidate": "지호는 지금 안경을 쓰는 중이다.",
+        "expected_decision": "reject",
+        "acceptable_output": "지호는 지금 안경을 착용한 상태다.",
+        "rejected_output": "지호는 지금 안경을 쓰는 중이다.",
+        "rationale": "원문의 쓰고 있다는 이 맥락에서 착용 후 유지되는 상태다. 쓰는 중이다는 안경을 쓰는 동작의 진행을 주장하므로 동작이 이미 끝났다는 맥락과 충돌한다.",
+        "preserved_facts": [
+          "관찰 대상은 지호다.",
+          "지호는 현재 안경을 착용하고 있다.",
+          "안경을 쓰는 동작은 관찰 이전에 완료되었다.",
+          "관찰 순간에는 안경을 쓰는 동작이 진행되지 않는다."
+        ],
+        "prohibited_changes": [
+          "착용 결과 상태를 착용 동작의 진행으로 바꾸지 않는다.",
+          "안경을 벗었거나 쓰지 않았다고 주장하지 않는다.",
+          "모든 고 있다 표현을 진행으로 일괄 변환하지 않는다.",
+          "안경의 색이나 착용 이유를 추가하지 않는다."
+        ]
+      },
+      "actual_output": {
+        "id": "KI-SUP-ASP-02",
+        "action": "rewrite",
+        "text": "지호는 지금 안경을 쓰고 있다.",
+        "reason": "원문의 '쓰고 있다'는 안경을 착용한 결과 상태가 이어지고 있다는 뜻이다. 후보의 '쓰는 중이다'는 안경을 얼굴에 올리는 동작이 진행 중이라는 뜻이 되어, 지금 그 동작을 하지 않는다는 문맥과 어긋난다."
+      },
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "KI-SUP-ASP-03",
+        "family": "aspect_and_modality",
+        "case_type": "keep",
+        "explicit_context": "가상의 그리기 활동 기록이다. 혜윤은 지정된 도형 하나를 모두 그렸고 그리기 작업은 끝났다. 혜윤이 같은 도형을 다시 그리기 시작한 사실은 없다.",
+        "source": "혜윤은 도형을 다 그렸다.",
+        "candidate": "혜윤은 도형을 다 그렸다.",
+        "expected_decision": "keep",
+        "acceptable_output": "혜윤은 도형을 다 그렸다.",
+        "rejected_output": "혜윤은 도형을 그리고 있다.",
+        "rationale": "다 그렸다는 완료를 간결하고 자연스럽게 전달한다. 그리고 있다로 바꾸면 이 맥락에서 완료된 그리기 작업을 진행 중인 작업으로 바꾸게 된다.",
+        "preserved_facts": [
+          "행위자는 혜윤이다.",
+          "그린 대상은 지정된 도형이다.",
+          "도형 그리기가 모두 완료되었다.",
+          "그리기 작업은 진행 중이 아니다."
+        ],
+        "prohibited_changes": [
+          "완료를 진행으로 바꾸지 않는다.",
+          "도형을 다시 그리는 새 작업을 추가하지 않는다.",
+          "완성까지 걸린 시간이나 완성 품질을 추가하지 않는다."
+        ]
+      },
+      "actual_output": {
+        "id": "KI-SUP-ASP-03",
+        "action": "keep",
+        "text": "혜윤은 도형을 다 그렸다.",
+        "reason": "후보는 원문과 같다. 도형 하나를 모두 그려 작업이 끝났다는 완료 상태를 그대로 전한다."
+      },
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "KI-SUP-CAU-01",
+        "family": "passive_and_causative",
+        "case_type": "normal",
+        "explicit_context": "가상의 리본 제작 기록이다. 세나는 이든에게 리본 자르기를 지시했다. 세나는 직접 자르지 않았고 이든이 지시에 따라 리본을 실제로 잘랐다.",
+        "source": "세나는 이든에게 리본을 자르게 했다. 이든이 리본을 잘랐다.",
+        "candidate": "세나의 지시로 이든이 리본을 잘랐다.",
+        "expected_decision": "accept",
+        "acceptable_output": "세나의 지시로 이든이 리본을 잘랐다.",
+        "rejected_output": "이든의 지시로 세나가 리본을 잘랐다.",
+        "rationale": "명시된 지시 맥락에서 사동의 지시자 세나와 실제 행위자 이든을 한 문장으로 유지할 수 있다. 거절 예문은 지시자와 실제 행위자를 뒤집는다.",
+        "preserved_facts": [
+          "세나가 자르기를 지시했다.",
+          "이든이 실제로 리본을 잘랐다.",
+          "세나가 직접 자른 것은 아니다.",
+          "리본 자르기가 실제로 이루어졌다."
+        ],
+        "prohibited_changes": [
+          "지시자와 실제 행위자를 바꾸지 않는다.",
+          "실제 자르기를 단순한 예정이나 지시만으로 축소하지 않는다.",
+          "리본 수량이나 자르는 목적을 추가하지 않는다."
+        ]
+      },
+      "actual_output": {
+        "id": "KI-SUP-CAU-01",
+        "action": "keep",
+        "text": "세나의 지시로 이든이 리본을 잘랐다.",
+        "reason": "세나가 지시했고 이든이 실제로 리본을 잘랐다는 사동주와 행위자, 대상의 관계가 그대로 유지된다. 세나가 직접 자르지 않았다는 사실과도 어긋나지 않는다."
+      },
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "KI-SUP-CAU-02",
+        "family": "passive_and_causative",
+        "case_type": "keep",
+        "explicit_context": "가상의 대화 장면이다. 선오가 농담을 했고 그 농담 때문에 다미가 웃었다. 선오는 다미에게 웃으라고 지시하지 않았고 다미는 자연스럽게 웃었다.",
+        "source": "선오가 농담으로 다미를 웃겼다.",
+        "candidate": "선오가 농담으로 다미를 웃겼다.",
+        "expected_decision": "keep",
+        "acceptable_output": "선오가 농담으로 다미를 웃겼다.",
+        "rejected_output": "다미가 선오에게 웃으라고 지시했다.",
+        "rationale": "웃겼다는 원인 제공자 선오와 실제 웃은 사람 다미를 자연스럽게 표현하는 사동이다. 사동을 반드시 지시로 풀면 맥락에 없는 명령을 만들며 거절 예문은 인물의 역할도 바꾼다.",
+        "preserved_facts": [
+          "선오가 농담을 했다.",
+          "농담 때문에 다미가 실제로 웃었다.",
+          "웃은 사람은 다미다.",
+          "다미에게 웃으라는 지시는 없었다."
+        ],
+        "prohibited_changes": [
+          "원인 제공자와 실제 웃은 사람을 바꾸지 않는다.",
+          "사동을 명령이나 의무로 일괄 해석하지 않는다.",
+          "농담 내용이나 웃은 시간을 추가하지 않는다."
+        ]
+      },
+      "actual_output": {
+        "id": "KI-SUP-CAU-02",
+        "action": "keep",
+        "text": "선오가 농담으로 다미를 웃겼다.",
+        "reason": "후보는 원문과 같다. 선오의 농담이 원인이 되어 다미가 웃었다는 관계를 전하고, 웃으라는 지시가 있었다는 뜻은 담지 않는다."
+      },
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "KI-SUP-PAS-01",
+        "family": "passive_and_causative",
+        "case_type": "failure",
+        "explicit_context": "가상의 연극 동작 기록이다. 예나가 지후를 밀었고 지후가 밀림을 당했다. 지후가 예나를 민 동작은 없었다. 두 사람 외에 다른 행위자는 없다.",
+        "source": "지후가 예나에게 밀렸다.",
+        "candidate": "지후가 예나를 밀었다.",
+        "expected_decision": "reject",
+        "acceptable_output": "예나가 지후를 밀었다.",
+        "rejected_output": "지후가 예나를 밀었다.",
+        "rationale": "피동문의 주어 지후는 밀림을 당한 사람이고 에게가 붙은 예나는 명시된 행위자다. 후보는 피동을 능동으로 바꾸면서 두 역할을 뒤집는다. 허용 예문은 원문에 이미 있는 행위자만 사용한다.",
+        "preserved_facts": [
+          "미는 행위자는 예나다.",
+          "밀림을 당한 사람은 지후다.",
+          "미는 동작은 실제로 이루어졌다.",
+          "지후가 예나를 민 동작은 없다."
+        ],
+        "prohibited_changes": [
+          "피동의 대상과 행위자를 바꾸지 않는다.",
+          "명시된 예나 외에 행위자를 만들어 내지 않는다.",
+          "동작의 의도나 힘의 크기를 추가하지 않는다."
+        ]
+      },
+      "actual_output": {
+        "id": "KI-SUP-PAS-01",
+        "action": "rewrite",
+        "text": "지후가 예나에게 밀렸다.",
+        "reason": "후보는 지후가 예나를 민 것으로 행위자와 대상을 뒤바꿨다. 문맥에서 민 사람은 예나이고 밀린 사람은 지후이므로, 지후를 주어로 둔 원문의 피동 구조를 유지한다."
+      },
+      "semantic_rating": null
+    }
+  ],
+  "overall_accuracy": null
+}

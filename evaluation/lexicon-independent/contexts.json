@@ -1,0 +1,374 @@
+{
+  "evaluation_id": "lexicon-independent-20261012",
+  "frozen_at_utc": "2026-10-12T13:23:13Z",
+  "origin": "synthetic authored contexts, frozen before reading dictionaries or examples; not a natural corpus, real incident record, or human study",
+  "fixed_denominator": 40,
+  "domains": {
+    "software_runtime": 10,
+    "work_coordination": 10,
+    "data_operations": 10,
+    "specification_documentation": 10
+  },
+  "contexts": [
+    {
+      "id": "C01",
+      "domain": "software_runtime",
+      "category": "state_vs_operation",
+      "context": "작업자 프로세스의 상태 표시가 활성으로 바뀌었지만 새 작업을 배정하지 않았다.",
+      "target_concept": "활성",
+      "intended_meaning": "현재 기능이 사용 가능한 상태",
+      "audience": "운영 개발자"
+    },
+    {
+      "id": "C02",
+      "domain": "software_runtime",
+      "category": "state_vs_operation",
+      "context": "관리자가 꺼진 알림 기능을 활성화한다.",
+      "target_concept": "활성화",
+      "intended_meaning": "사용 불가능한 기능을 사용 가능한 상태로 바꾸는 행위",
+      "audience": "운영 관리자"
+    },
+    {
+      "id": "C03",
+      "domain": "software_runtime",
+      "category": "failure_recovery",
+      "context": "서버가 입력 요청을 받았지만 처리 큐에만 넣었으므로 작업 완료 표시를 내보내지 않는다.",
+      "target_concept": "완료",
+      "intended_meaning": "작업의 요구된 처리가 모두 끝난 상태",
+      "audience": "API 개발자"
+    },
+    {
+      "id": "C04",
+      "domain": "software_runtime",
+      "category": "failure_recovery",
+      "context": "결제 요청의 응답이 5초 동안 도착하지 않아 시간 초과로 분류한다.",
+      "target_concept": "시간 초과",
+      "intended_meaning": "정해진 대기 시간이 지나도 기대한 응답을 받지 못함",
+      "audience": "운영 담당자"
+    },
+    {
+      "id": "C05",
+      "domain": "software_runtime",
+      "category": "failure_recovery",
+      "context": "전송이 실패하면 동일한 요청을 한 번 더 보내도록 클라이언트를 구성한다.",
+      "target_concept": "재시도",
+      "intended_meaning": "실패한 동작을 다시 실행함",
+      "audience": "클라이언트 개발자"
+    },
+    {
+      "id": "C06",
+      "domain": "software_runtime",
+      "category": "failure_recovery",
+      "context": "배포 직후 오류가 늘어 운영 버전을 직전 버전으로 되돌린다.",
+      "target_concept": "롤백",
+      "intended_meaning": "이미 적용한 변경을 이전의 유효한 상태로 되돌림",
+      "audience": "배포 담당자"
+    },
+    {
+      "id": "C07",
+      "domain": "software_runtime",
+      "category": "term_ambiguity",
+      "context": "저장소 상태를 확인하는 검사는 통과했지만 사용자가 주문을 넣는 동작은 아직 시험하지 않았다.",
+      "target_concept": "검사",
+      "intended_meaning": "정해진 조건을 만족하는지 확인하는 행위",
+      "audience": "품질 담당자"
+    },
+    {
+      "id": "C08",
+      "domain": "software_runtime",
+      "category": "failure_recovery",
+      "context": "전원 복귀 후 서비스가 정상 요청을 다시 처리하도록 복구한다.",
+      "target_concept": "복구",
+      "intended_meaning": "고장이나 중단 뒤 정상 기능을 회복하는 행위",
+      "audience": "장애 대응자"
+    },
+    {
+      "id": "C09",
+      "domain": "software_runtime",
+      "category": "term_ambiguity",
+      "context": "서버가 같은 요청 식별자를 두 번 받아도 결제를 한 번만 실행하도록 멱등성을 보장한다.",
+      "target_concept": "멱등성",
+      "intended_meaning": "동일 동작을 반복해도 추가 상태 변화가 생기지 않는 성질",
+      "audience": "백엔드 개발자"
+    },
+    {
+      "id": "C10",
+      "domain": "software_runtime",
+      "category": "names_domain",
+      "context": "로그의 정상 항목에는 요청 추적용 상관관계 식별자를 포함한다.",
+      "target_concept": "상관관계 식별자",
+      "intended_meaning": "서로 관련된 여러 처리 기록을 연결하는 식별 값",
+      "audience": "관측 도구 개발자"
+    },
+    {
+      "id": "C11",
+      "domain": "work_coordination",
+      "category": "proposal_vs_completion",
+      "context": "회의록에 일정 변경을 제안으로 적었으며 담당자의 승인은 아직 받지 않았다.",
+      "target_concept": "제안",
+      "intended_meaning": "검토나 채택을 요청하는 의견으로 아직 확정되지 않음",
+      "audience": "프로젝트 참여자"
+    },
+    {
+      "id": "C12",
+      "domain": "work_coordination",
+      "category": "proposal_vs_completion",
+      "context": "검토자가 수정안을 승인한 뒤 담당자가 문서에 반영한다.",
+      "target_concept": "승인",
+      "intended_meaning": "권한을 가진 사람이 특정 변경이나 행위를 허용함",
+      "audience": "문서 담당자"
+    },
+    {
+      "id": "C13",
+      "domain": "work_coordination",
+      "category": "proposal_vs_completion",
+      "context": "작성자는 개정 문구를 확정했지만 배포 문서에는 아직 적용하지 않았다.",
+      "target_concept": "적용",
+      "intended_meaning": "정해진 규칙이나 변경을 실제 대상에 시행함",
+      "audience": "문서 담당자"
+    },
+    {
+      "id": "C14",
+      "domain": "work_coordination",
+      "category": "permission_obligation",
+      "context": "팀장은 임시 담당자를 교체하고 민수에게 장애 보고 업무를 할당한다.",
+      "target_concept": "할당",
+      "intended_meaning": "특정 사람에게 수행할 업무를 지정함",
+      "audience": "팀장"
+    },
+    {
+      "id": "C15",
+      "domain": "work_coordination",
+      "category": "permission_obligation",
+      "context": "외부 검토자는 보고서를 읽을 수 있으나 내용을 수정할 권한은 없다.",
+      "target_concept": "권한",
+      "intended_meaning": "특정 행위를 수행하도록 부여된 자격이나 허가",
+      "audience": "외부 검토자"
+    },
+    {
+      "id": "C16",
+      "domain": "work_coordination",
+      "category": "permission_obligation",
+      "context": "배포 담당자는 배포 전에 승인 기록을 확인해야 한다.",
+      "target_concept": "해야 한다",
+      "intended_meaning": "규칙이 요구하는 필수 행위",
+      "audience": "배포 담당자"
+    },
+    {
+      "id": "C17",
+      "domain": "work_coordination",
+      "category": "permission_obligation",
+      "context": "사용자는 선택 사항인 설명란을 비워 둘 수 있다.",
+      "target_concept": "할 수 있다",
+      "intended_meaning": "규칙상 허용되지만 필수는 아닌 선택",
+      "audience": "일반 사용자"
+    },
+    {
+      "id": "C18",
+      "domain": "work_coordination",
+      "category": "term_ambiguity",
+      "context": "기능 출시일은 정했지만 담당자는 다른 팀의 검토가 끝날 때까지 작업을 보류한다.",
+      "target_concept": "보류",
+      "intended_meaning": "진행 여부나 실행을 나중으로 미룸",
+      "audience": "프로젝트 담당자"
+    },
+    {
+      "id": "C19",
+      "domain": "work_coordination",
+      "category": "proposal_vs_completion",
+      "context": "회의 종료 뒤 논의 결과를 기록으로 남기고 미결 항목을 별도로 표시한다.",
+      "target_concept": "기록",
+      "intended_meaning": "사실이나 행위를 나중에 확인하도록 남기는 행위",
+      "audience": "회의 서기"
+    },
+    {
+      "id": "C20",
+      "domain": "work_coordination",
+      "category": "names_domain",
+      "context": "보고서의 제품명은 가상 제품인 새봄으로 표기하며 일반 명사인 봄과 구별한다.",
+      "target_concept": "제품명",
+      "intended_meaning": "특정 제품을 구별하는 고유한 이름",
+      "audience": "기술 문서 작성자"
+    },
+    {
+      "id": "C21",
+      "domain": "data_operations",
+      "category": "transfer_cache_delete",
+      "context": "앱이 원격 서버의 새 이미지 파일을 장치에 내려받는다.",
+      "target_concept": "다운로드",
+      "intended_meaning": "원격 시스템의 데이터를 로컬 시스템으로 전송함",
+      "audience": "모바일 개발자"
+    },
+    {
+      "id": "C22",
+      "domain": "data_operations",
+      "category": "transfer_cache_delete",
+      "context": "사용자가 장치에서 만든 보고서를 원격 저장소에 올린다.",
+      "target_concept": "업로드",
+      "intended_meaning": "로컬 시스템의 데이터를 원격 시스템으로 전송함",
+      "audience": "일반 사용자"
+    },
+    {
+      "id": "C23",
+      "domain": "data_operations",
+      "category": "transfer_cache_delete",
+      "context": "같은 조회 결과를 빠르게 제공하려고 잠시 캐시에 저장한다.",
+      "target_concept": "캐시",
+      "intended_meaning": "다시 사용하기 위해 임시로 보관하는 데이터 또는 보관 영역",
+      "audience": "서버 개발자"
+    },
+    {
+      "id": "C24",
+      "domain": "data_operations",
+      "category": "transfer_cache_delete",
+      "context": "민감한 임시 파일을 삭제해 현재 저장소의 파일 목록과 내용에서 없앤다.",
+      "target_concept": "삭제",
+      "intended_meaning": "대상 데이터를 현재 저장소에서 없애는 행위",
+      "audience": "정보 관리 담당자"
+    },
+    {
+      "id": "C25",
+      "domain": "data_operations",
+      "category": "transfer_cache_delete",
+      "context": "서로 다른 장치에서 바뀐 주소록을 동기화해 같은 최신 내용으로 맞춘다.",
+      "target_concept": "동기화",
+      "intended_meaning": "복수 대상의 관련 상태나 내용을 서로 일치시킴",
+      "audience": "모바일 개발자"
+    },
+    {
+      "id": "C26",
+      "domain": "data_operations",
+      "category": "transfer_cache_delete",
+      "context": "원본 문서가 손상될 때 다시 사용할 수 있도록 별도 저장소에 백업한다.",
+      "target_concept": "백업",
+      "intended_meaning": "손실에 대비하여 복구용 사본을 따로 저장함",
+      "audience": "정보 관리 담당자"
+    },
+    {
+      "id": "C27",
+      "domain": "data_operations",
+      "category": "term_ambiguity",
+      "context": "요청의 메시지 본문만 서명하며 전송 헤더는 서명 대상에 넣지 않는다.",
+      "target_concept": "본문",
+      "intended_meaning": "메시지의 헤더를 제외한 실제 내용 부분",
+      "audience": "API 개발자"
+    },
+    {
+      "id": "C28",
+      "domain": "data_operations",
+      "category": "failure_recovery",
+      "context": "검색 색인이 문서의 변경을 아직 반영하지 않아 오래된 결과를 반환한다.",
+      "target_concept": "색인",
+      "intended_meaning": "검색을 빠르게 하기 위한 구조화된 참조 자료",
+      "audience": "검색 개발자"
+    },
+    {
+      "id": "C29",
+      "domain": "data_operations",
+      "category": "term_ambiguity",
+      "context": "계정 복사 작업은 원본을 보존하고 새 계정에 동일한 설정 사본을 만든다.",
+      "target_concept": "복사",
+      "intended_meaning": "원본을 유지하며 별도의 동일 내용 대상을 만듦",
+      "audience": "운영 관리자"
+    },
+    {
+      "id": "C30",
+      "domain": "data_operations",
+      "category": "state_vs_operation",
+      "context": "이동 작업은 새 폴더에 파일을 두고 기존 폴더에서는 파일을 제거한다.",
+      "target_concept": "이동",
+      "intended_meaning": "대상의 위치를 바꾸며 기존 위치에 원본을 남기지 않음",
+      "audience": "일반 사용자"
+    },
+    {
+      "id": "C31",
+      "domain": "specification_documentation",
+      "category": "unit_range",
+      "context": "요청 본문 크기는 2 MiB 이하로 제한하며 2 MB와 같은 값으로 취급하지 않는다.",
+      "target_concept": "MiB",
+      "intended_meaning": "2의 20제곱 바이트에 해당하는 정보량 단위",
+      "audience": "API 문서 독자"
+    },
+    {
+      "id": "C32",
+      "domain": "specification_documentation",
+      "category": "unit_range",
+      "context": "재시도 간격은 200 ms로 정하며 200초로 해석하지 않는다.",
+      "target_concept": "ms",
+      "intended_meaning": "초의 천분의 일에 해당하는 시간 단위",
+      "audience": "클라이언트 개발자"
+    },
+    {
+      "id": "C33",
+      "domain": "specification_documentation",
+      "category": "unit_range",
+      "context": "입력 정수는 1 이상 10 이하로 받으며 경계값 1과 10도 허용한다.",
+      "target_concept": "이하",
+      "intended_meaning": "기준값과 같은 값 및 그보다 작은 값을 포함하는 비교 관계",
+      "audience": "폼 개발자"
+    },
+    {
+      "id": "C34",
+      "domain": "specification_documentation",
+      "category": "unit_range",
+      "context": "암호 길이는 12자 이상이어야 하며 정확히 12자도 허용한다.",
+      "target_concept": "이상",
+      "intended_meaning": "기준값과 같은 값 및 그보다 큰 값을 포함하는 비교 관계",
+      "audience": "인증 개발자"
+    },
+    {
+      "id": "C35",
+      "domain": "specification_documentation",
+      "category": "unit_range",
+      "context": "서비스의 처리율은 초당 완료한 요청 수로 나타낸다.",
+      "target_concept": "처리율",
+      "intended_meaning": "단위 시간에 완료하는 작업량",
+      "audience": "성능 분석자"
+    },
+    {
+      "id": "C36",
+      "domain": "specification_documentation",
+      "category": "unit_range",
+      "context": "응답 지연은 요청을 보낸 시점부터 응답을 받은 시점까지의 시간으로 측정한다.",
+      "target_concept": "지연",
+      "intended_meaning": "요청과 기대 결과 사이에 경과하는 시간",
+      "audience": "성능 분석자"
+    },
+    {
+      "id": "C37",
+      "domain": "specification_documentation",
+      "category": "names_domain",
+      "context": "설정 키 retry_count는 번역하지 않고 철자와 밑줄을 그대로 유지한다.",
+      "target_concept": "retry_count",
+      "intended_meaning": "프로그램 설정에서 재시도 횟수를 가리키는 정확한 키 이름",
+      "audience": "설정 문서 작성자"
+    },
+    {
+      "id": "C38",
+      "domain": "specification_documentation",
+      "category": "names_domain",
+      "context": "문서에서 고객이 제공한 레몬은 사람의 별명이며 과일 이름으로 해석하지 않는다.",
+      "target_concept": "레몬",
+      "intended_meaning": "특정 사람을 가리키는 사용자 제공 별명",
+      "audience": "협업 도구 문서 작성자"
+    },
+    {
+      "id": "C39",
+      "domain": "specification_documentation",
+      "category": "term_ambiguity",
+      "context": "사용자 세션은 로그인부터 로그아웃까지 인증 상태를 유지하는 구간으로 정의한다.",
+      "target_concept": "세션",
+      "intended_meaning": "인증 상태를 유지하는 사용자와 시스템의 상호작용 구간",
+      "audience": "인증 문서 독자"
+    },
+    {
+      "id": "C40",
+      "domain": "specification_documentation",
+      "category": "permission_obligation",
+      "context": "서비스 계정은 읽기 전용 범위만 허용하는 접근 토큰으로 문서를 조회한다.",
+      "target_concept": "접근 토큰",
+      "intended_meaning": "요청자의 접근 자격과 허용 범위를 나타내는 인증 값",
+      "audience": "보안 개발자"
+    }
+  ]
+}

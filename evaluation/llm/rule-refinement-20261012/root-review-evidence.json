@@ -1,0 +1,11 @@
+{
+  "root_ratings_sha256": "80716fc3d246350e321f977db2aabc093f95e844a6ccebc806a537ade6ccd34d",
+  "report_ko_sha256": "2e74dd4fc4c074352509fadd59b9fd0e7c50af85c2053575d7ec761fc98179e5",
+  "original_frozen_hashes_verified": true,
+  "capacity_amendment_hashes_verified": true,
+  "actual_final_output_hashes_verified": true,
+  "model_calls_after_parent_ratings": 0,
+  "semantic_scores_supplied_by_root": true,
+  "root_review_is_not_blind": true,
+  "no_combined_accuracy": true
+}

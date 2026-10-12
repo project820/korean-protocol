@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a12ffe-10c6-7893-9aba-53999a5fadcd"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"results\":[{\"id\":\"autoload\",\"action\":\"keep\",\"text\":\"설정이 저장됐습니다.\",\"reason\":\"KP_AUTOLOAD_6c93d127 설정 저장 완료를 명확하고 자연스럽게 알립니다.\"}]}"}}
+{"type":"turn.completed","usage":{"input_tokens":16857,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":78,"reasoning_output_tokens":25}}

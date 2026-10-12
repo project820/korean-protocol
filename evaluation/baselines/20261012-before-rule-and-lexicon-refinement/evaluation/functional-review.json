@@ -1,0 +1,842 @@
+{
+  "schema_version": "1.0",
+  "purpose": "functional-design-review",
+  "reviewed_at": "2026-10-12",
+  "source": {
+    "title": "ASD-STE100 Simplified Technical English",
+    "issue": 9,
+    "date": "2025-01-15",
+    "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+    "rule_count": 53
+  },
+  "reviewed_rules_sha256": "5d8db818c0a50e4249fae2a4bd69a65418b29c3ff23ba20d4e468b0106d10ae0",
+  "reviewed_cases_sha256": "aa589b56a0c0896cfb8f695abad9a5fed91e4a33f42bc5aedca8f1ca0c26a397",
+  "independent_cases_path": "evaluation/functional-cases.json",
+  "independent_cases_sha256": "4385ce57e3c5635e026cb89a2cd87100587dc9e1ef9a20f8407688783c07d6a0",
+  "reviewed_spec_path": "docs/spec/korean-rules.md",
+  "reviewed_spec_sha256": "10aa7cd07fab89505fdbdc95e3948c721655f8ca7a0378b73deac0286d1ee9ae",
+  "method": "원본 각 기능의 목적·조건·예외를 읽고 한국어 규칙 requirement/conditions/exceptions 및 작성자 양호·반례·위반 사례, 별도 작성한 holdout을 대조했다. 사례의 기대값은 설계 검토 판단이며 실제 모델 생성 결과가 아니다. Opus 후 수정 전후 11개 규칙의 필드 차이와 작성자 -N 72개 전체의 명시 원문·후보·기대값을 읽고 재대조했다. 9개 독립 회귀를 추가하고 기존 독립 사례 3개의 적용 조건을 교정했다. 최종 잔여 예문 수정에서 WRD-002의 정의 연결, PROC-006의 이유 근거 범위, PROC-007의 순번 제거와 SYN-006의 정상 유지/후보 교정을 확인했다. 관련 독립 사례에 첫 단계 가정이 없으므로 독립 사례는 바꾸지 않았다.",
+  "independence": "규칙 작성자와 다른 에이전트가 최초 53개 사례를 작성자 규칙·사례를 읽기 전에 작성하고, 이후 원본 조건·설계 경계의 추가 사례를 작성했다. 사용자 지정 공통 회귀 문장 FC-7-3은 독립 검토 case_ids에서 제외했다. 242개 작성자 사례는 모두 author origin이며 독립 사례 수로 합산하지 않는다. 현재 별도 사례 84개 중 공통 회귀 1개를 뺀 83개를 독립 입력으로 사용한다.",
+  "limitations": [
+    "실제 LLM 호출·생성·출력 채점은 수행하지 않았다.",
+    "한국어 모어 독자 이해도·읽기 시간·재독 실험은 수행하지 않았다.",
+    "실제 어휘 사전의 분야별 사용 충족률은 이 검토의 대상이 아니다.",
+    "설치·업데이트·프로필 공급의 실제 환경 검증은 이 검토의 대상이 아니다.",
+    "partial 항목은 90% 분자에서 제외하며 영어의 강제 상한이나 폐쇄 어휘를 한국어에 억지로 도입하지 않는다."
+  ],
+  "reviews": [
+    {
+      "ste_id": "1.1",
+      "target_rule_ids": [
+        "KP-WRD-007"
+      ],
+      "verdict": "fail",
+      "rationale": "세 진입 경로와 뜻·범위·결합 기록은 생겼지만 미등록 일반 표현도 문맥이 명확하면 유지 후보로 둔다. 원본의 승인 어휘 집합 안에서만 작성하는 폐쇄 통제는 수행하지 않는다. 미등록 의미를 추측하지 않는 사례는 충족하나 어휘 사용 범위의 통제 강도가 달라 부분 대응이다.",
+      "case_ids": [
+        "FC-1-1",
+        "FC-1-1-U"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.2",
+      "target_rule_ids": [
+        "KP-WRD-003"
+      ],
+      "verdict": "pass",
+      "rationale": "표면형을 승인 품사·뜻·논항에 연결하며 새 품사전환은 별도 검토한다. 평탄도 명사를 미확인 가공 동사로 해석하는 사례를 거부하고 UI 명사형 예외를 허용하므로 문법 역할 통제 기능을 한국어에 맞게 충족한다.",
+      "case_ids": [
+        "FC-1-2",
+        "FC-1-2-UI"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.3",
+      "target_rule_ids": [
+        "KP-WRD-002",
+        "KP-WRD-003"
+      ],
+      "verdict": "pass",
+      "rationale": "문서의 뜻을 일관되게 유지하는 규칙과 승인 의미·새 의미 검토를 함께 적용한다. 개인 폴더 복사를 배포로 부르는 오용을 구분하므로 단순 명칭 일관성이 아닌 실제 승인 뜻의 사용을 통제한다. 최종 예문 재검토에서 원문의 서버 공개가 문맥에 정의된 배포와 직접 대응함을 확인했다. 불명확한 서버 저장을 배포로 추정하는 경로는 제거됐다.",
+      "case_ids": [
+        "FC-1-3"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.4",
+      "target_rule_ids": [
+        "KP-WRD-003"
+      ],
+      "verdict": "pass",
+      "rationale": "한국어 활용형을 승인된 품사·뜻·논항 패턴에 연결하고 생산적 활용과 새 의미를 구분한다. 진행을 완료로 바꾸는 단순화는 거부하며 UI 명사형을 허용하므로 형태 관리와 의미 보존을 함께 수행한다.",
+      "case_ids": [
+        "FC-1-4",
+        "FC-1-2-UI"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.5",
+      "target_rule_ids": [
+        "KP-NAM-002",
+        "KP-WRD-007"
+      ],
+      "verdict": "pass",
+      "rationale": "전문 명사의 진입 경로와 정의·대상·분야·출처를 기록한다. 승인된 광학 부품 명칭을 일반 표현으로 뭉개지 않고 전문 명사 확장의 근거를 확인하므로 분야 명칭 편입 기능을 갖춘다.",
+      "case_ids": [
+        "FC-1-5"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.6",
+      "target_rule_ids": [
+        "KP-NAM-002"
+      ],
+      "verdict": "pass",
+      "rationale": "기본 어휘 밖 표현을 전체 전문명칭의 구성 요소로 한정 허용하고 일반 서술의 승인으로 확대하지 않는다. 공식 화면명 보존과 분야 밖의 미정의 사람 지칭을 구분하므로 승인 범위의 경계를 지킨다.",
+      "case_ids": [
+        "FC-1-6",
+        "FC-1-6-X"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.7",
+      "target_rule_ids": [
+        "KP-NAM-004"
+      ],
+      "verdict": "pass",
+      "rationale": "새 명칭 동사에는 별도 행동 의미·논항·결과·분야 근거 검토를 요구한다. 장소 명사에서 운반 행동을 만들지 않고 별도 승인된 적층하다는 허용하므로 한국어 생산적 파생과 미승인 전환을 구별한다.",
+      "case_ids": [
+        "FC-1-7",
+        "FC-1-7-OK"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.8",
+      "target_rule_ids": [
+        "KP-NAM-001",
+        "KP-NAM-002"
+      ],
+      "verdict": "pass",
+      "rationale": "분야 자료에서 확인한 명칭의 출처와 대상을 기록하고 문서 안의 동일 이름을 유지한다. 도면의 후단 지지대를 유사한 별칭으로 바꾸지 않으므로 실제 자료에서 찾을 수 있는 분야 명칭을 사용한다.",
+      "case_ids": [
+        "FC-1-8"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.9",
+      "target_rule_ids": [
+        "KP-WRD-001"
+      ],
+      "verdict": "pass",
+      "rationale": "같은 개념을 정확하게 나타내는 표현 가운데 독자에게 익숙한 것을 고르고 전문어의 구별 요소는 유지한다. 장황한 장치 설명을 상태창으로 줄이되 창으로 뭉개지 않으므로 명칭의 이해 부담을 줄이는 기능을 충족한다. 수정 후에는 익숙한 대체어를 고를 독자 조건이 작성자 문맥에 명시됐음을 확인했다. 한자어 자체를 일괄 금지하는 예문으로 사용하지 않는다.",
+      "case_ids": [
+        "FC-1-9"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.10",
+      "target_rule_ids": [
+        "KP-WRD-005"
+      ],
+      "verdict": "pass",
+      "rationale": "미공유 은어·비유를 확인된 동작으로 바꾸고 인용과 공식 명칭은 보존한다. 신입 독자가 모르는 은어의 실제 행동을 문맥에서 확인하므로 한국어 독자 범위에 맞는 비공유 표현 통제를 수행한다.",
+      "case_ids": [
+        "FC-1-10"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.11",
+      "target_rule_ids": [
+        "KP-NAM-001",
+        "KP-NAM-006"
+      ],
+      "verdict": "pass",
+      "rationale": "동일 대상의 명칭과 축약 명칭을 일대일로 유지하며 개명·비교·인용은 관계를 밝혀 허용한다. 같은 화면의 프로젝트와 작업함을 정식 이름으로 통일해 대상 추적 기능을 충족한다.",
+      "case_ids": [
+        "FC-1-11"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.12",
+      "target_rule_ids": [
+        "KP-NAM-003",
+        "KP-NAM-004"
+      ],
+      "verdict": "pass",
+      "rationale": "전문 행동의 대상·조건·결과·분야·근거를 등록하고 명칭 동사와 구분한다. 소결을 다른 공정으로 바꾸지 않으며 별도 승인한 파생 동사를 허용하므로 전문 동사의 확장 경로가 작동한다.",
+      "case_ids": [
+        "FC-1-12",
+        "FC-1-7-OK"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.13",
+      "target_rule_ids": [
+        "KP-NAM-003",
+        "KP-VER-001"
+      ],
+      "verdict": "pass",
+      "rationale": "행동 지시의 명사화와 공정표의 명칭을 구별하고 작업 단계를 보존한다. 뜻이 정해지지 않은 상태 명사화는 전역 정보 부족 규칙에 따라 보류하며 공정 제목의 탈기 시간은 지시로 바꾸지 않는다.",
+      "case_ids": [
+        "FC-1-13",
+        "FC-1-13-N"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "1.14",
+      "target_rule_ids": [
+        "KP-WRD-006",
+        "KP-NUM-007"
+      ],
+      "verdict": "pass",
+      "rationale": "한국어 표기 기준을 유지하되 공식 이름·인용·코드는 실제 문자열을 우선한다. 영문 버튼의 실제 철자를 기본 영어 철자 관행으로 고치지 않으므로 표기 일관성과 공식 표기 예외를 함께 보존한다.",
+      "case_ids": [
+        "FC-1-14"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "2.1",
+      "target_rule_ids": [
+        "KP-NAM-005"
+      ],
+      "verdict": "pass",
+      "rationale": "한국어 명사 연쇄의 소속·기능·대상 관계를 조사 또는 설명으로 드러내며 공식 명칭은 임의 분할하지 않는다. 일정 승인과 규정 승인을 구별하는 사례로 영어 단어 개수 대신 한국어 묶음 관계의 통제 기능을 확인했다. 수정된 작성자 사례는 공식명이 아닌 설명용 명사 연쇄와 실제 두 해석을 구분하므로 공식 명칭 보존 예외와 충돌하지 않는다.",
+      "case_ids": [
+        "FC-2-1"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "2.2",
+      "target_rule_ids": [
+        "KP-WRD-004",
+        "KP-NAM-005",
+        "KP-NAM-006"
+      ],
+      "verdict": "pass",
+      "rationale": "첫 등장에 긴 전체 명칭을 식별하고 줄인 명칭과 일대일로 연결한다. 최초 도입과 이미 정의된 약칭 재사용을 나누고 충돌·공식 인용 예외를 둬 긴 명칭의 추적 기능을 충족한다. 긴 명칭의 설명용 재구성과 공식 명칭 보존은 수정된 NAM-005 문맥으로 구분한다.",
+      "case_ids": [
+        "FC-2-2",
+        "FC-2-2-OK"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "3.1",
+      "target_rule_ids": [
+        "KP-WRD-003"
+      ],
+      "verdict": "pass",
+      "rationale": "실제 서술어 표면형을 기본형의 승인 뜻·품사·활용·논항에 대응시킨다. 미승인 동의어 대신 승인 동사를 선택하는 사례와 생산적 활용 예외를 통해 동사 형태 관리의 한국어 대안을 확인했다.",
+      "case_ids": [
+        "FC-3-1"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "3.2",
+      "target_rule_ids": [
+        "KP-VER-003",
+        "KP-VER-004",
+        "KP-KO-004"
+      ],
+      "verdict": "pass",
+      "rationale": "영어 시제 목록을 복제하지 않고 사건 시점과 시작·진행·완료·비수행을 구분한다. 예정된 시운전을 이미 실행한 것으로 바꾸지 않으므로 시간·상태 차이를 읽을 수 있게 하는 기능을 충족한다. 다른 날 읽는 문서의 상대 시점 확인까지 적용 조건을 명시한 VER-004 수정과 실제 작성 기준일을 대조했다.",
+      "case_ids": [
+        "FC-3-2"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "3.3",
+      "target_rule_ids": [
+        "KP-VER-006"
+      ],
+      "verdict": "pass",
+      "rationale": "한국어 관형형의 현재 상태·과거 결과·대상 선정 기능을 확인한다. 냉각된 시편을 냉각할 시편으로 바꾸지 않고 해석이 미확정이면 보류하므로 결과 수식의 범위를 통제한다.",
+      "case_ids": [
+        "FC-3-3",
+        "FC-3-3-U"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "3.4",
+      "target_rule_ids": [
+        "KP-VER-003",
+        "KP-VER-005",
+        "KP-VER-007",
+        "KP-VER-008",
+        "KP-KO-007"
+      ],
+      "verdict": "pass",
+      "rationale": "중첩 서술에서 단계·시험·준비·양태·전언·사동의 의미가 있는 표지를 보존하고 중복만 줄인다. 정지 가능성을 확정 사건으로 바꾸지 않으므로 한국어 보조서술의 필요한 기능을 유지하면서 복잡성을 관리한다.",
+      "case_ids": [
+        "FC-3-4",
+        "FC-REV-CANDIDATE"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "3.5",
+      "target_rule_ids": [
+        "KP-VER-006",
+        "KP-SYN-009"
+      ],
+      "verdict": "pass",
+      "rationale": "명사화·관형형·핵심 서술의 실제 문장 기능을 구분한다. 압력계 읽기라는 행위명을 지시로 정돈하지만 공정표 제목은 명사형으로 보존하므로 영어 특정 접미형 대신 한국어의 행동·수식·명칭 경계를 통제한다.",
+      "case_ids": [
+        "FC-3-5",
+        "FC-1-13-N"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "3.6",
+      "target_rule_ids": [
+        "KP-VER-002",
+        "KP-KO-007"
+      ],
+      "verdict": "pass",
+      "rationale": "책임이 필요한 문맥에서 알려진 행위자를 밝히고 상태 초점·행위자 미상에서는 피동을 허용한다. 열린 문 상태에 사람을 만들지 않으며 교정 책임이 지정된 문맥에서는 그 역할을 명시한다.",
+      "case_ids": [
+        "FC-3-6",
+        "FC-3-6-A"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "3.7",
+      "target_rule_ids": [
+        "KP-VER-001",
+        "KP-SYN-009"
+      ],
+      "verdict": "pass",
+      "rationale": "핵심 행동을 직접 서술어로 나타내되 공정명·상태명·단계 표현을 유지한다. 품목 수 확인을 직접 표현하고 승인이라는 다른 업무로 바꾸지 않으므로 행동 직접 서술 기능을 충족한다.",
+      "case_ids": [
+        "FC-3-7"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "4.1",
+      "target_rule_ids": [
+        "KP-SYN-004",
+        "KP-SYN-005",
+        "KP-SYN-008",
+        "KP-KO-003"
+      ],
+      "verdict": "pass",
+      "rationale": "수식어 위치·관형절·부정 범위와 구조 신호를 함께 검토한다. 진단·표시·읽기의 대상 관계를 유지한 분리가 가능하며 단순 길이 수치만으로 적합 판정을 내리지 않는다. 추가 회귀 FC-REV-COND에서 접수와 통과를 모두 조건으로 남겨야 한다. 수정된 SYN-008은 승인 조건을 확인의 필연적 결과로 바꾸던 문장을 제거했다.",
+      "case_ids": [
+        "FC-4-1",
+        "FC-REV-COND"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "4.2",
+      "target_rule_ids": [
+        "KP-EDIT-002",
+        "KP-SYN-001",
+        "KP-SYN-002",
+        "KP-KO-001"
+      ],
+      "verdict": "pass",
+      "rationale": "한국어에서 주체·대상·조사를 생략할 수 있는 회복 조건과 책임 구별을 규정한다. 단일 대상의 저장 지시는 간결하게 유지하고 다수 주체 중 미확정 주체는 만들어 넣지 않으므로 필수 성분 보존 기능을 충족한다.",
+      "case_ids": [
+        "FC-4-2",
+        "FC-4-2-U"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "4.3",
+      "target_rule_ids": [
+        "KP-SYN-007",
+        "KP-TXT-001",
+        "KP-TXT-002",
+        "KP-NUM-005"
+      ],
+      "verdict": "pass",
+      "rationale": "목록의 공통 조건·항목 역할·모두 또는 일부·순서를 함께 표시한다. 불빛별 조건과 행동을 잃지 않고 목록화하므로 단순 줄바꿈보다 강한 정보 구조 통제를 수행한다.",
+      "case_ids": [
+        "FC-4-3"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "4.4",
+      "target_rule_ids": [
+        "KP-SYN-006",
+        "KP-PROC-004"
+      ],
+      "verdict": "pass",
+      "rationale": "한국어 연결 표현으로 원인·결과·대조·선택·예외의 관계를 유지한다. 검사 실패와 교체의 인과 방향을 뒤집지 않으며 관계가 이미 명확한 나열은 접속어 없이도 허용한다. 명확한 첨가 연결은 keep으로 바뀌었고 FC-REV-LINK도 독립 관측을 인과로 변경하는 대안을 거부한다.",
+      "case_ids": [
+        "FC-4-4",
+        "FC-REV-LINK"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "4.5",
+      "target_rule_ids": [
+        "KP-SYN-002",
+        "KP-SYN-003",
+        "KP-KO-001",
+        "KP-NAM-006"
+      ],
+      "verdict": "pass",
+      "rationale": "명사 지시 기능을 한국어 조사·선행 대상·명칭 연결로 수행한다. 두 통 중 미확정 대상을 임의 선택하지 않고 일반 개념 설명에는 지시어를 강제하지 않아 특정과 일반의 차이를 보존한다.",
+      "case_ids": [
+        "FC-4-5",
+        "FC-4-2-U",
+        "FC-4-5-G"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "5.1",
+      "target_rule_ids": [
+        "KP-SYN-008",
+        "KP-PROC-001"
+      ],
+      "verdict": "fail",
+      "rationale": "독립 행동 단위와 30어절·절·주체 트리거는 구체적으로 정의됐다. 그러나 원본의 강제 문장 길이 제한을 수동 재검토 신호로 바꾸며 기준을 넘겨도 유지할 수 있으므로 동일한 상한 통제 기능은 완전 대응으로 계산하지 않는다. SYN-008의 조건 확정화 예문은 수정됐고 FC-REV-COND에서 두 선행 조건을 공통 도입부로 보존한다. 강제 길이 상한과의 차이는 남아 partial을 유지한다.",
+      "case_ids": [
+        "FC-5-1",
+        "FC-LEN-30",
+        "FC-LEN-31",
+        "FC-REV-COND"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "5.2",
+      "target_rule_ids": [
+        "KP-PROC-001",
+        "KP-PROC-005",
+        "KP-SYN-007"
+      ],
+      "verdict": "pass",
+      "rationale": "독립 행동은 단계로 분리하고 동시 유지·순서·공통 조건을 보존한다. 슬라이더를 누른 상태를 손을 뗀 후의 행동으로 바꾸지 않으므로 한 실행 단위와 동시성 예외를 모두 충족한다.",
+      "case_ids": [
+        "FC-5-2"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "5.3",
+      "target_rule_ids": [
+        "KP-PROC-002",
+        "KP-VER-007",
+        "KP-KO-005"
+      ],
+      "verdict": "pass",
+      "rationale": "실제로 요구하는 절차에는 실행 동사와 대상·조건을 쓰며 한국어 종결형에서 허락·권고·질문은 그대로 구별한다. 선택적 삭제의 허락을 강제 삭제로 바꾸지 않아 지시 기능만 정확하게 명시한다.",
+      "case_ids": [
+        "FC-5-3",
+        "FC-REV-CANDIDATE"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "5.4",
+      "target_rule_ids": [
+        "KP-PROC-003",
+        "KP-PROC-004",
+        "KP-SYN-007",
+        "KP-PROC-005",
+        "KP-NUM-002"
+      ],
+      "verdict": "pass",
+      "rationale": "선행 조건을 행동 전에 밝히고 예외·경계·동시 조건이 적용되는 행동을 연결한다. 녹색 표시가 켜져야 하는 조건을 실행 후 확인으로 바꾸지 않으므로 조건 우선 기능을 한국어 연결형으로 충족한다.",
+      "case_ids": [
+        "FC-5-4"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "5.5",
+      "target_rule_ids": [
+        "KP-PROC-007"
+      ],
+      "verdict": "pass",
+      "rationale": "필수 행동뿐 아니라 요구조건과 허용 한계를 참고 사항에서 본문으로 옮긴다. 대기 지시와 하중 제한의 사례를 모두 판정하며 기존 행동의 이유를 주석으로 제공하는 예외를 보존한다. 최종 예문에서는 근거 없는 첫 단계 번호를 제거했다. FC-5-5와 FC-5-5-L도 필수 내용을 본문으로 옮길 뿐 전체 절차의 순번을 새로 정하지 않는다.",
+      "case_ids": [
+        "FC-5-5",
+        "FC-5-5-L"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "6.1",
+      "target_rule_ids": [
+        "KP-DESC-001",
+        "KP-DESC-002"
+      ],
+      "verdict": "pass",
+      "rationale": "독자에게 새 개념의 정의를 먼저 제시하고 설명을 연결하되 상태 질문에는 필요한 결과부터 답한다. 축열조를 정의한 뒤 예외 조건을 설명하므로 정보 도입 순서를 통제한다.",
+      "case_ids": [
+        "FC-6-1"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "6.2",
+      "target_rule_ids": [
+        "KP-SYN-006",
+        "KP-DESC-001",
+        "KP-DESC-005"
+      ],
+      "verdict": "pass",
+      "rationale": "중심 질문·관계 표현·의미 있는 반복을 조합해 설명의 논리 구조를 드러낸다. 유선과 무선이라는 핵심 구분에 수단을 연결하며 서로 다른 기능을 함께 해야 한다는 새 요구로 바꾸지 않는다. FC-REV-LINK는 이미 명확한 첨가 연결을 유지하며 불필요한 문장 분리를 강제하지 않는다.",
+      "case_ids": [
+        "FC-6-2",
+        "FC-REV-LINK"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "6.3",
+      "target_rule_ids": [
+        "KP-SYN-005",
+        "KP-SYN-008"
+      ],
+      "verdict": "fail",
+      "rationale": "설명문은 어절·절·수식·주체를 재현 가능한 절차로 검토하지만 원본의 강제 길이 상한 대신 초과 시 수동 검토를 사용한다. 짧은 모호 문장을 잡는 장점과 별개로 상한을 보장하지 않으므로 부분 대응이다. 조건 확정화 예문은 수정됐지만 수동 검토 신호와 강제 상한의 차이는 해결되지 않아 partial을 유지한다.",
+      "case_ids": [
+        "FC-6-3",
+        "FC-6-3-U",
+        "FC-LEN-30",
+        "FC-LEN-31",
+        "FC-REV-COND"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "6.4",
+      "target_rule_ids": [
+        "KP-DESC-003"
+      ],
+      "verdict": "pass",
+      "rationale": "관련된 정보를 한 중심 질문에 묶고 다른 질문은 새 문단으로 분리한다. 배터리 상태와 로그인 절차를 분리하면서 없는 인과관계를 만들지 않으므로 정보 묶음 기능을 충족한다.",
+      "case_ids": [
+        "FC-6-4"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "6.5",
+      "target_rule_ids": [
+        "KP-DESC-003"
+      ],
+      "verdict": "pass",
+      "rationale": "문단의 중심 주제를 명시적으로 하나로 유지하고 주제가 바뀌면 분리한다. 센서 역할과 배송 일정을 구분하고 같은 질문의 근거·반례는 같은 문단에 허용하므로 주제 통제를 충족한다.",
+      "case_ids": [
+        "FC-6-5"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "6.6",
+      "target_rule_ids": [
+        "KP-DESC-004"
+      ],
+      "verdict": "fail",
+      "rationale": "여섯 문장 초과를 검토 신호로 정의하고 유지 이유를 기록하지만 원본의 강제 문단 길이 제한과 달리 예외적으로 초과를 허용한다. 구조 검토의 존재만으로 상한 통제까지 완전 대응했다고 계산하지 않는다. 수정된 JSON은 미검증 트리거임을 밝히고 정상 사례가 실제 일곱 문장이다. FC-REV-PARA7도 정보를 모두 남겨 나누지만 강제 상한은 아니므로 partial을 유지한다.",
+      "case_ids": [
+        "FC-6-6",
+        "FC-REV-PARA7"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "7.1",
+      "target_rule_ids": [
+        "KP-WARN-001"
+      ],
+      "verdict": "pass",
+      "rationale": "해당 제품·분야의 실제 위험 분류를 적용하고 미확인 위험도를 창작하지 않는다. 장비 손상 분류를 사망 경고로 격상하지 않으므로 위험 수준 식별 기능과 분야별 분류 차이를 보존한다.",
+      "case_ids": [
+        "FC-7-1"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "7.2",
+      "target_rule_ids": [
+        "KP-WARN-002",
+        "KP-PROC-003",
+        "KP-WARN-004"
+      ],
+      "verdict": "pass",
+      "rationale": "확인된 안전 행동·조건·금지를 위험 행동 전에 배치한다. 작업 전 공급 차단을 작업 후로 옮기지 않으며 대응 절차가 없는 정보 경고에 새 조치를 만들지 않는 예외를 둔다. FC-REV-NOSAFETY에서 확인된 위험만으로 필수 보호 도구나 절차를 만들어 넣지 않는 예외를 재검토했다.",
+      "case_ids": [
+        "FC-7-2",
+        "FC-REV-NOSAFETY"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "7.3",
+      "target_rule_ids": [
+        "KP-WARN-003",
+        "KP-VER-008",
+        "KP-EDIT-003"
+      ],
+      "verdict": "pass",
+      "rationale": "독자의 안전 판단에 필요한 확인된 위험 결과를 조건·행동과 연결하며 가능성을 확정 피해로 바꾸지 않는다. 보호막 지시의 근거로 확인된 변색 가능성을 추가하되 반드시 파괴된다고 과장하는 대안을 거부한다. WARN-003은 위험 자료와 별도로 안전 절차가 요구한 조치를 문맥에 명시했다. FC-REV-NOSAFETY는 그 조치 근거가 없는 문맥에서는 위험 문장을 유지하도록 구분한다.",
+      "case_ids": [
+        "FC-7-3-R",
+        "FC-REV-NOSAFETY"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "8.1",
+      "target_rule_ids": [
+        "KP-TXT-003"
+      ],
+      "verdict": "pass",
+      "rationale": "한국어 문장 경계와 부호가 나타내는 관계를 명확히 쓰며 부호 자체를 일괄 금지하지 않는다. 조건별 문장 분리와 코드 속 세미콜론 보존을 나누므로 자연어 관계 통제와 리터럴 예외를 충족한다. 독립 사례 FC-8-1도 이미 명확한 세미콜론을 무조건 고치는 기대값에서 실제 조건 관계가 모호한 부호 나열로 교정했다.",
+      "case_ids": [
+        "FC-8-1",
+        "FC-8-1-C"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "8.2",
+      "target_rule_ids": [
+        "KP-TXT-003",
+        "KP-NAM-005",
+        "KP-NUM-007"
+      ],
+      "verdict": "pass",
+      "rationale": "관련 요소의 묶음 관계는 조사·구조 설명·정식 표기로 드러내고 영어식 하이픈을 강제하지 않는다. 식별자 내부 붙임표는 그대로 두며 명사 나열의 관계는 별도로 밝히므로 결합 표기의 기능을 수행한다. 수정된 NAM-005는 공식 명칭이 아닌 표현과 복수 해석을 문맥에 명시해 묶음 관계 편집의 적용 조건을 충족한다.",
+      "case_ids": [
+        "FC-8-2"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "8.3",
+      "target_rule_ids": [
+        "KP-TXT-004",
+        "KP-TXT-005",
+        "KP-WRD-004"
+      ],
+      "verdict": "pass",
+      "rationale": "괄호는 참조·식별·짧은 정의·약칭 같은 보충 정보에 사용하고 필수 조건은 본문에 둔다. 선행 차단 조건과 수식의 실제 괄호를 구별해 정보 보충 기능과 의미 보존 예외를 충족한다.",
+      "case_ids": [
+        "FC-8-3",
+        "FC-8-3-M"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "8.4",
+      "target_rule_ids": [
+        "KP-TXT-001",
+        "KP-TXT-003"
+      ],
+      "verdict": "pass",
+      "rationale": "상세 계산 절차에서 콜론 앞 도입부와 각 목록 항목을 별도 길이·절 검토 단위로 명시한다. 독립 사례에서 도입부 1개와 항목 2개의 세 단위를 식별하므로 한국어 검토 경계의 재현성을 확인했다.",
+      "case_ids": [
+        "FC-8-4",
+        "FC-8-4-B"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "8.5",
+      "target_rule_ids": [
+        "KP-SYN-008",
+        "KP-TXT-004"
+      ],
+      "verdict": "pass",
+      "rationale": "괄호 전체를 계산에서 빼지 않으며 내부 문장·절을 별도 검토한다. 짧은 위치 정보는 보존하고 긴 괄호의 주제 전환은 드러내므로 한 묶음 집계로 정보 부담을 숨기는 문제를 통제한다. 계수·괄호 규범은 바뀌지 않았으며 연결된 SYN-008의 의미 보존 예문을 FC-REV-COND로 다시 대조했다.",
+      "case_ids": [
+        "FC-8-5",
+        "FC-8-5-B",
+        "FC-REV-COND"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "8.6",
+      "target_rule_ids": [
+        "KP-SYN-008",
+        "KP-NUM-001",
+        "KP-NUM-007"
+      ],
+      "verdict": "pass",
+      "rationale": "공백 토큰을 일관되게 세되 숫자·단위·파일·인용의 실제 의미 단위와 문자열을 보존한다. 제목 내부 공백까지 포함한 재현 가능한 계수와 파일명·0.8 MPa 보존을 구분하므로 특수 요소 측정의 한국어 대안을 수행한다. 공백 토큰·리터럴 규범은 유지됐고 SYN-008의 승인 조건 보존을 독립 회귀로 다시 확인했다. 측정 신호가 의미 변경을 정당화하지 않는다.",
+      "case_ids": [
+        "FC-8-6",
+        "FC-8-6-Q",
+        "FC-LEN-30",
+        "FC-LEN-31",
+        "FC-REV-COND"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "8.7",
+      "target_rule_ids": [
+        "KP-SYN-008",
+        "KP-NUM-007"
+      ],
+      "verdict": "pass",
+      "rationale": "붙임표가 있는 실제 식별자는 보존하고 토큰 수를 줄이기 위한 임의 재결합은 허용하지 않는다. 승인 복합명칭과 문장 전체의 임의 연결을 구별하므로 일관된 결합 단위 측정과 검사 회피 방지를 수행한다. 임의 재결합 금지와 식별자 예외는 유지되며 SYN-008의 조건 보존 회귀도 충족한다.",
+      "case_ids": [
+        "FC-8-7",
+        "FC-8-7-N",
+        "FC-REV-COND"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "9.1",
+      "target_rule_ids": [
+        "KP-EDIT-001",
+        "KP-EDIT-002",
+        "KP-EDIT-004",
+        "KP-SYN-009"
+      ],
+      "verdict": "pass",
+      "rationale": "단어 치환으로 부족할 때 논항·조건·시간을 보존해 구조를 바꾸고 필요한 정보가 없으면 보류한다. 전원 꺼짐 때문에 점검을 마치지 못한 문장을 재구성하며 사건 순서와 부정을 유지한다. FC-REV-CANDIDATE는 실제 원문과 후보의 역할을 사례 안에 제공하고 FC-REV-NOORACLE은 원문·관측 사실이 없으면 복구를 보류한다. 수정된 작성자 -N 72개 모두 같은 자족성을 확인했다.",
+      "case_ids": [
+        "FC-9-1",
+        "FC-REV-CANDIDATE",
+        "FC-REV-NOORACLE"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "9.2",
+      "target_rule_ids": [
+        "KP-WRD-003",
+        "KP-WRD-008",
+        "KP-EDIT-001",
+        "KP-PROC-006"
+      ],
+      "verdict": "pass",
+      "rationale": "어휘의 승인 뜻뿐 아니라 논항·조사·활용·결합 의미를 문맥에서 검사한다. 문서와 화면 장치의 표시 주체·대상을 뒤집은 문장을 바로잡으므로 승인 단어의 존재만으로 적합 처리하지 않는다. 추가한 PROC-006 및 FC-REV-SHARED/UNSHARED/NOCRITERION은 같은 표면 지시에서 기준 공유·미공유·부재를 각각 keep/revise/clarify로 구분한다. 명시 원문 없는 후보 교정은 FC-REV-NOORACLE에 따라 보류한다. 최종 PROC-006 이유는 제공되지 않은 E1 내부 내용을 단정하지 않고 원문·문맥에 없는 복구 행동이라고 한정한다. 기준 공유 여부의 독립 세 사례 판정은 그대로 성립한다.",
+      "case_ids": [
+        "FC-9-2",
+        "FC-REV-SHARED",
+        "FC-REV-UNSHARED",
+        "FC-REV-NOCRITERION",
+        "FC-REV-CANDIDATE",
+        "FC-REV-NOORACLE"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "9.3",
+      "target_rule_ids": [
+        "KP-WRD-008",
+        "KP-NAM-004",
+        "KP-WRD-005"
+      ],
+      "verdict": "pass",
+      "rationale": "승인된 개별어의 결합이 새 뜻을 만들면 별도 의미·논항·분야 검토를 요구한다. 업무를 접다를 실제 동작으로 풀고 이미 검토된 인계를 받다는 보존해 비합성 결합과 승인 예외를 통제한다. WRD-008의 ‘다시’ 설명을 명확히 한 문구 수정은 기존 등록 의미 반복과 새 결합 의미의 구별을 바꾸지 않는다.",
+      "case_ids": [
+        "FC-9-3",
+        "FC-9-3-OK"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    },
+    {
+      "ste_id": "9.4",
+      "target_rule_ids": [
+        "KP-NAM-001",
+        "KP-WRD-006",
+        "KP-KO-005",
+        "KP-TXT-002"
+      ],
+      "verdict": "pass",
+      "rationale": "명칭·표기·높임·목록 형식뿐 아니라 같은 문맥의 반복 작업에 동일 동작 용어와 문장 방식을 사용한다. 확인 버튼의 반복 조작을 통일하되 입력 방식이나 문장 기능이 다른 경우의 예외를 보존한다.",
+      "case_ids": [
+        "FC-9-4"
+      ],
+      "reviewer": "system_coverage (규칙 작성자와 분리된 기능 설계 검토; Opus 지적 후 재검토)"
+    }
+  ],
+  "revision": {
+    "trigger": "Opus 언어 검토가 찾은 숨은 정답·조건 확정화·상충 판정·미근거 조치 및 예문 조건 문제를 재검토했다.",
+    "previous_hashes": {
+      "reviewed_rules_sha256": "cb7b6a98dadc9056f6568c53b64844752f5ac740bd60d5bea7a9d15dfb49c9a0",
+      "reviewed_cases_sha256": "9a87fd86b2dc077bd9548d7d1c0c3fec7046d5a346982d715b98d26441491e2b",
+      "reviewed_spec_sha256": "9e84b46b13b56c6047be2ca0d60778cac6fb540241d7463cec128642846c961f",
+      "independent_cases_sha256": "31170c43c6e9a0c60e04e4889d61563d4c7ea2eb4d9b4047e31b4374b7e484e0"
+    },
+    "report_path": "evaluation/functional-review-revision.md",
+    "changed_rule_ids": [
+      "KP-WRD-001",
+      "KP-NAM-005",
+      "KP-VER-001",
+      "KP-VER-004",
+      "KP-SYN-006",
+      "KP-SYN-008",
+      "KP-PROC-006",
+      "KP-DESC-004",
+      "KP-WARN-003",
+      "KP-NUM-006",
+      "KP-WRD-008"
+    ],
+    "new_independent_case_ids": [
+      "FC-REV-COND",
+      "FC-REV-SHARED",
+      "FC-REV-UNSHARED",
+      "FC-REV-NOCRITERION",
+      "FC-REV-NOSAFETY",
+      "FC-REV-CANDIDATE",
+      "FC-REV-NOORACLE",
+      "FC-REV-PARA7",
+      "FC-REV-LINK"
+    ],
+    "corrected_independent_case_ids": [
+      "FC-3-3-U",
+      "FC-4-3",
+      "FC-8-1"
+    ],
+    "author_candidate_repair_cases_rechecked": 72,
+    "independent_case_count": 83,
+    "shared_regression_case_count": 1,
+    "actual_llm_generation_runs": 0,
+    "verdict": "49개 기능 통과와 4개 부분 대응을 내용 재검토 후 유지한다. 단순 해시 치환으로 승계하지 않았다.",
+    "final_example_refinement": {
+      "previous_hashes": {
+        "reviewed_rules_sha256": "34af221d1f3e91f08439402cc70759b6dabd615b815a77229dcd465b59c7e119",
+        "reviewed_cases_sha256": "5c25fe7e416372283b624d1cabbc0601dd23fff2092d9a5af19233b3b86c19c4",
+        "reviewed_spec_sha256": "333027551452ed1d17970199dfa67044b336714af8f5e8db1721592763e1d8b4"
+      },
+      "reviewed_rule_ids": [
+        "KP-WRD-002",
+        "KP-PROC-006",
+        "KP-PROC-007",
+        "KP-SYN-006"
+      ],
+      "normative_fields_changed": false,
+      "independent_case_change_needed": false,
+      "decision": "WRD-002의 서버 공개/배포 정의를 연결하고 PROC-006 이유의 근거 범위를 한정하며 PROC-007의 임의 순번을 제거한 것을 확인했다. SYN-006의 이미 명확한 R 유지와 허위 인과 N 교정을 구분했다. 49개 통과와 4개 부분 대응을 유지한다."
+    }
+  }
+}

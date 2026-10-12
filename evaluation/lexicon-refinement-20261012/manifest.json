@@ -1,0 +1,1240 @@
+{
+  "evaluation_role": "reused_input_development_coverage_after_targeted_dictionary_expansion",
+  "source_root": "/Users/m5max/.codex/worktrees/korean-protocol-integration/ASD-STE100 Kor",
+  "baseline_directory": "../lexicon-independent",
+  "frozen_contexts_sha256": "25e7242d8a2e43b8afe2f6d2f27821532a119ff3a8af67ef9a7de04539485302",
+  "original_artifacts": [
+    {
+      "path": "check.py",
+      "sha256": "875c29f1a6c5a82a9111c12fe71e1365b9b53c126b7ccdb266d0e25f8df35f1b"
+    },
+    {
+      "path": "contexts.json",
+      "sha256": "25e7242d8a2e43b8afe2f6d2f27821532a119ff3a8af67ef9a7de04539485302"
+    },
+    {
+      "path": "extraction.json",
+      "sha256": "a41fbf8d91d90125fafab997ee9f3e69c114d3ae0b6880e57046ebe6aeddb188"
+    },
+    {
+      "path": "freeze.json",
+      "sha256": "f7230efcf4490501a467e6c23d9e06e6dbc31166764373f7d71114f527df01ae"
+    },
+    {
+      "path": "matches.json",
+      "sha256": "161e062519ca5aa93da6d5a577b4e8a475ca9801e38813d3c9f743e82193e593"
+    },
+    {
+      "path": "plan.md",
+      "sha256": "17092269db01b157f526237b9feb071990858af9a280d4a6bb1040920a40fff8"
+    },
+    {
+      "path": "report.md",
+      "sha256": "49632ab814b0a5336a03b2da1e733ff65573458a09b228d0da7283dea2b984b9"
+    },
+    {
+      "path": "verification-snapshot-only.json",
+      "sha256": "6081cbde81de00df14a8bbe10f6dfab1a9161f7f409859715007c6f5428c03ae"
+    },
+    {
+      "path": "verification-source-root.json",
+      "sha256": "d56adcea535d7f6fafbb507730085931e02fd66abfed8736d496e32db2a53a52"
+    },
+    {
+      "path": "verification.json",
+      "sha256": "d56adcea535d7f6fafbb507730085931e02fd66abfed8736d496e32db2a53a52"
+    }
+  ],
+  "baseline_inventory": 177,
+  "expanded_inventory": 193,
+  "added_entries": 16,
+  "fixed_denominator": 40,
+  "original_results": {
+    "denominator": 40,
+    "counts": {
+      "unmatched": 19,
+      "matched": 19,
+      "ambiguous": 2
+    },
+    "matched_fraction": "19/40",
+    "matched_percent": 47.5,
+    "by_domain": {
+      "software_runtime": {
+        "unmatched": 6,
+        "matched": 2,
+        "ambiguous": 2
+      },
+      "work_coordination": {
+        "unmatched": 3,
+        "matched": 7
+      },
+      "data_operations": {
+        "matched": 6,
+        "unmatched": 4
+      },
+      "specification_documentation": {
+        "unmatched": 6,
+        "matched": 4
+      }
+    },
+    "matched_editorial_statuses": {
+      "preferred": 13,
+      "allowed": 6
+    },
+    "expert_approval_evidence": {
+      "matched_entries_with_explicit_expert_approval_evidence": 0,
+      "meaning": "Approval is not encoded. This is not a rejection count or evidence of failed review."
+    }
+  },
+  "sources": [
+    {
+      "path": "schemas/lexicon.schema.json",
+      "sha256": "bc19159b3216efbfddff2d1e69c4747718bc936dbe5217fe14d76004c1a55898"
+    },
+    {
+      "path": "lexicon/core.json",
+      "sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce"
+    },
+    {
+      "path": "lexicon/domains/software.json",
+      "sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e"
+    },
+    {
+      "path": "docs/spec/lexicon.md",
+      "sha256": "d10dc420521c7e46078bf206432d873c491252a6ba17c8d64b304d652bcf236d"
+    },
+    {
+      "path": "evaluation/baselines/20261012-before-rule-and-lexicon-refinement/lexicon/core.json",
+      "sha256": "92ae772abcb40267e562fe3c7e8bceec8d0a9479de96cb48d9f1401cfff15e27"
+    },
+    {
+      "path": "evaluation/baselines/20261012-before-rule-and-lexicon-refinement/lexicon/domains/software.json",
+      "sha256": "43c0d51aa1ec6dc2edddd0ff1b1efbd88711cd0638e1666fc258c0e5db3de767"
+    }
+  ],
+  "unchanged_objects": [
+    {
+      "id": "KPL-0001",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "b6cdc640615c6ee0e04b3a5e02933571c34fd1490e377f8acc1ece352aa92f03",
+      "current_object_sha256": "b6cdc640615c6ee0e04b3a5e02933571c34fd1490e377f8acc1ece352aa92f03"
+    },
+    {
+      "id": "KPL-0002",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "e5b292dc7b4e012fc18ebf7cfc5b731f05a0c7098e2719f44246a41c75bd9964",
+      "current_object_sha256": "e5b292dc7b4e012fc18ebf7cfc5b731f05a0c7098e2719f44246a41c75bd9964"
+    },
+    {
+      "id": "KPL-0003",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ebf01912681cfbe49f96f7a8b88361a134182d88b79194341dead91fd495318b",
+      "current_object_sha256": "ebf01912681cfbe49f96f7a8b88361a134182d88b79194341dead91fd495318b"
+    },
+    {
+      "id": "KPL-0004",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "326e39f1f621540fb23ba80f857c05ca5fbb7080ee4d242cdad9f04843a810b9",
+      "current_object_sha256": "326e39f1f621540fb23ba80f857c05ca5fbb7080ee4d242cdad9f04843a810b9"
+    },
+    {
+      "id": "KPL-0005",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "589bd4b9231078d6e7503bb4b8361e55a2d5be4cc954cb492fccd53dcf597d49",
+      "current_object_sha256": "589bd4b9231078d6e7503bb4b8361e55a2d5be4cc954cb492fccd53dcf597d49"
+    },
+    {
+      "id": "KPL-0006",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "2117790ed21810bb3a70719fcb1f04bed9731571830a0dd1a74d48385ab961c3",
+      "current_object_sha256": "2117790ed21810bb3a70719fcb1f04bed9731571830a0dd1a74d48385ab961c3"
+    },
+    {
+      "id": "KPL-0007",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "33d65f8e4f4fb04816d7d3d1a96b8a9173ab5766e22bff6dd541d1b7b7505532",
+      "current_object_sha256": "33d65f8e4f4fb04816d7d3d1a96b8a9173ab5766e22bff6dd541d1b7b7505532"
+    },
+    {
+      "id": "KPL-0008",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "dac07127c58b55e445e45138b2c7b218fbef38c73fd51870a9e7df9536af2bc0",
+      "current_object_sha256": "dac07127c58b55e445e45138b2c7b218fbef38c73fd51870a9e7df9536af2bc0"
+    },
+    {
+      "id": "KPL-0009",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "e95e4e0ad60d4bb4cc591759d805ea134df57f37ea9d66b79e110966ca5beaf7",
+      "current_object_sha256": "e95e4e0ad60d4bb4cc591759d805ea134df57f37ea9d66b79e110966ca5beaf7"
+    },
+    {
+      "id": "KPL-0010",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ced0380f28026b4fb8206e1f0c3acba074f22f0c8bb89c2e5434ff0270310b7f",
+      "current_object_sha256": "ced0380f28026b4fb8206e1f0c3acba074f22f0c8bb89c2e5434ff0270310b7f"
+    },
+    {
+      "id": "KPL-0011",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "9c762a8e42d6a7ca6271ef64d8233904752dd4ec1978e92005f4fa0955544d4a",
+      "current_object_sha256": "9c762a8e42d6a7ca6271ef64d8233904752dd4ec1978e92005f4fa0955544d4a"
+    },
+    {
+      "id": "KPL-0012",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "28bd0761972159e9aacd6cea1e6644dc042d7e9c0393952537bf0d83afecd025",
+      "current_object_sha256": "28bd0761972159e9aacd6cea1e6644dc042d7e9c0393952537bf0d83afecd025"
+    },
+    {
+      "id": "KPL-0013",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "a3219e859f43d33867e5a8e4bf5a120b5d97f768fbe05240b7a35072289e1116",
+      "current_object_sha256": "a3219e859f43d33867e5a8e4bf5a120b5d97f768fbe05240b7a35072289e1116"
+    },
+    {
+      "id": "KPL-0014",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "adf260576840913e3fb51a8722821fa59af48e8bb4789a793d668a739c5eebfc",
+      "current_object_sha256": "adf260576840913e3fb51a8722821fa59af48e8bb4789a793d668a739c5eebfc"
+    },
+    {
+      "id": "KPL-0015",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "eab18976c335b0d5c100ad0893b08a841c83185438d8ab5863b84639296eca35",
+      "current_object_sha256": "eab18976c335b0d5c100ad0893b08a841c83185438d8ab5863b84639296eca35"
+    },
+    {
+      "id": "KPL-0016",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "9136664849b98f2c44e9f4b32964bb6cfe1953e15439a9475492609a0b4c309b",
+      "current_object_sha256": "9136664849b98f2c44e9f4b32964bb6cfe1953e15439a9475492609a0b4c309b"
+    },
+    {
+      "id": "KPL-0017",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "c42b3d9cc82bd6e87216535ac3dfe74945883dc3824e75894324d892c6b05328",
+      "current_object_sha256": "c42b3d9cc82bd6e87216535ac3dfe74945883dc3824e75894324d892c6b05328"
+    },
+    {
+      "id": "KPL-0018",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ef994d2e7f9ae98925bf37a4c8aa0385c8f426bd636ed74925f80696f2ac821e",
+      "current_object_sha256": "ef994d2e7f9ae98925bf37a4c8aa0385c8f426bd636ed74925f80696f2ac821e"
+    },
+    {
+      "id": "KPL-0019",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "fcbddf07f82ce851c2f3c5a9a4aa9034005fe2781153961e9d3933c3d802958a",
+      "current_object_sha256": "fcbddf07f82ce851c2f3c5a9a4aa9034005fe2781153961e9d3933c3d802958a"
+    },
+    {
+      "id": "KPL-0020",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "c781cefd1fdf62edb985379d042927551e8a83154555eb82069abbcec9c5f2ff",
+      "current_object_sha256": "c781cefd1fdf62edb985379d042927551e8a83154555eb82069abbcec9c5f2ff"
+    },
+    {
+      "id": "KPL-0021",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "6470b148ff04636c51a446e7fb75a085b16e011d8d8e7f54b3bb498b97b2c9ad",
+      "current_object_sha256": "6470b148ff04636c51a446e7fb75a085b16e011d8d8e7f54b3bb498b97b2c9ad"
+    },
+    {
+      "id": "KPL-0022",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "5e8650d81dba0420f779d5cd23febe58aac1b8d7a7ed6bdfe98dcaadf3c29565",
+      "current_object_sha256": "5e8650d81dba0420f779d5cd23febe58aac1b8d7a7ed6bdfe98dcaadf3c29565"
+    },
+    {
+      "id": "KPL-0023",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ed3cced8bfb6472d7d2ae836db83170f79bec64c9dc7846daf19bc4220d46348",
+      "current_object_sha256": "ed3cced8bfb6472d7d2ae836db83170f79bec64c9dc7846daf19bc4220d46348"
+    },
+    {
+      "id": "KPL-0024",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "9fe56e465fe5021ff4aa84ba833bf1a9abb9ebf5ca791ed16d4b117ce6ec2111",
+      "current_object_sha256": "9fe56e465fe5021ff4aa84ba833bf1a9abb9ebf5ca791ed16d4b117ce6ec2111"
+    },
+    {
+      "id": "KPL-0025",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f564c82436382d59e845bb49d1d7f998a97dce6753c9b60e86d7452c407b28cc",
+      "current_object_sha256": "f564c82436382d59e845bb49d1d7f998a97dce6753c9b60e86d7452c407b28cc"
+    },
+    {
+      "id": "KPL-0026",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "7cbd3ad89f35825a9c44006eabc8a391b56754a25fdf2e957f5a54a93e5ab19e",
+      "current_object_sha256": "7cbd3ad89f35825a9c44006eabc8a391b56754a25fdf2e957f5a54a93e5ab19e"
+    },
+    {
+      "id": "KPL-0027",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "0df3b9db45d3d8eeec193bdd3934b0d034f98850d6a0d884a25dc40c82bc4360",
+      "current_object_sha256": "0df3b9db45d3d8eeec193bdd3934b0d034f98850d6a0d884a25dc40c82bc4360"
+    },
+    {
+      "id": "KPL-0028",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "fcdc3406df9b1606075486ca606551a2b3a48e2bb916115c4bccf4b56171ff85",
+      "current_object_sha256": "fcdc3406df9b1606075486ca606551a2b3a48e2bb916115c4bccf4b56171ff85"
+    },
+    {
+      "id": "KPL-0029",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "900e5a2a25500a59ee58937e08fc7af9a2ac459a4fa7ad4804c058e60526f792",
+      "current_object_sha256": "900e5a2a25500a59ee58937e08fc7af9a2ac459a4fa7ad4804c058e60526f792"
+    },
+    {
+      "id": "KPL-0030",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "5fc07d31e4c8cea005e95efcc1af4a4f1d399d92855bfc0e20fc522368656917",
+      "current_object_sha256": "5fc07d31e4c8cea005e95efcc1af4a4f1d399d92855bfc0e20fc522368656917"
+    },
+    {
+      "id": "KPL-0031",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "efb0b024ef0f2132c2001acd9d7c9f8ee5805dfeeaa195b6b30c444d81db3724",
+      "current_object_sha256": "efb0b024ef0f2132c2001acd9d7c9f8ee5805dfeeaa195b6b30c444d81db3724"
+    },
+    {
+      "id": "KPL-0032",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "e2a846af75e62841bb4ab4aceea539d30e21fe5940d871615159c9aaeb11dda4",
+      "current_object_sha256": "e2a846af75e62841bb4ab4aceea539d30e21fe5940d871615159c9aaeb11dda4"
+    },
+    {
+      "id": "KPL-0033",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "1c864a9c984077474b7160be2d116097a2065956bb4c37bf782a7c0436eb67d5",
+      "current_object_sha256": "1c864a9c984077474b7160be2d116097a2065956bb4c37bf782a7c0436eb67d5"
+    },
+    {
+      "id": "KPL-0034",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "963d94f4e275d3baa654fea0bdddcb77819842d95508e3735b71a4bd7566dcbe",
+      "current_object_sha256": "963d94f4e275d3baa654fea0bdddcb77819842d95508e3735b71a4bd7566dcbe"
+    },
+    {
+      "id": "KPL-0035",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "2fd30999c18510394bd11e6399ca8df81cb789da5d1ed71af90db434c958f725",
+      "current_object_sha256": "2fd30999c18510394bd11e6399ca8df81cb789da5d1ed71af90db434c958f725"
+    },
+    {
+      "id": "KPL-0036",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "da8108419a517c53aaf4162605478068b264ce1f56d0186a20e077ad420efdfd",
+      "current_object_sha256": "da8108419a517c53aaf4162605478068b264ce1f56d0186a20e077ad420efdfd"
+    },
+    {
+      "id": "KPL-0037",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "50e63ed9817e86f9553e3c73fa53f83e452695dbe8baa20ca36c7135316cf7ba",
+      "current_object_sha256": "50e63ed9817e86f9553e3c73fa53f83e452695dbe8baa20ca36c7135316cf7ba"
+    },
+    {
+      "id": "KPL-0038",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "05ee3c594632db9584c2f072b313e96e492b094d67b8c804c3abbb5a54564af1",
+      "current_object_sha256": "05ee3c594632db9584c2f072b313e96e492b094d67b8c804c3abbb5a54564af1"
+    },
+    {
+      "id": "KPL-0039",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "7a1cb1f16a09625c3c91ffc4970547197a75e441cb035844266797d5d931e462",
+      "current_object_sha256": "7a1cb1f16a09625c3c91ffc4970547197a75e441cb035844266797d5d931e462"
+    },
+    {
+      "id": "KPL-0040",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "09fedd9ed40c82a6ca05838fe07b216b053486f5853405ee6b4ddd5302bde0bf",
+      "current_object_sha256": "09fedd9ed40c82a6ca05838fe07b216b053486f5853405ee6b4ddd5302bde0bf"
+    },
+    {
+      "id": "KPL-0041",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "15a313e141cec9c2ed484d17fa8faddd400fff3ffa20a06931eada620d028aad",
+      "current_object_sha256": "15a313e141cec9c2ed484d17fa8faddd400fff3ffa20a06931eada620d028aad"
+    },
+    {
+      "id": "KPL-0042",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "5bea631e50d8712aff2677c80ad8b11d3c155569df9fa092654e97076d18dd36",
+      "current_object_sha256": "5bea631e50d8712aff2677c80ad8b11d3c155569df9fa092654e97076d18dd36"
+    },
+    {
+      "id": "KPL-0043",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "15ccecf98f8f5eac4b0fe1e8848a0ea29b6b9df4bc479075fb65d86eb93dc398",
+      "current_object_sha256": "15ccecf98f8f5eac4b0fe1e8848a0ea29b6b9df4bc479075fb65d86eb93dc398"
+    },
+    {
+      "id": "KPL-0044",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "fa8ab88f32104996204c808d0c2f9f0fae1c3c37dd2ae3aacd24fe3690572187",
+      "current_object_sha256": "fa8ab88f32104996204c808d0c2f9f0fae1c3c37dd2ae3aacd24fe3690572187"
+    },
+    {
+      "id": "KPL-0045",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "befa9c23fe757298ef00e57a0c52026af93f433f0b2bc35262f4311ee5abc154",
+      "current_object_sha256": "befa9c23fe757298ef00e57a0c52026af93f433f0b2bc35262f4311ee5abc154"
+    },
+    {
+      "id": "KPL-0046",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ac6de2750b9a9b1457d3c459e3bb218e144f281b58952c547c1255339514e0c4",
+      "current_object_sha256": "ac6de2750b9a9b1457d3c459e3bb218e144f281b58952c547c1255339514e0c4"
+    },
+    {
+      "id": "KPL-0047",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "b594a19768b6df01a0f369627198e5e0ba280b98ad4015ee3dfd9d2c3227a7bd",
+      "current_object_sha256": "b594a19768b6df01a0f369627198e5e0ba280b98ad4015ee3dfd9d2c3227a7bd"
+    },
+    {
+      "id": "KPL-0048",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "c6ca97e628af8520afee101af2676e9293ecf01c0b08d857fb97012ff0ed1ca0",
+      "current_object_sha256": "c6ca97e628af8520afee101af2676e9293ecf01c0b08d857fb97012ff0ed1ca0"
+    },
+    {
+      "id": "KPL-0049",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "119cc96b7304c3b83445dc0333094fd2969ca3575d0dd6a20e98ee5a46786aa7",
+      "current_object_sha256": "119cc96b7304c3b83445dc0333094fd2969ca3575d0dd6a20e98ee5a46786aa7"
+    },
+    {
+      "id": "KPL-0050",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "4004cd3039e004e9b54f3bda9f95b4c6b8d5acc02376a7bee0c2acaf56e56c57",
+      "current_object_sha256": "4004cd3039e004e9b54f3bda9f95b4c6b8d5acc02376a7bee0c2acaf56e56c57"
+    },
+    {
+      "id": "KPL-0051",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "e730e14242847a6ae3297b6cac1a5e057a3754146206f65594c9446368c8b2a3",
+      "current_object_sha256": "e730e14242847a6ae3297b6cac1a5e057a3754146206f65594c9446368c8b2a3"
+    },
+    {
+      "id": "KPL-0052",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "e293644f7b6df5ca9379a6d50a77b6c85a7b19e178af0b5d4767bd3722215e88",
+      "current_object_sha256": "e293644f7b6df5ca9379a6d50a77b6c85a7b19e178af0b5d4767bd3722215e88"
+    },
+    {
+      "id": "KPL-0053",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "2d5115ab40bc2d0b986a6c4bdceac59bea83862181046469209a42fc8d827eea",
+      "current_object_sha256": "2d5115ab40bc2d0b986a6c4bdceac59bea83862181046469209a42fc8d827eea"
+    },
+    {
+      "id": "KPL-0054",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "1d603b810978df8084d783c5ad4cb920541a3d51e5351057f5f59f5cb4160717",
+      "current_object_sha256": "1d603b810978df8084d783c5ad4cb920541a3d51e5351057f5f59f5cb4160717"
+    },
+    {
+      "id": "KPL-0055",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "0d463fd8fc3b1d0b92dc1ddc020bd7e712ee7e2e4d9e156d18222215399d5f31",
+      "current_object_sha256": "0d463fd8fc3b1d0b92dc1ddc020bd7e712ee7e2e4d9e156d18222215399d5f31"
+    },
+    {
+      "id": "KPL-0056",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "1b8f8992a39218ea33eb7e81327a9c488944a0642fa0275bee7469d5a30107d3",
+      "current_object_sha256": "1b8f8992a39218ea33eb7e81327a9c488944a0642fa0275bee7469d5a30107d3"
+    },
+    {
+      "id": "KPL-0057",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "093e6a7d7e046e9574d86c0b1cb5405a0db4e8f916bc2bdff2c85ac0ef4ec259",
+      "current_object_sha256": "093e6a7d7e046e9574d86c0b1cb5405a0db4e8f916bc2bdff2c85ac0ef4ec259"
+    },
+    {
+      "id": "KPL-0058",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "9c3e630e206a24194efed749242b496db210091b8511d505af305843e7b82e5c",
+      "current_object_sha256": "9c3e630e206a24194efed749242b496db210091b8511d505af305843e7b82e5c"
+    },
+    {
+      "id": "KPL-0059",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "cf11cc7d4ff20ca32cf98b060118c1ba7e754b466269caa457f0025fddadb5a9",
+      "current_object_sha256": "cf11cc7d4ff20ca32cf98b060118c1ba7e754b466269caa457f0025fddadb5a9"
+    },
+    {
+      "id": "KPL-0060",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "18f6a245b1414cb9c039c7988fdd21483fa08cb8f078fd315c649be56f18f138",
+      "current_object_sha256": "18f6a245b1414cb9c039c7988fdd21483fa08cb8f078fd315c649be56f18f138"
+    },
+    {
+      "id": "KPL-0061",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "1357db9bead6f92b1f254c9c13120f73adce7f5a946a177c635a677589f854b9",
+      "current_object_sha256": "1357db9bead6f92b1f254c9c13120f73adce7f5a946a177c635a677589f854b9"
+    },
+    {
+      "id": "KPL-0062",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f697a1e8d77949187ea92dff64192425e4a86ec8225de967acd9f1eb734a0a29",
+      "current_object_sha256": "f697a1e8d77949187ea92dff64192425e4a86ec8225de967acd9f1eb734a0a29"
+    },
+    {
+      "id": "KPL-0063",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "c15a8f3c477738383f525cfb1374a8558713b040361d2a0c64ca9d7a10f25b81",
+      "current_object_sha256": "c15a8f3c477738383f525cfb1374a8558713b040361d2a0c64ca9d7a10f25b81"
+    },
+    {
+      "id": "KPL-0064",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "518b6eccb78021db961a19dca8be422b82f1ff9a1da2946fdf1519c280f29681",
+      "current_object_sha256": "518b6eccb78021db961a19dca8be422b82f1ff9a1da2946fdf1519c280f29681"
+    },
+    {
+      "id": "KPL-0065",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "4c8ad54728fd8f41667627f0e2a72c1390f033d2491904db40873c859c4190a4",
+      "current_object_sha256": "4c8ad54728fd8f41667627f0e2a72c1390f033d2491904db40873c859c4190a4"
+    },
+    {
+      "id": "KPL-0066",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "885ed162fc55f18225b69ec20d58eaba2ab21f44db308e48e94c90d12a09019f",
+      "current_object_sha256": "885ed162fc55f18225b69ec20d58eaba2ab21f44db308e48e94c90d12a09019f"
+    },
+    {
+      "id": "KPL-0067",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "5fc361ba3aa0fe2f5af0e63a5eb96a829f21301b66e5e6237eec72f32425585d",
+      "current_object_sha256": "5fc361ba3aa0fe2f5af0e63a5eb96a829f21301b66e5e6237eec72f32425585d"
+    },
+    {
+      "id": "KPL-0068",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "6561aea74eca31c7e1c5e5de7e55876286eeb237f5f308e37b43be2cc0f0a97c",
+      "current_object_sha256": "6561aea74eca31c7e1c5e5de7e55876286eeb237f5f308e37b43be2cc0f0a97c"
+    },
+    {
+      "id": "KPL-0069",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "513c18ebc6e840ed5f86d650ec25e8f18086542ceda032e45258a707c0bfa883",
+      "current_object_sha256": "513c18ebc6e840ed5f86d650ec25e8f18086542ceda032e45258a707c0bfa883"
+    },
+    {
+      "id": "KPL-0070",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "2d0a61d6fbe94249d0cc10dd92375633cb6172819623e871522623c51e121c8f",
+      "current_object_sha256": "2d0a61d6fbe94249d0cc10dd92375633cb6172819623e871522623c51e121c8f"
+    },
+    {
+      "id": "KPL-0071",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "3ef94372f8ef43cac83c49b69c73d4f21cd1b278741b4089dc0f337ef199977d",
+      "current_object_sha256": "3ef94372f8ef43cac83c49b69c73d4f21cd1b278741b4089dc0f337ef199977d"
+    },
+    {
+      "id": "KPL-0072",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "a80ac9f83a5924f66a2792e273297f80d403904b9fd14665f44a881d3b11ed87",
+      "current_object_sha256": "a80ac9f83a5924f66a2792e273297f80d403904b9fd14665f44a881d3b11ed87"
+    },
+    {
+      "id": "KPL-0073",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "9a5f8556ecf2c76530a8e638fb6eabed37f06d28aecb3c0a05febbcf486b6d3a",
+      "current_object_sha256": "9a5f8556ecf2c76530a8e638fb6eabed37f06d28aecb3c0a05febbcf486b6d3a"
+    },
+    {
+      "id": "KPL-0074",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "7e1395a13ef042c9726eb970cf6701c0716e1a773e86f9a6ad49a0f56d8b5dd9",
+      "current_object_sha256": "7e1395a13ef042c9726eb970cf6701c0716e1a773e86f9a6ad49a0f56d8b5dd9"
+    },
+    {
+      "id": "KPL-0075",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "90504f34db3fc6bd3ab19d66a7d9cfc8fd48a719182f658478c3338459ea5905",
+      "current_object_sha256": "90504f34db3fc6bd3ab19d66a7d9cfc8fd48a719182f658478c3338459ea5905"
+    },
+    {
+      "id": "KPL-0076",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "918b88410e02a93a38f808386b293f678fc0be0a2b44f4941f799276fd9200d8",
+      "current_object_sha256": "918b88410e02a93a38f808386b293f678fc0be0a2b44f4941f799276fd9200d8"
+    },
+    {
+      "id": "KPL-0077",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ab4033ee1eac3bb6aac59e19aef81c19794e4fca528f27a5024c2b19fabe2caa",
+      "current_object_sha256": "ab4033ee1eac3bb6aac59e19aef81c19794e4fca528f27a5024c2b19fabe2caa"
+    },
+    {
+      "id": "KPL-0078",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "8f7444e23196e7e6357bab92dea939c5ee667c9db462d95a80af0f169497c3fc",
+      "current_object_sha256": "8f7444e23196e7e6357bab92dea939c5ee667c9db462d95a80af0f169497c3fc"
+    },
+    {
+      "id": "KPL-0079",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "64bc8bc287428e073535840e4c177b258bfffe1a556afdaf3828b763e47c96f7",
+      "current_object_sha256": "64bc8bc287428e073535840e4c177b258bfffe1a556afdaf3828b763e47c96f7"
+    },
+    {
+      "id": "KPL-0080",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "32be6b6e0ffc590d76574e28385bc9c5d440c13886e05129c72896b32407f401",
+      "current_object_sha256": "32be6b6e0ffc590d76574e28385bc9c5d440c13886e05129c72896b32407f401"
+    },
+    {
+      "id": "KPL-0081",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "13f884c97097fa50f657f8ae88d4f381637b8105cf98704fd33e9c71cf19fc2a",
+      "current_object_sha256": "13f884c97097fa50f657f8ae88d4f381637b8105cf98704fd33e9c71cf19fc2a"
+    },
+    {
+      "id": "KPL-0082",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ce89535d3f92cfc2120f90d86b5272126b1b10ade0332c1a50951018cedd5c5f",
+      "current_object_sha256": "ce89535d3f92cfc2120f90d86b5272126b1b10ade0332c1a50951018cedd5c5f"
+    },
+    {
+      "id": "KPL-0083",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "07e112a2ca35781441ef61d104c02153f205e638f93d70eca24e5a77b599a2f9",
+      "current_object_sha256": "07e112a2ca35781441ef61d104c02153f205e638f93d70eca24e5a77b599a2f9"
+    },
+    {
+      "id": "KPL-0084",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "8412a9de40fdd987503b26a5fa7f4810b115a35004cf16cbf1ebc43e0dde1791",
+      "current_object_sha256": "8412a9de40fdd987503b26a5fa7f4810b115a35004cf16cbf1ebc43e0dde1791"
+    },
+    {
+      "id": "KPL-0085",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "11d7add63339b9ce4ace5b48d91451e1e86136ef2bb74758114a847e520d75e3",
+      "current_object_sha256": "11d7add63339b9ce4ace5b48d91451e1e86136ef2bb74758114a847e520d75e3"
+    },
+    {
+      "id": "KPL-0086",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "02cdc83c7af36872c047eff253f62403473beff7c7b08bdff62d68f70b06797a",
+      "current_object_sha256": "02cdc83c7af36872c047eff253f62403473beff7c7b08bdff62d68f70b06797a"
+    },
+    {
+      "id": "KPL-0087",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "dd443b84d30f3eec4adf563e394e270bf8d8427dc54adf1aa25f856c154128da",
+      "current_object_sha256": "dd443b84d30f3eec4adf563e394e270bf8d8427dc54adf1aa25f856c154128da"
+    },
+    {
+      "id": "KPL-0088",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "fdc8997cc0f795d6d45722adf5910e479b0670c6d4b280b5fe29a2307c2902b5",
+      "current_object_sha256": "fdc8997cc0f795d6d45722adf5910e479b0670c6d4b280b5fe29a2307c2902b5"
+    },
+    {
+      "id": "KPL-0089",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "1c4c0a38b9b06f05a107c82f2c01e8defc668489ea8baeb92cb632a02646c56b",
+      "current_object_sha256": "1c4c0a38b9b06f05a107c82f2c01e8defc668489ea8baeb92cb632a02646c56b"
+    },
+    {
+      "id": "KPL-0090",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "78cd8d393705a76eba93c0bd4d1022a9f0c366a2cb2f61f636dd0753476cece5",
+      "current_object_sha256": "78cd8d393705a76eba93c0bd4d1022a9f0c366a2cb2f61f636dd0753476cece5"
+    },
+    {
+      "id": "KPL-0091",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "be70b919d45ebdb0491824a7669788cbe67a48330e0fbc5136b61656dd8a386f",
+      "current_object_sha256": "be70b919d45ebdb0491824a7669788cbe67a48330e0fbc5136b61656dd8a386f"
+    },
+    {
+      "id": "KPL-0092",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "c1fd36dd0ab7629411ff9f865cba3701cb1af3ee5d1d4502e115e9f62010afa1",
+      "current_object_sha256": "c1fd36dd0ab7629411ff9f865cba3701cb1af3ee5d1d4502e115e9f62010afa1"
+    },
+    {
+      "id": "KPL-0093",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "684b0075c12359dda3185acee5445ec157be12060437cbb2bd27e6e1fb737a8d",
+      "current_object_sha256": "684b0075c12359dda3185acee5445ec157be12060437cbb2bd27e6e1fb737a8d"
+    },
+    {
+      "id": "KPL-0094",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "d0d232db3d70b2e0688bdc22aa619d62ba6ac95cba990d4c45b2427efdd81066",
+      "current_object_sha256": "d0d232db3d70b2e0688bdc22aa619d62ba6ac95cba990d4c45b2427efdd81066"
+    },
+    {
+      "id": "KPL-0095",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "a4072928936860f5f1f5210c88b5da0b5e584d56d04658fc40c6d3e976bf4c07",
+      "current_object_sha256": "a4072928936860f5f1f5210c88b5da0b5e584d56d04658fc40c6d3e976bf4c07"
+    },
+    {
+      "id": "KPL-0096",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "8e3fa5e6cd7e40314ff2b77f976299025145f42d27eeaa2576900adbc5994dea",
+      "current_object_sha256": "8e3fa5e6cd7e40314ff2b77f976299025145f42d27eeaa2576900adbc5994dea"
+    },
+    {
+      "id": "KPL-0097",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "06ea6362cb785c00dfddd34b507aea99c4cd8f1805b07f94cfb0b35571692b99",
+      "current_object_sha256": "06ea6362cb785c00dfddd34b507aea99c4cd8f1805b07f94cfb0b35571692b99"
+    },
+    {
+      "id": "KPL-0098",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "dfcaa4f256a179bf13dcc0c61362e3d905e0c60a8af0b4dbc0b8337945170237",
+      "current_object_sha256": "dfcaa4f256a179bf13dcc0c61362e3d905e0c60a8af0b4dbc0b8337945170237"
+    },
+    {
+      "id": "KPL-0099",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "2f1dced65da06efe9870a176b5436a12b21523e2d71b3530ea5d1b4955ec9c03",
+      "current_object_sha256": "2f1dced65da06efe9870a176b5436a12b21523e2d71b3530ea5d1b4955ec9c03"
+    },
+    {
+      "id": "KPL-0100",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "d3a648beab35df59f3cb26ec0bd5c3bd990a27efcd177f2c46d54d6313bfc127",
+      "current_object_sha256": "d3a648beab35df59f3cb26ec0bd5c3bd990a27efcd177f2c46d54d6313bfc127"
+    },
+    {
+      "id": "KPL-0101",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "15bd792bbebcad66c5a737fa921b016e24af9d1ccd12061872269ec6440e0e49",
+      "current_object_sha256": "15bd792bbebcad66c5a737fa921b016e24af9d1ccd12061872269ec6440e0e49"
+    },
+    {
+      "id": "KPL-0102",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ecf1fc1ebaa0c09818961035e03816862cd77f5fd47cdd9b1110712348f7b483",
+      "current_object_sha256": "ecf1fc1ebaa0c09818961035e03816862cd77f5fd47cdd9b1110712348f7b483"
+    },
+    {
+      "id": "KPL-0103",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "c86c1b5305489d30f658f40ccbfb86ce5e0d6c401acbc84a2bbaec657d1aa2aa",
+      "current_object_sha256": "c86c1b5305489d30f658f40ccbfb86ce5e0d6c401acbc84a2bbaec657d1aa2aa"
+    },
+    {
+      "id": "KPL-0104",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "9d511c73253424e3a1e038ae295e490dcd9b7c5723294bf7a9a2b19bbb963543",
+      "current_object_sha256": "9d511c73253424e3a1e038ae295e490dcd9b7c5723294bf7a9a2b19bbb963543"
+    },
+    {
+      "id": "KPL-0105",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f14a0da04dc4eed5ccb86001259e71296ed38a9e8a541f623e99af8e7004bb29",
+      "current_object_sha256": "f14a0da04dc4eed5ccb86001259e71296ed38a9e8a541f623e99af8e7004bb29"
+    },
+    {
+      "id": "KPL-0106",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ac794e5805c79c44732adbb65fa5dff65f016b93468be0e7489b54f6858b331f",
+      "current_object_sha256": "ac794e5805c79c44732adbb65fa5dff65f016b93468be0e7489b54f6858b331f"
+    },
+    {
+      "id": "KPL-0107",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "b83bd6c07594c9359971b43fd24cc22c4c90e3c9ce90edfb5c52df2c175b8108",
+      "current_object_sha256": "b83bd6c07594c9359971b43fd24cc22c4c90e3c9ce90edfb5c52df2c175b8108"
+    },
+    {
+      "id": "KPL-0108",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "d712642ba7281a531ebf54a4b4775cf3da3e621b475f1980b2cf615f069eeeeb",
+      "current_object_sha256": "d712642ba7281a531ebf54a4b4775cf3da3e621b475f1980b2cf615f069eeeeb"
+    },
+    {
+      "id": "KPL-0109",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "d8332ea279cd3afe9f2e8141904be23948face8ed995227fc7391136c05ab07a",
+      "current_object_sha256": "d8332ea279cd3afe9f2e8141904be23948face8ed995227fc7391136c05ab07a"
+    },
+    {
+      "id": "KPL-0110",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "763825b082bacceeb1bb5834e9346e42114738acc0dc9000d951cc17c9a01f58",
+      "current_object_sha256": "763825b082bacceeb1bb5834e9346e42114738acc0dc9000d951cc17c9a01f58"
+    },
+    {
+      "id": "KPL-0111",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ce63441e4c5cb8144ddaa7b8467238d49a6cb0b7d2c0cae64af941664986d0c1",
+      "current_object_sha256": "ce63441e4c5cb8144ddaa7b8467238d49a6cb0b7d2c0cae64af941664986d0c1"
+    },
+    {
+      "id": "KPL-0112",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f7a45b5f857321626d49e1be0b444c4512d90e6c2db283460a3aac0ab829409a",
+      "current_object_sha256": "f7a45b5f857321626d49e1be0b444c4512d90e6c2db283460a3aac0ab829409a"
+    },
+    {
+      "id": "KPL-0113",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "fc9f04102084dc01fe83a2a9a2f12ae9df05f5b7f553e1df54a0f5a2284ad0d0",
+      "current_object_sha256": "fc9f04102084dc01fe83a2a9a2f12ae9df05f5b7f553e1df54a0f5a2284ad0d0"
+    },
+    {
+      "id": "KPL-0114",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f4ef77dbecfcebf51b86d3568004017c4fef76ab1d78b0d54f12359e8334988c",
+      "current_object_sha256": "f4ef77dbecfcebf51b86d3568004017c4fef76ab1d78b0d54f12359e8334988c"
+    },
+    {
+      "id": "KPL-0115",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "7fdf821b7285df230a3ece02d60fb613a810316d1cf5551c4f78891313a4acc9",
+      "current_object_sha256": "7fdf821b7285df230a3ece02d60fb613a810316d1cf5551c4f78891313a4acc9"
+    },
+    {
+      "id": "KPL-0116",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "240cb480cf5a78cb7ee358165a6c972de184f65128d4dc239e07d0aaf3cd42f1",
+      "current_object_sha256": "240cb480cf5a78cb7ee358165a6c972de184f65128d4dc239e07d0aaf3cd42f1"
+    },
+    {
+      "id": "KPL-0117",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "139dc5f039197789ff48e84100d54cf71ac3d0e411a23575d93f71f1e4c2e02e",
+      "current_object_sha256": "139dc5f039197789ff48e84100d54cf71ac3d0e411a23575d93f71f1e4c2e02e"
+    },
+    {
+      "id": "KPL-0118",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "dab61dba87e4efa6aea29a3e8d9eadd6d39ff91ced2ca1e6ad91bcb53667727d",
+      "current_object_sha256": "dab61dba87e4efa6aea29a3e8d9eadd6d39ff91ced2ca1e6ad91bcb53667727d"
+    },
+    {
+      "id": "KPL-0119",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "16e567b7b1b390eed7a533541a63c94fb38134602243d7e75ce0e71c62bb447f",
+      "current_object_sha256": "16e567b7b1b390eed7a533541a63c94fb38134602243d7e75ce0e71c62bb447f"
+    },
+    {
+      "id": "KPL-0120",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f1367d4ee4ab64cf0cf6595ce679c70ea002ff26c7941bab53113e10eb668fb1",
+      "current_object_sha256": "f1367d4ee4ab64cf0cf6595ce679c70ea002ff26c7941bab53113e10eb668fb1"
+    },
+    {
+      "id": "KPL-0121",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "e12704ccf60dfcad00dda2b4e8d5dc9d2d1dd5e07e79740263f7db59ed5526cf",
+      "current_object_sha256": "e12704ccf60dfcad00dda2b4e8d5dc9d2d1dd5e07e79740263f7db59ed5526cf"
+    },
+    {
+      "id": "KPL-0122",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "45232b75dd7785418934ec0e17269ecab7c7bc1c1eaa043e514ca4caa2d84e8a",
+      "current_object_sha256": "45232b75dd7785418934ec0e17269ecab7c7bc1c1eaa043e514ca4caa2d84e8a"
+    },
+    {
+      "id": "KPL-0123",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "ad9c3b6b2a3663a9f9a734437a99af77d317cb45eda124667fc033d7c330bb14",
+      "current_object_sha256": "ad9c3b6b2a3663a9f9a734437a99af77d317cb45eda124667fc033d7c330bb14"
+    },
+    {
+      "id": "KPL-0124",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "b27a4fe148b7ddad823f429d0dc04bd7b5a478a00a046efef47c32d961d686c3",
+      "current_object_sha256": "b27a4fe148b7ddad823f429d0dc04bd7b5a478a00a046efef47c32d961d686c3"
+    },
+    {
+      "id": "KPL-0125",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "d4ba1edf9895a22e512ec24f9ba6b27df8bd0b6d95434e96987f3fb9525dcf27",
+      "current_object_sha256": "d4ba1edf9895a22e512ec24f9ba6b27df8bd0b6d95434e96987f3fb9525dcf27"
+    },
+    {
+      "id": "KPL-0126",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f4c18a2e189125190901998bc3b0f44521146dc2a10439e9ca183112bb84ba1e",
+      "current_object_sha256": "f4c18a2e189125190901998bc3b0f44521146dc2a10439e9ca183112bb84ba1e"
+    },
+    {
+      "id": "KPL-0127",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "06dff573ca292000a3ca5aa25048ead8071f40f03221dcf03bf244835bf5f07a",
+      "current_object_sha256": "06dff573ca292000a3ca5aa25048ead8071f40f03221dcf03bf244835bf5f07a"
+    },
+    {
+      "id": "KPL-0128",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "3e667de6ef5b7e8981290982eef75af11548d98e7ed6b84dbc7ee7f2adeeb93f",
+      "current_object_sha256": "3e667de6ef5b7e8981290982eef75af11548d98e7ed6b84dbc7ee7f2adeeb93f"
+    },
+    {
+      "id": "KPL-0129",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "796451f6d2c289655d292e9a62c0eb57000f0d3de666633a49451d238a918246",
+      "current_object_sha256": "796451f6d2c289655d292e9a62c0eb57000f0d3de666633a49451d238a918246"
+    },
+    {
+      "id": "KPL-0130",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "e3f66d87beff18cb8b954c7e262343685e2a9e2c753f8f87b86b8ea43eb8117e",
+      "current_object_sha256": "e3f66d87beff18cb8b954c7e262343685e2a9e2c753f8f87b86b8ea43eb8117e"
+    },
+    {
+      "id": "KPL-0131",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "e7f33e0b3f6a86614143f69df284180bd0390761f4a29e82e5dc7135f8922a9e",
+      "current_object_sha256": "e7f33e0b3f6a86614143f69df284180bd0390761f4a29e82e5dc7135f8922a9e"
+    },
+    {
+      "id": "KPL-0132",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "aa5f6573d9e2a44431ed474abf056c4836da1d160759ddb0813d5383406fe928",
+      "current_object_sha256": "aa5f6573d9e2a44431ed474abf056c4836da1d160759ddb0813d5383406fe928"
+    },
+    {
+      "id": "KPL-0133",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "b4668598d6f74eaa8c777bc87e62ca9efa379aab843a9bd62e557da4bd16cc11",
+      "current_object_sha256": "b4668598d6f74eaa8c777bc87e62ca9efa379aab843a9bd62e557da4bd16cc11"
+    },
+    {
+      "id": "KPL-0134",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "249f0be42cf1f01c1395751b45a46378393d0337e848bc7025312f7296a7f8e9",
+      "current_object_sha256": "249f0be42cf1f01c1395751b45a46378393d0337e848bc7025312f7296a7f8e9"
+    },
+    {
+      "id": "KPL-0135",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "21b1d22a153a02a45cb81ea307a358f145f58b693ca7aefd021a1308ad444023",
+      "current_object_sha256": "21b1d22a153a02a45cb81ea307a358f145f58b693ca7aefd021a1308ad444023"
+    },
+    {
+      "id": "KPL-0136",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f244dcdc9e769ae293db3abec22d5600afaa12cbdd82c85e961cd426b9d4e1d5",
+      "current_object_sha256": "f244dcdc9e769ae293db3abec22d5600afaa12cbdd82c85e961cd426b9d4e1d5"
+    },
+    {
+      "id": "KPL-0137",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "2fc113fd5341c8905b6dc0aed920c4247a0904d075dde51e46e74858bb3d8e09",
+      "current_object_sha256": "2fc113fd5341c8905b6dc0aed920c4247a0904d075dde51e46e74858bb3d8e09"
+    },
+    {
+      "id": "KPL-0138",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f96673c026158cfa069db555fc5ea569b43353b55ffe4049d36b40bcc9619dc8",
+      "current_object_sha256": "f96673c026158cfa069db555fc5ea569b43353b55ffe4049d36b40bcc9619dc8"
+    },
+    {
+      "id": "KPL-0139",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "bbf222ff362e261702b1f4ccffbb6a8087c14a1ea8d7e4902b1905be5dbc5a08",
+      "current_object_sha256": "bbf222ff362e261702b1f4ccffbb6a8087c14a1ea8d7e4902b1905be5dbc5a08"
+    },
+    {
+      "id": "KPL-0140",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "814516f90ffb45754f9f4dbea82491345074b51d0bb24163382f2ebdecff6ba3",
+      "current_object_sha256": "814516f90ffb45754f9f4dbea82491345074b51d0bb24163382f2ebdecff6ba3"
+    },
+    {
+      "id": "KPL-0141",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "0bcb5e1bc7ee02fa24e28d50974bb98520418a7e653de9e4144cceea00bfb1b0",
+      "current_object_sha256": "0bcb5e1bc7ee02fa24e28d50974bb98520418a7e653de9e4144cceea00bfb1b0"
+    },
+    {
+      "id": "KPL-0142",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "a9abe042070cef4907b372597b57cbf7dc4c1cea60aa70a51f1d9aeedaa8ff62",
+      "current_object_sha256": "a9abe042070cef4907b372597b57cbf7dc4c1cea60aa70a51f1d9aeedaa8ff62"
+    },
+    {
+      "id": "KPL-0143",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f5a5c693fed80ead08cad46b16fec7ce4b95fc6f60b7e5a9241c14dd44b13e4f",
+      "current_object_sha256": "f5a5c693fed80ead08cad46b16fec7ce4b95fc6f60b7e5a9241c14dd44b13e4f"
+    },
+    {
+      "id": "KPL-0144",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "8f078e2e1e1e35d5c1e87f5c09061923a3f4393353252c07845552c5cda79a20",
+      "current_object_sha256": "8f078e2e1e1e35d5c1e87f5c09061923a3f4393353252c07845552c5cda79a20"
+    },
+    {
+      "id": "KPL-0145",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "413d219661bcf9591d979e00ad13d9dccf36a7e12de5f89dc622b0f614cea31c",
+      "current_object_sha256": "413d219661bcf9591d979e00ad13d9dccf36a7e12de5f89dc622b0f614cea31c"
+    },
+    {
+      "id": "KPL-0146",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "e7bd086922b90117aecaeaa31618b2684c5a6a7965ee71ff8acb63a25e28df52",
+      "current_object_sha256": "e7bd086922b90117aecaeaa31618b2684c5a6a7965ee71ff8acb63a25e28df52"
+    },
+    {
+      "id": "KPL-0147",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "6f3d41672d6f4af80b2f705954e93d9b8a807543b29b473e38706b098705f3c4",
+      "current_object_sha256": "6f3d41672d6f4af80b2f705954e93d9b8a807543b29b473e38706b098705f3c4"
+    },
+    {
+      "id": "KPL-0148",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "36d1bd969071dca4767f95eb711e71181c614c91b1679c94bbfa93707c63ec67",
+      "current_object_sha256": "36d1bd969071dca4767f95eb711e71181c614c91b1679c94bbfa93707c63ec67"
+    },
+    {
+      "id": "KPL-0149",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "b38a0d7ee50025c0ff56ed8a5150a8118761c25e22b17cd664035bd072bec2df",
+      "current_object_sha256": "b38a0d7ee50025c0ff56ed8a5150a8118761c25e22b17cd664035bd072bec2df"
+    },
+    {
+      "id": "KPL-0150",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "4269ef3166e9aea34e0fe9da950f7d627bf7332a6c9bcb720192621a63d6e008",
+      "current_object_sha256": "4269ef3166e9aea34e0fe9da950f7d627bf7332a6c9bcb720192621a63d6e008"
+    },
+    {
+      "id": "KPL-0151",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "fdaa1d09f9a36b81a5619eebdd0638454938bd17547fd344fd3eb27976719c39",
+      "current_object_sha256": "fdaa1d09f9a36b81a5619eebdd0638454938bd17547fd344fd3eb27976719c39"
+    },
+    {
+      "id": "KPL-0152",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "af39b5e88c8c55f626104ba5f4103b843a767cb6d71d03a4bbe61c20a5c4b5cd",
+      "current_object_sha256": "af39b5e88c8c55f626104ba5f4103b843a767cb6d71d03a4bbe61c20a5c4b5cd"
+    },
+    {
+      "id": "KPL-0153",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "f9345a76c5afb3d9f3f89fa63e28b27ae29cde9aa7de46fd27eae5a4722416a8",
+      "current_object_sha256": "f9345a76c5afb3d9f3f89fa63e28b27ae29cde9aa7de46fd27eae5a4722416a8"
+    },
+    {
+      "id": "KPL-0154",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "53dd01cddc696e2d43176fdb976312ce7565878e9e08cd91b2559406ced10057",
+      "current_object_sha256": "53dd01cddc696e2d43176fdb976312ce7565878e9e08cd91b2559406ced10057"
+    },
+    {
+      "id": "KPL-0155",
+      "source_path": "lexicon/core.json",
+      "baseline_object_sha256": "abdc67c6264213d258a11b3d686856697a1f0502e59274947a75105abc7761ea",
+      "current_object_sha256": "abdc67c6264213d258a11b3d686856697a1f0502e59274947a75105abc7761ea"
+    },
+    {
+      "id": "KPL-SW-0001",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "c02565465431300c213bc0ea4cd84900d031a64726b165855ba6c0f4ec78bb3f",
+      "current_object_sha256": "c02565465431300c213bc0ea4cd84900d031a64726b165855ba6c0f4ec78bb3f"
+    },
+    {
+      "id": "KPL-SW-0002",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "bc6973c2a2db44ef881062d8cfe5e193882164fca758ad0d974b919aacbba650",
+      "current_object_sha256": "bc6973c2a2db44ef881062d8cfe5e193882164fca758ad0d974b919aacbba650"
+    },
+    {
+      "id": "KPL-SW-0003",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "4c4abab5b2d8187fb58c46c28e48a282dfb901bb935ef35f7ac0c40a0dbfee39",
+      "current_object_sha256": "4c4abab5b2d8187fb58c46c28e48a282dfb901bb935ef35f7ac0c40a0dbfee39"
+    },
+    {
+      "id": "KPL-SW-0004",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "3210d4e2fce9bd13cf5f478f3e9b574d49977ed0bdb7abe163f5210bbd5bac8e",
+      "current_object_sha256": "3210d4e2fce9bd13cf5f478f3e9b574d49977ed0bdb7abe163f5210bbd5bac8e"
+    },
+    {
+      "id": "KPL-SW-0005",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "fd0108647758d1520f11b072d0806add75af3976c57d0b020310c0d4864d41d8",
+      "current_object_sha256": "fd0108647758d1520f11b072d0806add75af3976c57d0b020310c0d4864d41d8"
+    },
+    {
+      "id": "KPL-SW-0006",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "c6062fc69c943a6e2bc20110b563551c8d61b594b523c66412b66ab714a331a0",
+      "current_object_sha256": "c6062fc69c943a6e2bc20110b563551c8d61b594b523c66412b66ab714a331a0"
+    },
+    {
+      "id": "KPL-SW-0007",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "daf4230958132df5fd6c2e4bf97f907ed747ac65e2d6681b26c4c81902e92a19",
+      "current_object_sha256": "daf4230958132df5fd6c2e4bf97f907ed747ac65e2d6681b26c4c81902e92a19"
+    },
+    {
+      "id": "KPL-SW-0008",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "06b338376c8f4cb62e76c092b21b68dc168785bd604e5e6311898c7d81a47a05",
+      "current_object_sha256": "06b338376c8f4cb62e76c092b21b68dc168785bd604e5e6311898c7d81a47a05"
+    },
+    {
+      "id": "KPL-SW-0009",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "c6d44dd7b14e5c2f6ded958f84ef57c98c6bb8ea7feda97263b4871b7f63a302",
+      "current_object_sha256": "c6d44dd7b14e5c2f6ded958f84ef57c98c6bb8ea7feda97263b4871b7f63a302"
+    },
+    {
+      "id": "KPL-SW-0010",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "a3e04088600035892bc52653ebe27653356917c06cdc5997102747a17f9c31c5",
+      "current_object_sha256": "a3e04088600035892bc52653ebe27653356917c06cdc5997102747a17f9c31c5"
+    },
+    {
+      "id": "KPL-SW-0011",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "03f81118de3b489ef52446169a8aacf9ddd3cee373052c3a1632c3a7d586a716",
+      "current_object_sha256": "03f81118de3b489ef52446169a8aacf9ddd3cee373052c3a1632c3a7d586a716"
+    },
+    {
+      "id": "KPL-SW-0012",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "320e594b48337a96f1e493a241a4602f178a40ceb807bad14a31027e18040719",
+      "current_object_sha256": "320e594b48337a96f1e493a241a4602f178a40ceb807bad14a31027e18040719"
+    },
+    {
+      "id": "KPL-SW-0013",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "c8ecdd929dacf6b28c0c5bbde567d20b038fe4e0843593302dca93cc0aa10aef",
+      "current_object_sha256": "c8ecdd929dacf6b28c0c5bbde567d20b038fe4e0843593302dca93cc0aa10aef"
+    },
+    {
+      "id": "KPL-SW-0014",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "84797787152762fbfbdcc508d400e07398a4e6a1306e1110686ebf8a72f33006",
+      "current_object_sha256": "84797787152762fbfbdcc508d400e07398a4e6a1306e1110686ebf8a72f33006"
+    },
+    {
+      "id": "KPL-SW-0015",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "2ca51a09a850c237de53bcd8094eba4cb5d581907ce954713d224faca21fc86c",
+      "current_object_sha256": "2ca51a09a850c237de53bcd8094eba4cb5d581907ce954713d224faca21fc86c"
+    },
+    {
+      "id": "KPL-SW-0016",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "8f868b100044545464ada3c24d5788b1c47fd04451be4c14bf5d22abf245c720",
+      "current_object_sha256": "8f868b100044545464ada3c24d5788b1c47fd04451be4c14bf5d22abf245c720"
+    },
+    {
+      "id": "KPL-SW-0017",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "b39a66b5e5bfaf69c0c4814d0f5adeed82fc0321633371a885493d830bef7150",
+      "current_object_sha256": "b39a66b5e5bfaf69c0c4814d0f5adeed82fc0321633371a885493d830bef7150"
+    },
+    {
+      "id": "KPL-SW-0018",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "c83b51be36c6eaf8cab0479451a5631ae09489615182e4b7eaad402b21c1f393",
+      "current_object_sha256": "c83b51be36c6eaf8cab0479451a5631ae09489615182e4b7eaad402b21c1f393"
+    },
+    {
+      "id": "KPL-SW-0019",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "2524ac28bc3e548bb2b1283a0b6436fc7ce0051c7d3a524c600bc433ba37b7d9",
+      "current_object_sha256": "2524ac28bc3e548bb2b1283a0b6436fc7ce0051c7d3a524c600bc433ba37b7d9"
+    },
+    {
+      "id": "KPL-SW-0020",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "ba0eca7692f22b2045226c347ca528869a707f156158d36e13b6f5ab204ae32e",
+      "current_object_sha256": "ba0eca7692f22b2045226c347ca528869a707f156158d36e13b6f5ab204ae32e"
+    },
+    {
+      "id": "KPL-SW-0021",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "c4f0d343260f232b0778eaeb01b77f4c9ecde26db69a040fd5bcc1e56ae8e621",
+      "current_object_sha256": "c4f0d343260f232b0778eaeb01b77f4c9ecde26db69a040fd5bcc1e56ae8e621"
+    },
+    {
+      "id": "KPL-SW-0022",
+      "source_path": "lexicon/domains/software.json",
+      "baseline_object_sha256": "d1ef7a4d40463a13e70fdb26da81f6d62c788ed7c9e1a10bba196dfce6f67d6e",
+      "current_object_sha256": "d1ef7a4d40463a13e70fdb26da81f6d62c788ed7c9e1a10bba196dfce6f67d6e"
+    }
+  ],
+  "revision": {
+    "number": 2,
+    "date": "2026-10-12",
+    "changed_entry_ids": [
+      "KPL-0156",
+      "KPL-0157",
+      "KPL-SW-0026",
+      "KPL-SW-0030",
+      "KPL-SW-0033"
+    ],
+    "basis": "Integration sources changed only five of the sixteen added entries; the 177 original objects, the other eleven added entries, frozen contexts and lexicon-independent artifacts were rechecked as unchanged.",
+    "role_note": "Same reused-input development recheck; not a new independent efficacy evaluation."
+  },
+  "superseded_revision": {
+    "number": 1,
+    "directory": "revisions/r1-initial-193-entries",
+    "files": [
+      {
+        "path": "check.py",
+        "sha256": "2b126e258658ea20bf75200b5550d44fd985dc4e357a2b443bbf2d68acd496ea"
+      },
+      {
+        "path": "consulted-records.json",
+        "sha256": "f125733bcbf7cd23fc0e8da409bc076e9146f480e00d6facd5369e0274f0fd30"
+      },
+      {
+        "path": "manifest.json",
+        "sha256": "93e29dbf81f00ea7cd9b62327476370bc101322a6ed77d5320a296b2642d5eaf"
+      },
+      {
+        "path": "matches.json",
+        "sha256": "10e156ef41ce5bdb9734cbb491cb835c314a7a898e8567a4e4506876b4cc0c0b"
+      },
+      {
+        "path": "report.md",
+        "sha256": "f40554de9d578a798214828d72a0bace5ac9baa9828b7f4af6f36d706d926835"
+      },
+      {
+        "path": "verification-snapshot-only.json",
+        "sha256": "02e64cbdfc1eba92bb5bc3ec743d7840c7bd4684d89fa4ca5fcfa424f881d37d"
+      },
+      {
+        "path": "verification-source-root.json",
+        "sha256": "9a54cd5735605a0311c1dcf9e957f6b6a71b19009888c0db7da39e642aecfb53"
+      }
+    ],
+    "development_counts": {
+      "ambiguous": 2,
+      "matched": 33,
+      "unmatched": 5
+    },
+    "source_sha256": {
+      "schemas/lexicon.schema.json": "bc19159b3216efbfddff2d1e69c4747718bc936dbe5217fe14d76004c1a55898",
+      "lexicon/core.json": "eca2f8d3f1fc89e84d7b725cee0224b46918df64b87c4eecd3eb93feb699ecd5",
+      "lexicon/domains/software.json": "f3a024547a8cae6c9fe3ecd96967ed84b15e2e7fa8cb3b765e5f6e95a90e4da7",
+      "docs/spec/lexicon.md": "241a0bde92f32b16fcbb20dd28a336e730a521ba6bae385bb7a6047ea9c10eaa",
+      "evaluation/baselines/20261012-before-rule-and-lexicon-refinement/lexicon/core.json": "92ae772abcb40267e562fe3c7e8bceec8d0a9479de96cb48d9f1401cfff15e27",
+      "evaluation/baselines/20261012-before-rule-and-lexicon-refinement/lexicon/domains/software.json": "43c0d51aa1ec6dc2edddd0ff1b1efbd88711cd0638e1666fc258c0e5db3de767"
+    },
+    "status": "superseded_by_revision_2; preserved byte copies; its source-root check no longer matches current integration sources by design"
+  }
+}

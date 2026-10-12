@@ -1,0 +1,33 @@
+{
+  "schema_valid": true,
+  "case_count": 24,
+  "family_count": 8,
+  "case_type_counts": {
+    "failure": 8,
+    "keep": 8,
+    "normal": 8
+  },
+  "expected_decision_counts": {
+    "accept": 8,
+    "keep": 8,
+    "reject": 8
+  },
+  "family_counts": {
+    "aspect_and_modality": 3,
+    "conditions_and_simultaneity": 3,
+    "honorifics_and_speech_act": 3,
+    "negation_and_quantifier_scope": 3,
+    "omission_and_referents": 3,
+    "particles_and_argument_roles": 3,
+    "passive_and_causative": 3,
+    "relative_and_modifier_attachment": 3
+  },
+  "one_case_per_family_and_type": true,
+  "sha256": {
+    "cases.json": "cc8c501b7e6c0d7e35c577cd8600491ddfc87e1d75c4cd4be52999e98eaf8504",
+    "plan.md": "a6b2ce75726f2b51e01f971a1a49e9c94cac35c1a385fbeea2d4dd71b9d88c0e",
+    "validate.py": "ec3d69fa58406a6c2658904f5864ec71e71a2ad5337163efde13697087c730ab"
+  },
+  "scope": "Structural verification and frozen file identity only; semantic correctness and integrated rule behavior require independent review.",
+  "freeze_status": "frozen_before_rule_mapping"
+}

@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "tested_at": "2026-10-12T14:46:01.159130+00:00",
+  "test": "temporary localhost TLS signed-content CLI update",
+  "runtime_root": "/Users/m5max/.codex/worktrees/korean-protocol-integration/ASD-STE100 Kor",
+  "runtime_sha256": "e9fee9277323d5587e97c3f9b2eb2731c3933a28ea0add6d3133cfe29d4f7b95",
+  "script_sha256": "9ab8b19721527a8592a6837c9395c0174d51bd0cfbdd04ccb7344f986f81ffeb",
+  "python_version": "3.9.6",
+  "transport": {
+    "scheme": "https",
+    "host": "localhost",
+    "port": 443,
+    "via_local_connect_proxy": true,
+    "proxy_listener_port": 59014,
+    "tls_listener_port": 59013,
+    "direct_port_443_bind_tested": false
+  },
+  "result": "failed",
+  "steps": [
+    {
+      "step": "signed-install-local-bundle",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "initial-status",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 1027,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "configure-source",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "reject-invalid-ca-file",
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "stdout_bytes": 0,
+      "stderr_bytes": 30
+    }
+  ],
+  "scope": {
+    "actual_https": false,
+    "intended_transport": "https",
+    "temporary_ca_and_signing_keys_only": true,
+    "ssl_cert_file_subprocess_only": true,
+    "user_trust_store_changed": false,
+    "real_user_global_installed": false,
+    "launchctl_registered": false,
+    "external_endpoint_tested": false,
+    "model_compliance_tested": false,
+    "private_keys_preserved": false
+  },
+  "random_port_preflight": {
+    "port": 59012,
+    "source_validation": "rejected",
+    "exit_code": 2,
+    "reason": "Source must be credential-free HTTPS on port 443"
+  },
+  "ca_certificate_sha256": "cce8b93b6bad9efec88519a076c2cf409b518f8616289bd8713f56f05961f22e",
+  "server_certificate_sha256": "a8304afa22e545fef84f402c7704827676d45d366d227e94e5f6a414e5596b53",
+  "signer_fingerprint": "SHA256:B/Tax3V+afWXQ4U2yge1eRLfqOtGhFsRGhusnV9qId4",
+  "releases": {
+    "0.2.0": {
+      "sequence": 1,
+      "manifest_sha256": "38040efe4e8333ac20cb56896fbdd36e3a50edd380995cf961e5db857397bbf7",
+      "files": {
+        "profiles/coding-agent.md": {
+          "sha256": "282cbdcea153cf6eec5361eda2431c7d2ee2c66d04e71c3fca19639a875c46ee",
+          "bytes": 28627
+        },
+        "profiles/chat.md": {
+          "sha256": "a8425e59ed5343b9f33286dbcac21f30c1e12e877d6a00381199edc0caeb0ca1",
+          "bytes": 28597
+        },
+        "profiles/work-document.md": {
+          "sha256": "532fab446de314d5e381e1013e2d6c349b4ca07cbc1086775d29b28d5fcf89e7",
+          "bytes": 28606
+        },
+        "specification/rules.json": {
+          "sha256": "c3be69747df248d6ec76f00788cc38a6e72ff5bc952ad73f0c2a8f8a106e736c",
+          "bytes": 171377
+        },
+        "lexicon/core.json": {
+          "sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+          "bytes": 302864
+        },
+        "lexicon/domains/software.json": {
+          "sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+          "bytes": 83473
+        },
+        "pack/protocol.md": {
+          "sha256": "1e3d8dd3141202e41fcbb3550e502a7ccb5248303b2b87d0b50f79c4191e9569",
+          "bytes": 91686
+        }
+      },
+      "fixture_only": true
+    },
+    "0.2.1": {
+      "sequence": 2,
+      "manifest_sha256": "8396a76432bcd3b39dcc525abd8eb61d480bc2698e3dc4522d8165aeb2cc6472",
+      "files": {
+        "profiles/coding-agent.md": {
+          "sha256": "282cbdcea153cf6eec5361eda2431c7d2ee2c66d04e71c3fca19639a875c46ee",
+          "bytes": 28627
+        },
+        "profiles/chat.md": {
+          "sha256": "a8425e59ed5343b9f33286dbcac21f30c1e12e877d6a00381199edc0caeb0ca1",
+          "bytes": 28597
+        },
+        "profiles/work-document.md": {
+          "sha256": "532fab446de314d5e381e1013e2d6c349b4ca07cbc1086775d29b28d5fcf89e7",
+          "bytes": 28606
+        },
+        "specification/rules.json": {
+          "sha256": "c3be69747df248d6ec76f00788cc38a6e72ff5bc952ad73f0c2a8f8a106e736c",
+          "bytes": 171377
+        },
+        "lexicon/core.json": {
+          "sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+          "bytes": 302864
+        },
+        "lexicon/domains/software.json": {
+          "sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+          "bytes": 83473
+        },
+        "pack/protocol.md": {
+          "sha256": "65c6d6ad626677578d24b1f90c046302067953fa8c2f7d2d92c352c316a654eb",
+          "bytes": 91754
+        }
+      },
+      "fixture_only": true
+    }
+  },
+  "fixture_transport_probe": {
+    "exit_code": 1,
+    "diagnostic": "DefaultVerifyPaths(cafile='/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-https-smoke-j6jzg_yq/pki/ca.crt', capath='/private/etc/ssl/certs', openssl_cafile_env='SSL_CERT_FILE', openssl_cafile='/private/etc/ssl/cert.pem', openssl_capath_env='SSL_CERT_DIR', openssl_capath='/private/etc/ssl/certs')\n{'x509': 128, 'crl': 0, 'x509_ca': 128}\n{'x509': 1, 'crl': 0, 'x509_ca': 1}\n",
+    "error": "ons/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py\", line 1338, in do_handshake\n    self._sslobj.do_handshake()\nssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1129)\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 214, in urlopen\n    return opener.open(url, data, timeout)\n  File \"/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 517, in open\n    response = self._open(req, data)\n  File \"/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 534, in _open\n    result = self._call_chain(self.handle_open, protocol, protocol +\n  File \"/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 494, in _call_chain\n    result = func(*args)\n  File \"/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1389, in https_open\n    return self.do_open(http.client.HTTPSConnection, req,\n  File \"/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1349, in do_open\n    raise URLError(err)\nurllib.error.URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1129)>\n"
+  },
+  "failure": "Fixture HTTPS transport probe failed",
+  "requests": [],
+  "connect_tunnels": [
+    "localhost:443",
+    "localhost:443"
+  ],
+  "temporary_material_removed": true,
+  "limitation": "Localhost TLS and CLI wiring only; no public release endpoint, launchd registration, real user installation or model compliance validation.",
+  "dictionary_locator_local_snapshot": {
+    "transport": "none",
+    "trust": "local-snapshot",
+    "actual_https": false,
+    "model_file_read_observed": false,
+    "render_function": "Controller._activate",
+    "render_line": 610,
+    "install_exit_code": 0,
+    "status_exit_code": 0,
+    "absolute_cache_directory_advertised": true,
+    "advertised_root_matches_active_cache": true,
+    "installed_version": "0.2.0",
+    "original_user_bytes_preserved": true,
+    "installed_profile_sha256": "7050fa9deae7efe3ca38e68205963c76293b284fcbec690568fcb7f18dea696e",
+    "files": {
+      "lexicon/core.json": {
+        "cached_file_exists": true,
+        "source_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "cached_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "explicit_absolute_file_locator_in_body": false,
+        "source_hash_matches_cache": true
+      },
+      "lexicon/domains/software.json": {
+        "cached_file_exists": true,
+        "source_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+        "cached_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+        "explicit_absolute_file_locator_in_body": false,
+        "source_hash_matches_cache": true
+      }
+    },
+    "result": "pass",
+    "locator_contract": "Relative lexicon/core.json and lexicon/domains/software.json resolve against the footer-advertised absolute cache directory; file-specific absolute locators are not inserted.",
+    "temporary_material_removed": true
+  },
+  "script_validation": {
+    "python_compile": "pass",
+    "actual_https_branch_executed": false
+  }
+}

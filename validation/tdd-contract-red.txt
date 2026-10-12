@@ -1,0 +1,32 @@
+...........................F..F.....
+======================================================================
+FAIL: test_related_reverse_reference_does_not_inflate_or_block_actual_design (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 95, in test_related_reverse_reference_does_not_inflate_or_block_actual_design
+    self.assertEqual([],report['errors'])
+AssertionError: Lists differ: [] != [{'code': 'asymmetric_mapping', 'path': 's[116 chars]s.'}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'code': 'asymmetric_mapping', 'path': 'specification/ste-crosswalk.json.items[0]', 'message': 'Rule KP-WRD-002 refers here but is absent from target_rule_ids.'}
+
+- []
++ [{'code': 'asymmetric_mapping',
++   'message': 'Rule KP-WRD-002 refers here but is absent from target_rule_ids.',
++   'path': 'specification/ste-crosswalk.json.items[0]'}]
+
+======================================================================
+FAIL: test_stale_spec_cannot_verify_changed_measurement_procedure (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 131, in test_stale_spec_cannot_verify_changed_measurement_procedure
+    self.assertError('verification_evidence')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 43, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'verification_evidence' not found in []
+
+----------------------------------------------------------------------
+Ran 36 tests in 0.117s
+
+FAILED (failures=2)

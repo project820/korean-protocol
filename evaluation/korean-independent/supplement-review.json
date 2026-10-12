@@ -1,0 +1,91 @@
+{
+  "reviewer_requested_model": "anthropic/claude-opus-5-5",
+  "reviewer_role": "independent agent semantic and rule-mapping reviewer",
+  "cases_sha256": "166e61eb5cdc65bda9300d2738377342532faaa6a0cfb314d4fbda2cc8337268",
+  "rules_sha256": "5d8db818c0a50e4249fae2a4bd69a65418b29c3ff23ba20d4e468b0106d10ae0",
+  "reviews": [
+    {
+      "case_id": "KI-SUP-ASP-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-VER-003",
+        "KP-EDIT-001"
+      ],
+      "rationale": "그리다 is an activity verb, so both 그리는 중이다 and 그리고 있다 can only mean the drawing is still going on. The context also states that the task started and is not finished. The candidate keeps the actor 루미, the object 점 세 개, the time 지금, and the sentence 아직 마치지 않았다, so accept holds under KP-EDIT-001 (proposition comparison during a wording change). KP-VER-003 applies because its condition covers reports on how far a task has gone. The candidate keeps the ongoing stage, and the rejected output 다 그렸다 turns it into completion, which is the same swap as the KP-VER-003 negative example (업로드했습니다 for a transfer still in progress). Neither output adds a count of finished dots.",
+      "concerns": [
+        "The change from 그리는 중이다 to 그리고 있다 is a free synonym swap that no rule in rules.json asks for. The case therefore tests only that a meaning-preserving variant is not rejected. It does not test whether the protocol would produce this edit.",
+        "The rejected output also drops the second source sentence. It would still be rejected without that loss because 다 그렸다 alone contradicts the context, so the decision does not depend on the dropped sentence."
+      ]
+    },
+    {
+      "case_id": "KI-SUP-ASP-02",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-VER-003",
+        "KP-EDIT-001"
+      ],
+      "rationale": "쓰다 means putting glasses on, and the context says the act ended and only the worn state remains. So 쓰고 있다 here is the result-state reading. -는 중이다 needs a process that is still unfolding, which forces 쓰는 중이다 into the reading where 지호 is putting the glasses on right now. The context explicitly rules that out, so reject is independently defensible. The case correctly avoids treating every -고 있다 as progressive and pairs naturally with ASP-01, where 그리고 있다 is progressive. KP-EDIT-001 applies because the edit is a form substitution that changes the time and state of the proposition. KP-VER-003 applies because the candidate presents a completed action as ongoing. The acceptable output 착용한 상태다 adds no new facts.",
+      "concerns": [
+        "No rule in rules.json names the result-state reading of -고 있다. KP-VER-003 lists only 시작·진행·완료·중단, so the mapping rests on reading the result state as completion plus a maintained state. Only docs/spec/lexicon.md line 56 names 진행·결과 상태 as separate axes. This is a gap on the rule side, not a defect in the case.",
+        "Keeping the source 지호는 지금 안경을 쓰고 있다 unchanged is equally correct in this context. The listed acceptable output is one valid option, and a grader must not read it as a required rewrite."
+      ]
+    },
+    {
+      "case_id": "KI-SUP-ASP-03",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-VER-003",
+        "KP-EDIT-001"
+      ],
+      "rationale": "다 그렸다 states that the whole figure is done, and the context confirms the work ended and did not restart. The source is already short and natural, so keep is defensible. The KP-VER-003 exception allows a simple completion statement when the source confirms completion, and that supports keeping it. The rejected output 그리고 있다 can only mean ongoing drawing with this verb, which contradicts the completed state under KP-VER-003 and the time element under KP-EDIT-001.",
+      "concerns": [
+        "The rejected output is an obvious contradiction. A more tempting candidate, such as dropping 다 to give 혜윤은 도형을 그렸다, would test whether the completeness marker that matches 모두 in the context survives. The frozen case does not cover that edit."
+      ]
+    },
+    {
+      "case_id": "KI-SUP-CAU-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-EDIT-001",
+        "KP-EDIT-003"
+      ],
+      "rationale": "-게 하다 alone does not say how 세나 brought the cutting about. The context, however, states that 세나 gave an instruction, did not cut, and that 이든 actually cut the ribbon. So 세나의 지시로 draws on facts that are supplied and invents nothing, as KP-EDIT-003 requires. The candidate keeps 세나 as the one who caused the action, 이든 as the one who performed it, and the fact that the cutting happened. That satisfies KP-EDIT-001 for a condensing edit that merges two sentences into one. The rejected output swaps the instructor and the performer, which changes who did what under KP-EDIT-001. Accept is defensible only because the explicit context provides the instruction, and the case rationale says so correctly.",
+      "concerns": [
+        "rules.json has no rule whose conditions cover causative role preservation. KP-KO-007's counterexample and exception discuss causatives, but its condition only covers stacked passives such as 되어지다, so it does not apply here. The case is mapped only through the general rules KP-EDIT-001 and KP-EDIT-003.",
+        "The rejected output tests a full role swap. It does not test the failure that docs/spec/korean-gate-audit.md lists under KG-MISS-CAUS-F, where the instructor becomes the direct performer, such as 세나가 리본을 잘랐다. The supplement does not close that gap."
+      ]
+    },
+    {
+      "case_id": "KI-SUP-CAU-02",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-EDIT-001",
+        "KP-EDIT-003"
+      ],
+      "rationale": "웃기다 is a lexical causative. 선오 is the cause, acting through 농담, and 다미 is the person who laughed. The verb implies that 다미 actually laughed, which matches the context. The source is natural and clear, and no rule asks for an edit, so keep is defensible. Rewriting the causative as a command, such as 선오가 다미에게 웃으라고 했다, would add a directive the context denies, which KP-EDIT-003 forbids. The rejected output also swaps the roles and the direction of the speech act, so KP-EDIT-001 rejects it as well.",
+      "concerns": [
+        "The rejected output combines the role swap with the invented command. A grader can reject it on the role swap alone, so the case does not isolate the failure its rationale names: turning a causative into a directive while keeping the same people in the same roles.",
+        "As in CAU-01, KP-KO-007 is related only by analogy because its condition (stacked passives) is not met. No rule in rules.json directly governs keeping a lexical causative."
+      ]
+    },
+    {
+      "case_id": "KI-SUP-PAS-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-EDIT-001"
+      ],
+      "rationale": "In 지후가 예나에게 밀렸다, 지후 is the person pushed and 예나, marked with 에게, is the one who pushed. The context fixes this as a physical push on stage and rules out the competitive sense of 밀리다. The candidate 지후가 예나를 밀었다 swaps who acted and who was acted on, so reject follows under KP-EDIT-001, which forbids changing 주체·대상. The acceptable output 예나가 지후를 밀었다 uses only the actor already named and keeps both roles, so it adds no new actor.",
+      "concerns": [
+        "The source passive is already clear and natural. A record of stage movements is not a responsibility or role-assignment sentence, so the KP-VER-002 condition is not met and no rule asks to turn the sentence active. The listed acceptable output is active, and graders must not treat the active form as required. Keeping the source passive is equally acceptable, and the case should be read as not enforcing active voice.",
+        "KP-VER-002's negative example and KP-KO-001's negative example both show role reversal, but neither rule's condition is met. KP-EDIT-001's condition covers only shortening or term substitution, so applying it to a voice change requires reading term substitution broadly. rules.json has no rule specific to passive voice that keeps the agent and patient fixed."
+      ]
+    }
+  ],
+  "limitations": [
+    "The review compared only the frozen supplement.json, supplement-plan.md, and supplement-check.json with the id, requirement, conditions, exceptions, and examples of the rules in specification/rules.json (version 0.2.0-draft), plus targeted searches of docs/spec. I did not read other evaluation files, model logs, or the original 24 cases.",
+    "I recomputed the SHA256 of supplement.json and specification/rules.json. I did not recompute the hashes of supplement-plan.md or the original frozen files, and I did not run the plan's verification script.",
+    "The verdicts record one reviewer's normative judgment of Korean meaning on synthetic cases. They are not evidence about real LLM performance, human comprehension, or expert or linguist approval.",
+    "Rule mapping for the three passive and causative cases relies on the general rules KP-EDIT-001 and KP-EDIT-003, because KP-KO-007, KP-VER-002, and KP-KO-001 have conditions these cases do not meet. A rule-driven checker could therefore decide these cases correctly without exercising any rule specific to passives or causatives."
+  ],
+  "conclusion": "All six expected decisions (two accept, two keep, two reject) hold up on Korean meaning alone. They separate ongoing action, completion, and the maintained worn state; the person who causes an action from the person who performs it; and the agent from the patient of a passive. None of them invents an agent or treats -고 있다 the same way across verbs. The concerns lie with the rules and with case strength, and they do not change any decision. rules.json has no rule for the result-state reading of -고 있다 and no rule whose conditions cover preserving causative or passive roles, so those cases rest only on KP-EDIT-001 and KP-EDIT-003. The rejected outputs for CAU-01 and CAU-02 test full role swaps and miss the instructor-becomes-performer failure listed in KG-MISS-CAUS-F. The acceptable output for PAS-01 must not be read as requiring active voice. These concerns belong in a separate review artifact, and neither frozen suite needs to change."
+}

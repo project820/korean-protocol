@@ -1,0 +1,22 @@
+................................F.
+======================================================================
+FAIL: test_unmapped_draft_reverse_reference_is_a_gap (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 83, in test_unmapped_draft_reverse_reference_is_a_gap
+    self.assertEqual([],report['errors'])
+AssertionError: Lists differ: [] != [{'code': 'asymmetric_mapping', 'path': 's[116 chars]s.'}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'code': 'asymmetric_mapping', 'path': 'specification/ste-crosswalk.json.items[0]', 'message': 'Rule KP-WRD-001 refers here but is absent from target_rule_ids.'}
+
+- []
++ [{'code': 'asymmetric_mapping',
++   'message': 'Rule KP-WRD-001 refers here but is absent from target_rule_ids.',
++   'path': 'specification/ste-crosswalk.json.items[0]'}]
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.106s
+
+FAILED (failures=1)

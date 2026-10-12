@@ -1,0 +1,97 @@
+{
+  "scope": "reused-input stochastic diagnosis; not independent efficacy data; no rubric scores assigned",
+  "report_author": "requested claude-opus-5-5/high via OpenCodex, report completion only after Sol subagent response stream disconnected; generated no outputs",
+  "generation_calls": {
+    "requested_model": "gpt-6.1-sol",
+    "requested_effort": "high",
+    "provider_requested": "subscription_router",
+    "count": 4,
+    "all_exit_zero": true,
+    "upstream_model_observed": null,
+    "fallback_observed": null
+  },
+  "integrity": {
+    "prompt_hash_match": true,
+    "profile_hash_match_treatment": true,
+    "final_hash_match": true,
+    "all_structure_valid": true,
+    "response_count_each": 12,
+    "stderr_bytes_total": 0,
+    "condition_key_both_reps": {
+      "A": "baseline",
+      "B": "treatment"
+    },
+    "blind_review_ratings_all_null": true
+  },
+  "v07": [
+    {
+      "repetition": 1,
+      "condition": "baseline",
+      "file": "sol-repetition-1/baseline/final.txt",
+      "ending": "생성하세요",
+      "inclusive_threshold_20": true,
+      "active0_conjunction": true,
+      "outside_condition_restriction": true,
+      "explicit_single_condition_prohibition": true,
+      "explicit_added_obligation": false,
+      "explicit_permission_language": false
+    },
+    {
+      "repetition": 1,
+      "condition": "treatment",
+      "file": "sol-repetition-1/treatment/final.txt",
+      "ending": "생성하세요",
+      "inclusive_threshold_20": true,
+      "active0_conjunction": true,
+      "outside_condition_restriction": true,
+      "explicit_single_condition_prohibition": true,
+      "explicit_added_obligation": false,
+      "explicit_permission_language": false
+    },
+    {
+      "repetition": 2,
+      "condition": "baseline",
+      "file": "sol-repetition-2/baseline/final.txt",
+      "ending": "생성할 수 있습니다",
+      "inclusive_threshold_20": true,
+      "active0_conjunction": true,
+      "outside_condition_restriction": true,
+      "explicit_single_condition_prohibition": false,
+      "explicit_added_obligation": false,
+      "explicit_permission_language": true
+    },
+    {
+      "repetition": 2,
+      "condition": "treatment",
+      "file": "sol-repetition-2/treatment/final.txt",
+      "ending": "생성할 수 있습니다",
+      "inclusive_threshold_20": true,
+      "active0_conjunction": true,
+      "outside_condition_restriction": true,
+      "explicit_single_condition_prohibition": true,
+      "explicit_added_obligation": false,
+      "explicit_permission_language": true
+    }
+  ],
+  "v07_notes": [
+    "Directive ending is recorded separately and is not treated as automatic semantic failure.",
+    "Repetition-1 baseline first sentence is identical to the historical candidate v07 output in ../runs/validation-candidate-20261012/blind-review.md.",
+    "Historical v07 meaning 11/12 remains contested per rating-contestation.md and is not changed here."
+  ],
+  "other_cases": {
+    "v02": "treatment (both reps) drops '대용량'; possible scope broadening, not confirmed error given shared context",
+    "v03": "treatment (both reps) asks recipient name without stating it is undetermined",
+    "v04": "treatment (both reps) asks deadline without stating it is undetermined",
+    "v12": "baseline (both reps) adds redundant 'R-12를 확인해 따르세요'; no invented steps",
+    "no_material_error_found": [
+      "v01",
+      "v05",
+      "v06",
+      "v08",
+      "v09",
+      "v10",
+      "v11"
+    ]
+  },
+  "human_or_expert_validation": false
+}

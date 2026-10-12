@@ -1,0 +1,45 @@
+..............F.....EE..........
+======================================================================
+ERROR: test_malformed_nested_reference_is_reported_without_crashing (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 174, in test_malformed_nested_reference_is_reported_without_crashing
+    self.assertTrue(self.check()['errors'])
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 36, in check
+    return validate_root(self.root, require_coverage=threshold)
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/validation/check.py", line 290, in validate_root
+    entries=check.lexicon([(name,data[name]) for name in FILES[2:4]])
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/validation/check.py", line 133, in lexicon
+    target=result.get(alt.get('entry_id'))
+TypeError: unhashable type: 'list'
+
+======================================================================
+ERROR: test_malformed_ste_reference_list_is_reported_without_crashing (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 178, in test_malformed_ste_reference_list_is_reported_without_crashing
+    self.assertError('field_type')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 43, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 36, in check
+    return validate_root(self.root, require_coverage=threshold)
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/validation/check.py", line 292, in validate_root
+    coverage=check.crosswalk(data[FILES[1]],rules,cases)
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/validation/check.py", line 267, in crosswalk
+    elif key not in rules[target_id].get('ste_refs',[]):self.error('asymmetric_mapping',path,'Target rule '+target_id+' does not refer to '+key+'.');mapped=False
+TypeError: argument of type 'NoneType' is not iterable
+
+======================================================================
+FAIL: test_duplicate_json_keys_are_rejected_instead_of_overwritten (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 182, in test_duplicate_json_keys_are_rejected_instead_of_overwritten
+    self.assertError('file_invalid')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 43, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'file_invalid' not found in ['schema_version', 'field_type', 'unknown_rule', 'unknown_rule']
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.101s
+
+FAILED (failures=1, errors=2)

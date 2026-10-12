@@ -1,0 +1,7 @@
+{
+  "contexts_sha256": "25e7242d8a2e43b8afe2f6d2f27821532a119ff3a8af67ef9a7de04539485302",
+  "plan_sha256": "17092269db01b157f526237b9feb071990858af9a280d4a6bb1040920a40fff8",
+  "fixed_denominator": 40,
+  "frozen_at_utc": "2026-10-12T13:23:13Z",
+  "lookup_started": false
+}

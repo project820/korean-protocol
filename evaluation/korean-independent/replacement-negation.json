@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "suite_id": "korean-independent-negation-replacement-v1",
+  "provenance": {
+    "method": "One newly authored fictional normative keep case by the separate case author, without reading source rules or old reviews.",
+    "evidence_type": "Normative author judgment; not empirical reader evidence, expert endorsement, or observed implementation performance.",
+    "source_scope": "Only this explicit_context and source establish the facts.",
+    "relationship_to_original": "This explicitly replaces the negation keep cell evidence previously represented by KI-NEG-03; it does not alter or silently regrade the original case. Both earlier frozen suites remain unchanged.",
+    "freeze_policy": "Freeze before independent mapping; record concerns separately without tuning frozen cases."
+  },
+  "decision_contract": {
+    "keep": "The unchanged candidate preserves an already clear natural source within its context.",
+    "acceptable_output": "One valid example, not an exhaustive whitelist.",
+    "rejected_output": "One concrete output with a contradictory occurrence count."
+  },
+  "cases": [
+    {
+      "id": "KI-NEG-04",
+      "family": "negation_and_quantifier_scope",
+      "case_type": "keep",
+      "explicit_context": "가상의 표시창 관찰 기록이다. 이번 관찰은 정확히 5분 동안 이어졌으며 그 시간 동안 표시창이 깜빡인 횟수는 0회다. 관찰 전후의 깜빡임 여부와 표시창의 기능은 기록하지 않았다.",
+      "source": "이번 5분간의 관찰에서 표시창은 한 번도 깜빡이지 않았다.",
+      "candidate": "이번 5분간의 관찰에서 표시창은 한 번도 깜빡이지 않았다.",
+      "expected_decision": "keep",
+      "acceptable_output": "이번 5분간의 관찰에서 표시창은 한 번도 깜빡이지 않았다.",
+      "rejected_output": "이번 5분간의 관찰에서 표시창은 한 번만 깜빡였다.",
+      "rationale": "한 번도 깜빡이지 않았다는 부정은 명시한 5분 관찰 안의 모든 깜빡임 발생을 배제해 발생 횟수를 0회로 한정한다. 원문은 이미 간결하고 명확하다. 한 번만 깜빡였다는 출력은 발생 횟수를 1회로 바꾸므로 원문과 맥락에 직접 모순된다.",
+      "preserved_facts": [
+        "대상은 표시창이다.",
+        "관찰 범위는 이번 5분이다.",
+        "관찰 범위 안의 깜빡임 발생 횟수는 0회다.",
+        "관찰 전후의 깜빡임 여부는 제시되지 않았다."
+      ],
+      "prohibited_changes": [
+        "발생 횟수 0회를 1회 이상으로 바꾸지 않는다.",
+        "이번 5분의 관찰 결과를 모든 시간의 성질로 일반화하지 않는다.",
+        "표시창 고장이나 기능 정상 여부를 새로 판단하지 않는다.",
+        "간결한 부정문에 원인이나 후속 조치를 추가하지 않는다."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "evidence_type": "independent-agent normative synthetic review; not model execution or human comprehension",
+  "rules_sha256": "5d8db818c0a50e4249fae2a4bd69a65418b29c3ff23ba20d4e468b0106d10ae0",
+  "sources": [
+    {
+      "cases": "cases.json",
+      "cases_sha256": "cc8c501b7e6c0d7e35c577cd8600491ddfc87e1d75c4cd4be52999e98eaf8504",
+      "review": "review.json",
+      "review_sha256": "7bfbe6b4a851d580c10983a9a72fe30ecb759b1621b9f21eee9efad61fe16eb7"
+    },
+    {
+      "cases": "supplement.json",
+      "cases_sha256": "166e61eb5cdc65bda9300d2738377342532faaa6a0cfb314d4fbda2cc8337268",
+      "review": "supplement-review.json",
+      "review_sha256": "57b58fc689e407fae897e9dfddb3211be8fdc11395ff0a171840fa4bb2c3a691"
+    },
+    {
+      "cases": "replacement-negation.json",
+      "cases_sha256": "b25bb08516713d0ae6771d4c78f2a008195f7ddf6591e209271686c4e26e5a34",
+      "review": "replacement-negation-review.json",
+      "review_sha256": "a974e4eb5b9ae8f283e78e9a187b08f9793d77075df44b77cdff6660be9b7f3d"
+    }
+  ],
+  "case_count": 31,
+  "passed_cases": 30,
+  "needs_revision_cases": [
+    "KI-NEG-03"
+  ],
+  "family_triplets": {
+    "particles_and_argument_roles": {
+      "normal": [
+        "KI-PAR-01"
+      ],
+      "failure": [
+        "KI-PAR-02"
+      ],
+      "keep": [
+        "KI-PAR-03"
+      ]
+    },
+    "omission_and_referents": {
+      "normal": [
+        "KI-OMI-01"
+      ],
+      "failure": [
+        "KI-OMI-02"
+      ],
+      "keep": [
+        "KI-OMI-03"
+      ]
+    },
+    "relative_and_modifier_attachment": {
+      "normal": [
+        "KI-MOD-01"
+      ],
+      "failure": [
+        "KI-MOD-02"
+      ],
+      "keep": [
+        "KI-MOD-03"
+      ]
+    },
+    "negation_and_quantifier_scope": {
+      "normal": [
+        "KI-NEG-01"
+      ],
+      "failure": [
+        "KI-NEG-02"
+      ],
+      "keep": [
+        "KI-NEG-04"
+      ]
+    },
+    "aspect_and_modality": {
+      "normal": [
+        "KI-ASP-01",
+        "KI-SUP-ASP-01"
+      ],
+      "failure": [
+        "KI-ASP-02",
+        "KI-SUP-ASP-02"
+      ],
+      "keep": [
+        "KI-ASP-03",
+        "KI-SUP-ASP-03"
+      ]
+    },
+    "passive_and_causative": {
+      "normal": [
+        "KI-PAS-01",
+        "KI-SUP-CAU-01"
+      ],
+      "failure": [
+        "KI-PAS-02",
+        "KI-SUP-PAS-01"
+      ],
+      "keep": [
+        "KI-PAS-03",
+        "KI-SUP-CAU-02"
+      ]
+    },
+    "honorifics_and_speech_act": {
+      "normal": [
+        "KI-HON-01"
+      ],
+      "failure": [
+        "KI-HON-02"
+      ],
+      "keep": [
+        "KI-HON-03"
+      ]
+    },
+    "conditions_and_simultaneity": {
+      "normal": [
+        "KI-CON-01"
+      ],
+      "failure": [
+        "KI-CON-02"
+      ],
+      "keep": [
+        "KI-CON-03"
+      ]
+    }
+  },
+  "supported_minimum_cells": 24,
+  "minimum_cells": 24,
+  "overall_korean_gate": "not_declared_complete; subfunction and rule-condition gaps remain recorded in reviews",
+  "historical_baseline": "../korean-gate-audit.json",
+  "limitations": [
+    "Reviewer family_coverage booleans were not trusted; cells derive from individual pass verdicts.",
+    "KI-NEG-03 is retained and excluded; KI-NEG-04 supplies replacement keep evidence.",
+    "Supplement cases cover aspect and passive/causative distinctions absent in initial24.",
+    "All cases are authored synthetic evidence; no new LLM performance run or reader trial.",
+    "Matching through a broad preservation rule does not prove dedicated Korean construction coverage."
+  ]
+}

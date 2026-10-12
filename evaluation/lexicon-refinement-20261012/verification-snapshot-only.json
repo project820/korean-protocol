@@ -1,0 +1,63 @@
+{
+  "verification": "passed",
+  "source_mode": "preserved_snapshot_only",
+  "revision": 2,
+  "superseded_revision_files_byte_identical": 7,
+  "changed_entries_rechecked": [
+    "KPL-0156",
+    "KPL-0157",
+    "KPL-SW-0026",
+    "KPL-SW-0030",
+    "KPL-SW-0033"
+  ],
+  "superseded_development_counts": {
+    "ambiguous": 2,
+    "matched": 33,
+    "unmatched": 5
+  },
+  "original_artifacts_byte_identical": 10,
+  "original_objects_unchanged": 177,
+  "frozen_contexts_sha256": "25e7242d8a2e43b8afe2f6d2f27821532a119ff3a8af67ef9a7de04539485302",
+  "evaluation_role": "reused_input_development_coverage_after_targeted_dictionary_expansion",
+  "denominator": 40,
+  "baseline_counts": {
+    "unmatched": 19,
+    "matched": 19,
+    "ambiguous": 2
+  },
+  "development_counts": {
+    "ambiguous": 2,
+    "matched": 33,
+    "unmatched": 5
+  },
+  "development_matched_percent": 82.5,
+  "by_domain": {
+    "software_runtime": {
+      "matched": 9,
+      "unmatched": 0,
+      "ambiguous": 1
+    },
+    "work_coordination": {
+      "matched": 9,
+      "unmatched": 1,
+      "ambiguous": 0
+    },
+    "data_operations": {
+      "matched": 9,
+      "unmatched": 0,
+      "ambiguous": 1
+    },
+    "specification_documentation": {
+      "matched": 6,
+      "unmatched": 4,
+      "ambiguous": 0
+    }
+  },
+  "matched_editorial_status": {
+    "allowed": 20,
+    "preferred": 13
+  },
+  "expert_approval": "not_encoded_or_evidenced; no approval rate is asserted",
+  "new_entry_matches": 14,
+  "baseline_matches_retained": 19
+}

@@ -1,0 +1,86 @@
+{
+  "verified_at": "2026-10-12",
+  "binary": "/Users/m5max/.local/bin/codex",
+  "codex_version": "0.162.1",
+  "command": [
+    "codex",
+    "debug",
+    "prompt-input",
+    "-c",
+    "project_doc_max_bytes=256",
+    "probe"
+  ],
+  "scope": "Temporary CODEX_HOME and git repository; no network/model call",
+  "records": [
+    {
+      "case": "global200_project200",
+      "global_bytes": 200,
+      "project_bytes": 200,
+      "child_bytes": null,
+      "project_doc_max_bytes": 256,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stdout_sha256": "d56204d6ec052de875fc1a15e9cf99f3a6a29124bdf32b1ea2995a5a97e85d36",
+      "global_end": true,
+      "project_end": true,
+      "child_end": null
+    },
+    {
+      "case": "global400_project200",
+      "global_bytes": 400,
+      "project_bytes": 200,
+      "child_bytes": null,
+      "project_doc_max_bytes": 256,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stdout_sha256": "ff78cfe9a57038477dfa8de7ff75372386a1f7414c5afb3b81ac8ba88a355101",
+      "global_end": true,
+      "project_end": true,
+      "child_end": null
+    },
+    {
+      "case": "global400_project400",
+      "global_bytes": 400,
+      "project_bytes": 400,
+      "child_bytes": null,
+      "project_doc_max_bytes": 256,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stdout_sha256": "01c739b9984c210a96c18fabd9f5457c7da9115bfdf1b6062ed6db04ac8609e4",
+      "global_end": true,
+      "project_end": false,
+      "child_end": null
+    },
+    {
+      "case": "global400_root200_child200",
+      "global_bytes": 400,
+      "project_bytes": 200,
+      "child_bytes": 200,
+      "project_doc_max_bytes": 256,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stdout_sha256": "3dc9a578d303a066c30cc8b71f419e49b40c2dd95052b227618968d3b6dbbd8e",
+      "global_end": true,
+      "project_end": true,
+      "child_end": false
+    },
+    {
+      "case": "global400_root128_child128",
+      "global_bytes": 400,
+      "project_bytes": 128,
+      "child_bytes": 128,
+      "project_doc_max_bytes": 256,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stdout_sha256": "85ecd221b0564490e8604d9c3b519d05bce80384dec4444285f27331df2c9be7",
+      "global_end": true,
+      "project_end": true,
+      "child_end": true
+    }
+  ],
+  "fixture_generator": "UTF-8: label + '_BEGIN\\n', then ASCII 'x' repeated to requested byte length, then '\\n' + label + '_END\\n'.",
+  "interpretation": "project_doc_max_bytes caps the discovered project file chain, excludes global AGENTS.md, and charges raw file bytes without joining separators in CLI 0.162.1.",
+  "limitations": "Prompt rendering only. Does not evaluate model compliance or other versions/cloud runtimes. Full system prompts are not persisted.",
+  "observed_version": "codex-cli 0.162.1",
+  "launcher_sha256": "61b0194f3bb6534439c8d26a3ed57d0805f84b884588b761795323eeb92fcf70"
+}

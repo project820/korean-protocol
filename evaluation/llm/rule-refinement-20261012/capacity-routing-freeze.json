@@ -1,0 +1,15 @@
+{
+  "freeze_time_utc": "2026-10-12T14:15:44.264448+00:00",
+  "original_plan_sha256": "1da8dbc8af67871f6e1c5c79a94ed7974b5571a63a9d33fd6b21f613097407c0",
+  "original_freeze_manifest_sha256": "500adac65064cdf024da0a35b3322b9c831d63eb70c7ec8cf90b7ac69b500295",
+  "original_attempt_count": 1,
+  "fixed_replacement_attempt_count": 4,
+  "amended_total_attempt_count_limit": 5,
+  "replacement_model": "anthropic/claude-opus-5-5",
+  "replacement_reasoning_effort": "high",
+  "sha256": {
+    "capacity-routing-amendment.md": "082188ac646464d63d65a542391f194b538d3e9480de4e263b9fddffd458fe11",
+    "execute-opus.py": "b5247fafae100ab0613d138070aba3c036c2e85117c9213c1d1eb0a6b27a4a61"
+  },
+  "frozen_original_inputs_unchanged": true
+}

@@ -1,0 +1,22 @@
+{
+  "schema_valid": true,
+  "supplement_case_count": 6,
+  "original_case_count": 24,
+  "combined_unique_case_count": 30,
+  "case_type_counts": {
+    "failure": 2,
+    "keep": 2,
+    "normal": 2
+  },
+  "original_sha256": {
+    "cases.json": "cc8c501b7e6c0d7e35c577cd8600491ddfc87e1d75c4cd4be52999e98eaf8504",
+    "plan.md": "a6b2ce75726f2b51e01f971a1a49e9c94cac35c1a385fbeea2d4dd71b9d88c0e",
+    "validate.py": "ec3d69fa58406a6c2658904f5864ec71e71a2ad5337163efde13697087c730ab"
+  },
+  "sha256": {
+    "supplement.json": "166e61eb5cdc65bda9300d2738377342532faaa6a0cfb314d4fbda2cc8337268",
+    "supplement-plan.md": "a11d40c415fb6eeadb6817aa452ce9995c01f4b1d73120377596e63e6fa43ba6"
+  },
+  "scope": "Structural counts and frozen file identity only; semantics and integrated rule mapping require separate review.",
+  "freeze_status": "frozen_before_rule_mapping"
+}

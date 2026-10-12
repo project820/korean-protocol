@@ -1,0 +1,40 @@
+{
+  "verification": "passed",
+  "source_mode": "current_sources_match",
+  "contexts_sha256": "25e7242d8a2e43b8afe2f6d2f27821532a119ff3a8af67ef9a7de04539485302",
+  "denominator": 40,
+  "counts": {
+    "unmatched": 19,
+    "matched": 19,
+    "ambiguous": 2
+  },
+  "matched_fraction": "19/40",
+  "matched_percent": 47.5,
+  "by_domain": {
+    "software_runtime": {
+      "unmatched": 6,
+      "matched": 2,
+      "ambiguous": 2
+    },
+    "work_coordination": {
+      "unmatched": 3,
+      "matched": 7
+    },
+    "data_operations": {
+      "matched": 6,
+      "unmatched": 4
+    },
+    "specification_documentation": {
+      "unmatched": 6,
+      "matched": 4
+    }
+  },
+  "matched_editorial_statuses": {
+    "preferred": 13,
+    "allowed": 6
+  },
+  "expert_approval_evidence": {
+    "matched_entries_with_explicit_expert_approval_evidence": 0,
+    "meaning": "Approval is not encoded. This is not a rejection count or evidence of failed review."
+  }
+}

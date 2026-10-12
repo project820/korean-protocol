@@ -1,0 +1,364 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Korean Protocol content release manifest v1",
+  "description": "Content-only manifest. Detached SSHSIG authenticates exact original UTF-8 bytes. Runtime must additionally enforce unique complete allowlist, bounds, trusted signer, paths, replay and compatibility checks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "version",
+    "channel",
+    "sequence",
+    "issued_at",
+    "expires_at",
+    "compatibility",
+    "signing",
+    "files"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "version": {
+      "$ref": "#/$defs/version"
+    },
+    "channel": {
+      "const": "stable"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "issued_at": {
+      "$ref": "#/$defs/time"
+    },
+    "expires_at": {
+      "$ref": "#/$defs/time"
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "engine_min",
+        "engine_max_exclusive",
+        "rules_schema_version",
+        "lexicon_schema_version"
+      ],
+      "properties": {
+        "engine_min": {
+          "$ref": "#/$defs/version"
+        },
+        "engine_max_exclusive": {
+          "$ref": "#/$defs/version"
+        },
+        "rules_schema_version": {
+          "const": 1
+        },
+        "lexicon_schema_version": {
+          "const": 1
+        },
+        "hosts": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "codex": {
+              "$ref": "#/$defs/hostRange"
+            },
+            "claude-code": {
+              "$ref": "#/$defs/hostRange"
+            },
+            "gemini-cli": {
+              "$ref": "#/$defs/hostRange"
+            },
+            "cursor": {
+              "$ref": "#/$defs/hostRange"
+            }
+          }
+        }
+      }
+    },
+    "signing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "key_id",
+        "namespace",
+        "principal"
+      ],
+      "properties": {
+        "format": {
+          "const": "openssh-sshsig"
+        },
+        "key_id": {
+          "type": "string",
+          "pattern": "^SHA256:[A-Za-z0-9+/]{43}$"
+        },
+        "namespace": {
+          "const": "kproto-release-v1"
+        },
+        "principal": {
+          "const": "kproto-release"
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "path"
+            ],
+            "properties": {
+              "path": {
+                "const": "profiles/coding-agent.md"
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "path"
+            ],
+            "properties": {
+              "path": {
+                "const": "profiles/chat.md"
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "path"
+            ],
+            "properties": {
+              "path": {
+                "const": "profiles/work-document.md"
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "path"
+            ],
+            "properties": {
+              "path": {
+                "const": "specification/rules.json"
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "path"
+            ],
+            "properties": {
+              "path": {
+                "const": "lexicon/core.json"
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "path"
+            ],
+            "properties": {
+              "path": {
+                "const": "lexicon/domains/software.json"
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "path"
+            ],
+            "properties": {
+              "path": {
+                "const": "pack/protocol.md"
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      ],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "role",
+          "size",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "enum": [
+              "profiles/coding-agent.md",
+              "profiles/chat.md",
+              "profiles/work-document.md",
+              "specification/rules.json",
+              "lexicon/core.json",
+              "lexicon/domains/software.json",
+              "pack/protocol.md"
+            ]
+          },
+          "role": {
+            "enum": [
+              "profile",
+              "rules",
+              "lexicon",
+              "protocol"
+            ]
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1048576
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "path": {
+                  "enum": [
+                    "profiles/coding-agent.md",
+                    "profiles/chat.md",
+                    "profiles/work-document.md"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "role": {
+                  "const": "profile"
+                },
+                "size": {
+                  "maximum": 28672
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "path": {
+                  "const": "specification/rules.json"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "role": {
+                  "const": "rules"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "path": {
+                  "enum": [
+                    "lexicon/core.json",
+                    "lexicon/domains/software.json"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "role": {
+                  "const": "lexicon"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "path": {
+                  "const": "pack/protocol.md"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "role": {
+                  "const": "protocol"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$",
+      "maxLength": 32
+    },
+    "time": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "hostRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "min",
+        "max_exclusive"
+      ],
+      "properties": {
+        "min": {
+          "$ref": "#/$defs/version"
+        },
+        "max_exclusive": {
+          "$ref": "#/$defs/version"
+        }
+      }
+    }
+  }
+}

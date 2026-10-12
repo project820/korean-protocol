@@ -1,0 +1,25 @@
+..................F...........F.......
+======================================================================
+FAIL: test_false_whitespace_measurement_cannot_verify_design (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 145, in test_false_whitespace_measurement_cannot_verify_design
+    self.assertError('verification_evidence')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 43, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'verification_evidence' not found in []
+
+======================================================================
+FAIL: test_shared_regression_case_is_not_independent_review_evidence (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 135, in test_shared_regression_case_is_not_independent_review_evidence
+    self.assertError('verification_evidence')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 43, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'verification_evidence' not found in []
+
+----------------------------------------------------------------------
+Ran 38 tests in 0.115s
+
+FAILED (failures=2)

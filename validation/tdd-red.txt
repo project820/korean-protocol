@@ -1,0 +1,255 @@
+FEFEFFFFFFFFFFFFFFFFFFFFF
+======================================================================
+ERROR: test_compiler_omits_source_metadata_and_cases (test_validation.CompilerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 166, in test_compiler_omits_source_metadata_and_cases
+    self.assertNotIn('SECRET-RESEARCH-METADATA',(self.root/name).read_text())
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1256, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1242, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1110, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/tmp_4ctcwoh/profiles/chat.md'
+
+======================================================================
+ERROR: test_profiles_are_deterministic (test_validation.CompilerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 170, in test_profiles_are_deterministic
+    before=(self.root/'profiles/chat.md').read_bytes()
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1249, in read_bytes
+    with self.open(mode='rb') as f:
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1242, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1110, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/tmpftugv4du/profiles/chat.md'
+
+======================================================================
+FAIL: test_budget_failure_does_not_silently_truncate_or_partial_write (test_validation.CompilerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 159, in test_budget_failure_does_not_silently_truncate_or_partial_write
+    with self.assertRaises(ValueError):self.compile(budget=40)
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_input_does_not_write_profiles (test_validation.CompilerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 155, in test_invalid_input_does_not_write_profiles
+    with self.assertRaises(ValueError):self.compile()
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_profiles_embed_rules_and_meaning_guards (test_validation.CompilerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 144, in test_profiles_embed_rules_and_meaning_guards
+    self.assertEqual({'profiles/coding-agent.md','profiles/chat.md','profiles/work-document.md','pack/protocol.md'},set(result))
+AssertionError: Items in the first set but not the second:
+'profiles/chat.md'
+'profiles/coding-agent.md'
+'profiles/work-document.md'
+'pack/protocol.md'
+
+======================================================================
+FAIL: test_asymmetric_mapping_is_rejected (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 77, in test_asymmetric_mapping_is_rejected
+    self.assertError('asymmetric_mapping')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'asymmetric_mapping' not found in []
+
+======================================================================
+FAIL: test_blank_verified_evidence_cannot_inflate_score (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 81, in test_blank_verified_evidence_cannot_inflate_score
+    self.assertError('verification_evidence')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'verification_evidence' not found in []
+
+======================================================================
+FAIL: test_case_ids_are_unique_across_casefiles (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 107, in test_case_ids_are_unique_across_casefiles
+    self.assertError('duplicate_case_id')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'duplicate_case_id' not found in []
+
+======================================================================
+FAIL: test_clarify_case_cannot_invent_actor (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 99, in test_clarify_case_cannot_invent_actor
+    self.assertError('case_invariant')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'case_invariant' not found in []
+
+======================================================================
+FAIL: test_cli_returns_nonzero_and_json_for_invalid_data (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 133, in test_cli_returns_nonzero_and_json_for_invalid_data
+    self.assertEqual(1,result.returncode)
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_coverage_threshold_is_explicit (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 90, in test_coverage_threshold_is_explicit
+    self.assertIn('coverage_threshold',[e['code'] for e in report['errors']])
+AssertionError: 'coverage_threshold' not found in []
+
+======================================================================
+FAIL: test_deprecated_alternative_is_not_a_usable_target (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 124, in test_deprecated_alternative_is_not_a_usable_target
+    self.assertError('deprecated_target')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'deprecated_target' not found in []
+
+======================================================================
+FAIL: test_domain_cannot_override_core_sense (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 119, in test_domain_cannot_override_core_sense
+    self.assertError('sense_collision')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'sense_collision' not found in []
+
+======================================================================
+FAIL: test_duplicate_rule_id_is_rejected (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 65, in test_duplicate_rule_id_is_rejected
+    self.assertError('duplicate_id')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'duplicate_id' not found in []
+
+======================================================================
+FAIL: test_every_rule_requires_linked_case (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 103, in test_every_rule_requires_linked_case
+    self.assertError('missing_case')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'missing_case' not found in []
+
+======================================================================
+FAIL: test_invalid_type_does_not_crash (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 61, in test_invalid_type_does_not_crash
+    self.assertError('field_type')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'field_type' not found in []
+
+======================================================================
+FAIL: test_keep_case_cannot_change_permission_to_command (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 95, in test_keep_case_cannot_change_permission_to_command
+    self.assertError('case_invariant')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'case_invariant' not found in []
+
+======================================================================
+FAIL: test_missing_file_is_actionable (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 57, in test_missing_file_is_actionable
+    self.assertError('file_missing')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'file_missing' not found in []
+
+======================================================================
+FAIL: test_number_only_evidence_cannot_inflate_score (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 86, in test_number_only_evidence_cannot_inflate_score
+    self.assertError('verification_evidence')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'verification_evidence' not found in []
+
+======================================================================
+FAIL: test_obsolete_ste_id_is_rejected_even_when_count_is_53 (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 69, in test_obsolete_ste_id_is_rejected_even_when_count_is_53
+    self.assertError('ste_id_set')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'ste_id_set' not found in []
+
+======================================================================
+FAIL: test_publication_fields_cannot_be_blank (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 128, in test_publication_fields_cannot_be_blank
+    self.assertError('field_type')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'field_type' not found in []
+
+======================================================================
+FAIL: test_same_sense_alternative_cannot_change_meaning (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 111, in test_same_sense_alternative_cannot_change_meaning
+    self.assertError('alternative_semantics')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'alternative_semantics' not found in []
+
+======================================================================
+FAIL: test_unknown_alternative_is_rejected (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 115, in test_unknown_alternative_is_rejected
+    self.assertError('unknown_entry')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'unknown_entry' not found in []
+
+======================================================================
+FAIL: test_unknown_target_rule_is_rejected (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 73, in test_unknown_target_rule_is_rejected
+    self.assertError('unknown_rule')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 42, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'unknown_rule' not found in []
+
+======================================================================
+FAIL: test_valid_draft_reports_gaps_without_claiming_semantic_proof (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 49, in test_valid_draft_reports_gaps_without_claiming_semantic_proof
+    self.assertEqual(1,report['coverage']['designed_count'])
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.061s
+
+FAILED (failures=23, errors=2)

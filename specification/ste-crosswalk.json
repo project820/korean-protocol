@@ -1,0 +1,990 @@
+{
+  "schema_version": "1.0",
+  "source": {
+    "title": "ASD-STE100 Simplified Technical English",
+    "issue": 9,
+    "date": "2025-01-15",
+    "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+    "rule_count": 53
+  },
+  "target": 0.9,
+  "items": [
+    {
+      "ste_id": "1.1",
+      "function": "어휘 진입 경로",
+      "korean_design": "일반 승인 어휘, 분야 전문 명사, 분야 전문 동사의 진입 경로를 나누고 의미·독자·분야와 승인 상태로 사용을 결정한다.",
+      "target_rule_ids": [
+        "KP-WRD-007"
+      ],
+      "status": "partial",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "fail"
+        }
+      ],
+      "gaps": [
+        "세 진입 경로와 뜻·범위·결합 기록은 생겼지만 미등록 일반 표현도 문맥이 명확하면 유지 후보로 둔다. 원본의 승인 어휘 집합 안에서만 작성하는 폐쇄 통제는 수행하지 않는다. 미등록 의미를 추측하지 않는 사례는 충족하나 어휘 사용 범위의 통제 강도가 달라 부분 대응이다."
+      ]
+    },
+    {
+      "ste_id": "1.2",
+      "function": "품사와 쓰임",
+      "korean_design": "표제어가 아니라 문맥 속 의미와 품사를 확인하고 품사 전환·파생은 별도 승인 조건에 연결한다.",
+      "target_rule_ids": [
+        "KP-WRD-003"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.3",
+      "function": "의미 선택",
+      "korean_design": "한 표현의 승인 의미를 개념 ID로 연결하고 문맥에서 다른 뜻으로 사용한 사례를 판정한다.",
+      "target_rule_ids": [
+        "KP-WRD-002",
+        "KP-WRD-003"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.4",
+      "function": "활용 범위",
+      "korean_design": "동사·형용사의 기본형과 허용 활용·결합을 연결하고 활용이 시상·양태·화행을 바꾸는지 검사한다.",
+      "target_rule_ids": [
+        "KP-WRD-003"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.5",
+      "function": "분야 명칭 등록",
+      "korean_design": "전문 명사의 범주, 개념 정의, 분야, 실제 명칭과 등록 근거를 기록하고 일반 어휘와 구분한다.",
+      "target_rule_ids": [
+        "KP-NAM-002",
+        "KP-WRD-007"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.6",
+      "function": "미등록 표현의 편입",
+      "korean_design": "사전에 없는 표현을 전문 명칭이나 명칭의 구성 요소로 쓰는 조건을 정하고 일반 서술에서의 무검토 사용과 구분한다.",
+      "target_rule_ids": [
+        "KP-NAM-002"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.7",
+      "function": "명칭의 행동어 전환",
+      "korean_design": "전문 명칭에 -하다 등을 붙이는 경우 명사 뜻만으로 행동 뜻을 승인하지 않고 독립된 행동 의미·논항·결합을 확인한다.",
+      "target_rule_ids": [
+        "KP-NAM-004"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.8",
+      "function": "분야 승인",
+      "korean_design": "조직·분야·프로젝트의 승인 용어와 공식 화면·장비 이름을 출처 및 적용 범위에 연결한다.",
+      "target_rule_ids": [
+        "KP-NAM-001",
+        "KP-NAM-002"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.9",
+      "function": "명칭의 식별 부담",
+      "korean_design": "같은 개념을 정확하게 식별하는 후보 중 독자에게 익숙한 명칭을 고르되 필요한 구별 요소를 줄이지 않는다.",
+      "target_rule_ids": [
+        "KP-WRD-001"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.10",
+      "function": "비공유 표현",
+      "korean_design": "지역어·은어·조직 내부 약칭이 독자에게 공유되는지 확인하고 공유되지 않은 경우 승인 명칭이나 설명을 사용한다.",
+      "target_rule_ids": [
+        "KP-WRD-005"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.11",
+      "function": "개념별 이름 유지",
+      "korean_design": "같은 문서·대화에서 동일 개념의 이름을 일관되게 유지하고 개명·인용·용어 비교의 예외를 기록한다.",
+      "target_rule_ids": [
+        "KP-NAM-001",
+        "KP-NAM-006"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.12",
+      "function": "분야 행동어 등록",
+      "korean_design": "전문 동사의 동작, 대상, 결과와 적용 분야를 기록하고 승인된 의미·활용·결합만 사용한다.",
+      "target_rule_ids": [
+        "KP-NAM-003",
+        "KP-NAM-004"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.13",
+      "function": "행동어의 명사 전환",
+      "korean_design": "전문 동사의 명사화가 상태·절차·행위 중 무엇을 뜻하는지 확인하고 승인된 파생 의미와 문서 위치에서만 사용한다.",
+      "target_rule_ids": [
+        "KP-NAM-003",
+        "KP-VER-001"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "1.14",
+      "function": "표기의 기준",
+      "korean_design": "한국어 맞춤법·띄어쓰기·외래어 및 영문 표기의 기준과 우선하는 공식 명칭을 정하며 인용·코드·식별자는 보존한다.",
+      "target_rule_ids": [
+        "KP-WRD-006",
+        "KP-NUM-007"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "2.1",
+      "function": "명사 연결의 해석",
+      "korean_design": "이어진 명사에서 대상과 수식 범위를 독자가 하나로 해석할 수 있는지 검사하고 관계가 불명확하면 조사·서술어나 분리 설명을 사용한다.",
+      "target_rule_ids": [
+        "KP-NAM-005"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "2.2",
+      "function": "긴 명칭의 도입",
+      "korean_design": "긴 전문 명칭은 처음에 온전하게 식별하고 승인된 약칭을 연결하며 혼동이 생기는 위치에서는 원래 명칭을 다시 사용한다.",
+      "target_rule_ids": [
+        "KP-WRD-004",
+        "KP-NAM-005",
+        "KP-NAM-006"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "3.1",
+      "function": "행동어 형태 참조",
+      "korean_design": "문장에 사용한 전문·일반 동사의 표면형을 기본형·의미·허용 활용에 연결해 임의 축약과 의미가 다른 파생을 구별한다.",
+      "target_rule_ids": [
+        "KP-WRD-003"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "3.2",
+      "function": "시점과 진행 상태",
+      "korean_design": "한국어의 현재·과거·예정, 시작·진행·완료와 지시를 구별하고 각 문서 기능에 필요한 시상·종결형을 선택한다.",
+      "target_rule_ids": [
+        "KP-VER-003",
+        "KP-VER-004",
+        "KP-KO-004"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "3.3",
+      "function": "상태 수식의 범위",
+      "korean_design": "행동 결과를 수식하는 한국어 관형형이 완료 상태인지 진행·예정인지 드러내고 수식 대상과 시간 범위를 확인한다.",
+      "target_rule_ids": [
+        "KP-VER-006"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "3.4",
+      "function": "보조 서술의 복잡성",
+      "korean_design": "겹친 보조용언·양태 표현에서 각 표현이 담당하는 뜻을 확인하고 의미가 중복될 때만 줄이며 가능성·허락·의무를 남긴다.",
+      "target_rule_ids": [
+        "KP-VER-003",
+        "KP-VER-005",
+        "KP-VER-007",
+        "KP-VER-008",
+        "KP-KO-007"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "3.5",
+      "function": "행동의 이름과 수식",
+      "korean_design": "행동을 명칭·명사절·관형절로 쓰는 용도를 구분하고 수행 지시를 명사 나열로 숨기거나 수식 범위를 혼동하지 않도록 판정한다.",
+      "target_rule_ids": [
+        "KP-VER-006",
+        "KP-SYN-009"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "3.6",
+      "function": "행위자와 상태 초점",
+      "korean_design": "책임과 수행 주체가 필요한 행동은 주체를 식별하고, 주체 미상 또는 상태 알림에서 적합한 피동을 허용하며 행위자를 만들어 넣지 않는다.",
+      "target_rule_ids": [
+        "KP-VER-002",
+        "KP-KO-007"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "3.7",
+      "function": "행동의 직접 서술",
+      "korean_design": "동일 의미의 행동은 직접 서술어로 나타내고 명사화·우회 표현을 줄이되 시작·진행·완료의 차이를 유지한다.",
+      "target_rule_ids": [
+        "KP-VER-001",
+        "KP-SYN-009"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "4.1",
+      "function": "문장 해석 부담",
+      "korean_design": "한 문장의 중심 내용, 절의 연결, 수식 깊이와 지시 대상 후보를 점검하고 의미·관계를 보존할 수 있을 때 나눈다.",
+      "target_rule_ids": [
+        "KP-SYN-004",
+        "KP-SYN-005",
+        "KP-SYN-008",
+        "KP-KO-003"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "4.2",
+      "function": "필수 성분 보존",
+      "korean_design": "축약·생략 뒤에도 주체·대상·조건이 하나로 복원되는지 확인하며 제목·표·화면 상태와 문맥이 공유된 생략은 허용한다.",
+      "target_rule_ids": [
+        "KP-EDIT-002",
+        "KP-SYN-001",
+        "KP-SYN-002",
+        "KP-KO-001"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "4.3",
+      "function": "복합 정보의 목록화",
+      "korean_design": "다수의 조건·선택·단계를 목록으로 나타내고 도입부의 적용 범위와 각 항목의 문법적 완결성을 유지한다.",
+      "target_rule_ids": [
+        "KP-SYN-007",
+        "KP-TXT-001",
+        "KP-TXT-002",
+        "KP-NUM-005"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "4.4",
+      "function": "문장 사이의 관계",
+      "korean_design": "대조·이유·결과·순서·조건을 문맥에서 추적할 수 있게 연결하며 이미 명확한 관계에 접속 표현을 반복하지 않는다.",
+      "target_rule_ids": [
+        "KP-SYN-006",
+        "KP-PROC-004"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "4.5",
+      "function": "대상의 특정",
+      "korean_design": "한국어 조사·지시어·명칭 재사용·생략 조건으로 새 대상과 기존 대상을 구별하고 여러 후보 중 지시 대상을 하나로 정한다.",
+      "target_rule_ids": [
+        "KP-SYN-002",
+        "KP-SYN-003",
+        "KP-KO-001",
+        "KP-NAM-006"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "5.1",
+      "function": "지시문 부담의 검사",
+      "korean_design": "지시문의 행동 단위, 조건 수, 수식 깊이와 문장 경계를 일정한 절차로 기록하고 독립 실행이 가능한 단위로 분리하는 판정 기준을 마련한다.",
+      "target_rule_ids": [
+        "KP-SYN-008",
+        "KP-PROC-001"
+      ],
+      "status": "partial",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "fail"
+        }
+      ],
+      "gaps": [
+        "독립 행동 단위와 30어절·절·주체 트리거는 구체적으로 정의됐다. 그러나 원본의 강제 문장 길이 제한을 수동 재검토 신호로 바꾸며 기준을 넘겨도 유지할 수 있으므로 동일한 상한 통제 기능은 완전 대응으로 계산하지 않는다. SYN-008의 조건 확정화 예문은 수정됐고 FC-REV-COND에서 두 선행 조건을 공통 도입부로 보존한다. 강제 길이 상한과의 차이는 남아 partial을 유지한다."
+      ]
+    },
+    {
+      "ste_id": "5.2",
+      "function": "행동 단위와 동시성",
+      "korean_design": "독립된 행동은 실행 순서로 나누고 동시에 유지해야 하는 행동이나 상태는 같은 단계 또는 명시적 동시 조건으로 연결한다.",
+      "target_rule_ids": [
+        "KP-PROC-001",
+        "KP-PROC-005",
+        "KP-SYN-007"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "5.3",
+      "function": "지시의 표현",
+      "korean_design": "실제로 요구하는 행동을 한국어 지시형으로 명확히 표현하되 허락·권고·확인 요청을 명령으로 강화하지 않는다.",
+      "target_rule_ids": [
+        "KP-PROC-002",
+        "KP-VER-007",
+        "KP-KO-005"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "5.4",
+      "function": "선행 조건의 위치",
+      "korean_design": "실행 여부·방법을 결정하는 조건을 해당 행동보다 먼저 알려 주며 예외·종료·재개 조건의 적용 대상을 연결한다.",
+      "target_rule_ids": [
+        "KP-PROC-003",
+        "KP-PROC-004",
+        "KP-SYN-007",
+        "KP-PROC-005",
+        "KP-NUM-002"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "5.5",
+      "function": "주석과 필수 행동",
+      "korean_design": "주석은 보충 설명을 담당하게 하고 필수 행동·선행 조건·금지는 독자가 실행 시점에 보는 본문 단계에 둔다.",
+      "target_rule_ids": [
+        "KP-PROC-007"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "6.1",
+      "function": "설명의 도입 순서",
+      "korean_design": "독자에게 필요한 기본 대상·개념을 먼저 도입하고 새 정보와 예외를 이미 소개한 내용에 연결한다.",
+      "target_rule_ids": [
+        "KP-DESC-001",
+        "KP-DESC-002"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "6.2",
+      "function": "설명의 구조 신호",
+      "korean_design": "핵심 용어, 제목과 관계 표현으로 설명의 주제 전환·대조·원인·결과를 추적할 수 있게 구성한다.",
+      "target_rule_ids": [
+        "KP-SYN-006",
+        "KP-DESC-001",
+        "KP-DESC-005"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "6.3",
+      "function": "설명문 부담의 검사",
+      "korean_design": "설명문의 중심 진술, 절 사이 관계와 수식 깊이를 일정한 절차로 기록하고 관계를 유지한 문장 분리의 기준을 마련한다.",
+      "target_rule_ids": [
+        "KP-SYN-005",
+        "KP-SYN-008"
+      ],
+      "status": "partial",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "fail"
+        }
+      ],
+      "gaps": [
+        "설명문은 어절·절·수식·주체를 재현 가능한 절차로 검토하지만 원본의 강제 길이 상한 대신 초과 시 수동 검토를 사용한다. 짧은 모호 문장을 잡는 장점과 별개로 상한을 보장하지 않으므로 부분 대응이다. 조건 확정화 예문은 수정됐지만 수동 검토 신호와 강제 상한의 차이는 해결되지 않아 partial을 유지한다."
+      ]
+    },
+    {
+      "ste_id": "6.4",
+      "function": "정보 묶음",
+      "korean_design": "서로 관련된 설명을 같은 문단에 묶고 주제가 바뀌는 경계를 문단으로 드러낸다.",
+      "target_rule_ids": [
+        "KP-DESC-003"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "6.5",
+      "function": "문단의 중심",
+      "korean_design": "각 문단의 중심 질문이나 주장 하나를 식별하고 다른 주제의 설명은 별도 문단으로 배치한다.",
+      "target_rule_ids": [
+        "KP-DESC-003"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "6.6",
+      "function": "문단 부담의 검사",
+      "korean_design": "문단의 문장 경계와 주제·근거·예외의 구조를 기록하고 독자가 관계를 추적하기 어려운 문단을 재검토하는 명시적 절차를 둔다.",
+      "target_rule_ids": [
+        "KP-DESC-004"
+      ],
+      "status": "partial",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "fail"
+        }
+      ],
+      "gaps": [
+        "여섯 문장 초과를 검토 신호로 정의하고 유지 이유를 기록하지만 원본의 강제 문단 길이 제한과 달리 예외적으로 초과를 허용한다. 구조 검토의 존재만으로 상한 통제까지 완전 대응했다고 계산하지 않는다. 수정된 JSON은 미검증 트리거임을 밝히고 정상 사례가 실제 일곱 문장이다. FC-REV-PARA7도 정보를 모두 남겨 나누지만 강제 상한은 아니므로 partial을 유지한다."
+      ]
+    },
+    {
+      "ste_id": "7.1",
+      "function": "위험 수준의 표시",
+      "korean_design": "검증된 분야 기준에 따라 위험 수준을 표시하고 일반 주의·정보와 구분하며 근거 없는 위험 등급을 새로 붙이지 않는다.",
+      "target_rule_ids": [
+        "KP-WARN-001"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "7.2",
+      "function": "안전 행동의 우선",
+      "korean_design": "안전 안내는 독자가 먼저 알아야 할 조건 또는 행동을 앞세우고 해당 대상·시점·금지 범위를 명확히 연결한다.",
+      "target_rule_ids": [
+        "KP-WARN-002",
+        "KP-PROC-003",
+        "KP-WARN-004"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "7.3",
+      "function": "위험과 결과의 연결",
+      "korean_design": "필요한 행동의 이유가 되는 위험이나 가능한 결과를 알려 주되 불확실성을 보존하고 확인되지 않은 피해·원인을 만들지 않는다.",
+      "target_rule_ids": [
+        "KP-WARN-003",
+        "KP-VER-008",
+        "KP-EDIT-003"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "8.1",
+      "function": "문장부호의 경계",
+      "korean_design": "한국어 문장부호의 용도와 경계 판정 기준을 정하고 부호 하나로 조건·목록·문장 관계가 달라지는 사례를 검사한다.",
+      "target_rule_ids": [
+        "KP-TXT-003"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "8.2",
+      "function": "결합 표기의 관계",
+      "korean_design": "복합 명칭·범위·식별자에서 붙임표와 띄어쓰기의 역할을 구별하고 관계 표기를 통일하며 리터럴을 변형하지 않는다.",
+      "target_rule_ids": [
+        "KP-TXT-003",
+        "KP-NAM-005",
+        "KP-NUM-007"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "8.3",
+      "function": "괄호의 기능",
+      "korean_design": "참조·식별자·약칭·용어 풀이·선택 정보를 괄호에 넣는 조건을 정하고 필수 행동·조건을 괄호 속에 숨기지 않는다.",
+      "target_rule_ids": [
+        "KP-TXT-004",
+        "KP-TXT-005",
+        "KP-WRD-004"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "8.4",
+      "function": "목록 도입과 경계 측정",
+      "korean_design": "목록의 도입문·항목별 문장 경계를 분리해 기록하고 공통 조건이 각 항목에 적용되는 범위와 중복 집계 기준을 명시한다.",
+      "target_rule_ids": [
+        "KP-TXT-001",
+        "KP-TXT-003"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "8.5",
+      "function": "괄호의 측정",
+      "korean_design": "괄호 구간을 구조 단위로 식별하면서 내부 절·행동·조건·설명량을 별도 기록해 괄호로 문장 부담을 감추지 못하게 한다.",
+      "target_rule_ids": [
+        "KP-SYN-008",
+        "KP-TXT-004"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "8.6",
+      "function": "리터럴의 측정",
+      "korean_design": "숫자·단위·약칭·식별자·인용·제목·고유명사의 경계를 보존해 묶음별로 기록하고 내부 길이·설명 필요성을 별도로 점검한다.",
+      "target_rule_ids": [
+        "KP-SYN-008",
+        "KP-NUM-001",
+        "KP-NUM-007"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "8.7",
+      "function": "결합어의 측정",
+      "korean_design": "붙임표 결합어·복합명칭의 표기 단위와 의미 단위를 구분해 일관되게 집계하고 임의 결합으로 검사 기준을 회피하지 못하게 한다.",
+      "target_rule_ids": [
+        "KP-SYN-008",
+        "KP-NUM-007"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "9.1",
+      "function": "문장 구조의 재설계",
+      "korean_design": "단어 대체만으로 뜻이 명확해지지 않으면 한국어 문장 구조를 바꾸되 원문의 사실·조건·화행·확실성을 보존한다.",
+      "target_rule_ids": [
+        "KP-EDIT-001",
+        "KP-EDIT-002",
+        "KP-EDIT-004",
+        "KP-SYN-009"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "9.2",
+      "function": "문맥 속 어휘 적합성",
+      "korean_design": "등록된 단어라도 문맥의 개념·논항·조사·결합이 맞는지 검사하고 승인 표제어의 존재만으로 적합 판정을 내리지 않는다.",
+      "target_rule_ids": [
+        "KP-WRD-003",
+        "KP-WRD-008",
+        "KP-EDIT-001",
+        "KP-PROC-006"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "9.3",
+      "function": "결합에 따른 뜻 변화",
+      "korean_design": "동사와 부사·명사·보조용언이 결합해 새 뜻을 만들면 결합 표현으로 검토하며 구성 단어의 개별 승인만으로 새 의미를 허용하지 않는다.",
+      "target_rule_ids": [
+        "KP-WRD-008",
+        "KP-NAM-004",
+        "KP-WRD-005"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "ste_id": "9.4",
+      "function": "표현 방식의 유지",
+      "korean_design": "문서 기능과 독자별로 용어·표기·종결형·참조 방식을 일관되게 유지하고 인용·화면 이름·목적 전환의 예외를 기록한다.",
+      "target_rule_ids": [
+        "KP-NAM-001",
+        "KP-WRD-006",
+        "KP-KO-005",
+        "KP-TXT-002"
+      ],
+      "status": "verified",
+      "evidence": [
+        {
+          "path": "evaluation/functional-review.json",
+          "kind": "functional-review",
+          "result": "pass"
+        }
+      ],
+      "gaps": []
+    }
+  ]
+}

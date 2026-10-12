@@ -1,0 +1,36 @@
+{
+  "profile_sha256": "6ec821d7aa866f520d7d3e1762b393ba40f0ee7ee8ae69905ab767f053d88c4c",
+  "profile_bytes": 28665,
+  "scope": "temporary homes and projects only",
+  "network_or_model_call": false,
+  "records": [
+    {
+      "scope": "user",
+      "original_global_bytes": 6509,
+      "installed_target_bytes": 35473,
+      "idempotent": true,
+      "rendered_rule_ids": 72,
+      "global_markers_preserved": true,
+      "prompt_render_sha256": "d027a01f482c7c84c56191bceb132523ad8ed3d7bc2c66d1f17f956ec5537308",
+      "offline_wrapper": true,
+      "uninstall_preserves_outside_addition": true,
+      "install_exit": 0,
+      "render_exit": 0,
+      "uninstall_exit": 0
+    },
+    {
+      "scope": "project",
+      "original_global_bytes": 6509,
+      "installed_target_bytes": 28967,
+      "idempotent": true,
+      "rendered_rule_ids": 72,
+      "global_markers_preserved": true,
+      "prompt_render_sha256": "ff3d5031f991cedd58194e423b5970e681b2f0f99e8c09f7a2dfe27f3b7e7755",
+      "offline_wrapper": true,
+      "uninstall_preserves_outside_addition": true,
+      "install_exit": 0,
+      "render_exit": 0,
+      "uninstall_exit": 0
+    }
+  ]
+}

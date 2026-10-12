@@ -1,0 +1,110 @@
+[
+  {
+    "repetition": 1,
+    "model": "gpt-6.1-sol",
+    "condition": "baseline",
+    "raw_directory": "sol-repetition-1/baseline",
+    "exit_code": 0,
+    "timeout": false,
+    "structure_valid": true,
+    "response_count": 12,
+    "prompt_sha256": "6f2de705cfe4c6edf110a3b4f8e27168be65595c48cc215f7cc5b79c4967e96c",
+    "profile_sha256": null,
+    "final_sha256": "a9f9f6e40a80c80c40b0a5a13ff27deb6964ce32e85adc63581c0a98414dc38f",
+    "started_at": "2026-10-12T13:12:37.657960+00:00",
+    "finished_at": "2026-10-12T13:13:16.073549+00:00",
+    "v07_text": "큐 길이가 20개 이하이고 활성 작업이 0개인 두 조건을 모두 만족할 때만 스냅샷을 생성하세요. 하나만 만족하면 생성하면 안 됩니다.",
+    "usage_returned": [
+      {
+        "input_tokens": 17735,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1127,
+        "reasoning_output_tokens": 380
+      }
+    ],
+    "upstream_model_observed": null,
+    "server_side_fallback_observed": null
+  },
+  {
+    "repetition": 1,
+    "model": "gpt-6.1-sol",
+    "condition": "treatment",
+    "raw_directory": "sol-repetition-1/treatment",
+    "exit_code": 0,
+    "timeout": false,
+    "structure_valid": true,
+    "response_count": 12,
+    "prompt_sha256": "6f2de705cfe4c6edf110a3b4f8e27168be65595c48cc215f7cc5b79c4967e96c",
+    "profile_sha256": "6ec821d7aa866f520d7d3e1762b393ba40f0ee7ee8ae69905ab767f053d88c4c",
+    "final_sha256": "7a4dd54ed4421d30944a62c4bcd727b4632003a14f7b4a328244461df01e26a5",
+    "started_at": "2026-10-12T13:13:16.218448+00:00",
+    "finished_at": "2026-10-12T13:13:45.255678+00:00",
+    "v07_text": "큐 길이가 20개 이하이고 활성 작업이 0개인 경우에만 스냅샷을 생성하세요. 두 조건 중 하나만 만족하면 생성하면 안 됩니다.",
+    "usage_returned": [
+      {
+        "input_tokens": 24987,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 791,
+        "reasoning_output_tokens": 121
+      }
+    ],
+    "upstream_model_observed": null,
+    "server_side_fallback_observed": null
+  },
+  {
+    "repetition": 2,
+    "model": "gpt-6.1-sol",
+    "condition": "baseline",
+    "raw_directory": "sol-repetition-2/baseline",
+    "exit_code": 0,
+    "timeout": false,
+    "structure_valid": true,
+    "response_count": 12,
+    "prompt_sha256": "6f2de705cfe4c6edf110a3b4f8e27168be65595c48cc215f7cc5b79c4967e96c",
+    "profile_sha256": null,
+    "final_sha256": "6bee8930925485b2d39ef817885512718d895d67efe3cf56d6cce314e48262b3",
+    "started_at": "2026-10-12T13:13:45.400420+00:00",
+    "finished_at": "2026-10-12T13:14:15.743734+00:00",
+    "v07_text": "스냅샷은 큐 길이가 20개 이하이고 활성 작업이 0개일 때만 생성할 수 있습니다. 두 조건을 모두 만족해야 합니다.",
+    "usage_returned": [
+      {
+        "input_tokens": 17738,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 879,
+        "reasoning_output_tokens": 173
+      }
+    ],
+    "upstream_model_observed": null,
+    "server_side_fallback_observed": null
+  },
+  {
+    "repetition": 2,
+    "model": "gpt-6.1-sol",
+    "condition": "treatment",
+    "raw_directory": "sol-repetition-2/treatment",
+    "exit_code": 0,
+    "timeout": false,
+    "structure_valid": true,
+    "response_count": 12,
+    "prompt_sha256": "6f2de705cfe4c6edf110a3b4f8e27168be65595c48cc215f7cc5b79c4967e96c",
+    "profile_sha256": "6ec821d7aa866f520d7d3e1762b393ba40f0ee7ee8ae69905ab767f053d88c4c",
+    "final_sha256": "b81293ef2489d392dfdaa11afdc399cf03955c78154149ba1f94047603612230",
+    "started_at": "2026-10-12T13:14:15.893559+00:00",
+    "finished_at": "2026-10-12T13:14:48.130250+00:00",
+    "v07_text": "큐 길이가 20개 이하이고 활성 작업이 0개일 때만 스냅샷을 생성할 수 있습니다. 두 조건 중 하나만 만족하면 생성하면 안 됩니다.",
+    "usage_returned": [
+      {
+        "input_tokens": 24987,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 866,
+        "reasoning_output_tokens": 193
+      }
+    ],
+    "upstream_model_observed": null,
+    "server_side_fallback_observed": null
+  }
+]

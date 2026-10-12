@@ -1,0 +1,63 @@
+{
+  "phase": "development regression; not new independent evidence",
+  "task_mode": "edit",
+  "case_count": 26,
+  "candidate_sha256": "6ec821d7aa866f520d7d3e1762b393ba40f0ee7ee8ae69905ab767f053d88c4c",
+  "previous_sha256": "5cd4c4657f33e112b9b1c0b95f29a51b689758ccb91155641a38abe6ba93d44e",
+  "new_independent_sample": false,
+  "source_reference": "development-reference.json",
+  "ratings_recorded_before_key_opening": true,
+  "conditions": {
+    "candidate profile treatment": {
+      "exit_code": 0,
+      "semantic_full_score_cases": 26,
+      "all_dimensions_full_score_cases": 26,
+      "score_sums": {
+        "semantic_preservation": 52,
+        "action_judgment": 52,
+        "clarity": 52,
+        "natural_korean": 52
+      },
+      "max_per_dimension": 52,
+      "invented_fact_or_procedure": 0,
+      "deficit_case_ids": [],
+      "actual_profile_sha256": "6ec821d7aa866f520d7d3e1762b393ba40f0ee7ee8ae69905ab767f053d88c4c",
+      "response_sha256": "d1cfb0a5a7aed97c4c69594702c44f79b620ee6e920bdc23e33b6a4f520e2265",
+      "usage_returned": [
+        {
+          "input_tokens": 25365,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2390,
+          "reasoning_output_tokens": 758
+        }
+      ]
+    },
+    "pre-adjustment profile treatment": {
+      "exit_code": 0,
+      "semantic_full_score_cases": 26,
+      "all_dimensions_full_score_cases": 26,
+      "score_sums": {
+        "semantic_preservation": 52,
+        "action_judgment": 52,
+        "clarity": 52,
+        "natural_korean": 52
+      },
+      "max_per_dimension": 52,
+      "invented_fact_or_procedure": 0,
+      "deficit_case_ids": [],
+      "actual_profile_sha256": "5cd4c4657f33e112b9b1c0b95f29a51b689758ccb91155641a38abe6ba93d44e",
+      "response_sha256": "c8a8fd6603b601dbe86290df6c537a3a635e1d108b1bd36886ca0abd5c7b1607",
+      "usage_returned": [
+        {
+          "input_tokens": 25357,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2361,
+          "reasoning_output_tokens": 721
+        }
+      ]
+    }
+  },
+  "combined_accuracy_with_validation": null
+}

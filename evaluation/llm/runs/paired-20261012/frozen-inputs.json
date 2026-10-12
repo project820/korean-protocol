@@ -1,0 +1,9 @@
+{
+  "cases_sha256": "14848d8a6e1c031d15bfd535af4f4470343269d38b9a6667122c4b6114c9d0d4",
+  "profile_sha256": "00084e5dfbf5b48acb355e0f584b41f68929e8e21cdc7f344fc7cbcbb005e3c5",
+  "case_count": 26,
+  "plan": "plan.md",
+  "plan_sha256": "514e7f5cee9eb48c26e02b940f1528fbd66d08d71ddd43d55b7b0a273e4c188d",
+  "execution_note": "Profile was finalized after baseline launch and before treatment launch; supervisor was paused while baseline finished. No baseline inputs changed.",
+  "draft_profile_before_baseline_sha256": "dec19c22d9c82589b1fb9c2eaaf7df29ff1ff2798a1ab1e6bcae6d07d2875e3c"
+}

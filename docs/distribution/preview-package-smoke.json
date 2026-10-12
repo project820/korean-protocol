@@ -1,0 +1,45 @@
+{
+  "artifact": "/Users/m5max/Documents/ChatGPT/ASD-STE100 Kor/output/distribution/2026-10-12-preview/korean-protocol-0.2.0-draft.zip",
+  "archive_sha256": "9ea66d49a45120a1cb387ad0a033fcfbc5df718584226a9d4350151aa0866be7",
+  "archive_bytes": 289879,
+  "signed": false,
+  "network_or_model_call": false,
+  "scope": "temporary paths only",
+  "steps": [
+    {
+      "step": "install-extracted-runtime",
+      "exit_code": 0
+    },
+    {
+      "step": "status",
+      "exit_code": 0
+    },
+    {
+      "step": "idempotent-reinstall",
+      "exit_code": 0
+    },
+    {
+      "step": "actual-codex-loader",
+      "exit_code": 0
+    },
+    {
+      "step": "offline-wrapper",
+      "exit_code": 0
+    },
+    {
+      "step": "uninstall",
+      "exit_code": 0
+    }
+  ],
+  "archive_members": 22,
+  "allowlist_source_bytes_and_checksums_match": true,
+  "loader_rule_count": 72,
+  "loader_prompt_sha256": "98ff86b8ff4f601fbd76ec9be06522cfb0cceb2e54ad56217765d0d683514027",
+  "profile_sha256": "282cbdcea153cf6eec5361eda2431c7d2ee2c66d04e71c3fca19639a875c46ee",
+  "result": "pass",
+  "idempotent": true,
+  "cache_file_count": 7,
+  "original_and_later_user_content_preserved": true,
+  "extracted_runtime_run_from_other_cwd": true,
+  "temporary_material_removed": true
+}

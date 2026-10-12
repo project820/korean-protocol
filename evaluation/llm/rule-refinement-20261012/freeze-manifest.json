@@ -1,0 +1,59 @@
+{
+  "freeze_time_utc": "2026-10-12T14:13:14.079568+00:00",
+  "profile_authoritative_path": "/Users/m5max/.codex/worktrees/korean-protocol-integration/ASD-STE100 Kor/profiles/coding-agent.md",
+  "profile_bytes": 28627,
+  "runner_path": "/Users/m5max/.codex/worktrees/korean-protocol-evaluation/ASD-STE100 Kor/evaluation/llm/runner.py",
+  "runner_sha256": "643be853e32ec08ebb79b5c6e625b9d114e1ad068ce76e3bbc6e69348644496c",
+  "frozen_sha256": {
+    "edit26-gold.json": "14848d8a6e1c031d15bfd535af4f4470343269d38b9a6667122c4b6114c9d0d4",
+    "edit26-prompt.txt": "942818e70955703ce88f2a1e767b46934f617dcc5f800c84fc58d3f820208c5a",
+    "execute.py": "267fa8d37eb1626320909f328606bd9c96ce23359307ee87ab34e01b010c0508",
+    "frozen-profile.md": "282cbdcea153cf6eec5361eda2431c7d2ee2c66d04e71c3fca19639a875c46ee",
+    "plan.md": "1da8dbc8af67871f6e1c5c79a94ed7974b5571a63a9d33fd6b21f613097407c0",
+    "supplement6-gold.json": "166e61eb5cdc65bda9300d2738377342532faaa6a0cfb314d4fbda2cc8337268",
+    "supplement6-prompt.txt": "852243a6babf8d512514cc65705b37a348929724b2a7128c59465e852a0bb4ab",
+    "supplement6-public-input.json": "5beda7bc25ae96e571d4509066c16271febd12477b5377341e4ce024850c6f18",
+    "validation12-gold.json": "7f2aa3ca80ca03293c4aefa48cab0507f2d21ac986b663846582d97c182aaf1f",
+    "validation12-prompt.txt": "6f2de705cfe4c6edf110a3b4f8e27168be65595c48cc215f7cc5b79c4967e96c"
+  },
+  "calls": [
+    {
+      "call": 1,
+      "directory": "01-edit26-treatment",
+      "condition": "treatment",
+      "gold": "edit26-gold.json",
+      "prompt": "edit26-prompt.txt",
+      "mode": "edit",
+      "scope": "reused edit holdout26 treatment development regression"
+    },
+    {
+      "call": 2,
+      "directory": "02-validation12-treatment",
+      "condition": "treatment",
+      "gold": "validation12-gold.json",
+      "prompt": "validation12-prompt.txt",
+      "mode": "generation",
+      "scope": "reused validation holdout12 treatment development regression"
+    },
+    {
+      "call": 3,
+      "directory": "03-supplement6-baseline",
+      "condition": "baseline",
+      "gold": "supplement6-gold.json",
+      "prompt": "supplement6-prompt.txt",
+      "mode": "edit",
+      "scope": "reused supplement6 targeted candidate diagnostic; not independent efficacy"
+    },
+    {
+      "call": 4,
+      "directory": "04-supplement6-treatment",
+      "condition": "treatment",
+      "gold": "supplement6-gold.json",
+      "prompt": "supplement6-prompt.txt",
+      "mode": "edit",
+      "scope": "reused supplement6 targeted candidate diagnostic; not independent efficacy"
+    }
+  ],
+  "max_model_attempts": 4,
+  "semantic_ratings_pending": true
+}

@@ -1,0 +1,261 @@
+{
+  "date": "2026-10-12",
+  "status": "local_refined_draft_with_deployment_and_efficacy_gaps",
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -p 'test_*.py'",
+    "exit_code": 0,
+    "passed": 134,
+    "runtime": 78,
+    "validation": 43,
+    "evaluation_runner": 8,
+    "distribution": 5
+  },
+  "schema": {
+    "tool": "jsonschema",
+    "version": "4.26.0",
+    "draft": "2020-12",
+    "meta_schemas": [
+      "schemas/lexicon.schema.json",
+      "schemas/release.schema.json"
+    ],
+    "validated_documents": [
+      "lexicon/core.json",
+      "lexicon/domains/software.json"
+    ],
+    "passed": true,
+    "production_dependency_added": false,
+    "scope": "Final193 senses after bounded correction"
+  },
+  "structure_check": "structure-check.json",
+  "artifact_checks": {
+    "profiles": {
+      "profiles/chat.md": {
+        "bytes": 28597,
+        "sha256": "a8425e59ed5343b9f33286dbcac21f30c1e12e877d6a00381199edc0caeb0ca1",
+        "all_72_normative_fields_preserved": true
+      },
+      "profiles/work-document.md": {
+        "bytes": 28606,
+        "sha256": "532fab446de314d5e381e1013e2d6c349b4ca07cbc1086775d29b28d5fcf89e7",
+        "all_72_normative_fields_preserved": true
+      },
+      "profiles/coding-agent.md": {
+        "bytes": 28627,
+        "sha256": "282cbdcea153cf6eec5361eda2431c7d2ee2c66d04e71c3fca19639a875c46ee",
+        "all_72_normative_fields_preserved": true
+      }
+    },
+    "trailing_whitespace": [],
+    "missing_relative_links": []
+  },
+  "llm_report": "../../evaluation/llm/rule-refinement-20261012/report-ko.md",
+  "new_validation_meaning_full_score": {
+    "baseline": 12,
+    "candidate": 11,
+    "total": 12,
+    "interpretation": "historical original ratings; v07 is disputed, not a confirmed semantic error"
+  },
+  "remaining_case": "v07 restrictive imperative rating is contested; no confirmed semantic regression",
+  "actual_install_smoke": "local-install-smoke.json",
+  "not_performed": [
+    "human comprehension trial",
+    "expert consultation",
+    "live signed HTTPS release publication",
+    "launchctl registration",
+    "real user global installation",
+    "commit",
+    "push"
+  ],
+  "source_sha256": {
+    "specification/rules.json": "c3be69747df248d6ec76f00788cc38a6e72ff5bc952ad73f0c2a8f8a106e736c",
+    "examples/rule-cases.json": "8c3e62fd98602ea82d2c490cc72dd92d0875c95033975e51ee6d0bcb7efaa288",
+    "docs/spec/korean-rules.md": "fe477655f7de1f35ef730209bcb7788d9ef52d2816773efd3a93e9991df551bf",
+    "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+    "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+    "examples/lexicon-cases.json": "5dc692c92b0ba704c54c86d4d4a2dafe42017500f03dac53d309264a747d4a0e",
+    "evaluation/functional-review.json": "8af13bf35e01338585ad0e2d6d01079850625397648a6872fe81ffcba416d596"
+  },
+  "rating_adjudication": "../../evaluation/llm/permission-adjudication.md",
+  "https_smoke": {
+    "evidence": "../distribution/https-smoke.json",
+    "result": "blocked",
+    "actual_https": false,
+    "blocker": "localhost:443 ordinary bind EACCES; runtime rejects non-443 ports",
+    "cached_dictionary_locator": "temporary CLI install/status passed; both dictionaries matched source hashes",
+    "script_validation": "Python compile only; HTTPS branches not executed",
+    "root_recheck_evidence": "../distribution/https-smoke-root.json",
+    "root_recheck": "Same ordinary bind EACCES, no TLS request; runtime policy unchanged"
+  },
+  "permission_diagnostic": {
+    "report": "../../evaluation/llm/permission-diagnostic-20261012/report.md",
+    "generation_calls": 4,
+    "generation_requested_model": "gpt-6.1-sol",
+    "exit_codes": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "repetitions_per_condition": 2,
+    "new_independent_efficacy_samples": false,
+    "report_completion_requested_model": "anthropic/claude-opus-5-5",
+    "handoff_reason": "Sol subagent response stream disconnected after generation completion",
+    "profile_changed": false,
+    "historical_ratings_changed": false,
+    "finding": "Both arms used restrictive imperative in repetition1 and permission wording in repetition2; no treatment-specific causality established"
+  },
+  "independent_lexicon_inventory": {
+    "report": "../../evaluation/lexicon-independent/report.md",
+    "frozen_contexts_sha256": "25e7242d8a2e43b8afe2f6d2f27821532a119ff3a8af67ef9a7de04539485302",
+    "synthetic_context_count": 40,
+    "matched": 19,
+    "unmatched": 19,
+    "ambiguous": 2,
+    "matched_percent": 47.5,
+    "meaning": "direct expression and sense linkage in this frozen synthetic sample, not sentence admissibility or general domain coverage",
+    "source_check": "python3 evaluation/lexicon-independent/check.py --source-root evaluation/baselines/20261012-before-rule-and-lexicon-refinement passed"
+  },
+  "korean_gate_baseline": {
+    "audit": "../../evaluation/korean-gate-audit.json",
+    "supported_cells": 14,
+    "required_cells": 24,
+    "gap_cells": 10,
+    "scope": "existing evidence only before new independently authored suites"
+  },
+  "korean_independent_cases": {
+    "report": "../../evaluation/korean-independent/report.md",
+    "summary": "../../evaluation/korean-independent/review-summary.json",
+    "authored_cases": 31,
+    "review_passes": 30,
+    "excluded": [
+      "KI-NEG-03"
+    ],
+    "minimum_triplet_cells": 24,
+    "complete_korean_gate_claimed": false,
+    "scope": "independent-agent normative synthetic review; no new LLM execution or human trial",
+    "check": "python3 evaluation/korean-independent/verify-review.py --rules-root evaluation/baselines/20261012-before-rule-and-lexicon-refinement passed"
+  },
+  "remote_main_observed": "0d3e855654834855dc86cae94ad0c9f96a664c0f",
+  "historical_profile_artifact_checks": {
+    "profiles/chat.md": {
+      "bytes": 28635,
+      "sha256": "ac472382e357b40dd85f0e427196d917fd3d6cbae495128cac254040ff3a52a8"
+    },
+    "profiles/work-document.md": {
+      "bytes": 28644,
+      "sha256": "ea434a44ac8eb30b662446b176b72ed1d3c458b0405a2547a828c72250f82022"
+    },
+    "profiles/coding-agent.md": {
+      "bytes": 28665,
+      "sha256": "6ec821d7aa866f520d7d3e1762b393ba40f0ee7ee8ae69905ab767f053d88c4c"
+    }
+  },
+  "historical_source_sha256": {
+    "specification/rules.json": "5d8db818c0a50e4249fae2a4bd69a65418b29c3ff23ba20d4e468b0106d10ae0",
+    "examples/rule-cases.json": "aa589b56a0c0896cfb8f695abad9a5fed91e4a33f42bc5aedca8f1ca0c26a397",
+    "docs/spec/korean-rules.md": "10aa7cd07fab89505fdbdc95e3948c721655f8ca7a0378b73deac0286d1ee9ae",
+    "lexicon/core.json": "92ae772abcb40267e562fe3c7e8bceec8d0a9479de96cb48d9f1401cfff15e27",
+    "lexicon/domains/software.json": "43c0d51aa1ec6dc2edddd0ff1b1efbd88711cd0638e1666fc258c0e5db3de767",
+    "examples/lexicon-cases.json": "61c8487f5b1d672a048748503df1f83b0b0ca764532c59855d1e134e14421b88",
+    "evaluation/functional-review.json": "e4c3da7f0b826901817c7ee9c9ddc9ec36536511a37e41ce5e5127d5d777977c"
+  },
+  "refinement_model_evaluation": {
+    "sol_failed_attempts": 1,
+    "failure": "Selected model is at capacity",
+    "opus_replacement_attempts": 4,
+    "requested_replacement_model": "anthropic/claude-opus-5-5",
+    "effort": "high",
+    "upstream_identity_observed": false,
+    "edit_meaning_passes": 26,
+    "edit_total": 26,
+    "generation_meaning_passes": 12,
+    "generation_total": 12,
+    "generation_all_five_dimensions": 10,
+    "brevity_findings": [
+      "v09",
+      "v10"
+    ],
+    "supplement_baseline_passes": 6,
+    "supplement_treatment_passes": 6,
+    "supplement_total_per_arm": 6,
+    "blind_review": false,
+    "new_independent_efficacy_sample": false,
+    "full_lexicon_read_by_model": false
+  },
+  "actual_install_smoke_scope": "Historical 6ec821d7 profile, temporary environments; not rerun as current282c profile installation",
+  "historical_verification_guide": "historical-verification.md",
+  "current_inventory": {
+    "rules": 72,
+    "rule_author_cases": 257,
+    "lexicon_senses": 193,
+    "lexicon_author_cases": 454,
+    "core_senses": 159,
+    "software_senses": 34
+  },
+  "refinement_review": {
+    "changed_rules": [
+      "KP-VER-005",
+      "KP-KO-007"
+    ],
+    "rule_source_sha256": "c3be69747df248d6ec76f00788cc38a6e72ff5bc952ad73f0c2a8f8a106e736c",
+    "functional_verified": 49,
+    "functional_total": 53,
+    "functional_partial": [
+      "1.1",
+      "5.1",
+      "6.3",
+      "6.6"
+    ],
+    "new_author_cases_are_independent": false
+  },
+  "lexicon_development_recheck": {
+    "report": "../../evaluation/lexicon-refinement-20261012/report.md",
+    "revision": 2,
+    "matched": 33,
+    "unmatched": 5,
+    "ambiguous": 2,
+    "total": 40,
+    "reused_input": true,
+    "independent_efficacy": false,
+    "requested_review_model": "anthropic/claude-opus-5-5",
+    "effort": "high",
+    "routing_reason": "Sol subagent returned Selected model is at capacity",
+    "old_177_entries_preserved": true,
+    "old_398_author_cases_preserved": true
+  },
+  "https_transport_followup": {
+    "report": "../distribution/https-transport-verification.md",
+    "evidence": "../distribution/https-proxy-smoke.json",
+    "result": "pass",
+    "steps": 16,
+    "interpreter": "Python 3.11.15 / OpenSSL 3.5.6",
+    "actual_tls": true,
+    "transport": "ephemeral loopback CONNECT proxy; canonical HTTPS localhost:443",
+    "manual_signed_update": true,
+    "wrapper_triggered_signed_update": true,
+    "invalid_ca_and_signature_rejected": true,
+    "offline_cached_profile_preserved": true,
+    "direct_port443_bind": false,
+    "public_endpoint": false,
+    "scheduler_registered": false,
+    "runtime_modified": false,
+    "independent_review": "Astra high source/report/hash review; no separate full rerun",
+    "python39_fixture_limitation": "../distribution/https-proxy-python39-failure.json",
+    "runtime_tests_python311": {
+      "passed": 78,
+      "command": "python3.11 -m unittest discover -s tests -p test_runtime.py"
+    }
+  },
+  "offline_preview_package": {
+    "report": "../distribution/preview-package.md",
+    "evidence": "../distribution/preview-package-smoke.json",
+    "archive_sha256": "9ea66d49a45120a1cb387ad0a033fcfbc5df718584226a9d4350151aa0866be7",
+    "archive_members": 22,
+    "signed": false,
+    "published": false,
+    "unit_tests_passed": 5,
+    "actual_extracted_install_smoke": "pass",
+    "current_profile_loader_rules": 72,
+    "current_profile_sha256": "282cbdcea153cf6eec5361eda2431c7d2ee2c66d04e71c3fca19639a875c46ee"
+  }
+}

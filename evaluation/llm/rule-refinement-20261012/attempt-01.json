@@ -1,0 +1,14 @@
+{
+  "call": 1,
+  "entry": {
+    "call": 1,
+    "directory": "01-edit26-treatment",
+    "condition": "treatment",
+    "gold": "edit26-gold.json",
+    "prompt": "edit26-prompt.txt",
+    "mode": "edit",
+    "scope": "reused edit holdout26 treatment development regression"
+  },
+  "attempt_started_at": "2026-10-12T14:13:21.795740+00:00",
+  "fixed_attempt_count_limit": 4
+}

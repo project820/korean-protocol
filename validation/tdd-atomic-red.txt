@@ -1,0 +1,13 @@
+.F......................................
+======================================================================
+FAIL: test_compilation_preserves_unrelated_existing_temporary_file (test_validation.CompilerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 285, in test_compilation_preserves_unrelated_existing_temporary_file
+    self.assertTrue(destination.exists())
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 40 tests in 0.122s
+
+FAILED (failures=1)

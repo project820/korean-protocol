@@ -1,0 +1,7 @@
+{
+  "directory": "../paired-20261012/baseline",
+  "prompt_sha256": "942818e70955703ce88f2a1e767b46934f617dcc5f800c84fc58d3f820208c5a",
+  "final_sha256": "5e42aa86985832c8ec36bfaa5f1ced04ab25791808c00d347e4effe7e76d935b",
+  "same_input_verified": true,
+  "limitation": "Baseline reused from earlier execution; time difference and no baseline repetition. Root has prior exposure to these baseline outputs."
+}

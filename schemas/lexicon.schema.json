@@ -1,0 +1,286 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://korean-protocol.org/schemas/lexicon.schema.json",
+  "title": "Korean Protocol 의미 단위 어휘사전",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "version",
+    "entries"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[a-z0-9.-]+)?$"
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "lemma",
+          "sense_id",
+          "pos",
+          "meaning",
+          "status",
+          "domains",
+          "forms",
+          "frames",
+          "conditions",
+          "avoid_senses",
+          "alternatives",
+          "examples",
+          "provenance",
+          "since",
+          "deprecated_since"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^KPL-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+          },
+          "lemma": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sense_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "pos": {
+            "enum": [
+              "동사",
+              "형용사",
+              "명사",
+              "부사",
+              "의존표현",
+              "접속표현",
+              "관형표현",
+              "서술표현"
+            ]
+          },
+          "meaning": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "preferred",
+              "allowed",
+              "restricted",
+              "deprecated"
+            ]
+          },
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "forms": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "frames": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "avoid_senses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "alternatives": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "entry_id",
+                "relation",
+                "condition"
+              ],
+              "properties": {
+                "entry_id": {
+                  "type": "string",
+                  "pattern": "^KPL-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+                },
+                "relation": {
+                  "enum": [
+                    "same_sense",
+                    "contextual"
+                  ]
+                },
+                "condition": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "examples": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "allowed",
+              "disallowed",
+              "exception"
+            ],
+            "properties": {
+              "allowed": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "context",
+                    "text"
+                  ],
+                  "properties": {
+                    "context": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "disallowed": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "context",
+                    "text",
+                    "reason"
+                  ],
+                  "properties": {
+                    "context": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "reason": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "exception": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "context",
+                    "text",
+                    "reason"
+                  ],
+                  "properties": {
+                    "context": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "reason": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "provenance": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "since": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "deprecated_since": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "deprecated"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "deprecated_since": {
+                  "type": "string"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "deprecated_since": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

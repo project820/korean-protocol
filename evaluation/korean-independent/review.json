@@ -1,0 +1,469 @@
+{
+  "reviewer_requested_model": "anthropic/claude-opus-5-5",
+  "reviewer_role": "independent agent semantic and rule-mapping reviewer",
+  "cases_sha256": "cc8c501b7e6c0d7e35c577cd8600491ddfc87e1d75c4cd4be52999e98eaf8504",
+  "rules_sha256": "5d8db818c0a50e4249fae2a4bd69a65418b29c3ff23ba20d4e468b0106d10ae0",
+  "source_hashes": {
+    "evaluation/korean-independent/cases.json": "cc8c501b7e6c0d7e35c577cd8600491ddfc87e1d75c4cd4be52999e98eaf8504 (matches check.json)",
+    "evaluation/korean-independent/plan.md": "a6b2ce75726f2b51e01f971a1a49e9c94cac35c1a385fbeea2d4dd71b9d88c0e (matches check.json)",
+    "evaluation/korean-independent/validate.py": "ec3d69fa58406a6c2658904f5864ec71e71a2ad5337163efde13697087c730ab (matches check.json)",
+    "evaluation/korean-independent/check.json": "7ae1eefc0aaff61d77a603242027d4f5d015ef9adcc6c7fe1cedf3dd5c8fc67f",
+    "specification/rules.json": "5d8db818c0a50e4249fae2a4bd69a65418b29c3ff23ba20d4e468b0106d10ae0 (version 0.2.0-draft, 72 rules, all mapped rules status=proposed)",
+    "historical_audit_baseline": "The historical 14/24 audit baseline is preserved unchanged. This review neither replaces nor recomputes it. A search of this worktree with rg for '14/24' found no copy of that baseline, so this review cannot cite its file or hash."
+  },
+  "reviews": [
+    {
+      "case_id": "KI-PAR-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-EDIT-001",
+        "KP-KO-002"
+      ],
+      "rationale": "The cleft '다온에게 빨간 봉투를 건넨 사람은 미루다' keeps 미루 as giver, 다온 as recipient, the single red envelope, and past completion, so KP-EDIT-001 (주체·대상·시점 preserved) allows it. The cleft adds exhaustive focus on 미루. KP-KO-002's exception permits a particle and focus change when no fact-distinguishing contrast is lost, and the context states that 미루 is the only giver. The accept decision is correct.",
+      "concerns": [
+        "KP-KO-001 does not apply because its condition requires a noun chain without particles, and both sentences carry full particles. The case therefore tests proposition preservation under topicalization rather than particle retention.",
+        "The cleft's exhaustive reading ('the person who handed it was 미루, and no one else') is safe only because the context names a single giver. Without that context sentence the candidate would add exclusivity."
+      ]
+    },
+    {
+      "case_id": "KI-PAR-02",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-EDIT-001"
+      ],
+      "rationale": "The candidate swaps requester and requestee. The context says 라온 made no request to 이솔, so KP-EDIT-001 (주체·대상 must match) rejects the edit. The acceptable output changes 은 to 이 without changing roles, which KP-KO-002's exception allows because no contrast is in play.",
+      "concerns": [
+        "The failure swaps the names and leaves every particle in place. It tests gross argument reversal rather than a particle-level role error such as 에게 → 에게서 (recipient → source) or comitative 와 versus symmetric 와. Because it is an easy reject, it gives weak evidence for the particle family.",
+        "KP-KO-001 is not triggered for the same reason as in KI-PAR-01, so the mapping rests on KP-EDIT-001 alone."
+      ]
+    },
+    {
+      "case_id": "KI-PAR-03",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-KO-001",
+        "KP-EDIT-001",
+        "KP-EDIT-003"
+      ],
+      "rationale": "'연필로' (instrument) and '봉투에' (location) already separate the roles. KP-KO-001 requires keeping the particles that carry those role distinctions, and no rule condition calls for rewriting the sentence. The keep decision is correct, and the rejected output shows the instrument–location swap that KP-EDIT-001 forbids.",
+      "concerns": [
+        "The rejected output '봉투로 연필에 별을 그렸다' is semantically absurd, so it makes a weak foil and does not show a realistic near-miss."
+      ]
+    },
+    {
+      "case_id": "KI-OMI-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-SYN-001",
+        "KP-SYN-003"
+      ],
+      "rationale": "The context names one actor (서린) for consecutive actions, which meets KP-SYN-001's requirement for omission: the same subject carries over and has no competing candidate. '그 상자' has one antecedent, which satisfies KP-SYN-003. The accept decision correctly treats optional ellipsis as eligible.",
+      "concerns": []
+    },
+    {
+      "case_id": "KI-OMI-02",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-SYN-001",
+        "KP-SYN-003",
+        "KP-EDIT-001"
+      ],
+      "rationale": "In the candidate '오린이 태오에게 열쇠를 건넨 뒤 열쇠를 주머니에 넣었다', the -ㄴ 뒤 chain with an omitted second subject defaults to the matrix subject 오린. The pocketing actor therefore changes from 태오 to 오린. KP-SYN-001 requires naming the subject when it changes, and KP-EDIT-001 rejects the subject change. The reject decision is correct.",
+      "concerns": [
+        "Read alone, the source '그는' has two candidates (오린, 태오), so KP-SYN-003 would flag the source pronoun itself. The case resolves this only through the context sentence. That is legitimate because the context is provided, but the case does not test KP-SYN-003 on its own.",
+        "The acceptable output replaces '그는' with '태오는'. This goes beyond rejecting the candidate and also applies KP-SYN-003 to the source. The change is fine, but the case does not label it as a second edit."
+      ]
+    },
+    {
+      "case_id": "KI-OMI-03",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-SYN-002",
+        "KP-SYN-003",
+        "KP-SYN-001",
+        "KP-KO-005",
+        "KP-EDIT-003"
+      ],
+      "rationale": "KP-SYN-002's condition (a short instruction after several files or devices are mentioned) is not triggered, because the object and place each have one visible referent. KP-SYN-001's exception bars adding 당신은 to a command for a single reader, and KP-SYN-003's exception allows bare deixis when the target is directly indicated. KP-KO-005 keeps the polite request. The rejected output adds 접수실, 제출, and 승인, which KP-EDIT-003 forbids. The keep decision correctly avoids forcing re-explanation of shared context.",
+      "concerns": [
+        "The rules' stated scope is LLM responses and business or technical documents. A face-to-face spoken utterance with physical pointing falls outside it, so KP-SYN-003's exception ('표·도면·선택 영역이 대상을 직접 표시') applies here only by analogy.",
+        "The context sentence '다 했으면은 그 종이 작성을 마치면을 뜻하고' quotes the expression without quotation marks, so it reads like the colloquial form '했으면은'. Writing it as \"'다 했으면'은\" would remove that misreading. The defect sits in the context metadata, not in the source or candidate."
+      ]
+    },
+    {
+      "case_id": "KI-MOD-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-EDIT-001",
+        "KP-SYN-004",
+        "KP-SYN-005"
+      ],
+      "rationale": "Reordering '표지에 파란 점이 있는' to '파란 점이 표지에 있는' keeps one relative clause on 봉투 and keeps '파란' on '점'. KP-SYN-005's exception keeps a clear single relative clause, and KP-SYN-004's exception does not force movement when only one relation is possible. The accept decision is correct.",
+      "concerns": [
+        "Neither order creates an attachment ambiguity, so the candidate does not test attachment risk. It is a neutral word-order variant, and the discriminating evidence comes only from the rejected output, which moves '파란' onto 봉투 and adds a dotting action."
+      ]
+    },
+    {
+      "case_id": "KI-MOD-02",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-SYN-004",
+        "KP-SYN-005",
+        "KP-EDIT-001",
+        "KP-VER-004"
+      ],
+      "rationale": "The candidate attaches '지난주에' to '만든' and deletes '채용한'. That changes the event time and drops the hiring fact, and it contradicts the context, which places the writing in this week. KP-EDIT-001 and KP-VER-004 reject the edit. The reject decision is correct.",
+      "concerns": [
+        "The source is structurally ambiguous: '지난주에' can scramble out of the outer relative clause, giving [지난주에 [채용한 직원이] 만든] 안내서. KP-SYN-004 ('다른 성분에 붙는 해석이 남으면 구조를 바꾼다') and KP-SYN-005 (a two-layer relative clause) therefore apply to the source itself. Only the context resolves the attachment.",
+        "The acceptable output '유담은 지난주에 채용한 직원이 만든 안내서를 읽었다' keeps the same nested structure and the same residual ambiguity, so it does not satisfy KP-SYN-004 or KP-SYN-005. A rule-compliant example splits the clauses, for example '유담은 안내서를 읽었다. 그 안내서는 지난주에 채용한 직원이 만들었다.' This defect is in the acceptable_output field. The expected decision is unaffected."
+      ]
+    },
+    {
+      "case_id": "KI-MOD-03",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-SYN-005",
+        "KP-SYN-004",
+        "KP-KO-005"
+      ],
+      "rationale": "'오른쪽 서랍에 든 작은 상자' has one relative clause, '작은' sits next to 상자, and '오른쪽' sits next to 서랍. KP-SYN-005's exception and KP-SYN-004's exception keep the sentence, and KP-KO-005 keeps the polite request. The keep decision is correct.",
+      "concerns": [
+        "The rejected output '작은 상자의 오른쪽 서랍을 꺼내 주세요' is an implausible structure, so the foil is weak, as in KI-PAR-03."
+      ]
+    },
+    {
+      "case_id": "KI-NEG-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-KO-003",
+        "KP-NUM-005",
+        "KP-EDIT-001"
+      ],
+      "rationale": "'켜지지 않은 표시창은 없다' over four displays is logically equivalent to '모두 켜져 있다'. KP-KO-003 governs the scope check, and its exception does not demand expansion once the scope is fixed. KP-NUM-005 keeps '모두' and the count of four. The accept decision is correct.",
+      "concerns": [
+        "KP-EDIT-001 lists '긍정과 부정' among the elements that must match. Its title (명제를 보존한다) supports reading this as propositional polarity, which the candidate preserves. A literal reader could still treat the surface switch from negation to affirmation as a violation. This is a rule-wording ambiguity, not a case defect.",
+        "'켜지지 않은' (failed to come on, an event) and '켜져 있다' (is lit, a state) differ in aspect. They coincide only because the context states the current state, and the case does not flag this dependency."
+      ]
+    },
+    {
+      "case_id": "KI-NEG-02",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-KO-003",
+        "KP-NUM-005",
+        "KP-EDIT-001"
+      ],
+      "rationale": "'모두 뒤집은 것은 아니다' is negation over the universal (not all). '하나도 뒤집지 않았다' asserts that none were flipped, which contradicts the context's three flipped cards. KP-KO-003's core requirement (distinguish full from partial negation) and KP-NUM-005 reject the edit, and the acceptable output keeps the partial reading. The reject decision is correct.",
+      "concerns": []
+    },
+    {
+      "case_id": "KI-NEG-03",
+      "verdict": "needs_revision",
+      "rule_ids": [
+        "KP-NUM-005",
+        "KP-VER-007",
+        "KP-WARN-004"
+      ],
+      "rationale": "The source '두 상자 중 하나만 열어도 된다' uses the -만 -어도 되다 sufficiency construction, which means 'opening just one is enough or acceptable'. It neither prohibits opening both nor states that opening is optional. The context and preserved_facts require 'opening both is not allowed' and 'opening is not required', and the source wording supplies neither. Under KP-NUM-005 (preserve 하나·모두 ranges) and KP-WARN-004 (a 만-type constraint must state the restricted action and condition precisely), the source does not convey the stated cap, so the keep decision is not supported. The rationale's claim that the sentence '자연스럽게 전달한다' the permitted range is incorrect for this construction.",
+      "concerns": [
+        "Korean semantics: '-만 -어도 되다' (as in '하나만 먹어도 돼' or '한 번만 봐도 된다') relieves an obligation and implies that more is acceptable but unnecessary. A restriction needs wording such as '하나만 열 수 있다' or '둘 다 열면 안 된다'. Reading the source as a restriction relies on a fact the source does not provide.",
+        "'열지 않아도 된다' is also absent from the source. The sufficiency reading tends to presuppose opening at least one, so preserved_fact '개봉은 의무가 아니다' comes from the context alone.",
+        "The case conflates restrictive syntax (-만) with explicit discretion (-어도 되다) and with an unstated prohibition, which the review instruction asks to keep separate.",
+        "The rejected output '두 상자를 모두 열어야 한다' is a correct reject, but it does not test the subtle point.",
+        "Revision options for a separate artifact, with the frozen case left unchanged: (a) make the context match the sufficiency reading and drop the both-prohibited fact; or (b) change the source to something like '두 상자 중 하나를 골라 열 수 있습니다. 둘 다 열면 안 됩니다. 열지 않아도 됩니다.' and keep it.",
+        "Because this keep case fails, the negation family's keep slot provides no valid evidence."
+      ]
+    },
+    {
+      "case_id": "KI-ASP-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-VER-007",
+        "KP-EDIT-001"
+      ],
+      "rationale": "'처리할 수 있다' and '처리가 가능하다' both express capacity in this context. KP-VER-007 forbids swapping ability with obligation, and the candidate does not do so. The rejected output ('처리해야 한다') shows the forbidden swap. KP-SYN-009 does not apply, because its condition requires a 것·함·에 대한 chain that pushes the main judgment back, and this candidate has none. The accept decision is correct, and it does not penalize 수 있다.",
+      "concerns": [
+        "'가능하다' is itself ambiguous between ability, possibility, and permission, like '수 있다'. The equivalence holds because the context fixes the ability reading, which keeps the case valid but makes it dependent on the context.",
+        "'두 개' carries an implicit upper bound ('up to two'). Both sentences keep it, but the case does not test that bound under KP-NUM-005."
+      ]
+    },
+    {
+      "case_id": "KI-ASP-02",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-VER-007",
+        "KP-PROC-006",
+        "KP-PROC-002"
+      ],
+      "rationale": "The source grants explicit discretion ('재시작해도 됩니다', '담당자에게 맡깁니다'). The candidate adds '반드시 ... 해야 합니다', which turns permission into obligation and violates KP-VER-007. KP-PROC-006's exception forbids inventing a mandatory action when the choice is delegated, and KP-PROC-002's exception bars forcing a permission into a directive. The rejection rests on the explicit discretion clause, not on the conditional form alone. The reject decision is correct.",
+      "concerns": [
+        "The acceptable output '재시작 여부를 결정해도 됩니다' frames the decision as permitted, while the source assigns it ('맡깁니다'). That is a small shift from an assignment of authority to an optional permission. '재시작 여부는 담당자가 판단해 정합니다' would preserve the assignment."
+      ]
+    },
+    {
+      "case_id": "KI-ASP-03",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-VER-007",
+        "KP-VER-008",
+        "KP-EDIT-003"
+      ],
+      "rationale": "'늦어질 수 있습니다' states a real possibility. KP-VER-007 keeps the possibility reading, KP-VER-008's exception bars adding reasons or probabilities to a short shared warning, and KP-EDIT-003 forbids the invented '항상 3초'. The keep decision correctly avoids forcing re-explanation of a possibility.",
+      "concerns": []
+    },
+    {
+      "case_id": "KI-PAS-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-VER-006",
+        "KP-VER-002",
+        "KP-EDIT-003"
+      ],
+      "rationale": "'닫혀 있다' and '닫힌 상태다' both describe the current resultative state of the passive or anticausative 닫히다. KP-VER-006's exception keeps a clear current state without expanding it, KP-VER-002's exception keeps passive or state wording when the actor is unknown, and KP-EDIT-003 rejects the invented 관리자. The accept decision is correct.",
+      "concerns": [
+        "This case is a passive-derived resultative state (-어 있다), which overlaps with aspect. It does not test an agentive or 되다/받다 passive, nor the core double-passive reduction in KP-KO-007 (되어지다 → 되다)."
+      ]
+    },
+    {
+      "case_id": "KI-PAS-02",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-EDIT-001",
+        "KP-VER-002",
+        "KP-SYN-001"
+      ],
+      "rationale": "Syntactic causative '-게 했다' separates causer 나린 from performer 현우. The candidate '나린이 안내판을 벽에 붙였다' makes 나린 the direct actor, which changes the subject (KP-EDIT-001). In a role record, KP-VER-002 requires naming the confirmed actor, and KP-SYN-001 requires naming a changed subject. The second source sentence supplies completion, so the preserved fact '완료되었다' is supported. The reject decision is correct.",
+      "concerns": [
+        "In everyday Korean, '나린이 안내판을 붙였다' can carry a commissioned-agent reading, as in '집을 지었다' for hired builders. The rejection depends on the context fact '직접 붙이지 않았다', which the case provides.",
+        "KP-KO-007 is the only rule that names 사동, but its condition (double passive making a result statement longer) is not triggered, and its exception covers causative–passive combinations, which are absent here. The causative evidence therefore maps through general actor-preservation rules (KP-EDIT-001, KP-VER-002). This describes how the rules map. It does not claim a rule is missing.",
+        "'-게 하다' can also mean permission ('let'). The acceptable output's '지시로' is valid only because the context says '지시만 했고'."
+      ]
+    },
+    {
+      "case_id": "KI-PAS-03",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-VER-002",
+        "KP-EDIT-003"
+      ],
+      "rationale": "'자동으로 부여됩니다' is a single 되다 passive whose implicit agent is the tool. KP-VER-002's exception keeps the passive when the resulting state matters more than the actor. '자동으로' already tells the user that no action is needed, and KP-EDIT-003 rejects the invented input duty. The keep decision correctly avoids rejecting a passive for its form.",
+      "concerns": [
+        "KP-VER-002's core condition (a sentence that decides who executes) applies weakly, because the sentence tells the reader they have no duty. The keep decision relies on '자동으로' to make the absence of a user duty explicit. A bare '부여됩니다' would be weaker evidence."
+      ]
+    },
+    {
+      "case_id": "KI-HON-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-KO-005"
+      ],
+      "rationale": "Switching from 하십시오체 '주시겠습니까?' to 해요체 '주시겠어요?' keeps a polite request directed at the participant, with the same timing (지금) and count (한 번). KP-KO-005 allows the ending choice as long as the request does not become a promise, command, or question about ability. The accept decision is correct.",
+      "concerns": [
+        "KP-KO-005 ties the ending to the reader relationship. The context gives no register requirement, so the accept decision holds only because no formal-register fact is stated.",
+        "The rejected output changes the speaker, timing, and count all at once, so it does not isolate the speech-act change."
+      ]
+    },
+    {
+      "case_id": "KI-HON-02",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-KO-005",
+        "KP-EDIT-001",
+        "KP-VER-002"
+      ],
+      "rationale": "'제가 확인하겠습니다' is the speaker's commissive. '확인해 주세요' turns it into a request to the listener, which changes both the speech act and the responsible actor. KP-EDIT-001 (subject) and KP-VER-002 (responsibility) reject the edit, and KP-KO-005 bars changing sentence function. The reject decision is correct.",
+      "concerns": [
+        "KP-KO-005's text lists 요청·허락·명령·질문 and omits 약속 (commissive), so the mapping applies the rule's principle to an unlisted act. The decision does not depend on that extension, because KP-EDIT-001 rejects the change independently.",
+        "The case tests speech-act change but not honorific level, since both sentences are polite."
+      ]
+    },
+    {
+      "case_id": "KI-HON-03",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-KO-006",
+        "KP-VER-008",
+        "KP-EDIT-004"
+      ],
+      "rationale": "'선생님께서 ... 말씀하셨습니다' honors the actual subject, the teacher. KP-KO-006's exception keeps quotation and real-person honorification. The rejected output removes the attribution and makes the reported request the student's own, which KP-VER-008 (mark who said what) forbids. KP-EDIT-004's exception protects quoted strings. The keep decision is correct.",
+      "concerns": []
+    },
+    {
+      "case_id": "KI-CON-01",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-PROC-005",
+        "KP-WARN-004",
+        "KP-NUM-005",
+        "KP-EDIT-001"
+      ],
+      "rationale": "'A고 B 있을 때만' requires both states at the start moment, which keeps conjunction (KP-NUM-005) and the 만-restriction (KP-WARN-004). The rejected '거나' widens the scope. KP-PROC-005 requires keeping 동안/상태에서 relations. Its condition applies when a duration changes the result, and the context explicitly excludes a maintenance requirement, so dropping '동안' loses no stated relation. The accept decision is correct.",
+      "concerns": [
+        "The case depends on the context's statement that maintenance is out of scope. Read alone, the source's '켜져 있는 동안' can suggest the light must stay on while transmitting, and a literal application of KP-PROC-005 would flag the removal of '동안'.",
+        "The source stacks '동안' and '때만', which is understandable but stilted. That is acceptable for an input the edit improves, and it shows the case is not a minimal pair."
+      ]
+    },
+    {
+      "case_id": "KI-CON-02",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-PROC-005",
+        "KP-EDIT-001"
+      ],
+      "rationale": "The candidate turns '동시에' into '누른 다음', changing simultaneous action into sequential action. KP-PROC-005's core requirement (keep 동시에 relations) and KP-EDIT-001 (preserve time relations) reject the edit, and the actor-to-button mapping is unchanged. The reject decision is correct.",
+      "concerns": []
+    },
+    {
+      "case_id": "KI-CON-03",
+      "verdict": "pass",
+      "rule_ids": [
+        "KP-EDIT-003",
+        "KP-PROC-004",
+        "KP-PROC-003"
+      ],
+      "rationale": "'값이 0이면 전송을 중단하세요' puts the condition before the action, which satisfies KP-PROC-003. It leaves the opposite condition unstated. The rejected output invents '0이 아니면 계속 전송하세요', which KP-EDIT-003 forbids, and KP-PROC-004's exception bars adding exceptions to a simple procedure. The keep decision is correct.",
+      "concerns": []
+    }
+  ],
+  "family_coverage": {
+    "particles_and_argument_roles": {
+      "normal": true,
+      "failure": true,
+      "keep": true,
+      "subfunctions_covered": [
+        "giver and recipient preserved under cleft topicalization",
+        "detection of requester/requestee reversal",
+        "instrument 로 versus location 에 kept as is"
+      ],
+      "gaps": [
+        "The failure swaps the names and leaves the particles unchanged, so no case tests a particle substitution that flips roles (에게 → 에게서, comitative versus symmetric 와).",
+        "No case tests KP-KO-002's contrast (은·는 versus 이·가 changing inclusion or responsibility).",
+        "No case tests KP-KO-001's exception for particle omission in compressed text or UI text.",
+        "No case tests delimiter scope (도, 만)."
+      ]
+    },
+    "omission_and_referents": {
+      "normal": true,
+      "failure": true,
+      "keep": true,
+      "subfunctions_covered": [
+        "omission of a recoverable same subject",
+        "a subject switch hidden by clause chaining",
+        "omitted object and place resolved by shared physical context"
+      ],
+      "gaps": [
+        "No failure tests object omission with several candidates, which is KP-SYN-002's core requirement.",
+        "No case tests inserting 당신은 into a command, which KP-SYN-001's exception bars.",
+        "The keep case relies on spoken deixis outside the rules' written-document scope, so it applies KP-SYN-003's exception only by analogy."
+      ]
+    },
+    "relative_and_modifier_attachment": {
+      "normal": true,
+      "failure": true,
+      "keep": true,
+      "subfunctions_covered": [
+        "word-order variant inside a single relative clause",
+        "reattachment of a temporal adverb across nested relative clauses (failure)",
+        "relative clause and adjective attachment kept"
+      ],
+      "gaps": [
+        "The normal case contains no real attachment ambiguity.",
+        "No accept case tests a correct split of a nested relative clause, which is KP-SYN-005's core requirement, and the KI-MOD-02 acceptable output keeps the ambiguous nesting.",
+        "No case tests KP-VER-006's state versus action modifier as a selection criterion.",
+        "No case tests the attachment of a manner or degree adverb."
+      ]
+    },
+    "negation_and_quantifier_scope": {
+      "normal": true,
+      "failure": true,
+      "keep": true,
+      "subfunctions_covered": [
+        "double negation rewritten as an equivalent universal positive",
+        "not-all versus none"
+      ],
+      "gaps": [
+        "The keep slot (KI-NEG-03) needs revision. Its source does not express the prohibition and optionality the case claims, so no valid keep evidence exists for this family.",
+        "No case tests KP-KO-004 (inability 못 versus non-performance 안).",
+        "No case tests the scope of 항상 or 반드시 combined with negation.",
+        "No case tests the restrictive -만 reading versus the sufficiency -만 -어도 되다 reading."
+      ]
+    },
+    "aspect_and_modality": {
+      "normal": true,
+      "failure": true,
+      "keep": true,
+      "subfunctions_covered": [
+        "ability paraphrase (수 있다 ↔ 가능하다)",
+        "explicit discretion converted to obligation (failure)",
+        "possibility kept without invented frequency"
+      ],
+      "gaps": [
+        "No case tests aspect, despite the family name: progressive versus completed (KP-VER-003), auxiliary-predicate meaning (KP-VER-005), and reference time (KP-VER-004).",
+        "No case tests evidential strength (KP-VER-008: 추정, 전언, 확인).",
+        "No case tests recommendation (-는 것이 좋다) versus obligation.",
+        "No case tests a restrictive imperative without explicit discretion, the contrast the review instruction asks to keep distinct."
+      ]
+    },
+    "passive_and_causative": {
+      "normal": true,
+      "failure": true,
+      "keep": true,
+      "subfunctions_covered": [
+        "passive: resultative state paraphrase (normal)",
+        "passive: tool-agent 되다 passive kept (keep)",
+        "causative: causer versus performer, rejecting causer-as-actor (failure)"
+      ],
+      "gaps": [
+        "Passive has no failure case. No case tests a passive edit that wrongly assigns or invents an agent, or a 받다/당하다 adversative passive.",
+        "Causative has no normal case, such as an acceptable paraphrase like '나린이 현우에게 붙이도록 지시했다'.",
+        "Causative has no keep case for a clear '-게 했다' sentence.",
+        "No case tests KP-KO-007's core requirement (reducing a double passive such as 되어지다 or 보여지다) or its exception (a causative–passive combination).",
+        "No case tests lexical versus syntactic causatives (먹였다 versus 먹게 했다, direct versus indirect causation).",
+        "The triplet covers passive in its normal and keep slots and causative only in its failure slot. Passive and causative therefore each have partial, unequal evidence, and this gap remains open."
+      ]
+    },
+    "honorifics_and_speech_act": {
+      "normal": true,
+      "failure": true,
+      "keep": true,
+      "subfunctions_covered": [
+        "register shift with the request preserved",
+        "commissive turned into directive (failure)",
+        "quotation with the actual subject honored (keep)"
+      ],
+      "gaps": [
+        "No case tests KP-KO-006's core requirement (removing person honorifics from objects, for example '커피 나오셨습니다').",
+        "No case tests object honorifics (드리다, 여쭈다).",
+        "No case tests an honorific downgrade that turns a request into a command.",
+        "No case tests KP-KO-005's exception for short UI text."
+      ]
+    },
+    "conditions_and_simultaneity": {
+      "normal": true,
+      "failure": true,
+      "keep": true,
+      "subfunctions_covered": [
+        "conjunction and simultaneity at the start moment (and versus or)",
+        "simultaneous action turned into sequential action (failure)",
+        "no invented instruction for the opposite condition (keep)"
+      ],
+      "gaps": [
+        "No case tests condition scope after a sentence split (KP-SYN-007).",
+        "No case tests exception placement (KP-PROC-004 core: 단, 다만).",
+        "No failure tests a condition placed after its action (KP-PROC-003).",
+        "No accept case tests a disjunctive condition.",
+        "No case tests boundary inclusion (KP-NUM-002)."
+      ]
+    }
+  },
+  "limitations": [
+    "All 24 cases are fictional, synthetic, and unaudited by humans. This review is an agent's normative judgment and provides no evidence about corpus behavior, reader comprehension, or model efficacy. No human or expert endorsed these results.",
+    "No model was called and no file was changed. Hashes were computed with shasum -a 256, and all three frozen digests match check.json. validate.py --verify was not run, so the structural schema check rests on check.json's recorded result.",
+    "Rule fields were extracted with Python for 39 candidate rules (id, title, requirement, scope, conditions, exceptions). Rule examples, references, and docs/spec/korean-rules.md were not read, because the extracted fields covered every needed definition.",
+    "Every mapped rule has status 'proposed' in rules.json version 0.2.0-draft. All mappings are to draft norms.",
+    "The rules' scope covers LLM responses and business or technical documents. Several cases are narrative or spoken scenes (KI-OMI-03, KI-HON-01, KI-PAR-*), so their mappings apply rule conditions by analogy.",
+    "The historical 14/24 audit baseline is preserved unchanged. This review's 23 pass and 1 needs_revision result comes from a separate semantic review of a different frozen set. It is not a comparable pass rate and does not supersede that baseline.",
+    "Concerns about acceptable_output fields (KI-MOD-02, KI-ASP-02, KI-OMI-02) and context wording (KI-OMI-03) are recorded without editing the frozen cases."
+  ],
+  "conclusion": "23 of 24 cases pass and 1 needs revision. KI-NEG-03 fails because its source '두 상자 중 하나만 열어도 된다' is a sufficiency construction that neither prohibits opening both boxes nor states that opening is optional, so the keep decision relies on facts the source does not express. The other 23 expected decisions follow from actual rule requirements, conditions, and exceptions, chiefly KP-EDIT-001, KP-SYN-001/004/005, KP-KO-003/005/006, KP-VER-002/007, and KP-PROC-005/006. Coverage is uneven. The passive_and_causative family covers passive only in its normal and keep slots and causative only in its failure slot, and the aspect_and_modality family contains no aspect case. Every family's triplet is structurally present, but the subfunction gaps listed above remain open. The review found no missing rule. The gaps are missing test coverage, plus one wording ambiguity in KP-EDIT-001's '긍정과 부정'."
+}

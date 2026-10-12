@@ -1,0 +1,22 @@
+..............F........................
+======================================================================
+FAIL: test_descriptive_expression_has_an_explicit_editorial_category (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 208, in test_descriptive_expression_has_an_explicit_editorial_category
+    self.assertEqual([],self.check()['errors'])
+AssertionError: Lists differ: [] != [{'code': 'field_value', 'path': 'lexicon/[60 chars]h.'}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'code': 'field_value', 'path': 'lexicon/core.json.entries[0].pos', 'message': 'Invalid part of speech.'}
+
+- []
++ [{'code': 'field_value',
++   'message': 'Invalid part of speech.',
++   'path': 'lexicon/core.json.entries[0].pos'}]
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.124s
+
+FAILED (failures=1)

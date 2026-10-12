@@ -1,0 +1,498 @@
+{
+  "rating_record_id": "root-ratings-rule-refinement-20261012",
+  "recorded_at_utc": "2026-10-12T14:26:58.136060+00:00",
+  "rated_by": "root agent",
+  "rating_source": "Root directly read all26 edit outputs, all12 generation outputs with facts/criteria, and both6-case arms. Persist supplied root judgments without additional model calls.",
+  "review_design": {
+    "blind": false,
+    "condition_labels_known_to_reviewer": true,
+    "fully_independent_from_integration": false,
+    "requested_generation_model": "anthropic/claude-opus-5-5",
+    "requested_reasoning_effort": "high",
+    "actual_upstream_provider_unobserved": true,
+    "historical_sol_comparison_is_not_causal": true,
+    "no_combined_accuracy": true,
+    "total_actual_attempts": 5
+  },
+  "profile_sha256": "282cbdcea153cf6eec5361eda2431c7d2ee2c66d04e71c3fca19639a875c46ee",
+  "profile_bytes": 28627,
+  "source_output_sha256": {
+    "opus-01-edit26-treatment/final.txt": "5f1591e66f67e8b8b765da5731bb3f12aa22a0fa1a613a6f04120486644d4af8",
+    "opus-02-validation12-treatment/final.txt": "41e9199708adc2f5866a5c61e04b28faf2375f1c51e6619ab92bb609f0d00283",
+    "opus-03-supplement6-baseline/final.txt": "ff1202ddbc0e52c0288bef34e6d7daa1739e3e8b6ccf1e768103c9ed64ef4ede",
+    "opus-04-supplement6-treatment/final.txt": "f368d432138f8a1a40b4685f616138808cafbe505af621ac6e106045729c9552"
+  },
+  "edit26": {
+    "scope": "Reused edit26 input development regression; one treatment batch.",
+    "cases": [
+      {
+        "id": "h01",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h02",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h03",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h04",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h05",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h06",
+        "actual_action": "clarify",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h07",
+        "actual_action": "clarify",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h08",
+        "actual_action": "rewrite",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h09",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h10",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h11",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h12",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h13",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h14",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h15",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h16",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h17",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h18",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h19",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h20",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h21",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h22",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h23",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "h24",
+        "actual_action": "rewrite",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "s01",
+        "actual_action": "keep",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      },
+      {
+        "id": "s02",
+        "actual_action": "clarify",
+        "allowed_action": true,
+        "source_context_facts_and_scope_preserved": true,
+        "pass": true,
+        "review_note": "원문과 문맥의 사실 및 범위를 보존하고 허용된 판단을 선택했다."
+      }
+    ],
+    "descriptive_pass_count": 26,
+    "case_count": 26
+  },
+  "validation12": {
+    "scope": "Reused validation12 input development regression; one treatment batch.",
+    "scale": "Each dimension0..2;2 meets criterion,1 records qualitative brevity concern without semantic error here.",
+    "cases": [
+      {
+        "id": "v01",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 2,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "제공 사실과 요청을 보존하며 발화 목적에 맞게 명확하고 자연스럽게 답했다."
+      },
+      {
+        "id": "v02",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 2,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "제공 사실과 요청을 보존하며 발화 목적에 맞게 명확하고 자연스럽게 답했다."
+      },
+      {
+        "id": "v03",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 2,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "제공 사실과 요청을 보존하며 발화 목적에 맞게 명확하고 자연스럽게 답했다."
+      },
+      {
+        "id": "v04",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 2,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "제공 사실과 요청을 보존하며 발화 목적에 맞게 명확하고 자연스럽게 답했다."
+      },
+      {
+        "id": "v05",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 2,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "제공 사실과 요청을 보존하며 발화 목적에 맞게 명확하고 자연스럽게 답했다."
+      },
+      {
+        "id": "v06",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 2,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "제공 사실과 요청을 보존하며 발화 목적에 맞게 명확하고 자연스럽게 답했다."
+      },
+      {
+        "id": "v07",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 2,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "제공 사실과 요청을 보존하며 발화 목적에 맞게 명확하고 자연스럽게 답했다."
+      },
+      {
+        "id": "v08",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 2,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "제공 사실과 요청을 보존하며 발화 목적에 맞게 명확하고 자연스럽게 답했다."
+      },
+      {
+        "id": "v09",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 1,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "Alt 키를 누른 상태를 같은 단계에서 반복한다. 이동 중 지속과 놓은 뒤 해제라는 동시성·순서는 정확하다."
+      },
+      {
+        "id": "v10",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 1,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "12개 이미지라는 근거 범위를 반복하고 후속 속도 측정 권고가 길다. 권고는 타당하며 완료된 시험을 창작한 것은 아니다."
+      },
+      {
+        "id": "v11",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 2,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "제공 사실과 요청을 보존하며 발화 목적에 맞게 명확하고 자연스럽게 답했다."
+      },
+      {
+        "id": "v12",
+        "meaning": 2,
+        "purpose": 2,
+        "clarity": 2,
+        "naturalness": 2,
+        "concision": 2,
+        "invented_facts": false,
+        "semantic_error": false,
+        "review_note": "제공 사실과 요청을 보존하며 발화 목적에 맞게 명확하고 자연스럽게 답했다."
+      }
+    ],
+    "descriptive_meaning_pass_count": 12,
+    "descriptive_all_five_dimensions_full_score_count": 10,
+    "case_count": 12,
+    "brevity_judgments_are_not_semantic_errors_or_sol_regression_evidence": true
+  },
+  "supplement6_pair": {
+    "scope": "Reused-case targeted diagnostic; profile refined after seeing cases; not independent efficacy.",
+    "equivalent_wording_accepted": true,
+    "improvement_claimed": false,
+    "baseline": [
+      {
+        "id": "KI-SUP-ASP-01",
+        "actual_action": "keep",
+        "expected_candidate_review_action": "keep",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      },
+      {
+        "id": "KI-SUP-ASP-02",
+        "actual_action": "rewrite",
+        "expected_candidate_review_action": "rewrite",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      },
+      {
+        "id": "KI-SUP-ASP-03",
+        "actual_action": "keep",
+        "expected_candidate_review_action": "keep",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      },
+      {
+        "id": "KI-SUP-CAU-01",
+        "actual_action": "keep",
+        "expected_candidate_review_action": "keep",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      },
+      {
+        "id": "KI-SUP-CAU-02",
+        "actual_action": "keep",
+        "expected_candidate_review_action": "keep",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      },
+      {
+        "id": "KI-SUP-PAS-01",
+        "actual_action": "rewrite",
+        "expected_candidate_review_action": "rewrite",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      }
+    ],
+    "treatment": [
+      {
+        "id": "KI-SUP-ASP-01",
+        "actual_action": "keep",
+        "expected_candidate_review_action": "keep",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      },
+      {
+        "id": "KI-SUP-ASP-02",
+        "actual_action": "rewrite",
+        "expected_candidate_review_action": "rewrite",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      },
+      {
+        "id": "KI-SUP-ASP-03",
+        "actual_action": "keep",
+        "expected_candidate_review_action": "keep",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      },
+      {
+        "id": "KI-SUP-CAU-01",
+        "actual_action": "keep",
+        "expected_candidate_review_action": "keep",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      },
+      {
+        "id": "KI-SUP-CAU-02",
+        "actual_action": "keep",
+        "expected_candidate_review_action": "keep",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      },
+      {
+        "id": "KI-SUP-PAS-01",
+        "actual_action": "rewrite",
+        "expected_candidate_review_action": "rewrite",
+        "action_pass": true,
+        "meaning_pass": true,
+        "review_note": "동등한 문맥상 표현을 인정한다. ASP02는 착용 결과 상태를 보존하고 PAS01의 피동문은 예나와 지후의 역할을 보존한다."
+      }
+    ],
+    "baseline_descriptive_pass_count": 6,
+    "treatment_descriptive_pass_count": 6,
+    "case_count_per_condition": 6
+  },
+  "limitations": [
+    "Inputs are reused development/diagnostic cases, not new independent efficacy evidence.",
+    "One model batch per condition; no reader experiment or expert endorsement.",
+    "Root knew labels and participated in integration context; ratings are not blind or fully independent.",
+    "Full193-term dictionary usage was not evaluated: profiles reference dictionary files, but prompts forbid tools/file reads.",
+    "Upstream provider is unobserved despite Opus/high request and no FALLBACK label in captures.",
+    "No new model calls were made to write this record."
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "phase": "new targeted validation after candidate tuning",
+  "case_count": 12,
+  "batches_per_condition": 1,
+  "profile_sha256": "6ec821d7aa866f520d7d3e1762b393ba40f0ee7ee8ae69905ab767f053d88c4c",
+  "ratings_file": "independent-root-ratings.json",
+  "condition_key_opened_after_rating_record": true,
+  "combined_accuracy_with_development_regressions": null,
+  "conditions": {
+    "treatment": {
+      "exit_code": 0,
+      "structure_valid": true,
+      "actual_response_count": 12,
+      "prompt_sha256": "6f2de705cfe4c6edf110a3b4f8e27168be65595c48cc215f7cc5b79c4967e96c",
+      "response_sha256": "341135321b9c8700647b7a65ea4d40faafc8a2fd4b72af03fdbbd71abd0ae69d",
+      "profile_sha256": "6ec821d7aa866f520d7d3e1762b393ba40f0ee7ee8ae69905ab767f053d88c4c",
+      "semantic_full_score_cases": 11,
+      "all_dimensions_full_score_cases": 11,
+      "score_sums": {
+        "semantic_preservation": 23,
+        "speech_purpose": 23,
+        "clarity": 23,
+        "natural_korean": 24,
+        "concision": 24
+      },
+      "max_per_dimension": 24,
+      "invented_fact_or_procedure": 0,
+      "deficit_case_ids": [
+        "v07"
+      ],
+      "usage_returned": [
+        {
+          "input_tokens": 24983,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1169,
+          "reasoning_output_tokens": 516
+        }
+      ]
+    },
+    "baseline": {
+      "exit_code": 0,
+      "structure_valid": true,
+      "actual_response_count": 12,
+      "prompt_sha256": "6f2de705cfe4c6edf110a3b4f8e27168be65595c48cc215f7cc5b79c4967e96c",
+      "response_sha256": "254f46ef6da5c8be7e142437038209b1d013419988fd36f46f521da63b1911fb",
+      "profile_sha256": null,
+      "semantic_full_score_cases": 12,
+      "all_dimensions_full_score_cases": 9,
+      "score_sums": {
+        "semantic_preservation": 24,
+        "speech_purpose": 24,
+        "clarity": 24,
+        "natural_korean": 24,
+        "concision": 21
+      },
+      "max_per_dimension": 24,
+      "invented_fact_or_procedure": 0,
+      "deficit_case_ids": [
+        "v03",
+        "v04",
+        "v12"
+      ],
+      "usage_returned": [
+        {
+          "input_tokens": 17729,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 881,
+          "reasoning_output_tokens": 149
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "New wording was fixed before candidate evaluation; weakness classes were selected after prior g07/g11 failures.",
+    "One model, one fixed-order batch per condition, no repeats; agent ratings do not establish general efficacy.",
+    "Caller requested Sol/high; upstream/server-side fallback is not returned by CLI."
+  ]
+}

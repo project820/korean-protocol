@@ -1,0 +1,24 @@
+{
+  "schema_valid": true,
+  "replacement_case_count": 1,
+  "original_case_count": 24,
+  "supplement_case_count": 6,
+  "combined_unique_case_count": 31,
+  "replacement_id": "KI-NEG-04",
+  "replaces_evidence_for": "KI-NEG-03",
+  "baseline_sha256": {
+    "cases.json": "cc8c501b7e6c0d7e35c577cd8600491ddfc87e1d75c4cd4be52999e98eaf8504",
+    "plan.md": "a6b2ce75726f2b51e01f971a1a49e9c94cac35c1a385fbeea2d4dd71b9d88c0e",
+    "validate.py": "ec3d69fa58406a6c2658904f5864ec71e71a2ad5337163efde13697087c730ab",
+    "check.json": "7ae1eefc0aaff61d77a603242027d4f5d015ef9adcc6c7fe1cedf3dd5c8fc67f",
+    "supplement.json": "166e61eb5cdc65bda9300d2738377342532faaa6a0cfb314d4fbda2cc8337268",
+    "supplement-plan.md": "a11d40c415fb6eeadb6817aa452ce9995c01f4b1d73120377596e63e6fa43ba6",
+    "supplement-check.json": "8d689be5e63aca0fbc5cd4de3e357f5abef92bd76e03c8d1f5c4bf1d16177b5c"
+  },
+  "sha256": {
+    "replacement-negation.json": "b25bb08516713d0ae6771d4c78f2a008195f7ddf6591e209271686c4e26e5a34",
+    "replacement-negation-plan.md": "c95d2ece9459fa48224aec877cdfb198d24718c7100278be616c7533d4f8d505"
+  },
+  "freeze_status": "frozen_before_rule_mapping",
+  "scope": "Structural checks and frozen file identity only; semantics and rule mapping require separate review."
+}

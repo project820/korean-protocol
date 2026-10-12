@@ -1,0 +1,3538 @@
+{
+  "schema_version": "1.0",
+  "version": "0.2.0-draft",
+  "rules": [
+    {
+      "id": "KP-EDIT-001",
+      "title": "수정 전후의 명제를 보존한다",
+      "requirement": "고친 문장의 주체·대상·긍정과 부정·조건·수량·시점·확실성을 원문과 대조하고 하나라도 달라지면 그 수정을 채택하지 않는다.",
+      "domain": "EDIT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "간결화나 용어 교체로 문장을 수정할 때 적용한다."
+      ],
+      "exceptions": [
+        "사용자가 사실 정정이나 내용 변경을 요청한 경우에는 정정 근거를 확인하고 내용 변경으로 표시한다."
+      ],
+      "positive_example": {
+        "context": "가능성 경고의 대상은 앞 문맥의 저장 기능이다.",
+        "before": "이 저장 기능에서 문제가 발생하는 것이 가능할 수 있습니다.",
+        "after": "이 저장 기능에서 문제가 발생할 수 있습니다."
+      },
+      "negative_example": {
+        "context": "가능성 경고의 대상은 앞 문맥의 저장 기능이다.",
+        "text": "이 저장 기능에서 문제가 발생합니다.",
+        "reason": "가능성을 확정 사실로 강화했다."
+      },
+      "counterexample": {
+        "context": "저장 기능의 실패 가능성을 짧게 경고한다.",
+        "text": "문제가 있을 수 있습니다.",
+        "why_allowed": "가능성이 전달 목적이며 대상도 문맥에 있어 추가 설명이 필요하지 않다."
+      },
+      "ste_refs": [
+        "9.1",
+        "9.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 가능성 양태의 의미",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002082557",
+          "access": "서지·초록 확인; 가능성·능력·허락의 구별 참고"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-EDIT-002",
+      "title": "모르는 관계는 확인 대상으로 남긴다",
+      "requirement": "수정에 필요한 주체·조건·기준이 자료에 없으면 대체문을 확정하지 말고 그 관계 하나를 확인한다.",
+      "domain": "EDIT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "해석 후보에 따라 행동이나 사실이 달라지고 문맥으로 하나를 고를 수 없을 때 적용한다."
+      ],
+      "exceptions": [
+        "차이가 표현 선택에만 있고 뜻이 같으면 작성자가 맡긴 범위에서 정돈한다."
+      ],
+      "positive_example": {
+        "context": "검토자는 이 대리로 확인되어 있다.",
+        "before": "김 대리가 이 대리에게 문서를 보냈습니다. 그가 검토했습니다.",
+        "after": "김 대리가 이 대리에게 문서를 보냈습니다. 이 대리가 검토했습니다."
+      },
+      "negative_example": {
+        "context": "검토자는 이 대리로 확인되어 있다.",
+        "text": "김 대리가 문서를 검토했습니다.",
+        "reason": "문맥에서 확인된 검토자를 바꿨다."
+      },
+      "counterexample": {
+        "context": "담당자가 한 명이며 직전 문장에서 식별된다.",
+        "text": "담당자가 문서를 받았습니다. 검토를 시작했습니다.",
+        "why_allowed": "경쟁하는 주체가 없고 두 번째 문장의 주체를 회복할 수 있다."
+      },
+      "ste_refs": [
+        "4.2",
+        "9.1"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "생략된 주어가 있는 문장 처리에 담화특출성이 미치는 영향",
+          "url": "https://accesson.kr/cogpsych/v.19/4/383/17405",
+          "access": "서지·초록 확인; 모든 생략의 우열을 입증하지 않음"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-EDIT-003",
+      "title": "표현 수정을 새 정보 작성과 구분한다",
+      "requirement": "문맥에 없는 원인·시험·수치·담당자·후속 약속을 명료화라는 이유로 추가하지 않는다.",
+      "domain": "EDIT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "LLM이 표현만 수정하거나 제공된 사실로 답할 때 적용한다."
+      ],
+      "exceptions": [
+        "사용자가 새 조사나 제안을 요청하면 확인한 사실과 제안을 각각 밝혀 추가한다."
+      ],
+      "positive_example": {
+        "context": "원문에는 기능의 가능성만 있다. 시험 이력은 제공되지 않았다.",
+        "before": "이 기능의 사용이 가능합니다.",
+        "after": "이 기능을 사용할 수 있습니다."
+      },
+      "negative_example": {
+        "context": "원문에는 기능의 가능성만 있다. 시험 이력은 제공되지 않았다.",
+        "text": "이 기능을 사용할 수 있습니다. 동시 접속 시험도 통과했습니다.",
+        "reason": "제공되지 않은 시험 결과를 창작했다."
+      },
+      "counterexample": {
+        "context": "파일 열기 실패 가능성을 경고하는데 추가 조치는 요청되지 않았다.",
+        "text": "파일을 열 때 문제가 있을 수 있습니다.",
+        "why_allowed": "가능성 경고만으로 기능을 수행하며 확인 약속을 덧붙일 이유가 없다."
+      },
+      "ste_refs": [
+        "9.1",
+        "7.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 가능성 양태의 의미",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002082557",
+          "access": "서지·초록 확인; 가능성·능력·허락의 구별 참고"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-EDIT-004",
+      "title": "직접 치환보다 문장 관계를 먼저 점검한다",
+      "requirement": "단어 교체만으로 서술어의 대상이나 조건을 유지할 수 없으면 문장을 다시 구성하고 연결된 논항을 함께 옮긴다.",
+      "domain": "EDIT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "명사화·번역투·모호한 결합을 고칠 때 적용한다."
+      ],
+      "exceptions": [
+        "명칭·인용·명령어의 고정 문자열은 문장 바깥의 설명만 정돈한다."
+      ],
+      "positive_example": {
+        "context": "담당자가 요청 내용 자체를 확인했다.",
+        "before": "담당자가 요청 사항에 대한 확인을 수행했습니다.",
+        "after": "담당자가 요청 내용을 확인했습니다."
+      },
+      "negative_example": {
+        "context": "담당자가 요청 내용 자체를 확인했다.",
+        "text": "담당자가 요청을 수행했습니다.",
+        "reason": "확인 행위를 요청 실행 행위로 바꿨다."
+      },
+      "counterexample": {
+        "context": "기능명은 실제 화면에 이렇게 표시된다.",
+        "text": "“확인 수행”을 선택하세요.",
+        "why_allowed": "고정 기능명을 바꾸면 독자가 화면에서 찾을 수 없다."
+      },
+      "ste_refs": [
+        "9.1",
+        "9.2",
+        "9.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-EDIT-005",
+      "title": "유지 판단과 이해도 검증을 구별한다",
+      "requirement": "규칙 준수·의미 보존·독자 이해도·LLM 적용 효과를 별도 판정하고 정답 사례의 통과를 실제 효과 입증으로 보고하지 않는다.",
+      "domain": "EDIT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "규약 시험 결과나 수정 성과를 설명할 때 적용한다."
+      ],
+      "exceptions": [
+        "실제 독자 또는 LLM 실험이 있으면 대상·과제·비교 조건·관측값을 함께 보고한다."
+      ],
+      "positive_example": {
+        "context": "검사는 예문 20개의 기대 판단만 비교했으며 독자 실험은 없었다.",
+        "before": "예문 검사 20개를 통과해 읽기 효과를 검증했습니다.",
+        "after": "예문 검사 20개를 통과했습니다. 독자 이해도는 시험하지 않았습니다."
+      },
+      "negative_example": {
+        "context": "검사는 예문 20개의 기대 판단만 비교했으며 독자 실험은 없었다.",
+        "text": "이 규칙을 쓰면 한국어 이해도가 높아집니다.",
+        "reason": "수행하지 않은 효과 실험을 확정했다."
+      },
+      "counterexample": {
+        "context": "규칙 ID 연결을 기계로 검사했다.",
+        "text": "규칙 ID 연결 검사에서 누락이 없었습니다.",
+        "why_allowed": "검사한 구조의 결과만 말한다."
+      },
+      "ste_refs": [
+        "9.2",
+        "9.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WRD-001",
+      "title": "뜻과 결합을 기준으로 어휘를 선택한다",
+      "requirement": "용어를 선택할 때 해당 문맥의 뜻과 함께 쓰이는 대상·서술어를 확인하고 동일한 뜻을 전하는 익숙한 표현을 고른다.",
+      "domain": "WRD",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "일반어와 전문어 중 표현을 고를 때 적용한다."
+      ],
+      "exceptions": [
+        "정확한 개념을 구별하는 전문어는 독자에게 낯설어도 유지하고 필요한 첫 설명만 제공한다."
+      ],
+      "positive_example": {
+        "context": "발송일의 다음 날을 말하며 법정 용어가 아니다. 대상 독자는 익일이라는 표현을 모르고 다음 날이라는 표현은 이해한다.",
+        "before": "익일에 발송합니다.",
+        "after": "다음 날 발송합니다."
+      },
+      "negative_example": {
+        "context": "발송일의 다음 날을 말하며 법정 용어가 아니다. 대상 독자는 익일이라는 표현을 모르고 다음 날이라는 표현은 이해한다.",
+        "text": "즉시 발송합니다.",
+        "reason": "쉬운 단어로 바꾸면서 발송 시점을 바꿨다."
+      },
+      "counterexample": {
+        "context": "설계 문서의 항복강도는 재료 성질을 특정한다.",
+        "text": "항복강도를 확인하세요.",
+        "why_allowed": "강도로 줄이면 파단강도와 구별되지 않는다."
+      },
+      "ste_refs": [
+        "1.1",
+        "1.9"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "우리글 명사 어절에서의 단어 빈도 효과",
+          "url": "https://accesson.kr/cogpsych/assets/pdf/17413/journal-20-1-21.pdf",
+          "access": "공개 원문; 친숙도 변수 참고; 제안 규칙의 효과는 검증 전"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WRD-002",
+      "title": "한 용어의 문맥상 의미를 고정한다",
+      "requirement": "한 문서의 같은 작업에서 용어에 붙인 뜻을 유지하고 다른 뜻으로 전환하면 그 차이를 명시한다.",
+      "domain": "WRD",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "동일 표현이 상태나 절차의 여러 단계를 가리킬 때 적용한다."
+      ],
+      "exceptions": [
+        "분야와 작업이 달라 같은 표제어가 다른 뜻을 갖는 경우에는 해당 구역의 정의를 밝힌다."
+      ],
+      "positive_example": {
+        "context": "문서에서 저장은 로컬 파일 기록을 뜻하고 배포는 서버 공개를 뜻한다.",
+        "before": "설정을 저장했습니다. 서버 공개는 아직 하지 않았습니다.",
+        "after": "설정을 로컬 파일에 저장했습니다. 서버에는 아직 배포하지 않았습니다."
+      },
+      "negative_example": {
+        "context": "문서에서 저장은 로컬 파일 기록을 뜻하고 배포는 서버 공개를 뜻한다.",
+        "text": "설정을 저장했으므로 배포를 마쳤습니다.",
+        "reason": "저장과 배포를 같은 단계로 취급했다."
+      },
+      "counterexample": {
+        "context": "같은 문서의 별도 구역이 적재함과 데이터 적재를 각각 정의한다.",
+        "text": "적재함을 비우세요. 데이터 적재를 시작하세요.",
+        "why_allowed": "대상이 명시되어 서로 다른 뜻이 섞이지 않는다."
+      },
+      "ste_refs": [
+        "1.3",
+        "9.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WRD-003",
+      "title": "품사와 한국어 결합 패턴을 함께 기록한다",
+      "requirement": "어휘 항목에 승인 뜻·품사·허용 활용·분야·독자·논항/조사 결합을 기록하고 표면형을 그 패턴에 연결해 판정한다. 같은 표제어라도 미등록 품사전환이나 뜻이 다른 활용은 별도 검토한다.",
+      "domain": "WRD",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "통제 어휘를 추가하거나 LLM이 표면형을 사전 항목에 대응시킬 때 적용한다. 표제어에서 한국어 활용형을 생성하더라도 품사·뜻·논항 패턴이 일치해야 한다."
+      ],
+      "exceptions": [
+        "명사형·관형형의 문장 기능이 명확하고 등록된 뜻을 유지하면 한국어 생산적 활용으로 허용한다. 제목·UI 레이블은 목적어와 종결어미를 강제하지 않는다. 새 의미나 동작이 생기면 별도 항목으로 검토한다."
+      ],
+      "positive_example": {
+        "context": "확인하다의 대상은 파일 존재이며 사실 여부를 확인한다.",
+        "before": "파일의 존재에 대한 확인을 했습니다.",
+        "after": "파일이 있는지 확인했습니다."
+      },
+      "negative_example": {
+        "context": "확인하다의 대상은 파일 존재이며 사실 여부를 확인한다.",
+        "text": "파일을 확인되게 했습니다.",
+        "reason": "확인하다의 주체와 대상 관계를 잘못 결합했다."
+      },
+      "counterexample": {
+        "context": "버튼 기능은 선택한 항목을 확인하는 것이다.",
+        "text": "확인",
+        "why_allowed": "UI 자리에서 행동 이름만으로 기능이 식별된다."
+      },
+      "ste_refs": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "3.1",
+        "9.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WRD-004",
+      "title": "낯선 축약어는 첫 사용에서 연결한다",
+      "requirement": "독자가 모르는 축약어를 쓰면 첫 사용에서 풀어 쓴 명칭과 축약어를 연결하고 이후 같은 축약어를 유지한다.",
+      "domain": "WRD",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "문서 내부 축약이나 조직별 약어를 처음 소개할 때 적용한다."
+      ],
+      "exceptions": [
+        "대상 독자가 공통으로 아는 표준 약어나 코드·파일 확장자는 반복해서 풀지 않는다."
+      ],
+      "positive_example": {
+        "context": "독자는 프로젝트 내부의 비상 정지 약어를 처음 본다.",
+        "before": "ES를 시험하세요.",
+        "after": "비상 정지(ES)를 시험하세요."
+      },
+      "negative_example": {
+        "context": "독자는 프로젝트 내부의 비상 정지 약어를 처음 본다.",
+        "text": "정지를 시험하세요.",
+        "reason": "일반 정지와 비상 정지의 구별을 삭제했다."
+      },
+      "counterexample": {
+        "context": "개발자에게 PDF 파일 형식을 안내한다.",
+        "text": "PDF 파일을 여세요.",
+        "why_allowed": "공유된 파일 형식명을 풀어 쓰면 식별에 필요한 정보가 늘지 않는다."
+      },
+      "ste_refs": [
+        "1.5",
+        "1.6",
+        "2.2",
+        "8.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "우리글 명사 어절에서의 단어 빈도 효과",
+          "url": "https://accesson.kr/cogpsych/assets/pdf/17413/journal-20-1-21.pdf",
+          "access": "공개 원문; 친숙도 변수 참고; 제안 규칙의 효과는 검증 전"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WRD-005",
+      "title": "은어와 비유는 실제 동작으로 풀어 쓴다",
+      "requirement": "업무 지시에서 독자에게 공유되지 않은 은어·비유·조직 내부 별칭은 확인된 대상과 동작으로 표현한다.",
+      "domain": "WRD",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "은어나 비유가 실행 대상·결과를 둘 이상으로 해석하게 할 때 적용한다."
+      ],
+      "exceptions": [
+        "인용·대화 분석·공유된 공식 별칭은 보존하고 문맥이 뜻을 하나로 정하면 치환을 강제하지 않는다."
+      ],
+      "positive_example": {
+        "context": "여기서 죽인다는 말은 개발 서버 프로세스를 종료한다는 뜻이다.",
+        "before": "개발 서버를 죽이세요.",
+        "after": "개발 서버 프로세스를 종료하세요."
+      },
+      "negative_example": {
+        "context": "여기서 죽인다는 말은 개발 서버 프로세스를 종료한다는 뜻이다.",
+        "text": "개발 서버를 삭제하세요.",
+        "reason": "프로세스 종료를 파일·설비 삭제로 바꿨다."
+      },
+      "counterexample": {
+        "context": "로그의 원문을 인용해 사용자의 신고를 분석한다.",
+        "text": "사용자는 “서버가 죽었다”고 신고했습니다.",
+        "why_allowed": "인용 내용을 바꾸면 신고 자료가 달라진다."
+      },
+      "ste_refs": [
+        "1.10",
+        "9.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WRD-006",
+      "title": "맞춤법과 표기를 식별 가능하게 통일한다",
+      "requirement": "일반 한국어는 현행 맞춤법과 띄어쓰기를 따르고 문서의 같은 명칭은 같은 표기로 쓴다.",
+      "domain": "WRD",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "대체 표기·외래어 표기가 문서에서 섞일 때 적용한다."
+      ],
+      "exceptions": [
+        "공식 상품명·파일명·코드·원문 인용은 실제 문자열을 보존하며 오탈자처럼 보여도 임의로 고치지 않는다."
+      ],
+      "positive_example": {
+        "context": "같은 기능을 본문에서는 다운로드로 정의했다.",
+        "before": "파일을 다운 로드하세요.",
+        "after": "파일을 다운로드하세요."
+      },
+      "negative_example": {
+        "context": "같은 기능을 본문에서는 다운로드로 정의했다.",
+        "text": "파일을 내려 받기.txt로 저장하세요.",
+        "reason": "사용자가 지정하지 않은 파일명을 만들어 냈다."
+      },
+      "counterexample": {
+        "context": "실제 파일명은 다운 로드.txt이다.",
+        "text": "“다운 로드.txt”를 여세요.",
+        "why_allowed": "띄어쓰기를 정돈하면 실제 파일과 이름이 달라진다."
+      },
+      "ste_refs": [
+        "1.14",
+        "9.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NAM-001",
+      "title": "같은 대상에는 같은 명칭을 쓴다",
+      "requirement": "같은 문서와 대화에서 동일한 기능·장비·자료를 가리킬 때 한 명칭을 유지한다. 같은 문맥·의미의 반복 작업은 같은 동작 용어와 문장 방식으로 표현한다.",
+      "domain": "NAM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "용어 기록·전문 작업 안내"
+      ],
+      "conditions": [
+        "동의어를 번갈아 써 대상 연결을 어렵게 할 때 적용한다."
+      ],
+      "exceptions": [
+        "명칭 변경 이력·비교·인용에서는 두 명칭을 그 관계와 함께 쓴다. 입력 방식·독자·문장 기능이 달라지면 그 차이에 맞는 표현을 쓰며 서로 다른 행동을 같은 용어로 강제하지 않는다."
+      ],
+      "positive_example": {
+        "context": "화면의 프로젝트와 안내문의 작업 공간은 같은 기능이다.",
+        "before": "프로젝트를 만드세요. 작업 공간에 파일을 추가하세요.",
+        "after": "프로젝트를 만드세요. 프로젝트에 파일을 추가하세요."
+      },
+      "negative_example": {
+        "context": "화면의 프로젝트와 안내문의 작업 공간은 같은 기능이다.",
+        "text": "프로젝트와 작업 공간을 각각 만드세요.",
+        "reason": "하나의 대상을 두 대상처럼 제시했다."
+      },
+      "counterexample": {
+        "context": "버전 변경으로 작업 공간을 프로젝트로 개명했다.",
+        "text": "기존 “작업 공간”의 이름이 “프로젝트”로 바뀌었습니다.",
+        "why_allowed": "두 명칭의 관계를 설명하는 문장이므로 함께 쓴다."
+      },
+      "ste_refs": [
+        "1.8",
+        "1.11",
+        "9.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NAM-002",
+      "title": "전문명사를 근거와 함께 확장한다",
+      "requirement": "기본 어휘에 없는 장비·부품·공정·자료 명칭은 실제 분야 자료의 이름을 확인하고 뜻·대상·분야·출처를 기록해 추가한다. 그 명칭 내부의 미등록 일반 표현은 전체 명칭을 식별할 때만 한정 허용하며 일반 서술의 승인으로 확대하지 않는다.",
+      "domain": "NAM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "용어 기록·전문 작업 안내"
+      ],
+      "conditions": [
+        "전문명사가 독자에게 필요한 대상을 정확히 특정할 때 적용한다."
+      ],
+      "exceptions": [
+        "한 번 인용한 외부 고유명은 전체 사전 승인을 거치지 않아도 출처와 실제 표기를 유지한다."
+      ],
+      "positive_example": {
+        "context": "공식 장비 목록이 공압 레귤레이터를 해당 부품명으로 쓴다.",
+        "before": "압력 맞추는 것을 교체하세요.",
+        "after": "공압 레귤레이터를 교체하세요."
+      },
+      "negative_example": {
+        "context": "공식 장비 목록이 공압 레귤레이터를 해당 부품명으로 쓴다.",
+        "text": "압력계를 교체하세요.",
+        "reason": "조절 부품과 측정 부품을 혼동했다."
+      },
+      "counterexample": {
+        "context": "제조사 설명의 정식 공정명을 인용한다.",
+        "text": "제조사는 이 공정을 “레이저 쇼크 피닝”이라고 부릅니다.",
+        "why_allowed": "출처의 명칭을 알리는 인용이며 임의의 새 통제어 승인이 아니다."
+      },
+      "ste_refs": [
+        "1.5",
+        "1.6",
+        "1.8"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NAM-003",
+      "title": "전문동사를 대상과 결과로 확장한다",
+      "requirement": "새 전문동사는 수행 대상·필요 조건·동작 후 상태·분야·근거를 기록하고 같은 형태의 일반 동작과 구별한다.",
+      "domain": "NAM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "용어 기록·전문 작업 안내"
+      ],
+      "conditions": [
+        "직접 서술해야 하는 전문 공정이나 기술 동작이 기본 어휘에 없을 때 적용한다."
+      ],
+      "exceptions": [
+        "설명 목적의 명사형 공정명은 동작 지시와 구별되어 있으면 허용한다."
+      ],
+      "positive_example": {
+        "context": "배관 공정에서 플러싱은 세척액으로 내부 잔류물을 제거하는 동작이다.",
+        "before": "배관의 플러싱 작업을 수행하세요.",
+        "after": "배관을 플러싱하세요."
+      },
+      "negative_example": {
+        "context": "배관 공정에서 플러싱은 세척액으로 내부 잔류물을 제거하는 동작이다.",
+        "text": "배관을 살균하세요.",
+        "reason": "플러싱을 별개의 살균 공정으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "공정표의 열 제목은 공정 이름을 나열한다.",
+        "text": "플러싱 시간",
+        "why_allowed": "공정 명사와 측정 항목을 나타내는 제목이다."
+      },
+      "ste_refs": [
+        "1.12",
+        "1.13",
+        "3.7"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NAM-004",
+      "title": "명칭을 동사로 바꿀 때 동작을 확인한다",
+      "requirement": "제품·앱·자료 명칭에 하다를 붙여 동작을 만들면 명사 항목의 승인만으로 허용하지 않는다. 별도 행동 의미·논항·결과·분야 근거를 전문동사 항목으로 검토하거나 확인된 일반 동작으로 풀어 쓴다.",
+      "domain": "NAM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "용어 기록·전문 작업 안내"
+      ],
+      "conditions": [
+        "명칭을 동사로 전환해 새 행동 의미를 만들 때 적용한다. 행동이 하나로 공유되더라도 신규 동사 의미의 검토는 생략하지 않는다."
+      ],
+      "exceptions": [
+        "업로드하다처럼 이미 동작 의미·대상 결합이 검토된 전문동사는 유지한다. 명사화·관형형처럼 기존 행동 뜻을 유지하는 한국어 활용은 새 동작 승인과 구별한다."
+      ],
+      "positive_example": {
+        "context": "슬랙한다는 말은 담당자에게 슬랙 메시지를 보내라는 뜻이다.",
+        "before": "담당자에게 슬랙하세요.",
+        "after": "담당자에게 슬랙 메시지를 보내세요."
+      },
+      "negative_example": {
+        "context": "슬랙한다는 말은 담당자에게 슬랙 메시지를 보내라는 뜻이다.",
+        "text": "슬랙을 설치하세요.",
+        "reason": "메시지 전송을 앱 설치로 바꿨다."
+      },
+      "counterexample": {
+        "context": "파일을 서버에 전송하는 업로드 동작이 공유되어 있다.",
+        "text": "파일을 업로드하세요.",
+        "why_allowed": "하다 결합이더라도 관습적인 전문동사의 뜻이 명확하다."
+      },
+      "ste_refs": [
+        "1.7",
+        "1.12",
+        "9.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NAM-005",
+      "title": "긴 명칭은 구성 관계를 먼저 밝힌다",
+      "requirement": "연속된 명사가 대상·소속·기능을 혼동하게 하면 조사나 구조 설명으로 관계를 드러내고 정확한 전체 명칭을 먼저 제시한다.",
+      "domain": "NAM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "용어 기록·전문 작업 안내"
+      ],
+      "conditions": [
+        "명사 연쇄에 둘 이상의 묶음 해석이 가능할 때 적용한다."
+      ],
+      "exceptions": [
+        "공식 장비명·표준명·고유명은 띄거나 축약해 새 명칭을 만들지 않고 주변 문장으로 관계를 설명한다."
+      ],
+      "positive_example": {
+        "context": "이 표현은 공식 양식명이 아니라 설명용 명사 연쇄이다. 독자는 승인 서버의 이전과 서버 이전의 승인으로 다르게 묶어 읽을 수 있다. 작성자가 확인한 뜻은 서버 이전에 필요한 승인을 요청하는 양식이다.",
+        "before": "서버 이전 승인 요청 양식을 작성하세요.",
+        "after": "서버 이전의 승인을 요청하는 양식을 작성하세요."
+      },
+      "negative_example": {
+        "context": "이 표현은 공식 양식명이 아니라 설명용 명사 연쇄이다. 독자는 승인 서버의 이전과 서버 이전의 승인으로 다르게 묶어 읽을 수 있다. 작성자가 확인한 뜻은 서버 이전에 필요한 승인을 요청하는 양식이다.",
+        "text": "승인 서버를 이전하는 양식을 작성하세요.",
+        "reason": "이전 대상과 승인 대상의 관계를 바꿨다."
+      },
+      "counterexample": {
+        "context": "장비 목록에 등록된 전체 명칭이 고속 원심 분리기 구동 모터이다.",
+        "text": "“고속 원심 분리기 구동 모터”를 점검하세요.",
+        "why_allowed": "공식 명칭의 식별력이 우선하며 영어의 세 단어 제한을 옮기지 않는다."
+      },
+      "ste_refs": [
+        "2.1",
+        "2.2",
+        "8.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 관계절 처리의 차이",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "access": "공개 원문; 실험 구문별 처리 차이를 참고; 고정 상한 근거가 아님"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NAM-006",
+      "title": "축약 명칭과 전체 명칭을 일대일로 연결한다",
+      "requirement": "긴 명칭을 줄일 때 처음에 전체 이름과 줄인 이름을 연결하고 같은 문서에서 다른 대상에 그 줄인 이름을 재사용하지 않는다.",
+      "domain": "NAM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "용어 기록·전문 작업 안내"
+      ],
+      "conditions": [
+        "반복되는 긴 장비·문서 명칭을 줄여 쓸 때 적용한다."
+      ],
+      "exceptions": [
+        "안전·계약·법정 인용에서 전체 명칭이 필요한 자리는 축약하지 않는다."
+      ],
+      "positive_example": {
+        "context": "문서에는 저압 배전반과 고압 배전반이 모두 있으며 이 문장은 저압 배전반만 가리킨다.",
+        "before": "배전반을 점검하세요.",
+        "after": "저압 배전반을 점검하세요."
+      },
+      "negative_example": {
+        "context": "문서에는 저압 배전반과 고압 배전반이 모두 있으며 이 문장은 저압 배전반만 가리킨다.",
+        "text": "모든 배전반을 점검하세요.",
+        "reason": "한 장비의 지시를 전체 장비로 확대했다."
+      },
+      "counterexample": {
+        "context": "문서 첫머리가 저압 배전반을 이후 배전반으로 부른다고 정의했고 다른 배전반은 없다.",
+        "text": "배전반을 점검하세요.",
+        "why_allowed": "축약어의 대응 대상이 하나로 유지된다."
+      },
+      "ste_refs": [
+        "2.2",
+        "1.11",
+        "4.5"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-VER-001",
+      "title": "행동을 직접 서술한다",
+      "requirement": "명사와 수행하다·진행하다의 결합이 별도 단계를 뜻하지 않으면 해당 행동의 서술어로 쓴다.",
+      "domain": "VER",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "우회적인 서술이 같은 행동을 길게 나타낼 때 적용한다."
+      ],
+      "exceptions": [
+        "검토를 진행하다처럼 착수·진행·완료를 구별하는 말과 공정명은 그 구별을 유지한다."
+      ],
+      "positive_example": {
+        "context": "결과 확인은 끝났으며 별도 확인 공정 이름이 아니다.",
+        "before": "결과에 대한 확인을 수행했습니다.",
+        "after": "결과를 확인했습니다."
+      },
+      "negative_example": {
+        "context": "결과 확인은 끝났으며 별도 확인 공정 이름이 아니다.",
+        "text": "결과를 수정했습니다.",
+        "reason": "확인 행위를 수정 행위로 바꿨다."
+      },
+      "counterexample": {
+        "context": "검토는 진행됐지만 완료됐는지 알려지지 않았다.",
+        "text": "검토를 진행했습니다.",
+        "why_allowed": "진행을 마침으로 바꾸면 완료 사실을 만들어 낸다."
+      },
+      "ste_refs": [
+        "3.7",
+        "1.13"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-VER-002",
+      "title": "행위자에게 맡긴 행동을 명시한다",
+      "requirement": "책임·역할·후속 행동을 정하는 문장에서는 확인된 행위자와 대상이 드러나는 서술을 쓴다.",
+      "domain": "VER",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "누가 실행하거나 책임질지 독자의 행동을 결정할 때 적용한다."
+      ],
+      "exceptions": [
+        "행위자보다 결과 상태가 중요하거나 행위자가 알려지지 않은 상태 알림은 피동을 유지한다."
+      ],
+      "positive_example": {
+        "context": "운영팀이 백업을 맡는다는 사실이 확인되어 있다.",
+        "before": "백업이 수행됩니다.",
+        "after": "운영팀이 백업을 수행합니다."
+      },
+      "negative_example": {
+        "context": "운영팀이 백업을 맡는다는 사실이 확인되어 있다.",
+        "text": "개발팀이 백업을 수행합니다.",
+        "reason": "피동을 능동으로 바꾸며 책임 주체를 창작했다."
+      },
+      "counterexample": {
+        "context": "저장 성공 토스트의 목적은 저장 상태 알림이다.",
+        "text": "설정이 저장되었습니다.",
+        "why_allowed": "행위자를 붙여도 다음 판단이 달라지지 않으며 결과가 중심이다."
+      },
+      "ste_refs": [
+        "3.6"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-VER-003",
+      "title": "진행과 완료를 구별한다",
+      "requirement": "시작·진행·완료·중단의 표지를 지우거나 서로 바꾸지 말고 실제 작업 단계를 유지한다.",
+      "domain": "VER",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "작업 경과나 상태를 보고할 때 적용한다."
+      ],
+      "exceptions": [
+        "단계 자체가 질문과 무관하고 원문에서 완료가 확정되어 있으면 간단한 완료 서술을 쓴다."
+      ],
+      "positive_example": {
+        "context": "업로드를 시작했으며 전송은 계속 진행 중이다.",
+        "before": "파일의 업로드가 현재 진행되고 있는 중입니다.",
+        "after": "파일을 업로드하고 있습니다."
+      },
+      "negative_example": {
+        "context": "업로드를 시작했으며 전송은 계속 진행 중이다.",
+        "text": "파일을 업로드했습니다.",
+        "reason": "진행 중인 전송을 완료로 보고했다."
+      },
+      "counterexample": {
+        "context": "검토가 진행됐다는 사실만 있고 종료 여부는 없다.",
+        "text": "검토를 진행했습니다.",
+        "why_allowed": "완료 여부를 추가로 확정하지 않는 문장이다."
+      },
+      "ste_refs": [
+        "3.2",
+        "3.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-VER-004",
+      "title": "사건 시점과 기준 시점을 보존한다",
+      "requirement": "과거 사건·현재 상태·예정 행동을 구별하고 시간 기준이 바뀌면 날짜나 기준을 밝혀 시제를 맞춘다.",
+      "domain": "VER",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "여러 시점의 상태를 비교하거나 다른 날 읽는 문서에서 상대 시점의 기준을 식별해야 할 때 적용한다."
+      ],
+      "exceptions": [
+        "항상 성립하는 기능 설명과 제목에는 사건 날짜를 강제로 넣지 않는다."
+      ],
+      "positive_example": {
+        "context": "문서는 다른 날에도 읽는다. 작성 기준일은 2026년 10월 12일이며 점검은 10월 11일에 끝났다.",
+        "before": "어제 점검의 완료를 수행했습니다.",
+        "after": "10월 11일에 점검을 완료했습니다."
+      },
+      "negative_example": {
+        "context": "문서는 다른 날에도 읽는다. 작성 기준일은 2026년 10월 12일이며 점검은 10월 11일에 끝났다.",
+        "text": "10월 12일에 점검을 완료했습니다.",
+        "reason": "확인된 사건 날짜를 바꿨다."
+      },
+      "counterexample": {
+        "context": "장치의 지속적인 기능을 설명한다.",
+        "text": "이 장치는 압력을 측정합니다.",
+        "why_allowed": "일반 기능이므로 현재형에 특정 측정 시점을 덧붙이지 않는다."
+      },
+      "ste_refs": [
+        "3.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-VER-005",
+      "title": "보조서술어의 단계와 결과 상태를 남긴다",
+      "requirement": "시험·준비 상태·비의도성·변화·진행·결과 상태를 보존한다. '-고 있다'는 동사 뜻과 문맥으로 진행/결과 유지를 구별하고 중복만 줄인다.",
+      "domain": "VER",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "보조서술어·'-고 있다'를 편집할 때 적용한다."
+      ],
+      "exceptions": [
+        "문맥에서 의미 차이가 없다는 사실이 확인되면 직접 서술어로 줄인다."
+      ],
+      "positive_example": {
+        "context": "배포 전에 시험으로 실행했으며 정식 작업은 아니다.",
+        "before": "시험 삼아 실행을 해 보는 작업을 수행했습니다.",
+        "after": "시험 삼아 실행해 봤습니다."
+      },
+      "negative_example": {
+        "context": "배포 전에 시험으로 실행했으며 정식 작업은 아니다.",
+        "text": "실행을 완료했습니다.",
+        "reason": "시험 실행을 정식 완료로 바꿨다."
+      },
+      "counterexample": {
+        "context": "결과 확인은 끝났으며 시도나 준비 뜻이 없다.",
+        "text": "결과를 확인했습니다.",
+        "why_allowed": "단순 서술어로 완료된 행위를 정확히 전한다."
+      },
+      "ste_refs": [
+        "3.4",
+        "3.5"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        },
+        {
+          "title": "국립국어원 온라인가나다: 문장의 짜임과 -고 있다(2026-04-17 답변)",
+          "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=27&pageIndex=1&qna_seq=329585",
+          "access": "2026-10-12 공식 답변 본문 확인. 한복을 입고 있다의 진행/결과 상태 해석을 문맥으로 구별한다는 설명을 확인함. 규약의 판정 절차와 효과는 이 답변이 검증하지 않음."
+        },
+        {
+          "title": "국립국어원 상담 사례: 안경을 끼다와 안경을 쓰다의 차이(2019-12-06)",
+          "url": "https://korean.go.kr/front/mcfaq/mcfaqView.do?mcfaq_seq=6108&mn_id=207&pageIndex=11",
+          "access": "2026-10-12 공식 답변 본문 확인. 안경과 쓰다/끼다의 착용 의미 결합을 확인함. 안경 사례의 진행/결과 유지 구별은 -고 있다 답변과 명시된 사례 문맥을 연결한 설계 판단임."
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-VER-006",
+      "title": "상태 관형어와 행동 관형어를 구별한다",
+      "requirement": "잠긴·닫힌·수정된 등의 관형어가 현재 상태인지 과거 행동 결과인지 확인하고 필요한 시점·행위 관계만 밝힌다.",
+      "domain": "VER",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "관형어가 지시 대상을 고르는 기준일 때 적용한다."
+      ],
+      "exceptions": [
+        "공유된 속성 이름이나 한 대상의 현재 상태가 명확하면 긴 관계절로 풀지 않는다."
+      ],
+      "positive_example": {
+        "context": "이전에는 닫혔지만 지금은 열린 문이 있다. 지금 닫힌 문만 점검한다.",
+        "before": "닫혔던 문을 점검하세요.",
+        "after": "현재 닫힌 문을 점검하세요."
+      },
+      "negative_example": {
+        "context": "이전에는 닫혔지만 지금은 열린 문이 있다. 지금 닫힌 문만 점검한다.",
+        "text": "이전에 닫혔던 모든 문을 점검하세요.",
+        "reason": "현재 상태 기준을 과거 이력 기준으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "목록은 현재 상태를 보여 주며 잠긴 파일을 골라야 한다.",
+        "text": "잠긴 파일을 선택하세요.",
+        "why_allowed": "현재 상태로 대상을 구별하는 짧은 관형어가 명확하다."
+      },
+      "ste_refs": [
+        "3.3",
+        "3.5"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 관계절 처리의 차이",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "access": "공개 원문; 실험 구문별 처리 차이를 참고; 고정 상한 근거가 아님"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-VER-007",
+      "title": "가능성·능력·허락·의무를 유지한다",
+      "requirement": "수 있다·해도 된다·해야 한다·하는 것이 좋다의 문맥상 기능을 확인하고 가능성·능력·허락·의무·권고를 서로 치환하지 않는다.",
+      "domain": "VER",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "양태 표현을 줄이거나 지시형으로 정돈할 때 적용한다."
+      ],
+      "exceptions": [
+        "사용자가 지시로 바꾸라고 요청한 경우에도 새로운 의무의 근거와 의도를 확인한다."
+      ],
+      "positive_example": {
+        "context": "파일 삭제는 허용되지만 필수 행동이 아니다.",
+        "before": "파일의 삭제를 해도 됩니다.",
+        "after": "파일을 삭제해도 됩니다."
+      },
+      "negative_example": {
+        "context": "파일 삭제는 허용되지만 필수 행동이 아니다.",
+        "text": "파일을 삭제하세요.",
+        "reason": "허락을 수행 명령으로 강화했다."
+      },
+      "counterexample": {
+        "context": "장치의 입력 형식 지원 여부를 설명한다.",
+        "text": "이 장치는 이 형식을 읽을 수 있습니다.",
+        "why_allowed": "능력을 나타내는 수 있다가 필요한 의미를 전한다."
+      },
+      "ste_refs": [
+        "3.4",
+        "5.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 가능성 양태의 의미",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002082557",
+          "access": "서지·초록 확인; 가능성·능력·허락의 구별 참고"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-VER-008",
+      "title": "근거와 확실성의 강도를 유지한다",
+      "requirement": "추정·가능성·확인·전언을 구별하고 정보 출처가 달라지면 누가 무엇을 확인하거나 말했다는지 필요한 범위에서 표시한다.",
+      "domain": "VER",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "추정이나 외부 설명을 결과 보고로 고칠 때 적용한다."
+      ],
+      "exceptions": [
+        "대상과 가능성이 공유된 짧은 경고에 이유·확률·확인 약속을 매번 추가하지 않는다."
+      ],
+      "positive_example": {
+        "context": "제조사가 내구 시험을 통과했다고 설명했고 작성자는 시험 기록을 보지 않았다.",
+        "before": "내구 시험을 통과했습니다.",
+        "after": "제조사는 내구 시험을 통과했다고 설명했습니다."
+      },
+      "negative_example": {
+        "context": "제조사가 내구 시험을 통과했다고 설명했고 작성자는 시험 기록을 보지 않았다.",
+        "text": "내구 시험 기록을 확인했습니다.",
+        "reason": "제조사의 전언을 작성자의 기록 확인으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "저장 실패의 가능성을 알리는 짧은 경고이며 구체 확률은 알려지지 않았다.",
+        "text": "저장에 실패할 수 있습니다.",
+        "why_allowed": "확률 수치가 없다는 이유로 가능성 경고를 오류로 판정하지 않는다."
+      },
+      "ste_refs": [
+        "3.4",
+        "7.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 가능성 양태의 의미",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002082557",
+          "access": "서지·초록 확인; 가능성·능력·허락의 구별 참고"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-SYN-001",
+      "title": "주체 생략은 회복 가능할 때 허용한다",
+      "requirement": "직전 문맥의 같은 주체를 이어받고 경쟁 후보가 없으면 주어를 생략하되 주체가 바뀌거나 책임을 구별하면 이름을 쓴다.",
+      "domain": "SYN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "연속된 보고나 절차에 주체가 반복될 때 적용한다."
+      ],
+      "exceptions": [
+        "한 독자에게 주는 명령은 당신은을 추가하지 않으며 주체 대비가 목적이면 반복한다."
+      ],
+      "positive_example": {
+        "context": "첫 문장은 작성자, 두 번째 문장은 운영팀의 행동이다.",
+        "before": "문서를 수정했습니다. 배포했습니다.",
+        "after": "문서를 수정했습니다. 운영팀이 배포했습니다."
+      },
+      "negative_example": {
+        "context": "첫 문장은 작성자, 두 번째 문장은 운영팀의 행동이다.",
+        "text": "문서를 수정하고 배포했습니다.",
+        "reason": "운영팀의 행동을 작성자의 행동으로 합쳤다."
+      },
+      "counterexample": {
+        "context": "작성자가 파일을 저장하고 같은 파일을 열었다.",
+        "text": "파일을 저장했습니다. 다시 열었습니다.",
+        "why_allowed": "주체와 대상이 이어져 생략을 회복할 수 있다."
+      },
+      "ste_refs": [
+        "4.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "생략된 주어가 있는 문장 처리에 담화특출성이 미치는 영향",
+          "url": "https://accesson.kr/cogpsych/v.19/4/383/17405",
+          "access": "서지·초록 확인; 모든 생략의 우열을 입증하지 않음"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-SYN-002",
+      "title": "대상 생략은 후보가 하나일 때 허용한다",
+      "requirement": "목적어·보어를 생략한 문장에서 대상 후보를 문맥으로 하나로 정할 수 없으면 확인된 이름을 다시 쓴다.",
+      "domain": "SYN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "여러 파일·장비·설정이 언급된 뒤 짧은 지시를 할 때 적용한다."
+      ],
+      "exceptions": [
+        "선택된 UI 항목이나 한 대상만 다루는 연속 절차에서는 반복을 생략할 수 있다."
+      ],
+      "positive_example": {
+        "context": "문서와 사진 중 삭제 대상은 사진으로 확인되어 있다.",
+        "before": "문서와 사진을 업로드했습니다. 삭제하세요.",
+        "after": "문서와 사진을 업로드했습니다. 사진을 삭제하세요."
+      },
+      "negative_example": {
+        "context": "문서와 사진 중 삭제 대상은 사진으로 확인되어 있다.",
+        "text": "문서와 사진을 삭제하세요.",
+        "reason": "한 대상의 삭제 지시를 두 대상으로 확대했다."
+      },
+      "counterexample": {
+        "context": "현재 선택된 파일 하나의 메뉴이다.",
+        "text": "삭제",
+        "why_allowed": "선택 대상이 UI에서 식별되므로 버튼에 목적어를 반복하지 않는다."
+      },
+      "ste_refs": [
+        "4.2",
+        "4.5"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "생략된 주어가 있는 문장 처리에 담화특출성이 미치는 영향",
+          "url": "https://accesson.kr/cogpsych/v.19/4/383/17405",
+          "access": "서지·초록 확인; 모든 생략의 우열을 입증하지 않음"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-SYN-003",
+      "title": "지시어의 선행 대상을 하나로 연결한다",
+      "requirement": "이것·그것·해당·이를 등의 지시어는 선행 대상을 하나로 연결하고 둘 이상의 후보가 있으면 확인된 대상명을 쓴다.",
+      "domain": "SYN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "지시어나 반복을 줄인 명칭으로 대상을 가리킬 때 적용한다."
+      ],
+      "exceptions": [
+        "표·도면·선택 영역이 대상을 직접 표시하면 지시어만 쓸 수 있다."
+      ],
+      "positive_example": {
+        "context": "필터와 호스를 점검한 뒤 호스를 교체한다.",
+        "before": "필터와 호스를 점검하세요. 이를 교체하세요.",
+        "after": "필터와 호스를 점검하세요. 호스를 교체하세요."
+      },
+      "negative_example": {
+        "context": "필터와 호스를 점검한 뒤 호스를 교체한다.",
+        "text": "필터를 교체하세요.",
+        "reason": "지시어의 확인된 선행 대상을 바꿨다."
+      },
+      "counterexample": {
+        "context": "사용자가 지금 선택한 사진을 질문했다.",
+        "text": "이 사진을 사용해도 됩니다.",
+        "why_allowed": "선택 영역이 지시 대상이며 허락도 유지된다."
+      },
+      "ste_refs": [
+        "4.5"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "생략된 주어가 있는 문장 처리에 담화특출성이 미치는 영향",
+          "url": "https://accesson.kr/cogpsych/v.19/4/383/17405",
+          "access": "서지·초록 확인; 모든 생략의 우열을 입증하지 않음"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-SYN-004",
+      "title": "수식어를 해당 대상 가까이에 둔다",
+      "requirement": "시간·장소·방식·정도의 수식어를 꾸미는 동작이나 대상 가까이에 두고 다른 성분에 붙는 해석이 남으면 구조를 바꾼다.",
+      "domain": "SYN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "수식어가 둘 이상의 서술어나 명사에 붙을 수 있을 때 적용한다."
+      ],
+      "exceptions": [
+        "관습적인 어순에서 관계가 하나로 정해지면 무조건 이동하지 않는다."
+      ],
+      "positive_example": {
+        "context": "오늘은 검토한 날이고 작성일은 지난주이다.",
+        "before": "오늘 지난주에 작성한 문서를 검토했습니다.",
+        "after": "지난주에 작성한 문서를 오늘 검토했습니다."
+      },
+      "negative_example": {
+        "context": "오늘은 검토한 날이고 작성일은 지난주이다.",
+        "text": "오늘 문서를 작성하고 검토했습니다.",
+        "reason": "검토일을 작성일에도 적용했다."
+      },
+      "counterexample": {
+        "context": "하나의 동작에 장소와 시간을 덧붙인다.",
+        "text": "회의실에서 오늘 회의합니다.",
+        "why_allowed": "수식 범위를 혼동할 다른 동작이 없다."
+      },
+      "ste_refs": [
+        "4.1",
+        "9.1"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 관계절 처리의 차이",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "access": "공개 원문; 실험 구문별 처리 차이를 참고; 고정 상한 근거가 아님"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-SYN-005",
+      "title": "관형절 중첩은 관계가 확인되면 풀어 쓴다",
+      "requirement": "관형절 안에 다른 관형절이 들어가거나 한 명사에 관형절이 연속되면 각 행위의 주체·시점·대상을 확인하고 독립 문장이나 명시된 연결로 정돈한다.",
+      "domain": "SYN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "두 겹 이상의 관형절이 주체와 대상을 서로 다른 방식으로 연결할 때 적용한다."
+      ],
+      "exceptions": [
+        "단일 관형절이나 정확한 대상 선택에 필요한 짧은 중첩은 이해 관계가 명확하면 유지한다."
+      ],
+      "positive_example": {
+        "context": "사용자는 지난주에 문서를 요청했고 담당자는 오늘 그 문서를 수정했다.",
+        "before": "담당자가 오늘 수정한 사용자가 지난주에 요청한 문서를 확인하세요.",
+        "after": "사용자가 지난주에 요청한 문서를 담당자가 오늘 수정했습니다. 그 문서를 확인하세요."
+      },
+      "negative_example": {
+        "context": "사용자는 지난주에 문서를 요청했고 담당자는 오늘 그 문서를 수정했다.",
+        "text": "사용자가 오늘 수정한 문서를 확인하세요.",
+        "reason": "주체와 시점의 연결을 바꿨다."
+      },
+      "counterexample": {
+        "context": "사용자가 요청한 문서 하나를 지정한다.",
+        "text": "사용자가 요청한 문서를 여세요.",
+        "why_allowed": "관형절 하나가 대상 선택에 필요한 정보를 전한다."
+      },
+      "ste_refs": [
+        "4.1",
+        "6.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 관계절 처리의 차이",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "access": "공개 원문; 실험 구문별 처리 차이를 참고; 고정 상한 근거가 아님"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-SYN-006",
+      "title": "접속 관계를 확인해 연결한다",
+      "requirement": "원인·결과·대조·추가·선택의 관계에 맞는 연결어미나 접속어를 쓰고 나열을 원인으로 바꾸지 않는다.",
+      "domain": "SYN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "문장을 나누거나 그래서·하지만·또는으로 연결할 때 적용한다."
+      ],
+      "exceptions": [
+        "같은 주제를 잇는 단순 나열은 불필요한 접속어 없이 문장 순서로 연결한다."
+      ],
+      "positive_example": {
+        "context": "비가 온 사실과 배송 지연은 독립 보고이며 원인은 확인되지 않았다.",
+        "before": "비가 왔고 배송이 늦었습니다.",
+        "after": "비가 왔고 배송이 늦었습니다."
+      },
+      "negative_example": {
+        "context": "비가 온 사실과 배송 지연은 독립 보고이며 원인은 확인되지 않았다.",
+        "text": "비 때문에 배송이 늦었습니다.",
+        "reason": "확인되지 않은 인과관계를 추가했다."
+      },
+      "counterexample": {
+        "context": "중단 원인이 오류임이 확인되어 있다.",
+        "text": "오류가 나서 작업을 중단했습니다.",
+        "why_allowed": "확인된 인과관계를 연결어미로 표현한다."
+      },
+      "ste_refs": [
+        "4.4",
+        "6.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-SYN-007",
+      "title": "나눈 문장의 조건 범위를 보존한다",
+      "requirement": "문장을 나눌 때 조건·예외·부정이 적용되는 행동을 각 문장이나 목록의 공통 도입부에 명시한다.",
+      "domain": "SYN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "여러 행동에 하나의 조건이 걸린 문장을 분리할 때 적용한다."
+      ],
+      "exceptions": [
+        "목록의 공통 조건이 모든 항목에 적용됨을 구조로 명확히 표시하면 항목마다 반복하지 않는다."
+      ],
+      "positive_example": {
+        "context": "오류가 났을 때만 작업 중단과 담당자 알림을 모두 수행한다.",
+        "before": "오류가 나면 작업을 중단하고 담당자에게 알리세요.",
+        "after": "오류가 나면 다음 두 행동을 하세요.\n- 작업을 중단하세요.\n- 담당자에게 알리세요."
+      },
+      "negative_example": {
+        "context": "오류가 났을 때만 작업 중단과 담당자 알림을 모두 수행한다.",
+        "text": "오류가 나면 작업을 중단하세요. 담당자에게 알리세요.",
+        "reason": "알림 행동이 무조건 수행되는 지시로 읽힌다."
+      },
+      "counterexample": {
+        "context": "동작이 두 개지만 동시에 필요한 고정 절차이다.",
+        "text": "잠금 버튼을 누른 상태에서 덮개를 여세요.",
+        "why_allowed": "분리하면 유지 조건이 사라지므로 한 문장으로 유지한다."
+      },
+      "ste_refs": [
+        "4.3",
+        "5.2",
+        "5.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-SYN-008",
+      "title": "길이는 구조 검토 신호로 사용한다",
+      "requirement": "미검증 편집 트리거로서, 한 문장이 공백 기준 30어절을 넘거나 종속절 3개·관형절 2겹·서로 다른 주체 3개 중 하나를 포함하면 수동으로 구조와 의미 보존을 검토한다. 어절과 절의 경계는 상세 규약의 계산 절차에 따른다.",
+      "domain": "SYN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "길거나 얽힌 문장이 절차·설명·보고에 사용될 때 적용한다."
+      ],
+      "exceptions": [
+        "인용·코드·공식 명칭은 내용 변경 없이 주변 문장만 검토하며 숫자 초과 자체로 위반을 확정하지 않는다."
+      ],
+      "positive_example": {
+        "context": "담당자의 신청 확인과 관리자의 승인을 모두 충족한 경우에만 시스템이 결과를 통보한다. 사용자는 통보된 결과를 확인한다. 관리자가 반드시 승인한다는 뜻은 아니다.",
+        "before": "담당자가 신청을 확인하고 관리자가 이를 승인하면 시스템이 결과를 통보하고 사용자가 결과를 확인합니다.",
+        "after": "담당자가 신청을 확인하고 관리자가 승인하면 시스템이 결과를 통보합니다. 사용자는 통보된 결과를 확인합니다."
+      },
+      "negative_example": {
+        "context": "담당자의 신청 확인과 관리자의 승인을 모두 충족한 경우에만 시스템이 결과를 통보한다. 사용자는 통보된 결과를 확인한다. 관리자가 반드시 승인한다는 뜻은 아니다.",
+        "text": "담당자가 신청을 확인합니다. 관리자가 승인합니다. 시스템이 결과를 통보합니다.",
+        "reason": "확인과 승인 조건을 없애 절차 의존성을 바꿨다."
+      },
+      "counterexample": {
+        "context": "정확한 공식 표준명이 길지만 대상은 하나이다.",
+        "text": "“국가공간정보통합체계 구축 및 운영에 관한 규정”을 확인하세요.",
+        "why_allowed": "명칭 길이만으로 단어를 제거하지 않는다."
+      },
+      "ste_refs": [
+        "4.1",
+        "5.1",
+        "6.3",
+        "8.5",
+        "8.6",
+        "8.7"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 관계절 처리의 차이",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "access": "공개 원문; 실험 구문별 처리 차이를 참고; 고정 상한 근거가 아님"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-SYN-009",
+      "title": "주절의 판단을 명사화 속에 숨기지 않는다",
+      "requirement": "사실·계획·의무·조건을 밝히는 핵심 판단은 서술어로 드러내고 명사화가 유효한 대상·상태·제목은 유지한다.",
+      "domain": "SYN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "것·함·에 대한을 연쇄해 문장의 주된 판단이 뒤로 밀릴 때 적용한다."
+      ],
+      "exceptions": [
+        "저장 실패·승인 여부처럼 구별할 개념이나 표 제목은 명사형으로 쓴다."
+      ],
+      "positive_example": {
+        "context": "로그 보관이 필수라는 뜻이다.",
+        "before": "로그의 보관이 필요한 것이라는 점에 대한 안내입니다.",
+        "after": "로그를 보관해야 합니다."
+      },
+      "negative_example": {
+        "context": "로그 보관이 필수라는 뜻이다.",
+        "text": "로그를 보관했습니다.",
+        "reason": "의무 안내를 완료 보고로 바꿨다."
+      },
+      "counterexample": {
+        "context": "표의 열은 승인이 났는지 표시한다.",
+        "text": "승인 여부",
+        "why_allowed": "명사형이 측정할 상태를 정확히 이름 붙인다."
+      },
+      "ste_refs": [
+        "3.5",
+        "3.7",
+        "9.1"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-KO-001",
+      "title": "조사는 역할이 달라지는 곳에 남긴다",
+      "requirement": "역할 모호·수량 대비·책임 구분에 필요한 조사는 남기고, 본문에서도 문맥으로 역할을 하나로 회복할 수 있는 구어·압축 표현의 생략을 허용한다.",
+      "domain": "KO",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "조사 없는 명사 연쇄가 행위자·대상·수신자를 혼동하게 할 때 적용한다."
+      ],
+      "exceptions": [
+        "본문의 구어·압축 표현, 검색어·파일명·표 제목·UI 레이블은 역할이 하나로 회복되고 대상 대비나 책임 구별이 사라지지 않으면 조사를 생략한다."
+      ],
+      "positive_example": {
+        "context": "관리자가 담당자에게 알리는 절차이다.",
+        "before": "관리자 담당자 알림",
+        "after": "관리자가 담당자에게 알립니다."
+      },
+      "negative_example": {
+        "context": "관리자가 담당자에게 알리는 절차이다.",
+        "text": "담당자가 관리자에게 알립니다.",
+        "reason": "알림의 발신자와 수신자를 뒤집었다."
+      },
+      "counterexample": {
+        "context": "업무 대화의 본문에서 작성자가 선택된 파일 하나의 저장을 보고하며 다른 파일과 대비하지 않는다.",
+        "text": "파일 저장했어요.",
+        "why_allowed": "목적어의 조사를 생략했지만 대상과 주체가 문맥에서 하나로 회복되며 책임·수량 대비도 없다."
+      },
+      "ste_refs": [
+        "4.2",
+        "4.5"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "생략된 주어가 있는 문장 처리에 담화특출성이 미치는 영향",
+          "url": "https://accesson.kr/cogpsych/v.19/4/383/17405",
+          "access": "서지·초록 확인; 모든 생략의 우열을 입증하지 않음"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-KO-002",
+      "title": "은·는과 이·가의 대비를 보존한다",
+      "requirement": "주제·대조·초점이 사실 구별에 쓰이면 은·는과 이·가를 기계적으로 바꾸거나 지우지 않는다.",
+      "domain": "KO",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "조사 정돈으로 포함 범위나 책임 대비가 달라질 때 적용한다."
+      ],
+      "exceptions": [
+        "대조나 초점이 없고 문법과 의미가 같으면 자연스러운 문맥상의 조사를 고른다."
+      ],
+      "positive_example": {
+        "context": "저장만 끝났고 배포는 끝나지 않았다는 대비이다.",
+        "before": "저장은 완료가 되었지만 배포는 완료가 되지 않았습니다.",
+        "after": "저장은 완료됐지만 배포는 완료되지 않았습니다."
+      },
+      "negative_example": {
+        "context": "저장만 끝났고 배포는 끝나지 않았다는 대비이다.",
+        "text": "저장과 배포가 완료됐습니다.",
+        "reason": "대조와 미완료 사실을 지웠다."
+      },
+      "counterexample": {
+        "context": "사건을 처음 보고하며 다른 주체와 대비하지 않는다.",
+        "text": "서버가 응답하지 않습니다.",
+        "why_allowed": "새 사건의 주체를 이·가로 나타내는 것이 적절하다."
+      },
+      "ste_refs": [
+        "4.2",
+        "9.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-KO-003",
+      "title": "부정의 범위를 확인한다",
+      "requirement": "안·못·아니다·없다와 모든·항상·반드시 등의 범위가 결합하면 무엇이 부정되는지 확인해 전면 부정과 부분 부정을 구별한다.",
+      "domain": "KO",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "부정문이 전부 실패와 일부 실패 등 서로 다른 해석을 만들 때 적용한다."
+      ],
+      "exceptions": [
+        "범위가 문맥에서 이미 하나로 정해진 짧은 부정문은 길게 풀지 않는다."
+      ],
+      "positive_example": {
+        "context": "일부 파일은 열리지만 모든 파일이 열리는 것은 아니다.",
+        "before": "모든 파일이 열리지 않습니다.",
+        "after": "일부 파일은 열리지만 모든 파일이 열리는 것은 아닙니다."
+      },
+      "negative_example": {
+        "context": "일부 파일은 열리지만 모든 파일이 열리는 것은 아니다.",
+        "text": "어떤 파일도 열리지 않습니다.",
+        "reason": "부분 부정을 전면 부정으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "저장 기능 자체가 현재 작동하지 않는다.",
+        "text": "저장할 수 없습니다.",
+        "why_allowed": "능력·가능의 부정 범위가 하나로 정해진다."
+      },
+      "ste_refs": [
+        "4.1",
+        "9.1"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-KO-004",
+      "title": "불능과 비수행을 구별한다",
+      "requirement": "못 했다·안 했다·하지 않았다가 기능 불능인지 의도적 비수행인지 단순 이력인지 구별하고 이유가 없으면 원인을 확정하지 않는다.",
+      "domain": "KO",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "부정 서술을 간결하게 바꾸거나 실패 원인을 보고할 때 적용한다."
+      ],
+      "exceptions": [
+        "원문이 원인을 구별하지 않고 이력만 말하면 하지 않았다를 유지한다."
+      ],
+      "positive_example": {
+        "context": "검토를 하지 않은 사실만 확인되며 이유는 없다.",
+        "before": "검토의 수행을 하지 않았습니다.",
+        "after": "검토하지 않았습니다."
+      },
+      "negative_example": {
+        "context": "검토를 하지 않은 사실만 확인되며 이유는 없다.",
+        "text": "검토할 수 없었습니다.",
+        "reason": "비수행 이력을 능력 불능으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "권한 부족 때문에 실제 삭제가 불가능했다.",
+        "text": "권한이 없어 삭제하지 못했습니다.",
+        "why_allowed": "불능의 원인이 확인되어 못의 뜻을 보존한다."
+      },
+      "ste_refs": [
+        "3.2",
+        "3.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 가능성 양태의 의미",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002082557",
+          "access": "서지·초록 확인; 가능성·능력·허락의 구별 참고"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-KO-005",
+      "title": "높임과 문장 기능을 함께 유지한다",
+      "requirement": "독자 관계에 맞는 종결형을 선택하되 높임을 줄이거나 늘리면서 요청·허락·명령·질문을 서로 바꾸지 않는다.",
+      "domain": "KO",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "하십시오체·해요체·요청 표현을 정돈할 때 적용한다."
+      ],
+      "exceptions": [
+        "제품의 짧은 안내·제목·버튼에는 명사형이나 짧은 동사를 쓰며 긴 높임 문장을 강제하지 않는다."
+      ],
+      "positive_example": {
+        "context": "저장을 정중하게 요청하는 문장이며 허락이 아니다.",
+        "before": "저장을 부탁드리는 바입니다.",
+        "after": "저장을 부탁드립니다."
+      },
+      "negative_example": {
+        "context": "저장을 정중하게 요청하는 문장이며 허락이 아니다.",
+        "text": "저장해도 됩니다.",
+        "reason": "정중한 요청을 허락으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "현재 선택한 내용을 저장하는 버튼이다.",
+        "text": "저장",
+        "why_allowed": "버튼의 자리와 기능이 명확해 종결형이 필요하지 않다."
+      },
+      "ste_refs": [
+        "5.3",
+        "9.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 종결표현의 화행 기능과 한국어 모어 화자의 인식에 관한 연구",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001480489",
+          "access": "서지·초록 확인; 문맥별 화행 기능 참고"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-KO-006",
+      "title": "주체 높임은 실제 주체에 맞춘다",
+      "requirement": "시·께서 등의 높임 표지가 높이는 대상을 확인하고 사물·상태에 인물 높임을 기계적으로 붙이지 않는다.",
+      "domain": "KO",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "사물이나 기능을 설명하는 안내에 인물 높임이 쓰일 때 적용한다."
+      ],
+      "exceptions": [
+        "공식 인용이나 고객을 실제 주체로 높이는 문장은 그 기능을 유지한다."
+      ],
+      "positive_example": {
+        "context": "저장 상태를 알리는 일반 UI 문장이다.",
+        "before": "설정이 저장되셨습니다.",
+        "after": "설정이 저장되었습니다."
+      },
+      "negative_example": {
+        "context": "저장 상태를 알리는 일반 UI 문장이다.",
+        "text": "고객님이 저장하셨습니다.",
+        "reason": "행위자가 제공되지 않았는데 고객으로 확정했다."
+      },
+      "counterexample": {
+        "context": "담당 교수의 승인이 사실이며 교수에게 높임을 쓴다.",
+        "text": "교수님께서 승인하셨습니다.",
+        "why_allowed": "실제 인물이 주체이며 적절한 높임을 나타낸다."
+      },
+      "ste_refs": [
+        "9.2",
+        "9.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 종결표현의 화행 기능과 한국어 모어 화자의 인식에 관한 연구",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001480489",
+          "access": "서지·초록 확인; 문맥별 화행 기능 참고"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-KO-007",
+      "title": "피동·사동의 역할과 원인 관계를 보존한다",
+      "requirement": "의미 없는 겹친 피동만 줄인다. 사동주·행위자·대상과 원인·명령·허락 관계를 보존한다. 능동화를 강제하지 않는다.",
+      "domain": "KO",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "피동·사동을 편집할 때 적용한다."
+      ],
+      "exceptions": [
+        "행위자·원인·수혜·의도 차이가 있는 사동·피동 결합은 뜻을 확인한 뒤 판단한다."
+      ],
+      "positive_example": {
+        "context": "문서가 수정된 상태를 보고하며 별도 사동 의미는 없다.",
+        "before": "문서가 수정되어졌습니다.",
+        "after": "문서가 수정되었습니다."
+      },
+      "negative_example": {
+        "context": "문서가 수정된 상태를 보고하며 별도 사동 의미는 없다.",
+        "text": "문서를 수정하겠습니다.",
+        "reason": "결과 상태를 미래 약속으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "관리자가 담당자에게 문서를 수정하도록 요청한 사실이다.",
+        "text": "관리자가 담당자에게 문서를 수정하게 했습니다.",
+        "why_allowed": "사동은 다른 사람에게 행동하게 한 관계를 나타내므로 단순 수정으로 줄이지 않는다."
+      },
+      "ste_refs": [
+        "3.6",
+        "3.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        },
+        {
+          "title": "국립국어원 온라인가나다: 사동의 정의(2025-01-04 답변)",
+          "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=261&pageIndex=1&qna_seq=308552",
+          "access": "2026-10-12 공식 답변 본문 확인. -게 하다/그렇게 되게 하다의 관계와 혈압 변화 용례, 단형/장형 사동 설명을 확인함. 모든 사동을 명령으로 치환할 근거는 아니며 문법 유형 분류에 견해 차이가 있음을 답변이 밝힘."
+        },
+        {
+          "title": "국립국어원 한국어기초사전: 웃기다(뜻 1, 문형)",
+          "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=63516",
+          "access": "2026-10-12 공식 사전 본문에서 한국어 뜻 1과 문형 1이 2를 웃기다, 이야기 때문에 웃는 용례를 확인함. 뜻 2의 평가 의미와 구별함. 인과를 명령으로 바꾸지 않는 기준은 사례 문맥에 근거한 설계 판단임."
+        },
+        {
+          "title": "이홍식: 문장의 주요 성분, 새국어생활 13권 4호(2003), 인쇄 160~161쪽",
+          "url": "https://www.korean.go.kr/nkview/nklife/2003_4/2003_0410.pdf",
+          "access": "2026-10-12 국립국어원 공개 원문에서 예문 (24)의 능동 목적어/피동 주어 대응과 예문 (26)의 사동 내포절 주체를 확인함. 글 전체의 논의를 검증한 것은 아니며 모든 피동을 능동으로 바꾸라는 지침으로 사용하지 않음."
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-PROC-001",
+      "title": "한 단계에 하나의 실행 단위를 둔다",
+      "requirement": "독자가 각각 완료·검사해야 하는 독립 행동은 별도 단계로 제시하고 동시에 수행해야 하는 행동은 한 실행 단위에 둔다.",
+      "domain": "PROC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "절차·작업 지시"
+      ],
+      "conditions": [
+        "복수 지시가 한 문장에 나열될 때 적용한다."
+      ],
+      "exceptions": [
+        "열어서 확인하다처럼 하나의 즉시 행동으로 이해되고 별도 확인점이 없는 결합은 유지한다."
+      ],
+      "positive_example": {
+        "context": "파일 저장 후 닫기가 별도 완료 단계이다.",
+        "before": "파일을 저장하고 창을 닫으세요.",
+        "after": "1. 파일을 저장하세요.\n2. 창을 닫으세요."
+      },
+      "negative_example": {
+        "context": "파일 저장 후 닫기가 별도 완료 단계이다.",
+        "text": "창을 닫고 파일을 저장하세요.",
+        "reason": "필요한 실행 순서를 뒤집었다."
+      },
+      "counterexample": {
+        "context": "버튼을 유지하며 덮개를 여는 행동이다.",
+        "text": "잠금 버튼을 누른 상태에서 덮개를 여세요.",
+        "why_allowed": "동시 유지 조건을 분리하지 않아야 한다."
+      },
+      "ste_refs": [
+        "5.1",
+        "5.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "국군 장병의 언어 사용 실태 조사와 교육 자료 개발",
+          "url": "https://www.korean.go.kr/front/reportData/reportDataView.do?mn_id=&pageIndex=2&report_seq=910&searchOrder=",
+          "access": "공식 원문 관련 부분; 지시·보고·공유 지식 참고; 현행 작전명령 규정이 아님"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-PROC-002",
+      "title": "지시는 실행할 동작으로 끝낸다",
+      "requirement": "정해진 행동을 지시하는 단계는 실행 가능한 동사와 대상·필수 조건을 쓰고 상태 설명이나 희망을 지시 대신 쓰지 않는다.",
+      "domain": "PROC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "절차·작업 지시"
+      ],
+      "conditions": [
+        "독자에게 실제 수행을 맡긴 절차 단계에 적용한다."
+      ],
+      "exceptions": [
+        "허락·권고·질문은 지시로 강제하지 않고 기존 문장 기능을 유지한다."
+      ],
+      "positive_example": {
+        "context": "절차가 케이블 연결을 필수 행동으로 지정했다.",
+        "before": "케이블 연결이 이루어질 것입니다.",
+        "after": "케이블을 연결하세요."
+      },
+      "negative_example": {
+        "context": "절차가 케이블 연결을 필수 행동으로 지정했다.",
+        "text": "케이블을 연결해도 됩니다.",
+        "reason": "필수 단계의 지시를 선택적 허락으로 약화했다."
+      },
+      "counterexample": {
+        "context": "파일 삭제가 허용되지만 의무는 아니다.",
+        "text": "파일을 삭제해도 됩니다.",
+        "why_allowed": "허락의 기능을 명령으로 바꾸지 않는다."
+      },
+      "ste_refs": [
+        "5.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 종결표현의 화행 기능과 한국어 모어 화자의 인식에 관한 연구",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001480489",
+          "access": "서지·초록 확인; 문맥별 화행 기능 참고"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-PROC-003",
+      "title": "선행 조건을 실행보다 먼저 제시한다",
+      "requirement": "행동의 실행 여부를 정하는 조건을 해당 행동 앞에 제시하고 수행을 시작한 뒤에야 알게 되는 구조를 피한다.",
+      "domain": "PROC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "절차·작업 지시"
+      ],
+      "conditions": [
+        "조건 충족에 따라 해야 할 행동이 달라질 때 적용한다."
+      ],
+      "exceptions": [
+        "설명문에서 이미 실행한 행동과 사후 조건을 분석하는 순서는 독자의 질문에 맞춘다."
+      ],
+      "positive_example": {
+        "context": "온도가 60도 이상일 때만 작동을 중단한다.",
+        "before": "작동을 중단하세요. 온도가 60도 이상이면 그렇습니다.",
+        "after": "온도가 60도 이상이면 작동을 중단하세요."
+      },
+      "negative_example": {
+        "context": "온도가 60도 이상일 때만 작동을 중단한다.",
+        "text": "온도가 60도 이하이면 작동을 중단하세요.",
+        "reason": "조건의 수치 방향을 뒤집었다."
+      },
+      "counterexample": {
+        "context": "정지 명령의 조건은 앞선 단계에서 확인됐다.",
+        "text": "작동을 중단하세요.",
+        "why_allowed": "공유된 조건을 단일 단계에서 무조건 반복할 필요가 없다."
+      },
+      "ste_refs": [
+        "5.4",
+        "7.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "국군 장병의 언어 사용 실태 조사와 교육 자료 개발",
+          "url": "https://www.korean.go.kr/front/reportData/reportDataView.do?mn_id=&pageIndex=2&report_seq=910&searchOrder=",
+          "access": "공식 원문 관련 부분; 지시·보고·공유 지식 참고; 현행 작전명령 규정이 아님"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-PROC-004",
+      "title": "예외의 적용 행동을 특정한다",
+      "requirement": "예외가 어느 조건이나 행동을 면제하는지 같은 문장 또는 공통 도입부에서 밝히고 단독 단서를 뒤로 떨어뜨리지 않는다.",
+      "domain": "PROC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "절차·작업 지시"
+      ],
+      "conditions": [
+        "단·다만·제외 등의 예외가 절차에 붙을 때 적용한다."
+      ],
+      "exceptions": [
+        "예외가 없는 단순 절차에는 예외를 만들어 추가하지 않는다."
+      ],
+      "positive_example": {
+        "context": "자동 백업이 완료된 경우에만 수동 백업을 생략한다.",
+        "before": "수동 백업을 하세요. 자동 백업이 끝나면 제외입니다.",
+        "after": "자동 백업이 끝나지 않았으면 수동 백업을 하세요."
+      },
+      "negative_example": {
+        "context": "자동 백업이 완료된 경우에만 수동 백업을 생략한다.",
+        "text": "자동 백업 기능이 있으면 수동 백업을 생략하세요.",
+        "reason": "완료 조건을 기능 존재 조건으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "모든 장비에 같은 점검이 적용되며 예외는 없다.",
+        "text": "모든 장비를 점검하세요.",
+        "why_allowed": "독자가 필요하지 않은 예외를 덧붙이지 않는다."
+      },
+      "ste_refs": [
+        "5.4",
+        "4.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-PROC-005",
+      "title": "순서와 동시성의 표지를 남긴다",
+      "requirement": "전·후·동안·상태에서·동시에의 관계를 보존하고 번호 목록으로 바꿀 때도 먼저/이후/유지를 드러낸다.",
+      "domain": "PROC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "절차·작업 지시"
+      ],
+      "conditions": [
+        "실행 시점이나 지속 상태가 결과를 바꾸는 절차에 적용한다."
+      ],
+      "exceptions": [
+        "순서가 자유로운 독립 점검은 번호가 우선순위나 선후를 뜻하지 않는다고 필요한 경우 밝힌다."
+      ],
+      "positive_example": {
+        "context": "잠금 버튼을 계속 누른 동안만 덮개가 열린다.",
+        "before": "잠금 버튼을 누르고 덮개를 여세요.",
+        "after": "잠금 버튼을 누른 상태에서 덮개를 여세요."
+      },
+      "negative_example": {
+        "context": "잠금 버튼을 계속 누른 동안만 덮개가 열린다.",
+        "text": "1. 잠금 버튼을 누르고 놓으세요.\n2. 덮개를 여세요.",
+        "reason": "지속해서 눌러야 하는 조건을 없앴다."
+      },
+      "counterexample": {
+        "context": "순서가 정해지지 않은 두 소모품의 상태 점검이다.",
+        "text": "필터와 호스의 상태를 확인하세요.",
+        "why_allowed": "문맥상 독립 확인이며 임의의 순서를 추가하지 않는다."
+      },
+      "ste_refs": [
+        "5.2",
+        "5.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-PROC-006",
+      "title": "행동 기준과 재량을 구별한다",
+      "requirement": "정해진 절차가 필요한 지시는 기준이나 참조 절차를 밝히고 방법을 독자에게 맡긴 지시는 목적과 확인된 제약을 유지한다.",
+      "domain": "PROC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "절차·작업 지시"
+      ],
+      "conditions": [
+        "적절히·알아서·충분히가 실행 판단을 맡길 때 적용한다."
+      ],
+      "exceptions": [
+        "독자가 공통 기준을 알고 있거나 방법 선택 자체가 위임된 경우에는 정해진 행동을 창작해 강제하지 않는다."
+      ],
+      "positive_example": {
+        "context": "작성자가 적용할 기준으로 E1 절차를 확인했다. E1 절차는 문서에 있지만 이 지시와 E1의 연결은 독자에게 공유되지 않았다.",
+        "before": "오류를 적절히 처리하세요.",
+        "after": "E1 오류 처리 절차에 따라 처리하세요."
+      },
+      "negative_example": {
+        "context": "작성자가 적용할 기준으로 E1 절차를 확인했다. E1 절차는 문서에 있지만 이 지시와 E1의 연결은 독자에게 공유되지 않았다.",
+        "text": "오류가 나면 파일을 삭제하세요.",
+        "reason": "원문과 문맥에 없는 복구 동작을 임의로 지시했다."
+      },
+      "counterexample": {
+        "context": "담당자는 주어진 예산 안에서 설치 방법을 선택할 재량이 있다.",
+        "text": "예산 한도 안에서 적절한 설치 방법을 선택하세요.",
+        "why_allowed": "방법 선택이 전달 목적이며 세부 절차 강제가 아니다."
+      },
+      "ste_refs": [
+        "5.3",
+        "5.4",
+        "9.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "ADP 6-0 Mission Command",
+          "url": "https://irp.fas.org/doddir/army/adp6_0.pdf",
+          "access": "공개 원문; 목적·제약·재량 참고; 한국어 표현 효과 근거가 아님"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-PROC-007",
+      "title": "필수 행동을 참고 사항에 숨기지 않는다",
+      "requirement": "필수 실행·점검·안전 조치와 행동 없는 필수 요구조건·허용 한계는 본문 절차·사양·경고에 두고 참고 사항에는 보충 정보만 둔다.",
+      "domain": "PROC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "절차·작업 지시"
+      ],
+      "conditions": [
+        "주석·참고·팁 속에 수행 의무·필수 요구조건·허용 한계가 들어 있을 때 적용한다. 행동 없는 조건이나 한계도 본문에서 판단할 수 있어야 한다."
+      ],
+      "exceptions": [
+        "같은 단계에 이미 적힌 행동의 이유·배경을 주석으로 설명하는 것은 허용한다."
+      ],
+      "positive_example": {
+        "context": "전원 차단은 필수 단계이며 참고 정보가 아니다.",
+        "before": "참고: 전원을 차단해야 합니다.",
+        "after": "전원을 차단하세요."
+      },
+      "negative_example": {
+        "context": "전원 차단은 필수 단계이며 참고 정보가 아니다.",
+        "text": "팁: 필요하면 전원을 차단하세요.",
+        "reason": "필수 안전 행동을 선택적 팁으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "전원 차단 단계는 이미 있으며 참고는 이유를 설명한다.",
+        "text": "참고: 이 장치는 전원을 차단해도 설정을 유지합니다.",
+        "why_allowed": "추가 행동이 아닌 기능 정보를 제공한다."
+      },
+      "ste_refs": [
+        "5.5",
+        "7.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-DESC-001",
+      "title": "독자 질문의 핵심 상태부터 보고한다",
+      "requirement": "상태 보고에서는 질문에 답하는 결과·실패·미완료를 먼저 말하고 그 결론의 범위나 제한을 바로 연결한다.",
+      "domain": "DESC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "설명·상태 보고"
+      ],
+      "conditions": [
+        "완료 여부나 결과를 묻는 LLM 답변과 업무 보고에 적용한다."
+      ],
+      "exceptions": [
+        "교육·배경 설명은 이해 순서에 맞춰 구성하며 결론이 중요하지 않은 장르에 결과 우선을 강제하지 않는다."
+      ],
+      "positive_example": {
+        "context": "질문은 서버 배포 여부이며 파일 저장만 완료됐다.",
+        "before": "파일은 저장됐습니다. 서버 배포는 아직 안 됐습니다.",
+        "after": "서버에는 아직 배포되지 않았습니다. 파일은 저장됐습니다."
+      },
+      "negative_example": {
+        "context": "질문은 서버 배포 여부이며 파일 저장만 완료됐다.",
+        "text": "저장을 마쳤으므로 작업을 완료했습니다.",
+        "reason": "질문한 배포의 미완료를 저장 완료로 가렸다."
+      },
+      "counterexample": {
+        "context": "질문이 파일 저장 여부이며 서버 배포는 별도 작업이다.",
+        "text": "파일은 저장됐습니다. 서버에는 아직 반영되지 않았습니다.",
+        "why_allowed": "질문에 답한 뒤 필요한 제한을 함께 밝힌다."
+      },
+      "ste_refs": [
+        "6.1",
+        "6.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "국군 장병의 언어 사용 실태 조사와 교육 자료 개발",
+          "url": "https://www.korean.go.kr/front/reportData/reportDataView.do?mn_id=&pageIndex=2&report_seq=910&searchOrder=",
+          "access": "공식 원문 관련 부분; 지시·보고·공유 지식 참고; 현행 작전명령 규정이 아님"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-DESC-002",
+      "title": "정의와 세부 정보를 이해 순서로 제공한다",
+      "requirement": "새 개념이 다음 설명의 전제이면 필요한 정의를 먼저 주고 구성·동작·예외를 단계적으로 연결한다.",
+      "domain": "DESC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "설명·상태 보고"
+      ],
+      "conditions": [
+        "독자가 처음 보는 기능·공정·개념을 설명할 때 적용한다."
+      ],
+      "exceptions": [
+        "독자가 이미 아는 정의는 반복하지 않으며 직접 답을 요구한 질문에는 필요한 답부터 준다."
+      ],
+      "positive_example": {
+        "context": "독자는 복제본의 의미를 처음 접한다.",
+        "before": "복제본을 갱신하면 원본의 변경이 반영됩니다. 복제본은 원본을 복사한 자료입니다.",
+        "after": "복제본은 원본을 복사한 자료입니다. 복제본을 갱신하면 원본의 변경이 반영됩니다."
+      },
+      "negative_example": {
+        "context": "독자는 복제본의 의미를 처음 접한다.",
+        "text": "복제본은 원본입니다.",
+        "reason": "자료 관계의 구별을 없앴다."
+      },
+      "counterexample": {
+        "context": "개발자는 복제본과 원본을 이미 구별하며 갱신 여부를 물었다.",
+        "text": "복제본은 아직 갱신되지 않았습니다.",
+        "why_allowed": "정의 반복 없이 질문한 상태를 전한다."
+      },
+      "ste_refs": [
+        "6.1"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-DESC-003",
+      "title": "단락의 중심 주제를 유지한다",
+      "requirement": "한 단락은 하나의 중심 질문이나 주제를 전개하고 다른 판단·절차·대상으로 전환하면 새 단락을 쓴다.",
+      "domain": "DESC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "설명·상태 보고"
+      ],
+      "conditions": [
+        "서로 다른 목적의 정보가 한 단락에 섞일 때 적용한다."
+      ],
+      "exceptions": [
+        "원인과 결과·비교 대상·반례가 같은 중심 질문을 설명하면 한 단락에 함께 둘 수 있다."
+      ],
+      "positive_example": {
+        "context": "저장 위치 설명과 계정 탈퇴 절차는 독립 주제이다.",
+        "before": "파일은 로컬 폴더에 저장됩니다. 계정을 삭제하려면 설정을 여세요.",
+        "after": "파일은 로컬 폴더에 저장됩니다.\n\n계정을 삭제하려면 설정을 여세요."
+      },
+      "negative_example": {
+        "context": "저장 위치 설명과 계정 탈퇴 절차는 독립 주제이다.",
+        "text": "파일을 저장하려면 계정을 삭제하세요.",
+        "reason": "단락을 나누지 않고 두 주제를 조건으로 연결했다."
+      },
+      "counterexample": {
+        "context": "저장 위치와 위치 변경 방법이 같은 질문에 답한다.",
+        "text": "파일은 로컬 폴더에 저장됩니다. 저장 위치는 설정에서 바꿀 수 있습니다.",
+        "why_allowed": "한 중심 주제의 상태와 조정 방법을 설명한다."
+      },
+      "ste_refs": [
+        "6.4",
+        "6.5"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-DESC-004",
+      "title": "긴 단락은 논리 전환점에서 검토한다",
+      "requirement": "미검증 편집 트리거로서, 단락이 여섯 문장을 넘으면 중심 주장·근거·예외의 경계를 검토하고 독자가 구분해 읽을 부분에서 나눈다. 문장 수만으로 자동 분할하지 않는다.",
+      "domain": "DESC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "설명·상태 보고"
+      ],
+      "conditions": [
+        "지속 설명이 긴 단락에 모일 때 적용한다."
+      ],
+      "exceptions": [
+        "하나의 짧은 사례를 이어 설명하는 문장들이 한 단락에 필요한 경우에는 유지한다. 유지 이유는 편집 검토 기록에만 남기고 독자용 본문이나 LLM 응답에 덧붙이지 않는다."
+      ],
+      "positive_example": {
+        "context": "원문은 일곱 문장의 한 단락이며 저장 위치·이름과 파일 보관 기간이라는 두 주제를 설명한다.",
+        "before": "파일은 로컬 폴더에 저장됩니다. 저장 위치는 설정에서 바꿉니다. 폴더 이름은 기록됩니다. 파일명은 유지됩니다. 파일은 30일 보관됩니다. 30일이 지나면 보관 대상에서 제외됩니다. 보관 기간은 관리자만 바꿀 수 있습니다.",
+        "after": "파일은 로컬 폴더에 저장됩니다. 저장 위치는 설정에서 바꿉니다. 폴더 이름은 기록됩니다. 파일명은 유지됩니다.\n\n파일은 30일 보관됩니다. 30일이 지나면 보관 대상에서 제외됩니다. 보관 기간은 관리자만 바꿀 수 있습니다."
+      },
+      "negative_example": {
+        "context": "원문은 일곱 문장의 한 단락이며 저장 위치·이름과 파일 보관 기간이라는 두 주제를 설명한다.",
+        "text": "파일을 설정에서 30일마다 저장하세요.",
+        "reason": "설명 두 개를 새 지시로 합쳤다."
+      },
+      "counterexample": {
+        "context": "하나의 계산 예제를 짧은 일곱 문장으로 순서대로 설명하며 중간 분할이 참조 연결을 끊는다.",
+        "text": "값은 1입니다. 1을 더합니다. 값은 2입니다. 2를 곱합니다. 값은 4입니다. 1을 뺍니다. 결과는 3입니다.",
+        "why_allowed": "여섯 문장은 자동 제한이 아닌 구조 검토 기준이며 사례의 연속성을 유지한다."
+      },
+      "ste_refs": [
+        "6.6"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-DESC-005",
+      "title": "반복은 필요한 구별을 남기고 줄인다",
+      "requirement": "같은 결론이나 공유된 배경이 새 근거·조건·구별을 더하지 않으면 반복을 줄이고 다른 대상·시점의 상태는 유지한다.",
+      "domain": "DESC",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "설명·상태 보고"
+      ],
+      "conditions": [
+        "LLM 응답에서 같은 결론을 여러 방식으로 되풀이할 때 적용한다."
+      ],
+      "exceptions": [
+        "위험 행동 직전의 안전 경고·장소가 다른 UI 안내·중요 대비는 독자의 판단에 필요하면 반복한다."
+      ],
+      "positive_example": {
+        "context": "두 문장은 같은 파일 저장 완료를 말한다.",
+        "before": "파일을 저장했습니다. 파일 저장이 완료되었습니다.",
+        "after": "파일을 저장했습니다."
+      },
+      "negative_example": {
+        "context": "두 문장은 같은 파일 저장 완료를 말한다.",
+        "text": "서버에도 배포했습니다.",
+        "reason": "반복을 없애려다 다른 완료 사실을 추가했다."
+      },
+      "counterexample": {
+        "context": "로컬 저장과 서버 배포는 서로 다른 단계이다.",
+        "text": "파일을 저장했습니다. 서버에는 아직 배포되지 않았습니다.",
+        "why_allowed": "서로 다른 상태의 구별이므로 중복으로 삭제하지 않는다."
+      },
+      "ste_refs": [
+        "6.2",
+        "6.5",
+        "9.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WARN-001",
+      "title": "위험 표지는 적용 체계의 수준을 따른다",
+      "requirement": "안전 경고의 위험·주의 표지는 해당 제품이나 업무의 실제 분류에 맞추고 위험도를 추정해 격상·격하하지 않는다.",
+      "domain": "WARN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "안전 경고·기능 경고"
+      ],
+      "conditions": [
+        "위험 표지가 이미 정해진 안전 안내를 작성하거나 옮길 때 적용한다."
+      ],
+      "exceptions": [
+        "단순 기능 오류 안내는 인명 안전 경고 체계로 바꾸지 않으며 조직별 위험 체계가 없으면 수준을 창작하지 않는다."
+      ],
+      "positive_example": {
+        "context": "제조사 안전 문서는 해당 감전 조치를 경고로 분류했다.",
+        "before": "참고: 감전 위험이 있습니다.",
+        "after": "경고: 감전 위험이 있습니다."
+      },
+      "negative_example": {
+        "context": "제조사 안전 문서는 해당 감전 조치를 경고로 분류했다.",
+        "text": "팁: 감전 위험이 있습니다.",
+        "reason": "제조사의 위험 수준을 참고 수준으로 낮췄다."
+      },
+      "counterexample": {
+        "context": "저장 버튼의 실패 가능성을 일반 기능 알림으로 표시한다.",
+        "text": "저장에 실패할 수 있습니다.",
+        "why_allowed": "인명 위험 수준이 알려지지 않았고 기능 경고 자체가 충분하다."
+      },
+      "ste_refs": [
+        "7.1"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WARN-002",
+      "title": "행동 전에 위험 조건과 대응을 연결한다",
+      "requirement": "안전 행동이 필요한 경고는 해당 행동 전에 배치하고 위험 조건과 확인된 금지·필수 행동을 함께 밝힌다.",
+      "domain": "WARN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "안전 경고·기능 경고"
+      ],
+      "conditions": [
+        "독자가 실행 중 위험에 노출될 수 있는 절차에 적용한다."
+      ],
+      "exceptions": [
+        "단순 위험 가능성만 전달하는 문맥에는 알려지지 않은 대응 절차를 추가하지 않는다."
+      ],
+      "positive_example": {
+        "context": "전원을 켠 채 덮개를 열면 감전 위험이 있으며 전원 차단이 필수이다.",
+        "before": "덮개를 여세요. 경고: 먼저 전원을 차단하세요.",
+        "after": "경고: 전원을 차단한 뒤 덮개를 여세요. 전원을 켠 채 열면 감전 위험이 있습니다."
+      },
+      "negative_example": {
+        "context": "전원을 켠 채 덮개를 열면 감전 위험이 있으며 전원 차단이 필수이다.",
+        "text": "덮개를 연 뒤 전원을 차단하세요.",
+        "reason": "위험을 피하기 위한 선행 조치 순서를 뒤집었다."
+      },
+      "counterexample": {
+        "context": "호환되지 않는 파일 형식의 오류 가능성만 알려져 있다.",
+        "text": "이 파일을 열 때 문제가 있을 수 있습니다.",
+        "why_allowed": "확인되지 않은 안전 조치나 시험 약속을 만들지 않는다."
+      },
+      "ste_refs": [
+        "7.2",
+        "5.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WARN-003",
+      "title": "위험 결과를 조건과 연결해 설명한다",
+      "requirement": "안전 판단에 필요한 경우 확인된 위험이나 가능한 결과를 해당 조건과 연결해 말하고 가능성을 확정 피해로 바꾸지 않는다.",
+      "domain": "WARN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "안전 경고·기능 경고"
+      ],
+      "conditions": [
+        "독자가 경고의 이유와 행동 결과를 알아야 할 때 적용한다."
+      ],
+      "exceptions": [
+        "대상과 위험이 공유된 짧은 경고에서는 이유를 반복하지 않는다."
+      ],
+      "positive_example": {
+        "context": "전원을 켠 채 덮개를 열면 감전이 가능하다는 자료가 있고, 같은 안전 절차는 덮개를 열기 전에 전원을 차단하도록 요구한다.",
+        "before": "덮개를 조심해서 여세요.",
+        "after": "전원을 차단한 뒤 덮개를 여세요. 전원을 켠 채 열면 감전될 수 있습니다."
+      },
+      "negative_example": {
+        "context": "전원을 켠 채 덮개를 열면 감전이 가능하다는 자료가 있고, 같은 안전 절차는 덮개를 열기 전에 전원을 차단하도록 요구한다.",
+        "text": "전원을 켠 채 열면 반드시 감전됩니다.",
+        "reason": "위험 가능성을 필연적인 피해로 바꿨다."
+      },
+      "counterexample": {
+        "context": "앞 문장이 감전 조건과 차단 조치를 이미 설명했다.",
+        "text": "감전될 수 있습니다.",
+        "why_allowed": "문맥에서 조건과 조치가 공유되어 짧은 경고가 필요한 뜻을 남긴다."
+      },
+      "ste_refs": [
+        "7.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 가능성 양태의 의미",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002082557",
+          "access": "서지·초록 확인; 가능성·능력·허락의 구별 참고"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WARN-004",
+      "title": "금지와 조건부 허용을 구별한다",
+      "requirement": "금지문은 금지된 행동과 조건을 정확히 쓰고 조건부 허용을 전면 금지나 무조건 허용으로 바꾸지 않는다.",
+      "domain": "WARN",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "안전 경고·기능 경고"
+      ],
+      "conditions": [
+        "하지 마세요·만·경우에만 등의 안전·업무 제약을 표현할 때 적용한다."
+      ],
+      "exceptions": [
+        "실제 전면 금지가 확인되어 있으면 조건을 새로 만들어 완화하지 않는다."
+      ],
+      "positive_example": {
+        "context": "관리자 승인 후에는 삭제가 허용되고 승인 전에는 금지된다.",
+        "before": "파일을 삭제하지 마세요. 관리자 승인 후에는 가능합니다.",
+        "after": "관리자 승인 전에는 파일을 삭제하지 마세요. 승인 후에는 삭제해도 됩니다."
+      },
+      "negative_example": {
+        "context": "관리자 승인 후에는 삭제가 허용되고 승인 전에는 금지된다.",
+        "text": "파일은 언제든 삭제해도 됩니다.",
+        "reason": "승인 조건을 지웠다."
+      },
+      "counterexample": {
+        "context": "비상 정지 장치를 해제하지 못하도록 전면 금지했다.",
+        "text": "비상 정지 장치를 임의로 해제하지 마세요.",
+        "why_allowed": "확인된 금지에 임의의 허용 예외를 넣지 않는다."
+      },
+      "ste_refs": [
+        "7.2",
+        "5.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "한국어 가능성 양태의 의미",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002082557",
+          "access": "서지·초록 확인; 가능성·능력·허락의 구별 참고"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-TXT-001",
+      "title": "목록은 공통 조건과 항목의 역할을 표시한다",
+      "requirement": "복잡한 병렬 항목은 목록으로 제시하고 공통 조건·모두/하나 선택·순서 여부를 도입문에서 식별하게 한다.",
+      "domain": "TXT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "본문·목록·표·UI"
+      ],
+      "conditions": [
+        "여러 항목을 비교·실행·선택해야 할 때 적용한다."
+      ],
+      "exceptions": [
+        "두 항목의 짧은 나열은 문장 안에서 쉽게 구별되면 목록으로 늘리지 않는다."
+      ],
+      "positive_example": {
+        "context": "관리자는 세 검사를 모두 수행해야 한다.",
+        "before": "관리자는 권한, 파일 상태, 저장 공간을 확인하세요.",
+        "after": "관리자는 다음 항목을 모두 확인하세요.\n- 권한\n- 파일 상태\n- 저장 공간"
+      },
+      "negative_example": {
+        "context": "관리자는 세 검사를 모두 수행해야 한다.",
+        "text": "다음 항목 중 하나만 확인하세요.",
+        "reason": "동시 충족을 선택 조건으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "서로 다른 파일 두 개를 이름으로 지정한다.",
+        "text": "A.txt와 B.txt를 여세요.",
+        "why_allowed": "짧고 평행한 두 대상이 명확해 목록화가 필요하지 않다."
+      },
+      "ste_refs": [
+        "4.3",
+        "8.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-TXT-002",
+      "title": "목록 항목의 문법 역할을 맞춘다",
+      "requirement": "같은 목록에서 행동·상태·대상 항목을 같은 문법 역할로 쓰고 다른 역할의 항목은 필요한 도입문으로 구별한다.",
+      "domain": "TXT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "본문·목록·표·UI"
+      ],
+      "conditions": [
+        "병렬 목록의 일부만 지시나 설명이 될 때 적용한다."
+      ],
+      "exceptions": [
+        "장단점·입력/결과 등 서로 다른 열의 표는 역할이 표 구조에 표시되면 형식을 다르게 쓸 수 있다."
+      ],
+      "positive_example": {
+        "context": "세 항목 모두 수행해야 하는 점검 단계이다.",
+        "before": "- 권한 확인\n- 파일을 여세요.\n- 저장 공간의 점검이 필요합니다.",
+        "after": "- 권한을 확인하세요.\n- 파일을 여세요.\n- 저장 공간을 점검하세요."
+      },
+      "negative_example": {
+        "context": "세 항목 모두 수행해야 하는 점검 단계이다.",
+        "text": "- 권한이 있습니다.\n- 파일을 열었습니다.\n- 저장 공간이 충분합니다.",
+        "reason": "수행 지시를 확인되지 않은 완료 보고로 바꿨다."
+      },
+      "counterexample": {
+        "context": "표는 행동과 결과를 서로 다른 열에 표시한다.",
+        "text": "행동: 저장 / 결과: 실패",
+        "why_allowed": "역할이 구별되므로 두 항목의 문법 형태가 같을 필요는 없다."
+      },
+      "ste_refs": [
+        "4.3",
+        "9.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-TXT-003",
+      "title": "부호는 문장 관계를 대신하지 않는다",
+      "requirement": "문장 경계·쉼표·쌍점·괄호를 관계가 드러나는 위치에 쓰고 슬래시·하이픈·세미콜론만으로 조건·선택·인과를 전달하지 않는다.",
+      "domain": "TXT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "본문·목록·표·UI"
+      ],
+      "conditions": [
+        "부호의 관계가 둘 이상으로 해석될 때 적용한다."
+      ],
+      "exceptions": [
+        "코드·식별자·정식 표기에 포함된 부호는 그대로 보존하며 부호 자체를 금지하지 않는다."
+      ],
+      "positive_example": {
+        "context": "전원이 꺼진 경우에만 덮개를 연다.",
+        "before": "전원 꺼짐 / 덮개 열기",
+        "after": "전원이 꺼져 있으면 덮개를 여세요."
+      },
+      "negative_example": {
+        "context": "전원이 꺼진 경우에만 덮개를 연다.",
+        "text": "전원을 끄거나 덮개를 여세요.",
+        "reason": "조건을 선택 관계로 바꿨다."
+      },
+      "counterexample": {
+        "context": "실제 파일명이 report-2026-10.txt이다.",
+        "text": "“report-2026-10.txt”를 여세요.",
+        "why_allowed": "이름 내부 하이픈은 문장 연결이 아니라 식별 문자열이다."
+      },
+      "ste_refs": [
+        "8.1",
+        "8.2",
+        "8.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-TXT-004",
+      "title": "괄호는 보충 정보를 담는다",
+      "requirement": "핵심 조건·필수 행동·주요 결론은 본문에 두고 괄호에는 참조·짧은 정의·식별 정보 등 보충 내용을 둔다.",
+      "domain": "TXT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "본문·목록·표·UI"
+      ],
+      "conditions": [
+        "필수 조건이 괄호에 숨겨지거나 긴 괄호가 흐름을 끊을 때 적용한다."
+      ],
+      "exceptions": [
+        "수학식·공식 명칭·인용의 괄호는 실제 의미와 문자열을 보존한다."
+      ],
+      "positive_example": {
+        "context": "저장 공간 1GB 이상이 설치 조건이다.",
+        "before": "설치하세요(저장 공간이 1GB 이상일 때만).",
+        "after": "저장 공간이 1GB 이상일 때만 설치하세요."
+      },
+      "negative_example": {
+        "context": "저장 공간 1GB 이상이 설치 조건이다.",
+        "text": "저장 공간과 관계없이 설치하세요.",
+        "reason": "설치 조건을 없앴다."
+      },
+      "counterexample": {
+        "context": "장비의 도면상 식별 번호를 표시한다.",
+        "text": "밸브(도면 3의 A)를 닫으세요.",
+        "why_allowed": "괄호가 핵심 동작을 가리지 않고 실제 식별 정보를 제공한다."
+      },
+      "ste_refs": [
+        "8.3",
+        "8.5"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-TXT-005",
+      "title": "참조는 실제로 찾을 위치를 특정한다",
+      "requirement": "절차·도면·표·파일을 참조하면 그 자료의 실제 이름이나 위치를 쓰고 같은 이름의 후보가 여럿이면 구별할 표지를 추가한다.",
+      "domain": "TXT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "본문·목록·표·UI"
+      ],
+      "conditions": [
+        "위 참조·이 문서·해당 표 등이 여러 자료로 연결될 때 적용한다."
+      ],
+      "exceptions": [
+        "바로 앞의 한 표·한 도면만 지칭하면 짧은 참조를 허용한다."
+      ],
+      "positive_example": {
+        "context": "점검표가 둘이며 이번 지시는 월간 점검표를 가리킨다.",
+        "before": "점검표를 작성하세요.",
+        "after": "월간 점검표를 작성하세요."
+      },
+      "negative_example": {
+        "context": "점검표가 둘이며 이번 지시는 월간 점검표를 가리킨다.",
+        "text": "일간 점검표를 작성하세요.",
+        "reason": "참조 대상을 바꿨다."
+      },
+      "counterexample": {
+        "context": "바로 앞에 밸브 위치를 보여 주는 도면이 하나 있다.",
+        "text": "위 도면에서 밸브 위치를 확인하세요.",
+        "why_allowed": "참조 대상이 문서 자리로 하나로 정해진다."
+      },
+      "ste_refs": [
+        "8.3",
+        "4.5"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-TXT-006",
+      "title": "짧은 UI 문구는 위치와 상태를 활용한다",
+      "requirement": "버튼·제목·상태·표 셀은 그 자리에서 대상과 문장 기능이 식별되면 명사형이나 짧은 구를 쓰고 필요한 구별만 남긴다.",
+      "domain": "TXT",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "본문·목록·표·UI"
+      ],
+      "conditions": [
+        "UI나 표의 짧은 표현을 문장 규칙으로 검사할 때 적용한다."
+      ],
+      "exceptions": [
+        "삭제 범위·실패 원인·결과 단계가 실제 판단을 바꾸면 짧다는 이유로 그 구별을 생략하지 않는다."
+      ],
+      "positive_example": {
+        "context": "두 상태 중 현재는 저장 실패이며 업로드 단계와 구별해야 한다.",
+        "before": "실패",
+        "after": "저장 실패"
+      },
+      "negative_example": {
+        "context": "두 상태 중 현재는 저장 실패이며 업로드 단계와 구별해야 한다.",
+        "text": "완료",
+        "reason": "실패를 완료로 바꿨다."
+      },
+      "counterexample": {
+        "context": "저장 버튼은 선택한 문서를 저장하며 다른 저장 동작은 없다.",
+        "text": "저장",
+        "why_allowed": "대상과 행동을 화면에서 회복할 수 있어 완전한 문장으로 늘리지 않는다."
+      },
+      "ste_refs": [
+        "4.2",
+        "6.2",
+        "9.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NUM-001",
+      "title": "수량의 대상과 단위를 함께 남긴다",
+      "requirement": "독자의 판단에 필요한 수치에는 무엇을 센 값인지와 단위를 남기고 단위 변환은 원값의 정밀도와 조건을 보존한다.",
+      "domain": "NUM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "수치·사양·일정·식별 정보"
+      ],
+      "conditions": [
+        "측정·용량·횟수·가격·시간을 제시할 때 적용한다."
+      ],
+      "exceptions": [
+        "표 머리나 바로 앞 문맥이 같은 단위를 명시하면 각 셀마다 반복하지 않는다."
+      ],
+      "positive_example": {
+        "context": "저장 용량은 2GB이며 개수가 아니다.",
+        "before": "저장 용량은 2입니다.",
+        "after": "저장 용량은 2GB입니다."
+      },
+      "negative_example": {
+        "context": "저장 용량은 2GB이며 개수가 아니다.",
+        "text": "파일 두 개를 저장할 수 있습니다.",
+        "reason": "용량 수치를 파일 개수로 바꿨다."
+      },
+      "counterexample": {
+        "context": "표 머리에서 시간(초)을 표시하고 셀은 응답 시간을 뜻한다.",
+        "text": "2",
+        "why_allowed": "표의 단위가 공유되어 셀의 수치만으로 이해된다."
+      },
+      "ste_refs": [
+        "8.6"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NUM-002",
+      "title": "경계와 포함 여부를 보존한다",
+      "requirement": "이상·이하·초과·미만·부터·까지의 경계와 포함 여부를 유지하고 범위만으로 포함을 알 수 없으면 확인한다.",
+      "domain": "NUM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "수치·사양·일정·식별 정보"
+      ],
+      "conditions": [
+        "허용 범위·온도·기간·버전 조건에 적용한다."
+      ],
+      "exceptions": [
+        "문맥의 범위 표기가 양끝 포함을 이미 정의했다면 매번 설명하지 않는다."
+      ],
+      "positive_example": {
+        "context": "허용 온도는 10도와 20도를 모두 포함한다.",
+        "before": "온도는 10~20도여야 합니다.",
+        "after": "온도는 10도 이상 20도 이하이어야 합니다."
+      },
+      "negative_example": {
+        "context": "허용 온도는 10도와 20도를 모두 포함한다.",
+        "text": "온도는 10도 초과 20도 미만이어야 합니다.",
+        "reason": "양끝 경계값을 허용 범위에서 제외했다."
+      },
+      "counterexample": {
+        "context": "검사 기준은 10도 초과이며 10도는 해당하지 않는다.",
+        "text": "10도를 초과하면 중단하세요.",
+        "why_allowed": "정확한 경계가 있어 더 짧게 이상으로 바꾸지 않는다."
+      },
+      "ste_refs": [
+        "8.6",
+        "5.4"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NUM-003",
+      "title": "비교의 기준과 방향을 남긴다",
+      "requirement": "증가·감소·몇 배·퍼센트의 비교는 기준값·비교값·대상을 보존하고 비율과 차이를 구별한다.",
+      "domain": "NUM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "수치·사양·일정·식별 정보"
+      ],
+      "conditions": [
+        "성능·가격·시간의 변화를 보고할 때 적용한다."
+      ],
+      "exceptions": [
+        "같은 표의 기준 열이 명시되어 있으면 본문에서 기준을 반복하지 않는다."
+      ],
+      "positive_example": {
+        "context": "응답 시간은 2초에서 1초가 되었으며 속도 지표가 아니다.",
+        "before": "응답 시간이 2초에서 1초로 감소가 되었습니다.",
+        "after": "응답 시간이 2초에서 1초로 줄었습니다."
+      },
+      "negative_example": {
+        "context": "응답 시간은 2초에서 1초가 되었으며 속도 지표가 아니다.",
+        "text": "응답 시간이 2배 늘었습니다.",
+        "reason": "변화 방향을 뒤집었다."
+      },
+      "counterexample": {
+        "context": "처음부터 실제 비율을 계산해 보고한다.",
+        "text": "응답 시간은 기존 2초의 절반인 1초입니다.",
+        "why_allowed": "기준과 비교값이 명확하고 실제 비율을 나타낸다."
+      },
+      "ste_refs": [
+        "8.6",
+        "6.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NUM-004",
+      "title": "대략값과 정확값을 구별한다",
+      "requirement": "약·최대·최소·평균·대표값·합계 등의 수치 성격을 보존하고 대략값을 정확값이나 상한으로 바꾸지 않는다.",
+      "domain": "NUM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "수치·사양·일정·식별 정보"
+      ],
+      "conditions": [
+        "관측 수치나 추정 수치를 간결하게 제시할 때 적용한다."
+      ],
+      "exceptions": [
+        "정확한 값이 확인되어 근사 표현을 정정하는 작업은 사실 정정으로 구별한다."
+      ],
+      "positive_example": {
+        "context": "대기 시간은 약 10분이며 최대 시간이 아니다.",
+        "before": "대기 시간은 대략 약 10분 정도입니다.",
+        "after": "대기 시간은 약 10분입니다."
+      },
+      "negative_example": {
+        "context": "대기 시간은 약 10분이며 최대 시간이 아니다.",
+        "text": "최대 10분 안에 완료됩니다.",
+        "reason": "근사 대기 시간을 완료 상한 약속으로 바꿨다."
+      },
+      "counterexample": {
+        "context": "장치의 명시된 최대 압력이다.",
+        "text": "최대 압력은 6bar입니다.",
+        "why_allowed": "상한 표지는 실제 사양을 구별하는 필수 정보이다."
+      },
+      "ste_refs": [
+        "8.6",
+        "9.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NUM-005",
+      "title": "논리 수량의 범위를 보존한다",
+      "requirement": "모두·각각·하나·적어도·최대·일부와 및·또는의 결합을 보존하고 항목별 값과 전체 합계를 구별한다.",
+      "domain": "NUM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "수치·사양·일정·식별 정보"
+      ],
+      "conditions": [
+        "여러 대상의 실행·허용 개수·용량을 말할 때 적용한다."
+      ],
+      "exceptions": [
+        "선택 규칙이 이미 UI에 표시되면 짧은 항목 이름을 쓸 수 있다."
+      ],
+      "positive_example": {
+        "context": "파일 세 개를 합쳐 최대 10MB이며 각 파일 한도가 아니다.",
+        "before": "세 파일은 10MB 이하이어야 합니다.",
+        "after": "세 파일의 총용량은 10MB 이하이어야 합니다."
+      },
+      "negative_example": {
+        "context": "파일 세 개를 합쳐 최대 10MB이며 각 파일 한도가 아니다.",
+        "text": "각 파일은 10MB 이하이어야 합니다.",
+        "reason": "전체 한도를 항목별 한도로 바꿨다."
+      },
+      "counterexample": {
+        "context": "각 파일에 10MB 한도가 적용된다.",
+        "text": "각 파일은 10MB 이하이어야 합니다.",
+        "why_allowed": "항목별 한도가 실제 조건이므로 합계로 바꾸지 않는다."
+      },
+      "ste_refs": [
+        "8.6",
+        "4.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NUM-006",
+      "title": "날짜와 기준 시점을 식별하게 쓴다",
+      "requirement": "문서의 실행 시점이 바뀔 수 있으면 날짜·시각의 기준을 밝히고 오늘·내일 같은 상대 시점을 보존 문서에서는 확인된 절대 날짜로 연결한다.",
+      "domain": "NUM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "수치·사양·일정·식별 정보"
+      ],
+      "conditions": [
+        "다른 날 읽거나 시간대가 다른 독자가 실행할 일정 안내에 적용한다."
+      ],
+      "exceptions": [
+        "당일 대화나 시간대 차이가 없는 UI에서는 기준이 공유되면 상대 날짜를 유지한다."
+      ],
+      "positive_example": {
+        "context": "작성일은 2026년 10월 12일이며 한국 시각의 다음 날 오전 10시 일정이다. 이 안내는 다른 날에도 읽으며 시간대가 다른 수신자에게 전달된다.",
+        "before": "내일 오전 10시에 시작합니다.",
+        "after": "2026년 10월 13일 오전 10시(한국 시각)에 시작합니다."
+      },
+      "negative_example": {
+        "context": "작성일은 2026년 10월 12일이며 한국 시각의 다음 날 오전 10시 일정이다. 이 안내는 다른 날에도 읽으며 시간대가 다른 수신자에게 전달된다.",
+        "text": "2026년 10월 12일 오전 10시에 시작합니다.",
+        "reason": "다음 날을 작성일로 바꿨다."
+      },
+      "counterexample": {
+        "context": "같은 날의 대화에서 오늘 수행 여부만 묻는다.",
+        "text": "오늘 처리했습니다.",
+        "why_allowed": "당일 기준이 공유된 보고라 절대 날짜를 강제하지 않는다."
+      },
+      "ste_refs": [
+        "8.6",
+        "3.2"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-NUM-007",
+      "title": "식별 문자열은 문자 단위로 보존한다",
+      "requirement": "파일 경로·명령어·코드·버전·장비 ID는 실제 문자열을 보존하고 부호·대소문자·공백을 문체 규칙으로 고치지 않는다.",
+      "domain": "NUM",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서",
+        "수치·사양·일정·식별 정보"
+      ],
+      "conditions": [
+        "실행하거나 검색할 식별 문자열을 제시할 때 적용한다."
+      ],
+      "exceptions": [
+        "사용자가 문자열 변경을 요청하면 변경 값과 사용 위치를 확인한 별도 작업으로 다룬다."
+      ],
+      "positive_example": {
+        "context": "실제 파일명은 A-01.txt이며 보기 문장만 정돈한다.",
+        "before": "A-01.txt의 열기를 수행하세요.",
+        "after": "“A-01.txt”를 여세요."
+      },
+      "negative_example": {
+        "context": "실제 파일명은 A-01.txt이며 보기 문장만 정돈한다.",
+        "text": "“A 01.txt”를 여세요.",
+        "reason": "식별자 안의 하이픈을 공백으로 바꿔 다른 파일을 가리킨다."
+      },
+      "counterexample": {
+        "context": "실제 명령은 git switch -c codex/protocol-rules이다.",
+        "text": "git switch -c codex/protocol-rules",
+        "why_allowed": "명령어 부호는 실행 의미가 있으므로 한글 문장 부호 기준을 적용하지 않는다."
+      },
+      "ste_refs": [
+        "1.14",
+        "8.2",
+        "8.6",
+        "8.7"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WRD-007",
+      "title": "미등록 표현을 세 진입 경로로 검토한다",
+      "requirement": "통제 어휘를 운영할 때 미등록 표현은 일반 표현·전문명사·전문동사 중 해당 경로로 검토하고 뜻·범위·결합 근거를 기록한다. 미등록 자체를 의미 불명이나 금지로 확정하지 않는다.",
+      "domain": "WRD",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "새 표제어를 추가하거나 사전이 다루지 않는 표현을 등록 범위에서 판정할 때 적용한다."
+      ],
+      "exceptions": [
+        "실제 식별 문자열·인용·미등록 일반 표현은 문맥으로 뜻이 분명하면 원문 유지 후보로 둔다. 문맥상 새 전문 의미는 일반 표현으로 자동 승인하지 않는다."
+      ],
+      "positive_example": {
+        "context": "문서의 일반 표현 항목은 다시 시도하다를 같은 동작의 이름으로 사용하며 리트라이는 별도 등록되지 않았다.",
+        "before": "전송을 리트라이하세요.",
+        "after": "전송을 다시 시도하세요."
+      },
+      "negative_example": {
+        "context": "문서의 일반 표현 항목은 다시 시도하다를 같은 동작의 이름으로 사용하며 리트라이는 별도 등록되지 않았다.",
+        "text": "전송을 초기화하세요.",
+        "reason": "다시 시도하는 동작을 상태 초기화로 바꿨다."
+      },
+      "counterexample": {
+        "context": "본문의 다음 날은 뜻이 공유된 일반 표현이며 해당 사전이 아직 모든 일반어를 등록하지 않았다.",
+        "text": "다음 날 발송합니다.",
+        "why_allowed": "미등록 자체만으로 이미 명확한 일반 표현을 삭제하거나 추가 설명을 강제하지 않는다."
+      },
+      "ste_refs": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "1.12"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    },
+    {
+      "id": "KP-WRD-008",
+      "title": "새 결합 의미를 별도로 검토한다",
+      "requirement": "개별 단어가 등록되어 있어도 결합이 새 전문 의미·동작·결과를 만들면 그 결합의 뜻·논항·분야·예문을 별도로 검토한다. 개별 어휘 승인을 새 결합 의미의 승인으로 확대하지 않는다.",
+      "domain": "WRD",
+      "scope": [
+        "한국어 LLM 응답",
+        "업무·기술 문서"
+      ],
+      "conditions": [
+        "각 단어의 일반 뜻으로 전체 행동을 회복할 수 없는 관용·기술 결합을 사용할 때 적용한다."
+      ],
+      "exceptions": [
+        "등록된 뜻의 단순 수식·정상적인 한국어 활용·문자 그대로의 행동 나열은 새 의미가 없으면 별도 결합 승인을 강제하지 않는다."
+      ],
+      "positive_example": {
+        "context": "문맥의 밀어 올리다는 서버에 새 버전을 배포하는 뜻이며 이 결합은 등록되지 않았다.",
+        "before": "새 버전을 밀어 올리세요.",
+        "after": "새 버전을 배포하세요."
+      },
+      "negative_example": {
+        "context": "문맥의 밀어 올리다는 서버에 새 버전을 배포하는 뜻이며 이 결합은 등록되지 않았다.",
+        "text": "새 버전을 삭제하세요.",
+        "reason": "배포 동작을 삭제로 바꿨다."
+      },
+      "counterexample": {
+        "context": "‘다시’는 기존의 저장 동작을 반복하라는 뜻이며 새 전문 의미를 만들지 않는다.",
+        "text": "파일을 다시 저장하세요.",
+        "why_allowed": "기존 등록 동작의 반복을 뜻하는 단순 결합이다."
+      },
+      "ste_refs": [
+        "9.2",
+        "9.3"
+      ],
+      "references": [
+        {
+          "title": "ASD-STE100 Issue 9 작성 기능 참고 · 한국어 규칙은 독립 설계",
+          "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+          "access": "공식 원문; 영어 규칙 식별자와 문서작성 기능을 확인함; 한국어 효과 근거가 아님"
+        },
+        {
+          "title": "공공언어 요건 정립 및 진단 기준 개발 연구",
+          "url": "https://korean.go.kr/front/reportData/reportDataView.do?mn_id=207&report_seq=486",
+          "access": "공식 원문 관련 부분; 정보성·구성·정확성 참고; 세부 규칙은 설계 가설"
+        }
+      ],
+      "status": "proposed"
+    }
+  ]
+}

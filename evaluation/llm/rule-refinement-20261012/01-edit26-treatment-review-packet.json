@@ -1,0 +1,421 @@
+{
+  "scope": "reused edit holdout26 treatment development regression",
+  "condition": "treatment",
+  "structure": {
+    "valid": false,
+    "errors": [
+      "Expecting value: line 1 column 1 (char 0)"
+    ]
+  },
+  "cases": [
+    {
+      "case": {
+        "id": "h01",
+        "set": "holdout",
+        "category": "조건",
+        "context": "세 개의 승인 항목이 모두 참이어야 배포할 수 있다.",
+        "source": "승인 A, B, C를 모두 받은 경우에만 배포하세요.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "A/B/C의 논리곱과 배포조건을 유지한다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h02",
+        "set": "holdout",
+        "category": "예외",
+        "context": "본 규정은 임시 계정에 적용되지 않는다.",
+        "source": "관리자 계정을 제외한 모든 정식 계정은 90일마다 비밀번호를 바꿔야 합니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "관리자 제외, 정식 계정 한정,90일 주기,의무를 유지한다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h03",
+        "set": "holdout",
+        "category": "동시조건",
+        "context": "손잡이를 계속 잡아야 문이 열린다.",
+        "source": "손잡이를 당긴 채로 문을 밀어 여세요.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "당김 유지와 밀기를 동시에 하며,연속 단계로 분리하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h04",
+        "set": "holdout",
+        "category": "순서",
+        "context": "업데이트의 필수 순서는 종료,설치,재시작이다.",
+        "source": "앱을 종료한 뒤 업데이트를 설치하고 앱을 다시 켜세요.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "종료→설치→재시작의 순서를 유지한다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h05",
+        "set": "holdout",
+        "category": "부정범위",
+        "context": "각 로그의 검사 결과는 없다.",
+        "source": "모든 로그가 정상인 것은 아닙니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "일부가 정상이 아님을 뜻하며 모두가 비정상이라고 하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h06",
+        "set": "holdout",
+        "category": "부정범위확인",
+        "context": "원문 외에 작성자의 의도를 확인할 자료는 없다.",
+        "source": "새 드라이버를 설치하지 않은 장비만 점검하지 마세요.",
+        "allowed_actions": [
+          "clarify"
+        ],
+        "required_meaning": "이중 부정과 한정 범위를 확인하며 대상을 임의 확정하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h07",
+        "set": "holdout",
+        "category": "미확인대상",
+        "context": "정 연구원이 한 연구원에게 견적서를 보냈다. 다음 문장의 담당자는 미확인이다.",
+        "source": "그가 금액을 수정했습니다.",
+        "allowed_actions": [
+          "clarify"
+        ],
+        "required_meaning": "누가 수정했는지 물으며 정/한 중 하나를 창작하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h08",
+        "set": "holdout",
+        "category": "확인된대상",
+        "context": "정 연구원이 한 연구원에게 견적서를 보냈다. 금액 수정자는 한 연구원이다.",
+        "source": "그가 금액을 수정했습니다.",
+        "allowed_actions": [
+          "rewrite"
+        ],
+        "required_meaning": "한 연구원이 금액을 수정했다고 명시한다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h09",
+        "set": "holdout",
+        "category": "진행",
+        "context": "검토 종료 여부는 확인되지 않았다.",
+        "source": "호환성 검토를 진행했습니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "검토를 수행한 사실만 유지하며 검토완료/통과를 확정하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h10",
+        "set": "holdout",
+        "category": "계획실행구분",
+        "context": "오늘은 복원 계획만 정했고 복원은 아직 실행하지 않았다.",
+        "source": "내일 백업을 복원할 예정입니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "내일이라는 시점,예정 상태를 유지하며 이미 복원했다고 쓰지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h11",
+        "set": "holdout",
+        "category": "허락",
+        "context": "삭제 여부는 담당자의 선택이다.",
+        "source": "검사가 끝난 임시 사본은 지워도 됩니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "검사완료 조건과 삭제 허락을 유지하며 명령/의무로 바꾸지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h12",
+        "set": "holdout",
+        "category": "능력",
+        "context": "USB는 해당 센서의 지원 인터페이스이고 지금 연결되어 있지는 않다.",
+        "source": "이 센서는 USB로 데이터를 전송할 수 있습니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "지원 기능을 유지하며 실제 전송완료를 주장하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h13",
+        "set": "holdout",
+        "category": "가능성",
+        "context": "서로 다른 두 버전 간 호환이 보장되지 않는다.",
+        "source": "이 버전에서는 일부 플러그인이 작동하지 않을 수 있습니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "일부 플러그인의 실패 가능성을 유지하며 확정 실패/원인/시험상태로 바꾸지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h14",
+        "set": "holdout",
+        "category": "의무",
+        "context": "재시도는 선택 행동이 아니며 기존 지시의 필수 단계다.",
+        "source": "연결이 끊기면 인증을 다시 받아야 합니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "연결중단 조건과 재인증 의무를 유지한다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h15",
+        "set": "holdout",
+        "category": "잘못된어휘치환",
+        "context": "도입은 새 도구의 조직 배치를 뜻하고 단순 사용과 다르다.",
+        "source": "팀은 새 분석 도구의 도입을 승인했습니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "팀/도입 승인 사실을 유지하며 도구사용/구매 완료로 치환하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h16",
+        "set": "holdout",
+        "category": "전문어",
+        "context": "보존은 원본 기록을 변경없이 남기는 의무이며 예약 기능과 다르다.",
+        "source": "원본 로그는 보존 기간이 끝날 때까지 보존해야 합니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "원본 로그와 보존기간,보존의무를 유지하며 예약/백업으로 잘못 치환하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h17",
+        "set": "holdout",
+        "category": "기능명",
+        "context": "화면의 버튼 이름은 동기화이고 업로드 버튼은 다른 기능이다.",
+        "source": "변경 사항을 보내려면 동기화 버튼을 누르세요.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "실제 기능명 동기화를 유지하며 업로드로 바꾸지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h18",
+        "set": "holdout",
+        "category": "피동예외",
+        "context": "저장한 사람은 중요하지 않고 설정 저장 상태를 알리는 안내다.",
+        "source": "알림 설정이 저장되었습니다.",
+        "allowed_actions": [
+          "keep"
+        ],
+        "required_meaning": "명확한 저장 상태 안내를 유지하며 담당자를 창작하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h19",
+        "set": "holdout",
+        "category": "상태레이블",
+        "context": "작은 표의 승인상태 셀에 넣는 값이다.",
+        "source": "승인 대기",
+        "allowed_actions": [
+          "keep"
+        ],
+        "required_meaning": "셀의 짧은 상태 레이블을 유지하며 설명문/완료상태로 늘리거나 바꾸지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h20",
+        "set": "holdout",
+        "category": "정중요청",
+        "context": "상대는 외부 협력사이고 검토를 정중하게 요청해야 한다.",
+        "source": "오늘 보내드린 수정안을 검토해 주시겠습니까?",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "오늘 발송된 수정안과 정중한 요청을 유지하며 강한 명령으로 바꾸지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h21",
+        "set": "holdout",
+        "category": "수량단위",
+        "context": "전체 측정기간은 10분이고 평균응답을 보고한다.",
+        "source": "10분 동안 측정한 평균 응답 시간이 800ms에서 600ms로 줄었습니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "10분/평균/800→600ms/감소를 유지하며 최대값이나200퍼센트로 바꾸지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h22",
+        "set": "holdout",
+        "category": "원인미확인",
+        "context": "관측된 사실은 배포 후 오류율증가이며 인과관계는 아직 확인되지 않았다.",
+        "source": "배포 이후 오류율이 높아졌습니다.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "시간상 이후관계만 유지하며 배포가 원인이라고 확정하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h23",
+        "set": "holdout",
+        "category": "재량예외",
+        "context": "복구방법은 담당자가 선택하지만 원본 수정은 금지한다.",
+        "source": "원본을 변경하지 않는 범위에서 담당자가 적절한 복구 방법을 선택하세요.",
+        "allowed_actions": [
+          "keep",
+          "rewrite"
+        ],
+        "required_meaning": "담당자 재량과 원본 변경금지를 유지하며 특정 복구절차를 강제하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "h24",
+        "set": "holdout",
+        "category": "알려진절차",
+        "context": "공유된 장애대응 절차 B-7만 이 문맥에 적용되며 내용은 따로 제공하지 않았다.",
+        "source": "장애가 나면 정해진 절차에 따라 대응하세요.",
+        "allowed_actions": [
+          "rewrite"
+        ],
+        "required_meaning": "장애조건과 실제 B-7 절차를 가리키며 재시도/삭제 등의 내용을 창작하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "s01",
+        "set": "regression",
+        "category": "가능성회귀",
+        "context": "경고 대상은 현재 검토 중인 새 로그인 기능이고 양측이 그 대상을 공유한다.",
+        "source": "문제가 있을 수 있습니다.",
+        "allowed_actions": [
+          "keep"
+        ],
+        "required_meaning": "가능성 경고를 그대로 유지하며 확인상태 장문으로 바꾸지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    },
+    {
+      "case": {
+        "id": "s02",
+        "set": "regression",
+        "category": "기준확인회귀",
+        "context": "처리기준,원인,참조절차는 정해지지 않았고 별도의 공유문서도 없다.",
+        "source": "오류를 적절히 처리하세요.",
+        "allowed_actions": [
+          "clarify"
+        ],
+        "required_meaning": "필요한 처리기준을 물으며 원인/재시도/삭제/절차를 창작하지 않는다."
+      },
+      "actual_output": null,
+      "semantic_rating": null
+    }
+  ],
+  "overall_accuracy": null
+}

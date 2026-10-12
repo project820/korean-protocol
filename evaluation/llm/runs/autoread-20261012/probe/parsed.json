@@ -1,0 +1,12 @@
+{
+  "structure_valid": true,
+  "errors": [],
+  "results": [
+    {
+      "id": "autoload",
+      "action": "keep",
+      "text": "설정이 저장됐습니다.",
+      "reason": "KP_AUTOLOAD_6c93d127 설정 저장 완료를 명확하고 자연스럽게 알립니다."
+    }
+  ]
+}

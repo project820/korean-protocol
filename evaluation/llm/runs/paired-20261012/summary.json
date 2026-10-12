@@ -1,0 +1,87 @@
+{
+  "cases": 26,
+  "novel_holdout": 24,
+  "regression": 2,
+  "batches_per_condition": 1,
+  "exact_match_used_for_semantic_scoring": false,
+  "conditions": {
+    "treatment": {
+      "exit_code": 0,
+      "structure_valid": true,
+      "actual_response_count": 26,
+      "semantic_preservation_pass": 26,
+      "action_choice_pass": 26,
+      "holdout_semantic_pass": 24,
+      "holdout_action_pass": 24,
+      "invented_fact_or_procedure": 0,
+      "action_counts": {
+        "keep": 20,
+        "clarify": 3,
+        "rewrite": 3
+      },
+      "usage_returned": [
+        {
+          "input_tokens": 25358,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2151,
+          "reasoning_output_tokens": 516
+        }
+      ],
+      "profile_sha256": "00084e5dfbf5b48acb355e0f584b41f68929e8e21cdc7f344fc7cbcbb005e3c5",
+      "output_sha256": "078d12afce2838f0055c9a9f1669b227fdb7d445948e03c8cbc8d633df1f1822",
+      "independent_score_sums": {
+        "semantic_preservation": 52,
+        "action_judgment": 52,
+        "clarity": 52,
+        "natural_korean": 52
+      },
+      "independent_max_per_dimension": 52
+    },
+    "baseline": {
+      "exit_code": 0,
+      "structure_valid": true,
+      "actual_response_count": 26,
+      "semantic_preservation_pass": 26,
+      "action_choice_pass": 25,
+      "holdout_semantic_pass": 24,
+      "holdout_action_pass": 24,
+      "invented_fact_or_procedure": 0,
+      "action_counts": {
+        "keep": 19,
+        "clarify": 3,
+        "rewrite": 4
+      },
+      "usage_returned": [
+        {
+          "input_tokens": 18113,
+          "cached_input_tokens": 4736,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2131,
+          "reasoning_output_tokens": 505
+        }
+      ],
+      "profile_sha256": null,
+      "output_sha256": "5e42aa86985832c8ec36bfaa5f1ced04ab25791808c00d347e4effe7e76d935b",
+      "independent_score_sums": {
+        "semantic_preservation": 52,
+        "action_judgment": 51,
+        "clarity": 52,
+        "natural_korean": 52
+      },
+      "independent_max_per_dimension": 52
+    }
+  },
+  "limits": [
+    "조건별1배치이며 사례별 독립 생성/반복실험이 아니다.",
+    "baseline 과제에도 의미보존과 비창작 지시가 있다.",
+    "root 독립평정은 agent 평정이며 실제 한국어 독자 실험이 아니다.",
+    "단일 모델·고정순서·소표본이라 효능/통계유의성/현장효과를 일반화하지 않는다.",
+    "baseline 벽시계시간은 최종프로필대기를 포함하므로 속도비교를 하지 않는다.",
+    "CLI는 요청모델/localhost라우터 설정만 보여주며 최종upstream/FALLBACK 여부는 미확인이다."
+  ],
+  "first_reviewer_numeric_scores": "first-reviewer-ratings.json에 별도 보존; independent-root-ratings.json에 root의 명시적0~2평정도 보존함.",
+  "input_tokens_treatment_minus_baseline": 7245,
+  "snapshot_status": "initial reviewed snapshot; not final release validation",
+  "later_review_notice": "Root reported Opus P1 rule findings including SYN008 condition alteration after this run; rules correction began. New snapshot requires separate treatment evaluation."
+}

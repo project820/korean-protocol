@@ -1,0 +1,7 @@
+{
+  "cases_sha256": "b64a53a4728a179aefaf466e9fcef2ce62dde6a9529c77e74f8f159458e577f9",
+  "profile_sha256": "5cd4c4657f33e112b9b1c0b95f29a51b689758ccb91155641a38abe6ba93d44e",
+  "case_count": 12,
+  "plan": "generation-plan.md",
+  "plan_sha256": "1f915912c3ce37b3f6a8e977e43237ef789edb9fdcfd437605421bc07f4b68ab"
+}

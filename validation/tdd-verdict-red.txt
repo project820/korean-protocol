@@ -1,0 +1,15 @@
+............F............................
+======================================================================
+FAIL: test_conflicting_review_verdicts_cannot_inflate_verified_count (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 152, in test_conflicting_review_verdicts_cannot_inflate_verified_count
+    self.assertError('verification_evidence')
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 43, in assertError
+    self.assertIn(code,[e['code'] for e in self.check()['errors']])
+AssertionError: 'verification_evidence' not found in []
+
+----------------------------------------------------------------------
+Ran 41 tests in 0.128s
+
+FAILED (failures=1)

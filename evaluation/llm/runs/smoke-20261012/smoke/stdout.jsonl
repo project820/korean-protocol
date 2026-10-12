@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a12ffa-2c9d-71e0-9713-46fae2b23a81"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"results\":[{\"id\":\"h01\",\"action\":\"keep\",\"text\":\"승인 A, B, C를 모두 받은 경우에만 배포하세요.\",\"reason\":\"세 승인을 모두 받아야 배포할 수 있다는 조건이 명확하고 자연스럽습니다.\"}]}"}}
+{"type":"turn.completed","usage":{"input_tokens":16799,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":116,"reasoning_output_tokens":54}}

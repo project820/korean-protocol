@@ -1,0 +1,82 @@
+{
+  "task_mode": "generation",
+  "case_count": 12,
+  "batches_per_condition": 1,
+  "ratings_file": "independent-root-ratings.json",
+  "condition_key_opened_after_rating_record": true,
+  "conditions": {
+    "baseline": {
+      "original_raw_directory": "generation-final-20261012/baseline",
+      "exit_code": 0,
+      "structure_valid": true,
+      "actual_response_count": 12,
+      "prompt_sha256": "072ef63be07444eb41be0c1da7eecd94004cbce03361de837d814bf75f3ab40e",
+      "response_sha256": "6fa2527eefb0a3c07777b182cbca245d22ddd73500e8b7ab67dab38bcc41e593",
+      "profile_sha256": null,
+      "semantic_pass": 12,
+      "all_dimensions_full_score": 10,
+      "invented_fact_or_procedure": 0,
+      "score_sums": {
+        "semantic_preservation": 24,
+        "speech_purpose": 23,
+        "clarity": 23,
+        "natural_korean": 24,
+        "concision": 22
+      },
+      "max_per_dimension": 24,
+      "usage_returned": [
+        {
+          "input_tokens": 17670,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 796,
+          "reasoning_output_tokens": 95
+        }
+      ],
+      "deficit_case_ids": [
+        "g07",
+        "g11"
+      ]
+    },
+    "treatment": {
+      "original_raw_directory": "generation-final-20261012/treatment",
+      "exit_code": 0,
+      "structure_valid": true,
+      "actual_response_count": 12,
+      "prompt_sha256": "072ef63be07444eb41be0c1da7eecd94004cbce03361de837d814bf75f3ab40e",
+      "response_sha256": "5ce71628ad8d1b42479b0279a4823fd19679ab676cea2e81b61c8ef0dc58b584",
+      "profile_sha256": "5cd4c4657f33e112b9b1c0b95f29a51b689758ccb91155641a38abe6ba93d44e",
+      "semantic_pass": 12,
+      "all_dimensions_full_score": 10,
+      "invented_fact_or_procedure": 0,
+      "score_sums": {
+        "semantic_preservation": 24,
+        "speech_purpose": 23,
+        "clarity": 23,
+        "natural_korean": 24,
+        "concision": 22
+      },
+      "max_per_dimension": 24,
+      "usage_returned": [
+        {
+          "input_tokens": 24925,
+          "cached_input_tokens": 4736,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 949,
+          "reasoning_output_tokens": 213
+        }
+      ],
+      "deficit_case_ids": [
+        "g07",
+        "g11"
+      ]
+    }
+  },
+  "profile_sha256": "5cd4c4657f33e112b9b1c0b95f29a51b689758ccb91155641a38abe6ba93d44e",
+  "combined_edit_generation_accuracy": null,
+  "limitations": [
+    "모델1종/조건별1batch/반복1로효능·통계유의성·독자이해도·현장효과를일반화하지않음.",
+    "CLI는요청라우터/모델설정만제공하며최종upstream/FALLBACK은미확인."
+  ],
+  "input_token_difference": 7255
+}

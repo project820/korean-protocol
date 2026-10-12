@@ -1,0 +1,7 @@
+{
+  "pid": 60518,
+  "started_at": "2026-10-12T13:12:37.656346+00:00",
+  "max_cli_invocations": 4,
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "high"
+}

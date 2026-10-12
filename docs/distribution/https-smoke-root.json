@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "tested_at": "2026-10-12T13:21:42.194927+00:00",
+  "test": "temporary localhost TLS signed-content CLI update",
+  "runtime_root": "/Users/m5max/.codex/worktrees/korean-protocol-integration/ASD-STE100 Kor",
+  "runtime_sha256": "e9fee9277323d5587e97c3f9b2eb2731c3933a28ea0add6d3133cfe29d4f7b95",
+  "script_sha256": "096e2ef7622a15add7f80e21a09e0fe4f6dbd56fe24c02bc015e1c3359ef089f",
+  "python_version": "3.9.6",
+  "transport": {
+    "scheme": "https",
+    "host": "127.0.0.1",
+    "port": 443
+  },
+  "result": "blocked",
+  "steps": [],
+  "scope": {
+    "actual_https": false,
+    "intended_transport": "https",
+    "temporary_ca_and_signing_keys_only": true,
+    "ssl_cert_file_subprocess_only": true,
+    "user_trust_store_changed": false,
+    "real_user_global_installed": false,
+    "launchctl_registered": false,
+    "external_endpoint_tested": false,
+    "model_compliance_tested": false,
+    "private_keys_preserved": false
+  },
+  "random_port_preflight": {
+    "port": 65252,
+    "source_validation": "rejected",
+    "exit_code": 2,
+    "reason": "Source must be credential-free HTTPS on port 443"
+  },
+  "blocker": "Ordinary localhost bind failed; existing listener was not changed",
+  "bind_errno": 13,
+  "bind_error_name": "EACCES",
+  "temporary_material_removed": true,
+  "dictionary_locator_local_snapshot": {
+    "transport": "none",
+    "trust": "local-snapshot",
+    "actual_https": false,
+    "model_file_read_observed": false,
+    "render_function": "Controller._activate",
+    "render_line": 610,
+    "install_exit_code": 0,
+    "status_exit_code": 0,
+    "absolute_cache_directory_advertised": true,
+    "advertised_root_matches_active_cache": true,
+    "installed_version": "0.2.0",
+    "original_user_bytes_preserved": true,
+    "installed_profile_sha256": "ed8762e7f0cc09b249242d122d492057d2231d8bccd399b4ac64610a97148b18",
+    "files": {
+      "lexicon/core.json": {
+        "cached_file_exists": true,
+        "source_sha256": "92ae772abcb40267e562fe3c7e8bceec8d0a9479de96cb48d9f1401cfff15e27",
+        "cached_sha256": "92ae772abcb40267e562fe3c7e8bceec8d0a9479de96cb48d9f1401cfff15e27",
+        "explicit_absolute_file_locator_in_body": false,
+        "source_hash_matches_cache": true
+      },
+      "lexicon/domains/software.json": {
+        "cached_file_exists": true,
+        "source_sha256": "43c0d51aa1ec6dc2edddd0ff1b1efbd88711cd0638e1666fc258c0e5db3de767",
+        "cached_sha256": "43c0d51aa1ec6dc2edddd0ff1b1efbd88711cd0638e1666fc258c0e5db3de767",
+        "explicit_absolute_file_locator_in_body": false,
+        "source_hash_matches_cache": true
+      }
+    },
+    "result": "pass",
+    "locator_contract": "Relative lexicon/core.json and lexicon/domains/software.json resolve against the footer-advertised absolute cache directory; file-specific absolute locators are not inserted.",
+    "temporary_material_removed": true
+  },
+  "main_https_branches": "not executed because prerequisite bind failed; script syntax and independent locator branch were checked only",
+  "script_validation": {
+    "python_compile": "pass",
+    "actual_https_branch_executed": false
+  }
+}

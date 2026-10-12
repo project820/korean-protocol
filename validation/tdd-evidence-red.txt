@@ -1,0 +1,23 @@
+...........F.................
+======================================================================
+FAIL: test_current_functional_review_is_counted_without_semantic_claim (test_validation.ValidationTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/m5max/.codex/worktrees/korean-protocol-validation/ASD-STE100 Kor/tests/test_validation.py", line 102, in test_current_functional_review_is_counted_without_semantic_claim
+    self.assertEqual([],report['errors'])
+AssertionError: Lists differ: [] != [{'code': 'verification_evidence', 'path':[136 chars]s.'}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'code': 'verification_evidence', 'path': 'specification/ste-crosswalk.json.items[0]', 'message': 'Evidence has no matching pass review with rationale, reviewer, and linked cases.'}
+
+- []
++ [{'code': 'verification_evidence',
++   'message': 'Evidence has no matching pass review with rationale, reviewer, '
++              'and linked cases.',
++   'path': 'specification/ste-crosswalk.json.items[0]'}]
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.096s
+
+FAILED (failures=1)

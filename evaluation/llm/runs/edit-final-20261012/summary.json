@@ -1,0 +1,77 @@
+{
+  "task_mode": "edit",
+  "case_count": 26,
+  "batches_per_condition": 1,
+  "ratings_file": "independent-root-ratings.json",
+  "condition_key_opened_after_rating_record": true,
+  "conditions": {
+    "treatment": {
+      "original_raw_directory": "edit-final-20261012/treatment",
+      "exit_code": 0,
+      "structure_valid": true,
+      "actual_response_count": 26,
+      "prompt_sha256": "942818e70955703ce88f2a1e767b46934f617dcc5f800c84fc58d3f820208c5a",
+      "response_sha256": "c8a8fd6603b601dbe86290df6c537a3a635e1d108b1bd36886ca0abd5c7b1607",
+      "profile_sha256": "5cd4c4657f33e112b9b1c0b95f29a51b689758ccb91155641a38abe6ba93d44e",
+      "semantic_pass": 26,
+      "all_dimensions_full_score": 26,
+      "invented_fact_or_procedure": 0,
+      "score_sums": {
+        "semantic_preservation": 52,
+        "action_judgment": 52,
+        "clarity": 52,
+        "natural_korean": 52
+      },
+      "max_per_dimension": 52,
+      "usage_returned": [
+        {
+          "input_tokens": 25357,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2361,
+          "reasoning_output_tokens": 721
+        }
+      ],
+      "deficit_case_ids": []
+    },
+    "baseline": {
+      "original_raw_directory": "paired-20261012/baseline",
+      "exit_code": 0,
+      "structure_valid": true,
+      "actual_response_count": 26,
+      "prompt_sha256": "942818e70955703ce88f2a1e767b46934f617dcc5f800c84fc58d3f820208c5a",
+      "response_sha256": "5e42aa86985832c8ec36bfaa5f1ced04ab25791808c00d347e4effe7e76d935b",
+      "profile_sha256": null,
+      "semantic_pass": 26,
+      "all_dimensions_full_score": 25,
+      "invented_fact_or_procedure": 0,
+      "score_sums": {
+        "semantic_preservation": 52,
+        "action_judgment": 51,
+        "clarity": 52,
+        "natural_korean": 52
+      },
+      "max_per_dimension": 52,
+      "usage_returned": [
+        {
+          "input_tokens": 18113,
+          "cached_input_tokens": 4736,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2131,
+          "reasoning_output_tokens": 505
+        }
+      ],
+      "deficit_case_ids": [
+        "s01"
+      ]
+    }
+  },
+  "profile_sha256": "5cd4c4657f33e112b9b1c0b95f29a51b689758ccb91155641a38abe6ba93d44e",
+  "combined_edit_generation_accuracy": null,
+  "limitations": [
+    "모델1종/조건별1batch/반복1로효능·통계유의성·독자이해도·현장효과를일반화하지않음.",
+    "CLI는요청라우터/모델설정만제공하며최종upstream/FALLBACK은미확인.",
+    "기존편집baseline원자료재사용,실행시점차이,baseline재반복없음,root검토자기노출."
+  ],
+  "input_token_difference": 7244
+}

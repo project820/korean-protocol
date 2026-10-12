@@ -1,0 +1,1351 @@
+{
+  "input_stage": "/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kp-validation-inputs-m9c54inu",
+  "report": {
+    "ok": true,
+    "errors": [],
+    "gaps": [
+      {
+        "path": "specification/ste-crosswalk.json.items[0]",
+        "message": "Rule KP-WRD-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[0]",
+        "message": "Rule KP-WRD-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[0]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[0]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[0]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[1]",
+        "message": "Rule KP-WRD-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[1]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[1]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[1]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[2]",
+        "message": "Rule KP-WRD-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[2]",
+        "message": "Rule KP-WRD-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[2]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[2]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[2]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[3]",
+        "message": "Rule KP-WRD-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[3]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[3]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[3]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[4]",
+        "message": "Rule KP-WRD-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[4]",
+        "message": "Rule KP-NAM-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[4]",
+        "message": "Rule KP-WRD-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[4]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[4]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[4]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[5]",
+        "message": "Rule KP-WRD-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[5]",
+        "message": "Rule KP-NAM-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[5]",
+        "message": "Rule KP-WRD-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[5]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[5]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[5]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[6]",
+        "message": "Rule KP-NAM-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[6]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[6]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[6]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[7]",
+        "message": "Rule KP-NAM-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[7]",
+        "message": "Rule KP-NAM-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[7]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[7]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[7]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[8]",
+        "message": "Rule KP-WRD-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[8]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[8]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[8]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[9]",
+        "message": "Rule KP-WRD-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[9]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[9]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[9]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[10]",
+        "message": "Rule KP-NAM-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[10]",
+        "message": "Rule KP-NAM-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[10]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[10]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[10]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[11]",
+        "message": "Rule KP-NAM-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[11]",
+        "message": "Rule KP-NAM-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[11]",
+        "message": "Rule KP-WRD-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[11]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[11]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[11]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[12]",
+        "message": "Rule KP-NAM-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[12]",
+        "message": "Rule KP-VER-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[12]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[12]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[12]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[13]",
+        "message": "Rule KP-WRD-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[13]",
+        "message": "Rule KP-NUM-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[13]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[13]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[13]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[14]",
+        "message": "Rule KP-NAM-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[14]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[14]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[14]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[15]",
+        "message": "Rule KP-WRD-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[15]",
+        "message": "Rule KP-NAM-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[15]",
+        "message": "Rule KP-NAM-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[15]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[15]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[15]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[16]",
+        "message": "Rule KP-WRD-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[16]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[16]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[16]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[17]",
+        "message": "Rule KP-VER-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[17]",
+        "message": "Rule KP-VER-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[17]",
+        "message": "Rule KP-KO-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[17]",
+        "message": "Rule KP-NUM-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[17]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[17]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[17]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[17]",
+        "message": "영어 형태와 한국어 구조의 차이를 설명하고 기능 보존 근거를 심사해야 한다. 직접 번역이나 해당 없음 처리는 완전 대응이 아니다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[18]",
+        "message": "Rule KP-VER-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[18]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[18]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[18]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[18]",
+        "message": "영어 형태와 한국어 구조의 차이를 설명하고 기능 보존 근거를 심사해야 한다. 직접 번역이나 해당 없음 처리는 완전 대응이 아니다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[19]",
+        "message": "Rule KP-VER-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[19]",
+        "message": "Rule KP-VER-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[19]",
+        "message": "Rule KP-VER-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[19]",
+        "message": "Rule KP-VER-008 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[19]",
+        "message": "Rule KP-KO-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[19]",
+        "message": "Rule KP-KO-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[19]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[19]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[19]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[20]",
+        "message": "Rule KP-VER-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[20]",
+        "message": "Rule KP-VER-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[20]",
+        "message": "Rule KP-SYN-009 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[20]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[20]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[20]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[20]",
+        "message": "영어 형태와 한국어 구조의 차이를 설명하고 기능 보존 근거를 심사해야 한다. 직접 번역이나 해당 없음 처리는 완전 대응이 아니다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[21]",
+        "message": "Rule KP-VER-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[21]",
+        "message": "Rule KP-KO-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[21]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[21]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[21]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[22]",
+        "message": "Rule KP-NAM-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[22]",
+        "message": "Rule KP-VER-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[22]",
+        "message": "Rule KP-SYN-009 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[22]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[22]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[22]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[23]",
+        "message": "Rule KP-SYN-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[23]",
+        "message": "Rule KP-SYN-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[23]",
+        "message": "Rule KP-SYN-008 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[23]",
+        "message": "Rule KP-KO-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[23]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[23]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[23]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[24]",
+        "message": "Rule KP-EDIT-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[24]",
+        "message": "Rule KP-SYN-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[24]",
+        "message": "Rule KP-SYN-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[24]",
+        "message": "Rule KP-KO-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[24]",
+        "message": "Rule KP-KO-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[24]",
+        "message": "Rule KP-TXT-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[24]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[24]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[24]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[25]",
+        "message": "Rule KP-SYN-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[25]",
+        "message": "Rule KP-TXT-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[25]",
+        "message": "Rule KP-TXT-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[25]",
+        "message": "Rule KP-NUM-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[25]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[25]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[25]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[26]",
+        "message": "Rule KP-SYN-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[26]",
+        "message": "Rule KP-PROC-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[26]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[26]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[26]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[27]",
+        "message": "Rule KP-NAM-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[27]",
+        "message": "Rule KP-SYN-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[27]",
+        "message": "Rule KP-SYN-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[27]",
+        "message": "Rule KP-KO-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[27]",
+        "message": "Rule KP-TXT-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[27]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[27]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[27]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[27]",
+        "message": "영어 형태와 한국어 구조의 차이를 설명하고 기능 보존 근거를 심사해야 한다. 직접 번역이나 해당 없음 처리는 완전 대응이 아니다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[28]",
+        "message": "Rule KP-SYN-008 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[28]",
+        "message": "Rule KP-PROC-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[28]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[28]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[28]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[28]",
+        "message": "한국어 측정·검토 절차의 경계, 판정 기준과 재현 가능한 사례가 아직 연결되지 않았다. 간결성 선언만으로 완전 대응을 계산하지 않는다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[29]",
+        "message": "Rule KP-SYN-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[29]",
+        "message": "Rule KP-PROC-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[29]",
+        "message": "Rule KP-PROC-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[29]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[29]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[29]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[30]",
+        "message": "Rule KP-VER-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[30]",
+        "message": "Rule KP-KO-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[30]",
+        "message": "Rule KP-PROC-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[30]",
+        "message": "Rule KP-PROC-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[30]",
+        "message": "Rule KP-WARN-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[30]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[30]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[30]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[31]",
+        "message": "Rule KP-SYN-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[31]",
+        "message": "Rule KP-PROC-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[31]",
+        "message": "Rule KP-PROC-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[31]",
+        "message": "Rule KP-PROC-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[31]",
+        "message": "Rule KP-PROC-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[31]",
+        "message": "Rule KP-WARN-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[31]",
+        "message": "Rule KP-NUM-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[31]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[31]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[31]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[32]",
+        "message": "Rule KP-PROC-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[32]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[32]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[32]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[33]",
+        "message": "Rule KP-DESC-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[33]",
+        "message": "Rule KP-DESC-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[33]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[33]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[33]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[34]",
+        "message": "Rule KP-SYN-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[34]",
+        "message": "Rule KP-DESC-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[34]",
+        "message": "Rule KP-DESC-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[34]",
+        "message": "Rule KP-TXT-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[34]",
+        "message": "Rule KP-NUM-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[34]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[34]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[34]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[35]",
+        "message": "Rule KP-SYN-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[35]",
+        "message": "Rule KP-SYN-008 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[35]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[35]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[35]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[35]",
+        "message": "한국어 측정·검토 절차의 경계, 판정 기준과 재현 가능한 사례가 아직 연결되지 않았다. 간결성 선언만으로 완전 대응을 계산하지 않는다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[36]",
+        "message": "Rule KP-DESC-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[36]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[36]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[36]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[37]",
+        "message": "Rule KP-DESC-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[37]",
+        "message": "Rule KP-DESC-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[37]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[37]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[37]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[38]",
+        "message": "Rule KP-DESC-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[38]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[38]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[38]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[38]",
+        "message": "한국어 측정·검토 절차의 경계, 판정 기준과 재현 가능한 사례가 아직 연결되지 않았다. 간결성 선언만으로 완전 대응을 계산하지 않는다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[39]",
+        "message": "Rule KP-WARN-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[39]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[39]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[39]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[40]",
+        "message": "Rule KP-PROC-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[40]",
+        "message": "Rule KP-PROC-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[40]",
+        "message": "Rule KP-WARN-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[40]",
+        "message": "Rule KP-WARN-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[40]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[40]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[40]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[41]",
+        "message": "Rule KP-EDIT-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[41]",
+        "message": "Rule KP-VER-008 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[41]",
+        "message": "Rule KP-WARN-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[41]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[41]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[41]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[42]",
+        "message": "Rule KP-TXT-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[42]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[42]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[42]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[43]",
+        "message": "Rule KP-NAM-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[43]",
+        "message": "Rule KP-TXT-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[43]",
+        "message": "Rule KP-NUM-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[43]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[43]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[43]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[44]",
+        "message": "Rule KP-WRD-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[44]",
+        "message": "Rule KP-TXT-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[44]",
+        "message": "Rule KP-TXT-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[44]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[44]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[44]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[45]",
+        "message": "Rule KP-TXT-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[45]",
+        "message": "Rule KP-TXT-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[45]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[45]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[45]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[45]",
+        "message": "한국어 측정·검토 절차의 경계, 판정 기준과 재현 가능한 사례가 아직 연결되지 않았다. 간결성 선언만으로 완전 대응을 계산하지 않는다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[46]",
+        "message": "Rule KP-SYN-008 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[46]",
+        "message": "Rule KP-TXT-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[46]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[46]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[46]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[46]",
+        "message": "한국어 측정·검토 절차의 경계, 판정 기준과 재현 가능한 사례가 아직 연결되지 않았다. 간결성 선언만으로 완전 대응을 계산하지 않는다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "Rule KP-SYN-008 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "Rule KP-NUM-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "Rule KP-NUM-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "Rule KP-NUM-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "Rule KP-NUM-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "Rule KP-NUM-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "Rule KP-NUM-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "Rule KP-NUM-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[47]",
+        "message": "한국어 측정·검토 절차의 경계, 판정 기준과 재현 가능한 사례가 아직 연결되지 않았다. 간결성 선언만으로 완전 대응을 계산하지 않는다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[48]",
+        "message": "Rule KP-SYN-008 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[48]",
+        "message": "Rule KP-NUM-007 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[48]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[48]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[48]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[48]",
+        "message": "한국어 측정·검토 절차의 경계, 판정 기준과 재현 가능한 사례가 아직 연결되지 않았다. 간결성 선언만으로 완전 대응을 계산하지 않는다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[49]",
+        "message": "Rule KP-EDIT-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[49]",
+        "message": "Rule KP-EDIT-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[49]",
+        "message": "Rule KP-EDIT-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[49]",
+        "message": "Rule KP-EDIT-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[49]",
+        "message": "Rule KP-SYN-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[49]",
+        "message": "Rule KP-SYN-009 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[49]",
+        "message": "Rule KP-KO-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[49]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[49]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[49]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Rule KP-EDIT-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Rule KP-EDIT-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Rule KP-EDIT-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Rule KP-WRD-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Rule KP-WRD-003 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Rule KP-KO-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Rule KP-KO-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Rule KP-PROC-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Rule KP-NUM-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Rule KP-WRD-008 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[50]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[51]",
+        "message": "Rule KP-EDIT-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[51]",
+        "message": "Rule KP-WRD-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[51]",
+        "message": "Rule KP-NAM-004 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[51]",
+        "message": "Rule KP-WRD-008 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[51]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[51]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[51]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[51]",
+        "message": "영어 형태와 한국어 구조의 차이를 설명하고 기능 보존 근거를 심사해야 한다. 직접 번역이나 해당 없음 처리는 완전 대응이 아니다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "Rule KP-EDIT-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "Rule KP-WRD-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "Rule KP-NAM-001 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "Rule KP-KO-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "Rule KP-KO-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "Rule KP-DESC-005 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "Rule KP-TXT-002 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "Rule KP-TXT-006 has a related source reference but is not selected as an actual functional contribution."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "Source function is unmapped."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "실제 한국어 규칙 ID와 적용 조건·예외·용례를 연결해야 한다."
+      },
+      {
+        "path": "specification/ste-crosswalk.json.items[52]",
+        "message": "원본 기능의 모든 요소를 대조한 설계 검토와 독립 사례 검증 기록이 필요하다."
+      }
+    ],
+    "coverage": {
+      "designed_count": 0,
+      "verified_count": 0,
+      "partial_count": 0,
+      "unmapped_count": 53,
+      "source_count": 53,
+      "designed_ratio": 0.0,
+      "verified_ratio": 0.0,
+      "unconfirmed_count": 53,
+      "semantically_unconfirmed_count": 53,
+      "verified_kind": "verified_functional_design"
+    },
+    "semantic_verified": false,
+    "limitations": [
+      "Static validation checks structure, references, and case invariants only.",
+      "verified_functional_design validates a recorded review artifact; it does not independently repeat that review.",
+      "LLM meaning preservation, reader comprehension, and 90% semantic performance require separate execution and human evaluation."
+    ]
+  }
+}

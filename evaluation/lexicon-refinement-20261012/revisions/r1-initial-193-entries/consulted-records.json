@@ -1,0 +1,1255 @@
+{
+  "evaluation_role": "reused_input_development_coverage_after_targeted_dictionary_expansion",
+  "records": [
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/7",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "dac07127c58b55e445e45138b2c7b218fbef38c73fd51870a9e7df9536af2bc0",
+      "record": {
+        "id": "KPL-0008",
+        "lemma": "삭제하다",
+        "sense_id": "delete",
+        "pos": "동사",
+        "meaning": "파일이나 기록 등의 대상을 해당 저장 위치에서 없애다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "삭제하다",
+          "삭제합니다",
+          "삭제했습니다",
+          "삭제하세요"
+        ],
+        "frames": [
+          "저장 위치에서 대상을 삭제하다"
+        ],
+        "conditions": [
+          "영구 삭제 여부는 저장소의 실제 동작에 따른다."
+        ],
+        "avoid_senses": [
+          "연결 해제나 화면 숨김과 같지 않다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/9",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "ced0380f28026b4fb8206e1f0c3acba074f22f0c8bb89c2e5434ff0270310b7f",
+      "record": {
+        "id": "KPL-0010",
+        "lemma": "복사하다",
+        "sense_id": "copy",
+        "pos": "동사",
+        "meaning": "원래 대상을 남기고 그와 같은 내용의 사본을 만들다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "복사하다",
+          "복사합니다",
+          "복사했습니다",
+          "복사하세요"
+        ],
+        "frames": [
+          "대상을 위치로 복사하다"
+        ],
+        "conditions": [
+          "사본의 범위와 위치가 작업에 필요하면 남긴다."
+        ],
+        "avoid_senses": [
+          "원본을 옮기거나 삭제한다는 뜻은 아니다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/10",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "9c762a8e42d6a7ca6271ef64d8233904752dd4ec1978e92005f4fa0955544d4a",
+      "record": {
+        "id": "KPL-0011",
+        "lemma": "이동하다",
+        "sense_id": "move",
+        "pos": "동사",
+        "meaning": "대상의 위치를 다른 곳으로 바꾸다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "이동하다",
+          "이동합니다",
+          "이동했습니다",
+          "이동하세요"
+        ],
+        "frames": [
+          "대상을 위치로 이동하다"
+        ],
+        "conditions": [
+          "자료 이동에서는 원래 위치에 남는지 실제 동작을 확인한다."
+        ],
+        "avoid_senses": [
+          "복사본 생성만으로 이동 완료를 말하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/42",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "15ccecf98f8f5eac4b0fe1e8848a0ea29b6b9df4bc479075fb65d86eb93dc398",
+      "record": {
+        "id": "KPL-0043",
+        "lemma": "기록하다",
+        "sense_id": "record",
+        "pos": "동사",
+        "meaning": "관찰하거나 전달한 내용을 나중에 확인할 수 있게 남기다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "기록하다",
+          "기록합니다",
+          "기록했습니다",
+          "기록하세요"
+        ],
+        "frames": [
+          "내용을 기록 위치에 기록하다"
+        ],
+        "conditions": [
+          "사실과 의견을 서로 식별할 수 있게 적는다."
+        ],
+        "avoid_senses": [
+          "기록 내용의 참됨을 검증하는 뜻은 아니다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/46",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "b594a19768b6df01a0f369627198e5e0ba280b98ad4015ee3dfd9d2c3227a7bd",
+      "record": {
+        "id": "KPL-0047",
+        "lemma": "승인하다",
+        "sense_id": "approve",
+        "pos": "동사",
+        "meaning": "권한자가 정한 대상이나 행동을 허용하는 결정을 내리다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "승인하다",
+          "승인합니다",
+          "승인했습니다",
+          "승인하세요"
+        ],
+        "frames": [
+          "권한자가 대상을 승인하다"
+        ],
+        "conditions": [
+          "검토한 사실과 승인 결정을 구별한다."
+        ],
+        "avoid_senses": [
+          "결정만으로 실행 완료를 뜻하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/71",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "a80ac9f83a5924f66a2792e273297f80d403904b9fd14665f44a881d3b11ed87",
+      "record": {
+        "id": "KPL-0072",
+        "lemma": "권한",
+        "sense_id": "authority",
+        "pos": "명사",
+        "meaning": "정책이나 역할에 따라 대상에게 허용된 행동의 범위이다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "권한",
+          "권한을",
+          "권한이"
+        ],
+        "frames": [
+          "권한이 있다",
+          "권한을 부여하다"
+        ],
+        "conditions": [
+          "기술적 능력과 역할상의 허용을 구별한다."
+        ],
+        "avoid_senses": [
+          "작동 가능한 기능 전체를 뜻하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/86",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "dd443b84d30f3eec4adf563e394e270bf8d8427dc54adf1aa25f856c154128da",
+      "record": {
+        "id": "KPL-0087",
+        "lemma": "완료",
+        "sense_id": "completed_state",
+        "pos": "명사",
+        "meaning": "정한 범위의 활동을 끝까지 수행한 상태이다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "완료",
+          "완료를",
+          "완료가"
+        ],
+        "frames": [
+          "작업 완료",
+          "완료 상태"
+        ],
+        "conditions": [
+          "화면 상태나 표에서는 짧은 명사형을 허용한다."
+        ],
+        "avoid_senses": [
+          "일부 진행이나 실행 시작을 나타내지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/96",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "06ea6362cb785c00dfddd34b507aea99c4cd8f1805b07f94cfb0b35571692b99",
+      "record": {
+        "id": "KPL-0097",
+        "lemma": "이상",
+        "sense_id": "at_least",
+        "pos": "명사",
+        "meaning": "비교 기준과 같거나 그보다 큰 범위이다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "이상",
+          "이상을",
+          "이상이"
+        ],
+        "frames": [
+          "수량 이상"
+        ],
+        "conditions": [
+          "기준값을 범위에 포함한다."
+        ],
+        "avoid_senses": [
+          "초과와 바꾸면 경계가 달라진다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/97",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "dfcaa4f256a179bf13dcc0c61362e3d905e0c60a8af0b4dbc0b8337945170237",
+      "record": {
+        "id": "KPL-0098",
+        "lemma": "이하",
+        "sense_id": "at_most",
+        "pos": "명사",
+        "meaning": "비교 기준과 같거나 그보다 작은 범위이다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "이하",
+          "이하를",
+          "이하가"
+        ],
+        "frames": [
+          "수량 이하"
+        ],
+        "conditions": [
+          "기준값을 범위에 포함한다."
+        ],
+        "avoid_senses": [
+          "미만과 바꾸면 경계가 달라진다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/124",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "d4ba1edf9895a22e512ec24f9ba6b27df8bd0b6d95434e96987f3fb9525dcf27",
+      "record": {
+        "id": "KPL-0125",
+        "lemma": "수 있다",
+        "sense_id": "permission",
+        "pos": "의존표현",
+        "meaning": "권한이나 규정에 따라 행동을 허락함을 나타내다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "수 있다",
+          "수정할 수 있습니다",
+          "열람할 수 있습니다"
+        ],
+        "frames": [
+          "권한자는 행동할 수 있다"
+        ],
+        "conditions": [
+          "허락 문맥이 분명할 때 쓰며 능력과 혼동되면 확인한다."
+        ],
+        "avoid_senses": [
+          "기술적 실행 가능성과 같지 않다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/127",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "3e667de6ef5b7e8981290982eef75af11548d98e7ed6b84dbc7ee7f2adeeb93f",
+      "record": {
+        "id": "KPL-0128",
+        "lemma": "해야 하다",
+        "sense_id": "obligation",
+        "pos": "의존표현",
+        "meaning": "목적이나 규정에 따라 행동을 수행할 필요 또는 의무를 나타내다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "해야 하다",
+          "해야 합니다",
+          "꺼야 합니다"
+        ],
+        "frames": [
+          "조건이면 행동해야 한다"
+        ],
+        "conditions": [
+          "필요성이나 의무의 근거가 문맥에서 식별돼야 한다."
+        ],
+        "avoid_senses": [
+          "선택 가능한 허락이나 단순 권장과 구별한다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/145",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "e7bd086922b90117aecaeaa31618b2684c5a6a7965ee71ff8acb63a25e28df52",
+      "record": {
+        "id": "KPL-0146",
+        "lemma": "보류하다",
+        "sense_id": "defer",
+        "pos": "동사",
+        "meaning": "결정이나 실행을 하지 않고 다음 판단까지 미루다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "보류하다",
+          "보류합니다",
+          "보류했습니다",
+          "보류하세요"
+        ],
+        "frames": [
+          "결정이나 작업을 보류하다"
+        ],
+        "conditions": [
+          "기다리는 조건이 판단에 필요하면 알린다."
+        ],
+        "avoid_senses": [
+          "거부나 취소가 확정됐다는 뜻은 아니다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/148",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "b38a0d7ee50025c0ff56ed8a5150a8118761c25e22b17cd664035bd072bec2df",
+      "record": {
+        "id": "KPL-0149",
+        "lemma": "적용하다",
+        "sense_id": "apply",
+        "pos": "동사",
+        "meaning": "정한 규칙·설정·변경을 대상에 실제로 사용하거나 효력을 갖게 하다.",
+        "status": "preferred",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "적용하다",
+          "적용합니다",
+          "적용했습니다",
+          "적용하세요"
+        ],
+        "frames": [
+          "규칙이나 변경을 대상에 적용하다"
+        ],
+        "conditions": [
+          "검토·저장·실제 효력 발생을 구별한다."
+        ],
+        "avoid_senses": [
+          "저장만 하고 반영하지 않은 상태를 뜻하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/155",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "173194e5f32db7d08cd550d4c5c837fab0a26d08be5c3b34e7f5158c5a42ce0d",
+      "record": {
+        "id": "KPL-0156",
+        "lemma": "검사",
+        "sense_id": "inspection",
+        "pos": "명사",
+        "meaning": "대상의 특정 사항이나 상태가 정한 조건에 맞는지 살펴보는 활동이다.",
+        "status": "allowed",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "검사",
+          "검사를",
+          "검사가"
+        ],
+        "frames": [
+          "대상을 검사하다",
+          "대상의 검사",
+          "검사에서 조건을 확인하다"
+        ],
+        "conditions": [
+          "검사할 사항과 범위를 식별하며 검사라는 명칭만으로 방법이나 전체 검증 수준을 확정하지 않는다.",
+          "KPL-0029 확인하다와 행동 범위가 겹칠 수 있으나 KPL-0030 검증하다 또는 KPL-0032 시험하다와 같은 활동이라고 자동 판정하지 않는다."
+        ],
+        "avoid_senses": [
+          "좁은 검사 통과를 전체 기능 시험이나 모든 요구사항 검증 완료로 확대하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/156",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "2a8769fc76358dc657cc2c7927471711e5faa8c68558a657faf0905714de45f9",
+      "record": {
+        "id": "KPL-0157",
+        "lemma": "복구",
+        "sense_id": "restore_function",
+        "pos": "명사",
+        "meaning": "고장·손상·중단으로 잃은 대상의 정한 기능을 다시 사용할 수 있게 하는 조치이다.",
+        "status": "allowed",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "복구",
+          "복구를",
+          "복구가"
+        ],
+        "frames": [
+          "대상을 정상 기능으로 복구하다",
+          "장애 뒤 대상의 복구"
+        ],
+        "conditions": [
+          "복구한 기능과 확인한 범위를 보고하며 원인 제거·자료 복원·서비스 재시작 중 필요한 방법은 실제 절차에 따른다.",
+          "KPL-0012 복원하다는 식별된 이전 상태로 되돌리는 행동이며 이 복구의 자동 대체어가 아니다. KPL-0025 재개하다나 KPL-SW-0022 롤백하다도 복구 방법 또는 부분 단계일 수 있다."
+        ],
+        "avoid_senses": [
+          "기능이 회복됐다는 사실만으로 데이터가 과거 사본과 같아지거나 모든 기능이 회복됐다고 확정하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/157",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "b44665568f8173f46f38279548a66c77fa89fbe7166058ee0523d90776f44a42",
+      "record": {
+        "id": "KPL-0158",
+        "lemma": "제안",
+        "sense_id": "proposal",
+        "pos": "명사",
+        "meaning": "검토하거나 채택하도록 내놓은 의견 또는 방안이다.",
+        "status": "allowed",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "제안",
+          "제안을",
+          "제안이"
+        ],
+        "frames": [
+          "변경을 제안하다",
+          "상대에게 방안을 제안하다",
+          "제안을 검토하다"
+        ],
+        "conditions": [
+          "제안 내용과 수락·승인·실제 적용 상태를 구별하며 이미 채택된 제안의 이력도 제안이라고 부를 수 있다.",
+          "KPL-0046 요청하다는 상대 행동을 요구하는 뜻이며 모든 제안이 의무 지시나 실행 요청과 같은 것은 아니다."
+        ],
+        "avoid_senses": [
+          "제안의 존재만으로 KPL-0047 승인하다의 결정이나 KPL-0149 적용하다의 실행을 확정하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/core.json",
+      "json_pointer": "/entries/158",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "a88410f8244d6e748029abca751bdca2184e43abb180d926ce8c274691cd71c4",
+      "record": {
+        "id": "KPL-0159",
+        "lemma": "할당",
+        "sense_id": "assign_work",
+        "pos": "명사",
+        "meaning": "식별된 사람이나 역할이 맡을 업무를 지정하는 행위이다.",
+        "status": "allowed",
+        "domains": [
+          "general"
+        ],
+        "forms": [
+          "할당",
+          "할당을",
+          "할당이"
+        ],
+        "frames": [
+          "사람에게 업무를 할당하다",
+          "업무의 할당",
+          "역할에 업무를 할당하다"
+        ],
+        "conditions": [
+          "누구에게 어떤 업무를 지정했는지 식별하며 이 뜻은 업무 배정에 한정한다.",
+          "할당과 수락·착수·완료는 별도 상태이며 KPL-0073 책임의 전체 범위도 배정 사실만으로 추가하지 않는다."
+        ],
+        "avoid_senses": [
+          "업무 할당을 실행 완료나 접근 권한 부여로 바꾸지 않는다. 메모리·주소·수량의 자원 할당은 이 업무 뜻이 아니다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/2",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "4c4abab5b2d8187fb58c46c28e48a282dfb901bb935ef35f7ac0c40a0dbfee39",
+      "record": {
+        "id": "KPL-SW-0003",
+        "lemma": "업로드하다",
+        "sense_id": "upload",
+        "pos": "동사",
+        "meaning": "로컬이나 출발 저장소의 데이터를 지정한 원격 저장소로 전송하다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "업로드하다",
+          "업로드합니다",
+          "업로드했습니다"
+        ],
+        "frames": [
+          "파일을 서버에 업로드하다"
+        ],
+        "conditions": [
+          "화면 기능명이 업로드이면 그 이름을 유지한다."
+        ],
+        "avoid_senses": [
+          "외부 공개나 처리 완료를 뜻하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/3",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "3210d4e2fce9bd13cf5f478f3e9b574d49977ed0bdb7abe163f5210bbd5bac8e",
+      "record": {
+        "id": "KPL-SW-0004",
+        "lemma": "다운로드하다",
+        "sense_id": "download",
+        "pos": "동사",
+        "meaning": "원격 저장소의 데이터를 지정한 로컬 또는 수신 저장소로 전송받다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "다운로드하다",
+          "다운로드합니다",
+          "다운로드했습니다"
+        ],
+        "frames": [
+          "파일을 위치에 다운로드하다"
+        ],
+        "conditions": [
+          "전송 결과와 파일 열람 성공을 구별한다."
+        ],
+        "avoid_senses": [
+          "원본이 제거된다는 뜻은 아니다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/8",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "c6d44dd7b14e5c2f6ded958f84ef57c98c6bb8ea7feda97263b4871b7f63a302",
+      "record": {
+        "id": "KPL-SW-0009",
+        "lemma": "백업하다",
+        "sense_id": "backup",
+        "pos": "동사",
+        "meaning": "복구에 사용할 수 있도록 정한 시점의 자료 사본을 별도 위치에 보관하다.",
+        "status": "allowed",
+        "domains": [
+          "software",
+          "document_management"
+        ],
+        "forms": [
+          "백업하다",
+          "백업합니다",
+          "백업했습니다"
+        ],
+        "frames": [
+          "자료를 백업 위치에 백업하다"
+        ],
+        "conditions": [
+          "백업 생성과 복구 가능성 시험을 구별한다."
+        ],
+        "avoid_senses": [
+          "현재 원본이 올바르거나 복원이 검증됐다는 뜻은 아니다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/14",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "2ca51a09a850c237de53bcd8094eba4cb5d581907ce954713d224faca21fc86c",
+      "record": {
+        "id": "KPL-SW-0015",
+        "lemma": "세션",
+        "sense_id": "session",
+        "pos": "명사",
+        "meaning": "정한 사용자나 작업의 연속된 실행 또는 접속 상태를 관리하는 단위이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "세션"
+        ],
+        "frames": [
+          "세션을 시작하다",
+          "세션이 만료되다"
+        ],
+        "conditions": [
+          "서비스가 정한 범위와 유효 조건을 함께 읽는다."
+        ],
+        "avoid_senses": [
+          "로그인 계정이나 영구 권한과 같지 않다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/15",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "8f868b100044545464ada3c24d5788b1c47fd04451be4c14bf5d22abf245c720",
+      "record": {
+        "id": "KPL-SW-0016",
+        "lemma": "토큰",
+        "sense_id": "credential_token",
+        "pos": "명사",
+        "meaning": "접근 또는 신원 확인에 사용하는 값이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "토큰"
+        ],
+        "frames": [
+          "토큰을 발급하다",
+          "토큰이 만료되다"
+        ],
+        "conditions": [
+          "인증용 토큰이라는 문맥에 적용한다."
+        ],
+        "avoid_senses": [
+          "LLM 처리량 단위인 토큰과 같지 않다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/21",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "d1ef7a4d40463a13e70fdb26da81f6d62c788ed7c9e1a10bba196dfce6f67d6e",
+      "record": {
+        "id": "KPL-SW-0022",
+        "lemma": "롤백하다",
+        "sense_id": "rollback",
+        "pos": "동사",
+        "meaning": "적용된 변경을 정한 이전 배포 또는 데이터 상태로 되돌리다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "롤백하다",
+          "롤백합니다",
+          "롤백했습니다"
+        ],
+        "frames": [
+          "배포를 기준 버전으로 롤백하다"
+        ],
+        "conditions": [
+          "되돌리는 기준과 데이터 영향은 실제 절차로 정한다."
+        ],
+        "avoid_senses": [
+          "일반 문장 편집의 되돌리기나 모든 복구와 같지 않다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/22",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "74ee4b5651e423fc758cf76fc74ae426fee03becff5042be749ca6f4fae30361",
+      "record": {
+        "id": "KPL-SW-0023",
+        "lemma": "활성",
+        "sense_id": "enabled_state",
+        "pos": "명사",
+        "meaning": "해당 제품에서 기능이나 대상의 사용이 가능하도록 설정된 상태이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "활성",
+          "활성을",
+          "활성이"
+        ],
+        "frames": [
+          "기능이 활성 상태이다",
+          "대상의 활성 여부",
+          "활성 상태인 기능"
+        ],
+        "conditions": [
+          "제품이 활성이라는 상태명을 사용 가능한 설정 상태로 정의한 문맥에서만 적용한다.",
+          "사용 가능 설정과 현재 작업 수행·사용자 권한·서비스 정상 여부를 따로 판단한다."
+        ],
+        "avoid_senses": [
+          "활성 상태를 현재 작업 실행·완료 또는 모든 사용자에 대한 허락으로 확대하지 않는다. 생물학적 활성이나 사용 빈도는 이 뜻이 아니다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/23",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "e1b2571835d6d83558e7cf5145dd658fbde97778b3da450d7dc612c8ae610a6a",
+      "record": {
+        "id": "KPL-SW-0024",
+        "lemma": "활성화",
+        "sense_id": "enable_feature",
+        "pos": "명사",
+        "meaning": "사용이 불가능하도록 설정된 기능이나 대상을 사용할 수 있는 설정 상태로 바꾸는 행위이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "활성화",
+          "활성화를",
+          "활성화가"
+        ],
+        "frames": [
+          "기능을 활성화하다",
+          "기능의 활성화",
+          "활성화 뒤 기능을 사용하다"
+        ],
+        "conditions": [
+          "활성화 전후의 설정 상태와 실제 동작 실행을 구별한다.",
+          "기능 활성화와 계정의 인증·접근 권한 부여는 별도 절차이다."
+        ],
+        "avoid_senses": [
+          "활성화를 해당 작업의 시작·성공·완료 또는 계정의 권한 부여와 같은 뜻으로 쓰지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/24",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "155d236cab29f722956799c1c4cd1bb84843532e711ff914ea40e16d3309eafa",
+      "record": {
+        "id": "KPL-SW-0025",
+        "lemma": "시간 초과",
+        "sense_id": "response_timeout",
+        "pos": "명사",
+        "meaning": "정한 응답 대기 시간이 지나도 기대한 응답을 받지 못한 상태이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "시간 초과",
+          "시간 초과를",
+          "시간 초과가"
+        ],
+        "frames": [
+          "요청의 응답 대기 시간이 초과되다",
+          "대기 한도에 따른 시간 초과",
+          "시간 초과로 대기를 끝내다"
+        ],
+        "conditions": [
+          "어느 요청의 어떤 응답을 언제까지 기다렸는지 식별하며 이 항목은 응답 대기 한도에 한정한다.",
+          "응답을 못 받은 사실과 원격 작업의 실행·취소·완료 상태를 구별한다."
+        ],
+        "avoid_senses": [
+          "시간 초과를 원격 실행 취소나 서버 처리 실패의 확정으로 바꾸지 않는다. 달력상의 제출 지각은 이 뜻이 아니다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/25",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "603b13a1c6ceaa92a1c617cd589af9838e8649c5dbe49c45684504997392185b",
+      "record": {
+        "id": "KPL-SW-0026",
+        "lemma": "재시도",
+        "sense_id": "retry_failed_operation",
+        "pos": "명사",
+        "meaning": "실패했거나 응답을 확인하지 못한 기존 동작을 다시 실행하려는 행위이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "재시도",
+          "재시도를",
+          "재시도가"
+        ],
+        "frames": [
+          "실패한 요청의 재시도",
+          "요청을 조건에 따라 재시도하다",
+          "재시도 횟수"
+        ],
+        "conditions": [
+          "정상 처리의 일반 반복과 구별하며 실패·응답 미확인이라는 앞 상태를 유지한다.",
+          "재시도 대상·조건·횟수·간격이 실행에 필요하면 실제 정책을 확인하며 중복 효과 가능성을 별도로 판단한다."
+        ],
+        "avoid_senses": [
+          "재시도를 성공 보장이나 이전 실행의 취소로 읽지 않는다. KPL-0116 반복하다로 바꿀 때 실패·불확실한 응답이라는 맥락을 없애지 않는다."
+        ],
+        "alternatives": [
+          {
+            "entry_id": "KPL-0116",
+            "relation": "contextual",
+            "condition": "앞 문장에서 실패 또는 응답 미확인과 같은 동작의 재실행 조건을 이미 밝히고 그 맥락을 그대로 유지할 때 후속 행동의 서술어로 반복하다를 선택할 수 있다. 정상적인 정기 반복으로 바꾸거나 임의 횟수를 추가하지 않는다."
+          }
+        ],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/26",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "c00cd2707d6a3ac2a6eb8335839e436d7fa3be79f1886861d09d59e9c56573d6",
+      "record": {
+        "id": "KPL-SW-0027",
+        "lemma": "멱등성",
+        "sense_id": "idempotent_effect",
+        "pos": "명사",
+        "meaning": "정의된 같은 동작을 여러 번 적용한 요청 효과가 한 번 적용한 요청 효과와 같은 성질이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "멱등성",
+          "멱등성을",
+          "멱등성이"
+        ],
+        "frames": [
+          "동작의 멱등성",
+          "요청 효과에 대한 멱등성",
+          "멱등성을 보장하다"
+        ],
+        "conditions": [
+          "동일 동작과 요청 효과의 범위를 계약에 따라 정하며 요청 식별자나 키가 같다는 사실만으로 보장을 추론하지 않는다.",
+          "멱등성은 지정한 요청 효과에 적용한다. 요청별 기록과 응답 표현까지 항상 같다는 뜻은 아니다."
+        ],
+        "avoid_senses": [
+          "실행 횟수가 한 번이라는 보장이나 부수 로그·응답의 동일성을 뜻하지 않는다. 모든 동작이 읽기 전용이라는 뜻도 아니다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/27",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "1a9eac8924cb51cbdcd54362d7c30d03a5fd92b2c90caec3885d089673a90944",
+      "record": {
+        "id": "KPL-SW-0028",
+        "lemma": "상관관계 식별자",
+        "sense_id": "correlation_identifier",
+        "pos": "명사",
+        "meaning": "서로 관련된 요청·응답 또는 처리 기록을 같은 작업 문맥으로 연결할 때 사용하는 식별 값이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "상관관계 식별자",
+          "상관관계 식별자를",
+          "상관관계 식별자가"
+        ],
+        "frames": [
+          "기록에 상관관계 식별자를 포함하다",
+          "상관관계 식별자로 기록을 연결하다"
+        ],
+        "conditions": [
+          "식별자가 연결하는 범위와 생성·전파 규칙은 해당 시스템의 정의를 따른다.",
+          "특정 시스템의 trace-id나 CorrelationId가 이 역할을 맡을 수 있으나 모든 시스템에서 같은 형식이라고 강제하지 않는다."
+        ],
+        "avoid_senses": [
+          "식별자의 일치만으로 원인·사용자 권한·메시지 중복 제거 또는 작업 성공을 확정하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/28",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "b7e0885686d0f52a58fdcbdeffaddf477b31e1de5919e98a3eaca1616cfabc0d",
+      "record": {
+        "id": "KPL-SW-0029",
+        "lemma": "캐시",
+        "sense_id": "reusable_copy_store",
+        "pos": "명사",
+        "meaning": "이후의 같은 종류 요청에서 다시 사용하도록 데이터 사본을 보관하는 저장 영역이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "캐시",
+          "캐시를",
+          "캐시가"
+        ],
+        "frames": [
+          "결과를 캐시에 저장하다",
+          "캐시에서 사본을 읽다",
+          "캐시의 유효성을 확인하다"
+        ],
+        "conditions": [
+          "이 뜻은 사본의 재사용 목적을 가진 저장 영역에 한정하며 캐시 자료 자체는 캐시에 보관된 데이터라고 구별한다.",
+          "저장 매체·만료·갱신·재사용 조건은 구현별 정책에 따르며 무조건 메모리나 고정 만료 시간을 뜻하지 않는다."
+        ],
+        "avoid_senses": [
+          "캐시 저장을 백업 완료나 원본의 최신 상태 보장으로 읽지 않는다. 캐시 사본 삭제만으로 원본 삭제를 확정하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/29",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "f8bd1a4a8edc3a58ecf786973b13e40009f096e8be0ef106267f1fa1770a9682",
+      "record": {
+        "id": "KPL-SW-0030",
+        "lemma": "동기화",
+        "sense_id": "synchronize_selected_data",
+        "pos": "명사",
+        "meaning": "복수 대상에서 선택한 관련 데이터의 변경을 정한 방향과 충돌 규칙에 따라 전달해 일치시키는 과정이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "동기화",
+          "동기화를",
+          "동기화가"
+        ],
+        "frames": [
+          "A와 B의 선택 데이터를 동기화하다",
+          "원본에서 사본으로 동기화하다",
+          "동기화의 충돌 규칙"
+        ],
+        "conditions": [
+          "동기화 범위·방향·기준과 충돌 처리 정책을 실제 구현에 따라 식별한다.",
+          "시작·전달·완료와 현재의 일치 상태를 구별하며 자동으로 즉시·전역 일치를 보장하지 않는다."
+        ],
+        "avoid_senses": [
+          "동기화를 이전 시점 백업으로의 복원이나 변경 손실 없는 병합의 보장으로 읽지 않는다. 시계·스레드의 동기화는 이 데이터 뜻이 아니다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/30",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "c1263e7ca97b4b1a9572a62d8b01d4602ef74c8cd99de7f27192d3aa07427df5",
+      "record": {
+        "id": "KPL-SW-0031",
+        "lemma": "본문",
+        "sense_id": "message_body",
+        "pos": "명사",
+        "meaning": "메시지에서 헤더와 구별해 내용 전달에 사용하는 부분이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "본문",
+          "본문을",
+          "본문이"
+        ],
+        "frames": [
+          "메시지의 본문",
+          "본문만 서명하다",
+          "본문에서 값을 읽다"
+        ],
+        "conditions": [
+          "이 항목은 요청·응답 메시지의 본문에 한정하며 일반 문서 본문의 뜻을 자동으로 연결하지 않는다.",
+          "본문은 문자·바이너리 데이터를 담을 수 있다. HTTP 전송 코딩 전후의 바이트를 구별해야 하면 해당 프로토콜의 정의를 따른다."
+        ],
+        "avoid_senses": [
+          "본문을 헤더까지 포함한 전체 메시지나 반드시 사람에게 보이는 문장으로 확대하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/31",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "a5beb6ba189ff30ee948cfa1a6deb29fadde180ecb7fbc437cfb47534199f9f4",
+      "record": {
+        "id": "KPL-SW-0032",
+        "lemma": "색인",
+        "sense_id": "search_reference_structure",
+        "pos": "명사",
+        "meaning": "대상의 검색을 위해 검색 기준과 대상의 위치나 식별자를 연결해 구성한 참조 자료이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "색인",
+          "색인을",
+          "색인이"
+        ],
+        "frames": [
+          "문서의 검색 색인",
+          "색인을 갱신하다",
+          "색인에서 문서를 찾다"
+        ],
+        "conditions": [
+          "이 뜻은 검색용 참조 구조에 한정하며 원본 자료와 색인의 갱신 시점을 구별한다.",
+          "색인의 검색 단위와 갱신 방식은 구현에 따르며 모든 색인을 같은 데이터 구조로 가정하지 않는다."
+        ],
+        "avoid_senses": [
+          "색인 삭제·갱신을 원본 문서의 삭제·변경으로 읽지 않는다. 색인이 존재한다는 사실만으로 최신 변경 반영을 보장하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/32",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "76508f94902e2747eef05869f391a18a7e9bf63af2a7acdb70cbb1cfd7d99ecf",
+      "record": {
+        "id": "KPL-SW-0033",
+        "lemma": "처리율",
+        "sense_id": "completed_work_rate",
+        "pos": "명사",
+        "meaning": "정한 관측 구간에 완료한 작업량을 해당 구간의 시간으로 나눈 값이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "처리율",
+          "처리율을",
+          "처리율이"
+        ],
+        "frames": [
+          "대상의 처리율을 작업량/시간으로 나타내다",
+          "구간의 평균 처리율",
+          "성공 작업의 처리율"
+        ],
+        "conditions": [
+          "어떤 작업량을 완료로 세는지, 관측 시간과 실패 포함 여부를 명시하거나 공유된 측정 정의를 따른다.",
+          "이 뜻은 완료량 기준의 처리율이며 유입량·착수량·백분율 또는 이론상 최대 처리 능력과 구별한다."
+        ],
+        "avoid_senses": [
+          "처리율을 요청 한 건의 지연 시간이나 작업 성공 비율로 바꾸지 않는다. 짧은 구간의 평균을 항상 유지되는 최댓값으로 확정하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    },
+    {
+      "source_path": "lexicon/domains/software.json",
+      "json_pointer": "/entries/33",
+      "dataset_version": "0.2.0-draft",
+      "full_object_sha256": "c000f95d7bedff8eb2dbb4ebf49e929f910d30cfe44122f42616a93ababd05b6",
+      "record": {
+        "id": "KPL-SW-0034",
+        "lemma": "지연",
+        "sense_id": "request_latency",
+        "pos": "명사",
+        "meaning": "정한 요청 시작 시점부터 기대한 응답이나 결과를 관찰한 시점까지 경과한 시간이다.",
+        "status": "allowed",
+        "domains": [
+          "software"
+        ],
+        "forms": [
+          "지연",
+          "지연을",
+          "지연이"
+        ],
+        "frames": [
+          "요청의 응답 지연",
+          "시작 시점부터 종료 시점까지의 지연",
+          "성공 요청과 실패 요청의 지연을 구별하다"
+        ],
+        "conditions": [
+          "측정 관점·시작·종료 사건·시간 단위와 통계량을 실제 측정 정의에 따라 식별한다.",
+          "네트워크 구간과 서비스 전체의 측정 범위를 섞지 않으며 실패 응답도 지연을 가질 수 있다."
+        ],
+        "avoid_senses": [
+          "지연 값을 완료 작업 수나 성공 여부로 읽지 않는다. 이 요청 시간 뜻을 일정 연기·의도적 대기와 자동으로 같은 뜻으로 연결하지 않는다."
+        ],
+        "alternatives": [],
+        "since": "0.2.0",
+        "deprecated_since": null
+      }
+    }
+  ]
+}
