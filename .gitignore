@@ -1,0 +1,5 @@
+# Keep source downloads and research execution records local.
+/research/**
+!/research/2026-10-12/
+!/research/2026-10-12/research-report.html
+.DS_Store
