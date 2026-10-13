@@ -1,6 +1,6 @@
 # 설치와 배포 계약 v1
 
-이 문서는 Korean Protocol을 한 번 설치한 뒤 로컬에서 계속 사용하는 배포 계약을 정의한다. POSIX 로컬 설치·서명 검증·콘텐츠 updater·시작 wrapper와 macOS launchd 파일 생성은 구현했고, 실제 발행 서비스와 사용자 예약 작업은 연결하지 않았다. [현재 구현과 실행법](implementation-status.md)은 실행 가능한 명령과 남은 설계를 구분한다. 규약은 LLM 응답의 표현을 안내하며 모든 응답의 준수를 보장하지 않는다.
+이 문서는 Korean Protocol을 한 번 설치한 뒤 로컬에서 계속 사용하는 배포 계약을 정의한다. POSIX 로컬 설치·서명 검증·콘텐츠 updater·시작 wrapper와 macOS launchd 파일 생성·예약 등록을 구현했다. [현재 공개 발행과 실제 업그레이드](public-0.3.0-verification.md)는 0.3.0·순번 2의 서명·Pages 게시와 두 임시 호스트의 0.2.0→0.3.0 갱신을 확인했다. 사용자 전역 예약 작업은 이 업그레이드 시험에서 변경하지 않았다. [현재 구현과 실행법](implementation-status.md)은 실행 가능한 명령과 남은 설계를 구분한다. 규약은 LLM 응답의 표현을 안내하며 모든 응답의 준수를 보장하지 않는다.
 
 ## 적용 범위
 
@@ -158,7 +158,7 @@ uninstall은 상태·원본 backup·검증 캐시를 남겨 복구할 수 있게
 
 설계의 모든 항목이 첫 구현에 포함되었다고 주장하지 않는다. [검증 계획](verification.md)과 [구현 상태](implementation-status.md)는 실제 시험 증거와 남은 공백을 정한다.
 
-[HTTPS 실행 검증](https-transport-verification.md)은 Python 3.11의 실제 TLS·서명 확인·시작 wrapper 갱신·오프라인 유지 결과와 환경별 한계를 기록한다. 공개 배포와 예약 실행 등록은 별도 단계로 남아 있다.
+[과거 HTTPS 실행 검증](https-transport-verification.md)은 Python 3.11의 실제 TLS·서명 확인·시작 wrapper 갱신·오프라인 유지 결과와 환경별 한계를 기록한다. 당시 공개 배포와 예약 실행 등록을 수행하지 않은 기록이며 현재 공개 상태는 [0.3.0 발행·업그레이드 검증](public-0.3.0-verification.md)을 따른다.
 
 ## 발행용 콘텐츠를 준비한다
 

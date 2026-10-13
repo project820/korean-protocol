@@ -25,7 +25,7 @@ SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc
 
 ## 공개 배포에서 서명 설치한다
 
-공개 배포 주소는 `https://project820.github.io/korean-protocol`이다. 기존 공개 서명본은 0.2.0·순번 1이며 현재 로컬 0.3.0-draft 후보는 아직 게시하지 않았다. Codex 예시이며, Claude Code에서는 모든 명령의 `--host codex`를 `--host claude-code`로 바꾼다. 각 명령은 JSON을 출력한다. 명령이 실패하면 원인과 종료 코드를 보고하고 성공으로 표시하지 않는다.
+공개 배포 주소는 `https://project820.github.io/korean-protocol`이다. 현재 공개 서명본은 0.3.0·순번 2이며 [발행·업그레이드 검증](https://github.com/project820/korean-protocol/blob/main/docs/distribution/public-0.3.0-verification.md)에 확인 결과를 기록했다. Codex 예시이며, Claude Code에서는 모든 명령의 `--host codex`를 `--host claude-code`로 바꾼다. 각 명령은 JSON을 출력한다. 명령이 실패하면 원인과 종료 코드를 보고하고 성공으로 표시하지 않는다.
 
 macOS에서는 예약 자동 갱신을 명시적으로 등록한다.
 
@@ -48,7 +48,7 @@ macOS에서도 자동 갱신을 원하지 않으면 `--autoupdate off`를 사용
 
 ## 오프라인 미서명 설치를 명시적으로 선택한다
 
-네트워크를 사용할 수 없거나 사용자가 미서명 로컬 설치를 요청하면 서명 옵션 없이 실행한다. 이 경로는 저장소 또는 ZIP의 파일을 그대로 설치하며 자동 갱신은 꺼져 있다. 현재 로컬 후보는 설치 상태에 0.3.0으로 기록하며, 서명된 공개 발행을 뜻하지 않는다.
+네트워크를 사용할 수 없거나 사용자가 미서명 로컬 설치를 요청하면 서명 옵션 없이 실행한다. 이 경로는 저장소 또는 ZIP의 파일을 그대로 설치하며 자동 갱신은 꺼져 있다. 현재 로컬 원본은 설치 상태에 0.3.0으로 기록한다. 이 미서명 설치 경로의 `trust: local-snapshot`을 공개 서명본의 인증 결과로 표시하지 않는다.
 
 ```sh
 python3 -B distribution/agent_install.py plan --host codex

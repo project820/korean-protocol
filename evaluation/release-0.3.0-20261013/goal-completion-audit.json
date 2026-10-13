@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "result": "declared_goal_gates_satisfied",
+  "auditor": "/root with independent /root/final_goal_audit and /root/control_security_review",
+  "previous_goal_turn": "progress: candidate release preparation and local upgrade validation completed",
+  "requirements": [
+    {
+      "requirement": "Full Korean controlled-language structure with rules, conditions, exceptions and examples",
+      "evidence": [
+        "docs/spec/toc.md",
+        "docs/spec/korean-rules.md",
+        "specification/rules.json",
+        "examples/rule-cases.json"
+      ],
+      "result": "pass"
+    },
+    {
+      "requirement": "At least90% of ASD-STE100 writing functions have reviewed Korean correspondence",
+      "evidence": [
+        "docs/spec/coverage-policy.md",
+        "specification/ste-crosswalk.json",
+        "evaluation/functional-review.json",
+        "evaluation/release-0.3.0-20261013/metadata-carryforward-review.json"
+      ],
+      "result": "49 of53 functions pass independent design review; four partial; not whole-language accuracy"
+    },
+    {
+      "requirement": "Meaning-based controlled lexicon and Korean-specific cases",
+      "evidence": [
+        "lexicon/core.json",
+        "lexicon/domains/software.json",
+        "evaluation/korean-independent/report.md",
+        "evaluation/llm/lexical-meaning-use-20261013/gate-review.json"
+      ],
+      "result": "pass within declared scope"
+    },
+    {
+      "requirement": "Actual untreated/KP/STE-principle comparison preserves meaning and records failures",
+      "evidence": [
+        "evaluation/llm/controlled-korean-20261013/report.md",
+        "evaluation/llm/fresh-controlled-20261013/report.md",
+        "evaluation/llm/lexical-meaning-use-20261013/report.md",
+        "evaluation/llm/isolation-20261013.md"
+      ],
+      "result": "pass with recorded sample/isolation/rating limits; no universal accuracy or human comprehension claim"
+    },
+    {
+      "requirement": "Persistent install, offline use, signed update and recovery for first supported coding agents",
+      "evidence": [
+        "evaluation/release-0.3.0-20261013/public-upgrade-result.json",
+        "evaluation/release-0.3.0-20261013/public-independent-review.json",
+        "evaluation/release-0.3.0-20261013/historical-helper-migration.json",
+        "docs/distribution/public-scheduler-verification.json"
+      ],
+      "result": "pass for declared Codex and Claude Code support"
+    },
+    {
+      "requirement": "Publish reviewed version and preserve authenticated release history",
+      "evidence": [
+        "evaluation/release-0.3.0-20261013/public-actions-run.json",
+        "evaluation/release-0.3.0-20261013/public-history-release.json"
+      ],
+      "result": "0.3.0 sequence2 published; sign/publish/receipt/archive succeeded"
+    }
+  ],
+  "validation": {
+    "automatic_tests": 361,
+    "result": "pass",
+    "log": "evaluation/release-0.3.0-20261013/unittest-final.log"
+  },
+  "limitations": [
+    "Research/development draft, not official ASD-STE100 Korean edition",
+    "No whole-natural-corpus90%, expert endorsement or human comprehension improvement proved",
+    "No new0.3 actual registered scheduler/login/sleep-wake test; prior scheduler evidence and local current/old runtime tests kept distinct",
+    "External user-owned old wrappers require explicit replacement with new returned runtime route",
+    "Existing session context cannot be erased by file-level OFF"
+  ],
+  "required_work_remaining": []
+}

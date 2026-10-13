@@ -6,7 +6,7 @@ Korean Protocol은 LLM이 한국어로 사실·조건·행동·불확실성을 �
 
 프로젝트명은 **Korean Protocol**, 저장소명은 **`korean-protocol`**입니다. 현재 버전은 전체 규칙·통제 어휘·판정 사례·지속 설치 도구를 갖춘 **0.3.0-draft 연구·개발 초안**입니다. [전체 목차](docs/spec/toc.md)와 [체계 구조](docs/spec/architecture.md)에서 설계를 확인할 수 있습니다.
 
-현재 0.3.0-draft는 표현 규칙 보완과 규약·높임말 적용 설정을 포함한 미공개 로컬 후보입니다. 다음 공개 발행 후보는 0.3.0·순번 2이며, 기존 공개 서명본은 0.2.0·순번 1입니다.
+현재 공개 서명본은 표현 규칙 보완과 규약·높임말 적용 설정을 포함한 **0.3.0·순번 2**입니다. 원본의 `0.3.0-draft` 표시는 연구·개발 초안의 품질 범위를 뜻합니다. [공개 발행·업그레이드 검증](docs/distribution/public-0.3.0-verification.md)은 게시와 두 임시 호스트의 실제 갱신 결과를 기록합니다.
 
 사용하려면 [에이전트 설치 안내](INSTALL.md)를 읽으세요. Codex·Claude Code는 [공개 HTTPS 배포](https://project820.github.io/korean-protocol)에서 서명된 규약을 설치합니다. macOS는 예약 자동 갱신을 등록하고, Linux는 시작 wrapper를 연결하거나 자동 갱신을 끕니다. 일반 채팅용 파일은 [빠른 시작](docs/distribution/quick-start.md)에서 안내합니다.
 
@@ -118,6 +118,6 @@ GitHub 저장소의 짧은 소개에는 다음 문장을 사용합니다.
 
 [적용 설정](docs/distribution/application-controls.md)에서 규약 on/off와 높임말 on/off를 독립적으로 바꾼다. 새로 쓰는 기본 응답에는 높임말을 쓰지 않고, 명료한 상태에는 `표기된 담당자 없음.` 같은 짧은 형식을 우선한다. [표현 운영 지침](docs/spec/control-expression.md)은 생략 가능한 정보와 반드시 남길 조건·양태·행위자를 구분한다.
 
-[압축 문체의 실제 1:1:1 비교](evaluation/llm/controlled-korean-20261013/report.md)는 미적용·보완 규약·STE 원칙의 한국어 적용을 같은 입력으로 실행한 기록이다. 이번 보완본은 로컬 후보이며 공개 Pages의 기존 서명 콘텐츠와 다르다.
+[압축 문체의 실제 1:1:1 비교](evaluation/llm/controlled-korean-20261013/report.md)는 미적용·보완 규약·STE 원칙의 한국어 적용을 같은 입력으로 실행한 기록이다. 이 평가에 사용한 보완 규약은 0.3.0·순번 2로 공개했으며, 공개 콘텐츠 7개의 바이트가 원본과 일치한다. 공개 발행은 이 비교의 표본·평정·한계를 바꾸지 않는다.
 
 [어휘의 실제 허용 뜻 사용](evaluation/llm/lexical-meaning-use-20261013/report.md)은 사전 정의를 참고해 고정한 24개 문맥에서 뜻 실현·직접 용어 사용·예외 보존·미확정 처리를 구분했다. 최초 비교의 사용자 스킬 유입을 수정하고 모든 조건을 다시 실행했다.

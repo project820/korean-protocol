@@ -1,0 +1,20 @@
+{
+  "reviewer": "/root/control_security_review",
+  "result": "pass",
+  "findings": [],
+  "verified": [
+    "Both saved public 0.2.0 sequence1 and 0.3.0 sequence2 SSHSIG signatures reverified with pinned publisher public key",
+    "Publisher fingerprint matches pinned metadata",
+    "Manifest/signature hashes match evidence; seven signed candidate file sizes/hashes match current source and Actions head 468322666bb2c85b2700c50fc701e6d4f82a002f",
+    "Driver and four code hashes match; baseline retained unchanged and prepared before publication",
+    "All four Actions jobs succeeded; both hosts eleven steps returned expected exit codes including offline failure3 and cached wrapper0",
+    "Signed cache files and original user bytes match recorded hashes; temporary root removed",
+    "Driver does not resign content or read private keys"
+  ],
+  "limits": [
+    "Current runtime/helper used for public upgrade",
+    "No registered scheduler, model invocation, login or sleep-wake test in this public upgrade",
+    "Historical executable migration verified separately",
+    "Workflow not repeated by reviewer"
+  ]
+}
