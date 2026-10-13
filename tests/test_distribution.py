@@ -53,6 +53,9 @@ class DistributionTests(unittest.TestCase):
             entry = next(n for n in archive.namelist() if n.endswith('/runtime/kproto.py'))
             start = entry.removesuffix('runtime/kproto.py')+'start.py'
             self.assertIn(start,archive.namelist())
+            prefix = entry.removesuffix('runtime/kproto.py')
+            self.assertIn(prefix+'agent-install.py',archive.namelist())
+            self.assertIn(prefix+'INSTALL.md',archive.namelist())
 
     def test_existing_output_is_preserved(self):
         self.output.write_bytes(b'existing')

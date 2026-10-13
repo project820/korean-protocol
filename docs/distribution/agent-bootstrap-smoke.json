@@ -1,0 +1,23 @@
+{
+  "archive_sha256": "30f8a16b750b3c00e63b3c45d404ba6db64d9069a40d2936929d812a89dcad52",
+  "archive_bytes": 376934,
+  "hosts": {
+    "codex": {
+      "install_verified": true,
+      "version": "0.2.0",
+      "autoupdate": "off",
+      "status_after_clone_move": true,
+      "uninstall_after_clone_move": true
+    },
+    "claude-code": {
+      "install_verified": true,
+      "version": "0.2.0",
+      "autoupdate": "off",
+      "status_after_clone_move": true,
+      "uninstall_after_clone_move": true
+    }
+  },
+  "scope": "isolated temporary HOME; no real user installation; no model inference",
+  "archive_files": 27,
+  "all_archive_checksums_match": true
+}

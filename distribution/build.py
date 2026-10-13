@@ -19,11 +19,13 @@ INPUTS = (
     'docs/spec/lexicon.md', 'examples/rule-cases.json',
     'examples/lexicon-cases.json', 'distribution/START-HERE.md',
     'distribution/CHAT-START.md', 'distribution/launcher.py',
+    'INSTALL.md', 'distribution/agent_install.py',
 )
 ALIASES = {
     'distribution/START-HERE.md':'START-HERE.md',
     'distribution/CHAT-START.md':'CHAT-START.md',
     'distribution/launcher.py':'start.py',
+    'distribution/agent_install.py':'agent-install.py',
 }
 
 
