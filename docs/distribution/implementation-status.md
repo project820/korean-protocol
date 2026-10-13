@@ -1,6 +1,6 @@
 # 현재 구현과 실행법
 
-Python 3.9 표준 라이브러리로 POSIX 설치기와 서명 콘텐츠 updater를 구현했다. macOS 임시 상태에서 실제 OpenSSH 서명 검증과 install/update/rollback/conflict/recovery 테스트 78개가 통과했다. 실제 사용자 설정·예약 작업·발행 endpoint를 변경하거나 연결하지 않았다.
+Python 3.9 표준 라이브러리로 POSIX 설치기와 서명 콘텐츠 updater를 구현했다. macOS 임시 상태에서 실제 OpenSSH 서명 검증과 install/update/rollback/conflict/recovery 테스트 78개가 통과했다. 일반 사용자 에이전트 설정과 발행 endpoint는 변경하지 않았다. 별도 임시 설치본의 실제 macOS 예약 등록·실행·해제는 [후속 시험](scheduler-registration-verification.json)에서 확인했다.
 
 ## 실행 가능한 경로
 
@@ -38,7 +38,7 @@ python3 -m runtime.kproto --state-dir /ABS/STATE autoupdate configure --mode sch
 python3 -m runtime.kproto --state-dir /ABS/STATE status --json
 ```
 
-status의 scheduler는 `generated`, `registered=false`를 표시한다. plist에는 절대 Python·runtime·state 경로와 `RunAtLoad`, `StartInterval=86400`이 들어간다. 생성은 dry-run 결과에 해당하며 실제 `launchctl bootstrap`을 실행하지 않는다. 사용자가 검토한 job을 자신의 launchd domain에 한 번 등록하면 실행 주기가 연결된다. 작업 이력·절전 복귀·호스트 새 세션 로드까지 확인해야 실제 자동 적용 완료로 표시한다.
+status의 scheduler는 `generated`, `registered=false`를 표시한다. plist에는 절대 Python·runtime·state 경로와 `RunAtLoad`, `StartInterval=86400`이 들어간다. 이 생성 명령은 `launchctl bootstrap`을 실행하지 않는다. 서명 설치기에 `--register-scheduler`를 지정하거나 지속 관리 명령의 `scheduler_register`를 실행하면 OS 등록까지 수행한다. 등록 작업은 매시 정각과 로그인 시에 갱신 시각을 확인한다. 절전 복귀·재로그인·호스트 새 세션의 실제 운영 확인은 별도로 구분한다.
 
 private endpoint는 `--token-env KPROTO_TOKEN`으로 변수 이름만 설정한다. terminal에 설정한 환경 변수가 launchd job에 자동 전달된다고 가정하지 않는다. scheduler 실행 환경의 인증 공급은 사용자가 준비해야 하며 plist에 token 값을 넣지 않는다. 인증이 없으면 원격 갱신은 실패하고 기존 규약을 유지한다.
 
@@ -48,7 +48,7 @@ python3 -m runtime.kproto --state-dir /ABS/STATE update --pin 0.2.0
 python3 -m runtime.kproto --state-dir /ABS/STATE update --unpin
 ```
 
-off는 자기 생성 plist를 hash 확인 후 제거하고 네트워크 조회를 막는다. 사용자가 이미 외부 등록한 job을 runtime이 bootout한 것으로 표시하지 않는다. 그 job이 계속 호출되어도 mode off에서는 네트워크를 사용하지 않는다. pin은 현재 버전만 지정하며 다른 버전 pin은 cache rollback을 먼저 수행한다.
+off는 자신이 등록한 job의 실행 경로·인자와 plist 해시를 확인한 뒤 해제하고, 소유한 예약 파일을 제거한다. 등록 정보가 없거나 사용자가 바꾼 외부 job을 임의로 해제하지 않는다. mode off에서는 원격 조회를 수행하지 않는다. pin은 현재 버전만 지정하며 다른 버전 pin은 cache rollback을 먼저 수행한다.
 
 ## 확인한 실패 처리
 
@@ -62,7 +62,7 @@ HTTP header/body blocking은 worker process deadline으로 종료하고 private 
 python3 -m unittest discover -s tests -p test_runtime.py
 ```
 
-이 명령은 104 tests를 실행하여 `OK`로 끝났다. 데이터 fixtures·network 주입과 실제 macOS ssh-keygen을 사용했으며 실제 HTTPS 서버·사용자 host 추론·launchctl 등록 성공을 시험한 것으로 확대하지 않는다.
+현재 전체 시험에서 이 모듈의 118개 시험이 통과했다. 데이터 fixtures·network 주입과 실제 macOS ssh-keygen을 사용했으며 실제 HTTPS 서버·사용자 host 추론·launchctl 등록 성공을 시험한 것으로 확대하지 않는다.
 
 ## 남은 연결
 
@@ -70,7 +70,7 @@ python3 -m unittest discover -s tests -p test_runtime.py
 
 같은 시험의 독립 로컬 설치 단계에서 관리 블록의 절대 캐시 경로와 활성 캐시가 일치했고 두 사전 파일의 해시가 원본과 같았다. 개별 사전의 절대 파일 경로를 본문에 삽입하거나 모델이 사전을 읽는 것을 관측한 결과는 아니다.
 
-`runtime.kproto`에는 검사기 통합 명령, diff/dry-run, 관리 블록 재소유, host별 상세 status, 자동 trust key rotation, 실제 scheduler registration이 없다. 검사는 validation CLI를 별도로 사용한다. uninstall은 backup/cache를 유지하고 사용자 내용이 생긴 파일을 지우지 않는다. 처음 없던 빈 파일을 완전히 삭제하는 복원은 아직 구현하지 않았으며 제거 후 빈 파일이 남을 수 있다.
+`runtime.kproto`에는 검사기 통합 명령, diff/dry-run, 관리 블록 재소유, host별 상세 status, 자동 trust key rotation이 없다. macOS scheduler registration은 서명 설치·지속 관리 경로와 공개 HTTPS source가 있을 때 지원한다. 검사는 validation CLI를 별도로 사용한다. uninstall은 backup/cache를 유지하고 사용자 내용이 생긴 파일을 지우지 않는다. 처음 없던 빈 파일을 완전히 삭제하는 복원은 아직 구현하지 않았으며 제거 후 빈 파일이 남을 수 있다.
 
 프로젝트 지침 체인 자체가 32KiB에 가까워 28KiB profile을 더 넣을 수 없으면 프로젝트 설치가 실패한다. 같은 global 지침은 이 프로젝트 예산에 포함하지 않으며 사용자 설치를 프로젝트 상한으로 거부하지 않는다. 설치기는 기존 지침을 삭제하거나 host 상한을 늘리지 않는다. 더 큰 상한을 설정한 프로젝트도 최종 대상이 설치기의 4MiB 파일 보호 상한을 넘으면 거부한다. 3.2MiB 사용자 원문을 설치하고 state commit 전에 중단한 뒤 base64가 커진 journal에서 무손실 복구하는 경계 시험도 통과했다.
 

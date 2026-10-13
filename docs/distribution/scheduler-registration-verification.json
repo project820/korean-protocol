@@ -1,0 +1,37 @@
+{
+  "scope": "temporary signed Codex home and owned real macOS LaunchAgent; no normal user agent configuration changed",
+  "started_at": "2026-10-13T13:29:36.235917+09:00",
+  "registered": true,
+  "live_identity_verified": true,
+  "persistent_plist_verified": true,
+  "not_due_run": {
+    "runs": 1,
+    "last_exit_code": 0
+  },
+  "unpublished_endpoint_run": {
+    "runs": 2,
+    "last_exit_code": 3
+  },
+  "cached_profile_preserved": true,
+  "off_removed_plist": true,
+  "live_job_absent": true,
+  "uninstall_restored_user_bytes": true,
+  "finished_at": "2026-10-13T13:29:47.519393+09:00",
+  "source_hashes": {
+    "runtime/kproto.py": "5e87c278d2fc6d17855320f0387da5ada0bb8f94209ebc893304588d899ea005",
+    "distribution/agent_install.py": "f17381c048ceaa95b3a3c5504ba9e6d80075bf194c17f9b03b5dc679df659c4c",
+    "tests/test_scheduler.py": "b40173a8ba1805e94d858865414277f0849a2c75de32f2379eec6a73884641bd",
+    "tests/test_agent_install.py": "e162aaa26f74d8f35565bffb010306b76c0ce6d45903cb63e20439e9ff7106c0",
+    "tests/test_runtime.py": "7d7872295fa17ee8c37da7dad93cedc8a9da6fb5447ca576ce445475743fc986"
+  },
+  "validation": {
+    "command": "python3 -B -m unittest discover -s tests",
+    "tests": 287,
+    "seconds": 33.812,
+    "result": "passed",
+    "independent_security_review": "no blocking findings",
+    "python_crash_reports_before": 18,
+    "python_crash_reports_after": 18,
+    "new_python_crash_reports": []
+  }
+}

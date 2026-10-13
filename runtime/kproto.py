@@ -9,7 +9,6 @@ from datetime import datetime, timedelta, timezone
 import hashlib
 import http.client
 import json
-import multiprocessing
 import os
 from pathlib import Path
 import plistlib
@@ -31,6 +30,7 @@ ENGINE_VERSION = '0.1.0'
 MAX_PROFILE_BYTES = 28 * 1024
 MAX_MANAGED_BYTES = 30 * 1024
 MAX_FILE_BYTES = 1024 * 1024
+MAX_DOWNLOAD_REQUEST_BYTES = 64 * 1024
 MAX_TOTAL_BYTES = 4 * 1024 * 1024
 MAX_JOURNAL_BYTES = ((MAX_TOTAL_BYTES + 2) // 3) * 4 + 128 * 1024
 CONTENT_PATHS = (
@@ -128,7 +128,7 @@ def read_bytes(path, maximum=MAX_FILE_BYTES):
     try:
         parent_fd = open_directory(path.parent)
         try:
-            fd = os.open(path.name, os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0), dir_fd=parent_fd)
+            fd = os.open(path.name, os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0) | getattr(os, 'O_NONBLOCK', 0), dir_fd=parent_fd)
         finally:
             os.close(parent_fd)
     except FileNotFoundError:
@@ -218,6 +218,83 @@ def key_fingerprint(public_key):
     if len(raw) != 51 or raw[:19] != b'\x00\x00\x00\x0bssh-ed25519\x00\x00\x00 ':
         raise InputError('Invalid Ed25519 public key')
     return 'SHA256:' + base64.b64encode(hashlib.sha256(raw).digest()).decode().rstrip('=')
+
+
+def launchctl(*arguments):
+    """Never interpolate shell input or expose launchctl's diagnostic output."""
+    try:
+        return subprocess.run(['/bin/launchctl', *arguments], capture_output=True,
+                              text=True, timeout=15, check=False)
+    except (OSError, subprocess.TimeoutExpired):
+        raise WriteError('launchctl is unavailable or exceeded its time limit') from None
+
+
+def scheduler_probe(record):
+    """Read live state; an unrecognized print layout never authorizes removal.
+
+    launchctl documents print as an unstable diagnostic format. Only its exit
+    status establishes presence; path/program/arguments checks fail closed.
+    """
+    domain = 'gui/' + str(os.getuid())
+    if (not isinstance(record, dict) or not re.fullmatch(r'com\.korean-protocol\.update\.[0-9a-f]{12}', str(record.get('label', ''))) or
+            not isinstance(record.get('path'), str) or not isinstance(record.get('arguments'), list) or
+            not record['arguments'] or any(not isinstance(arg, str) for arg in record['arguments'])):
+        return {'registered': None, 'live_owned': False, 'error': 'Invalid scheduler ownership record'}
+    try:
+        result = launchctl('print', domain + '/' + record['label'])
+        if result.returncode == 113 and launchctl('print', domain).returncode == 0:
+            return {'registered': False, 'live_owned': False}
+        if result.returncode != 0:
+            return {'registered': None, 'live_owned': False, 'error': 'Unable to query GUI launchd service'}
+        paths = re.findall(r'^\tpath = (.+)$', result.stdout, re.MULTILINE)
+        programs = re.findall(r'^\tprogram = (.+)$', result.stdout, re.MULTILINE)
+        blocks = re.findall(r'^\targuments = \{\n(.*?)^\t\}', result.stdout, re.MULTILINE | re.DOTALL)
+        arguments = [line.strip() for line in blocks[0].splitlines()] if len(blocks) == 1 else []
+        owned = (paths == [record['path']] and programs == [record['arguments'][0]] and
+                 arguments == record['arguments'])
+        return {'registered': True, 'live_owned': owned}
+    except ProtocolError:
+        return {'registered': None, 'live_owned': False, 'error': 'Unable to query GUI launchd service'}
+
+
+def scheduler_status(config, state_dir):
+    scheduler = dict(config.get('scheduler', {'status': 'disabled', 'registered': False}))
+    record = scheduler.get('launch_agent')
+    if record:
+        scheduler.update(scheduler_probe(record))
+        try:
+            path = safe_path(record['path'])
+            info = path.stat()
+            label = 'com.korean-protocol.update.' + digest(str(state_dir).encode())[:12]
+            data = read_bytes(path)
+            job = plistlib.loads(data)
+            scheduler['persisted'] = (path == safe_path(Path.home()/'Library/LaunchAgents'/(label+'.plist')) and
+                                      record['label'] == label and info.st_uid == os.getuid() and
+                                      not stat.S_IMODE(info.st_mode) & 0o022 and digest(data) == record['hash'] and
+                                      isinstance(job, dict) and job.get('Label') == label and job.get('ProgramArguments') == record['arguments'])
+        except (ProtocolError, OSError, KeyError, TypeError, ValueError, plistlib.InvalidFileException):
+            scheduler['persisted'] = False
+        scheduler['status'] = ('unknown' if scheduler['registered'] is None else
+                               'registered' if scheduler['registered'] and scheduler['live_owned'] and scheduler['persisted'] else
+                               'conflict' if scheduler['registered'] else 'unloaded')
+    return scheduler
+
+
+def remove_owned_file(path, expected):
+    """Remove only the previously checked single-link regular file."""
+    path = safe_path(path)
+    if read_bytes(path) != expected:
+        raise ConflictError('Owned file changed before removal; file preserved')
+    info = path.stat()
+    parent_fd = open_directory(path.parent)
+    try:
+        current = os.stat(path.name, dir_fd=parent_fd, follow_symlinks=False)
+        if (info.st_dev, info.st_ino) != (current.st_dev, current.st_ino):
+            raise ConflictError('Owned file identity changed; file preserved')
+        os.unlink(path.name, dir_fd=parent_fd)
+        os.fsync(parent_fd)
+    finally:
+        os.close(parent_fd)
 
 
 def content_files(bundle):
@@ -340,18 +417,39 @@ def validate_source(source):
     return source.rstrip('/')
 
 
-def download_worker(url,headers,maximum,connection):
-    """Keep blocking TLS/header/body reads outside the parent deadline boundary."""
+def download_worker(url,headers,maximum):
+    """Return only a status byte and a bounded body, never exception text."""
     try:
         opener=urllib.request.build_opener(NoRedirect())
         with opener.open(urllib.request.Request(url,headers=headers),timeout=15) as response:
             data=response.read(maximum+1)
-        connection.send_bytes(b'\x01'+data if len(data)<=maximum else b'\x00')
+        return b'\x01'+data if len(data)<=maximum else b'\x00'
     except Exception:
         # Even malformed HTTP response exceptions can contain credentials/body text.
-        connection.send_bytes(b'\x00')
-    finally:
-        connection.close()
+        return b'\x00'
+
+
+def download_worker_main():
+    """Read credentials from a bounded private pipe in a fresh interpreter."""
+    result=b'\x00'
+    try:
+        raw=sys.stdin.buffer.read(MAX_DOWNLOAD_REQUEST_BYTES+1)
+        if len(raw)>MAX_DOWNLOAD_REQUEST_BYTES:
+            raise InputError('Download request exceeds size limit')
+        request=strict_json(raw)
+        if not isinstance(request,dict) or set(request)!={'url','headers','maximum'}:
+            raise InputError('Invalid download request')
+        maximum=request['maximum']
+        if type(maximum) is not int or not 0<=maximum<=MAX_FILE_BYTES:
+            raise InputError('Invalid download limit')
+        if not isinstance(request['url'],str) or not isinstance(request['headers'],dict) or any(not isinstance(k,str) or not isinstance(v,str) for k,v in request['headers'].items()):
+            raise InputError('Invalid download request')
+        result=download_worker(request['url'],request['headers'],maximum)
+    except Exception:
+        pass
+    sys.stdout.buffer.write(result)
+    sys.stdout.buffer.flush()
+    return 0
 
 
 class Controller:
@@ -382,10 +480,13 @@ class Controller:
         safe_path(path)
         parent_fd = open_directory(path.parent)
         try:
-            fd = os.open(path.name,os.O_WRONLY|os.O_CREAT|os.O_NOFOLLOW,0o600,dir_fd=parent_fd)
+            fd = os.open(path.name,os.O_RDWR|os.O_NONBLOCK|os.O_CREAT|os.O_NOFOLLOW,0o600,dir_fd=parent_fd)
         finally:
             os.close(parent_fd)
         try:
+            info = os.fstat(fd)
+            if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) & 0o022:
+                raise ConflictError('State lock has unsafe ownership or type')
             try:
                 fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
             except BlockingIOError:
@@ -403,10 +504,13 @@ class Controller:
         safe_path(path)
         parent_fd = open_directory(path.parent)
         try:
-            fd=os.open(path.name,os.O_WRONLY|os.O_CREAT|os.O_NOFOLLOW,0o600,dir_fd=parent_fd)
+            fd=os.open(path.name,os.O_RDWR|os.O_NONBLOCK|os.O_CREAT|os.O_NOFOLLOW,0o600,dir_fd=parent_fd)
         finally:
             os.close(parent_fd)
         try:
+            info = os.fstat(fd)
+            if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) & 0o022:
+                raise ConflictError('Target lock has unsafe ownership or type')
             try:
                 fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
             except BlockingIOError:
@@ -421,8 +525,145 @@ class Controller:
         result['installed'] = bool(state.get('target'))
         result['recovery_required'] = self.journal_path.exists()
         result['autoupdate'] = self._config().get('mode','off')
-        result['scheduler'] = self._config().get('scheduler',{'status':'disabled','registered':False})
+        result['scheduler'] = scheduler_status(self._config(), self.root)
         return result
+
+    def _agent_path(self):
+        label = 'com.korean-protocol.update.' + digest(str(self.root).encode())[:12]
+        return safe_path(Path.home()/'Library/LaunchAgents'/(label+'.plist')), label
+
+    def _agent_bytes(self, record):
+        path, label = self._agent_path()
+        if record.get('path') != str(path) or record.get('label') != label:
+            raise ConflictError('Scheduler ownership path or label differs; job preserved')
+        if not path.exists():
+            return path, None
+        info = path.stat()
+        data = read_bytes(path)
+        if info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) & 0o022 or digest(data) != record.get('hash'):
+            raise ConflictError('LaunchAgent is unowned or modified; job preserved')
+        try:
+            job = plistlib.loads(data)
+        except (ValueError, plistlib.InvalidFileException):
+            raise ConflictError('Invalid owned LaunchAgent; job preserved') from None
+        if not isinstance(job, dict) or job.get('Label') != label or job.get('ProgramArguments') != record.get('arguments'):
+            raise ConflictError('LaunchAgent identity differs; job preserved')
+        return path, data
+
+    def _unregister_scheduler(self, cfg, locked=False):
+        record = cfg.get('scheduler', {}).get('launch_agent')
+        if not record:
+            return
+        path, _ = self._agent_bytes(record)
+        with nullcontext() if locked else self._target_lock(path):
+            path, data = self._agent_bytes(record)
+            probe = scheduler_probe(record)
+            if probe['registered'] is None:
+                raise WriteError('Scheduler status is unknown; job preserved')
+            if probe['registered']:
+                if data is None or not probe['live_owned']:
+                    raise ConflictError('Loaded scheduler identity is not owned; job preserved')
+                if self._agent_bytes(record)[1] != data:
+                    raise ConflictError('LaunchAgent changed during removal; job preserved')
+                result = launchctl('bootout', 'gui/'+str(os.getuid())+'/'+record['label'])
+                after = scheduler_probe(record)
+                if result.returncode != 0 or after['registered'] is not False:
+                    raise WriteError('Scheduler removal was not confirmed; plist preserved for retry')
+            if data is not None:
+                remove_owned_file(path, data)
+            cfg['scheduler'].pop('launch_agent', None)
+
+    def unregister_scheduler(self):
+        with self.lock():
+            self._recover()
+            cfg = self._config()
+            self._unregister_scheduler(cfg)
+            atomic_write(self.config_path, json_bytes(cfg))
+        return self.status()['scheduler']
+
+    def _disable_scheduler(self, cfg):
+        scheduler = cfg.get('scheduler', {})
+        path = safe_path(scheduler['path']) if scheduler.get('path') else None
+        data = read_bytes(path) if path and path.exists() else None
+        if data is not None and digest(data) != scheduler.get('hash'):
+            raise ConflictError('User modified scheduler output; file preserved')
+        self._unregister_scheduler(cfg)
+        if data is not None:
+            remove_owned_file(path, data)
+        cfg['scheduler'] = {'status': 'disabled', 'registered': False}
+
+    def register_scheduler(self):
+        with self.lock():
+            self._recover()
+            cfg = self._config()
+            if sys.platform != 'darwin':
+                raise CompatibilityError('Scheduler registration supports macOS only')
+            if cfg.get('mode') != 'scheduled' or self._state().get('trust') != 'signed':
+                raise TrustError('Scheduler registration requires a signed installation and scheduled mode')
+            validate_source(cfg.get('source', ''))
+            if cfg.get('token_env'):
+                raise InputError('Scheduler registration cannot persist a private endpoint shell credential')
+            runtime = safe_path(__file__)
+            if self.root not in runtime.parents or not runtime.is_file():
+                raise InputError('Scheduler registration requires the durable runtime inside its state directory')
+            runtime_info = runtime.stat()
+            if runtime_info.st_uid != os.getuid() or stat.S_IMODE(runtime_info.st_mode) & 0o022:
+                raise InputError('Durable runtime has unsafe ownership or permissions')
+            for parent in runtime.parents:
+                info = parent.stat()
+                if info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) & 0o022:
+                    raise InputError('Durable runtime directory has unsafe ownership or permissions')
+                if parent == self.root:
+                    break
+            path, label = self._agent_path()
+            args = [str(Path(sys.executable).resolve()), str(runtime), '--state-dir', str(self.root), 'update', '--scheduled']
+            if any('\n' in arg or '\r' in arg for arg in [str(path), *args]):
+                raise InputError('Scheduler paths cannot contain line breaks')
+            job = {'Label': label, 'ProgramArguments': args, 'RunAtLoad': True,
+                   'StartCalendarInterval': {'Minute': 0}, 'Umask': 0o077,
+                   'StandardOutPath': str(self.root/'scheduled.stdout.log'),
+                   'StandardErrorPath': str(self.root/'scheduled.stderr.log')}
+            safe_path(job['StandardOutPath'])
+            safe_path(job['StandardErrorPath'])
+            data = plistlib.dumps(job, sort_keys=True)
+            record = {'path': str(path), 'label': label, 'hash': digest(data), 'arguments': args}
+            previous = cfg.get('scheduler', {}).get('launch_agent')
+            if previous:
+                _, previous_data = self._agent_bytes(previous)
+                probe = scheduler_probe(previous)
+                if previous_data == data and probe['registered'] is True and probe['live_owned']:
+                    return scheduler_status(cfg, self.root)
+                self._unregister_scheduler(cfg)
+                atomic_write(self.config_path, json_bytes(cfg))
+            path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+            safe_path(path.parent)
+            info = path.parent.stat()
+            if info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) & 0o022:
+                raise InputError('LaunchAgents directory has unsafe ownership or permissions')
+            with self._target_lock(path):
+                if path.exists():
+                    raise ConflictError('Existing LaunchAgent is not owned; file preserved')
+                probe = scheduler_probe(record)
+                if probe['registered'] is not False:
+                    raise ConflictError('Scheduler label is already loaded or its status is unknown; job preserved')
+                cfg['scheduler']['launch_agent'] = record
+                # Persist ownership before loading: a failed final state write
+                # must still leave a safe, explicit removal route.
+                atomic_write(self.config_path, json_bytes(cfg))
+                try:
+                    atomic_write(path, data, expected=b'')
+                    result = launchctl('bootstrap', 'gui/'+str(os.getuid()), str(path))
+                    probe = scheduler_probe(record)
+                    if result.returncode != 0 or probe['registered'] is not True or not probe['live_owned']:
+                        raise WriteError('Scheduler registration was not confirmed')
+                except (ProtocolError, OSError):
+                    try:
+                        self._unregister_scheduler(cfg, locked=True)
+                        atomic_write(self.config_path, json_bytes(cfg))
+                    except (ProtocolError, OSError):
+                        raise WriteError('Scheduler registration failed and cleanup is incomplete; use scheduler status/unregister') from None
+                    raise WriteError('Scheduler registration failed; owned LaunchAgent was removed') from None
+        return self.status()['scheduler']
 
     def configure(self,mode=None,source=None,token_env=None,interval_hours=None,emit=None):
         with self.lock():
@@ -447,23 +688,18 @@ class Controller:
                     raise CompatibilityError('Scheduler generation currently supports macOS only')
                 scheduler=cfg.get('scheduler',{})
                 path=safe_path(emit or self.root/'autoupdate.plist')
-                if path.exists() and (scheduler.get('path')!=str(path) or digest(read_bytes(path))!=scheduler.get('hash')):
+                previous_data = read_bytes(path) if path.exists() else b''
+                if path.exists() and (scheduler.get('path')!=str(path) or digest(previous_data)!=scheduler.get('hash')):
                     raise ConflictError('Existing scheduler output is not owned or was modified')
                 label='com.korean-protocol.update.'+digest(str(self.root).encode())[:12]
                 args=[str(Path(sys.executable).resolve()),str(Path(__file__).resolve()),'--state-dir',str(self.root),'update','--scheduled']
                 job={'Label':label,'ProgramArguments':args,'RunAtLoad':True,'StartInterval':3600*cfg.get('interval_hours',24),'StandardOutPath':str(self.root/'scheduled.stdout.log'),'StandardErrorPath':str(self.root/'scheduled.stderr.log')}
                 data=plistlib.dumps(job,sort_keys=True)
-                atomic_write(path,data)
-                cfg['scheduler']={'status':'generated','registered':False,'path':str(path),'label':label,'hash':digest(data)}
+                atomic_write(path,data,expected=previous_data)
+                cfg['scheduler']={'status':'generated','registered':False,'path':str(path),'label':label,'hash':digest(data),
+                                  **({'launch_agent': scheduler['launch_agent']} if scheduler.get('launch_agent') else {})}
             elif mode in ('off','interval'):
-                scheduler=cfg.get('scheduler',{})
-                if scheduler.get('path'):
-                    path=safe_path(scheduler['path'])
-                    if path.exists():
-                        if digest(read_bytes(path))!=scheduler.get('hash'):
-                            raise ConflictError('User modified scheduler output; file preserved')
-                        path.unlink()
-                cfg['scheduler']={'status':'disabled','registered':False}
+                self._disable_scheduler(cfg)
             atomic_write(self.config_path,json_bytes(cfg))
             return cfg
 
@@ -715,9 +951,15 @@ class Controller:
                 separator=state.get('separator','').encode('ascii')
                 if separator and prefix.endswith(separator) and digest(prefix)==state.get('original_prefix_hash'):
                     prefix=prefix[:-len(separator)]
+                cfg = self._config()
+                self._disable_scheduler(cfg)
+                cfg['mode'] = 'off'
+                atomic_write(self.config_path, json_bytes(cfg))
                 self._transaction(target,before,prefix+suffix,{})
 
     def fetch(self,url,maximum,deadline=None):
+        if type(maximum) is not int or not 0<=maximum<=MAX_FILE_BYTES:
+            raise InputError('Invalid download limit')
         cfg=self._config()
         source=validate_source(cfg.get('source',''))
         base=urllib.parse.urlsplit(source)
@@ -736,35 +978,44 @@ class Controller:
         remaining=deadline-time.monotonic()
         if remaining<=0:
             raise NetworkError('Network time budget exhausted')
-        context=multiprocessing.get_context('fork')
-        receiver,sender=context.Pipe(duplex=False)
-        worker=context.Process(target=download_worker,args=(url,headers,maximum,sender))
-        worker.daemon=True
+        request=json_bytes({'url':url,'headers':headers,'maximum':maximum})
+        if len(request)>MAX_DOWNLOAD_REQUEST_BYTES:
+            raise InputError('Download request exceeds size limit')
+        worker=None
         try:
-            worker.start()
-            sender.close()
+            # macOS urllib proxy discovery uses CoreFoundation, which is unsafe
+            # after a Python fork. Exec also supports dynamically loaded runtimes.
+            worker=subprocess.Popen([sys.executable,'-I','-B',str(Path(__file__).resolve()),'--download-worker'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
             remaining=deadline-time.monotonic()
-            if remaining<=0 or not receiver.poll(min(15,remaining)):
+            if remaining<=0:
                 raise NetworkError('Network time budget exhausted')
-            response=receiver.recv_bytes(maxlength=maximum+2)
+            # The local worker writes at most maximum+1 bytes and no diagnostics.
+            response,_=worker.communicate(input=request,timeout=min(15,remaining))
             if time.monotonic()>deadline:
                 raise NetworkError('Network time budget exhausted')
-            if not response or response[0]!=1:
+            if worker.returncode or not response or response[0]!=1 or len(response)>maximum+1:
                 raise NetworkError('HTTPS content download failed')
             return response[1:]
+        except subprocess.TimeoutExpired:
+            raise NetworkError('Network time budget exhausted') from None
         except (OSError,EOFError,ValueError,http.client.HTTPException):
             raise NetworkError('HTTPS content download failed') from None
         finally:
-            sender.close()
-            receiver.close()
-            if worker.pid is not None:
-                if worker.is_alive():
-                    worker.terminate()
-                worker.join(timeout=0.2)
-                if worker.is_alive():
-                    worker.kill()
-                    worker.join(timeout=0.2)
-                worker.close()
+            if worker is not None:
+                try:
+                    if worker.poll() is None:
+                        worker.kill()
+                    try:
+                        worker.wait(timeout=0.2)
+                    except subprocess.TimeoutExpired:
+                        worker.kill()
+                        worker.wait(timeout=0.2)
+                except (OSError,subprocess.TimeoutExpired):
+                    raise NetworkError('HTTPS worker termination failed') from None
+                finally:
+                    for stream in (worker.stdin,worker.stdout):
+                        if stream is not None:
+                            stream.close()
 
     def _download(self,url,maximum,deadline):
         if time.monotonic()>=deadline:
@@ -921,6 +1172,8 @@ def main(argv=None):
     update=sub.add_parser('update');update.add_argument('--scheduled',action='store_true')
     update.add_argument('--pin');update.add_argument('--unpin',action='store_true')
     sub.add_parser('recover')
+    scheduler = sub.add_parser('scheduler')
+    scheduler.add_argument('action', choices=['register', 'unregister', 'status'])
     auto=sub.add_parser('autoupdate');auto.add_argument('action',choices=['configure'])
     auto.add_argument('--mode',choices=['off','interval','scheduled'],required=True)
     auto.add_argument('--source');auto.add_argument('--token-env');auto.add_argument('--interval-hours',type=int)
@@ -961,6 +1214,14 @@ def main(argv=None):
                 ctrl.update(scheduled=args.scheduled)
         elif args.command=='autoupdate':
             ctrl.configure(args.mode,args.source,args.token_env,args.interval_hours,args.emit)
+        elif args.command=='scheduler':
+            if args.action == 'register':
+                result = ctrl.register_scheduler()
+            elif args.action == 'unregister':
+                result = ctrl.unregister_scheduler()
+            else:
+                result = ctrl.status()['scheduler']
+            print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         elif args.command=='run':
             if not ctrl.status()['installed']:
                 raise MissingError('No local protocol is installed')
@@ -988,4 +1249,4 @@ def main(argv=None):
 
 
 if __name__=='__main__':
-    sys.exit(main())
+    sys.exit(download_worker_main() if sys.argv[1:]==['--download-worker'] else main())

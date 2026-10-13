@@ -231,7 +231,7 @@ def read_status(runtime, root, host, verify_cache=True):
             verified = True
     return dict(state, installed=bool(state.get('target')), verified=verified,
                 autoupdate=config.get('mode', 'off'), source=config.get('source'),
-                scheduler=config.get('scheduler', {'status': 'disabled', 'registered': False}),
+                scheduler=runtime.scheduler_status(config, root),
                 recovery_required=journal_path.exists())
 
 
@@ -406,6 +406,7 @@ def main(argv=None):
     parser.add_argument('--expected-fingerprint')
     parser.add_argument('--source')
     parser.add_argument('--autoupdate', choices=['off', 'interval', 'scheduled'], default='off')
+    parser.add_argument('--register-scheduler', action='store_true', help='Explicitly register a signed macOS scheduled update LaunchAgent')
     runtime = None
     tool = None
     result = {'ok': False, 'verified': False}
@@ -438,9 +439,11 @@ def main(argv=None):
                 raise AgentError('Current host target differs from installed target; existing instructions preserved', 7)
             result['target'] = status['target']
         captured = None
-        if args.action not in ('plan', 'install') and (args.signed_directory or args.trust_key or args.expected_fingerprint or args.source or args.autoupdate != 'off'):
+        if args.action not in ('plan', 'install') and (args.signed_directory or args.trust_key or args.expected_fingerprint or args.source or args.autoupdate != 'off' or args.register_scheduler):
             raise AgentError('Signed installation options apply only to plan/install')
         if args.action in ('plan', 'install'):
+            if args.register_scheduler and (not args.signed_directory or args.autoupdate != 'scheduled' or not args.source):
+                raise AgentError('Scheduler registration requires --signed-directory, --autoupdate scheduled, and --source')
             if args.signed_directory:
                 if not args.trust_key or not args.expected_fingerprint:
                     raise AgentError('Signed directory requires --trust-key and --expected-fingerprint')
@@ -453,6 +456,8 @@ def main(argv=None):
                     raise AgentError('Scheduler generation currently supports macOS only', 6)
                 captured = capture_signed(runtime, args.signed_directory, args.trust_key, args.expected_fingerprint, root)
                 result.update(content_verified=True, planned_version=captured[0]['version'])
+                if args.register_scheduler and (root/'config.json').exists() and json_object(root/'config.json', owned=True).get('token_env'):
+                    raise AgentError('Scheduler registration cannot persist a private endpoint shell credential')
             else:
                 if status.get('trust') == 'signed' or (root / 'trust/public_key').exists():
                     raise AgentError('Existing signed trust requires explicit signed installation; local downgrade is refused', 5)
@@ -475,6 +480,8 @@ def main(argv=None):
                     result['changed'] = controller.install_signed(stage, target, 'coding-agent',
                                                                  durable.host_budget(args, target), host_context=context)
                     controller.configure(mode=args.autoupdate, source=args.source)
+                    if args.register_scheduler:
+                        controller.register_scheduler()
             else:
                 with mutation_guard(runtime, root, args.host, False, target):
                     tool = persist_tool(runtime, root, args.host, bundle)
@@ -497,6 +504,10 @@ def main(argv=None):
             result['verified'] = False
         if args.action == 'plan':
             result['proposed_writes'] = [str(root), str(tool), str(target)]
+            result['scheduler_registration_requested'] = args.register_scheduler
+            if args.register_scheduler:
+                label = 'com.korean-protocol.update.' + runtime.digest(str(root).encode())[:12]
+                result['proposed_writes'].append(str(Path.home()/'Library/LaunchAgents'/(label+'.plist')))
         result.update(ok=True, tool_available=tool_available, snapshot_version=VERSION)
         return_code = 0
     except (AgentError, OSError) as exc:
@@ -520,7 +531,10 @@ def main(argv=None):
         result['management_commands'] = {action: shlex.join(command) for action, command in routes.items()}
         base = [sys.executable, '-B', str(tool / 'runtime/kproto.py'), '--state-dir', result['state_dir']]
         result['runtime_argv'] = {'update': base + ['update'], 'run': base + ['run'],
-                                  'configure_off': base + ['autoupdate', 'configure', '--mode', 'off']}
+                                  'configure_off': base + ['autoupdate', 'configure', '--mode', 'off'],
+                                  'scheduler_register': base + ['scheduler', 'register'],
+                                  'scheduler_unregister': base + ['scheduler', 'unregister'],
+                                  'scheduler_status': base + ['scheduler', 'status']}
         result['runtime_commands'] = {action: shlex.join(command) for action, command in result['runtime_argv'].items()}
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     return return_code

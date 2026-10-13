@@ -1,16 +1,23 @@
 import importlib
+import importlib.util
 import argparse
 import io
 import http.client
 import json
+import multiprocessing
 import os
 import plistlib
 from pathlib import Path
 import shutil
+import socketserver
+import ssl
 import subprocess
+import sys
 import tempfile
+import threading
+import time
 import unittest
-from contextlib import redirect_stderr
+from contextlib import contextmanager, redirect_stderr
 from unittest import mock
 
 
@@ -39,6 +46,72 @@ class RuntimeTests(unittest.TestCase):
 
     def install(self, version='0.1.0'):
         return self.controller.install_snapshot(self.bundle, self.target, version)
+
+    @contextmanager
+    def https_proxy(self,response=b'HTTP/1.1 200 OK\r\nContent-Length: 7\r\n\r\ncontent',stall=None):
+        """Serve real TLS through the proxy selected by the fresh worker."""
+        openssl=shutil.which('openssl')
+        self.assertIsNotNone(openssl,'TLS fixture requires OpenSSL')
+        cert=self.root/'tls-cert.pem'
+        key=self.root/'tls-key.pem'
+        generated=subprocess.run([openssl,'req','-x509','-newkey','rsa:2048','-nodes','-keyout',str(key),'-out',str(cert),'-subj','/CN=example.test','-days','1','-addext','subjectAltName=DNS:example.test'],capture_output=True)
+        self.assertEqual(0,generated.returncode,generated.stderr)
+        tls=ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        tls.load_cert_chain(cert,key)
+        # Xcode's LibreSSL default loader ignores SSL_CERT_FILE. Explicitly trust
+        # this fixture CA without disabling hostname or certificate verification.
+        bootstrap=self.root/'tls-worker.py'
+        bootstrap.write_text('import ssl, runpy\nssl._create_default_https_context=lambda: ssl.create_default_context(cafile='+repr(str(cert))+')\nrunpy.run_path('+repr(str(Path(self.k.__file__).resolve()))+',run_name="__main__")\n')
+        reached=threading.Event()
+        stop=threading.Event()
+        requests=[]
+
+        class Handler(socketserver.StreamRequestHandler):
+            def handle(self):
+                try:
+                    connect=self.rfile.readline()
+                    if not connect.startswith(b'CONNECT example.test:443 '):
+                        return
+                    while self.rfile.readline() not in (b'\r\n',b'\n',b''):
+                        pass
+                    if stall=='proxy':
+                        reached.set()
+                        stop.wait(5)
+                        return
+                    self.wfile.write(b'HTTP/1.1 200 Connection established\r\n\r\n')
+                    self.wfile.flush()
+                    with tls.wrap_socket(self.connection,server_side=True) as connection:
+                        with connection.makefile('rb') as request:
+                            lines=[request.readline()]
+                            while True:
+                                line=request.readline()
+                                if line in (b'\r\n',b'\n',b''):
+                                    break
+                                lines.append(line)
+                        requests.append(b''.join(lines))
+                        connection.sendall(response)
+                        reached.set()
+                        if stall=='body':
+                            stop.wait(5)
+                except (OSError,ssl.SSLError):
+                    pass
+
+        class Server(socketserver.ThreadingTCPServer):
+            daemon_threads=True
+            block_on_close=False
+
+        server=Server(('127.0.0.1',0),Handler)
+        thread=threading.Thread(target=server.serve_forever,kwargs={'poll_interval':0.01},daemon=True)
+        thread.start()
+        proxy='http://127.0.0.1:'+str(server.server_address[1])
+        try:
+            with mock.patch.dict(os.environ,{'HTTPS_PROXY':proxy,'https_proxy':proxy,'NO_PROXY':'','no_proxy':'','SSL_CERT_FILE':str(cert)}),mock.patch.object(self.k,'__file__',str(bootstrap)):
+                yield reached,requests
+        finally:
+            stop.set()
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=1)
 
     def test_install_is_idempotent_and_preserves_original_bytes(self):
         self.install()
@@ -176,11 +249,100 @@ class RuntimeTests(unittest.TestCase):
         self.install()
         self.controller.configure(source='https://example.test', token_env='KPROTO_TEST_TOKEN')
         self.controller.trust_key = lambda *args: None
-        with mock.patch.dict(os.environ, {'KPROTO_TEST_TOKEN': 'super-secret-token'}):
-            with mock.patch('urllib.request.OpenerDirector.open', side_effect=OSError('super-secret-token')):
+        with self.https_proxy(response=b'secret-response-token\r\n\r\n') as (_,requests):
+            with mock.patch.dict(os.environ, {'KPROTO_TEST_TOKEN': 'super-secret-token'}):
                 with self.assertRaises(self.k.NetworkError) as result:
                     self.controller.fetch('https://example.test/release.json', 100)
         self.assertNotIn('super-secret-token', str(result.exception))
+        self.assertEqual(1,len(requests))
+        self.assertIn(b'Authorization: Bearer super-secret-token',requests[0])
+
+    def test_download_worker_masks_exception_details(self):
+        for error in (OSError('super-secret-token'),http.client.BadStatusLine('secret-response-token')):
+            with self.subTest(error=type(error).__name__),mock.patch('urllib.request.OpenerDirector.open',side_effect=error):
+                self.assertEqual(b'\x00',self.k.download_worker('https://example.test',{},100))
+
+    def test_fetch_real_https_preserves_proxy_and_body_limit(self):
+        self.controller.configure(source='https://example.test')
+        with self.https_proxy() as (_,requests):
+            self.assertEqual(b'content',self.controller.fetch('https://example.test/release.json',7))
+            with self.assertRaises(self.k.NetworkError):
+                self.controller.fetch('https://example.test/release.json',6)
+        self.assertEqual(2,len(requests))
+
+    def test_fetch_real_https_refuses_redirect(self):
+        self.controller.configure(source='https://example.test')
+        with self.https_proxy(response=b'HTTP/1.1 302 Found\r\nLocation: https://elsewhere.test/secret\r\nContent-Length: 0\r\n\r\n') as (_,requests):
+            with self.assertRaises(self.k.NetworkError):
+                self.controller.fetch('https://example.test/release.json',100)
+        self.assertEqual(1,len(requests))
+
+    def test_fetch_uses_fresh_interpreter_and_private_stdin(self):
+        self.controller.configure(source='https://example.test',token_env='KPROTO_TEST_TOKEN')
+        worker=mock.Mock()
+        worker.communicate.return_value=(b'\x01content',None)
+        worker.poll.return_value=0
+        worker.returncode=0
+        with mock.patch.dict(os.environ,{'KPROTO_TEST_TOKEN':'private-test-token'}), \
+                mock.patch.object(multiprocessing,'get_context',side_effect=AssertionError('Python fork is unsafe')), \
+                mock.patch.object(self.k.subprocess,'Popen',return_value=worker) as launch:
+            self.assertEqual(b'content',self.controller.fetch('https://example.test/release.json',100))
+        command=launch.call_args.args[0]
+        self.assertEqual(['-I','-B'],command[1:3])
+        self.assertEqual(str(Path(self.k.__file__).resolve()),command[3])
+        self.assertNotIn('private-test-token',' '.join(command))
+        self.assertNotIn('https://example.test',' '.join(command))
+        self.assertEqual(subprocess.DEVNULL,launch.call_args.kwargs['stderr'])
+        request=json.loads(worker.communicate.call_args.kwargs['input'])
+        self.assertEqual('Bearer private-test-token',request['headers']['Authorization'])
+
+    def test_dynamic_agent_runtime_fetch_uses_native_proxy_discovery(self):
+        bundle=Path(self.k.__file__).resolve().parents[1]
+        spec=importlib.util.spec_from_file_location('agent_install_fetch_fixture',bundle/'distribution/agent_install.py')
+        agent=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(agent)
+        runtime=agent.load_runtime(bundle)
+        self.assertNotIn(runtime.__name__,sys.modules,'Fixture must retain the installer nonimportable module contract')
+        controller=runtime.Controller(self.root/'dynamic-state')
+        controller.configure(source='https://127.0.0.1')
+        launch=subprocess.Popen
+        workers=[]
+
+        def record(*args,**kwargs):
+            worker=launch(*args,**kwargs)
+            workers.append(worker)
+            return worker
+
+        # Keep the normal environment: on macOS this calls native system proxy
+        # discovery, safely in the newly exec'd interpreter rather than a fork.
+        with mock.patch.object(runtime.subprocess,'Popen',side_effect=record):
+            with self.assertRaises(runtime.NetworkError):
+                controller.fetch('https://127.0.0.1/release.json',100,deadline=time.monotonic()+2)
+        self.assertEqual(1,len(workers))
+        self.assertIn(workers[0].returncode,(0,-9),'Worker must exit safely or be killed at the deadline, without a native crash')
+        with self.https_proxy(),mock.patch.object(runtime,'__file__',self.k.__file__):
+            controller.configure(source='https://example.test')
+            self.assertEqual(b'content',controller.fetch('https://example.test/release.json',100))
+
+    def test_fetch_rejects_unbounded_input_before_launching_worker(self):
+        self.controller.configure(source='https://example.test',token_env='KPROTO_TEST_TOKEN')
+        with mock.patch.object(self.k.subprocess,'Popen') as launch:
+            for maximum in (-1,self.k.MAX_FILE_BYTES+1,True):
+                with self.subTest(maximum=maximum),self.assertRaises(self.k.InputError):
+                    self.controller.fetch('https://example.test/release.json',maximum)
+            with mock.patch.dict(os.environ,{'KPROTO_TEST_TOKEN':'x'*self.k.MAX_DOWNLOAD_REQUEST_BYTES}):
+                with self.assertRaises(self.k.InputError):
+                    self.controller.fetch('https://example.test/release.json',100)
+        launch.assert_not_called()
+
+    def test_fresh_worker_rejects_malformed_and_oversized_private_input(self):
+        command=[sys.executable,'-I','-B',str(Path(self.k.__file__).resolve()),'--download-worker']
+        for request in (b'private-invalid-json',b'x'*(self.k.MAX_DOWNLOAD_REQUEST_BYTES+1),self.k.json_bytes({'url':'https://example.test','headers':{},'maximum':self.k.MAX_FILE_BYTES+1})):
+            with self.subTest(size=len(request)):
+                result=subprocess.run(command,input=request,capture_output=True,timeout=2)
+                self.assertEqual(0,result.returncode)
+                self.assertEqual(b'\x00',result.stdout)
+                self.assertEqual(b'',result.stderr)
 
     def test_cli_status_reads_local_state(self):
         self.install()
@@ -269,27 +431,33 @@ c.install_snapshot(Path(sys.argv[2]),Path(sys.argv[3]),'0.2.0')
         self.assertEqual(installed,self.target.read_bytes())
 
     def test_bad_http_response_and_nested_json_have_safe_errors(self):
-        self.controller.configure(source='https://example.test')
         with mock.patch('urllib.request.OpenerDirector.open',side_effect=http.client.BadStatusLine('secret-response-token')):
-            with self.assertRaises(self.k.NetworkError) as result:
-                self.controller.fetch('https://example.test/release.json',100)
-        self.assertNotIn('secret-response-token',str(result.exception))
+            self.assertEqual(b'\x00',self.k.download_worker('https://example.test/release.json',{},100))
         with self.assertRaises(self.k.InputError):
             self.k.strict_json(b'['*1100+b'0'+b']'*1100)
 
     def test_total_fetch_deadline_terminates_blocked_reader(self):
         self.controller.configure(source='https://example.test')
-        import time
+        launch=subprocess.Popen
+        for stall in ('proxy','body'):
+            with self.subTest(stall=stall),self.https_proxy(response=b'HTTP/1.1 200 OK\r\nContent-Length: 10\r\n\r\nx',stall=stall) as (reached,_):
+                workers=[]
 
-        def blocked(*args,**kwargs):
-            time.sleep(2)
-            raise OSError('late')
+                def record(*args,**kwargs):
+                    worker=launch(*args,**kwargs)
+                    workers.append(worker)
+                    return worker
 
-        start=time.monotonic()
-        with mock.patch('urllib.request.OpenerDirector.open',side_effect=blocked):
-            with self.assertRaises(self.k.NetworkError):
-                self.controller.fetch('https://example.test/release.json',100,deadline=start+0.1)
-        self.assertLess(time.monotonic()-start,1)
+                start=time.monotonic()
+                with mock.patch.object(self.k.subprocess,'Popen',side_effect=record):
+                    with self.assertRaisesRegex(self.k.NetworkError,'time budget'):
+                        self.controller.fetch('https://example.test/release.json',100,deadline=start+0.6)
+                self.assertTrue(reached.is_set(),'Fresh worker must reach the blocking network path')
+                self.assertLess(time.monotonic()-start,1.5)
+                self.assertEqual(1,len(workers))
+                self.assertIsNotNone(workers[0].returncode,'Timed-out worker must be reaped')
+                self.assertTrue(workers[0].stdin.closed)
+                self.assertTrue(workers[0].stdout.closed)
 
     def test_host_context_is_absolute_across_working_directory_changes(self):
         home=self.root/'home'

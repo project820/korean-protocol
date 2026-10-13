@@ -515,6 +515,60 @@ class AgentInstallTests(unittest.TestCase):
         self.assertTrue(value['verified'])
 
     @unittest.skipUnless(sys.platform == 'darwin', 'macOS scheduler only')
+    def test_signed_scheduler_registration_plan_has_no_writes_or_launchctl(self):
+        extras = self.signed_static() + ['--source', 'https://updates.example', '--autoupdate', 'scheduled', '--register-scheduler']
+        before = self.tree()
+        with mock.patch.dict(os.environ, self.env), \
+                mock.patch.object(self.agent, 'load_runtime', return_value=self.runtime), \
+                mock.patch.object(self.runtime, 'launchctl', side_effect=AssertionError('launchctl must not run in a new plan')), \
+                redirect_stdout(io.StringIO()) as output:
+            code = self.agent.main(['plan', '--host', 'codex', '--state-dir', str(self.state), *extras])
+        value = json.loads(output.getvalue())
+        self.assertEqual(0, code, value)
+        self.assertTrue(value['scheduler_registration_requested'])
+        self.assertTrue(any('/Library/LaunchAgents/' in path for path in value['proposed_writes']))
+        self.assertEqual(before, self.tree())
+        self.assertIn('scheduler_register', value['runtime_argv'])
+
+    def test_registration_opt_in_rejects_missing_signed_scheduled_source(self):
+        for extras in (['--register-scheduler'], ['--register-scheduler', '--autoupdate', 'scheduled'],
+                       ['--register-scheduler', '--source', 'https://updates.example']):
+            before = self.tree()
+            code, value = self.run_cli('install', extras=extras)
+            self.assertEqual(2, code, value)
+            self.assertFalse(value['ok'])
+            self.assertEqual(before, self.tree())
+
+    @unittest.skipUnless(sys.platform == 'darwin', 'macOS scheduler only')
+    def test_signed_opt_in_registers_durable_runtime_and_failure_returns_cleanup_commands(self):
+        extras = self.signed_static() + ['--source', 'https://updates.example', '--autoupdate', 'scheduled', '--register-scheduler']
+        load = self.agent.load_runtime
+        called = []
+        def patched_load(bundle):
+            module = load(bundle)
+            def register(ctrl):
+                called.append((Path(module.__file__), ctrl.root, ctrl._state()['trust'], ctrl._config()['mode']))
+                raise module.WriteError('modeled registration failure')
+            module.Controller.register_scheduler = register
+            return module
+        with mock.patch.dict(os.environ, self.env), \
+                mock.patch.object(self.agent, 'load_runtime', side_effect=patched_load), \
+                redirect_stdout(io.StringIO()) as output:
+            code = self.agent.main(['install', '--host', 'codex', '--state-dir', str(self.state), *extras])
+        value = json.loads(output.getvalue())
+        self.assertEqual(8, code, value)
+        self.assertFalse(value['ok'])
+        self.assertEqual(1, len(called))
+        path, root, trust, mode = called[0]
+        self.assertIn(root, path.parents)
+        self.assertNotIn(self.bundle, path.parents)
+        self.assertEqual(('signed', 'scheduled'), (trust, mode))
+        self.assertTrue(Path(value['runtime_argv']['scheduler_unregister'][2]).is_file())
+        code, value = self.run_cli('status')
+        self.assertEqual(0, code, value)
+        self.assertTrue(value['verified'])
+
+    @unittest.skipUnless(sys.platform == 'darwin', 'macOS scheduler only')
     def test_signed_scheduled_and_management_survive_clone_removal(self):
         extras = self.signed_static() + ['--source', 'https://updates.example', '--autoupdate', 'scheduled']
         code, value = self.run_cli('install', extras=extras)
