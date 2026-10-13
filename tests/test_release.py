@@ -32,6 +32,22 @@ class ReleaseTests(unittest.TestCase):
             destination = self.source / name
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes((repo / name).read_bytes())
+        # Keep fictional first-release history independent of the current draft.
+        # Only top-level metadata changes; all rule/lexicon entries stay intact.
+        for name in ('specification/rules.json', 'lexicon/core.json',
+                     'lexicon/domains/software.json'):
+            path = self.source / name
+            value = json.loads(path.read_text())
+            current = value['version']
+            path.write_bytes(path.read_bytes().replace(
+                ('"version": "' + current + '"').encode(),
+                b'"version": "0.2.0-draft"', 1))
+        # Repair only the copied fixture proof for that metadata-only adjustment.
+        proof_path = self.source / 'evaluation/functional-review.json'
+        proof = json.loads(proof_path.read_text())
+        proof['reviewed_rules_sha256'] = k.digest(
+            (self.source / 'specification/rules.json').read_bytes())
+        proof_path.write_text(json.dumps(proof, ensure_ascii=False, indent=2) + '\n')
         self.key = self.root / 'signer'
         result = subprocess.run(['ssh-keygen', '-q', '-t', 'ed25519', '-N', '', '-f', str(self.key)], capture_output=True)
         self.assertEqual(0, result.returncode, result.stderr)

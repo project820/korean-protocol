@@ -1,0 +1,118 @@
+{
+  "artifact": "evaluation/llm/controlled-korean-20261013/ste-reference-profile.md",
+  "profile_sha256": "8b1fba691988ced69b82bbe10d3836f5cb694d9e2ccde0e132da76c18a22e262",
+  "profile_bytes": 3303,
+  "created": "2026-10-13",
+  "author_model": "claude-opus-5-5",
+  "author_route": "OpenCodex, as stated by the parent dispatch; the route was not checked separately in this session",
+  "purpose": "Comparator condition 'STE applied Korean' in a 1:1:1 comparison (untreated Korean / Korean Protocol Korean / STE applied Korean) on the same inputs.",
+  "condition_definition": "This condition applies English ASD-STE100 writing principles to Korean. It does not claim conformance to the official English STE dictionary.",
+  "independence": {
+    "inputs_read": [
+      "research/2026-10-13-ellipsis/research-note.md",
+      "research/2026-10-13-ellipsis/sourceevidence.json",
+      "https://www.asd-ste100.org/STE_faq.html (HTML only)"
+    ],
+    "not_read": "Korean Protocol rules, profiles, evaluation cases, gold data, condition keys, and model outputs in this directory were not opened.",
+    "excluded_from_profile": "The user example '표기된 담당자 없음' and any Korean Protocol special guards were left out on purpose.",
+    "full_pdf_downloaded": false
+  },
+  "sources": [
+    {
+      "id": "STE9",
+      "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+      "edition_date": "2025-01-15",
+      "access": "Paraphrase and locators from the earlier verified extract in sourceevidence.json; not downloaded again",
+      "rules_used": {
+        "4.2": "Do not omit words to make sentences shorter.",
+        "4.5": "Keep necessary articles/demonstratives; repeated articles mark modifier scope. Mapped to Korean only as 'keep words needed for scope and reference', not as adding 이/그.",
+        "5.2": "One instruction per sentence unless actions are simultaneous.",
+        "5.3": "Use the imperative for instructions.",
+        "5.4": "Put a condition the reader must know first before the instruction."
+      }
+    },
+    {
+      "id": "STE-FAQ",
+      "url": "https://www.asd-ste100.org/STE_faq.html",
+      "accessed": "2026-10-13",
+      "principles_used": [
+        "Each approved word has one meaning; one synonym is selected (basis for consistent terms, no synonyms).",
+        "Technical nouns and technical verbs come from official documentation, drawings, glossaries; do not invent them.",
+        "Short sentences, one topic per sentence, active voice.",
+        "Procedures use direct imperative language, are not narrative, and do not use the passive; descriptive text uses active voice; passive is allowed only when the agent is unknown.",
+        "A condition the reader must know before a step goes at the start of the sentence.",
+        "STE covers procedural and descriptive texts and safety instructions (warnings, cautions)."
+      ]
+    },
+    {
+      "id": "NIKL-PARTICLE",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id&pageIndex=1&qna_seq=332372",
+      "used_for": "Profile rule 20: case particles may be omitted when recoverable and meaning is unchanged; auxiliary particles carry meaning."
+    },
+    {
+      "id": "NIKL-SUBJECT",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=&qna_seq=329142&pageIndex=1&searchCondition=&searchKeyword=",
+      "used_for": "Profile rule 20: a subject recoverable from context may be omitted."
+    }
+  ],
+  "profile_rule_map": {
+    "1-4": [
+      "STE9 4.2",
+      "STE-FAQ (no invented content is a preservation constraint of this comparison)"
+    ],
+    "5-7": [
+      "STE-FAQ dictionary and technical-noun principles"
+    ],
+    "8-11": [
+      "STE-FAQ one topic/active voice",
+      "STE9 4.5 (reference and scope)"
+    ],
+    "12-15": [
+      "STE9 5.2-5.4",
+      "STE-FAQ procedures"
+    ],
+    "16-18": [
+      "STE-FAQ procedural/descriptive/safety scope"
+    ],
+    "19-21": [
+      "Korean language adaptation; see adaptation_choices"
+    ]
+  },
+  "adaptation_choices": [
+    {
+      "choice": "Neutral plain style (-다) without honorifics; the requested genre and quotations keep their original style.",
+      "basis": "Experiment design choice to match the Korean Protocol condition style for a fair comparison. This is not an STE rule."
+    },
+    {
+      "choice": "Instructions use the plain -ㄴ다/-는다 ending as the Korean rendering of the STE imperative.",
+      "basis": "Language adaptation. STE 5.3 defines the English imperative only."
+    },
+    {
+      "choice": "Recoverable Korean subject and case-particle omission is allowed only when who, what, condition, and modality stay clear.",
+      "basis": "Korean language adaptation supported by NIKL answers. STE 4.2 forbids English word omission and does not license Korean omission."
+    },
+    {
+      "choice": "English STE sentence word limits are not applied to Korean eojeol counts.",
+      "basis": "Word and eojeol counts are not comparable units; length is controlled through one topic and one instruction per sentence."
+    },
+    {
+      "choice": "No Korean mapping of STE approved words is claimed.",
+      "basis": "The STE dictionary is English. Profile rules 5-7 keep only the one-name-one-meaning principle."
+    }
+  ],
+  "limitations": [
+    "This profile is a Korean comparator built on STE principles. It cannot serve as evidence of formal STE equivalence or conformance.",
+    "Rule locators come from the earlier extract in sourceevidence.json and the public FAQ. The full 434-page standard was not re-read in this session, so other STE rules (noun clusters, verb forms, punctuation, safety-instruction format details) are summarized only at the FAQ level.",
+    "The profile was written by one author model without a separate review or pilot run.",
+    "NIKL online Q&A answers are case explanations and are published only for about two years."
+  ],
+  "integration_review": {
+    "by": "parent",
+    "before_execution": true,
+    "changes": [
+      "Aligned task framing with generation requests rather than forcing editing.",
+      "Clarified selecting an existing name when multiple aliases refer to one item; identifiers remain unchanged."
+    ],
+    "not_based_on_outputs": true
+  }
+}

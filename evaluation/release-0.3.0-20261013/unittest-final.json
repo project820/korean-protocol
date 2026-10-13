@@ -1,0 +1,6 @@
+{
+  "command": "python3 -B -m unittest discover -s tests",
+  "exit_code": 0,
+  "output_path": "evaluation/release-0.3.0-20261013/unittest-final.log",
+  "scope": "final suite including five candidate-upgrade smoke guard tests"
+}

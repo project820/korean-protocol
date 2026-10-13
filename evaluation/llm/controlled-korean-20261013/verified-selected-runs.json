@@ -1,0 +1,100 @@
+{
+  "runs": {
+    "final-kp": "sol-verified-final",
+    "final-ste": "sol-final-ste",
+    "final-baseline": "sol-baseline",
+    "holdout-kp": "sol-verified-holdout",
+    "holdout-ste": "sol-holdout-ste",
+    "holdout-baseline": "sol-holdout-baseline",
+    "confirmation-kp": "sol-verified-confirmation",
+    "confirmation-ste": "sol-confirmation-ste",
+    "confirmation-baseline": "sol-confirmation-baseline"
+  },
+  "character_counts": {
+    "final-kp": 1358,
+    "final-ste": 1671,
+    "final-baseline": 1779,
+    "holdout-kp": 1344,
+    "holdout-ste": 1490,
+    "holdout-baseline": 1554,
+    "confirmation-kp": 1009,
+    "confirmation-ste": 1070,
+    "confirmation-baseline": 1051
+  },
+  "trace_audit": {
+    "final-kp": {
+      "structure_valid": true,
+      "item_types": [
+        "agent_message"
+      ],
+      "non_message_items": []
+    },
+    "final-ste": {
+      "structure_valid": true,
+      "item_types": [
+        "agent_message"
+      ],
+      "non_message_items": []
+    },
+    "final-baseline": {
+      "structure_valid": true,
+      "item_types": [
+        "agent_message"
+      ],
+      "non_message_items": []
+    },
+    "holdout-kp": {
+      "structure_valid": true,
+      "item_types": [
+        "agent_message",
+        "command_execution"
+      ],
+      "non_message_items": [
+        "command_execution",
+        "command_execution",
+        "command_execution",
+        "command_execution",
+        "command_execution",
+        "command_execution"
+      ],
+      "audit_note": "Three commands (start/end events counted twice) read only mounted lexicon paths: rg files, targeted rg, selected JSON entries. No external files, internet or subagents observed."
+    },
+    "holdout-ste": {
+      "structure_valid": true,
+      "item_types": [
+        "agent_message"
+      ],
+      "non_message_items": []
+    },
+    "holdout-baseline": {
+      "structure_valid": true,
+      "item_types": [
+        "agent_message"
+      ],
+      "non_message_items": []
+    },
+    "confirmation-kp": {
+      "structure_valid": true,
+      "item_types": [
+        "agent_message"
+      ],
+      "non_message_items": []
+    },
+    "confirmation-ste": {
+      "structure_valid": true,
+      "item_types": [
+        "agent_message"
+      ],
+      "non_message_items": []
+    },
+    "confirmation-baseline": {
+      "structure_valid": true,
+      "item_types": [
+        "agent_message"
+      ],
+      "non_message_items": []
+    }
+  },
+  "metric": "Unicode code points including whitespace and punctuation; not tokens or reading time",
+  "profile_sha256": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60"
+}

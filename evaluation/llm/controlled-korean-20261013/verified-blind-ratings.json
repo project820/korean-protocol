@@ -1,0 +1,294 @@
+{
+  "reviewer": "verified_blind_review (independent Sol reviewer; only blinded input read)",
+  "dimensions": [
+    "meaning_pass",
+    "task_pass",
+    "structure_pass",
+    "no_surplus",
+    "plain_style"
+  ],
+  "default_ratings": {
+    "A": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "B": [
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    "C": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "reviews": [
+    {
+      "collection": "final",
+      "id": "ck01_protocol_definition",
+      "overrides": {}
+    },
+    {
+      "collection": "final",
+      "id": "ck02_global_condition_procedure",
+      "overrides": {}
+    },
+    {
+      "collection": "final",
+      "id": "ck03_simultaneous_action",
+      "overrides": {}
+    },
+    {
+      "collection": "final",
+      "id": "ck04_permission_and_duty",
+      "overrides": {}
+    },
+    {
+      "collection": "final",
+      "id": "ck05_possibility_warning",
+      "overrides": {}
+    },
+    {
+      "collection": "final",
+      "id": "ck06_completion_and_unverified_report",
+      "overrides": {}
+    },
+    {
+      "collection": "final",
+      "id": "ck07_ambiguous_noun_roles",
+      "overrides": {
+        "B": {
+          "task_pass": false,
+          "rationale": "Unknown assignments and known sequence preserved; never asks the required who-reviews and who-sends questions."
+        }
+      }
+    },
+    {
+      "collection": "final",
+      "id": "ck08_inclusive_endpoints_units",
+      "overrides": {}
+    },
+    {
+      "collection": "final",
+      "id": "ck09_same_object_names",
+      "overrides": {}
+    },
+    {
+      "collection": "final",
+      "id": "ck10_preserve_polite_quote",
+      "overrides": {}
+    },
+    {
+      "collection": "final",
+      "id": "ck11_explicit_polite_genre",
+      "overrides": {
+        "B": {
+          "plain_style": true,
+          "rationale": "Polite genre explicitly requested; conventional closing accepted."
+        }
+      }
+    },
+    {
+      "collection": "final",
+      "id": "ck12_simple_fact_answer",
+      "overrides": {}
+    },
+    {
+      "collection": "holdout",
+      "id": "kh01_and_or_shared_exception",
+      "overrides": {}
+    },
+    {
+      "collection": "holdout",
+      "id": "kh02_independent_actions",
+      "overrides": {}
+    },
+    {
+      "collection": "holdout",
+      "id": "kh03_overlapping_actions",
+      "overrides": {}
+    },
+    {
+      "collection": "holdout",
+      "id": "kh04_actor_recipient",
+      "overrides": {}
+    },
+    {
+      "collection": "holdout",
+      "id": "kh05_unfinished_reported_status",
+      "overrides": {}
+    },
+    {
+      "collection": "holdout",
+      "id": "kh06_capability_and_possibility",
+      "overrides": {
+        "A": {
+          "no_surplus": false,
+          "rationale": "Copies irrelevant source-availability commentary about automatic retransmission."
+        },
+        "B": {
+          "no_surplus": false,
+          "rationale": "Copies irrelevant source-availability commentary about automatic retransmission."
+        }
+      }
+    },
+    {
+      "collection": "holdout",
+      "id": "kh07_permission_recommendation",
+      "overrides": {}
+    },
+    {
+      "collection": "holdout",
+      "id": "kh08_asymmetric_weight_bounds",
+      "overrides": {}
+    },
+    {
+      "collection": "holdout",
+      "id": "kh09_single_cart_aliases",
+      "overrides": {}
+    },
+    {
+      "collection": "holdout",
+      "id": "kh10_customer_quote_boundary",
+      "overrides": {
+        "A": {
+          "no_surplus": false,
+          "rationale": "Copies irrelevant source-availability commentary about current seat number."
+        },
+        "B": {
+          "no_surplus": false,
+          "rationale": "Copies irrelevant source-availability commentary about current seat number."
+        }
+      }
+    },
+    {
+      "collection": "holdout",
+      "id": "kh11_requested_honorific_email",
+      "overrides": {
+        "B": {
+          "plain_style": true,
+          "rationale": "Polite genre explicitly requested; conventional closing accepted."
+        }
+      }
+    },
+    {
+      "collection": "holdout",
+      "id": "kh12_easy_definition",
+      "overrides": {
+        "B": {
+          "plain_style": true,
+          "rationale": "Uses non-honorific conversational endings."
+        }
+      }
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc01_select_relevant_result",
+      "overrides": {}
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc02_undocumented_not_absent",
+      "overrides": {}
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc03_no_record_not_no_action",
+      "overrides": {}
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc04_known_features_only",
+      "overrides": {}
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc05_conditions_and_item_exception",
+      "overrides": {}
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc06_roles_and_return_path",
+      "overrides": {}
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc07_time_and_certainty",
+      "overrides": {}
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc08_one_list_multiple_names",
+      "overrides": {}
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc09_preserve_source_honorifics",
+      "overrides": {}
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc10_requested_polite_message",
+      "overrides": {
+        "B": {
+          "plain_style": true,
+          "rationale": "Polite genre explicitly requested; conventional closing accepted."
+        }
+      }
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc11_inclusive_measurement_unit",
+      "overrides": {}
+    },
+    {
+      "collection": "confirmation",
+      "id": "kc12_direct_winner_answer",
+      "overrides": {}
+    }
+  ],
+  "method": "All108 outputs reviewed. Each row inherits label defaults; overrides replace named dimensions. Recorded by parent from reviewer report. Surplus judged conservatively, not minimum-length compliance.",
+  "totals": {
+    "reviewed_inputs": 36,
+    "rated_outputs": 108,
+    "pass_counts_by_label": {
+      "A": [
+        36,
+        36,
+        36,
+        34,
+        36
+      ],
+      "B": [
+        36,
+        35,
+        36,
+        34,
+        4
+      ],
+      "C": [
+        36,
+        36,
+        36,
+        36,
+        36
+      ]
+    },
+    "overall_pass_counts": [
+      108,
+      107,
+      108,
+      104,
+      76
+    ]
+  },
+  "limitations": "Manual model review of reused synthetic text, not human efficacy or official STE compliance."
+}

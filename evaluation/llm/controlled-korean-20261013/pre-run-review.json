@@ -1,0 +1,7 @@
+{
+  "reviewer": "parent",
+  "before_model_execution": true,
+  "cases": 12,
+  "decision": "Accept self-contained cases and modality/structure invariants; answers need not repeat irrelevant metadata. No exact wording required; polite genre and quotes override default style.",
+  "synthetic": true
+}

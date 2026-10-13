@@ -1,0 +1,13 @@
+{
+  "at_utc": "2026-10-13T10:57:15.814624+00:00",
+  "hashes": {
+    "run.py": "df45c7751f316f85795144e80e60fbde98e5ab2df13b6d2697802f0241927a3e",
+    "disabled-skills.json": "29b4d2ffa3e7ccafcbddf5dbca8734834c7d6fc59d6a0ad1933825ab1cba7055",
+    "plan-isolated.md": "58f27669ded5721eb094cd3682b9444eb6aa45c0a4f75a800e2cc42b0a1f4214",
+    "cases.json": "638d429059f854d49ff0266ba65345e13c7a04ae691a477e8ae53cc6c55cff03",
+    "gold.json": "8683b5791cd50270077683f34efe54a89674dc431e2f9e4650dd35f53ff490d5",
+    "source-contract.json": "f7b262766b2aabdb1eed61133aa07794ae0926c1ca790c9602d5c134eb8d8bb0",
+    "kp-profile.md": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60",
+    "ste-profile.md": "8b1fba691988ced69b82bbe10d3836f5cb694d9e2ccde0e132da76c18a22e262"
+  }
+}

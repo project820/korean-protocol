@@ -1,0 +1,122 @@
+{
+  "reviewer": "fresh_outputs_review",
+  "method": "Independent blind read of only input/criteria and72 outputs; no condition key or profiles",
+  "reviewed_outputs": 72,
+  "dimensions": [
+    "meaning_pass",
+    "task_pass",
+    "clarity_pass",
+    "no_surplus"
+  ],
+  "default": {
+    "meaning_pass": true,
+    "task_pass": true,
+    "clarity_pass": true,
+    "no_surplus": true
+  },
+  "overrides": [],
+  "totals": {
+    "meaning_pass": 72,
+    "task_pass": 72,
+    "clarity_pass": 72,
+    "no_surplus": 72
+  },
+  "per_rep_label": [
+    {
+      "repetition": 1,
+      "label": "A",
+      "n": 12,
+      "meaning_pass": 12,
+      "task_pass": 12,
+      "clarity_pass": 12,
+      "no_surplus": 12
+    },
+    {
+      "repetition": 1,
+      "label": "B",
+      "n": 12,
+      "meaning_pass": 12,
+      "task_pass": 12,
+      "clarity_pass": 12,
+      "no_surplus": 12
+    },
+    {
+      "repetition": 1,
+      "label": "C",
+      "n": 12,
+      "meaning_pass": 12,
+      "task_pass": 12,
+      "clarity_pass": 12,
+      "no_surplus": 12
+    },
+    {
+      "repetition": 2,
+      "label": "A",
+      "n": 12,
+      "meaning_pass": 12,
+      "task_pass": 12,
+      "clarity_pass": 12,
+      "no_surplus": 12
+    },
+    {
+      "repetition": 2,
+      "label": "B",
+      "n": 12,
+      "meaning_pass": 12,
+      "task_pass": 12,
+      "clarity_pass": 12,
+      "no_surplus": 12
+    },
+    {
+      "repetition": 2,
+      "label": "C",
+      "n": 12,
+      "meaning_pass": 12,
+      "task_pass": 12,
+      "clarity_pass": 12,
+      "no_surplus": 12
+    }
+  ],
+  "gold_ambiguities": [],
+  "evaluation_notes": [
+    "nf02 confirmation-needed preserves unknown action, not invented commitment.",
+    "nf03 names completed/uncompleted branches, so partial negation is clear.",
+    "nf06 allowed instruction construction preserves actual sender and recipient.",
+    "nf07 starttime/unknown completiontime are related supplied facts.",
+    "nf10 asking whether both documents is not an arbitrary selection.",
+    "nf11 r2/B curly quote delimiters do not alter verbatim quotation content.",
+    "nf12 polite genre and courtesy accepted; recommendation does not become duty."
+  ],
+  "verbosity_observations": [
+    {
+      "repetition": 1,
+      "label": "A",
+      "id": "nf07",
+      "note": "Starttime and unknown completiontime add length to state report.",
+      "score_effect": "none"
+    },
+    {
+      "repetition": 1,
+      "label": "A",
+      "id": "nf09",
+      "note": "1000-user condition repeated in first and final sentence.",
+      "score_effect": "none"
+    },
+    {
+      "repetition": 2,
+      "label": "B",
+      "id": "nf07",
+      "note": "Starttime and unknown completiontime add length to state report.",
+      "score_effect": "none"
+    },
+    {
+      "repetition": 2,
+      "label": "B",
+      "id": "nf09",
+      "note": "1000-user condition repeated in first and final sentence.",
+      "score_effect": "none"
+    }
+  ],
+  "recorded_by": "parent from reviewer returned JSON",
+  "limitations": "All-pass means supplied criteria passed on12 synthetic cases*2 runs; not statistical reliability, human comprehension or formalSTE compliance."
+}

@@ -1,0 +1,32 @@
+{
+  "ste-r1": {
+    "chars": 997,
+    "commands": [],
+    "profile_sha256": "8b1fba691988ced69b82bbe10d3836f5cb694d9e2ccde0e132da76c18a22e262"
+  },
+  "treatment-r1": {
+    "chars": 862,
+    "commands": [],
+    "profile_sha256": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60"
+  },
+  "baseline-r1": {
+    "chars": 1008,
+    "commands": [],
+    "profile_sha256": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60"
+  },
+  "baseline-r2": {
+    "chars": 1027,
+    "commands": [],
+    "profile_sha256": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60"
+  },
+  "ste-r2": {
+    "chars": 1047,
+    "commands": [],
+    "profile_sha256": "8b1fba691988ced69b82bbe10d3836f5cb694d9e2ccde0e132da76c18a22e262"
+  },
+  "treatment-r2": {
+    "chars": 929,
+    "commands": [],
+    "profile_sha256": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60"
+  }
+}

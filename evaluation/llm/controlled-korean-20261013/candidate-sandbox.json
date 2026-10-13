@@ -1,0 +1,442 @@
+{
+  "sandbox": "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2",
+  "signed": false,
+  "purpose": "Local unpublished candidate only; no global settings changed",
+  "profile_sha256": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60",
+  "hosts": [
+    {
+      "host": "codex",
+      "install": {
+        "action": "install",
+        "autoupdate": "off",
+        "block_hash": "2d8d12b7be6d04cf88661b6267dea569e38f310a07b5d000b25fbdfe105f4784",
+        "budget": 4194304,
+        "budget_kind": "installer-file-safety",
+        "cache_id": "0.2.0-fd96b90b306fa69f677e7fdfaae1b28274200a9bf6b8b83697250a3dcbd7c718",
+        "changed": true,
+        "content_verified": true,
+        "enabled": true,
+        "highest_sequence": 0,
+        "honorifics": false,
+        "host": "codex",
+        "host_context": {
+          "codex_home": "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex",
+          "host": "codex",
+          "project_root": null,
+          "scope": "user"
+        },
+        "install_validated": true,
+        "installed": true,
+        "managed_bytes": 29638,
+        "management_argv": {
+          "configure": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex"
+          ],
+          "honorifics_off": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex",
+            "--honorifics",
+            "off"
+          ],
+          "honorifics_on": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex",
+            "--honorifics",
+            "on"
+          ],
+          "protocol_off": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex",
+            "--protocol",
+            "off"
+          ],
+          "protocol_on": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex",
+            "--protocol",
+            "on"
+          ],
+          "status": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "status",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex"
+          ],
+          "uninstall": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "uninstall",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex"
+          ]
+        },
+        "management_commands": {
+          "configure": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py configure --host codex --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state --codex-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex",
+          "honorifics_off": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py configure --host codex --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state --codex-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex --honorifics off",
+          "honorifics_on": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py configure --host codex --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state --codex-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex --honorifics on",
+          "protocol_off": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py configure --host codex --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state --codex-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex --protocol off",
+          "protocol_on": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py configure --host codex --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state --codex-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex --protocol on",
+          "status": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py status --host codex --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state --codex-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex",
+          "uninstall": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py uninstall --host codex --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state --codex-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex"
+        },
+        "ok": true,
+        "original_exists": false,
+        "original_prefix_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "pin": null,
+        "planned_version": "0.2.0",
+        "profile": "coding-agent",
+        "profile_bytes": 28669,
+        "protocol_enabled": true,
+        "recovery_required": false,
+        "runtime_argv": {
+          "configure_off": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "autoupdate",
+            "configure",
+            "--mode",
+            "off"
+          ],
+          "run": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "run"
+          ],
+          "scheduler_register": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "scheduler",
+            "register"
+          ],
+          "scheduler_status": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "scheduler",
+            "status"
+          ],
+          "scheduler_unregister": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "scheduler",
+            "unregister"
+          ],
+          "update": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+            "update"
+          ]
+        },
+        "runtime_commands": {
+          "configure_off": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state autoupdate configure --mode off",
+          "run": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state run",
+          "scheduler_register": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state scheduler register",
+          "scheduler_status": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state scheduler status",
+          "scheduler_unregister": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state scheduler unregister",
+          "update": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state update"
+        },
+        "scheduler": {
+          "registered": false,
+          "status": "disabled"
+        },
+        "selected_target": "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex/AGENTS.md",
+        "separator": "",
+        "snapshot_version": "0.2.0",
+        "source": null,
+        "state_dir": "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex-state",
+        "target": "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/codex/AGENTS.md",
+        "target_matches": true,
+        "tool_available": true,
+        "trust": "local-snapshot",
+        "verified": true,
+        "version": "0.2.0"
+      }
+    },
+    {
+      "host": "claude-code",
+      "install": {
+        "action": "install",
+        "autoupdate": "off",
+        "block_hash": "711af056c20f83e338bddf119126d5a5302f39bc4eb4e460b2aaf8e5319b7916",
+        "budget": 4194304,
+        "budget_kind": "installer-file-safety",
+        "cache_id": "0.2.0-fd96b90b306fa69f677e7fdfaae1b28274200a9bf6b8b83697250a3dcbd7c718",
+        "changed": true,
+        "content_verified": true,
+        "enabled": true,
+        "highest_sequence": 0,
+        "honorifics": false,
+        "host": "claude-code",
+        "host_context": {
+          "claude_home": "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code",
+          "host": "claude-code",
+          "project_root": null,
+          "scope": "user"
+        },
+        "install_validated": true,
+        "installed": true,
+        "managed_bytes": 29644,
+        "management_argv": {
+          "configure": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code"
+          ],
+          "honorifics_off": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code",
+            "--honorifics",
+            "off"
+          ],
+          "honorifics_on": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code",
+            "--honorifics",
+            "on"
+          ],
+          "protocol_off": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code",
+            "--protocol",
+            "off"
+          ],
+          "protocol_on": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code",
+            "--protocol",
+            "on"
+          ],
+          "status": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "status",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code"
+          ],
+          "uninstall": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py",
+            "uninstall",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code"
+          ]
+        },
+        "management_commands": {
+          "configure": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py configure --host claude-code --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state --claude-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code",
+          "honorifics_off": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py configure --host claude-code --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state --claude-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code --honorifics off",
+          "honorifics_on": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py configure --host claude-code --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state --claude-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code --honorifics on",
+          "protocol_off": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py configure --host claude-code --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state --claude-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code --protocol off",
+          "protocol_on": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py configure --host claude-code --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state --claude-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code --protocol on",
+          "status": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py status --host claude-code --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state --claude-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code",
+          "uninstall": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/agent-install.py uninstall --host claude-code --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state --claude-home /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code"
+        },
+        "ok": true,
+        "original_exists": false,
+        "original_prefix_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "pin": null,
+        "planned_version": "0.2.0",
+        "profile": "coding-agent",
+        "profile_bytes": 28669,
+        "protocol_enabled": true,
+        "recovery_required": false,
+        "runtime_argv": {
+          "configure_off": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "autoupdate",
+            "configure",
+            "--mode",
+            "off"
+          ],
+          "run": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "run"
+          ],
+          "scheduler_register": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "scheduler",
+            "register"
+          ],
+          "scheduler_status": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "scheduler",
+            "status"
+          ],
+          "scheduler_unregister": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "scheduler",
+            "unregister"
+          ],
+          "update": [
+            "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+            "update"
+          ]
+        },
+        "runtime_commands": {
+          "configure_off": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state autoupdate configure --mode off",
+          "run": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state run",
+          "scheduler_register": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state scheduler register",
+          "scheduler_status": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state scheduler status",
+          "scheduler_unregister": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state scheduler unregister",
+          "update": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 -B /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state/agent-tool-1ed394ba519020e784ff7c6ddd5fc5bde33fbacf6998d8823f1cb323f5594435/runtime/kproto.py --state-dir /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state update"
+        },
+        "scheduler": {
+          "registered": false,
+          "status": "disabled"
+        },
+        "selected_target": "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code/rules/korean-protocol.md",
+        "separator": "",
+        "snapshot_version": "0.2.0",
+        "source": null,
+        "state_dir": "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code-state",
+        "target": "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-verified-session-5yd5miz2/claude-code/rules/korean-protocol.md",
+        "target_matches": true,
+        "tool_available": true,
+        "trust": "local-snapshot",
+        "verified": true,
+        "version": "0.2.0"
+      }
+    }
+  ]
+}

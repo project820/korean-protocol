@@ -1,0 +1,207 @@
+{
+  "status": "local-release-candidate-prepared-and-verified",
+  "root": "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor",
+  "evidence": "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor/evaluation/release-0.3.0-20261013",
+  "version": "0.3.0-draft",
+  "public_version_candidate": "0.3.0",
+  "sequence_candidate": 2,
+  "published": false,
+  "snapshot_files": 21,
+  "frozen_model_files": 1233,
+  "changed_paths": [
+    {
+      "path": "specification/rules.json",
+      "before_sha256": "d58196b167a048b339d687d5d81954c9d482083494c5b19a03202c59def09408",
+      "after_sha256": "e1e921b1d3cfc7e5039a0d6ba8447e05a21bf47331cadcd393c982a4c2272f03",
+      "changed": true
+    },
+    {
+      "path": "lexicon/core.json",
+      "before_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+      "after_sha256": "2f8ad8315fe23a3e63406a02aa1b58188cc60a79a06e1a4239e3ed7cbf1b1bad",
+      "changed": true
+    },
+    {
+      "path": "lexicon/domains/software.json",
+      "before_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+      "after_sha256": "2e537f1178e85e4efb63f357a5f8da13927749ada2f58647f8bff879661db688",
+      "changed": true
+    },
+    {
+      "path": "evaluation/functional-review.json",
+      "before_sha256": "9cea6e3451ed2372716707466a5f4bf90dd618e855cb0f9de0b9b37710fb4f9b",
+      "after_sha256": "abe2e1fe4d6214e01df5d89c7b06ab35f4b533ebd080860e771dab72274541a8",
+      "changed": true
+    },
+    {
+      "path": "distribution/build.py",
+      "before_sha256": "c59be69e30d8d20d8aec1874e5fb49cb098e7e2a1e317e06be16c16de2cd4516",
+      "after_sha256": "1a82c54a48128ba69c4757a1d9988a5a0b8c0bc428bc8f4ff3e055670c9ec05d",
+      "changed": true
+    },
+    {
+      "path": "distribution/launcher.py",
+      "before_sha256": "aa454b9d1539f7ecae6c06dc2aa0e1effab374cd905b85a40dc1a7b04e1049b2",
+      "after_sha256": "72a53563dd24b8ad200dcd50e359077ac5d2f47831724294994ef910d44cb53b",
+      "changed": true
+    },
+    {
+      "path": "distribution/agent_install.py",
+      "before_sha256": "6332d08f7fac25c080bcc85ce0c95b1d52fbfd15c11a10a1e1fb4c2b7896602f",
+      "after_sha256": "097344c293bc32e8ef28a9f7117cd323591c82cb2ca901e209a6a0a01977177d",
+      "changed": true
+    },
+    {
+      "path": "distribution/START-HERE.md",
+      "before_sha256": "754a05b1f5267057b43e9fde932b04729a0f2d524c500516b890c89a789bfbe6",
+      "after_sha256": "aad954354ba3687323e1b31cf9a936028f0808e55b27e2a5ffda0b333d24e0ed",
+      "changed": true
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "3dc87fa6e721cf0adccd877193719a370a97f43196abf70ffbbae2bf44111ec2",
+      "after_sha256": "cd69b21d56bd02be03a9d832661298df4c2390c100213d4bd20f1434824d84b5",
+      "changed": true
+    },
+    {
+      "path": "INSTALL.md",
+      "before_sha256": "5ee00744b8efd9e6034736aaafa0aeaae3c36729e6ff9a1def2faf765efc5675",
+      "after_sha256": "530e1834a3f881b1a74b387cfa7f1423517f05779fd753529a45f97f324b4adb",
+      "changed": true
+    },
+    {
+      "path": "docs/distribution/README.md",
+      "before_sha256": "72e5cf2b630f0460ffae6dcd6d623d16dfc62ed17530dc2cb25f70c758356fd5",
+      "after_sha256": "53e94e3f4164efc8e8bdbda078a1de1a023a5926976adbc18b477de0fe0cbf10",
+      "changed": true
+    },
+    {
+      "path": "tests/test_distribution.py",
+      "before_sha256": "4288afc0de95bdc9d5a43c18b5abb44fb3c696520ccc56027b900c38d4821566",
+      "after_sha256": "105f0db53669757cbf76163acc76690b16a5691400ab6b5befccaabbfa06cf4a",
+      "changed": true
+    },
+    {
+      "path": "tests/test_launcher.py",
+      "before_sha256": "a3e866b11001293c33291e2ef23eafdce0463f9de06b0c4cc0ba473c540484d3",
+      "after_sha256": "3965e257ddd315a6f2fafc136431e436f0d954283e3429111815f385133d43f8",
+      "changed": true
+    },
+    {
+      "path": "tests/test_agent_install.py",
+      "before_sha256": "31611f7ae6fbf1536bc691a7a33b9a1ac4db2e07d99e7f21194919a614c26d89",
+      "after_sha256": "0c7fd1f4559fc4326c9a07e82a95fdaf9177d6b38f72f2f0eb49de1842b306c7",
+      "changed": true
+    },
+    {
+      "path": "tests/test_release.py",
+      "before_sha256": "9609462b27d1bf722e9493bbebbfc239c97ff7fee270a68d2916c647a336893f",
+      "after_sha256": "563fbe72864a016ff424566fa3e96c55e05024fa2d21cffacd5fc8a6494f3716",
+      "changed": true
+    },
+    {
+      "path": "tests/test_actions_release.py",
+      "before_sha256": "39eb324f171faf7711cd76cb0bee11f48e05e298076cbe53c6f5caf45c9fe92f",
+      "after_sha256": "a3b2e6a0191c72b19533b02575dd3584caad490c8f04f90ead0556a74215881a",
+      "changed": true
+    },
+    {
+      "path": "tests/test_manual_https_smoke.py",
+      "before_sha256": "9600d7fb8f0945bfe9058b1f88e79e2ac1c2d5457ecf30cf6a2863e874925be8",
+      "after_sha256": "586dbc39707f6a41fb66738248e6fd12dfb98681cda8997a9737eff710e71774",
+      "changed": true
+    }
+  ],
+  "validation": [
+    {
+      "command": "python3 -B -m unittest discover -s tests -p 'test_launcher.py'",
+      "tests": 20,
+      "result": "pass"
+    },
+    {
+      "command": "python3 -B -m unittest discover -s tests -p 'test_distribution.py'",
+      "tests": 12,
+      "result": "pass"
+    },
+    {
+      "command": "python3 -B -m unittest discover -s tests -p 'test_agent_install.py'",
+      "tests": 45,
+      "result": "pass"
+    },
+    {
+      "command": "python3 -B -m unittest discover -s tests -p 'test_release.py'",
+      "tests": 16,
+      "result": "pass"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    },
+    {
+      "command": "python3 -B -m validation.compile --root . --output .",
+      "result": "pass; four compiled outputs byte-identical to before snapshot"
+    },
+    {
+      "command": "python3 -B -m validation.check --root .",
+      "result": "PASS; functional design 49/53; semantic evaluation unconfirmed"
+    },
+    {
+      "command": "python3 -B -m unittest discover -s tests",
+      "result": "pass",
+      "tests": 356,
+      "log_path": "evaluation/release-0.3.0-20261013/unittest-final.log"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    }
+  ],
+  "frozen_model_evaluation_files_unchanged": 1233,
+  "signed": false,
+  "semantic_verified": false,
+  "empirical_results_unchanged": true,
+  "package": {
+    "published": false,
+    "signed": false,
+    "artifact_path": "/tmp/kproto-release030-prepared/korean-protocol-0.3.0-draft.zip",
+    "prefix": "korean-protocol-0.3.0-draft",
+    "zip_bytes": 415111,
+    "sha256": "4ca680487f8310df07369629bac056bb1fc705a6a540acca54257989c55a6fa1",
+    "file_count": 36,
+    "checksums_verified": 35,
+    "allowlisted_source_files_match": 33,
+    "source_versions": {
+      "specification/rules.json": "0.3.0-draft",
+      "lexicon/core.json": "0.3.0-draft",
+      "lexicon/domains/software.json": "0.3.0-draft"
+    },
+    "offline_install_version": "0.3.0",
+    "compiled_profiles": [
+      {
+        "path": "profiles/coding-agent.md",
+        "sha256": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60",
+        "byte_identical_to_before": true
+      },
+      {
+        "path": "profiles/chat.md",
+        "sha256": "90cfea2e019fac15f68a277149d95c85e7d04ba2fc424f009761d6fbd2fc4394",
+        "byte_identical_to_before": true
+      },
+      {
+        "path": "profiles/work-document.md",
+        "sha256": "97569176f17d90c3dbfd49ab4350de1784f36313a03ffba7400a9460e99b341d",
+        "byte_identical_to_before": true
+      },
+      {
+        "path": "pack/protocol.md",
+        "sha256": "7e444b90ec3800f9f1563b4593b023895d982e9ca1c7f052b62397d7050345ce",
+        "byte_identical_to_before": true
+      }
+    ],
+    "evaluation_files_packaged": false,
+    "raw_pdf_packaged": false,
+    "public_version_candidate": "0.3.0",
+    "sequence_candidate": 2
+  },
+  "canonical_review": "evaluation/release-0.3.0-20261013/metadata-carryforward-review.json"
+}

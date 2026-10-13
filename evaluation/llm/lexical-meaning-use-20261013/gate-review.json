@@ -1,0 +1,19 @@
+{
+  "reviewer": "lexical_metric_review",
+  "verdict": "pass for declared limited lexical gate",
+  "policy": "docs/spec/coverage-policy.md sections5",
+  "verified": [
+    "Both freeze manifests and current dictionary hashes match.",
+    "All72 blindtexts match their preserved parsed outputs; six reruns exit0 and snapshotsunchanged.",
+    "Recomputed allrows/overrides: KP24/24, baseline21/24, STE22/24; all-disputed-pass24/23/23.",
+    "Denominators16/4/4/24 preserved; KP10direct+6paraphrases=16.",
+    "Character totals1886/1792/2035 and5.0percent reduction reproduce.",
+    "Disputed deductions and scope limits retained."
+  ],
+  "limitations": [
+    "Dictionary-informed synthetic sample, not whole dictionary or naturalcorpuscoverage.",
+    "No causal accuracy or humanreader effect claim.",
+    "Skill configuration is not OS read confinement.",
+    "Overall revisedcandidate publication remains separate."
+  ]
+}

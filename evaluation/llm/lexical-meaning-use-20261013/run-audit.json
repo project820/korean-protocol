@@ -1,0 +1,60 @@
+{
+  "treatment-b1": {
+    "characters": 901,
+    "item_types": [
+      "agent_message"
+    ],
+    "completed_commands": [],
+    "output_sha256": "77c09d852db1dc26130a7aff5e898cc0f143df479eb6b64be4496c78dd913dbf"
+  },
+  "treatment-b2": {
+    "characters": 846,
+    "item_types": [
+      "agent_message"
+    ],
+    "completed_commands": [],
+    "output_sha256": "c16a76aef6c9d1b7d5b28a51d60b3a89243fbea5e89fbddca8bffdeb9fac3e97"
+  },
+  "baseline-b1": {
+    "characters": 1028,
+    "item_types": [
+      "agent_message"
+    ],
+    "completed_commands": [],
+    "output_sha256": "6366f6de4b368fdcddd0b27f64224a71196c953f83c12914c8d247f480b4165d"
+  },
+  "baseline-b2": {
+    "characters": 932,
+    "item_types": [
+      "agent_message"
+    ],
+    "completed_commands": [],
+    "output_sha256": "5ad118b37a53d495d57c6057a30a4a2122f2e72b25cf57c5e422e7c1059c3e9c"
+  },
+  "ste-b1": {
+    "characters": 1046,
+    "item_types": [
+      "agent_message",
+      "command_execution"
+    ],
+    "completed_commands": [
+      {
+        "command": "/bin/zsh -lc 'cat /Users/m5max/.agents/skills/superpowers/using-superpowers/SKILL.md'",
+        "exit_code": 0
+      },
+      {
+        "command": "/bin/zsh -lc 'rg --files lexicon'",
+        "exit_code": 2
+      }
+    ],
+    "output_sha256": "b4e0c69cfcf584a7759c8070687d5ea89b96819bd3c0eb22f1adfe2dafad9f61"
+  },
+  "ste-b2": {
+    "characters": 948,
+    "item_types": [
+      "agent_message"
+    ],
+    "completed_commands": [],
+    "output_sha256": "25458d6c5a3d41b5097e4bf264755af74e2113dd8df79132cca4e76d3995e752"
+  }
+}

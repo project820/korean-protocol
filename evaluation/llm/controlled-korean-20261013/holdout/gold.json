@@ -1,0 +1,338 @@
+{
+  "provenance": {
+    "created_at_utc": "2026-10-13T09:33:15.584695+00:00",
+    "status": "preregistered_before_holdout_model_outputs",
+    "case_origin": "Second collection of twelve newly authored self-contained synthetic holdout cases. Domains, identifiers, measurements, quoted texts, and requests differ from the initial collection.",
+    "author_access": "The author did not read model outputs, revised norms, compiled profiles, original model responses, or the current implementation. The author used the delegated holdout requirements and recollection of the initial cases authored by the same author.",
+    "quote_origin": "Customer messages are synthetic source quotations inside these cases; they are not claimed to be records of actual people.",
+    "freeze_policy": "Freeze these cases and criteria before generating holdout responses. Keep the same public facts and request in every condition. Record amendments separately if needed."
+  },
+  "evaluation_policy": {
+    "meaning_and_task": "Apply mandatory meaning, prohibited changes, and requested deliverable criteria in all conditions. Mandatory meaning contains only information needed for the actual request; do not require an unrelated full copy of the facts.",
+    "style": "Evaluate improved-condition controlled-Korean style separately. Ordinary honorific use in baseline or current-condition responses is a style characteristic, not a meaning or task failure. Explicitly requested honorific genre and verbatim quote preservation remain task requirements in all conditions.",
+    "variants": "Accept semantically equivalent wording and formatting. Listed variants are examples, not a phrase whitelist.",
+    "priority": "Meaning, action relationships, conditions, modality, evidentiary status, quantities, and task delivery take priority over brevity. A shorter answer does not earn credit for omitted required meaning.",
+    "not_required": "Do not force arbitrary terminology, a particular ending, a fixed number of words, a fixed number of sentences, or unrelated factual restatement."
+  },
+  "cases": [
+    {
+      "id": "kh01_and_or_shared_exception",
+      "task_intent": "대관 운영 작업의 공통 시작 조건과 그 조건보다 우선하는 점검일 예외를 전달한다.",
+      "mandatory_meaning": [
+        "대관 승인과 보증금 조건을 함께 만족해야 한다.",
+        "보증금 조건은 납부 또는 면제 승인 중 하나를 만족하면 된다.",
+        "조건이 테이블 배치, 음향 장비 연결, 행사장 개방 모두에 적용됨을 알 수 있다.",
+        "정기 점검일에는 조건을 만족해도 세 작업을 모두 할 수 없다."
+      ],
+      "prohibited_changes": [
+        "대관 승인 또는 보증금 조건 중 하나만 있으면 시작할 수 있게 바꾸지 않는다.",
+        "보증금 납부와 면제 승인을 모두 요구하지 않는다.",
+        "점검일 예외를 한 작업에만 적용하거나 조건을 충족하면 점검일에도 허용한다고 쓰지 않는다."
+      ],
+      "acceptable_variants": [
+        "대관 승인 AND (납부 OR 면제 승인) 구조를 문장, 표, 항목으로 나타낼 수 있다.",
+        "점검일 예외를 먼저 제시하거나 마지막에 공통 예외로 명시해도 된다.",
+        "세 작업을 공통 작업 집합으로 먼저 정의하고 그 집합에 조건을 적용해도 된다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "조건의 결합 방식과 공통 적용 범위를 바로 파악할 수 있게 쓴다.",
+          "운영 지침은 기본 높임말 없이 쓴다."
+        ]
+      }
+    },
+    {
+      "id": "kh02_independent_actions",
+      "task_intent": "새 담당자가 독립적인 작업을 올바른 선후 관계로 수행하도록 안내한다.",
+      "mandatory_meaning": [
+        "책의 바코드를 스캔한다.",
+        "스캔 결과를 확인한 뒤 보관 위치를 입력한다.",
+        "위치 입력을 마친 뒤 저장을 누른다.",
+        "서로 독립적인 작업과 그 순서를 유지한다."
+      ],
+      "prohibited_changes": [
+        "스캔과 위치 입력 또는 위치 입력과 저장을 동시에 수행하라고 바꾸지 않는다.",
+        "스캔 결과 확인을 생략하거나 저장을 먼저 하게 하지 않는다.",
+        "새 보관 위치, 시스템 버튼 이름, 자동 저장 기능을 만들어 내지 않는다."
+      ],
+      "acceptable_variants": [
+        "번호 목록, 별개의 문장, 선후 관계가 명확한 안내 문단을 모두 허용한다.",
+        "명시적인 순서 표현이 충분하면 각 작업의 독립성을 별도로 설명하지 않아도 된다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "독립적으로 수행할 행동과 확인을 구분하여 읽을 수 있게 쓴다.",
+          "반납 안내는 기본 높임말 없이 쓴다."
+        ]
+      }
+    },
+    {
+      "id": "kh03_overlapping_actions",
+      "task_intent": "받치기와 잠금핀 끼우기의 동시 진행 범위를 보존한 설치 안내를 제공한다.",
+      "mandatory_meaning": [
+        "잠금핀을 끼우는 동안 패널 아래쪽을 계속 받친다.",
+        "잠금핀이 끝까지 들어간 뒤 받치던 손을 뗀다."
+      ],
+      "prohibited_changes": [
+        "받치기 완료 후 손을 떼고 잠금핀을 끼우는 순차 작업으로 바꾸지 않는다.",
+        "잠금핀을 끼운 뒤에 처음 받치게 하지 않는다.",
+        "삽입이 끝나기 전에 손을 떼게 하거나 새로운 고정 장치와 시간을 추가하지 않는다."
+      ],
+      "acceptable_variants": [
+        "아래쪽을 받친 상태에서 잠금핀을 끼운다는 표현을 허용한다.",
+        "먼저 받치고 그 상태를 유지하면서 핀을 끼우는 안내도 허용한다.",
+        "받치기와 끼우기를 한 문장 또는 겹치는 동작임을 명시한 복수 문장으로 쓸 수 있다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "함께 유지할 행동을 단순한 순차 목록으로 쪼개지 않는다.",
+          "설치 안내는 기본 높임말 없이 쓴다."
+        ]
+      }
+    },
+    {
+      "id": "kh04_actor_recipient",
+      "task_intent": "초안 제작자, 검토 요청자, 수신자와 검토 결과 전달 대상을 구분한다.",
+      "mandatory_meaning": [
+        "디자인팀이 초안을 만든다.",
+        "운영팀이 초안을 법무팀에 보내 검토를 요청한다.",
+        "법무팀이 검토하고 결과를 운영팀에 전달한다."
+      ],
+      "prohibited_changes": [
+        "운영팀을 검토자로 바꾸거나 디자인팀이 법무팀에 요청한다고 바꾸지 않는다.",
+        "검토 요청의 수신자를 운영팀으로 바꾸지 않는다.",
+        "검토 결과의 수신자를 디자인팀으로 바꾸지 않는다."
+      ],
+      "acceptable_variants": [
+        "팀별 표, 문장, 주체와 자료 이동을 표시한 흐름 표현을 허용한다.",
+        "자료 전달과 요청을 하나의 행동으로 표현할 수 있다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "주체와 수신자가 흐릿해지는 명사 나열을 피한다.",
+          "인수인계 설명은 기본 높임말 없이 쓴다."
+        ]
+      }
+    },
+    {
+      "id": "kh05_unfinished_reported_status",
+      "task_intent": "실제로 끝난 준비, 아직 하지 않은 일, 직원의 전언과 미승인 상태를 구분한다.",
+      "mandatory_meaning": [
+        "예약 신청서 작성은 완료했지만 제출은 하지 않았다.",
+        "시설 직원이 전화로 예약 가능하다고 말했다는 전언을 보존한다.",
+        "예약 승인은 받지 않았다.",
+        "다과 주문은 장소 확정 이후 진행할 예정이다."
+      ],
+      "prohibited_changes": [
+        "직원의 가능하다는 말을 예약 확정 또는 승인으로 바꾸지 않는다.",
+        "신청서를 제출했다고 쓰지 않는다.",
+        "다과 주문을 이미 끝낸 일로 바꾸거나 준비 지연의 원인을 만들어 내지 않는다."
+      ],
+      "acceptable_variants": [
+        "전언을 직접 인용하거나 발언 주체를 명시한 간접 인용으로 쓸 수 있다.",
+        "완료 항목과 대기 항목을 나누거나 같은 문단에서 명확하게 구분해도 된다.",
+        "자료에 없는 실제 예약 가능 여부를 별도로 단정할 필요는 없다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "완료 상태와 예정 상태를 구분한다.",
+          "전언을 발언 주체 없이 확정 사실로 쓰지 않는다.",
+          "동료 대상 준비 상황은 기본 높임말 없이 쓴다."
+        ]
+      }
+    },
+    {
+      "id": "kh06_capability_and_possibility",
+      "task_intent": "첨부 기능의 용량과 연결 중단 때 발생할 수 있는 상태 변화를 설명한다.",
+      "mandatory_meaning": [
+        "한 번에 첨부할 수 있는 최대 파일 수는 8개다.",
+        "전송 중 연결이 끊길 때 대기 상태로 바뀔 수 있다.",
+        "대기 상태 변화는 반드시 일어나는 결과가 아니다."
+      ],
+      "prohibited_changes": [
+        "첨부 용량을 발생 확률로 바꾸거나 최대치를 필수 첨부 수로 바꾸지 않는다.",
+        "연결이 끊기면 항상 대기 상태가 된다고 단정하지 않는다.",
+        "자동 재전송 기능과 재시도 시각을 만들어 내지 않는다."
+      ],
+      "acceptable_variants": [
+        "최대 8개 지원, 8개까지 첨부 가능 등 기능 능력을 유지하는 표현을 허용한다.",
+        "대기가 될 가능성이 있다는 표현도 허용한다.",
+        "자동 재전송 정보가 없다는 사실을 도움말에 따로 복사할 필요는 없다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "기능의 능력과 결과의 가능성을 각각 분명하게 표현한다.",
+          "도움말은 기본 높임말 없이 쓴다."
+        ]
+      }
+    },
+    {
+      "id": "kh07_permission_recommendation",
+      "task_intent": "선택 가능한 로비 이용과 의무가 아닌 휴대전화 설정 권고를 안내한다.",
+      "mandatory_meaning": [
+        "유효한 입장권이 있는 관객은 공연 전 로비를 이용할 수 있다.",
+        "로비 이용은 선택이며 강제하지 않는다.",
+        "관람 전 진동 모드 전환은 권고이며 의무로 바꾸지 않는다."
+      ],
+      "prohibited_changes": [
+        "입장권 조건을 없애거나 공연 후에도 이용할 수 있다고 확장하지 않는다.",
+        "관객에게 로비 이용을 의무로 부과하지 않는다.",
+        "진동 모드 전환을 필수 조건으로 쓰거나 기기를 꺼야 한다고 바꾸지 않는다."
+      ],
+      "acceptable_variants": [
+        "이용 가능, 원하면 이용 등 허용 표현을 허용한다.",
+        "권장한다 또는 권고 사항이라는 설명을 허용한다.",
+        "의무가 아님을 별도로 쓰지 않아도 권고 의미가 명확하면 허용한다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "허용과 권고를 같은 강제 지시로 합치지 않는다.",
+          "일반 이용 안내는 기본 높임말 없이 쓴다."
+        ]
+      }
+    },
+    {
+      "id": "kh08_asymmetric_weight_bounds",
+      "task_intent": "하한 포함과 상한 제외가 다른 무게 범위를 밝히고 세 꾸러미를 판정한다.",
+      "mandatory_meaning": [
+        "무게 범위는 0.8 kg를 포함하고 4.6 kg를 제외한다.",
+        "꾸러미 R은 0.8 kg이며 보관 가능하다.",
+        "꾸러미 S는 4.6 kg이며 보관할 수 없다.",
+        "꾸러미 U는 4.5 kg이며 보관 가능하다.",
+        "무게 단위가 kg임을 표 또는 설명에서 알 수 있다."
+      ],
+      "prohibited_changes": [
+        "하한을 초과로 바꾸거나 상한을 이하로 바꾸지 않는다.",
+        "소수점과 단위를 바꾸거나 값을 반올림하여 판정을 바꾸지 않는다.",
+        "무게 조건을 꾸러미 개수 또는 크기 조건으로 바꾸지 않는다."
+      ],
+      "acceptable_variants": [
+        "0.8 kg 이상 4.6 kg 미만 또는 0.8 ≤ 무게 < 4.6 kg 등을 허용한다.",
+        "단위를 표 머리글에 한 번 표시할 수 있다.",
+        "가능/불가, 적합/부적합 등 판정 뜻을 보존하는 표현을 허용한다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "하한과 상한의 포함 여부를 구분한다.",
+          "표 설명은 기본 높임말 없이 쓴다."
+        ]
+      }
+    },
+    {
+      "id": "kh09_single_cart_aliases",
+      "task_intent": "동일 이동 설비에 수행할 준비 작업과 이동을 올바른 순서로 안내한다.",
+      "mandatory_meaning": [
+        "별칭 세 개를 같은 이동 설비로 취급한다.",
+        "그 설비의 서랍을 닫는다.",
+        "그 설비의 바퀴 브레이크를 해제한다.",
+        "그 설비를 배식 구역으로 이동한다.",
+        "서랍 닫기, 브레이크 해제, 이동의 순서를 보존한다."
+      ],
+      "prohibited_changes": [
+        "별칭을 세 개의 다른 설비로 분리하지 않는다.",
+        "브레이크 해제를 브레이크 걸기로 바꾸지 않는다.",
+        "이동 목적지를 바꾸거나 추가 작업을 만들어 내지 않는다."
+      ],
+      "acceptable_variants": [
+        "배식 카트, 서빙 수레, 운반차, C-92 중 의미를 보존하는 명칭을 선택할 수 있다.",
+        "머리말에서 대상을 지정하고 동작 지시에서 반복 명칭을 생략해도 된다.",
+        "설명을 위해 별칭을 소개하는 것은 허용한다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "실행 지시에서는 같은 설비를 선택한 명칭으로 일관되게 지칭한다.",
+          "명칭 생략이 대상을 불명확하게 만들면 안 된다.",
+          "준비 안내는 기본 높임말 없이 쓴다."
+        ]
+      }
+    },
+    {
+      "id": "kh10_customer_quote_boundary",
+      "task_intent": "고객 원문을 보존하면서 예약 담당자의 확인과 안내 작업을 전달한다.",
+      "mandatory_meaning": [
+        "고객 원문 \"안녕하십니까. 좌석 변경이 가능한지 확인 부탁드립니다. 답변 기다리겠습니다.\"를 글자와 문장부호까지 그대로 인용한다.",
+        "좌석 변경이 아직 승인되지 않았음을 유지한다.",
+        "예약 담당자가 빈 좌석 유무를 확인한 뒤 고객에게 승인 여부를 알리는 순서를 전달한다."
+      ],
+      "prohibited_changes": [
+        "인용문의 높임말을 바꾸거나 원문을 요약하여 인용문으로 제시하지 않는다.",
+        "좌석 변경이 이미 승인됐다고 쓰지 않는다.",
+        "현재 좌석 번호, 변경될 좌석 번호 또는 빈 좌석이 있다는 결과를 만들어 내지 않는다."
+      ],
+      "acceptable_variants": [
+        "인용 부호 또는 인용 블록으로 원문을 구분할 수 있다.",
+        "좌석 번호가 제공되지 않았다는 사실을 내부 메모에 별도로 복사할 필요는 없다.",
+        "빈 좌석 확인과 승인 여부 안내를 의미가 같은 다른 표현으로 쓸 수 있다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "고객 인용문의 높임말을 그대로 보존한다.",
+          "새로 작성한 내부 전달 메모는 기본 높임말 없이 쓴다."
+        ]
+      }
+    },
+    {
+      "id": "kh11_requested_honorific_email",
+      "task_intent": "초청 연사가 사용할 행사 일정 안내 이메일 본문을 존댓말로 제공한다.",
+      "mandatory_meaning": [
+        "행사일이 2026년 11월 4일임을 전달한다.",
+        "행사 장소가 하늘홀임을 전달한다.",
+        "리허설은 09:20, 발표는 10:10에 시작한다.",
+        "요청한 높임말 이메일 문체를 사용한다."
+      ],
+      "prohibited_changes": [
+        "기본 높임말 생략을 이유로 요청한 이메일을 반말로 쓰지 않는다.",
+        "리허설과 발표의 시각을 뒤바꾸지 않는다.",
+        "연사나 발신자의 이름, 종료 시각, 행사 주제를 만들어 내지 않는다."
+      ],
+      "acceptable_variants": [
+        "제목과 인사말은 제공할 수 있지만 특정 문구를 강제하지 않는다.",
+        "시각은 오전 9시 20분, 오전 10시 10분처럼 같은 뜻의 표기를 허용한다.",
+        "수신인 이름 없이 연사라는 호칭을 사용해도 된다.",
+        "이름이 없다는 메타 설명을 본문에 복사할 필요는 없다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "사용자가 요청한 존댓말 장르를 기본 문체보다 우선한다.",
+          "직접 보낼 수 있는 일정 안내 이메일 본문을 제공한다."
+        ]
+      }
+    },
+    {
+      "id": "kh12_easy_definition",
+      "task_intent": "회의 용어인 정족수의 뜻을 설명한다.",
+      "mandatory_meaning": [
+        "정족수는 회의가 성립하는 데 필요한 최소 참석 인원이라고 설명한다."
+      ],
+      "prohibited_changes": [
+        "정족수를 안건 통과에 필요한 찬성표 수라고 정의하지 않는다.",
+        "모든 회의에서 참석 인원의 과반수라는 새 기준을 만들어 내지 않는다.",
+        "자료에 정의가 있는데도 추가 확인을 요구하며 답변을 보류하지 않는다."
+      ],
+      "acceptable_variants": [
+        "회의를 열어 유효하게 진행하기 위해 필요한 최소 사람 수 등 뜻이 같은 표현을 허용한다.",
+        "해당 단체의 14명 예시는 넣거나 생략할 수 있다.",
+        "찬성표 기준과 다르다는 설명은 넣거나 생략할 수 있다.",
+        "정의 한 문장으로 답할 수 있으며 문장 수 자체를 점수 기준으로 삼지 않는다."
+      ],
+      "expected_style": {
+        "applies_to": "improved",
+        "criteria": [
+          "쉬운 정의 질문에 인사, 응답 예고, 불필요한 주변 설명을 붙이지 않는다.",
+          "답변은 기본 높임말 없이 쓴다."
+        ]
+      }
+    }
+  ]
+}

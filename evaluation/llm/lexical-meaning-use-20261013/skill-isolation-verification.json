@@ -1,0 +1,39 @@
+{
+  "cli_version": "codex-cli 0.162.1",
+  "auth_contents_read": false,
+  "home_overridden": false,
+  "raw_probe_path": "/tmp/kproto-skill-isolation.json",
+  "raw_probe_sha256": "97088dde6faec03950b2c1742e7470d43c9a03a3893feb8155cc82d98c0d4b7a",
+  "references": [
+    "https://learn.chatgpt.com/docs/build-skills",
+    "https://learn.chatgpt.com/docs/app-server#skills"
+  ],
+  "probes": {
+    "before": {
+      "discovered": 57,
+      "enabled": 57,
+      "errors": [],
+      "stderr_empty": true
+    },
+    "after": {
+      "discovered": 57,
+      "enabled": 57,
+      "errors": [],
+      "stderr_empty": true
+    },
+    "disabled": {
+      "discovered": 57,
+      "enabled": 0,
+      "errors": [],
+      "stderr_empty": true
+    },
+    "runner_verified": {
+      "discovered": 57,
+      "enabled": 0,
+      "errors": [],
+      "stderr_empty": true
+    }
+  },
+  "runner_sha256": "df45c7751f316f85795144e80e60fbde98e5ab2df13b6d2697802f0241927a3e",
+  "registry_sha256": "29b4d2ffa3e7ccafcbddf5dbca8734834c7d6fc59d6a0ad1933825ab1cba7055"
+}

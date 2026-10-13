@@ -70,6 +70,165 @@ class SchedulerTests(unittest.TestCase):
             self.fail('Unexpected launchctl operation: '+str(args))
         return subprocess.CompletedProcess(args, code, output, '')
 
+    def application_fixture(self):
+        bundle=self.root/'bundle'
+        for name in self.k.CONTENT_PATHS:
+            path=bundle/name
+            path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_text(json.dumps({'schema_version':'1.0','version':'0.1.0','rules' if name.startswith('specification/') else 'entries':[{'id':'fixture'}]}) if name.endswith('.json') else 'Content\n')
+        self.k.atomic_write(self.ctrl.state_path,self.k.json_bytes({}))
+        self.ctrl.install_snapshot(bundle,self.target,'0.1.0')
+        state=self.ctrl._state()
+        state['trust']='signed'
+        self.k.atomic_write(self.ctrl.state_path,self.k.json_bytes(state))
+        # Signature validation has separate real-key coverage; this fixture models
+        # scheduler ownership and transaction order without invoking global jobs.
+        raw,files,seq,sig=self.ctrl._load_cache(state['cache_id'],'0.1.0','local-snapshot')
+        metadata=self.ctrl.root/'releases'/state['cache_id']/'metadata.json'
+        value=json.loads(metadata.read_bytes())
+        value['trust']='signed'
+        self.k.atomic_write(metadata,self.k.json_bytes(value))
+        return mock.patch.object(self.ctrl,'_load_cache',return_value=(raw,files,seq,sig))
+
+    def test_application_settings_migrate_owned_older_scheduler_first(self):
+        cache_patch=self.application_fixture()
+        self.ctrl.register_scheduler()
+        newer=self.ctrl.root/'agent-tool-new/runtime/kproto.py'
+        newer.parent.mkdir(parents=True)
+        shutil.copy2(self.runtime,newer)
+        before_config=self.ctrl._config()
+        with cache_patch,mock.patch.object(self.k,'__file__',str(newer)):
+            self.ctrl.configure_application(enabled=False)
+        self.assertEqual(str(newer),self.loaded[1]['ProgramArguments'][1])
+        self.assertEqual(str(newer),plistlib.loads(Path(before_config['scheduler']['path']).read_bytes())['ProgramArguments'][1])
+        self.assertFalse(self.ctrl.status()['enabled'])
+        self.assertEqual('scheduled',self.ctrl._config()['mode'])
+        self.assertEqual(before_config['source'],self.ctrl._config()['source'])
+
+    def test_scheduler_migration_failure_keeps_application_settings_unchanged(self):
+        cache_patch=self.application_fixture()
+        self.ctrl.register_scheduler()
+        newer=self.ctrl.root/'agent-tool-new/runtime/kproto.py'
+        newer.parent.mkdir(parents=True)
+        shutil.copy2(self.runtime,newer)
+        before=self.target.read_bytes()
+        state_before=self.ctrl.state_path.read_bytes()
+        self.bootout_failure=True
+        with cache_patch,mock.patch.object(self.k,'__file__',str(newer)):
+            with self.assertRaises(self.k.WriteError):
+                self.ctrl.configure_application(enabled=False)
+        self.assertEqual(before,self.target.read_bytes())
+        self.assertEqual(state_before,self.ctrl.state_path.read_bytes())
+        self.assertEqual(str(self.runtime),self.loaded[1]['ProgramArguments'][1])
+
+    def test_generated_only_scheduler_migration_does_not_register_job(self):
+        cache_patch=self.application_fixture()
+        newer=self.ctrl.root/'agent-tool-new/runtime/kproto.py'
+        newer.parent.mkdir(parents=True)
+        shutil.copy2(self.runtime,newer)
+        output=Path(self.ctrl._config()['scheduler']['path'])
+        with cache_patch,mock.patch.object(self.k,'__file__',str(newer)):
+            self.ctrl.configure_application(enabled=False)
+        self.assertEqual(str(newer),plistlib.loads(output.read_bytes())['ProgramArguments'][1])
+        self.assertIsNone(self.loaded)
+        self.assertFalse(any(call[0]=='bootstrap' for call in self.calls))
+
+    def test_failed_migration_bootstrap_removes_old_job_and_keeps_settings(self):
+        cache_patch=self.application_fixture()
+        self.ctrl.register_scheduler()
+        newer=self.ctrl.root/'agent-tool-new/runtime/kproto.py'
+        newer.parent.mkdir(parents=True)
+        shutil.copy2(self.runtime,newer)
+        before=self.target.read_bytes()
+        self.bootstrap_failure=True
+        with cache_patch,mock.patch.object(self.k,'__file__',str(newer)):
+            with self.assertRaises(self.k.WriteError):
+                self.ctrl.configure_application(enabled=False)
+        self.assertEqual(before,self.target.read_bytes())
+        self.assertTrue(self.ctrl.status()['enabled'])
+        self.assertIsNone(self.loaded)
+        self.assertFalse(self.path.exists())
+
+    def check_migration_config_failure(self,registered):
+        cache_patch=self.application_fixture()
+        if registered:
+            self.ctrl.register_scheduler()
+        newer=self.ctrl.root/'agent-tool-new/runtime/kproto.py'
+        newer.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copy2(self.runtime,newer)
+        output=Path(self.ctrl._config()['scheduler']['path'])
+        output_before=output.read_bytes()
+        config_before=self.ctrl.config_path.read_bytes()
+        host_before=self.target.read_bytes()
+        write=self.k.atomic_write
+        def interrupted(path,data,**kwargs):
+            if Path(path)==self.ctrl.config_path and output.read_bytes()!=output_before:
+                raise OSError('injected migration config failure')
+            return write(path,data,**kwargs)
+        with cache_patch,mock.patch.object(self.k,'__file__',str(newer)):
+            with mock.patch.object(self.k,'atomic_write',side_effect=interrupted):
+                with self.assertRaises((OSError,self.k.WriteError)):
+                    self.ctrl.configure_application(enabled=False)
+            self.assertEqual(output_before,output.read_bytes())
+            self.assertEqual(config_before,self.ctrl.config_path.read_bytes())
+            self.assertEqual(host_before,self.target.read_bytes())
+            self.ctrl.configure_application(enabled=False)
+            self.assertEqual(str(newer),plistlib.loads(output.read_bytes())['ProgramArguments'][1])
+            if registered:
+                self.assertEqual(str(newer),self.loaded[1]['ProgramArguments'][1])
+            self.ctrl.configure_application(enabled=True)
+
+    def test_generated_migration_config_failure_restores_output_for_retry(self):
+        self.check_migration_config_failure(False)
+
+    def test_registered_migration_config_failure_restores_output_for_retry(self):
+        self.check_migration_config_failure(True)
+
+    def test_interrupted_plist_config_migration_recovers_after_restart(self):
+        cache_patch=self.application_fixture()
+        self.ctrl.register_scheduler()
+        newer=self.ctrl.root/'agent-tool-new/runtime/kproto.py'
+        newer.parent.mkdir(parents=True)
+        shutil.copy2(self.runtime,newer)
+        before=self.target.read_bytes()
+        write=self.k.atomic_write
+        def interrupted(path,data,**kwargs):
+            if Path(path)==self.ctrl.config_path:
+                raise KeyboardInterrupt()
+            return write(path,data,**kwargs)
+        with cache_patch as loader,mock.patch.object(self.k,'__file__',str(newer)):
+            with mock.patch.object(self.k,'atomic_write',side_effect=interrupted):
+                with self.assertRaises(KeyboardInterrupt):
+                    self.ctrl.configure_application(enabled=False)
+            self.assertTrue(self.ctrl.status()['recovery_required'])
+            self.assertEqual(before,self.target.read_bytes())
+            restarted=self.k.Controller(self.ctrl.root)
+            with mock.patch.object(restarted,'_load_cache',return_value=loader.return_value):
+                restarted.configure_application(enabled=False)
+            self.assertFalse(restarted.status()['recovery_required'])
+            self.assertFalse(restarted.status()['enabled'])
+            self.assertEqual(str(newer),self.loaded[1]['ProgramArguments'][1])
+
+    def test_interrupted_post_commit_registration_resumes_after_restart(self):
+        cache_patch=self.application_fixture()
+        self.ctrl.register_scheduler()
+        newer=self.ctrl.root/'agent-tool-new/runtime/kproto.py'
+        newer.parent.mkdir(parents=True)
+        shutil.copy2(self.runtime,newer)
+        before=self.target.read_bytes()
+        with cache_patch as loader,mock.patch.object(self.k,'__file__',str(newer)):
+            with mock.patch.object(self.ctrl,'_register_scheduler',side_effect=KeyboardInterrupt()):
+                with self.assertRaises(KeyboardInterrupt):
+                    self.ctrl.configure_application(enabled=False)
+            self.assertEqual(before,self.target.read_bytes())
+            self.assertTrue(self.ctrl._config()['scheduler']['runtime_migration_registration_required'])
+            restarted=self.k.Controller(self.ctrl.root)
+            with mock.patch.object(restarted,'_load_cache',return_value=loader.return_value):
+                restarted.configure_application(enabled=False)
+            self.assertFalse(restarted.status()['enabled'])
+            self.assertEqual(str(newer),self.loaded[1]['ProgramArguments'][1])
+            self.assertNotIn('runtime_migration_registration_required',restarted._config()['scheduler'])
+
     def test_register_persists_owned_job_and_verifies_actual_state(self):
         status = self.ctrl.register_scheduler()
         self.assertTrue(status['registered'])

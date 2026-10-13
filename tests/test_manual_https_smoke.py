@@ -30,6 +30,17 @@ class SignedStaticSmokeTests(unittest.TestCase):
         manifest = k.make_manifest(repo, '0.2.0', 1, self.fingerprint)
         self.payload = {'releases/0.2.0/' + name: (repo / name).read_bytes()
                         for name in k.CONTENT_PATHS}
+        # Preserve the fictional 0.2.0 publisher bytes apart from top-level metadata.
+        for item in manifest['files']:
+            name = 'releases/0.2.0/' + item['path']
+            if name.endswith('.json'):
+                raw = self.payload[name]
+                current = k.strict_json(raw)['version']
+                self.payload[name] = raw.replace(
+                    ('"version": "' + current + '"').encode(),
+                    b'"version": "0.2.0-draft"', 1)
+                item['size'] = len(self.payload[name])
+                item['sha256'] = k.digest(self.payload[name])
         self.payload['stable/release.json'] = k.json_bytes(manifest)
         signed = subprocess.run(['ssh-keygen', '-Y', 'sign', '-f', str(key), '-n', 'kproto-release-v1'],
                                 input=self.payload['stable/release.json'], check=True, capture_output=True)

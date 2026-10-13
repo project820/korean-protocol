@@ -1,0 +1,351 @@
+--- before/specification/rules.json
++++ after/specification/rules.json
+@@ -1,6 +1,6 @@
+ {
+   "schema_version": "1.0",
+-  "version": "0.2.0-draft",
++  "version": "0.3.0-draft",
+   "rules": [
+     {
+       "id": "KP-EDIT-001",
+--- before/lexicon/core.json
++++ after/lexicon/core.json
+@@ -1,6 +1,6 @@
+ {
+   "schema_version": "1.0",
+-  "version": "0.2.0-draft",
++  "version": "0.3.0-draft",
+   "entries": [
+     {
+       "id": "KPL-0001",
+--- before/lexicon/domains/software.json
++++ after/lexicon/domains/software.json
+@@ -1,6 +1,6 @@
+ {
+   "schema_version": "1.0",
+-  "version": "0.2.0-draft",
++  "version": "0.3.0-draft",
+   "entries": [
+     {
+       "id": "KPL-SW-0001",
+--- before/evaluation/functional-review.json
++++ after/evaluation/functional-review.json
+@@ -9,7 +9,7 @@
+     "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+     "rule_count": 53
+   },
+-  "reviewed_rules_sha256": "d58196b167a048b339d687d5d81954c9d482083494c5b19a03202c59def09408",
++  "reviewed_rules_sha256": "e1e921b1d3cfc7e5039a0d6ba8447e05a21bf47331cadcd393c982a4c2272f03",
+   "reviewed_cases_sha256": "a26e63ec0f232b970594b28ee6e07ccd0614b8f75e7f2141ae3883349d8b7699",
+   "independent_cases_path": "evaluation/functional-cases.json",
+   "independent_cases_sha256": "4385ce57e3c5635e026cb89a2cd87100587dc9e1ef9a20f8407688783c07d6a0",
+--- before/distribution/build.py
++++ after/distribution/build.py
+@@ -7,7 +7,7 @@
+ import zipfile
+ 
+ 
+-PREFIX = 'korean-protocol-0.2.0-draft'
++PREFIX = 'korean-protocol-0.3.0-draft'
+ INPUTS = (
+     'LICENSE', 'NOTICE.md',
+     'runtime/__init__.py', 'runtime/kproto.py',
+@@ -50,7 +50,7 @@
+             raise FileNotFoundError('Missing distribution input: '+name)
+         destination = ALIASES.get(name,name)
+         files[destination] = path.read_bytes()
+-    chat = ['# Korean Protocol — 규칙과 사전\n\n이 파일은 0.2 연구·개발 초안의 전체 규약 본문과 사전 원본을 함께 제공한다. '
++    chat = ['# Korean Protocol — 규칙과 사전\n\n이 파일은 0.3.0-draft 연구·개발 초안의 전체 규약 본문과 사전 원본을 함께 제공한다. '
+             '첨부만으로 모델의 준수나 전체 사전 읽기를 보장하지 않는다.\n']
+     for name in ('pack/protocol.md','lexicon/core.json','lexicon/domains/software.json'):
+         chat.append('\n## 원본: '+name+'\n\nSHA-256: '+hashlib.sha256(files[name]).hexdigest()+'\n\n')
+--- before/distribution/launcher.py
++++ after/distribution/launcher.py
+@@ -6,7 +6,7 @@
+ import types
+ 
+ 
+-PREVIEW_VERSION = '0.2.0'
++PREVIEW_VERSION = '0.3.0'
+ HOST_NAMES = {'codex': 'Codex', 'claude-code': 'Claude Code'}
+ 
+ 
+--- before/distribution/agent_install.py
++++ after/distribution/agent_install.py
+@@ -39,7 +39,7 @@
+ from contextlib import contextmanager
+ import types
+ 
+-VERSION = '0.2.0'
++VERSION = '0.3.0'
+ TOOL_NAME = 'agent-tool'
+ TOOL_FILES = ('agent-install.py', 'runtime/kproto.py')
+ LIMIT = 4 * 1024 * 1024
+--- before/distribution/START-HERE.md
++++ after/distribution/START-HERE.md
+@@ -1,8 +1,8 @@
+ # Korean Protocol 오프라인 설치 초안
+ 
+-이 패키지는 0.2 연구·개발 초안이다. 한국어 규칙 72개, 사전 뜻 193개와 규칙·어휘 작성 사례를 포함한다. 규약은 LLM의 표현을 안내하며 모든 출력의 의미 보존이나 독자 이해도를 보장하지 않는다. ASD-STE100의 공식 한국어판이 아니다.
++이 패키지는 0.3.0-draft 연구·개발 초안이다. 한국어 규칙 72개, 사전 뜻 193개와 규칙·어휘 작성 사례를 포함한다. 규약은 LLM의 표현을 안내하며 모든 출력의 의미 보존이나 독자 이해도를 보장하지 않는다. ASD-STE100의 공식 한국어판이 아니다.
+ 
+-이 패키지는 서명하지 않은 로컬 설치용 미리보기다. `SHA256SUMS`는 파일 손상 확인용이며 발행자 인증이 아니다. 공개키와 지문은 `distribution/trust/`에 포함하지만 갱신 서버는 아직 게시하지 않아 이 미리보기로 원격 자동 갱신을 켤 수 없다. 서명된 배포물의 신뢰 기준과 실제 주소를 확인한 뒤 자동 갱신을 연결한다.
++이 패키지는 서명하지 않은 로컬 설치용 미리보기다. `SHA256SUMS`는 파일 손상 확인용이며 발행자 인증이 아니다. 공개키와 지문은 `distribution/trust/`에 포함한다. 공개 HTTPS 배포에는 기존 0.2.0 서명본이 있으며 이 0.3.0-draft 후보는 게시하지 않았다. 이 미서명 미리보기로 원격 자동 갱신을 켤 수 없다. 서명된 배포물의 신뢰 기준과 실제 주소를 확인한 뒤 자동 갱신을 연결한다.
+ 
+ ## 에이전트에게 설치를 맡긴다
+ 
+@@ -27,7 +27,7 @@
+ ZIP을 사용자가 관리할 고정 경로에 풀고 아래 두 변수를 실제 경로로 바꾼다. 압축을 푼 폴더의 `runtime/kproto.py`를 읽고 실행할 코드를 확인한다. 예시의 상태 경로는 호스트 대상 하나만 관리하며 다른 대상 설치에는 별도 상태 경로를 사용한다.
+ 
+ ```sh
+-KPROTO_DIR="/실제/경로/korean-protocol-0.2.0-draft"
++KPROTO_DIR="/실제/경로/korean-protocol-0.3.0-draft"
+ KPROTO_STATE="/실제/설치/상태/경로"
+ ```
+ 
+@@ -38,7 +38,7 @@
+ 아래 상세 명령은 Codex 사용자 지침에 규약을 추가한다. 기본 `CODEX_HOME`은 기존 환경 설정을 따르며, 프로젝트 설치를 원하면 아래의 별도 명령을 사용한다. 기존 사용자 지침의 관리 블록 밖 내용을 보존하며 충돌이 있으면 설치를 거부한다.
+ 
+ ```sh
+-python3 "$KPROTO_DIR/runtime/kproto.py" --state-dir "$KPROTO_STATE" install --bundle "$KPROTO_DIR" --host codex --scope user --local-snapshot --version 0.2.0 --autoupdate off
++python3 "$KPROTO_DIR/runtime/kproto.py" --state-dir "$KPROTO_STATE" install --bundle "$KPROTO_DIR" --host codex --scope user --local-snapshot --version 0.3.0 --autoupdate off
+ python3 "$KPROTO_DIR/runtime/kproto.py" --state-dir "$KPROTO_STATE" status --json
+ ```
+ 
+@@ -47,7 +47,7 @@
+ 프로젝트 하나에 설치하려면 별도 상태 경로와 프로젝트 절대 경로를 지정한다. 사용자 설치 예시와 같은 상태 경로를 공유하지 않는다.
+ 
+ ```sh
+-python3 "$KPROTO_DIR/runtime/kproto.py" --state-dir "/별도/상태/경로" install --bundle "$KPROTO_DIR" --host codex --scope project --project-root "/실제/프로젝트/경로" --local-snapshot --version 0.2.0 --autoupdate off
++python3 "$KPROTO_DIR/runtime/kproto.py" --state-dir "/별도/상태/경로" install --bundle "$KPROTO_DIR" --host codex --scope project --project-root "/실제/프로젝트/경로" --local-snapshot --version 0.3.0 --autoupdate off
+ ```
+ 
+ 설치한 규약과 사전은 로컬에 복사돼 서버나 정기 갱신 없이 유지된다. 호스트가 내용을 읽는 방식과 새 세션 시작 조건은 호스트에 따라 다르다. 향후 상태 확인·제거에 사용할 런타임 폴더와 Python은 고정 경로에 보관한다. 런타임 코드는 콘텐츠 자동 갱신으로 교체하지 않는다.
+@@ -68,4 +68,4 @@
+ - [전체 규약 본문](pack/protocol.md)과 `lexicon/`은 설치할 콘텐츠다.
+ - `examples/`는 작성자가 만든 판정 사례이며 독립적인 효능 시험이 아니다.
+ 
+-기능 대응 검토의 49/53개는 전체 완성도·사전 충족률·LLM 정답률을 뜻하지 않는다. 독자 실험과 한국어학·군사 전문가의 실제 자문은 수행하지 않았다. 연구·평가 실행 기록과 개발용 검사기는 이 설치 패키지에 포함하지 않았다. 전체 근거는 [프로젝트 저장소](https://github.com/project820/korean-protocol)에서 관리하며 현재 저장소 접근 권한이 필요하다.
++기능 대응 검토의 49/53개는 전체 완성도·사전 충족률·LLM 정답률을 뜻하지 않는다. 독자 실험과 한국어학·군사 전문가의 실제 자문은 수행하지 않았다. 연구·평가 실행 기록과 개발용 검사기는 이 설치 패키지에 포함하지 않았다. 전체 근거는 [공개 프로젝트 저장소](https://github.com/project820/korean-protocol)에서 관리한다.
+--- before/README.md
++++ after/README.md
+@@ -4,7 +4,9 @@
+ 
+ Korean Protocol은 LLM이 한국어로 사실·조건·행동·불확실성을 분명하게 전달하도록 만드는 표현 규약입니다. 한국어의 어휘 의미와 결합, 문장 구조, 지시·보고·경고의 작성 기준을 함께 정의합니다.
+ 
+-프로젝트명은 **Korean Protocol**, 저장소명은 **`korean-protocol`**입니다. 현재 버전은 전체 규칙·통제 어휘·판정 사례·지속 설치 도구를 갖춘 **0.2 연구·개발 초안**입니다. [전체 목차](docs/spec/toc.md)와 [체계 구조](docs/spec/architecture.md)에서 설계를 확인할 수 있습니다.
++프로젝트명은 **Korean Protocol**, 저장소명은 **`korean-protocol`**입니다. 현재 버전은 전체 규칙·통제 어휘·판정 사례·지속 설치 도구를 갖춘 **0.3.0-draft 연구·개발 초안**입니다. [전체 목차](docs/spec/toc.md)와 [체계 구조](docs/spec/architecture.md)에서 설계를 확인할 수 있습니다.
++
++현재 0.3.0-draft는 표현 규칙 보완과 규약·높임말 적용 설정을 포함한 미공개 로컬 후보입니다. 다음 공개 발행 후보는 0.3.0·순번 2이며, 기존 공개 서명본은 0.2.0·순번 1입니다.
+ 
+ 사용하려면 [에이전트 설치 안내](INSTALL.md)를 읽으세요. Codex·Claude Code는 [공개 HTTPS 배포](https://project820.github.io/korean-protocol)에서 서명된 규약을 설치합니다. macOS는 예약 자동 갱신을 등록하고, Linux는 시작 wrapper를 연결하거나 자동 갱신을 끕니다. 일반 채팅용 파일은 [빠른 시작](docs/distribution/quick-start.md)에서 안내합니다.
+ 
+@@ -72,7 +74,7 @@
+ 
+ ASD-STE100 Issue 9의 작성 기능 53개 중 49개가 기능 대응 검토를 통과했습니다(92.45%). 나머지 4개는 부분 대응입니다. 이 비율은 규약 전체의 완성도나 사전 충족률, LLM 정답률을 뜻하지 않습니다.
+ 
+-한국어 규칙 72개와 사전 뜻 항목 193개를 작성했습니다. 작성 사례는 규칙 291개·어휘 454개이며, 별도 기능 검토에는 독립 사례 83개와 공통 회귀 1개를 사용했습니다. 배포 런타임을 포함한 통합 자동 테스트 355개가 통과했습니다.
++한국어 규칙 72개와 사전 뜻 항목 193개를 작성했습니다. 작성 사례는 규칙 291개·어휘 454개이며, 별도 기능 검토에는 독립 사례 83개와 공통 회귀 1개를 사용했습니다. 배포 런타임을 포함한 통합 자동 테스트 361개가 통과했습니다.
+ 
+ [별도로 고정한 어휘 문맥 40개](evaluation/lexicon-independent/report.md)에서는 사전의 표적 뜻과 직접 연결한 항목이 19개(47.5%)였습니다. 미연결 19개와 미확정 2개를 분모에 남겼습니다. 이는 해당 합성 표본의 사전 수록 범위이며, 규약의 문장 허용률이나 실제 업무 전체의 어휘 충족률은 아닙니다. 식별자·단위의 미등재와 일반 용어의 뜻 정의 공백을 구분합니다.
+ 
+--- before/INSTALL.md
++++ after/INSTALL.md
+@@ -25,7 +25,7 @@
+ 
+ ## 공개 배포에서 서명 설치한다
+ 
+-공개 배포 주소는 `https://project820.github.io/korean-protocol`이다. Codex 예시이며, Claude Code에서는 모든 명령의 `--host codex`를 `--host claude-code`로 바꾼다. 각 명령은 JSON을 출력한다. 명령이 실패하면 원인과 종료 코드를 보고하고 성공으로 표시하지 않는다.
++공개 배포 주소는 `https://project820.github.io/korean-protocol`이다. 기존 공개 서명본은 0.2.0·순번 1이며 현재 로컬 0.3.0-draft 후보는 아직 게시하지 않았다. Codex 예시이며, Claude Code에서는 모든 명령의 `--host codex`를 `--host claude-code`로 바꾼다. 각 명령은 JSON을 출력한다. 명령이 실패하면 원인과 종료 코드를 보고하고 성공으로 표시하지 않는다.
+ 
+ macOS에서는 예약 자동 갱신을 명시적으로 등록한다.
+ 
+@@ -48,7 +48,7 @@
+ 
+ ## 오프라인 미서명 설치를 명시적으로 선택한다
+ 
+-네트워크를 사용할 수 없거나 사용자가 미서명 로컬 설치를 요청하면 서명 옵션 없이 실행한다. 이 경로는 저장소 또는 ZIP의 파일을 그대로 설치하며 자동 갱신은 꺼져 있다.
++네트워크를 사용할 수 없거나 사용자가 미서명 로컬 설치를 요청하면 서명 옵션 없이 실행한다. 이 경로는 저장소 또는 ZIP의 파일을 그대로 설치하며 자동 갱신은 꺼져 있다. 현재 로컬 후보는 설치 상태에 0.3.0으로 기록하며, 서명된 공개 발행을 뜻하지 않는다.
+ 
+ ```sh
+ python3 -B distribution/agent_install.py plan --host codex
+--- before/docs/distribution/README.md
++++ after/docs/distribution/README.md
+@@ -55,7 +55,7 @@
+ 
+ 발행 공개키는 사용자가 별도로 확인한 채널, 검토한 저장소 commit 또는 조직 관리 정책으로 전달한다. v1에서는 공개키를 remote 콘텐츠로 자동 교체하지 않는다. 키 교체·폐기는 별도 검토와 로컬 trust 설정 교체가 필요하다. 이 제한 때문에 키가 바뀌면 자동 업데이트가 멈출 수 있으며 기존 규약은 계속 작동한다. 재시도만으로 키 변경을 승인하지 않는다.
+ 
+-서명이 없는 개인 checkout은 `install --bundle LOCAL_DIR --local-snapshot --version 0.2.0`으로 설치한다. 이 입력은 release manifest 없이 고정 일곱 콘텐츠 파일을 검증하고 자체 hash metadata를 생성한다. 이 옵션은 로컬 파일을 사용자가 선택했다는 뜻이며 발행자 인증을 뜻하지 않는다. 상태에 `trust=local-snapshot`을 기록하고 원격 자동 업데이트를 거부한다. 서명 없는 원격 다운로드를 checksum만 확인하여 자동 적용하는 모드는 제공하지 않는다.
++서명이 없는 개인 checkout은 `install --bundle LOCAL_DIR --local-snapshot --version 0.3.0`으로 설치한다. 이 입력은 release manifest 없이 고정 일곱 콘텐츠 파일을 검증하고 자체 hash metadata를 생성한다. 이 옵션은 로컬 파일을 사용자가 선택했다는 뜻이며 발행자 인증을 뜻하지 않는다. 상태에 `trust=local-snapshot`을 기록하고 원격 자동 업데이트를 거부한다. 서명 없는 원격 다운로드를 checksum만 확인하여 자동 적용하는 모드는 제공하지 않는다.
+ 
+ ## manifest와 서명
+ 
+--- before/tests/test_distribution.py
++++ after/tests/test_distribution.py
+@@ -1,4 +1,5 @@
+ import hashlib
++import json
+ from pathlib import Path
+ import posixpath
+ import re
+@@ -7,7 +8,9 @@
+ from urllib.parse import urlsplit
+ import zipfile
+ 
+-from distribution.build import INPUTS, build
++from distribution.build import INPUTS, PREFIX, build
++from distribution.agent_install import VERSION
++from distribution.launcher import PREVIEW_VERSION
+ 
+ 
+ class DistributionTests(unittest.TestCase):
+@@ -80,6 +83,20 @@
+             self.assertIn('(docs/distribution/application-controls.md)',archive.read(prefix+'INSTALL.md').decode())
+             self.assertIn('(control-expression.md)',archive.read(prefix+'docs/spec/korean-rules.md').decode())
+ 
++    def test_repository_package_and_offline_defaults_match_source_version(self):
++        repo = Path(__file__).resolve().parents[1]
++        versions = {json.loads((repo/name).read_text())['version'] for name in
++                    ('specification/rules.json', 'lexicon/core.json',
++                     'lexicon/domains/software.json')}
++        self.assertEqual(1, len(versions))
++        version = versions.pop()
++        self.assertEqual('korean-protocol-' + version, PREFIX)
++        self.assertEqual(version.removesuffix('-draft'), VERSION)
++        self.assertEqual(VERSION, PREVIEW_VERSION)
++        guide = (repo/'distribution/START-HERE.md').read_text()
++        self.assertIn(PREFIX, guide)
++        self.assertIn('--version ' + VERSION, guide)
++
+     def test_chat_attachment_preserves_full_rules_and_dictionaries(self):
+         build(self.root,self.output)
+         with zipfile.ZipFile(self.output) as archive:
+--- before/tests/test_launcher.py
++++ after/tests/test_launcher.py
+@@ -75,7 +75,7 @@
+         self.assertEqual('user', command[command.index('--scope') + 1])
+         self.assertEqual('codex', command[command.index('--host') + 1])
+         self.assertEqual('off', command[command.index('--autoupdate') + 1])
+-        self.assertEqual('0.2.0', command[command.index('--version') + 1])
++        self.assertEqual('0.3.0', command[command.index('--version') + 1])
+         self.assertEqual(str(self.bundle), command[command.index('--bundle') + 1])
+         self.assertFalse(child.call_args.kwargs.get('shell', False))
+ 
+@@ -195,7 +195,7 @@
+         command=child.call_args.args[0]
+         self.assertEqual('claude-code',command[command.index('--host')+1])
+         self.assertEqual(str(home),command[command.index('--claude-home')+1])
+-        self.assertEqual('0.2.0',command[command.index('--version')+1])
++        self.assertEqual('0.3.0',command[command.index('--version')+1])
+         self.assertTrue(command[command.index('--state-dir')+1].endswith('korean-protocol-claude-code'))
+         self.assertNotIn('--codex-home',command)
+         self.assertFalse(home.exists())
+--- before/tests/test_agent_install.py
++++ after/tests/test_agent_install.py
+@@ -180,7 +180,7 @@
+                 self.assertTrue(value['changed'])
+                 self.assertEqual('off', value['autoupdate'])
+                 self.assertEqual('local-snapshot', value['trust'])
+-                self.assertEqual('0.2.0', value['version'])
++                self.assertEqual('0.3.0', value['version'])
+                 installed = target.read_bytes()
+                 self.assertTrue(installed.startswith(original))
+                 code, value = self.run_cli('install', host)
+--- before/tests/test_release.py
++++ after/tests/test_release.py
+@@ -32,6 +32,22 @@
+             destination = self.source / name
+             destination.parent.mkdir(parents=True, exist_ok=True)
+             destination.write_bytes((repo / name).read_bytes())
++        # Keep fictional first-release history independent of the current draft.
++        # Only top-level metadata changes; all rule/lexicon entries stay intact.
++        for name in ('specification/rules.json', 'lexicon/core.json',
++                     'lexicon/domains/software.json'):
++            path = self.source / name
++            value = json.loads(path.read_text())
++            current = value['version']
++            path.write_bytes(path.read_bytes().replace(
++                ('"version": "' + current + '"').encode(),
++                b'"version": "0.2.0-draft"', 1))
++        # Repair only the copied fixture proof for that metadata-only adjustment.
++        proof_path = self.source / 'evaluation/functional-review.json'
++        proof = json.loads(proof_path.read_text())
++        proof['reviewed_rules_sha256'] = k.digest(
++            (self.source / 'specification/rules.json').read_bytes())
++        proof_path.write_text(json.dumps(proof, ensure_ascii=False, indent=2) + '\n')
+         self.key = self.root / 'signer'
+         result = subprocess.run(['ssh-keygen', '-q', '-t', 'ed25519', '-N', '', '-f', str(self.key)], capture_output=True)
+         self.assertEqual(0, result.returncode, result.stderr)
+--- before/tests/test_actions_release.py
++++ after/tests/test_actions_release.py
+@@ -226,6 +226,18 @@
+             destination = source / name
+             destination.parent.mkdir(parents=True, exist_ok=True)
+             destination.write_bytes((repo / name).read_bytes())
++        # Keep this fictional first release independent of current draft metadata.
++        for name in ('specification/rules.json', 'lexicon/core.json',
++                     'lexicon/domains/software.json'):
++            path = source / name
++            current = k.strict_json(path.read_bytes())['version']
++            path.write_bytes(path.read_bytes().replace(
++                ('"version": "' + current + '"').encode(),
++                b'"version": "0.2.0-draft"', 1))
++        proof_path = source / 'evaluation/functional-review.json'
++        proof = k.strict_json(proof_path.read_bytes())
++        proof['reviewed_rules_sha256'] = k.digest((source/'specification/rules.json').read_bytes())
++        proof_path.write_bytes(k.json_bytes(proof))
+         trust = source / 'distribution/trust'
+         trust.mkdir(parents=True)
+         (trust / 'publisher.pub').write_bytes(self.public.read_bytes())
+--- before/tests/test_manual_https_smoke.py
++++ after/tests/test_manual_https_smoke.py
+@@ -30,6 +30,17 @@
+         manifest = k.make_manifest(repo, '0.2.0', 1, self.fingerprint)
+         self.payload = {'releases/0.2.0/' + name: (repo / name).read_bytes()
+                         for name in k.CONTENT_PATHS}
++        # Preserve the fictional 0.2.0 publisher bytes apart from top-level metadata.
++        for item in manifest['files']:
++            name = 'releases/0.2.0/' + item['path']
++            if name.endswith('.json'):
++                raw = self.payload[name]
++                current = k.strict_json(raw)['version']
++                self.payload[name] = raw.replace(
++                    ('"version": "' + current + '"').encode(),
++                    b'"version": "0.2.0-draft"', 1)
++                item['size'] = len(self.payload[name])
++                item['sha256'] = k.digest(self.payload[name])
+         self.payload['stable/release.json'] = k.json_bytes(manifest)
+         signed = subprocess.run(['ssh-keygen', '-Y', 'sign', '-f', str(key), '-n', 'kproto-release-v1'],
+                                 input=self.payload['stable/release.json'], check=True, capture_output=True)
+--- final-refresh-before/docs/status/requirements.md
++++ after/docs/status/requirements.md
+@@ -2,7 +2,7 @@
+ 
+ ## 2026-10-13 보완 후보의 현재 상태를 기록한다
+ 
+-현재 로컬 후보에는 규칙 72개·작성 사례 291개·사전 뜻 193개·어휘 사례 454개가 있다. 자동 테스트 355개가 통과했다. [압축 문체 비교](../../evaluation/llm/controlled-korean-20261013/report.md)는 실제 미적용·보완 KP·STE 원칙 적용 출력과 실패 후 보완 과정을 보존한다. 이 후보는 아직 커밋하거나 공개 배포하지 않았다.
++현재 로컬 후보에는 규칙 72개·작성 사례 291개·사전 뜻 193개·어휘 사례 454개가 있다. 자동 테스트 361개가 통과했다. [압축 문체 비교](../../evaluation/llm/controlled-korean-20261013/report.md)는 실제 미적용·보완 KP·STE 원칙 적용 출력과 실패 후 보완 과정을 보존한다. 이 후보는 아직 커밋하거나 공개 배포하지 않았다.
+ 
+ | 관문 | 현재 증거와 미완료 범위를 구분한다. |
+ | --- | --- |
+@@ -13,6 +13,8 @@
+ | 지속 설치·자동 갱신 | 공개 0.2.0과 임시 두 호스트의 서명 설치·오프라인 유지·예약 실행 증거가 있다. 새 후보는 OFF 유지·높임말 전환·이관 복구를 검증했다. 공개 다음 버전으로의 실제 업그레이드, 재로그인·절전 복귀는 아직 검증하지 않았다. |
+ 
+ 2026-10-13 현재 원격 저장소는 공개이며 Pages는 0.2.0·순번 1을 제공한다. 로컬 후보와 공개 서명물의 해시는 다르다. 아래 기록은 각 단계의 당시 상태이며, 비공개·미게시·라이선스 미정이라는 과거 문장은 현재 상태가 아니다. 공개 상태의 근거는 [첫 공개 감사](completion-audit-20261013-public.md), 후보의 근거는 [검증 결과](../../evaluation/llm/lexical-meaning-use-20261013/verification.json)를 따른다.
++
++[실제 후보 업그레이드 시험](../../evaluation/release-0.3.0-20261013/candidate-upgrade-smoke.json)은 현행 런타임·설치기로 임시 TEST 키가 서명한 0.2.0 공개 콘텐츠에서 실제 0.3.0 후보 콘텐츠로 로컬 HTTPS 갱신을 수행했고, Codex·Claude Code 각각 20단계를 통과했다. 공개 운영키로 서명해 공개 주소에서 수행하는 0.3.0 업그레이드는 아직 검증하지 않았다. 이 시험은 현행 실행 코드를 사용했으므로 0.2.0 원본 실행기에서 새 코드로 이관하는 경로의 성공을 주장하지 않는다.
+ 
+ [제어언어 논문 검토](../../research/2026-10-13-ellipsis/controlled-language-papers.md)는 기존 영어 이해도·한국어 기계번역 실험을 구분한다. 분량 감소와 이해도 향상을 같은 지표로 계산하지 않는다.
+ 
+--- final-refresh-before/docs/status/completion-audit-20261013-compact.md
++++ after/docs/status/completion-audit-20261013-compact.md
+@@ -33,4 +33,8 @@
+ 
+ 최초 어휘 비교에서 사용자 스킬 파일의 외부 읽기를 발견해 모든 조건을 다시 실행했다. 새 실행기는 관측한 스킬 57개를 프로세스별로 비활성화하며 실제 inventory와 모델 지침 로드를 확인했다. 이전 비교의 사용자 스킬 메타데이터 노출 가능성도 별도로 기록했다. 새 원출력의 도구 접근은 제공된 어휘집 범위 안에 있었다.
+ 
+-전체 자동 테스트는 355개가 통과했다. 기능 대응·한국어 최소 사례·제한된 실제 출력·어휘 관문의 근거는 갖췄지만, 보완 후보는 아직 공개본과 다르다. 다음 작업은 후속 버전의 배포물을 준비하고, 공개 발행 후 기존 설치의 실제 업그레이드를 검증하는 것이다. 기존 0.2.0의 지속 설치 성공을 새 후보의 공개 배포 성공으로 대신하지 않는다.
++전체 자동 테스트는 361개가 통과했다. 기능 대응·한국어 최소 사례·제한된 실제 출력·어휘 관문의 근거는 갖췄지만, 보완 후보는 아직 공개본과 다르다. 다음 작업은 후속 버전의 배포물을 준비하고, 공개 발행 후 기존 설치의 실제 업그레이드를 검증하는 것이다. 기존 0.2.0의 지속 설치 성공을 새 후보의 공개 배포 성공으로 대신하지 않는다.
++
++## 0.3.0 후보의 로컬 업그레이드를 검증했다
++
++[실제 후보 업그레이드 시험](../../evaluation/release-0.3.0-20261013/candidate-upgrade-smoke.json)은 현행 런타임·설치기로 임시 TEST 키가 서명한 0.2.0 공개 콘텐츠에서 실제 0.3.0 후보 콘텐츠로 로컬 HTTPS 갱신을 수행했고, Codex·Claude Code 각각 20단계를 통과했다. 공개 운영키로 서명해 공개 주소에서 수행하는 0.3.0 업그레이드는 아직 검증하지 않았다. 이 시험은 현행 실행 코드를 사용했으므로 0.2.0 원본 실행기에서 새 코드로 이관하는 경로의 성공을 주장하지 않는다.

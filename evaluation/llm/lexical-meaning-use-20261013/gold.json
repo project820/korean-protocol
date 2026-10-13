@@ -1,0 +1,707 @@
+{
+  "cases": [
+    {
+      "id": "lm01",
+      "domain": "software_runtime",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-SW-0001"
+      ],
+      "task_intent": "v2.3.1의 환경별 적용 상태를 공지한다.",
+      "mandatory_meaning": [
+        "v2.3.1 변경이 스테이징 환경에 적용되어 사용 가능함(스테이징 배포)",
+        "운영 환경에는 아직 적용되지 않음"
+      ],
+      "prohibited_changes": [
+        "운영에 배포됐다고 쓰기",
+        "아티팩트 업로드를 배포로 쓰기",
+        "버전 v2.3.1 변경"
+      ],
+      "acceptable_variants": [
+        "v2.3.1을 스테이징에 배포했으며 운영에는 아직 배포하지 않았습니다.",
+        "v2.3.1이 스테이징 환경에 배포되었고 운영 환경 배포는 아직입니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "스테이징 적용 완료와 운영 미적용이 함께 전달되면 충족",
+        "approved_term_use": "'배포하다'(배포했습니다/배포되었고 등 활용 포함)를 '스테이징에 적용해 사용 가능하게 함'의 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'스테이징 환경에 적용 완료' 같은 표현은 개념 충족이지만 직접 사용은 아님",
+        "misuse": "업로드나 빌드 준비를 '배포'라 하거나, 환경 구분 없이 '배포 완료'라고 쓰는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "불필요. 사실만으로 결정 가능"
+      }
+    },
+    {
+      "id": "lm02",
+      "domain": "software_runtime",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-SW-0025"
+      ],
+      "task_intent": "응답 대기 한도 초과 사실과 서버 처리 결과 미확인을 구별해 메모를 고친다.",
+      "mandatory_meaning": [
+        "재고 조회 API 요청이 30초 대기 한도 안에 응답을 받지 못함",
+        "서버 쪽 처리 결과(성공·실패·취소)는 확인되지 않음"
+      ],
+      "prohibited_changes": [
+        "서버 처리 실패로 확정하기",
+        "요청이 취소되었다고 쓰기",
+        "30초 한도 변경"
+      ],
+      "acceptable_variants": [
+        "재고 조회 API 요청이 30초 응답 대기 한도 안에 응답을 받지 못해 시간 초과로 대기를 끝냈으며, 서버 쪽 처리 결과는 아직 확인되지 않았다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "30초 대기 한도 안에 응답 없음과 서버 결과 미확인이 모두 있으면 충족",
+        "approved_term_use": "'시간 초과'를 응답 대기 한도 초과의 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'30초 안에 응답이 오지 않아 대기를 끝냈다'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "'시간 초과로 서버 처리가 실패했다/취소되었다'처럼 원격 결과를 확정하는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm03",
+      "domain": "software_runtime",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0124"
+      ],
+      "task_intent": "도구 v4가 읽는 기능을 지원하는 파일 형식을 안내한다.",
+      "mandatory_meaning": [
+        "리포트 도구 v4는 CSV와 Parquet 파일을 읽는 기능이 있음",
+        "XLSX 읽기는 지원하지 않음"
+      ],
+      "prohibited_changes": [
+        "사용 허가나 허락으로 표현하기",
+        "XLSX를 지원한다고 쓰기",
+        "이미 읽었다는 완료 의미로 쓰기"
+      ],
+      "acceptable_variants": [
+        "리포트 도구 v4는 CSV와 Parquet 파일을 읽을 수 있으며, XLSX 파일은 지원하지 않습니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "CSV·Parquet 읽기 기능 지원과 XLSX 미지원이 전달되면 충족",
+        "approved_term_use": "'읽을 수 있다/있습니다'를 도구의 기능 의미로 쓰면 직접 사용",
+        "faithful_paraphrase": "'CSV와 Parquet 읽기를 지원한다'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "'사용자는 CSV를 읽어도 됩니다'처럼 허락으로 읽히게 쓰는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "불필요. 사용 허가 절차는 필수 내용이 아님"
+      }
+    },
+    {
+      "id": "lm04",
+      "domain": "software_runtime",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0072"
+      ],
+      "task_intent": "기술적 동작 여부와 역할상 허용을 구별해 답한다.",
+      "mandatory_meaning": [
+        "개발자 역할인 김지수 님에게는 정책상 롤백 권한이 없음(릴리스 관리자 역할에만 허용)",
+        "버튼이 동작하는 것과 허용 여부는 별개임"
+      ],
+      "prohibited_changes": [
+        "버튼이 동작하므로 권한이 있다고 쓰기",
+        "기술적으로 롤백이 불가능하다고 쓰기",
+        "허용 역할 변경"
+      ],
+      "acceptable_variants": [
+        "버튼은 동작하지만, 정책상 롤백 권한은 릴리스 관리자 역할에만 있어 개발자 역할인 김지수 님은 누르시면 안 됩니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "역할에 따른 허용 범위 밖이라는 점과 기술적 동작과의 구별이 전달되면 충족",
+        "approved_term_use": "'권한'을 정책·역할상 허용 범위의 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'정책상 릴리스 관리자만 롤백하도록 허용되어 있다'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "'권한'을 버튼 기능 사용 가능성 전체로 쓰거나 기술적 가능성과 혼동하는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm05",
+      "domain": "software_runtime",
+      "category": "unregistered_exception",
+      "target_entry_ids": [],
+      "task_intent": "사용자가 지정한 제품명과 설정 표기를 그대로 둔 채 릴리스 노트를 쓴다.",
+      "mandatory_meaning": [
+        "제품명 'NimbusRelay 2.0'과 고정 표기 'max_wait_ms=1500'을 원문 그대로 보존한다.",
+        "해당 설정 기본값이 1500으로 바뀌었음을 알린다."
+      ],
+      "prohibited_changes": [
+        "제품명 번역·음차·변형",
+        "설정 키를 다른 이름으로 바꾸기",
+        "1500을 '1.5초'로 대체하기",
+        "이 표기들이 사전에 등록되어 있다고 주장하기"
+      ],
+      "acceptable_variants": [
+        "NimbusRelay 2.0에서 max_wait_ms=1500이 새 기본값이 되었습니다.",
+        "NimbusRelay 2.0: max_wait_ms 기본값을 1500으로 변경(max_wait_ms=1500)"
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "기본값 변경 사실이 전달되면 충족",
+        "approved_term_use": "해당 없음. 등록 표제 사용을 요구하지 않음",
+        "faithful_paraphrase": "주변 문장은 자유롭게 바꿀 수 있으나 표기는 그대로 유지; 원문 표기 옆에 '(1.5초)'를 덧붙이는 것은 허용",
+        "misuse": "표기를 바꾸거나 '시간 초과' 등 사전 표제로 대체하는 경우",
+        "permitted_exception": "제품명과 ms 단위 설정값은 사전 밖의 고정 표기로 그대로 보존",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm06",
+      "domain": "software_runtime",
+      "category": "genuinely_unresolved",
+      "target_entry_ids": [
+        "KPL-SW-0001"
+      ],
+      "task_intent": "어느 변경을 고객 공지 대상으로 할지 확인한다.",
+      "mandatory_meaning": [
+        "'그 변경'이 A인지 B인지 사실만으로 정할 수 없음을 밝힘",
+        "어느 변경인지 묻는 확인 질문을 함(필요하면 A는 스테이징, B는 운영 적용 상태임을 함께 알림)"
+      ],
+      "prohibited_changes": [
+        "A나 B 중 하나를 임의로 골라 공지 작성",
+        "A를 운영에 배포됐다고 쓰기",
+        "배포 일정·담당자 등 무관한 질문만 하기"
+      ],
+      "acceptable_variants": [
+        "어느 변경을 말씀하시는지 확인 부탁드립니다. 검색 필터 개선(A)은 스테이징에만, 알림 문구 수정(B)은 운영에 배포되어 있습니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "대상 변경이 정해지지 않았음을 밝히고 확인을 요청하면 충족",
+        "approved_term_use": "확인 질문에서 '배포'를 쓸 경우 환경 적용의 뜻으로 써야 함; 사용이 필수는 아님",
+        "faithful_paraphrase": "'운영에 적용된 것은 B뿐'과 같은 표현 허용",
+        "misuse": "스테이징 적용을 고객 대상 배포 완료로 표현하는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "필수. 대상 변경 선택이 필요함"
+      }
+    },
+    {
+      "id": "lm07",
+      "domain": "work_coordination",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0047"
+      ],
+      "task_intent": "검토, 승인 결정, 집행 상태를 구별해 보고한다.",
+      "mandatory_meaning": [
+        "결재권자 최 이사가 10/12에 1,200만 원 증액안을 승인함",
+        "예산 집행은 아직 이루어지지 않음"
+      ],
+      "prohibited_changes": [
+        "박 과장이 승인했다고 쓰기",
+        "집행 완료로 쓰기",
+        "금액·날짜 변경"
+      ],
+      "acceptable_variants": [
+        "1,200만 원 증액안은 10/12 최 이사가 승인했으며, 예산 집행은 아직 이루어지지 않았습니다.",
+        "재무팀 검토를 거쳐 최 이사가 10/12 증액안을 승인했고 집행은 아직입니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "권한자의 허용 결정과 집행 미완료가 전달되면 충족; 박 과장 검토는 선택 사항",
+        "approved_term_use": "'승인하다'(승인했으며 등 활용 포함)를 최 이사의 허용 결정에 쓰면 직접 사용",
+        "faithful_paraphrase": "'최 이사가 증액을 허용하기로 결정했다'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "검토자에게 승인을 귀속하거나 승인을 집행 완료로 쓰는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm08",
+      "domain": "work_coordination",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0046"
+      ],
+      "task_intent": "전달된 요청과 미응답·미수행 상태를 정리한다.",
+      "mandatory_meaning": [
+        "인프라팀에 8443 포트 개방을 요청한 상태다.",
+        "아직 응답·허용 결정·포트 개방 작업이 없다."
+      ],
+      "prohibited_changes": [
+        "명령·지시로 바꾸기",
+        "승인되거나 개방됐다고 쓰기",
+        "포트 번호 변경"
+      ],
+      "acceptable_variants": [
+        "SEC-412: 보안팀 한서연 님이 10/11 인프라팀에 방화벽 8443 포트 개방을 요청했으며, 아직 응답이나 작업은 없습니다.",
+        "요청자 이름과 날짜는 선택이다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "인프라팀에 8443 포트 개방을 요청한 사실과 미처리 상태가 전달되면 충족; 요청자 이름과 날짜는 선택.",
+        "approved_term_use": "'요청하다'(요청했으며 등 활용 포함)를 이 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'열어 달라고 전달했다'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "'지시했다'처럼 강제로 바꾸거나 요청을 승인·완료로 쓰는 경우",
+        "permitted_exception": "티켓 번호 SEC-412는 그대로 유지",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm09",
+      "domain": "work_coordination",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0146"
+      ],
+      "task_intent": "계약 결정을 미룬 사실을 회의록에 기록한다.",
+      "mandatory_meaning": [
+        "운영위원회가 대한물류 계약 체결 결정을 보류함",
+        "법무 의견서 도착이 다음 판단의 조건임",
+        "거절·취소가 아님"
+      ],
+      "prohibited_changes": [
+        "계약 거절·취소·무산으로 쓰기",
+        "조건(법무 의견서) 누락"
+      ],
+      "acceptable_variants": [
+        "대한물류 계약 체결 결정은 법무 의견서 도착 시까지 보류함.",
+        "법무 의견서를 받을 때까지 대한물류와의 계약 결정을 보류하기로 함."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "결정을 미룬 사실과 기다리는 조건이 있으면 충족",
+        "approved_term_use": "'보류하다'(보류함 등 활용 포함)를 결정을 미룬다는 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'의견서 도착 후 다시 판단하기로 미룸'은 개념 충족이지만 직접 사용은 아님",
+        "misuse": "'보류'를 거절이나 중단 확정으로 쓰는 경우",
+        "permitted_exception": "공급사명 '대한물류' 유지",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm10",
+      "domain": "work_coordination",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0031"
+      ],
+      "task_intent": "승인으로 잘못 쓴 상태를 검토 사실로 고친다.",
+      "mandatory_meaning": [
+        "정윤 님이 시안 v3을 검토하고 수정 필요 항목 2개를 남김",
+        "승인 결정은 아직 없음"
+      ],
+      "prohibited_changes": [
+        "승인됐다고 유지하기",
+        "반려됐다고 쓰기",
+        "항목 수 변경"
+      ],
+      "acceptable_variants": [
+        "정윤 님이 시안 v3을 검토하고 수정이 필요한 항목 2개를 남겼습니다. 승인 결정은 아직 없습니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "내용을 살펴 수정 필요를 따진 사실과 미승인이 전달되면 충족",
+        "approved_term_use": "'검토하다'(검토하고 등 활용 포함)를 이 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'살펴보고 수정 사항을 메모했다'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "검토를 승인으로 쓰거나 '검토 완료'로 승인을 암시하는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm11",
+      "domain": "work_coordination",
+      "category": "unregistered_exception",
+      "target_entry_ids": [],
+      "task_intent": "도구명과 상태값을 원문 그대로 두고 의미를 설명한다.",
+      "mandatory_meaning": [
+        "'Hanul Flow'와 'PENDING_L2'를 원문 그대로 표기",
+        "PENDING_L2는 2차 결재 대기 상태임"
+      ],
+      "prohibited_changes": [
+        "표기 번역·변형",
+        "승인 완료나 반려 상태로 설명하기",
+        "이 표기들이 사전에 등록되어 있다고 주장하기"
+      ],
+      "acceptable_variants": [
+        "Hanul Flow에서 PENDING_L2는 2차 결재를 기다리는 상태를 뜻합니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "2차 결재 대기라는 의미가 전달되면 충족",
+        "approved_term_use": "해당 없음. '승인하다' 등을 쓸 경우 미승인 상태와 모순되지 않아야 함",
+        "faithful_paraphrase": "'두 번째 결재 단계 대기'처럼 바꿔 말하는 것 허용",
+        "misuse": "PENDING_L2를 '승인됨' 등으로 설명하는 경우",
+        "permitted_exception": "도구명과 상태값은 사전 밖의 고정 표기로 그대로 보존",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm12",
+      "domain": "work_coordination",
+      "category": "genuinely_unresolved",
+      "target_entry_ids": [
+        "KPL-0146"
+      ],
+      "task_intent": "보류 대상이 어느 건인지 확인한다.",
+      "mandatory_meaning": [
+        "'이 건'이 서버 증설 구매 요청인지 신입 채용 공고 게시인지 정해지지 않았음을 밝힘",
+        "어느 건(또는 두 건 모두)인지 확인을 요청함"
+      ],
+      "prohibited_changes": [
+        "한 건을 임의로 골라 보류 공지 작성",
+        "보류를 취소·거절로 공지",
+        "무관한 운영 질문만 하기"
+      ],
+      "acceptable_variants": [
+        "팀장님 메시지가 서버 증설 구매 요청과 신입 채용 공고 게시 중 어느 건(혹은 두 건 모두)을 보류하라는 것인지 확인 후 공지를 작성하겠습니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "대상 미확정을 밝히고 확인을 요청하면 충족",
+        "approved_term_use": "'보류'를 쓸 경우 결정·실행을 미룬다는 뜻이어야 함; 필수 아님",
+        "faithful_paraphrase": "'미뤄 둘 건이 어느 쪽인지' 같은 표현 허용",
+        "misuse": "보류를 취소로 바꾸는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "필수. 대상 선택이 필요함"
+      }
+    },
+    {
+      "id": "lm13",
+      "domain": "data_operations",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0001"
+      ],
+      "task_intent": "개인 저장소 기록과 팀 적용을 구별해 알린다.",
+      "mandatory_meaning": [
+        "필터 설정이 '내 설정' 저장소에 저장됨",
+        "팀 공유 보기나 서버 기본값에는 적용되지 않음"
+      ],
+      "prohibited_changes": [
+        "팀에 공유·적용됐다고 쓰기",
+        "저장소 이름 변경"
+      ],
+      "acceptable_variants": [
+        "필터 설정은 제 '내 설정'에 저장해 두었고, 팀 공유 보기나 기본값에는 적용하지 않았습니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "다시 쓸 수 있게 개인 저장소에 기록한 사실과 미적용이 있으면 충족",
+        "approved_term_use": "'저장하다'(저장해 두었고 등 활용 포함)를 이 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'내 설정에 기록해 두었다'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "저장을 팀 적용이나 공개로 쓰는 경우",
+        "permitted_exception": "'내 설정' 명칭 유지",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm14",
+      "domain": "data_operations",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0012"
+      ],
+      "task_intent": "기준 스냅샷을 밝혀 복원 조치를 기록한다.",
+      "mandatory_meaning": [
+        "orders 테이블을 10/12 03:00 스냅샷 상태로 복원함",
+        "10/12 03:00~15:10 사이 변경은 포함되지 않음"
+      ],
+      "prohibited_changes": [
+        "10/11 스냅샷으로 쓰기",
+        "기준 시점 누락",
+        "손실 없이 완전 복구됐다고 쓰기",
+        "초기화·백업으로 바꾸기"
+      ],
+      "acceptable_variants": [
+        "orders 테이블을 10/12 03:00 스냅샷 기준으로 복원했으며, 03:00~15:10 사이 변경분은 복원 데이터에 포함되지 않았다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "식별된 이전 상태로 되돌린 사실, 기준 시점, 누락 구간이 있으면 충족",
+        "approved_term_use": "'복원하다'(복원했으며 등 활용 포함)를 이 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'10/12 03:00 스냅샷 상태로 되돌렸다'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "기준 없는 '복원 완료', 초기 상태로의 리셋으로 쓰는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "불필요. 기준 스냅샷이 사실에 명시됨"
+      }
+    },
+    {
+      "id": "lm15",
+      "domain": "data_operations",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-SW-0009"
+      ],
+      "task_intent": "백업 생성과 복구 시험 미실시를 구별해 고친다.",
+      "mandatory_meaning": [
+        "10/13 02:00 시점 회계 DB를 acct-bk 버킷에 백업함",
+        "복구 가능성 시험은 하지 않음"
+      ],
+      "prohibited_changes": [
+        "복원 검증 완료 유지",
+        "복원을 실행했다고 쓰기",
+        "버킷명·시점 변경"
+      ],
+      "acceptable_variants": [
+        "10/13 02:00 시점 회계 DB를 acct-bk 버킷에 백업했으며, 복구 시험은 아직 하지 않았습니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "정한 시점 사본을 별도 위치에 보관한 사실과 복구 미시험이 있으면 충족",
+        "approved_term_use": "'백업하다'(백업했으며 등 활용 포함)를 이 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'사본을 acct-bk에 보관했다'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "백업을 복원 또는 복원 검증으로 쓰는 경우",
+        "permitted_exception": "버킷명 acct-bk 유지",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm16",
+      "domain": "data_operations",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-SW-0030"
+      ],
+      "task_intent": "동기화 시작과 완료 미확인을 구별해 보고한다.",
+      "mandatory_meaning": [
+        "CRM에서 메일 발송 도구로 연락처를 전달하는 10/13 01:00 동기화가 시작됨",
+        "완료는 아직 확인되지 않음"
+      ],
+      "prohibited_changes": [
+        "동기화 완료나 일치 상태 확정",
+        "양방향으로 쓰기",
+        "백업·복원으로 바꾸기"
+      ],
+      "acceptable_variants": [
+        "CRM → 메일 발송 도구 연락처 동기화가 10/13 01:00에 시작됐으며, 완료 로그는 아직 없습니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "방향, 범위(연락처), 시작과 완료 미확인이 전달되면 충족; 충돌 규칙은 선택 사항",
+        "approved_term_use": "'동기화'를 정한 방향으로 선택 데이터를 전달해 맞추는 과정의 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'연락처 변경 전달 작업'은 개념 충족이지만 직접 사용은 아님",
+        "misuse": "시작만 확인된 작업을 '동기화 완료'로 쓰거나 시계 동기화 등 다른 뜻으로 쓰는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm17",
+      "domain": "data_operations",
+      "category": "unregistered_exception",
+      "target_entry_ids": [],
+      "task_intent": "제품명과 표준 용량 단위를 그대로 두고 정책 문구를 옮긴다.",
+      "mandatory_meaning": [
+        "'VaultSync Pro'를 원문 그대로 표기",
+        "'512 GiB'를 그대로 표기",
+        "테넌트당 최대 512 GiB까지 보관한다는 뜻"
+      ],
+      "prohibited_changes": [
+        "GiB를 GB로 바꾸거나 수치 환산",
+        "제품명 번역(예: '볼트 동기화')",
+        "제품명에 'Sync'가 있다고 동기화 기능을 덧붙이기",
+        "사전 등록을 주장하기"
+      ],
+      "acceptable_variants": [
+        "VaultSync Pro는 테넌트당 최대 512 GiB까지 보관합니다.",
+        "VaultSync Pro의 테넌트별 보관 용량은 512 GiB 이하입니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "테넌트별 상한 512 GiB가 전달되면 충족",
+        "approved_term_use": "해당 없음",
+        "faithful_paraphrase": "'최대', '이하' 등 경계를 포함하는 표현 허용",
+        "misuse": "'512 GiB 미만'처럼 경계를 바꾸거나 제품명을 사전 표제 '동기화'로 해석하는 경우",
+        "permitted_exception": "제품명과 GiB 단위는 사전 밖의 고정 표기로 그대로 보존",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm18",
+      "domain": "data_operations",
+      "category": "genuinely_unresolved",
+      "target_entry_ids": [
+        "KPL-0012"
+      ],
+      "task_intent": "복원 기준 사본을 확인한다.",
+      "mandatory_meaning": [
+        "'예전 버전'이 10/10 23:00 본(10/11 수정 이전)인지 10/12 23:00 본(덮어쓰기 직전)인지 정할 수 없음을 밝힘",
+        "기준 사본 선택을 확인함"
+      ],
+      "prohibited_changes": [
+        "한 사본을 임의로 골라 안내",
+        "최초·빈 상태로 되돌리라고 안내",
+        "무관한 질문만 하기"
+      ],
+      "acceptable_variants": [
+        "어느 시점으로 복원할까요? 10/10 23:00 본은 10/11 팀원 수정 이전이고, 10/12 23:00 본은 그 수정을 포함한 덮어쓰기 직전 상태입니다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "기준 시점이 둘이라 선택이 필요함을 밝히면 충족",
+        "approved_term_use": "'복원'을 쓸 경우 식별된 이전 상태로 돌린다는 뜻이어야 함; 필수 아님",
+        "faithful_paraphrase": "'어느 사본으로 되돌릴지' 같은 표현 허용",
+        "misuse": "기준 없이 '원래대로 복원'을 안내하는 경우",
+        "permitted_exception": "파일명 plan.docx 유지",
+        "clarification": "필수. 기준 사본 선택이 필요함"
+      }
+    },
+    {
+      "id": "lm19",
+      "domain": "specification_documentation",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0030"
+      ],
+      "task_intent": "기준과 근거를 갖춘 충족 판정을 보고한다.",
+      "mandatory_meaning": [
+        "p95 측정값 280ms를 근거로 R-7의 300ms 이하 기준을 충족한다고 판정한 결과를 전달한다.",
+        "동시 사용자 1,000명 조건에서의 결과임"
+      ],
+      "prohibited_changes": [
+        "모든 조건에서 충족으로 확대",
+        "기준을 300ms 미만으로 바꾸기",
+        "판정 주체 바꾸기"
+      ],
+      "acceptable_variants": [
+        "QA 이은지 님이 동시 사용자 1,000명 조건의 p95 280ms 측정 결과로 R-7(300ms 이하) 충족을 검증했습니다.",
+        "검토자 이름은 선택이다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "기준, 근거, 충족 판단, 조건이 있으면 충족",
+        "approved_term_use": "'검증하다'(검증했습니다 등 활용 포함)를 기준 대조 판단의 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'기준과 대조해 충족으로 판정했다'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "측정 실행 자체만을 검증이라 하거나 근거 없이 검증됐다고 쓰는 경우",
+        "permitted_exception": "R-7, p95 표기 유지",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm20",
+      "domain": "specification_documentation",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0032"
+      ],
+      "task_intent": "시험 조건과 관찰 결과를 기록한다.",
+      "mandatory_meaning": [
+        "펌웨어 3.2를 영하 10°C에서 2시간 시험함",
+        "재부팅 0회 관찰",
+        "결과는 이 조건에 한정됨"
+      ],
+      "prohibited_changes": [
+        "모든 온도에서 안정하다고 쓰기",
+        "검증 완료로 쓰기",
+        "조건 수치 변경"
+      ],
+      "acceptable_variants": [
+        "펌웨어 3.2를 영하 10°C에서 2시간 시험한 결과 재부팅은 0회였다(다른 온도 조건은 미시험)."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "조건과 관찰 결과가 구별되어 있고 일반화하지 않으면 충족",
+        "approved_term_use": "'시험하다'(시험한 등 활용 포함)를 이 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'영하 10°C에서 2시간 작동시켜 본 결과'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "한 조건 결과를 저온 전반이나 모든 조건으로 넓히는 경우",
+        "permitted_exception": "°C 단위 유지",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm21",
+      "domain": "specification_documentation",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-0098"
+      ],
+      "task_intent": "경계를 포함하도록 사양 번역을 고친다.",
+      "mandatory_meaning": [
+        "페이로드 크기는 2 MB와 같거나 그보다 작아야 함(2 MB 포함)"
+      ],
+      "prohibited_changes": [
+        "'미만' 유지",
+        "단위·수치 변경"
+      ],
+      "acceptable_variants": [
+        "페이로드 크기는 2MB 이하여야 한다.",
+        "페이로드 크기는 2MB를 넘으면 안 된다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "2 MB를 허용 범위에 포함하면 충족",
+        "approved_term_use": "'이하'를 기준값 포함 범위의 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'2MB를 넘으면 안 된다', '최대 2MB'는 개념 충족이지만 직접 사용은 아님",
+        "misuse": "'미만'을 쓰거나 경계를 빼는 경우",
+        "permitted_exception": "MB 단위 유지",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm22",
+      "domain": "specification_documentation",
+      "category": "approved_sense",
+      "target_entry_ids": [
+        "KPL-SW-0033"
+      ],
+      "task_intent": "성공 비율로 잘못 쓴 처리율을 팀 정의에 맞게 고친다.",
+      "mandatory_meaning": [
+        "처리율은 1,800건 ÷ 600초 = 초당 3건"
+      ],
+      "prohibited_changes": [
+        "처리율을 95%로 유지",
+        "유입 2,100건 기준(3.5건/초)으로 계산",
+        "최대 처리 능력으로 확정",
+        "성공 건만으로 계산(2.85건/초)"
+      ],
+      "acceptable_variants": [
+        "10:00~10:10 구간의 처리율은 초당 3건(완료 1,800건/600초)이며, 성공 비율은 95%입니다.",
+        "성공 비율 95%의 별도 설명은 선택이다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "완료량/시간 값 3건/초가 제시되면 충족; 성공 비율 언급은 선택이지만 처리율과 구별되어야 함",
+        "approved_term_use": "'처리율'을 단위 시간당 완료량의 뜻으로 쓰면 직접 사용",
+        "faithful_paraphrase": "'초당 완료 작업 3건'은 개념 충족이지만 직접 사용은 아님",
+        "misuse": "처리율을 백분율·유입량·지연 시간으로 쓰는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "불필요. 팀 측정 정의가 주어짐"
+      }
+    },
+    {
+      "id": "lm23",
+      "domain": "specification_documentation",
+      "category": "unregistered_exception",
+      "target_entry_ids": [],
+      "task_intent": "도구명과 단위를 그대로 두고 캡션을 쓴다.",
+      "mandatory_meaning": [
+        "'TideMeter 4'와 '12,400 ops/s'를 그대로 표기",
+        "도구가 보고한 throughput 값이라는 점만 전달"
+      ],
+      "prohibited_changes": [
+        "표기 변형",
+        "정의를 알 수 없는 값을 사전 뜻의 완료량 기준 처리율로 확정",
+        "최대 성능으로 확정",
+        "사전 등록을 주장하기"
+      ],
+      "acceptable_variants": [
+        "TideMeter 4로 측정한 throughput: 12,400 ops/s",
+        "TideMeter 4가 보고한 throughput은 12,400 ops/s이다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "도구 보고값임이 전달되면 충족",
+        "approved_term_use": "해당 없음. '처리율' 사용은 필수가 아니며, 쓸 경우 도구 정의 미확인을 함께 밝혀야 함",
+        "faithful_paraphrase": "'초당 연산 수' 정도의 중립 설명 허용",
+        "misuse": "완료 기준 처리율이나 최대 처리 능력으로 단정하는 경우",
+        "permitted_exception": "도구명과 ops/s 단위는 사전 밖의 고정 표기로 보존",
+        "clarification": "불필요"
+      }
+    },
+    {
+      "id": "lm24",
+      "domain": "specification_documentation",
+      "category": "genuinely_unresolved",
+      "target_entry_ids": [
+        "KPL-SW-0033"
+      ],
+      "task_intent": "처리율 0.92의 정의와 단위를 확인한 뒤 판단한다.",
+      "mandatory_meaning": [
+        "관측값 0.92의 출처가 성공 비율(대시보드 A)인지 초당 완료량(대시보드 B)인지 확인되지 않았다.",
+        "목표 1.0은 대시보드 A의 성공 비율 목표이므로 관측값도 같은 지표인지 확인해야 실제 미달 여부를 판정할 수 있다.",
+        "관측값의 출처나 측정 정의 확인을 요청하거나 확인 필요성을 명확히 밝힌다."
+      ],
+      "prohibited_changes": [
+        "관측값과 목표의 지표가 같은지 확인하지 않고 실제 미달·달성을 확정",
+        "0.92를 92% 성공률이나 건/초로 임의 확정",
+        "무관한 질문만 하기"
+      ],
+      "acceptable_variants": [
+        "목표 1.0은 성공 비율 기준인데, 관측값 0.92가 같은 성공 비율인지 확인되지 않았다. 관측값의 대시보드 출처를 확인해야 한다.",
+        "0.92가 대시보드 A의 성공 비율이라면 목표보다 낮다는 조건부 계산을 허용한다. 출처 확인 전 실제 미달을 확정하지 않는다."
+      ],
+      "lexical_use_criteria": {
+        "concept_fulfillment": "관측값의 지표가 미확정임을 밝히고 출처 확인을 요청하거나 확인 필요성을 명시하면 충족.",
+        "approved_term_use": "'처리율'을 등록된 뜻으로 확정해 쓰지 않음; 원문 인용은 허용",
+        "faithful_paraphrase": "'이 값이 무엇을 잰 것인지' 같은 표현 허용",
+        "misuse": "단위 없는 처리율을 완료량/시간 뜻으로 자동 연결하는 경우",
+        "permitted_exception": "해당 없음",
+        "clarification": "관측값의 출처·지표 확인이 필요하다. 이미 주어진 목표의 지표를 재질문할 필요는 없다."
+      }
+    }
+  ]
+}

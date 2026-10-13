@@ -1,0 +1,9 @@
+{
+  "project_marker_loaded": true,
+  "available_skill_names": [],
+  "tool_calls_observed": false,
+  "nonfatal_cli_warnings": [
+    "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-catalog-check-cclm584f/codex-home/config.toml."
+  ],
+  "scope": "Model diagnostic plus appserver inventory, not OSreadconfinement"
+}

@@ -1,0 +1,308 @@
+{
+ "author": "claude-opus-5-5 (Korean normative editor)",
+ "worktree": "/Users/m5max/.codex/worktrees/protocol-language/ASD-STE100 Kor",
+ "status": "edits_complete_pending_parent_review",
+ "baseline_backups": {
+  "rules": "/tmp/kproto-rules.before-opus.json",
+  "cases": "/tmp/kproto-cases.before-opus.json",
+  "compile": "/tmp/kproto-compile.before-opus.py",
+  "edit_script": "/tmp/kproto-opus-edit.py"
+ },
+ "files_changed": [
+  "specification/rules.json",
+  "examples/rule-cases.json",
+  "validation/compile.py",
+  "tests/test_controlled_language.py",
+  "profiles/coding-agent.md",
+  "profiles/chat.md",
+  "profiles/work-document.md",
+  "pack/protocol.md",
+  "docs/spec/control-expression.md (new)"
+ ],
+ "files_not_touched": [
+  "specification/ste-crosswalk.json",
+  "evaluation/*",
+  "docs/spec/korean-rules.md",
+  "runtime/security/install files"
+ ],
+ "normative_rule_changes": {
+  "KP-KO-005": [
+   "title",
+   "requirement",
+   "conditions",
+   "exceptions",
+   "positive_example",
+   "negative_example",
+   "counterexample"
+  ],
+  "KP-KO-006": [
+   "requirement",
+   "conditions",
+   "positive_example",
+   "counterexample"
+  ],
+  "KP-EDIT-004": [
+   "requirement",
+   "positive_example"
+  ],
+  "KP-WRD-002": [
+   "requirement",
+   "conditions",
+   "positive_example"
+  ],
+  "KP-WRD-003": [
+   "conditions"
+  ],
+  "KP-PROC-001": [
+   "conditions",
+   "positive_example",
+   "negative_example",
+   "counterexample"
+  ],
+  "KP-PROC-002": [
+   "conditions",
+   "positive_example",
+   "negative_example"
+  ],
+  "KP-DESC-001": [
+   "requirement",
+   "positive_example"
+  ],
+  "KP-DESC-005": [
+   "requirement",
+   "exceptions",
+   "positive_example"
+  ],
+  "KP-VER-008": [
+   "conditions"
+  ],
+  "KP-TXT-006": [
+   "requirement",
+   "exceptions"
+  ]
+ },
+ "boilerplate_only_rule_changes": {
+  "rule_ids": [
+   "KP-DESC-002",
+   "KP-DESC-003",
+   "KP-EDIT-001",
+   "KP-EDIT-002",
+   "KP-EDIT-003",
+   "KP-EDIT-005",
+   "KP-KO-001",
+   "KP-KO-002",
+   "KP-KO-003",
+   "KP-KO-004",
+   "KP-KO-007",
+   "KP-NAM-002",
+   "KP-NAM-003",
+   "KP-NAM-005",
+   "KP-NAM-006",
+   "KP-NUM-001",
+   "KP-NUM-002",
+   "KP-NUM-003",
+   "KP-NUM-004",
+   "KP-NUM-005",
+   "KP-NUM-006",
+   "KP-NUM-007",
+   "KP-PROC-003",
+   "KP-PROC-004",
+   "KP-PROC-005",
+   "KP-PROC-006",
+   "KP-SYN-001",
+   "KP-SYN-002",
+   "KP-SYN-003",
+   "KP-SYN-004",
+   "KP-SYN-005",
+   "KP-SYN-006",
+   "KP-SYN-007",
+   "KP-TXT-001",
+   "KP-TXT-002",
+   "KP-TXT-003",
+   "KP-TXT-004",
+   "KP-TXT-005",
+   "KP-VER-001",
+   "KP-VER-002",
+   "KP-VER-003",
+   "KP-VER-004",
+   "KP-VER-005",
+   "KP-VER-006",
+   "KP-VER-007",
+   "KP-WARN-001",
+   "KP-WARN-002",
+   "KP-WARN-003",
+   "KP-WARN-004",
+   "KP-WRD-001",
+   "KP-WRD-004",
+   "KP-WRD-005",
+   "KP-WRD-006",
+   "KP-WRD-007",
+   "KP-WRD-008"
+  ],
+  "count": 55,
+  "change": "Removed the trailing ' 적용한다.' (and a dangling '에') from single-sentence conditions. The compiled header now reads '요구사항 뒤에 (적용 조건), [예외]를 쓴다.', so the condition role is stated once. KP-NAM-004 and KP-PROC-007 keep their wording because their conditions contain a second sentence."
+ },
+ "guards_change": {
+  "before": "사용자의 상위 지침·작업 범위를 따른다. 뜻·확실성·시상·발화 목적을 보존한다.\n설명이 필요한 문장은 ~다, 절차는 ~한다로 쓴다. 명료한 상태·결과는 짧은 명사형을 허용한다.\n사용자가 지정한 높임·장르를 우선한다. 인용·코드는 보존한다.\n가능성을 사실로, 허락을 명령으로 바꾸지 않는다. 명확한 주체는 생략할 수 있다.\n답에 필수인 정보만 묻는다. 불가 설명으로 끝내지 않는다. 공유 문맥·불필요한 확인 상태·이유는 짧은 경고에 덧붙이지 않는다.\n",
+  "after": "사용자의 상위 지침·작업 범위를 따른다. 뜻·확실성·시상·발화 목적을 보존한다.\n새로 쓰는 글과 문체 정돈은 높임 없는 기본 문체로 쓴다. 기존 글을 고칠 때는 확립된 문체를 유지한다.\n명료한 상태·결과는 짧은 명사형으로 쓴다. 행동·조건·인과·경쟁 대상은 문장으로 밝힌다.\n가능성을 사실로, 허락을 명령으로, 미기록을 부재로 바꾸지 않는다. 행위자가 하나로 회복되면 주체를 생략할 수 있다.\n확인할 수 없는 필수 정보만 묻는다. 불가 설명으로 끝내지 않는다. 공유 문맥·불필요한 확인 상태·이유는 짧은 경고에 덧붙이지 않는다.\n",
+  "notes": "Scoped the plain default to new text and explicit normalization; edits keep the established register. Status-noun forms are now preferred, and the guard names when a full clause is required. Restored the trigger that limits questions to essential information that cannot be confirmed. Added the unrecorded-to-absent guard. User-specified register, quote and code preservation moved from GUARDS to the KP-KO-005 exception, which every profile still contains, so the text is not duplicated."
+ },
+ "case_changes": {
+  "register_reverted_to_source": [
+   "KP-EDIT-004-R",
+   "KP-WRD-002-R",
+   "KP-KO-006-R",
+   "KP-DESC-001-R",
+   "KP-DESC-005-R"
+  ],
+  "normalization_instruction_added_to_context": [
+   "KP-KO-005-R",
+   "KP-PROC-001-R",
+   "KP-PROC-002-R",
+   "KP-PROC-001-INDEPENDENT",
+   "KP-TXT-006-ACTION-NOT-STATUS",
+   "KP-TXT-006-TEST-STATUS",
+   "KP-TXT-006-CHECK-STATUS",
+   "KP-TXT-006-DEPLOY-STATUS"
+  ],
+  "procedure_step_marked_in_context": [
+   "KP-PROC-001-K",
+   "KP-PROC-001-SIMULTANEOUS"
+  ],
+  "scope_context_added": [
+   "KP-KO-006-K"
+  ],
+  "output_changed": {
+   "KP-KO-005-R": "저장해 주기 바란다.",
+   "KP-KO-005-PLAIN-REQUEST": "파일을 저장해 주기 바란다."
+  },
+  "rule_ids_changed": {
+   "KP-WRD-002-CONSISTENT": [
+    "KP-NAM-001",
+    "KP-WRD-002"
+   ]
+  },
+  "new_cases": {
+   "KP-KO-005-PLAIN-DIRECTIVE": "revise: 다음 명령을 실행하라.",
+   "KP-KO-005-PLAIN-PROHIBITION": "revise: 작업 중에는 전원 케이블을 뽑지 마라.",
+   "KP-KO-005-SOURCE-REGISTER": "keep: 설정을 저장했습니다.",
+   "KP-TXT-006-CONDITION-CLAUSE": "keep: 설정을 바꾼 경우에만 재시작이 필요하다."
+  },
+  "all_new_case_origin": "author"
+ },
+ "review_findings": [
+  {
+   "finding": "HIGH KO-005 scope new vs edit",
+   "disposition": "accepted_with_modification",
+   "what": "KO-005 exception and GUARDS: edits and continuations keep the established source, document or product register unless normalization is requested. Register-only output changes were reverted in 5 authored cases. Cases that do convert register now state the normalization in context, and a test enforces this for every revise case and positive example.",
+   "rejected_part": "The proposed audience-genre exception (customer notice, email, UI message) is not adopted as an inference rule. Under the user's plain default, genre alone does not justify adding honorifics. The rule now says '독자나 장르만으로 높임을 추정해 더하지 않는다'. An established product register is still covered through '제품에 확립된 문체'."
+  },
+  {
+   "finding": "HIGH directive/prohibition semantics",
+   "disposition": "accepted",
+   "what": "KO-005: '~한다' is for reader actions in numbered steps only. Other reader directives use '~하라', prohibitions use '~하지 마라', and reader-directed requests use '~해 주기 바란다'. PROC-002's condition is limited to numbered or listed steps. The PROC-001-K and SIMULTANEOUS contexts are marked as steps. New cases cover the directive outside a step and the safety prohibition. A safety warning is a directive, so it falls under ~하라 or ~하지 마라."
+  },
+  {
+   "finding": "MEDIUM request form",
+   "disposition": "accepted",
+   "what": "'~해 주기 바란다' for reader-directed requests. Reported requests name the requester and tense ('전하는 요청은 요청자와 시제를 밝힌다'). The KO-005 example output changed from '저장을 요청한다' to '저장해 주기 바란다'."
+  },
+  {
+   "finding": "MEDIUM question forms",
+   "disposition": "accepted",
+   "what": "'질문은 ~는가·~ㄴ가로 쓰거나 ~는지 알려 달라로 묻는다.' The '~는지' form appears only inside the request frame."
+  },
+  {
+   "finding": "MEDIUM GUARDS ask trigger lost",
+   "disposition": "accepted",
+   "what": "Restored as '확인할 수 없는 필수 정보만 묻는다.'"
+  },
+  {
+   "finding": "MEDIUM DESC-005 over-broad deletion",
+   "disposition": "accepted",
+   "what": "Requirement: '이미 밝힌 결론·공유 배경을 되풀이하는 부분과 새 정보 없는 답변 예고·맺음말은 삭제한다.' Deletion now covers only repeated parts, so a partial overlap deletes only the overlap. A section recap in a long document is added as an exception when the reader needs it (STE 6.2 structure signal)."
+  },
+  {
+   "finding": "MEDIUM DESC-001 scope limits narrowed",
+   "disposition": "accepted",
+   "what": "'결론의 적용 범위·미검증 부분은 바로 연결한다.'"
+  },
+  {
+   "finding": "MEDIUM WRD-002 direction",
+   "disposition": "accepted",
+   "what": "'한 용어는 같은 문서·작업에서 한 뜻으로 쓴다. 다른 뜻으로 전환하면 차이를 밝힌다. 같은 대상의 명칭 통일은 KP-NAM-001을 따른다.' The synonym-unification case now links to NAM-001 as well."
+  },
+  {
+   "finding": "LOW EDIT-004 trigger",
+   "disposition": "accepted",
+   "what": "Restored '단어 교체만으로'."
+  },
+  {
+   "finding": "LOW PROC-001 condition",
+   "disposition": "accepted",
+   "what": "'한 문장·단계에 지시가 여럿 있을 때'"
+  },
+  {
+   "finding": "LOW WRD-003 compressed condition",
+   "disposition": "accepted",
+   "what": "Rewritten as a full clause that names the dictionary entry."
+  },
+  {
+   "finding": "LOW KO-006 subject honorific under plain default",
+   "disposition": "partially_accepted",
+   "what": "Edits preserve a real-person subject honorific, and new plain text does not add one. The counterexample context is now an edit of an existing report.",
+   "rejected_part": "The claim that '교수님께서 승인하셨다' is mixed register is rejected. Subject honorification (-시-/께서) and addressee speech level are separate Korean systems, and plain declaratives with subject honorifics are standard. So the rule does not limit preservation to omitted-subject identification."
+  },
+  {
+   "finding": "LOW VER-008 condition",
+   "disposition": "accepted",
+   "what": "'추정·외부 설명·기록 부재를 결과로 보고하거나 고칠 때' now covers both new reporting and edits."
+  }
+ ],
+ "user_direction_applied": [
+  "Status-noun forms are preferred, not only allowed: GUARDS says '짧은 명사형으로 쓴다', and the TXT-006 requirement cites '표기된 담당자 없음.'",
+  "TXT-006 exceptions and GUARDS name the cases that need full clauses: actions, conditions, causality and competing referents. A new keep case covers the condition boundary.",
+  "Unknown vs absent, modality, participants, time, numbers and quotes are preserved, per the guide and the existing rules.",
+  "docs/spec/control-expression.md records the STE 4.5, 5.2 and 1.11 distinctions. It does not claim that STE mandates fragments."
+ ],
+ "verification": {
+  "red_first": "Updated tests/test_controlled_language.py before the source edits: 5 failures, 0 errors (scope guard, request form, register invariant, source-register case, condition-boundary case).",
+  "commands": {
+   "python3 -B -m unittest discover -s tests -p test_controlled_language.py": "Ran 8 tests OK",
+   "python3 -B -m unittest discover -s tests -p test_validation.py": "Ran 45 tests OK",
+   "python3 -B -m validation.compile --root . --output .": "compiled 4 outputs",
+   "python3 -B -m validation.check --root . --json": "ok=true, errors=[]. Gaps report that crosswalk review hashes no longer match the changed rules and cases (expected; needs independent re-review)."
+  },
+  "rule_count": 72,
+  "all_rule_ids_conditions_exceptions_in_profiles": true,
+  "profile_bytes": {
+   "profiles/coding-agent.md": 28659,
+   "profiles/chat.md": 28629,
+   "profiles/work-document.md": 28638,
+   "pack/protocol.md": 94258
+  },
+  "budget_bytes": 28672,
+  "min_headroom_bytes": 13,
+  "not_run": [
+   "full test suite (owned by parent)",
+   "LLM generation or evaluation",
+   "evaluation/llm/controlled-korean-20261013 (not read)"
+  ]
+ },
+ "risks": [
+  "Coding-agent profile headroom is 13 bytes, so any further guard or rule addition needs offsetting compression.",
+  "The crosswalk proofs (5.3, 9.4 and all others bound to rules/cases hashes) need re-review; this edit does not change ste-crosswalk.json.",
+  "The '~하라' form outside steps is a design choice for unambiguous plain directives. Its naturalness in chat has not been measured with readers or LLM runs."
+ ],
+ "sha256": {
+  "specification/rules.json": "ad06bff2e4aff08daa1aa637c92bf34ae0f8ddef5f573ed9e10be7dfd43be3a1",
+  "examples/rule-cases.json": "6d434a2fec0dd81563ea83a7303b768dc9f97ba5d8201f5f024aa708697194b4",
+  "validation/compile.py": "d5cb3aa8912a7bfee463e96537569ba82b2c612f8f25f3cb17f3b81434d79183",
+  "tests/test_controlled_language.py": "309157e2d16e855260eaa18f25d00b7e684c6712cbefb3a0fb625f25b22493c9",
+  "profiles/coding-agent.md": "184d86be87191adefdbbe8f7ae037b2f111805f3b5d87bb2eae47765a64f626b",
+  "profiles/chat.md": "fac35ce0057a47bad278c79576ee9e7131aba9550b632a38e45a62140a8fd340",
+  "profiles/work-document.md": "a9cad586d4404fdc8f573681b9837cb502e79e055fd3bf4d8328a55754350392",
+  "pack/protocol.md": "f756d6e1e73fa7617b77dc017da5ea40d0851a8c04b5faa99ef2a61ddf6ffc3d",
+  "docs/spec/control-expression.md": "9ed7e39d6fbeaf1dc61f430ddec598049ee9d32be1a1ea232c9bcd1664d12d85"
+ }
+}

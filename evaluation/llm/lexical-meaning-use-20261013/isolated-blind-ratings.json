@@ -1,0 +1,749 @@
+{
+  "reviewer": "lexical_outputs_review",
+  "method": "Read only isolated-blind-input.json; independent condition-name-blind manual review; parent recorded returned ratings",
+  "reviewed_outputs": 72,
+  "defaults": {
+    "meaning_pass": true,
+    "task_pass": true,
+    "clarity_pass": true,
+    "handling_pass": true
+  },
+  "false_overrides": [
+    {
+      "id": "lm15",
+      "label": "C",
+      "meaning_pass": false,
+      "task_pass": false,
+      "handling_pass": false,
+      "quote": "이 사본으로 복구할 수 있는지는 아직 검증하지 않았습니다.",
+      "reason": "Gold requires no recovery test; no verification is weaker. Backup term still correct.",
+      "disputed": true
+    },
+    {
+      "id": "lm18",
+      "label": "A",
+      "meaning_pass": false,
+      "task_pass": false,
+      "handling_pass": false,
+      "quote": "덮어쓰기 전 버전으로 복원하려면 10/12 23:00 백업 사본을 사용한다.",
+      "reason": "Selects10/12 without confirming intended previous version."
+    },
+    {
+      "id": "lm18",
+      "label": "C",
+      "meaning_pass": false,
+      "task_pass": false,
+      "handling_pass": false,
+      "quote": "10/11 수정 내용을 보존할 수 있도록 10/12 23:00 백업 사본으로 복원해 주세요.",
+      "reason": "Invents preservation of10/11edit as selection criterion."
+    },
+    {
+      "id": "lm24",
+      "label": "A",
+      "meaning_pass": false,
+      "task_pass": false,
+      "handling_pass": false,
+      "quote": "보고된 '처리율 0.92'에는 단위가 없고 어느 대시보드에서 나온 값인지 확인되지 않았으므로, 대시보드 A의 성공 비율 목표 1.0에 미달하는지 판단할 수 없다.",
+      "reason": "Strict explicit-function reading requires request or expressed need to check source; pragmatic reading accepts implied need.",
+      "disputed": true
+    },
+    {
+      "id": "lm24",
+      "label": "C",
+      "meaning_pass": false,
+      "task_pass": false,
+      "handling_pass": false,
+      "quote": "보고된 '처리율 0.92'는 출처와 단위가 확인되지 않아 목표 1.0 미달 여부를 판단할 수 없으며, 대시보드 A의 성공 비율이라면 목표에 미달합니다.",
+      "reason": "Conditional arithmetic permitted; disputed omission is explicit source-check function, not arbitrary resolution.",
+      "disputed": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "lm01",
+      "domain": "software_runtime",
+      "category": "approved_sense",
+      "A": "faithful_paraphrase",
+      "B": "direct_allowed",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm02",
+      "domain": "software_runtime",
+      "category": "approved_sense",
+      "A": "faithful_paraphrase",
+      "B": "faithful_paraphrase",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm03",
+      "domain": "software_runtime",
+      "category": "approved_sense",
+      "A": "faithful_paraphrase",
+      "B": "direct_allowed",
+      "C": "faithful_paraphrase"
+    },
+    {
+      "id": "lm04",
+      "domain": "software_runtime",
+      "category": "approved_sense",
+      "A": "faithful_paraphrase",
+      "B": "faithful_paraphrase",
+      "C": "faithful_paraphrase"
+    },
+    {
+      "id": "lm05",
+      "domain": "software_runtime",
+      "category": "unregistered_exception",
+      "A": "preserved_exception",
+      "B": "preserved_exception",
+      "C": "preserved_exception"
+    },
+    {
+      "id": "lm06",
+      "domain": "software_runtime",
+      "category": "genuinely_unresolved",
+      "A": "justified_uncertainty",
+      "B": "justified_uncertainty",
+      "C": "justified_uncertainty"
+    },
+    {
+      "id": "lm07",
+      "domain": "work_coordination",
+      "category": "approved_sense",
+      "A": "direct_allowed",
+      "B": "direct_allowed",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm08",
+      "domain": "work_coordination",
+      "category": "approved_sense",
+      "A": "direct_allowed",
+      "B": "direct_allowed",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm09",
+      "domain": "work_coordination",
+      "category": "approved_sense",
+      "A": "direct_allowed",
+      "B": "direct_allowed",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm10",
+      "domain": "work_coordination",
+      "category": "approved_sense",
+      "A": "direct_allowed",
+      "B": "direct_allowed",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm11",
+      "domain": "work_coordination",
+      "category": "unregistered_exception",
+      "A": "preserved_exception",
+      "B": "preserved_exception",
+      "C": "preserved_exception"
+    },
+    {
+      "id": "lm12",
+      "domain": "work_coordination",
+      "category": "genuinely_unresolved",
+      "A": "justified_uncertainty",
+      "B": "justified_uncertainty",
+      "C": "justified_uncertainty"
+    },
+    {
+      "id": "lm13",
+      "domain": "data_operations",
+      "category": "approved_sense",
+      "A": "faithful_paraphrase",
+      "B": "direct_allowed",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm14",
+      "domain": "data_operations",
+      "category": "approved_sense",
+      "A": "faithful_paraphrase",
+      "B": "direct_allowed",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm15",
+      "domain": "data_operations",
+      "category": "approved_sense",
+      "A": "faithful_paraphrase",
+      "B": "faithful_paraphrase",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm16",
+      "domain": "data_operations",
+      "category": "approved_sense",
+      "A": "faithful_paraphrase",
+      "B": "faithful_paraphrase",
+      "C": "faithful_paraphrase"
+    },
+    {
+      "id": "lm17",
+      "domain": "data_operations",
+      "category": "unregistered_exception",
+      "A": "preserved_exception",
+      "B": "preserved_exception",
+      "C": "preserved_exception"
+    },
+    {
+      "id": "lm18",
+      "domain": "data_operations",
+      "category": "genuinely_unresolved",
+      "A": "unjustified_resolution",
+      "B": "justified_uncertainty",
+      "C": "unjustified_resolution"
+    },
+    {
+      "id": "lm19",
+      "domain": "specification_documentation",
+      "category": "approved_sense",
+      "A": "faithful_paraphrase",
+      "B": "faithful_paraphrase",
+      "C": "faithful_paraphrase"
+    },
+    {
+      "id": "lm20",
+      "domain": "specification_documentation",
+      "category": "approved_sense",
+      "A": "faithful_paraphrase",
+      "B": "faithful_paraphrase",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm21",
+      "domain": "specification_documentation",
+      "category": "approved_sense",
+      "A": "direct_allowed",
+      "B": "direct_allowed",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm22",
+      "domain": "specification_documentation",
+      "category": "approved_sense",
+      "A": "direct_allowed",
+      "B": "direct_allowed",
+      "C": "direct_allowed"
+    },
+    {
+      "id": "lm23",
+      "domain": "specification_documentation",
+      "category": "unregistered_exception",
+      "A": "preserved_exception",
+      "B": "preserved_exception",
+      "C": "preserved_exception"
+    },
+    {
+      "id": "lm24",
+      "domain": "specification_documentation",
+      "category": "genuinely_unresolved",
+      "A": "justified_uncertainty",
+      "B": "justified_uncertainty",
+      "C": "justified_uncertainty"
+    }
+  ],
+  "totals_by_label": {
+    "A": {
+      "concept": [
+        16,
+        16
+      ],
+      "direct": [
+        6,
+        16
+      ],
+      "exception": [
+        4,
+        4
+      ],
+      "unresolved": [
+        2,
+        4
+      ],
+      "handling": [
+        22,
+        24
+      ],
+      "misuse": [
+        1,
+        24
+      ]
+    },
+    "B": {
+      "concept": [
+        16,
+        16
+      ],
+      "direct": [
+        10,
+        16
+      ],
+      "exception": [
+        4,
+        4
+      ],
+      "unresolved": [
+        4,
+        4
+      ],
+      "handling": [
+        24,
+        24
+      ],
+      "misuse": [
+        0,
+        24
+      ]
+    },
+    "C": {
+      "concept": [
+        15,
+        16
+      ],
+      "direct": [
+        12,
+        16
+      ],
+      "exception": [
+        4,
+        4
+      ],
+      "unresolved": [
+        2,
+        4
+      ],
+      "handling": [
+        21,
+        24
+      ],
+      "misuse": [
+        1,
+        24
+      ]
+    }
+  },
+  "totals_by_domain": {
+    "data_operations": {
+      "A": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          0,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          0,
+          1
+        ],
+        "handling": [
+          5,
+          6
+        ],
+        "misuse": [
+          1,
+          6
+        ]
+      },
+      "B": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          2,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          1,
+          1
+        ],
+        "handling": [
+          6,
+          6
+        ],
+        "misuse": [
+          0,
+          6
+        ]
+      },
+      "C": {
+        "concept": [
+          3,
+          4
+        ],
+        "direct": [
+          3,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          0,
+          1
+        ],
+        "handling": [
+          4,
+          6
+        ],
+        "misuse": [
+          1,
+          6
+        ]
+      }
+    },
+    "software_runtime": {
+      "A": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          0,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          1,
+          1
+        ],
+        "handling": [
+          6,
+          6
+        ],
+        "misuse": [
+          0,
+          6
+        ]
+      },
+      "B": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          2,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          1,
+          1
+        ],
+        "handling": [
+          6,
+          6
+        ],
+        "misuse": [
+          0,
+          6
+        ]
+      },
+      "C": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          2,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          1,
+          1
+        ],
+        "handling": [
+          6,
+          6
+        ],
+        "misuse": [
+          0,
+          6
+        ]
+      }
+    },
+    "specification_documentation": {
+      "A": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          2,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          0,
+          1
+        ],
+        "handling": [
+          5,
+          6
+        ],
+        "misuse": [
+          0,
+          6
+        ]
+      },
+      "B": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          2,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          1,
+          1
+        ],
+        "handling": [
+          6,
+          6
+        ],
+        "misuse": [
+          0,
+          6
+        ]
+      },
+      "C": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          3,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          0,
+          1
+        ],
+        "handling": [
+          5,
+          6
+        ],
+        "misuse": [
+          0,
+          6
+        ]
+      }
+    },
+    "work_coordination": {
+      "A": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          4,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          1,
+          1
+        ],
+        "handling": [
+          6,
+          6
+        ],
+        "misuse": [
+          0,
+          6
+        ]
+      },
+      "B": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          4,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          1,
+          1
+        ],
+        "handling": [
+          6,
+          6
+        ],
+        "misuse": [
+          0,
+          6
+        ]
+      },
+      "C": {
+        "concept": [
+          4,
+          4
+        ],
+        "direct": [
+          4,
+          4
+        ],
+        "exception": [
+          1,
+          1
+        ],
+        "unresolved": [
+          1,
+          1
+        ],
+        "handling": [
+          6,
+          6
+        ],
+        "misuse": [
+          0,
+          6
+        ]
+      }
+    }
+  },
+  "all_disputed_pass_sensitivity": {
+    "A": {
+      "concept": [
+        16,
+        16
+      ],
+      "direct": [
+        6,
+        16
+      ],
+      "exception": [
+        4,
+        4
+      ],
+      "unresolved": [
+        3,
+        4
+      ],
+      "handling": [
+        23,
+        24
+      ],
+      "misuse": [
+        1,
+        24
+      ]
+    },
+    "B": {
+      "concept": [
+        16,
+        16
+      ],
+      "direct": [
+        10,
+        16
+      ],
+      "exception": [
+        4,
+        4
+      ],
+      "unresolved": [
+        4,
+        4
+      ],
+      "handling": [
+        24,
+        24
+      ],
+      "misuse": [
+        0,
+        24
+      ]
+    },
+    "C": {
+      "concept": [
+        16,
+        16
+      ],
+      "direct": [
+        12,
+        16
+      ],
+      "exception": [
+        4,
+        4
+      ],
+      "unresolved": [
+        3,
+        4
+      ],
+      "handling": [
+        23,
+        24
+      ],
+      "misuse": [
+        1,
+        24
+      ]
+    }
+  },
+  "ambiguity_notes": [
+    "lm15C no-verification vs no-test can be understood pragmatically; strictgold distinguishes them.",
+    "lm24A/C inability to decide due to unknownsource can pragmatically imply check-needed; strictgold asks explicit function.",
+    "No gold changed. These disputed differences must not support an undisputed accuracy-gain claim."
+  ],
+  "scope": "16 assigned senses+4exception+4uncertainty, not alloutputwords or193-entry corpuscoverage",
+  "classification_notes": [
+    "lm04C policy inability is not technical inability.",
+    "lm20C actual negative use 시험하지 않았다 countsdirect.",
+    "lm23A/C qualify definition uncertainty, so no invented completed-work metric.",
+    "lm15C backupterm directcorrect even though stricthandling fails."
+  ]
+}

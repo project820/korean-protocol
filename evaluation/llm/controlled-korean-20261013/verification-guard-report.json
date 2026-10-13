@@ -1,0 +1,49 @@
+{
+ "worktree": "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor",
+ "change": "Appended guard '제시된 검증 상태는 남긴다.' to GUARDS scope line in validation/compile.py",
+ "guard_bytes_added": 38,
+ "budget_bytes": 28672,
+ "files": {
+  "validation/compile.py": {
+   "before": "2e56d639ee326bd853135e186099db2e58cd03a3b1c3ab80347e16e72fb611b2",
+   "after": "67697c2c6c1289ac8a6d115c01d88ec87305621f49916d23e0a094317a9a742f"
+  },
+  "tests/test_controlled_language.py": {
+   "before": "9f83f5ed6670449eb52a6eee22935c639c7c360bb0736125fc40054c8ae16eaa",
+   "after": "50404024d03bc2849ce7688be4eda91ef6ef76e0165026d99d5375d13398be29"
+  },
+  "profiles/chat.md": {
+   "before": "a6ce4012022e8cd5b4c498b9ccb8a8d62953b5923ee841e763894d149fc70730",
+   "after": "90cfea2e019fac15f68a277149d95c85e7d04ba2fc424f009761d6fbd2fc4394",
+   "bytes_before": 28601,
+   "bytes_after": 28639
+  },
+  "profiles/coding-agent.md": {
+   "before": "7a6ce15e53ddb22fc946c3ea482eba24bc1e9bdb3e15237ee121f5a4eed6c564",
+   "after": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60",
+   "bytes_before": 28631,
+   "bytes_after": 28669,
+   "headroom_after": 3
+  },
+  "profiles/work-document.md": {
+   "before": "ad3a871edf1d9261e3f48c8f7ee276c1c985d630b6df6138eaef5713d9d67e52",
+   "after": "97569176f17d90c3dbfd49ab4350de1784f36313a03ffba7400a9460e99b341d",
+   "bytes_before": 28610,
+   "bytes_after": 28648
+  },
+  "pack/protocol.md": {
+   "before": "80362c44d98002ba678413a054c9fe96f7ce7f9152473e178d3f6886a44a293a",
+   "after": "7e444b90ec3800f9f1563b4593b023895d982e9ca1c7f052b62397d7050345ce",
+   "bytes_before": 94230,
+   "bytes_after": 94268
+  }
+ },
+ "tests": {
+  "new_test": "tests.test_controlled_language.ControlledLanguageTests.test_compiled_profiles_keep_provided_verification_status",
+  "before_patch": "FAILED (failures=1)",
+  "compile": "python3 -B -m validation.compile --root . --output . -> compiled 4 outputs",
+  "after_patch": "python3 -B -m unittest tests.test_controlled_language -> Ran 11 tests OK"
+ },
+ "untouched": "rules.json, cases, gold, eval, crosswalk proof; no commit/push",
+ "semantic_caveat": "Profile text only; LLM output regression not re-run"
+}

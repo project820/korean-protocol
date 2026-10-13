@@ -1,0 +1,183 @@
+{
+  "published": false,
+  "signed": false,
+  "artifact_path": "/tmp/kproto-release030-final/korean-protocol-0.3.0-draft.zip",
+  "prefix": "korean-protocol-0.3.0-draft",
+  "zip_bytes": 415111,
+  "sha256": "4ca680487f8310df07369629bac056bb1fc705a6a540acca54257989c55a6fa1",
+  "file_count": 36,
+  "checksums_verified": 35,
+  "allowlisted_source_files_match": 33,
+  "source_versions": {
+    "specification/rules.json": "0.3.0-draft",
+    "lexicon/core.json": "0.3.0-draft",
+    "lexicon/domains/software.json": "0.3.0-draft"
+  },
+  "offline_install_version": "0.3.0",
+  "compiled_profiles": [
+    {
+      "path": "profiles/coding-agent.md",
+      "sha256": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60",
+      "byte_identical_to_before": true
+    },
+    {
+      "path": "profiles/chat.md",
+      "sha256": "90cfea2e019fac15f68a277149d95c85e7d04ba2fc424f009761d6fbd2fc4394",
+      "byte_identical_to_before": true
+    },
+    {
+      "path": "profiles/work-document.md",
+      "sha256": "97569176f17d90c3dbfd49ab4350de1784f36313a03ffba7400a9460e99b341d",
+      "byte_identical_to_before": true
+    },
+    {
+      "path": "pack/protocol.md",
+      "sha256": "7e444b90ec3800f9f1563b4593b023895d982e9ca1c7f052b62397d7050345ce",
+      "byte_identical_to_before": true
+    }
+  ],
+  "evaluation_files_packaged": false,
+  "raw_pdf_packaged": false,
+  "public_version_candidate": "0.3.0",
+  "sequence_candidate": 2,
+  "final": true,
+  "initial_package_audit_path": "evaluation/release-0.3.0-20261013/unsigned-package-audit.json",
+  "initial_zip_sha256": "4ca680487f8310df07369629bac056bb1fc705a6a540acca54257989c55a6fa1",
+  "byte_identical_to_initial_zip": true,
+  "final_document_edits_packaged": false,
+  "reason_document_edits_do_not_affect_zip": "README.md and docs/status/* are absent from distribution.build.INPUTS; the explicit allowlist is unchanged.",
+  "source_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "4a00ba5994c0d66364882d8bc4d345bddca53ca3c2b4891a65db0d47b2ebfa23"
+    },
+    {
+      "path": "NOTICE.md",
+      "sha256": "cefbf4f6564ba334b9493187a929f536260b0aa94d40a89b3992f59cd4ace261"
+    },
+    {
+      "path": "runtime/__init__.py",
+      "sha256": "46b8e1e65578627c91a924ce69a4c09fc3a4bd3df2c32fb1472c981c5dfa0f96"
+    },
+    {
+      "path": "runtime/kproto.py",
+      "sha256": "b1e19233e11fca9c0770ccfa70b0fec89e4f4034dc8bfb2d43856fbad266c40b"
+    },
+    {
+      "path": "profiles/coding-agent.md",
+      "sha256": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60"
+    },
+    {
+      "path": "profiles/chat.md",
+      "sha256": "90cfea2e019fac15f68a277149d95c85e7d04ba2fc424f009761d6fbd2fc4394"
+    },
+    {
+      "path": "profiles/work-document.md",
+      "sha256": "97569176f17d90c3dbfd49ab4350de1784f36313a03ffba7400a9460e99b341d"
+    },
+    {
+      "path": "specification/rules.json",
+      "sha256": "e1e921b1d3cfc7e5039a0d6ba8447e05a21bf47331cadcd393c982a4c2272f03"
+    },
+    {
+      "path": "specification/ste-crosswalk.json",
+      "sha256": "d327bd514ef76d92cf1cae2e43f8ba4e7fdf1a96934f843229d069537bc718aa"
+    },
+    {
+      "path": "lexicon/core.json",
+      "sha256": "2f8ad8315fe23a3e63406a02aa1b58188cc60a79a06e1a4239e3ed7cbf1b1bad"
+    },
+    {
+      "path": "lexicon/domains/software.json",
+      "sha256": "2e537f1178e85e4efb63f357a5f8da13927749ada2f58647f8bff879661db688"
+    },
+    {
+      "path": "pack/protocol.md",
+      "sha256": "7e444b90ec3800f9f1563b4593b023895d982e9ca1c7f052b62397d7050345ce"
+    },
+    {
+      "path": "schemas/lexicon.schema.json",
+      "sha256": "bc19159b3216efbfddff2d1e69c4747718bc936dbe5217fe14d76004c1a55898"
+    },
+    {
+      "path": "schemas/release.schema.json",
+      "sha256": "3da3a08075bb48a38caa128995183aca05b8f63a871aace97389bf3f8858f53a"
+    },
+    {
+      "path": "docs/spec/toc.md",
+      "sha256": "970b6057447db29d09d30cadae31fe1022834408d0574cacc99a85ca2061d04f"
+    },
+    {
+      "path": "docs/spec/architecture.md",
+      "sha256": "d330b527ff2009cf7d14e7c0624ef701d2cd934a85e516af1ef7deafdcb2b9da"
+    },
+    {
+      "path": "docs/spec/coverage-policy.md",
+      "sha256": "b4736606efb2806d8dd22aa2ad3e2850f83754c06e663422f2a1418331cd50ae"
+    },
+    {
+      "path": "docs/spec/korean-rules.md",
+      "sha256": "97c0d7b26be168d5711a01bc8867faf35c9cc6e87e8e9d27c197881d3e9036af"
+    },
+    {
+      "path": "docs/spec/control-expression.md",
+      "sha256": "aa1dbb8b606b5b36ec640dec71088525298c512a6704d816e6990361ebacd65d"
+    },
+    {
+      "path": "docs/spec/lexicon.md",
+      "sha256": "d10dc420521c7e46078bf206432d873c491252a6ba17c8d64b304d652bcf236d"
+    },
+    {
+      "path": "examples/rule-cases.json",
+      "sha256": "a26e63ec0f232b970594b28ee6e07ccd0614b8f75e7f2141ae3883349d8b7699"
+    },
+    {
+      "path": "examples/lexicon-cases.json",
+      "sha256": "5dc692c92b0ba704c54c86d4d4a2dafe42017500f03dac53d309264a747d4a0e"
+    },
+    {
+      "path": "distribution/START-HERE.md",
+      "sha256": "aad954354ba3687323e1b31cf9a936028f0808e55b27e2a5ffda0b333d24e0ed"
+    },
+    {
+      "path": "distribution/CHAT-START.md",
+      "sha256": "c68efa7d2e3ee022d346d33e118b7b1634fcadd502b7d0d14b221e95b46b27ca"
+    },
+    {
+      "path": "distribution/launcher.py",
+      "sha256": "72a53563dd24b8ad200dcd50e359077ac5d2f47831724294994ef910d44cb53b"
+    },
+    {
+      "path": "INSTALL.md",
+      "sha256": "530e1834a3f881b1a74b387cfa7f1423517f05779fd753529a45f97f324b4adb"
+    },
+    {
+      "path": "distribution/agent_install.py",
+      "sha256": "097344c293bc32e8ef28a9f7117cd323591c82cb2ca901e209a6a0a01977177d"
+    },
+    {
+      "path": "docs/distribution/signed-install.md",
+      "sha256": "608b6d667d49649acffc86e73b59c97441efab0b04d50470c0bebbac95bd707d"
+    },
+    {
+      "path": "docs/distribution/application-controls.md",
+      "sha256": "88f696be6e4d318fa1b502668aaa1fa1e59743240e403ec8221b40e3252973d3"
+    },
+    {
+      "path": "research/2026-10-13-ellipsis/research-note.md",
+      "sha256": "7aa6acc5abc938caadbe440bf2449d747212c4667c95d7da6d8ce9543f252146"
+    },
+    {
+      "path": "research/2026-10-13-ellipsis/sourceevidence.json",
+      "sha256": "3aa261af2c345727a96f1a25e059f9be2f0bbe1547ab86b69f51f2a46b777250"
+    },
+    {
+      "path": "distribution/trust/publisher.pub",
+      "sha256": "67e81449136186d892ccf5dd1ce2898629b889bdeed7e9a6401686f9199cae98"
+    },
+    {
+      "path": "distribution/trust/publisher.json",
+      "sha256": "abdcf16e82e1373989dd00f16efc2992af0b489eb932bf58280a413ab61c7f37"
+    }
+  ]
+}

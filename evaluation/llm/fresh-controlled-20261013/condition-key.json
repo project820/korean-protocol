@@ -1,0 +1,12 @@
+{
+  "1": {
+    "A": "ste",
+    "B": "treatment",
+    "C": "baseline"
+  },
+  "2": {
+    "A": "baseline",
+    "B": "ste",
+    "C": "treatment"
+  }
+}

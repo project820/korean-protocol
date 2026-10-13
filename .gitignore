@@ -2,6 +2,12 @@
 /research/**
 !/research/2026-10-12/
 !/research/2026-10-12/research-report.html
+!/research/2026-10-13-ellipsis/
+!/research/2026-10-13-ellipsis/research-note.md
+!/research/2026-10-13-ellipsis/sourceevidence.json
 .DS_Store
 __pycache__/
 *.py[cod]
+
+!/research/2026-10-13-ellipsis/controlled-language-papers.md
+!/research/2026-10-13-ellipsis/controlled-language-papers.json

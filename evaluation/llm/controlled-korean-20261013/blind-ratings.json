@@ -1,0 +1,443 @@
+{
+  "reviews": [
+    {
+      "id": "ck01_protocol_definition",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "기술 문서의 작성 규약이라는 정의, 세 요소, 시험 미실시 상태와 가상 적용 예시를 모두 보존한다. plain_style은 “규약입니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "기술 문서의 작성 규약이라는 정의, 세 요소, 시험 미실시 상태와 가상 적용 예시를 모두 보존한다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "기술 문서의 작성 규약이라는 정의, 세 요소, 시험 미실시 상태와 가상 적용 예시를 모두 보존한다. plain_style은 “규약입니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck02_global_condition_procedure",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "전원 꺼짐과 0 kPa의 동시 충족을 모든 단계에 적용하고, 열기→교체→닫기 및 조건 불충족 시 시작 금지와 관리자 통보를 보존한다. plain_style은 “작업 전 조건을 확인하세요.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "전원 꺼짐과 0 kPa의 동시 충족을 모든 단계에 적용하고, 열기→교체→닫기 및 조건 불충족 시 시작 금지와 관리자 통보를 보존한다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "전원 꺼짐과 0 kPa의 동시 충족을 모든 단계에 적용하고, 열기→교체→닫기 및 조건 불충족 시 시작 금지와 관리자 통보를 보존한다. plain_style은 “상태에서만 수행하세요.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck03_simultaneous_action",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "두 버튼을 동시에 3초 동안 누르라는 지시와 녹색 표시등이 켜지면 놓으라는 지시를 함께 제시한다. 3초 뒤 표시등과 관계없이 놓으라는 지시는 없으며, 녹색 표시등의 시작 상태 의미를 보존한다. plain_style은 “동시에 3초 동안 누르세요.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "두 버튼을 동시에 3초 동안 누르라는 지시와 녹색 표시등이 켜지면 놓으라는 지시를 함께 제시한다. 3초 뒤 표시등과 관계없이 놓으라는 지시는 없으며, 녹색 표시등의 시작 상태 의미를 보존한다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "두 버튼을 동시에 3초 동안 누르라는 지시와 녹색 표시등이 켜지면 놓으라는 지시를 함께 제시한다. 3초 뒤 표시등과 관계없이 놓으라는 지시는 없으며, 녹색 표시등의 시작 상태 의미를 보존한다. plain_style은 “동시에 3초 동안 누르세요.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck04_permission_and_duty",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "접수 후 대기 구역 이용의 선택성과 건물 안에서 출입증 착용의 의무를 구별한다. plain_style은 “이용할 수 있습니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "접수 후 대기 구역 이용의 선택성과 건물 안에서 출입증 착용의 의무를 구별한다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "접수 후 대기 구역 이용의 선택성과 건물 안에서 출입증 착용의 의무를 구별한다. plain_style은 “이용하셔도 됩니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck05_possibility_warning",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "50 °C 초과 조건과 보호 회로에 의한 차단 가능성을 보존하고, 확률이나 대응 행동을 만들지 않는다. plain_style은 “전원을 차단할 수 있습니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "50 °C 초과 조건과 보호 회로에 의한 차단 가능성을 보존하고, 확률이나 대응 행동을 만들지 않는다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "50 °C 초과 조건과 보호 회로에 의한 차단 가능성을 보존하고, 확률이나 대응 행동을 만들지 않는다. plain_style은 “전원을 차단할 수 있습니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck06_completion_and_unverified_report",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "문구 수정, 로컬 타입 검사 통과, Safari 실제 계정 시험 미실행, 비활성화 현상의 보고와 원인 미조사를 구별한다. plain_style은 “로그인 버튼의 문구를 수정했습니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "문구 수정, 로컬 타입 검사 통과, Safari 실제 계정 시험 미실행, 비활성화 현상의 보고와 원인 미조사를 구별한다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "문구 수정, 로컬 타입 검사 통과, Safari 실제 계정 시험 미실행, 비활성화 현상의 보고와 원인 미조사를 구별한다. plain_style은 “로컬 타입 검사를 실행해 통과했습니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck07_ambiguous_noun_roles",
+      "ratings": {
+        "A": {
+          "meaning_pass": false,
+          "task_pass": false,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "“업무 지시문을 확정하려면 검토 담당자와 도면 발송 담당자를 먼저 확인해야 합니다.”라고 설명하지만 검토 담당자와 발송 담당자가 누구인지 실제로 묻지 않는다. 고정 기준에서 필수로 요구하는 두 역할 확인 질문을 누락한다. 메모만으로 확정할 수 없다는 한계와 검토 후 발송 순서는 정확하며, 임의 역할 배정은 없다. 이 누락은 task_pass와 필수 요구 보존을 보는 meaning_pass에 함께 반영하며 별개의 두 오류로 세지 않는다. plain_style은 “작성할 수 없습니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "“검토와 도면 발송은 각각 발주처 담당자 김민수와 시공사 담당자 이지현 중 누가 맡는가?”라고 두 역할을 묻고 검토 후 발송 순서를 유지한다. “담당자가 정해져 있지 않아”는 독립적으로 읽으면 실제 미배정 단정이지만, 이어지는 “메모에서 확인되는 작업 순서”와 확인 질문의 문맥상 메모에서 담당자를 특정할 수 없다는 설명으로 읽을 수 있어 입증된 사실 추가로 판정하지 않는다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "“도면 검토 담당자와 도면 발송 담당자는 각각 누구인가요?”라고 누락된 두 역할을 직접 묻는다. “모두 검토한다면”은 두 사람 검토를 확정하지 않는 조건문이며 검토 순서 확인도 실제 순서를 지정하지 않는다. 이미 알려진 검토 후 발송을 재진술하지 않았지만 뒤집지도 않는다. plain_style은 “각각 누구인가요?”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck08_inclusive_endpoints_units",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "양 끝값을 포함하는 범위와 A=-5 °C 합격, B=35 °C 합격, C=35.1 °C 불합격을 표로 보존한다. plain_style은 “35 °C 이하입니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "양 끝값을 포함하는 범위와 A=-5 °C 합격, B=35 °C 합격, C=35.1 °C 불합격을 표로 보존한다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "양 끝값을 포함하는 범위와 A=-5 °C 합격, B=35 °C 합격, C=35.1 °C 불합격을 표로 보존한다. plain_style은 “양 끝값을 포함합니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck09_same_object_names",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "하나의 저장 탱크 T-07을 지정하고 수위 확인→배출 밸브 닫기→외벽 누수 확인의 순서와 일관된 대상을 보존한다. plain_style은 “다음 순서대로 점검하세요.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "하나의 저장 탱크 T-07을 지정하고 수위 확인→배출 밸브 닫기→외벽 누수 확인의 순서와 일관된 대상을 보존한다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "하나의 저장 탱크 T-07을 지정하고 수위 확인→배출 밸브 닫기→외벽 누수 확인의 순서와 일관된 대상을 보존한다. plain_style은 “다음 순서대로 점검하세요.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck10_preserve_polite_quote",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "고객 문의의 글자와 문장부호를 그대로 보존하고, 기존 및 변경 발송 예정일과 아직 하지 않은 고객 안내의 처리 의무를 전달한다. plain_style은 “변경되었습니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다. 고객 원문 안의 높임말은 정확한 인용 보존 예외에 해당한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "고객 문의의 글자와 문장부호를 그대로 보존하고, 기존 및 변경 발송 예정일과 아직 하지 않은 고객 안내의 처리 의무를 전달한다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다. 고객 원문 안의 높임말은 정확한 인용 보존 예외에 해당한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "고객 문의의 글자와 문장부호를 그대로 보존하고, 기존 및 변경 발송 예정일과 아직 하지 않은 고객 안내의 처리 의무를 전달한다. plain_style은 “변경됐습니다.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다. 고객 원문 안의 높임말은 정확한 인용 보존 예외에 해당한다."
+        }
+      }
+    },
+    {
+      "id": "ck11_explicit_polite_genre",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "B-214의 발송 예정일 변경과 두 날짜를 보존하며 명시적으로 요청한 정중한 문자 장르에 맞는 높임말을 사용한다. 도착 예정일 미정은 제공된 사실이며 인사와 감사는 요청 장르에 맞는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "B-214의 발송 예정일 변경과 두 날짜를 보존하며 명시적으로 요청한 정중한 문자 장르에 맞는 높임말을 사용한다. 도착 예정일 미정은 제공된 사실이며 인사와 감사는 요청 장르에 맞는다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "B-214의 발송 예정일 변경과 두 날짜를 보존하며 명시적으로 요청한 정중한 문자 장르에 맞는 높임말을 사용한다. 도착 예정일 미정은 제공된 사실이며 인사와 감사는 요청 장르에 맞는다."
+        }
+      }
+    },
+    {
+      "id": "ck12_simple_fact_answer",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "오늘 예약 접수 마감 시각 17:00을 직접 답하며 새 사실이나 조언을 추가하지 않는다. plain_style은 “마감해요.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "오늘 예약 접수 마감 시각 17:00을 직접 답하며 새 사실이나 조언을 추가하지 않는다. 새 작성 본문은 보통체이며 필수 정보를 잃지 않는 문장 구성이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "오늘 예약 접수 마감 시각 17:00을 직접 답하며 새 사실이나 조언을 추가하지 않는다. plain_style은 “마감해요.”라는 새 작성 본문의 높임말 때문에 실패한다. 이 문체 차이는 의미·과업·구조 판정에 반영하지 않는다."
+        }
+      }
+    }
+  ],
+  "summary": {
+    "case_count": 12,
+    "output_count": 36,
+    "pass_counts": {
+      "A": {
+        "meaning_pass": 11,
+        "task_pass": 11,
+        "structure_pass": 12,
+        "no_surplus": 12,
+        "plain_style": 1
+      },
+      "B": {
+        "meaning_pass": 12,
+        "task_pass": 12,
+        "structure_pass": 12,
+        "no_surplus": 12,
+        "plain_style": 12
+      },
+      "C": {
+        "meaning_pass": 12,
+        "task_pass": 12,
+        "structure_pass": 12,
+        "no_surplus": 12,
+        "plain_style": 1
+      }
+    },
+    "failure_ids": {
+      "A": {
+        "meaning_pass": [
+          "ck07_ambiguous_noun_roles"
+        ],
+        "task_pass": [
+          "ck07_ambiguous_noun_roles"
+        ],
+        "structure_pass": [],
+        "no_surplus": [],
+        "plain_style": [
+          "ck01_protocol_definition",
+          "ck02_global_condition_procedure",
+          "ck03_simultaneous_action",
+          "ck04_permission_and_duty",
+          "ck05_possibility_warning",
+          "ck06_completion_and_unverified_report",
+          "ck07_ambiguous_noun_roles",
+          "ck08_inclusive_endpoints_units",
+          "ck09_same_object_names",
+          "ck10_preserve_polite_quote",
+          "ck12_simple_fact_answer"
+        ]
+      },
+      "B": {
+        "meaning_pass": [],
+        "task_pass": [],
+        "structure_pass": [],
+        "no_surplus": [],
+        "plain_style": []
+      },
+      "C": {
+        "meaning_pass": [],
+        "task_pass": [],
+        "structure_pass": [],
+        "no_surplus": [],
+        "plain_style": [
+          "ck01_protocol_definition",
+          "ck02_global_condition_procedure",
+          "ck03_simultaneous_action",
+          "ck04_permission_and_duty",
+          "ck05_possibility_warning",
+          "ck06_completion_and_unverified_report",
+          "ck07_ambiguous_noun_roles",
+          "ck08_inclusive_endpoints_units",
+          "ck09_same_object_names",
+          "ck10_preserve_polite_quote",
+          "ck12_simple_fact_answer"
+        ]
+      }
+    },
+    "non_style_failure_output_ids": [
+      "ck07_ambiguous_noun_roles:A"
+    ],
+    "assessment_rule": "필수 요구 누락·반전·근거 없는 추가는 meaning_pass에서 평가하고 실제 과업 수행은 task_pass에서 별도로 평가한다. 기본 보통체 관찰은 plain_style에서만 평가하며 명시적인 정중한 장르 요청과 정확한 원문 인용에는 예외를 적용한다."
+  },
+  "limitations": [
+    "blind-input.json만 읽었다. 조건 키, 프로필, 모델 메타데이터와 다른 저장소 파일은 읽지 않았다. A/B/C의 문체 패턴에서 조건을 추측할 가능성은 남으므로 이 평가는 완전한 문체 차폐를 뜻하지 않는다.",
+    "ck07 B의 “담당자가 정해져 있지 않아”는 실제 미배정과 메모에서 역할을 특정할 수 없음 사이에 표현상의 모호성이 있다. 고정 입력은 실제 배정 상태를 제공하지 않는다. 문맥상 후자의 해석이 가능하므로 실패로 단정하지 않았으며, 실제 미배정이라고 의도했다는 추가 근거가 있으면 의미 판정이 달라진다.",
+    "ck07 A의 “먼저 확인해야 합니다”는 필요한 확인 내용을 간접적으로 전달한다. 고정 기준은 누가 맡는지 묻는 질문을 요구하므로 실패로 평가했다. 확인 필요성의 서술 자체를 질문의 기능적 대체로 허용하는 평가 규칙에서는 이 한 건의 판정이 달라진다.",
+    "ck03의 3개 출력은 3초 누름과 녹색 표시등을 본 후 해제를 연속해 적었다. 표시등이 정확히 3초에 켜지는지 입력에 없지만, 어느 출력도 표시등 전에 해제하거나 임의의 추가 누름 시간을 지시하지 않아 실패로 세지 않았다.",
+    "no_surplus는 모든 반복을 기계적으로 탈락시키지 않았다. ck04 A/C의 선택 사항 재확인, ck08의 양 끝 포함 설명, ck09의 대상 명칭 반복은 안내 정확성에 도움이 되는 재표현으로 허용했다. ck06 A의 해결 여부 미확인 설명도 완료 범위를 오해하지 않게 하는 표현으로 허용했다.",
+    "ck11 A의 “이용에 참고해 주시기 바랍니다. 감사합니다.”는 실질 정보가 적지만 명시적으로 요청한 정중한 고객 문자에 맞는 마무리로 허용했다. 장르상 인사와 감사를 불필요한 군더더기로 간주하지 않았다.",
+    "평가는 한 명의 독립 검토자에 의한 질적 판단이며 새 모델 호출이나 다른 평가자의 결과를 사용하지 않았다."
+  ]
+}

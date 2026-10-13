@@ -25,7 +25,7 @@ SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc
 
 ## 공개 배포에서 서명 설치한다
 
-공개 배포 주소는 `https://project820.github.io/korean-protocol`이다. Codex 예시이며, Claude Code에서는 모든 명령의 `--host codex`를 `--host claude-code`로 바꾼다. 각 명령은 JSON을 출력한다. 명령이 실패하면 원인과 종료 코드를 보고하고 성공으로 표시하지 않는다.
+공개 배포 주소는 `https://project820.github.io/korean-protocol`이다. 기존 공개 서명본은 0.2.0·순번 1이며 현재 로컬 0.3.0-draft 후보는 아직 게시하지 않았다. Codex 예시이며, Claude Code에서는 모든 명령의 `--host codex`를 `--host claude-code`로 바꾼다. 각 명령은 JSON을 출력한다. 명령이 실패하면 원인과 종료 코드를 보고하고 성공으로 표시하지 않는다.
 
 macOS에서는 예약 자동 갱신을 명시적으로 등록한다.
 
@@ -48,7 +48,7 @@ macOS에서도 자동 갱신을 원하지 않으면 `--autoupdate off`를 사용
 
 ## 오프라인 미서명 설치를 명시적으로 선택한다
 
-네트워크를 사용할 수 없거나 사용자가 미서명 로컬 설치를 요청하면 서명 옵션 없이 실행한다. 이 경로는 저장소 또는 ZIP의 파일을 그대로 설치하며 자동 갱신은 꺼져 있다.
+네트워크를 사용할 수 없거나 사용자가 미서명 로컬 설치를 요청하면 서명 옵션 없이 실행한다. 이 경로는 저장소 또는 ZIP의 파일을 그대로 설치하며 자동 갱신은 꺼져 있다. 현재 로컬 후보는 설치 상태에 0.3.0으로 기록하며, 서명된 공개 발행을 뜻하지 않는다.
 
 ```sh
 python3 -B distribution/agent_install.py plan --host codex
@@ -84,3 +84,7 @@ python3 -B distribution/agent_install.py uninstall --host codex
 ## 라이선스를 함께 보존한다
 
 직접 작성한 코드·규약·사전·문서는 MIT License로 제공한다. 저장소와 ZIP의 `LICENSE`·`NOTICE.md`를 함께 보존한다. 설치 캐시의 `pack/protocol.md`와 지속 관리 Python 파일에도 허가문이 포함되며, 규약 또는 설치 코드를 재배포할 때 해당 고지를 함께 제공한다. 외부 ASD-STE100 원문 등의 권리는 프로젝트의 MIT License로 바뀌지 않는다.
+
+## 규약 적용과 높임말을 바꾼다
+
+새 설치는 규약 적용을 켜고 높임말을 끈다. 설치 뒤 `configure --protocol on|off`와 `configure --honorifics on|off`로 각각 바꾼다. 실제 명령·상태 의미·진행 중인 세션의 제한은 [적용 설정](docs/distribution/application-controls.md)을 따른다. 반환된 지속 관리 명령을 사용하고 실제 사용자 환경과 시험용 홈을 혼동하지 않는다.

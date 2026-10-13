@@ -1,0 +1,41 @@
+{
+  "condition": "treatment",
+  "model_requested": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "task_mode": "generation",
+  "case_count": 12,
+  "samples_per_condition": 1,
+  "prepared_only": true,
+  "global_user_config_loaded": false,
+  "global_user_agents_loaded": false,
+  "read_boundary_limit": "Read boundaries are prompt instructions and require raw tool-trace audit; the CLI read-only sandbox does not guarantee cwd-only reads.",
+  "trace_audit": "required; not performed",
+  "trace_audit_source": "stdout.jsonl tool calls and results",
+  "semantic_evaluation": "not performed",
+  "automatic_fallback": false,
+  "upstream_provider_observed": null,
+  "fallback_observed": null,
+  "input_contract": {
+    "runner_sha256": "5d567065604d74dd1ab824d808acc1f46ea78c06f5380167b27913b20ac1e482",
+    "shared_runner_sha256": "643be853e32ec08ebb79b5c6e625b9d114e1ad068ce76e3bbc6e69348644496c",
+    "cases_sha256": "d1e065bb8c2bbd9620f0ba81cd1137734850291f73c5e2bf9caaa88ad8bacf30",
+    "profile_sha256": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+    "core_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+    "software_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+    "plan_sha256": "719bb54c4400e4b091ba63fde46f61b52c43da941c92f8caf577d8c1db55a15c",
+    "adjudication_sha256": "2e486c32564f7c3cfdeccd296aed813fc2100526826b3c3af711a6dfa2d999cd",
+    "prompt_sha256": "0292a216b6b5a1c9b2c04ed8994749dd053fe4e178213c045ed2292cb9c60aac",
+    "case_count": 12,
+    "task_mode": "generation",
+    "permitted_models": [
+      "gpt-6.1-sol",
+      "anthropic/claude-opus-5-5"
+    ],
+    "reasoning_effort": "high"
+  },
+  "mounted_files_sha256": {
+    "AGENTS.md": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+    "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+    "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e"
+  }
+}

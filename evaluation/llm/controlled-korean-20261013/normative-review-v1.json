@@ -1,0 +1,671 @@
+{
+ "verdict": "changes_requested",
+ "summary": "13 rules changed (12 at the first read; KP-VER-008 landed concurrently at 18:32 KST). 23 STE IDs are affected by a changed target rule or a new or modified linked authored case. Of the 20 affected previous passes, 18 hold on content and 2 (5.3, 9.4) are blocked by KP-KO-005. The affected partials 5.1, 6.3 and 6.6 stay fail. The 30 unaffected IDs (29 passes and the 1.1 fail) carry forward by equality. Content restorable: 47 of 49. 5.3 and 9.4 need a KO-005 revision and re-review first.",
+ "issues": [
+  {
+   "severity": "high",
+   "rule_id": "KP-KO-005",
+   "path": "specification/rules.json#KP-KO-005; validation/compile.py GUARDS",
+   "reason": "The plain default has no scope boundary between newly authored text and edits of existing text. GUARDS states '기본 종결형은 ~다' unconditionally; KO-005 exceptions cover only user-specified register/genre and quotes/code, not an existing document's or product's established register or an external-recipient genre. Consequences: (1) a partial edit of a 합니다체 document or newly written UI copy in a 습니다 product produces mixed register, which defeats the 9.4 function (consistent endings per document/reader); (2) 30 of 84 fixed independent cases expect 'keep' with honorific output (e.g. FC-5-2, FC-5-3, FC-7-1, FC-8-6), and they stay valid only if the default does not apply to edits outside an explicit normalization task; (3) authored cases are inconsistent: the new KO-005-PLAIN-* contexts say '기본 문체로 편집한다', but the 12 modified authored cases (e.g. KP-EDIT-004-R, KP-WRD-002-R, KP-DESC-005-R) convert register without that instruction and merge two edits in one minimal pair, while about 60 unchanged rules' examples preserve 합니다/해요 in before/after edits.",
+   "suggested_fix": "Scope the default in both KO-005 and GUARDS: it applies to text the model writes and to explicit style normalization; edits of existing text keep the source register unless the user requests normalization. Add an exception for an established document/product register and an audience genre (customer notice, email, UI message). Revert register-only changes in the expected outputs of modified authored cases whose context gives no normalization instruction, or add that instruction to their context."
+  },
+  {
+   "severity": "high",
+   "rule_id": "KP-KO-005",
+   "path": "specification/rules.json#KP-KO-005, #KP-PROC-002; validation/compile.py GUARDS",
+   "reason": "'절차는 ~한다' makes an instruction identical in form to a description or to the writer's own planned action. GUARDS also allows '명확한 주체는 생략할 수 있다'. In coding-agent and chat output, '다음 명령을 실행한다.' can mean either 'run this' or 'I will run this', so the actor and the speech act both change. Outside a numbered step, '잠금 버튼을 누른 상태에서 덮개를 연다.' (KP-PROC-001-K/-SIMULTANEOUS) reads as a mechanism description. KO-005 gives no plain form for prohibition or safety commands. '~지 마세요' could become '~지 않는다', which turns a prohibition into a description and weakens STE 5.3/7.1 command force (FC-7-1 '떨어뜨리지 마세요'). The 5.3 crosswalk design still says '한국어 지시형'.",
+   "suggested_fix": "Define '~한다' as a directive only inside marked procedure steps whose actor is the reader. Outside steps, or when the writer and the reader can both be the actor, name the actor or use '~하라'. Give a prohibition form ('~하지 마라' / '~해서는 안 된다') and require a command form for safety instructions. Mark the context of the PROC-001-K/-SIMULTANEOUS cases as a procedure step."
+  },
+  {
+   "severity": "medium",
+   "rule_id": "KP-KO-005",
+   "path": "specification/rules.json#KP-KO-005 positive_example, examples/rule-cases.json#KP-KO-005-PLAIN-REQUEST",
+   "reason": "Removing '부탁드립니다' removes a lexical request verb, which is more than an addressee honorific. The only plain request form shown is the performative '요청한다'. With an omitted subject this collides with a report ('(someone) requests'), and in present tense with a habitual description. KO-005 offers no plain form for request or recommendation to the reader, so request versus report depends on the case context alone.",
+   "suggested_fix": "Specify reader-directed request forms ('~해 주기 바란다' / '~해 달라'). Allow '~을 요청한다' only when the requester and addressee are explicit or recoverable. Keep reported requests in past tense with their agent ('사용자가 저장을 요청했다')."
+  },
+  {
+   "severity": "medium",
+   "rule_id": "KP-KO-005",
+   "path": "specification/rules.json#KP-KO-005 requirement",
+   "reason": "'질문은 ~인가·~인지 등' is grammatically imprecise. '~인가' attaches to the copula and adjectives, while verbs take '~는가' (the case itself uses '끝났는가'). '~인지' is an embedded or indirect-question ending, so sentence-final '~인지' forms a fragment. In chat, a written '~는가?' can read as a rhetorical or self-posed question when the model needs the user's answer (EDIT-002 clarification).",
+   "suggested_fix": "Write the direct questions as '~는가·~(으)ㄴ가'. Name '~는지' only as an embedded form ('~는지 확인한다'). For an information request to the user, require a direct question or '~는지 알려 달라'."
+  },
+  {
+   "severity": "medium",
+   "rule_id": "(profile guard)",
+   "path": "validation/compile.py GUARDS line 3",
+   "reason": "The guard '답에 필수인 정보를 확인할 수 없으면 그 정보만 묻는다' was compressed to '답에 필수인 정보만 묻는다'. The trigger 'only when it cannot be confirmed' was lost. The unconditional form permits asking for essential information that the model can determine from the provided context or repository. KP-EDIT-002 still has the condition, so the profile now states two inconsistent norms. This is a primary norm change made under budget compression.",
+   "suggested_fix": "Restore '확인할 수 없는 필수 정보만 묻는다.' This adds about 15 bytes."
+  },
+  {
+   "severity": "medium",
+   "rule_id": "KP-DESC-005",
+   "path": "specification/rules.json#KP-DESC-005 requirement",
+   "reason": "Old: '같은 결론이나 공유된 배경이 ... 반복을 줄이고'. New: '새 근거·조건·구별을 더하지 않는 결론·공유 배경·답변 예고·맺음말은 삭제한다'. The qualifier 'same/repeated' was dropped and 'reduce' became 'delete'. Read alone, the compiled requirement covers a sole first statement of the conclusion, because a conclusion adds no 'new basis', and this conflicts with DESC-001's first-sentence result. Only the condition '(반복·의례적 설명...)' prevents that reading. A recap that serves as a structure signal (STE 6.2) also has no exception.",
+   "suggested_fix": "Change the requirement to '이미 밝힌 결론·공유 배경을 되풀이하거나 새 정보 없는 답변 예고·맺음말은 삭제한다.' Keep 'reduce' for partial repetition."
+  },
+  {
+   "severity": "medium",
+   "rule_id": "KP-DESC-001",
+   "path": "specification/rules.json#KP-DESC-001 requirement",
+   "reason": "Old: '그 결론의 범위나 제한을 바로 연결한다'. New: '결론을 바꾸는 범위·제한은 바로 연결한다'. This is a primary narrowing, not budget wording. A scope limit such as 'only tested on macOS' or 'not deployed' arguably does not 'change' the conclusion, so it may now be deferred or dropped. That weakens the evidence-boundary function. The first-sentence placement is a tightening and is acceptable.",
+   "suggested_fix": "Change the sentence to '결론의 적용 범위·미검증 부분은 바로 연결한다.'"
+  },
+  {
+   "severity": "medium",
+   "rule_id": "KP-WRD-002",
+   "path": "specification/rules.json#KP-WRD-002 requirement/title",
+   "reason": "The requirement now leads with the meaning-to-term direction ('같은 뜻에는 같은 용어를 쓴다'), while the title keeps term-to-meaning ('한 용어의 문맥상 의미를 고정한다'). The explicit 'keep the meaning attached to a term' is now only implied by '다른 뜻으로 전환하면 차이를 밝힌다'. The new first sentence duplicates NAM-001 but lacks NAM-001's exceptions for rename history, comparison, input mode, reader, and sentence function. It can therefore force one term across actions that NAM-001 deliberately keeps distinct.",
+   "suggested_fix": "Change the requirement to '한 용어는 같은 문서·작업에서 한 뜻으로 쓴다. 다른 뜻으로 전환하면 차이를 밝힌다.' Leave the synonym direction to NAM-001, or add a reference to NAM-001's exceptions."
+  },
+  {
+   "severity": "low",
+   "rule_id": "KP-EDIT-004",
+   "path": "specification/rules.json#KP-EDIT-004 requirement",
+   "reason": "The trigger 'by word replacement alone' ('단어 교체만으로') was dropped. '대상·조건·논항을 보존할 수 없으면 ... 문장을 다시 쓴다' no longer says what fails to preserve them, so the rule reads as 'rewrite when preservation is impossible'. The phrase '단어만 바꾸지 않고' only partly restores the intent. 9.1 still passes.",
+   "suggested_fix": "Change the requirement to '단어 교체만으로 대상·조건·논항을 보존할 수 없으면 문장을 다시 쓰고 연결된 논항을 함께 옮긴다.'"
+  },
+  {
+   "severity": "low",
+   "rule_id": "KP-PROC-001",
+   "path": "specification/rules.json#KP-PROC-001 conditions",
+   "reason": "The condition changed from '복수 지시가 한 문장에 나열될 때' to '한 단계에 독립 지시가 여럿 있을 때'. The trigger now presupposes the independence judgment that the rule itself must make, and it is tied to an existing step rather than to a sentence. That narrows STE 5.2, which is stated per sentence.",
+   "suggested_fix": "Change the condition to '한 문장·단계에 지시가 여럿 있을 때'."
+  },
+  {
+   "severity": "low",
+   "rule_id": "KP-WRD-003",
+   "path": "specification/rules.json#KP-WRD-003 conditions",
+   "reason": "'LLM이 표면형을 사전 항목에 대응시킬 때' became '표면형 대응 때'. The object, the dictionary entry, is lost, and the compressed noun phrase is itself the kind of telegraphic nominalization the protocol discourages. The norm is otherwise unchanged.",
+   "suggested_fix": "Change the condition to '통제 어휘 추가·표면형의 사전 항목 대응 때'."
+  },
+  {
+   "severity": "low",
+   "rule_id": "KP-KO-006",
+   "path": "specification/rules.json#KP-KO-006",
+   "reason": "Under the new plain default, KO-006 makes preservation of real-person subject honorifics an unconditional requirement. This produces mixed register ('교수님께서 승인하셨다'), and the counterexample still ends in '습니다'. Whether a subject honorific is kept by default or only when it identifies an omitted subject is a design choice that the rule does not state.",
+   "suggested_fix": "Keep the subject honorific only when it identifies an omitted subject or the user requested honorifics. Otherwise name the subject plainly. Show the counterexample in the default register."
+  },
+  {
+   "severity": "low",
+   "rule_id": "KP-VER-008",
+   "path": "specification/rules.json#KP-VER-008 conditions",
+   "reason": "The added sentence '미확인·미기록을 실제 부재·미수행으로 단정하지 않는다' is a primary strengthening and is sound. Its trigger condition still reads only '추정이나 외부 설명을 결과 보고로 고칠 때'. Reporting absence from a missing record (KP-VER-008-ROLE-UNRECORDED and -TEST-UNRECORDED) fits that condition only loosely. Both new cases supply the explicit original text, so they stay consistent with FC-REV-NOORACLE.",
+   "suggested_fix": "Extend the condition: '추정·외부 설명·기록 부재를 결과 보고로 고칠 때'."
+  }
+ ],
+ "reviewed_changed_rules": [
+  {
+   "rule_id": "KP-KO-005",
+   "change_class": "primary_norm_change",
+   "fields": [
+    "title",
+    "requirement",
+    "conditions",
+    "exceptions",
+    "positive_example"
+   ]
+  },
+  {
+   "rule_id": "KP-KO-006",
+   "change_class": "primary_norm_change",
+   "fields": [
+    "title",
+    "requirement",
+    "conditions",
+    "exceptions",
+    "positive_example"
+   ],
+   "note": "not mapped to any STE ID"
+  },
+  {
+   "rule_id": "KP-DESC-005",
+   "change_class": "primary_norm_change",
+   "fields": [
+    "requirement",
+    "conditions",
+    "positive_example",
+    "counterexample"
+   ]
+  },
+  {
+   "rule_id": "KP-DESC-001",
+   "change_class": "primary_norm_change",
+   "fields": [
+    "requirement",
+    "conditions",
+    "positive_example",
+    "counterexample"
+   ],
+   "note": "first-sentence placement is a tightening; limitation scope is narrowed"
+  },
+  {
+   "rule_id": "KP-WRD-002",
+   "change_class": "primary_norm_change",
+   "fields": [
+    "requirement",
+    "conditions",
+    "positive_example"
+   ],
+   "note": "direction inverted to meaning-to-term"
+  },
+  {
+   "rule_id": "KP-PROC-001",
+   "change_class": "minor_norm_change",
+   "fields": [
+    "requirement",
+    "conditions",
+    "positive_example",
+    "counterexample"
+   ],
+   "note": "condition narrowed; '유지' added to the simultaneous unit"
+  },
+  {
+   "rule_id": "KP-PROC-002",
+   "change_class": "wording_plus_register",
+   "fields": [
+    "requirement",
+    "conditions",
+    "positive_example",
+    "counterexample"
+   ],
+   "note": "'정해진' dropped; directive form now '~한다' (see the high issue)"
+  },
+  {
+   "rule_id": "KP-EDIT-004",
+   "change_class": "budget_wording_with_minor_loss",
+   "fields": [
+    "requirement",
+    "conditions",
+    "positive_example"
+   ]
+  },
+  {
+   "rule_id": "KP-WRD-003",
+   "change_class": "budget_wording_with_minor_loss",
+   "fields": [
+    "conditions",
+    "exceptions"
+   ]
+  },
+  {
+   "rule_id": "KP-NAM-001",
+   "change_class": "budget_wording_only",
+   "fields": [
+    "requirement",
+    "exceptions"
+   ]
+  },
+  {
+   "rule_id": "KP-SYN-008",
+   "change_class": "budget_wording_only",
+   "fields": [
+    "requirement"
+   ]
+  },
+  {
+   "rule_id": "KP-DESC-004",
+   "change_class": "budget_wording_only",
+   "fields": [
+    "requirement",
+    "exceptions"
+   ]
+  },
+  {
+   "rule_id": "KP-VER-008",
+   "change_class": "primary_norm_change",
+   "fields": [
+    "requirement"
+   ],
+   "note": "strengthening; landed concurrently at 18:32 KST during this review"
+  }
+ ],
+ "profile_guard_changes": [
+  {
+   "path": "validation/compile.py",
+   "change": "added the plain-default line",
+   "class": "primary_norm_change"
+  },
+  {
+   "path": "validation/compile.py",
+   "change": "'확인할 수 없으면' dropped from the ask guard",
+   "class": "primary_norm_change_under_budget"
+  },
+  {
+   "path": "validation/compile.py",
+   "change": "short-warning guard merged",
+   "class": "budget_wording_only"
+  }
+ ],
+ "affected_ste_ids": [
+  "1.2",
+  "1.3",
+  "1.4",
+  "1.8",
+  "1.11",
+  "3.1",
+  "3.4",
+  "4.1",
+  "5.1",
+  "5.2",
+  "5.3",
+  "5.4",
+  "6.1",
+  "6.2",
+  "6.3",
+  "6.6",
+  "7.3",
+  "8.5",
+  "8.6",
+  "8.7",
+  "9.1",
+  "9.2",
+  "9.4"
+ ],
+ "per_affected_review": [
+  {
+   "ste_id": "1.2",
+   "verdict": "pass",
+   "rationale": "KP-WRD-003 changed only by compressing its condition and exception; part of speech, meaning and argument linkage and the UI nominal exception are unchanged. FC-1-2 (clarify on the unregistered verb) and FC-1-2-UI (keep '복사') still hold.",
+   "case_ids": [
+    "FC-1-2",
+    "FC-1-2-UI"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "1.3",
+   "verdict": "pass",
+   "rationale": "Approved-meaning control still comes from KP-WRD-003, and KP-WRD-002 keeps '다른 뜻으로 전환하면 차이를 밝힌다'. FC-1-3 (copy wrongly called 배포, revise to the actual action) holds. The WRD-002 direction and title mismatch is recorded as a medium issue and does not block this verdict.",
+   "case_ids": [
+    "FC-1-3"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-WRD-002-R",
+    "KP-WRD-002-CONSISTENT"
+   ]
+  },
+  {
+   "ste_id": "1.4",
+   "verdict": "pass",
+   "rationale": "The KP-WRD-003 change is budget-only. FC-1-4 (progressive aspect kept) and FC-1-2-UI hold.",
+   "case_ids": [
+    "FC-1-4",
+    "FC-1-2-UI"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "1.8",
+   "verdict": "pass",
+   "rationale": "The KP-NAM-001 change is budget-only, and its rename, comparison, quotation and input-mode exceptions are intact. FC-1-8 (keep the drawing name) holds.",
+   "case_ids": [
+    "FC-1-8"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "1.11",
+   "verdict": "pass",
+   "rationale": "The KP-NAM-001 change is budget-only. FC-1-11 (unify to 프로젝트) holds.",
+   "case_ids": [
+    "FC-1-11"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "3.1",
+   "verdict": "pass",
+   "rationale": "The KP-WRD-003 change is budget-only. FC-3-1 (사인하다 to 서명하다) holds.",
+   "case_ids": [
+    "FC-3-1"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "3.4",
+   "verdict": "pass",
+   "rationale": "VER-008 only adds a ban on turning unconfirmed or unrecorded information into actual absence or non-performance. That is consistent with preserving modality and evidential strength. The other targets (VER-003, VER-005, VER-007, KO-007) are unchanged. FC-3-4 (possibility kept) and FC-REV-CANDIDATE (permission restored) hold.",
+   "case_ids": [
+    "FC-3-4",
+    "FC-REV-CANDIDATE"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-VER-008-ROLE-UNRECORDED",
+    "KP-VER-008-TEST-UNRECORDED"
+   ]
+  },
+  {
+   "ste_id": "4.1",
+   "verdict": "pass",
+   "rationale": "KP-SYN-008 was only reordered: it is still an unverified signal, a manual review with the same thresholds. FC-4-1 and FC-REV-COND hold.",
+   "case_ids": [
+    "FC-4-1",
+    "FC-REV-COND"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "5.1",
+   "verdict": "fail",
+   "rationale": "Partial status is retained. SYN-008 has no hard length cap, as before, and its wording change is budget-only. PROC-001's narrowed condition does not change FC-5-1, a five-action split.",
+   "case_ids": [
+    "FC-5-1",
+    "FC-LEN-30",
+    "FC-LEN-31",
+    "FC-REV-COND"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-PROC-001-R",
+    "KP-PROC-001-K",
+    "KP-PROC-001-INDEPENDENT",
+    "KP-PROC-001-SIMULTANEOUS"
+   ]
+  },
+  {
+   "ste_id": "5.2",
+   "verdict": "pass",
+   "rationale": "PROC-001 keeps both independent-step separation and the simultaneous-hold exception. FC-5-2 (no split of the press-and-hold) holds. The narrowed condition is a low issue. The new authored cases are not independent evidence.",
+   "case_ids": [
+    "FC-5-2"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-PROC-001-R",
+    "KP-PROC-001-K",
+    "KP-PROC-001-INDEPENDENT",
+    "KP-PROC-001-SIMULTANEOUS"
+   ]
+  },
+  {
+   "ste_id": "5.3",
+   "verdict": "fail",
+   "rationale": "Blocked until a KO-005/PROC-002 fix. Permission is preserved ('지워도 된다'; FC-5-3 and FC-REV-CANDIDATE hold on decision). However, the new default '절차는 ~한다' is not a directive form outside marked steps; it collides with description and with the writer's own action. KO-005 also gives no prohibition, safety-command or reader-directed request form, while the crosswalk design requires '한국어 지시형'. This verdict can be restored after the two high KO-005 issues are fixed and re-reviewed.",
+   "case_ids": [
+    "FC-5-3",
+    "FC-REV-CANDIDATE"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-KO-005-R",
+    "KP-KO-005-PLAIN-PERMISSION",
+    "KP-KO-005-PLAIN-REQUEST",
+    "KP-KO-005-PLAIN-QUESTION",
+    "KP-KO-005-USER-HONORIFICS",
+    "KP-KO-005-QUOTE",
+    "KP-PROC-002-R",
+    "KP-PROC-002-K"
+   ]
+  },
+  {
+   "ste_id": "5.4",
+   "verdict": "pass",
+   "rationale": "No target rule changed. The only new linked case is the authored KP-PROC-001-SIMULTANEOUS, through PROC-005. FC-5-4 (condition before action) holds.",
+   "case_ids": [
+    "FC-5-4"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-PROC-001-SIMULTANEOUS"
+   ]
+  },
+  {
+   "ste_id": "6.1",
+   "verdict": "pass",
+   "rationale": "Definition-first ordering for explanations is unaffected, and the DESC-001 education/background exception is retained. FC-6-1 holds. The DESC-001 limitation narrowing is a medium issue.",
+   "case_ids": [
+    "FC-6-1"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-DESC-001-R",
+    "KP-DESC-001-K",
+    "KP-DESC-001-RESULT",
+    "KP-DESC-005-LIMIT"
+   ]
+  },
+  {
+   "ste_id": "6.2",
+   "verdict": "pass",
+   "rationale": "FC-6-2 and FC-REV-LINK hold. The DESC-005 condition confines deletion to repetition and ritual text. The requirement wording is over-broad, a medium issue, and a fix is recommended before re-stamping provenance.",
+   "case_ids": [
+    "FC-6-2",
+    "FC-REV-LINK"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-DESC-001-R",
+    "KP-DESC-001-K",
+    "KP-DESC-001-RESULT",
+    "KP-DESC-005-R",
+    "KP-DESC-005-K",
+    "KP-DESC-005-SURPLUS",
+    "KP-DESC-005-LIMIT"
+   ]
+  },
+  {
+   "ste_id": "6.3",
+   "verdict": "fail",
+   "rationale": "Partial status is retained. The SYN-008 change is budget-only, and there is still no hard cap.",
+   "case_ids": [
+    "FC-6-3",
+    "FC-6-3-U",
+    "FC-LEN-30",
+    "FC-LEN-31",
+    "FC-REV-COND"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "6.6",
+   "verdict": "fail",
+   "rationale": "Partial status is retained. The DESC-004 change is a budget-only reorder, still with a six-sentence signal and no hard cap.",
+   "case_ids": [
+    "FC-6-6",
+    "FC-REV-PARA7"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "7.3",
+   "verdict": "pass",
+   "rationale": "The VER-008 strengthening supports 7.3's rule against inventing unconfirmed harm or cause. The short-warning exception is unchanged. FC-7-3-R and FC-REV-NOSAFETY hold. The new authored cases are not independent evidence.",
+   "case_ids": [
+    "FC-7-3-R",
+    "FC-REV-NOSAFETY"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-VER-008-ROLE-UNRECORDED",
+    "KP-VER-008-TEST-UNRECORDED"
+   ]
+  },
+  {
+   "ste_id": "8.5",
+   "verdict": "pass",
+   "rationale": "The SYN-008 change is budget-only. The parenthesis rules are unchanged. FC-8-5, FC-8-5-B and FC-REV-COND hold.",
+   "case_ids": [
+    "FC-8-5",
+    "FC-8-5-B",
+    "FC-REV-COND"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "8.6",
+   "verdict": "pass",
+   "rationale": "The SYN-008 change is budget-only. The literal rules are unchanged. FC-8-6, FC-8-6-Q, FC-LEN-30/31 and FC-REV-COND hold.",
+   "case_ids": [
+    "FC-8-6",
+    "FC-8-6-Q",
+    "FC-LEN-30",
+    "FC-LEN-31",
+    "FC-REV-COND"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "8.7",
+   "verdict": "pass",
+   "rationale": "The SYN-008 change is budget-only. FC-8-7, FC-8-7-N and FC-REV-COND hold.",
+   "case_ids": [
+    "FC-8-7",
+    "FC-8-7-N",
+    "FC-REV-COND"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "9.1",
+   "verdict": "pass",
+   "rationale": "EDIT-004 still requires restructuring and moving linked arguments. EDIT-001 and EDIT-002 are unchanged. FC-9-1, FC-REV-CANDIDATE and FC-REV-NOORACLE hold. The lost 'word replacement alone' trigger is a low issue. KP-EDIT-004-R now also changes register, which is covered by the high scope issue.",
+   "case_ids": [
+    "FC-9-1",
+    "FC-REV-CANDIDATE",
+    "FC-REV-NOORACLE"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-EDIT-004-R"
+   ]
+  },
+  {
+   "ste_id": "9.2",
+   "verdict": "pass",
+   "rationale": "The KP-WRD-003 change is budget-only. FC-9-2 and the FC-REV-SHARED/UNSHARED/NOCRITERION triad hold.",
+   "case_ids": [
+    "FC-9-2",
+    "FC-REV-SHARED",
+    "FC-REV-UNSHARED",
+    "FC-REV-NOCRITERION",
+    "FC-REV-CANDIDATE",
+    "FC-REV-NOORACLE"
+   ],
+   "authored_case_ids_reviewed": []
+  },
+  {
+   "ste_id": "9.4",
+   "verdict": "fail",
+   "rationale": "Blocked until a KO-005 scope fix. The 9.4 design requires endings kept consistent per document function and reader. KO-005 now forces '~다' unless the user specified a register, with no exception for an established document or product register, so partial edits and new UI copy yield mixed register. FC-9-4 (unify the repeated button action) still holds on terminology, and NAM-001 is budget-only. This verdict can be restored after the scope and register exception is added and re-reviewed.",
+   "case_ids": [
+    "FC-9-4"
+   ],
+   "authored_case_ids_reviewed": [
+    "KP-KO-005-R",
+    "KP-KO-005-PLAIN-PERMISSION",
+    "KP-KO-005-PLAIN-REQUEST",
+    "KP-KO-005-PLAIN-QUESTION",
+    "KP-KO-005-USER-HONORIFICS",
+    "KP-KO-005-QUOTE"
+   ]
+  }
+ ],
+ "restoration": {
+  "restorable_on_content": [
+   "1.2",
+   "1.3",
+   "1.4",
+   "1.5",
+   "1.6",
+   "1.7",
+   "1.8",
+   "1.9",
+   "1.10",
+   "1.11",
+   "1.12",
+   "1.13",
+   "1.14",
+   "2.1",
+   "2.2",
+   "3.1",
+   "3.2",
+   "3.3",
+   "3.4",
+   "3.5",
+   "3.6",
+   "3.7",
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "4.5",
+   "5.2",
+   "5.4",
+   "5.5",
+   "6.1",
+   "6.2",
+   "6.4",
+   "6.5",
+   "7.1",
+   "7.2",
+   "7.3",
+   "8.1",
+   "8.2",
+   "8.3",
+   "8.4",
+   "8.5",
+   "8.6",
+   "8.7",
+   "9.1",
+   "9.2",
+   "9.3"
+  ],
+  "blocked_pending_fix": [
+   "5.3",
+   "9.4"
+  ],
+  "retain_partial": [
+   "1.1",
+   "5.1",
+   "6.3",
+   "6.6"
+  ],
+  "note": "Any fix changes the rules.json hash. Apply the fixes first and stamp the new provenance once. Before restoring the 31 unaffected items, the high KO-005 scope fix should land so that the 30 honorific 'keep' cases in the fixed independent set (e.g. FC-5-2, FC-7-1) stay consistent with the rule set."
+ },
+ "unchanged_carry_forward_validated": true,
+ "unchanged_carry_forward_evidence": "For all 30 unaffected STE IDs, the target_rule_ids in the review and the crosswalk are identical. Every target rule object is equal between HEAD and the worktree. The set of authored cases linked by rule_ids is identical, with no modified or new member. evaluation/functional-cases.json (4385ce57…) and docs/spec/korean-rules.md (94e5e029…) are byte-identical to the reviewed hashes. Crosswalk items differ only in status and gaps. The global GUARDS change is outside these hashes and is recorded as a separate cross-cutting issue.",
+ "unchanged_fc_keep_cases_with_honorific_output": [
+  "FC-1-4",
+  "FC-1-5",
+  "FC-1-6",
+  "FC-1-8",
+  "FC-1-12",
+  "FC-1-14",
+  "FC-3-2",
+  "FC-3-3",
+  "FC-3-4",
+  "FC-3-6",
+  "FC-4-2",
+  "FC-5-2",
+  "FC-5-3",
+  "FC-7-1",
+  "FC-7-3",
+  "FC-8-2",
+  "FC-8-6",
+  "FC-1-7-OK",
+  "FC-2-2-OK",
+  "FC-4-5-G",
+  "FC-8-3-M",
+  "FC-8-5-B",
+  "FC-8-6-Q",
+  "FC-8-7-N",
+  "FC-9-3-OK",
+  "FC-LEN-30",
+  "FC-LEN-31",
+  "FC-REV-SHARED",
+  "FC-REV-NOSAFETY",
+  "FC-REV-LINK"
+ ],
+ "current_rule_sha256": "ca52588a629763b43f16bcffb9ac764367f08539e52bbff7a9f085fa0b0829cd",
+ "current_case_sha256": "08e3b262d685d95cb2b0d02a8ac4a8debea7a1f6babafe2ff3c96481c9e8838a",
+ "independent_cases_sha256": "4385ce57e3c5635e026cb89a2cd87100587dc9e1ef9a20f8407688783c07d6a0",
+ "reviewed_spec_sha256": "94e5e029ecf3ea2ed355def4c92087ae33da81a0940d7e36f1b677b7c914dc75",
+ "previous_reviewed_rules_sha256": "12368f51c779dec529b0c108879a19bca11bb00fc50d524b2315c7c777a39697",
+ "previous_reviewed_cases_sha256": "deb3a9e7deb6de1a0dfc4c2d20c70b6979635e527e3b08c09ee3d0e7dbbf4b8e",
+ "constraints": [
+  "Read-only review: no implementation edits, commits, publication, external model calls, Orca or GJC.",
+  "evaluation/llm/controlled-korean-20261013 was not read.",
+  "Tests and the compiler were not run, so no __pycache__ or tempdir writes were made in the worktree. Profile content was checked by reading the committed profiles.",
+  "Profile budget: coding-agent.md is 28528 of 28672 bytes (144 bytes of headroom), so the suggested fixes need offsetting compression elsewhere.",
+  "New authored cases (author origin) were reviewed as content only and were not counted as independent evidence.",
+  "The worktree was modified concurrently during review: rules.json and rule-cases.json changed at 18:32 KST (KP-VER-008 and two new cases). This review binds only to current_rule_sha256 and current_case_sha256. Any later edit invalidates it."
+ ],
+ "limitations": [
+  "This is a design review. It makes no claim about runtime or model performance, reader comprehension or real LLM output.",
+  "Authored-case linkage to STE IDs was computed through rule_ids intersecting target_rule_ids, following the prior review method.",
+  "The honorific detection used for the FC keep list is a regex over acceptable_output, and each listed case should be spot-checked before it is relied on."
+ ]
+}

@@ -1,0 +1,23 @@
+{
+  "phase": "before model generation",
+  "reviewer": "lexical_gold_review",
+  "amended_cases": [
+    "lm05",
+    "lm08",
+    "lm19",
+    "lm22",
+    "lm24"
+  ],
+  "public_case_changed": "lm24 target definition now known; observation source unknown, making metric comparison genuinely unresolved",
+  "gold_changes": "Preserve literal setting; make attribution and ratio explanation optional; remove inapplicable inclusivebound mapping",
+  "originals": [
+    "cases-author-original.json",
+    "gold-author-original.json"
+  ],
+  "followup": "Synchronized duplicate lexical criteria for lm08 optional requester and lm24 confirmation need vs question.",
+  "final_review": {
+    "reviewer": "lexical_gold_review",
+    "approved": true,
+    "scope": "All24 cases/gold/source contract plus corrected duplicatecriteria; before outputs"
+  }
+}

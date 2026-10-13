@@ -1,0 +1,293 @@
+{
+  "cli_version": "codex-cli 0.162.1",
+  "inventory_method": "skills/list with forceReload=true, isolated CODEX_HOME, no credentials",
+  "path_policy": "User paths are frozen absolute paths; system paths are relative to each invocation CODEX_HOME.",
+  "observed_skill_count": 57,
+  "skills": [
+    {
+      "name": "computer-use",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/computer-use/SKILL.md"
+    },
+    {
+      "name": "deep-research-fusion",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/deep-research-fusion/SKILL.md"
+    },
+    {
+      "name": "find-skills",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/find-skills/SKILL.md"
+    },
+    {
+      "name": "firecrawl-research-router",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/firecrawl-research-router/SKILL.md"
+    },
+    {
+      "name": "gjc-contribpr",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-contribpr/SKILL.md"
+    },
+    {
+      "name": "gjc-deepinterview",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-deepinterview/SKILL.md"
+    },
+    {
+      "name": "gjc-delegation",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-delegation/SKILL.md"
+    },
+    {
+      "name": "gjc-extragoal",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-extragoal/SKILL.md"
+    },
+    {
+      "name": "gjc-flowwork",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-flowwork/SKILL.md"
+    },
+    {
+      "name": "gjc-insanereview",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-insanereview/SKILL.md"
+    },
+    {
+      "name": "gjc-insanescout",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-insanescout/SKILL.md"
+    },
+    {
+      "name": "gjc-insanesearch",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-insanesearch/SKILL.md"
+    },
+    {
+      "name": "gjc-invest",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-invest/SKILL.md"
+    },
+    {
+      "name": "gjc-ouroboros",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-ouroboros/SKILL.md"
+    },
+    {
+      "name": "gjc-ouroborosauto",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-ouroborosauto/SKILL.md"
+    },
+    {
+      "name": "gjc-ouroboroshandoff",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-ouroboroshandoff/SKILL.md"
+    },
+    {
+      "name": "gjc-ouroborosinterview",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-ouroborosinterview/SKILL.md"
+    },
+    {
+      "name": "gjc-ouroborosqa",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-ouroborosqa/SKILL.md"
+    },
+    {
+      "name": "gjc-ralplan",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-ralplan/SKILL.md"
+    },
+    {
+      "name": "gjc-team",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-team/SKILL.md"
+    },
+    {
+      "name": "gjc-ultragoal",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/gjc-ultragoal/SKILL.md"
+    },
+    {
+      "name": "grok-launch-radar",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/grok-launch-radar/SKILL.md"
+    },
+    {
+      "name": "grok-x-intel",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/grok-x-intel/SKILL.md"
+    },
+    {
+      "name": "insane-search",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/insane-search/SKILL.md"
+    },
+    {
+      "name": "koan",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/koan/SKILL.md"
+    },
+    {
+      "name": "linear-cli",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/linear-cli/SKILL.md"
+    },
+    {
+      "name": "orca-cli",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/orca-cli/SKILL.md"
+    },
+    {
+      "name": "orca-linear",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/orca-linear/SKILL.md"
+    },
+    {
+      "name": "orchestration",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/orchestration/SKILL.md"
+    },
+    {
+      "name": "parallel-research-router",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/parallel-research-router/SKILL.md"
+    },
+    {
+      "name": "paseo",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/paseo/SKILL.md"
+    },
+    {
+      "name": "paseo-advisor",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/paseo-advisor/SKILL.md"
+    },
+    {
+      "name": "paseo-committee",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/paseo-committee/SKILL.md"
+    },
+    {
+      "name": "paseo-handoff",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/paseo-handoff/SKILL.md"
+    },
+    {
+      "name": "paseo-help",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/paseo-help/SKILL.md"
+    },
+    {
+      "name": "source-command-lah",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/source-command-lah/SKILL.md"
+    },
+    {
+      "name": "stylefusion",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/stylefusion/SKILL.md"
+    },
+    {
+      "name": "stylegallery",
+      "scope": "user",
+      "path": "/Users/m5max/.agents/skills/stylegallery/SKILL.md"
+    },
+    {
+      "name": "superpowers:brainstorming",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/brainstorming/SKILL.md"
+    },
+    {
+      "name": "superpowers:dispatching-parallel-agents",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/dispatching-parallel-agents/SKILL.md"
+    },
+    {
+      "name": "superpowers:executing-plans",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/executing-plans/SKILL.md"
+    },
+    {
+      "name": "superpowers:finishing-a-development-branch",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/finishing-a-development-branch/SKILL.md"
+    },
+    {
+      "name": "superpowers:receiving-code-review",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/receiving-code-review/SKILL.md"
+    },
+    {
+      "name": "superpowers:requesting-code-review",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/requesting-code-review/SKILL.md"
+    },
+    {
+      "name": "superpowers:subagent-driven-development",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/subagent-driven-development/SKILL.md"
+    },
+    {
+      "name": "superpowers:systematic-debugging",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/systematic-debugging/SKILL.md"
+    },
+    {
+      "name": "superpowers:test-driven-development",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/test-driven-development/SKILL.md"
+    },
+    {
+      "name": "superpowers:using-git-worktrees",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/using-git-worktrees/SKILL.md"
+    },
+    {
+      "name": "superpowers:using-superpowers",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/using-superpowers/SKILL.md"
+    },
+    {
+      "name": "superpowers:verification-before-completion",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/verification-before-completion/SKILL.md"
+    },
+    {
+      "name": "superpowers:writing-plans",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/writing-plans/SKILL.md"
+    },
+    {
+      "name": "superpowers:writing-skills",
+      "scope": "user",
+      "path": "/Users/m5max/.codex/superpowers/skills/writing-skills/SKILL.md"
+    },
+    {
+      "name": "imagegen",
+      "scope": "system",
+      "path": "skills/.system/imagegen/SKILL.md"
+    },
+    {
+      "name": "openai-docs",
+      "scope": "system",
+      "path": "skills/.system/openai-docs/SKILL.md"
+    },
+    {
+      "name": "review-agent",
+      "scope": "system",
+      "path": "skills/.system/review-agent/SKILL.md"
+    },
+    {
+      "name": "skill-creator",
+      "scope": "system",
+      "path": "skills/.system/skill-creator/SKILL.md"
+    },
+    {
+      "name": "skill-installer",
+      "scope": "system",
+      "path": "skills/.system/skill-installer/SKILL.md"
+    }
+  ]
+}

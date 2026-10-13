@@ -1,0 +1,27 @@
+{
+  "status": "initial comparison excluded; all six conditions will be repeated under corrected discovery settings",
+  "offending_run": "ste-b1",
+  "evidence": "ste-b1/stdout.jsonl",
+  "observed_external_read": "/Users/m5max/.agents/skills/superpowers/using-superpowers/SKILL.md",
+  "observed_local_search": "rg --files lexicon (absent in STE arm)",
+  "cause": "CODEX_HOME isolation and ignore-user-config do not suppress HOME/.agents/skills discovery",
+  "official_reference": "https://developers.openai.com/codex/skills/",
+  "preserved": [
+    "all initial raw runs",
+    "original plan",
+    "design-freeze.json",
+    "cases.json",
+    "gold.json"
+  ],
+  "scope": "Reject under frozen no-external-read criterion; no semantic grading or score-based selection performed",
+  "correction": "New runner with per-process discovery/plugins/hooks controls; inventory probe before replay. Do not alter user globals or old runners.",
+  "ineffective_probe": {
+    "cli_version": "0.162.1",
+    "before_enabled": 57,
+    "after_six_flags_enabled": 57,
+    "user_skills": 52,
+    "system_skills": 5,
+    "evidence": "/tmp/kproto-skill-isolation.json",
+    "note": "skills/list inventory did not change; do not claim skip_host_skill_discovery alone removed skills"
+  }
+}

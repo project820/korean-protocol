@@ -1,0 +1,1019 @@
+{
+  "schema_version": 1,
+  "tested_at": "2026-10-13T11:25:07.226130+00:00",
+  "test": "actual candidate content upgrade under current runtime and helper",
+  "runtime_root": "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor",
+  "code_sha256": {
+    "runtime/kproto.py": "b1e19233e11fca9c0770ccfa70b0fec89e4f4034dc8bfb2d43856fbad266c40b",
+    "distribution/agent_install.py": "097344c293bc32e8ef28a9f7117cd323591c82cb2ca901e209a6a0a01977177d",
+    "tests/manual_https_smoke.py": "bb994f5384a87d0c89d6b71fe08d4d2c365140c077085519fdebbd33773004a1",
+    "tests/manual_candidate_upgrade_smoke.py": "4012798d046243981c812f9324401a29291c9fb00a3af9b9ce5b8b43ef6219a3"
+  },
+  "python_executable": "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "python_version": "3.12.14",
+  "ssl_version": "OpenSSL 3.5.8 25 Aug 2026",
+  "result": "pass",
+  "hosts": {
+    "codex": {
+      "steps": [
+        {
+          "step": "production-signed-0.2.0-local-install",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor/distribution/agent_install.py",
+            "install",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/production-state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/production-home",
+            "--signed-directory",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/authenticated-public",
+            "--trust-key",
+            "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor/distribution/trust/publisher.pub",
+            "--expected-fingerprint",
+            "SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15980,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "production-baseline-uninstall",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/production-state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "uninstall",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/production-state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/production-home"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15125,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "TEST-signed-0.2.0-install",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor/distribution/agent_install.py",
+            "install",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home",
+            "--signed-directory",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/test-initial",
+            "--trust-key",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/TEST-signing-key.pub",
+            "--expected-fingerprint",
+            "SHA256:pYwygwQegMTlpazHX4VO3aDVU7jhRudcfTdJjiFX3nw",
+            "--source",
+            "https://localhost:443",
+            "--autoupdate",
+            "interval"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15319,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "OFF-and-honorifics-ON",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home",
+            "--protocol",
+            "off",
+            "--honorifics",
+            "on"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15266,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "actual-candidate-HTTPS-update-while-OFF",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "update"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "candidate-status-while-OFF",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "status",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15246,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "ON-inject-latest-verified-profile",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home",
+            "--protocol",
+            "on"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15265,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "honorifics-OFF",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home",
+            "--honorifics",
+            "off"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15266,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "honorifics-ON",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home",
+            "--honorifics",
+            "on"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15265,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "reject-invalid-signature",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "update"
+          ],
+          "exit_code": 5,
+          "expected_exit_code": 5,
+          "stdout_bytes": 0,
+          "stderr_bytes": 39
+        },
+        {
+          "step": "OFF-before-rollback",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home",
+            "--protocol",
+            "off"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15266,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "rollback-public-content-cache-0.2.0",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "rollback",
+            "--version",
+            "0.2.0"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "rollback-status",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "status",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15249,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "rollback-ON",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home",
+            "--protocol",
+            "on"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15268,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "rollback-candidate-cache",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "rollback",
+            "--version",
+            "0.3.0"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "remove-cached-rollback-pin",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "update",
+            "--unpin"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "offline-update-fails-safely",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "update"
+          ],
+          "exit_code": 3,
+          "expected_exit_code": 3,
+          "stdout_bytes": 0,
+          "stderr_bytes": 30
+        },
+        {
+          "step": "offline-verified-status",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "status",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15245,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "offline-wrapper-host-command",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "run",
+            "--",
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-c",
+            "raise SystemExit(0)"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "uninstall-restores-user-bytes",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "uninstall",
+            "--host",
+            "codex",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/state",
+            "--codex-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/codex/host-home"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 14465,
+          "stderr_bytes": 0
+        }
+      ],
+      "result": "pass",
+      "persistent_code_sha256": {
+        "runtime/kproto.py": "b1e19233e11fca9c0770ccfa70b0fec89e4f4034dc8bfb2d43856fbad266c40b",
+        "agent-install.py": "097344c293bc32e8ef28a9f7117cd323591c82cb2ca901e209a6a0a01977177d"
+      },
+      "upgrade": {
+        "initial_version": "0.2.0",
+        "target_version": "0.3.0",
+        "highest_sequence": 2,
+        "requests": [
+          "/stable/release.json",
+          "/stable/release.json.sig",
+          "/releases/0.3.0/profiles/coding-agent.md",
+          "/releases/0.3.0/profiles/chat.md",
+          "/releases/0.3.0/profiles/work-document.md",
+          "/releases/0.3.0/specification/rules.json",
+          "/releases/0.3.0/lexicon/core.json",
+          "/releases/0.3.0/lexicon/domains/software.json",
+          "/releases/0.3.0/pack/protocol.md"
+        ],
+        "OFF_survived": true,
+        "honorifics_survived": true,
+        "all_seven_cached_files_match_source": true
+      },
+      "ON": {
+        "complete_current_profile_injected": true,
+        "honorific_both_options_verified": true,
+        "user_prefix_suffix_preserved": true,
+        "installed_profile_sha256": "0e5aa6bf0b4337bb78d91e2ed42ac01ed6182cb397198d63afc287bee0735741"
+      },
+      "invalid_signature_preserved_target_cache_state": true,
+      "rollback": {
+        "OFF_and_honorifics_survived": true,
+        "cached_0_2_profile_injected": true,
+        "candidate_restored_exactly": true,
+        "highest_sequence_preserved": true
+      },
+      "offline": {
+        "last_verified_profile_cache_preserved": true,
+        "all_seven_files_readable": true,
+        "wrapper_host_exit": 0,
+        "uninstall_restored_user_bytes": true
+      }
+    },
+    "claude-code": {
+      "steps": [
+        {
+          "step": "production-signed-0.2.0-local-install",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor/distribution/agent_install.py",
+            "install",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/production-state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/production-home",
+            "--signed-directory",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/authenticated-public",
+            "--trust-key",
+            "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor/distribution/trust/publisher.pub",
+            "--expected-fingerprint",
+            "SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 16541,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "production-baseline-uninstall",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/production-state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "uninstall",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/production-state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/production-home"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15673,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "TEST-signed-0.2.0-install",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor/distribution/agent_install.py",
+            "install",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home",
+            "--signed-directory",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/test-initial",
+            "--trust-key",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/TEST-signing-key.pub",
+            "--expected-fingerprint",
+            "SHA256:pYwygwQegMTlpazHX4VO3aDVU7jhRudcfTdJjiFX3nw",
+            "--source",
+            "https://localhost:443",
+            "--autoupdate",
+            "interval"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15880,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "OFF-and-honorifics-ON",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home",
+            "--protocol",
+            "off",
+            "--honorifics",
+            "on"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15827,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "actual-candidate-HTTPS-update-while-OFF",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "update"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "candidate-status-while-OFF",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "status",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15807,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "ON-inject-latest-verified-profile",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home",
+            "--protocol",
+            "on"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15826,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "honorifics-OFF",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home",
+            "--honorifics",
+            "off"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15827,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "honorifics-ON",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home",
+            "--honorifics",
+            "on"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15826,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "reject-invalid-signature",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "update"
+          ],
+          "exit_code": 5,
+          "expected_exit_code": 5,
+          "stdout_bytes": 0,
+          "stderr_bytes": 39
+        },
+        {
+          "step": "OFF-before-rollback",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home",
+            "--protocol",
+            "off"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15827,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "rollback-public-content-cache-0.2.0",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "rollback",
+            "--version",
+            "0.2.0"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "rollback-status",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "status",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15810,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "rollback-ON",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "configure",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home",
+            "--protocol",
+            "on"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15829,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "rollback-candidate-cache",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "rollback",
+            "--version",
+            "0.3.0"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "remove-cached-rollback-pin",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "update",
+            "--unpin"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "offline-update-fails-safely",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "update"
+          ],
+          "exit_code": 3,
+          "expected_exit_code": 3,
+          "stdout_bytes": 0,
+          "stderr_bytes": 30
+        },
+        {
+          "step": "offline-verified-status",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "status",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15806,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "offline-wrapper-host-command",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/runtime/kproto.py",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "run",
+            "--",
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-c",
+            "raise SystemExit(0)"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        {
+          "step": "uninstall-restores-user-bytes",
+          "argv": [
+            "/Users/m5max/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state/agent-tool-298fe48ce6bc263682acce3bb5b7bff6850a1b0ec704f4ee398b4854a7e36c16/agent-install.py",
+            "uninstall",
+            "--host",
+            "claude-code",
+            "--state-dir",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/state",
+            "--claude-home",
+            "/private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/kproto-actual-candidate-s5mgwmy6/claude-code/host-home"
+          ],
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "stdout_bytes": 15013,
+          "stderr_bytes": 0
+        }
+      ],
+      "result": "pass",
+      "persistent_code_sha256": {
+        "runtime/kproto.py": "b1e19233e11fca9c0770ccfa70b0fec89e4f4034dc8bfb2d43856fbad266c40b",
+        "agent-install.py": "097344c293bc32e8ef28a9f7117cd323591c82cb2ca901e209a6a0a01977177d"
+      },
+      "upgrade": {
+        "initial_version": "0.2.0",
+        "target_version": "0.3.0",
+        "highest_sequence": 2,
+        "requests": [
+          "/stable/release.json",
+          "/stable/release.json.sig",
+          "/releases/0.3.0/profiles/coding-agent.md",
+          "/releases/0.3.0/profiles/chat.md",
+          "/releases/0.3.0/profiles/work-document.md",
+          "/releases/0.3.0/specification/rules.json",
+          "/releases/0.3.0/lexicon/core.json",
+          "/releases/0.3.0/lexicon/domains/software.json",
+          "/releases/0.3.0/pack/protocol.md"
+        ],
+        "OFF_survived": true,
+        "honorifics_survived": true,
+        "all_seven_cached_files_match_source": true
+      },
+      "ON": {
+        "complete_current_profile_injected": true,
+        "honorific_both_options_verified": true,
+        "user_prefix_suffix_preserved": true,
+        "installed_profile_sha256": "cc4c48eed120cde3084b5b7a7b3fc51a4a0951cd0caab6e7a7a1c0af7a7fe6d5"
+      },
+      "invalid_signature_preserved_target_cache_state": true,
+      "rollback": {
+        "OFF_and_honorifics_survived": true,
+        "cached_0_2_profile_injected": true,
+        "candidate_restored_exactly": true,
+        "highest_sequence_preserved": true
+      },
+      "offline": {
+        "last_verified_profile_cache_preserved": true,
+        "all_seven_files_readable": true,
+        "wrapper_host_exit": 0,
+        "uninstall_restored_user_bytes": true
+      }
+    }
+  },
+  "scope": {
+    "public_production_upgrade": false,
+    "original_0_2_executable_migration": false,
+    "candidate_signature": "temporary TEST key only",
+    "production_private_key_read": false,
+    "global_installation": false,
+    "global_trust_store_changed": false,
+    "scheduler_registered": false,
+    "model_compliance_tested": false
+  },
+  "public_baseline": {
+    "source": "https://project820.github.io/korean-protocol",
+    "version": "0.2.0",
+    "sequence": 1,
+    "fingerprint": "SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc",
+    "manifest_sha256": "58880d6d835d12c73afa3f7c9fc708eadc03d94fef5ccad08559b83b8e7623c9",
+    "signature_sha256": "f73181552ef97b7870fbde8d1c54bcb246044e472d825fccae03ba3637c1f2bb",
+    "authentication": "Pinned publisher SSHSIG verified; all seven payload hashes verified",
+    "files": {
+      "profiles/coding-agent.md": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+      "profiles/chat.md": "d1587c8b6eaaf4ca74f9f2c740525c9793c707a6f95ed1aec14472f518e4ef63",
+      "profiles/work-document.md": "3a3cb806f0cf98066aaf28ca016149be335036afe9e67890291da825ce17f216",
+      "specification/rules.json": "12368f51c779dec529b0c108879a19bca11bb00fc50d524b2315c7c777a39697",
+      "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+      "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+      "pack/protocol.md": "fea7f3879b3567c466ce126e5f11deba52fe8f449da71ee00c85c908f5b2b038"
+    }
+  },
+  "candidate": {
+    "version": "0.3.0",
+    "source_version": "0.3.0-draft",
+    "files": {
+      "profiles/coding-agent.md": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60",
+      "profiles/chat.md": "90cfea2e019fac15f68a277149d95c85e7d04ba2fc424f009761d6fbd2fc4394",
+      "profiles/work-document.md": "97569176f17d90c3dbfd49ab4350de1784f36313a03ffba7400a9460e99b341d",
+      "specification/rules.json": "e1e921b1d3cfc7e5039a0d6ba8447e05a21bf47331cadcd393c982a4c2272f03",
+      "lexicon/core.json": "2f8ad8315fe23a3e63406a02aa1b58188cc60a79a06e1a4239e3ed7cbf1b1bad",
+      "lexicon/domains/software.json": "2e537f1178e85e4efb63f357a5f8da13927749ada2f58647f8bff879661db688",
+      "pack/protocol.md": "7e444b90ec3800f9f1563b4593b023895d982e9ca1c7f052b62397d7050345ce"
+    },
+    "content_bytes_exactly_source": true
+  },
+  "test_signer_fingerprint": "SHA256:pYwygwQegMTlpazHX4VO3aDVU7jhRudcfTdJjiFX3nw",
+  "test_manifests": {
+    "0.2.0": "a35d89ae096294f51dee4c73be09164990c5eaa72f5da873d6967402eb9f4740",
+    "0.3.0": "93894f0fcd0c09895f78f2b0acdef1e5032211bff8005627338fdd0d78ac5940"
+  },
+  "transport": {
+    "scheme": "https",
+    "source": "https://localhost:443",
+    "restricted_connect_proxy": true,
+    "foreign_authority_rejected": true,
+    "default_certificate_validation": true,
+    "ssl_cert_file_subprocess_only": true,
+    "direct_port_443_bind_tested": false
+  },
+  "HTTPS_requests": [
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/releases/0.3.0/profiles/coding-agent.md",
+    "/releases/0.3.0/profiles/chat.md",
+    "/releases/0.3.0/profiles/work-document.md",
+    "/releases/0.3.0/specification/rules.json",
+    "/releases/0.3.0/lexicon/core.json",
+    "/releases/0.3.0/lexicon/domains/software.json",
+    "/releases/0.3.0/pack/protocol.md",
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/releases/0.3.0/profiles/coding-agent.md",
+    "/releases/0.3.0/profiles/chat.md",
+    "/releases/0.3.0/profiles/work-document.md",
+    "/releases/0.3.0/specification/rules.json",
+    "/releases/0.3.0/lexicon/core.json",
+    "/releases/0.3.0/lexicon/domains/software.json",
+    "/releases/0.3.0/pack/protocol.md",
+    "/stable/release.json",
+    "/stable/release.json.sig"
+  ],
+  "CONNECT_tunnels": [
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443"
+  ],
+  "source_and_code_unchanged_during_smoke": true,
+  "python_crash_report_check": {
+    "directories": [
+      "/Users/m5max/Library/Logs/DiagnosticReports",
+      "/Library/Logs/DiagnosticReports"
+    ],
+    "existing_python_report_count": 19,
+    "new_or_changed_python_reports": [],
+    "unavailable_directories": [],
+    "contents_read": false,
+    "limitation": "Immediate filename/stat comparison; delayed macOS report generation is not excluded"
+  },
+  "temporary_material_removed": true,
+  "limitations": [
+    "No production signature or public production endpoint for candidate 0.3.0",
+    "Current runtime/helper only; original 0.2 executable migration not exercised",
+    "No real Codex/Claude model invocation, login, sleep/wake or scheduler registration",
+    "Local CONNECT transports verified TLS; no direct port-443 listener or global trust change"
+  ]
+}

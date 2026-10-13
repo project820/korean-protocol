@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-13T11:28:09.838612+00:00",
+  "reviewer": "/root/control_security_review",
+  "verdict": "no actionable blockers",
+  "attribution": "Independent reviewer result supplied by parent /root after reviewer final report review",
+  "report": "evaluation/release-0.3.0-20261013/candidate-upgrade-smoke.json",
+  "report_sha256": "aaa68aa228e97fcee3dd1539d21638f478870cc85b61bddc80af230f137f3726",
+  "checks": {
+    "new_offline_guard_tests_passed": 5,
+    "hosts": {
+      "codex": {
+        "steps": 20,
+        "all_exit_codes_match_expected": true
+      },
+      "claude-code": {
+        "steps": 20,
+        "all_exit_codes_match_expected": true
+      }
+    },
+    "code_hashes_compared_with_current_files": 4,
+    "candidate_content_hashes_compared_with_current_files": 7,
+    "pinned_publisher_fingerprint_matches_repository": true,
+    "test_signer_differs_from_publisher": true,
+    "OFF_honorifics_user_bytes_cache_signature_rejection_rollback_offline_uninstall_claims_supported": true,
+    "rollback_highest_sequence_preserved": true,
+    "new_python_crash_reports": 0
+  },
+  "limitations": [
+    "Reviewer read and checked reports/source and ran guard tests; reviewer did not independently rerun TLS scenario",
+    "Immediate crash filename/stat comparison does not exclude delayed report generation",
+    "Current runtime/helper localhost TLS content upgrade only; no production 0.3.0 signing/publication",
+    "Original 0.2 executable migration and real scheduler registration were not exercised"
+  ]
+}

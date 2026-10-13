@@ -55,7 +55,7 @@ Claude/ Cursor의 전용 규칙 파일을 사용할 때에는 파일 전체를 �
 
 발행 공개키는 사용자가 별도로 확인한 채널, 검토한 저장소 commit 또는 조직 관리 정책으로 전달한다. v1에서는 공개키를 remote 콘텐츠로 자동 교체하지 않는다. 키 교체·폐기는 별도 검토와 로컬 trust 설정 교체가 필요하다. 이 제한 때문에 키가 바뀌면 자동 업데이트가 멈출 수 있으며 기존 규약은 계속 작동한다. 재시도만으로 키 변경을 승인하지 않는다.
 
-서명이 없는 개인 checkout은 `install --bundle LOCAL_DIR --local-snapshot --version 0.2.0`으로 설치한다. 이 입력은 release manifest 없이 고정 일곱 콘텐츠 파일을 검증하고 자체 hash metadata를 생성한다. 이 옵션은 로컬 파일을 사용자가 선택했다는 뜻이며 발행자 인증을 뜻하지 않는다. 상태에 `trust=local-snapshot`을 기록하고 원격 자동 업데이트를 거부한다. 서명 없는 원격 다운로드를 checksum만 확인하여 자동 적용하는 모드는 제공하지 않는다.
+서명이 없는 개인 checkout은 `install --bundle LOCAL_DIR --local-snapshot --version 0.3.0`으로 설치한다. 이 입력은 release manifest 없이 고정 일곱 콘텐츠 파일을 검증하고 자체 hash metadata를 생성한다. 이 옵션은 로컬 파일을 사용자가 선택했다는 뜻이며 발행자 인증을 뜻하지 않는다. 상태에 `trust=local-snapshot`을 기록하고 원격 자동 업데이트를 거부한다. 서명 없는 원격 다운로드를 checksum만 확인하여 자동 적용하는 모드는 제공하지 않는다.
 
 ## manifest와 서명
 

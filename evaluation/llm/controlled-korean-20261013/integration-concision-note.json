@@ -1,0 +1,5 @@
+{
+  "change": "Scoped the no-restatement guard to request-irrelevant material rather than an absolute ban; same normative meaning as leading request-scoped sentence.",
+  "before_execution": true,
+  "author": "parent integration review"
+}

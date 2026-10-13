@@ -1,0 +1,9 @@
+{
+  "condition": "treatment",
+  "files_sha256": {
+    "AGENTS.md": "7a6ce15e53ddb22fc946c3ea482eba24bc1e9bdb3e15237ee121f5a4eed6c564",
+    "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+    "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e"
+  },
+  "workspace_path": "/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/scope-condition-isolated-ht2msfuh/project"
+}

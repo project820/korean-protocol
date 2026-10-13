@@ -1,0 +1,25 @@
+{
+  "phase": "before any model output",
+  "reviewer": "fresh_gold_review",
+  "amended_cases": [
+    "nf01",
+    "nf02",
+    "nf03",
+    "nf04",
+    "nf06",
+    "nf08",
+    "nf09",
+    "nf10",
+    "nf11"
+  ],
+  "reason": "Fix facts, avoid turning optional details into mandatory text, preserve instruction relay uncertainty and quote register boundary",
+  "original": "gold-author-original.json",
+  "final": "gold.json",
+  "additional_parent_correction": "nf11 quote-external honorific style is optional; user requested exact quotation, not external honorifics",
+  "final_review": {
+    "approved": true,
+    "reviewer": "fresh_gold_review",
+    "scope": "All12 public inputs and corrected gold; no outputs read",
+    "result": "Factual drift and mandatory/optional conflicts resolved; no remaining blocker"
+  }
+}

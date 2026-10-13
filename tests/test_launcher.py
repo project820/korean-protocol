@@ -75,7 +75,7 @@ class LauncherTests(unittest.TestCase):
         self.assertEqual('user', command[command.index('--scope') + 1])
         self.assertEqual('codex', command[command.index('--host') + 1])
         self.assertEqual('off', command[command.index('--autoupdate') + 1])
-        self.assertEqual('0.2.0', command[command.index('--version') + 1])
+        self.assertEqual('0.3.0', command[command.index('--version') + 1])
         self.assertEqual(str(self.bundle), command[command.index('--bundle') + 1])
         self.assertFalse(child.call_args.kwargs.get('shell', False))
 
@@ -195,7 +195,7 @@ class LauncherTests(unittest.TestCase):
         command=child.call_args.args[0]
         self.assertEqual('claude-code',command[command.index('--host')+1])
         self.assertEqual(str(home),command[command.index('--claude-home')+1])
-        self.assertEqual('0.2.0',command[command.index('--version')+1])
+        self.assertEqual('0.3.0',command[command.index('--version')+1])
         self.assertTrue(command[command.index('--state-dir')+1].endswith('korean-protocol-claude-code'))
         self.assertNotIn('--codex-home',command)
         self.assertFalse(home.exists())

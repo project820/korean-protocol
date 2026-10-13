@@ -1,0 +1,1 @@
+Do not use any tools or read files. Return one JSON object with project_marker (the value supplied by project AGENTS.md in your context, null if absent) and available_skill_names (names explicitly listed as enabled/available skills in your supplied context, empty array if none). Do not invent skill names. This is a context-loading diagnostic, not a request to execute a skill.

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "python_executable": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+  "python_version": "3.9.6",
+  "files_sha256": {
+    "tests/manual_candidate_upgrade_smoke.py": "4012798d046243981c812f9324401a29291c9fb00a3af9b9ce5b8b43ef6219a3",
+    "tests/test_candidate_upgrade_smoke.py": "d560c8a36c0c5ff1224892e4c45eadd4d91b5a101065c198ca79530b9512925c",
+    "evaluation/release-0.3.0-20261013/candidate-upgrade-smoke.json": "aaa68aa228e97fcee3dd1539d21638f478870cc85b61bddc80af230f137f3726"
+  },
+  "checks": [
+    {
+      "command": "python3 -B -m unittest discover -s tests -p test_candidate_upgrade_smoke.py",
+      "exit_code": 0,
+      "passed": 5
+    },
+    {
+      "command": "python3 -B -m unittest discover -s tests -p 'test*smoke.py'",
+      "exit_code": 0,
+      "passed": 11
+    }
+  ],
+  "scope": "offline guards plus existing smoke artifact loader; actual two-host TLS evidence is separate candidate-upgrade-smoke.json"
+}

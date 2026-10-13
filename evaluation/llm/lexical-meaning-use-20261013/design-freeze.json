@@ -1,0 +1,13 @@
+{
+  "frozen_at_utc": "2026-10-13T10:45:21.857574+00:00",
+  "sha256": {
+    "cases.json": "638d429059f854d49ff0266ba65345e13c7a04ae691a477e8ae53cc6c55cff03",
+    "gold.json": "8683b5791cd50270077683f34efe54a89674dc431e2f9e4650dd35f53ff490d5",
+    "source-contract.json": "f7b262766b2aabdb1eed61133aa07794ae0926c1ca790c9602d5c134eb8d8bb0",
+    "plan.md": "1c6fe1edebf89e0a418dc5738132d74368f280f8adb4d10b87aeb70fc7e419e3",
+    "metric-review.json": "4f3667b3da5d1086011c8c1ad3f25b103e761888a683852220b91e13e62c76ea",
+    "gold-adjudication.json": "fb6e04276b3d5e2e04b807dafd521210ef0fe9e85aec407c3a04f1460f6780ef",
+    "kp-profile.md": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60",
+    "ste-profile.md": "8b1fba691988ced69b82bbe10d3836f5cb694d9e2ccde0e132da76c18a22e262"
+  }
+}

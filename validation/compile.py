@@ -8,9 +8,10 @@ from .check import Checker, FILES, validate_root
 NOTICE_PATHS=('LICENSE','NOTICE.md')
 PROFILE_PATHS=('profiles/coding-agent.md','profiles/chat.md','profiles/work-document.md','pack/protocol.md')
 GUARDS='''사용자의 상위 지침·작업 범위를 따른다. 뜻·확실성·시상·발화 목적을 보존한다.
-가능성을 사실로, 허락을 명령으로 바꾸지 않는다. 명확한 주체는 생략할 수 있다.
-답에 필수인 정보를 확인할 수 없으면 그 정보만 묻는다. 불가 설명으로 끝내지 않는다.
-짧은 경고에는 공유 문맥이나 불필요한 확인 상태·이유를 덧붙이지 않는다.
+새로 쓰는 글과 문체 정돈은 높임 없는 기본 문체로 쓴다. 기존 글을 고칠 때는 확립된 문체를 유지한다.
+요청에 필요한 결과·판단·행동만 쓴다. 요청과 무관한 입력 사실 재진술·명칭 통일 안내·작성 과정·누락 정보는 쓰지 않는다. 제시된 검증 상태는 남긴다.
+가능성을 사실로, 허락을 명령으로, 미기록을 부재·미배정으로 바꾸지 않는다. 행위자가 하나로 회복되면 주체를 생략할 수 있다.
+확인할 수 없는 필수 정보만 묻는다. 불가 설명으로 끝내지 않는다.
 '''
 SCOPES={
     'profiles/coding-agent.md':'작업 결과 보고에는 실제 변경·검증·제약을 쓴다. 코드·명령·API 표기를 보존한다.',
@@ -36,7 +37,7 @@ def compile_profiles(root, output, budget=28*1024):
         if rule['exceptions']:rule_text.append('['+'; '.join(rule['exceptions'])+']')
     dictionary='`lexicon/core.json`·`lexicon/domains/software.json`에서 뜻·활용·논항·조건을 확인한다. deprecated 대안은 쓰지 않는다.\n'
     # Full rules take priority over an optional glossary; the full lexicon ships separately.
-    common='## 원칙\n\n'+GUARDS+'\n## 규칙\n\n요구사항 뒤에 (조건), [예외]를 쓴다.\n\n'+'\n'.join(rule_text)+'\n\n## 어휘\n\n'+dictionary
+    common='## 원칙\n\n'+GUARDS+'\n## 규칙\n\n요구사항 뒤에 (적용 조건), [예외]를 쓴다.\n\n'+'\n'.join(rule_text)+'\n\n## 어휘\n\n'+dictionary
     contents={name:'# Korean Protocol\n\n'+SCOPES[name]+'\n\n'+common for name in SCOPES}
     detail=['# Korean Protocol 상세 규약\n',GUARDS,'이 규약은 한국어 표현의 설계 초안이다. 구조 검사를 통과해도 LLM의 의미 보존이나 독자의 이해도가 검증되었다고 표현하지 않는다.\n']
     for rule in rules:

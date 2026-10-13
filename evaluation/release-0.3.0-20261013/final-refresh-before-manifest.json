@@ -1,0 +1,20 @@
+{
+  "scope": "before final count and candidate-upgrade-evidence documentation refresh",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "cd69b21d56bd02be03a9d832661298df4c2390c100213d4bd20f1434824d84b5",
+      "bytes": 16069
+    },
+    {
+      "path": "docs/status/requirements.md",
+      "sha256": "7fcac4d9fd01ec0ec16895986084563a4483d9813947256f8ebb315f00dcf1de",
+      "bytes": 17474
+    },
+    {
+      "path": "docs/status/completion-audit-20261013-compact.md",
+      "sha256": "51452e752e97d2bbb17902c930c96ed658fd7fd534bc3864df743d52a452a477",
+      "bytes": 5717
+    }
+  ]
+}

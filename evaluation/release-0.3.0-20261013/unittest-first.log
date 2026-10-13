@@ -1,0 +1,42 @@
+This file reconstructs failure excerpts and the terminal summary from the first full-suite tool output.
+It is not the original raw complete stdout/stderr log.
+Command: python3 -B -m unittest discover -s tests
+Tool output sources: exec session 43196; final chunk 121823; initial chunk 428556.
+The current candidate metadata was 0.3.0-draft; three historical test fixtures copied it without normalizing their fixed 0.2.0 manifest/source versions.
+
+ERROR: test_actions_private_first_release_runs_prepare_sign_and_seal (test_actions_release.ActionsSigningTests)
+  File "tests/test_actions_release.py", line 242, in test_actions_private_first_release_runs_prepare_sign_and_seal
+    actions.execute(command, source, work)
+  File "distribution/actions_release.py", line 319, in execute
+    release.prepare(root, prepared, version, sequence, now.strftime('%Y-%m-%dT%H:%M:%SZ'),
+  File "distribution/release.py", line 167, in prepare
+    files, source_version = _validated_source(root, version)
+  File "distribution/release.py", line 79, in _validated_source
+    source_version = _source_version(files, version)
+  File "distribution/release.py", line 71, in _source_version
+    raise k.InputError('Content source version must match the numeric release version')
+runtime.kproto.InputError: Content source version must match the numeric release version
+
+ERROR: test_authenticated_capture_preserves_every_publisher_byte_and_source_mtime (test_manual_https_smoke.SignedStaticSmokeTests)
+  File "tests/test_manual_https_smoke.py", line 50, in test_authenticated_capture_preserves_every_publisher_byte_and_source_mtime
+    manifest, payload = self.load()
+  File "tests/test_manual_https_smoke.py", line 46, in load
+    return smoke.load_signed_static(**arguments)
+  File "tests/manual_https_smoke.py", line 96, in load_signed_static
+    raise module.InputError('Content source version differs from the signed release')
+runtime.kproto.InputError: Content source version differs from the signed release
+
+ERROR: test_https_request_expectation_follows_authenticated_manifest_order (test_manual_https_smoke.SignedStaticSmokeTests)
+  File "tests/test_manual_https_smoke.py", line 64, in test_https_request_expectation_follows_authenticated_manifest_order
+    manifest, _ = self.load()
+  File "tests/test_manual_https_smoke.py", line 46, in load
+    return smoke.load_signed_static(**arguments)
+  File "tests/manual_https_smoke.py", line 96, in load_signed_static
+    raise module.InputError('Content source version differs from the signed release')
+runtime.kproto.InputError: Content source version differs from the signed release
+
+Ran 356 tests in 39.665s
+FAILED (errors=3)
+
+The three paths passed after fixture-only top-version normalization and fixture manifest/proof hash repair.
+The complete subsequent successful 356-test run is preserved in unittest-pre-upgrade-356.log.

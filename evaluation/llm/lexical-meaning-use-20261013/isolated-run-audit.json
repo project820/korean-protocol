@@ -1,0 +1,126 @@
+{
+  "isolated-ste-b1": {
+    "characters": 1034,
+    "item_types": [
+      "agent_message",
+      "error"
+    ],
+    "completed_commands": [],
+    "nonfatal_warnings": [
+      "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/scope-condition-isolated-svbb3cos/codex-home/config.toml."
+    ],
+    "execution_completed": true,
+    "mounts_unchanged": true,
+    "output_sha256": "2d2dcf802f1ef668da074d6edf19b012745c588b5623c5e3efc580420b73ccbf"
+  },
+  "isolated-ste-b2": {
+    "characters": 1001,
+    "item_types": [
+      "agent_message",
+      "error"
+    ],
+    "completed_commands": [],
+    "nonfatal_warnings": [
+      "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/scope-condition-isolated-hu17c7hq/codex-home/config.toml."
+    ],
+    "execution_completed": true,
+    "mounts_unchanged": true,
+    "output_sha256": "28d30f59180594e7353d7bcb8be59b9fad53012e2adb89378cc03fc6a1dc911f"
+  },
+  "isolated-treatment-b1": {
+    "characters": 888,
+    "item_types": [
+      "agent_message",
+      "command_execution",
+      "error"
+    ],
+    "completed_commands": [
+      {
+        "command": "/bin/zsh -lc \"rg -n '배포|적용|업로드|승인|검토|보류|지원|롤백|대기|결재' lexicon/core.json lexicon/domains/software.json\"",
+        "exit_code": 0
+      },
+      {
+        "command": "/bin/zsh -lc \"python3 -c 'import json; from pathlib import Path; wanted={\\\"배포하다\\\",\\\"업로드하다\\\",\\\"시간 초과\\\",\\\"지원하다\\\",\\\"수 있다\\\",\\\"수 없다\\\",\\\"승인하다\\\",\\\"검토하다\\\",\\\"요청하다\\\",\\\"보류하다\\\",\\\"적용하다\\\",\\\"롤백하다\\\"};\ndef visit(x):\n if isinstance(x,dict):\n  if x.get(\\\"lemma\\\") in wanted: print(json.dumps({k:v for k,v in x.items() if k in (\\\"lemma\\\",\\\"meaning\\\",\\\"sense\\\",\\\"argument_patterns\\\",\\\"usage_conditions\\\",\\\"constraints\\\",\\\"allowed_forms\\\",\\\"notes\\\")},ensure_ascii=False))\n  else:\n   for v in x.values(): visit(v)\n elif isinstance(x,list):\n  for v in x: visit(v)\nfor name in (\\\"lexicon/core.json\\\",\\\"lexicon/domains/software.json\\\"): visit(json.loads(Path(name).read_text()))'\"",
+        "exit_code": 0
+      }
+    ],
+    "nonfatal_warnings": [
+      "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/scope-condition-isolated-bi3r9q36/codex-home/config.toml."
+    ],
+    "execution_completed": true,
+    "mounts_unchanged": true,
+    "output_sha256": "ff850ce669423b62d9dd76b2e1cfcfc3771324d0529ce8c5bb6127b809e36678"
+  },
+  "isolated-treatment-b2": {
+    "characters": 904,
+    "item_types": [
+      "agent_message",
+      "command_execution",
+      "error"
+    ],
+    "completed_commands": [
+      {
+        "command": "/bin/zsh -lc \"rg -n '\\\"(저장|복원|복구|백업|동기화|처리율|처리량|페이로드|테넌트|검증|충족|스냅샷)\\\"' lexicon/core.json lexicon/domains/software.json\"",
+        "exit_code": 0
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '1415,1510p' lexicon/domains/software.json\nsed -n '1580,1660p' lexicon/domains/software.json\nsed -n '7545,7605p' lexicon/core.json\"",
+        "exit_code": 0
+      },
+      {
+        "command": "/bin/zsh -lc \"rg -n '\\\"lemma\\\": \\\"(저장|복원|백업|검증|롤백|페이로드|테넌트)' lexicon/core.json lexicon/domains/software.json\"",
+        "exit_code": 0
+      },
+      {
+        "command": "/bin/zsh -lc \"sed -n '7,47p' lexicon/core.json\nsed -n '540,580p' lexicon/core.json\nsed -n '1434,1474p' lexicon/core.json\nsed -n '384,424p' lexicon/domains/software.json\"",
+        "exit_code": 0
+      }
+    ],
+    "nonfatal_warnings": [
+      "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/scope-condition-isolated-pcw2ay5z/codex-home/config.toml."
+    ],
+    "execution_completed": true,
+    "mounts_unchanged": true,
+    "output_sha256": "c1a80fc673d346f24dfc66cdb9b33f4ca2e6a2b1ea7e3dbec2811b43acbebddc"
+  },
+  "isolated-baseline-b1": {
+    "characters": 952,
+    "item_types": [
+      "agent_message",
+      "command_execution",
+      "error"
+    ],
+    "completed_commands": [
+      {
+        "command": "/bin/zsh -lc 'pwd; rg --files lexicon'",
+        "exit_code": 2
+      }
+    ],
+    "nonfatal_warnings": [
+      "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/scope-condition-isolated-_i3to6jb/codex-home/config.toml."
+    ],
+    "execution_completed": true,
+    "mounts_unchanged": true,
+    "output_sha256": "f74f518f6d46d6ce5c908525ce31d5d045736cba4f5a30de93e876f070cc72cc"
+  },
+  "isolated-baseline-b2": {
+    "characters": 934,
+    "item_types": [
+      "agent_message",
+      "command_execution",
+      "error"
+    ],
+    "completed_commands": [
+      {
+        "command": "/bin/zsh -lc 'for p in lexicon/core.json lexicon/domains/software.json; do if [ -f \"$p\" ]; then rg -n '\"'저장|복원|복구|백업|동기|검증|시험|테넌트|처리율|throughput|페이로드' \\\"\"'$p\"; fi; done'",
+        "exit_code": 0
+      }
+    ],
+    "nonfatal_warnings": [
+      "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /private/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/scope-condition-isolated-y2vixgmk/codex-home/config.toml."
+    ],
+    "execution_completed": true,
+    "mounts_unchanged": true,
+    "output_sha256": "24897d79159bd3bb614816b2b990133ce8757e0fff81ce0c2fbab002dec8386f"
+  }
+}

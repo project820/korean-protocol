@@ -1,0 +1,11 @@
+{
+  "command": "python3 -B -m unittest discover -s tests",
+  "tests": 352,
+  "passed": true,
+  "seconds": 40.373,
+  "diff_check_passed": true,
+  "packaging_review": "control_security_review: no actionable security/build defects",
+  "artifact": "/private/tmp/korean-protocol-controlled-candidate-20261013.zip",
+  "artifact_sha256": "68246c493d3e171beb4d57f95538a23de2d069218ded7d80521a5749169576c7",
+  "published": false
+}

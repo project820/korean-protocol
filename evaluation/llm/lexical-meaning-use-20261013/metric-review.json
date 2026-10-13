@@ -1,0 +1,59 @@
+{
+  "reviewer": "lexical_metric_review",
+  "stage": "before generation",
+  "denominators": {
+    "concept_fulfillment": 16,
+    "direct_approved_term_use": 16,
+    "exception_preservation": 4,
+    "unresolved_handling": 4,
+    "total_context_handling": 24,
+    "misuse_contexts": 24
+  },
+  "principles": [
+    "Do not label24-context handling as approved-meaning usage.",
+    "Faithful paraphrase counts concept fulfillment, not direct term use.",
+    "Directuse excludes mere mentions,quotes,filenames and identifiers; validinflection and frames required.",
+    "Retain all24 contexts, domain4/1/1 composition, uncertainty and errors.",
+    "Purposive dictionary-informed synthetic sample is not corpus coverage."
+  ],
+  "existing_evidence": {
+    "pos": [
+      "docs/spec/lexicon.md",
+      "tests/test_validation.py:test_descriptive_expression_has_an_explicit_editorial_category",
+      "FC-1-2",
+      "FC-1-2-UI"
+    ],
+    "inflection": [
+      "FC-1-4",
+      "LEX-FORMS-*"
+    ],
+    "frames": [
+      "LEX-CLARIFY-FRAME-01",
+      "FC-3-1",
+      "FC-9-2",
+      "FC-4-5"
+    ],
+    "technical_nouns": [
+      "FC-1-5",
+      "FC-1-6",
+      "FC-1-6-X"
+    ],
+    "technical_verbs": [
+      "FC-1-7",
+      "FC-1-12",
+      "FC-1-7-OK"
+    ],
+    "project_extensions": [
+      "FC-1-6",
+      "LEX-KEEP-TERM-01",
+      "LEX-REVISE-04",
+      "LEX-CLARIFY-TERM-01"
+    ],
+    "collisions": [
+      "tests/test_validation.py:test_domain_cannot_override_core_sense",
+      "LEX-CLARIFY-TERM-01",
+      "LEX-CLARIFY-SENSE-01"
+    ]
+  },
+  "limits": "Structuretests verify schema/invariants, notsemantic compatibility. Functionalreview hashes matchcurrent sources; authoredcases not allindependentlyreviewed. PolicydoesnotrequireallKoreanformsorhumanstudy."
+}

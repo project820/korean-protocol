@@ -226,6 +226,18 @@ class ActionsSigningTests(unittest.TestCase):
             destination = source / name
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes((repo / name).read_bytes())
+        # Keep this fictional first release independent of current draft metadata.
+        for name in ('specification/rules.json', 'lexicon/core.json',
+                     'lexicon/domains/software.json'):
+            path = source / name
+            current = k.strict_json(path.read_bytes())['version']
+            path.write_bytes(path.read_bytes().replace(
+                ('"version": "' + current + '"').encode(),
+                b'"version": "0.2.0-draft"', 1))
+        proof_path = source / 'evaluation/functional-review.json'
+        proof = k.strict_json(proof_path.read_bytes())
+        proof['reviewed_rules_sha256'] = k.digest((source/'specification/rules.json').read_bytes())
+        proof_path.write_bytes(k.json_bytes(proof))
         trust = source / 'distribution/trust'
         trust.mkdir(parents=True)
         (trust / 'publisher.pub').write_bytes(self.public.read_bytes())

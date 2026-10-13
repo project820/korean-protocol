@@ -1,0 +1,125 @@
+{
+  "scope": "Development refinement of output contract; not independent evaluation. No runtime/crosswalk/evaluation files touched; no commits.",
+  "rule_count": 72,
+  "changed_rules": {
+    "KP-DESC-005": {
+      "requirement": "이미 밝힌 범위·양태·결론·배경을 되풀이하는 설명, 번호 순서로 드러난 선행 조건, 새 정보 없는 예고·맺음말은 삭제한다. 다른 대상·시점의 상태는 남긴다.",
+      "conditions": [
+        "반복·의례 문구가 답·행동 정보를 늘리지 않을 때"
+      ],
+      "exceptions": [
+        "위험 행동 직전 안전 경고·다른 위치의 UI 안내·중요 대비·긴 문서 구획 요약·실제 모호성 해소·동시 유지·전역 조건은 판단에 필요하면 남긴다."
+      ]
+    },
+    "KP-EDIT-002": {
+      "requirement": "수정·실행에 필요한 주체·조건·기준이 없을 때만 확인한다. 있어야 할 역할은 누가 맡았는지 묻고, 배정을 위임받지 않았으면 배정을 제안하지 않는다.",
+      "conditions": [
+        "해석 후보에 따라 행동이나 사실이 달라지고 문맥으로 하나를 고를 수 없을 때"
+      ],
+      "exceptions": [
+        "문장만 고칠 때는 뜻을 유지해 수정할 수 있으면 실행용 정보를 묻지 않는다. 같은 뜻의 표현은 맡긴 범위에서 정돈한다."
+      ]
+    },
+    "KP-SYN-009": {
+      "requirement": "핵심 사실·계획·의무·조건은 서술어로 밝힌다. 명료한 상태·결과·제목은 KP-TXT-006을 따른다.",
+      "conditions": [
+        "것·함·에 대한을 연쇄해 주된 판단이 뒤로 밀릴 때"
+      ],
+      "exceptions": [
+        "저장 실패·승인 여부처럼 구별할 개념은 명사형으로 쓴다."
+      ]
+    },
+    "KP-KO-001": {
+      "requirement": "행위자·대상·수신자·도구·장소의 대응과 수량·책임 대비를 보존한다.",
+      "conditions": [
+        "조사 없는 명사 연쇄를 풀거나 조사가 있는 문장의 조사·논항을 편집할 때"
+      ],
+      "exceptions": [
+        "본문의 구어·압축 표현, 검색어·파일명·표 제목·UI 레이블은 역할이 하나로 회복되고 대상 대비나 책임 구별이 사라지지 않으면 조사를 생략한다."
+      ]
+    }
+  },
+  "unchanged_but_relevant": {
+    "KP-TXT-006": "상태·결과·확인 항목은 대상·범위·양태가 명확하면 '표기된 담당자 없음.'처럼 대상+상태의 짧은 명사형으로 쓴다. 버튼·제목·표 셀은 위치로 대상·기능이 식별되면 명사형·짧은 구를 쓴다."
+  },
+  "guards": [
+    "사용자의 상위 지침·작업 범위를 따른다. 뜻·확실성·시상·발화 목적을 보존한다.",
+    "새로 쓰는 글과 문체 정돈은 높임 없는 기본 문체로 쓴다. 기존 글을 고칠 때는 확립된 문체를 유지한다.",
+    "요청에 필요한 결과·판단·행동만 쓴다. 입력 사실 재진술·명칭 통일 안내·작성 과정·요청과 무관한 누락 정보는 쓰지 않는다.",
+    "가능성을 사실로, 허락을 명령으로, 미기록을 부재·미배정으로 바꾸지 않는다. 행위자가 하나로 회복되면 주체를 생략할 수 있다.",
+    "확인할 수 없는 필수 정보만 묻는다. 불가 설명으로 끝내지 않는다."
+  ],
+  "compaction_notes": [
+    "Removed guard line on short nominal status: duplicated KP-TXT-006 requirement and its action/condition/causal/contrast exception.",
+    "Removed guard clause on short-warning extras: covered by KP-VER-008 exception.",
+    "Removed KP-KO-001 second requirement sentence: duplicated by its stricter exception on particle omission.",
+    "KP-SYN-009 status nominal sentence now points to KP-TXT-006 instead of restating it."
+  ],
+  "files": {
+    "specification/rules.json": {
+      "sha256_before": "ad06bff2e4aff08daa1aa637c92bf34ae0f8ddef5f573ed9e10be7dfd43be3a1",
+      "sha256_after": "d58196b167a048b339d687d5d81954c9d482083494c5b19a03202c59def09408",
+      "bytes": 171499
+    },
+    "examples/rule-cases.json": {
+      "sha256_before": "6d434a2fec0dd81563ea83a7303b768dc9f97ba5d8201f5f024aa708697194b4",
+      "sha256_after": "a26e63ec0f232b970594b28ee6e07ccd0614b8f75e7f2141ae3883349d8b7699",
+      "bytes": 198386
+    },
+    "profiles/chat.md": {
+      "sha256_before": "fac35ce0057a47bad278c79576ee9e7131aba9550b632a38e45a62140a8fd340",
+      "sha256_after": "acca03e8752b3145cdb6959ddc575f19837742be14b4e2bd4251ac2511c84cca",
+      "bytes": 28601
+    },
+    "profiles/coding-agent.md": {
+      "sha256_before": "184d86be87191adefdbbe8f7ae037b2f111805f3b5d87bb2eae47765a64f626b",
+      "sha256_after": "cebcf150adaa3dde204132f4664301570243d7aba1bd895a4a34e8fa77691d64",
+      "bytes": 28631
+    },
+    "profiles/work-document.md": {
+      "sha256_before": "a9cad586d4404fdc8f573681b9837cb502e79e055fd3bf4d8328a55754350392",
+      "sha256_after": "4d48cfe330f0a3100ab0d743ac603fbd1323904a604a9268ae75f911d9a04f0e",
+      "bytes": 28610
+    },
+    "pack/protocol.md": {
+      "sha256_before": "f756d6e1e73fa7617b77dc017da5ea40d0851a8c04b5faa99ef2a61ddf6ffc3d",
+      "sha256_after": "b6dffd446b20cbca7fed9d86fab244dee5be872e017323c298229e98af20ee9e",
+      "bytes": 94230
+    },
+    "validation/compile.py": {
+      "sha256_before": "d5cb3aa8912a7bfee463e96537569ba82b2c612f8f25f3cb17f3b81434d79183",
+      "sha256_after": "67eb36250a7f70492737d5f74cc629a20efe2de6d3ff2cec812ea75abe93d710",
+      "bytes": 5740
+    },
+    "tests/test_controlled_language.py": {
+      "sha256_before": "309157e2d16e855260eaa18f25d00b7e684c6712cbefb3a0fb625f25b22493c9",
+      "sha256_after": "15ca2cd44109a699b42b244488d86348cf1c3ff8ec06892f0219ecd897c43bc6",
+      "bytes": 10298
+    }
+  },
+  "profile_budget_bytes": 28672,
+  "new_cases": [
+    "KP-DESC-005-INPUT-RECITAL",
+    "KP-DESC-005-MODALITY-ONCE",
+    "KP-DESC-005-LIMIT-ONCE",
+    "KP-DESC-005-IRRELEVANT-MISSING",
+    "KP-DESC-005-SEQUENCE-PREREQ",
+    "KP-DESC-005-GLOBAL-CONDITION",
+    "KP-DESC-005-SAFETY-REPEAT",
+    "KP-EDIT-002-ROLE-ASK",
+    "KP-EDIT-002-ROLE-DELEGATED"
+  ],
+  "new_tests": [
+    "test_compiled_profiles_state_request_scoped_output_contract",
+    "test_output_contract_cases_drop_surplus_and_keep_needed_relations"
+  ],
+  "verification": {
+    "red": "2 failures before implementation (/tmp/kproto-concision-red.txt)",
+    "tests.test_controlled_language": "10 OK",
+    "validation.check": "Integrity PASS; designed=49/53; verified functional design=0/53; semantic evaluation=unconfirmed",
+    "tests.test_validation": "OK",
+    "tests.test_distribution": "OK",
+    "tests.test_release": "1 failure test_rejects_symlink_source_payload_evidence_output_and_parent; passes on clean HEAD export; cause: concurrent uncommitted ste-crosswalk change (49 verified at HEAD -> 0) so release no longer reads evaluation/functional-review.json; not touched by this change"
+  },
+  "limits": "Authored cases test output-contract invariants only; LLM output conciseness and semantic preservation remain unmeasured until parent reruns the 24+STE conditions."
+}

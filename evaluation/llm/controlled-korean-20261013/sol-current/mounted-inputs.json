@@ -1,0 +1,9 @@
+{
+  "condition": "treatment",
+  "files_sha256": {
+    "AGENTS.md": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+    "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+    "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e"
+  },
+  "workspace_path": "/var/folders/yy/jvyvnf4x4_1b9pf7p3fq18gr0000gn/T/scope-condition-isolated-k02enk43/project"
+}

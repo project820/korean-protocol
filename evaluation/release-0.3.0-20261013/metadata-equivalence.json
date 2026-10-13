@@ -1,0 +1,36 @@
+{
+  "status": "approved-independent-metadata-carryforward",
+  "files": [
+    {
+      "path": "specification/rules.json",
+      "before_version": "0.2.0-draft",
+      "after_version": "0.3.0-draft",
+      "before_sha256": "d58196b167a048b339d687d5d81954c9d482083494c5b19a03202c59def09408",
+      "after_sha256": "e1e921b1d3cfc7e5039a0d6ba8447e05a21bf47331cadcd393c982a4c2272f03",
+      "parsed_equal_excluding_top_level_version": true,
+      "byte_diff_only_top_level_version": true
+    },
+    {
+      "path": "lexicon/core.json",
+      "before_version": "0.2.0-draft",
+      "after_version": "0.3.0-draft",
+      "before_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+      "after_sha256": "2f8ad8315fe23a3e63406a02aa1b58188cc60a79a06e1a4239e3ed7cbf1b1bad",
+      "parsed_equal_excluding_top_level_version": true,
+      "byte_diff_only_top_level_version": true
+    },
+    {
+      "path": "lexicon/domains/software.json",
+      "before_version": "0.2.0-draft",
+      "after_version": "0.3.0-draft",
+      "before_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+      "after_sha256": "2e537f1178e85e4efb63f357a5f8da13927749ada2f58647f8bff879661db688",
+      "parsed_equal_excluding_top_level_version": true,
+      "byte_diff_only_top_level_version": true
+    }
+  ],
+  "entry_ids_since_entry_versions_unchanged": true,
+  "functional_review_unchanged": false,
+  "compiled_profiles_unchanged": true,
+  "functional_review_hash_only_update": true
+}

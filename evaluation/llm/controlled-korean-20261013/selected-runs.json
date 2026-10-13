@@ -1,0 +1,26 @@
+{
+  "runs": {
+    "final-kp": "sol-concise-final",
+    "final-ste": "sol-final-ste",
+    "final-baseline": "sol-baseline",
+    "holdout-kp": "sol-concise-holdout",
+    "holdout-ste": "sol-holdout-ste",
+    "holdout-baseline": "sol-holdout-baseline",
+    "confirmation-kp": "sol-confirmation-kp",
+    "confirmation-ste": "sol-confirmation-ste",
+    "confirmation-baseline": "sol-confirmation-baseline"
+  },
+  "character_counts": {
+    "final-kp": 1332,
+    "final-ste": 1671,
+    "final-baseline": 1779,
+    "holdout-kp": 1380,
+    "holdout-ste": 1490,
+    "holdout-baseline": 1554,
+    "confirmation-kp": 965,
+    "confirmation-ste": 1070,
+    "confirmation-baseline": 1051
+  },
+  "metric": "Unicode code points incl whitespace/punctuation; nottokensorreadtime",
+  "fixed_profile_sha256": "7a6ce15e53ddb22fc946c3ea482eba24bc1e9bdb3e15237ee121f5a4eed6c564"
+}

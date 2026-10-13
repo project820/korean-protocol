@@ -1,0 +1,11 @@
+# 새 입력에서 의미와 명확성을 검증한다
+
+This prospective evaluation freezes 12 freshly authored synthetic inputs and gold before any generation. Opus medium authored them without profile, lexicon, previous-case or output access; a separate Sol reviewer checks gold before execution. Corrections, if necessary, are documented before freeze; never change gold to fit output.
+
+Run all three conditions (untreated baseline, current KP, independent Korean rendering of STE principles) twice in six separate ephemeral contexts. Within each repetition, public facts, requests and ordering are identical. Use existing runner with requested gpt-6.1-sol/high. Max3 concurrent calls; no selective successful-result replacement. Capacity failure triggers preserved failure and all six conditions rerun with Opus/high. Other errors are diagnosed first. No model/profile/lexicon changes during evaluation.
+
+Baseline has no profile or lexicon, KP has frozen profile and both dictionaries, STE has only its frozen independent guideline. Gold and plan are outside model-visible project. Audit raw commands; observed forbidden reads invalidate that run. Read-only does not mean filesystem-read confinement.
+
+Each of12 tasks is rated for mandatory meaning, requested task, clear actor/referent/condition/modality, and irrelevant additions. Gold accepts different wording, complete short status phrases and requested polite genres. Require zero semantic or task errors among24 KP outputs for this bounded candidate check. Compare all conditions; equal success is not improvement. Record failures and uncertainty, never average critical semantic failures away. Report shortness separately in Unicode characters including spaces, not comprehension or tokens. No mandatory shortening percentage.
+
+Blind independent reviewer sees only public input, fixed gold and shuffled outputs, not condition key/profile. A judgment must cite output/criterion; unclear gold judgments are disclosed separately. Record repeated results per case, not72 independent samples. Repetition count2 is only an instability diagnostic, not statistical reliability proof. Human reading/task outcomes remain untested. STE arm is Korean adaptation, not officialEnglish compliance.

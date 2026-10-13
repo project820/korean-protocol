@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-13",
+  "scope": "Controlled-language empirical evidence for evaluation design; no claim of Korean Protocol efficacy.",
+  "sources": [
+    {
+      "id": "HK2008",
+      "title": "Controlled Korean for Korean-English MT",
+      "authors": [
+        "Munpyo Hong",
+        "Chang-Hyun Kim"
+      ],
+      "year": 2008,
+      "venue": "PACLIC 22, pp.391–396",
+      "url": "https://aclanthology.org/Y08-1040/",
+      "pdf": "https://aclanthology.org/Y08-1040.pdf",
+      "doi": null,
+      "methods": "40,000 translation pairs informed rule discovery. Experiment sampled 50 sentences for each of eight error types; only checker-detected suggestions were rewritten. Output translation quality was evaluated, not human task comprehension.",
+      "results": "Paper reports overall translation accuracy improvement of 4.25%; ambiguous expressions +25%, subject-predicate mismatch +21%, double subject/object +20% in its category table.",
+      "limits": "Denominator/relative-versus-percentage-point definition of reported improvements, uncertainty intervals and significance are not sufficiently specified. Historical MT system; do not extrapolate to modern LLMs or human reading. Legitimate Korean constructions labeled 'errors' were system difficulties, not universal grammatical defects.",
+      "evaluation_implication": "Measure ambiguity and semantic role preservation per language/system. Test each rule category independently; do not import English rules wholesale.",
+      "verification": "Firecrawl PDF 6/6 pages, HTTP200; ACL page metadata verifies 2008 rather than search crawl date."
+    },
+    {
+      "id": "S1995",
+      "title": "The Comprehensibility of Simplified English in Procedures",
+      "authors": [
+        "Serena K. Shubert",
+        "Jan H. Spyridakis",
+        "Heather K. Holmback",
+        "Mary B. Coney"
+      ],
+      "year": 1995,
+      "doi": "10.2190/WG69-D74B-4DLL-2WBK",
+      "url": "https://doi.org/10.2190/WG69-D74B-4DLL-2WBK",
+      "methods": "SE/non-SE versions of two aircraft-maintenance procedures; outcomes were comprehension, content location and reading-plus-test time. Companion primary author account reports 130 engineering undergraduates, randomized among four documents, 20 two-part questions, 30-minute limit and alpha≤.05.",
+      "results": "Publisher abstract reports improved comprehension and location for the more complex procedure, and essentially unchanged completion time.",
+      "limits": "Only two procedures; complexity difference was recognized post hoc in the companion account. Publisher abstract says native-language differences were not statistically tested because cells differed greatly; avoid claiming proven non-native interaction. Full 1995 paper was not obtained.",
+      "evaluation_implication": "Stratify complexity before testing and separate accuracy, location and time. Questionnaire completion is not operational task success.",
+      "verification": "Parallel Search publisher abstract plus primary companion paper; full 1995 paper not inspected."
+    },
+    {
+      "id": "C1996",
+      "title": "Simplified English for Aircraft Workcards",
+      "authors": [
+        "Steven Chervak",
+        "Colin G. Drury",
+        "James P. Ouellette"
+      ],
+      "year": 1996,
+      "venue": "HFES Annual Meeting 40(5),303–307",
+      "doi": "10.1177/154193129604000502",
+      "url": "https://doi.org/10.1177/154193129604000502",
+      "methods": "175 practicing aircraft maintenance technicians in between-subject comprehension testing; 16 workcards crossed language (SE/non-SE), difficulty (easy/difficult) and layout (standard/revised).",
+      "results": "Publisher abstract reports significant comprehension improvement, especially difficult workcards and non-native speakers; no layout effect.",
+      "limits": "Abstract lacks effect sizes, confidence intervals and detailed significance tests. Real technicians answered comprehension tests; actual maintenance success was not established. Do not import the 175-person sample as a recommended sample size.",
+      "evaluation_implication": "Use target readers, include both easy and difficult materials and hold layout constant when testing wording.",
+      "verification": "Firecrawl rejected for insufficient credits; Parallel publisher extraction fallback."
+    },
+    {
+      "id": "H1996",
+      "title": "Issues in Conducting Empirical Evaluations of Controlled Languages",
+      "authors": [
+        "Heather Holmback",
+        "Serena Shubert",
+        "Jan Spyridakis"
+      ],
+      "year": 1996,
+      "venue": "CLAW ’96",
+      "url": "https://aclanthology.org/www.mt-archive.info/90/CLAW-1996-Holmback.pdf",
+      "doi": null,
+      "methods": "Primary authors recount their comprehension and translation experiments and analyze design threats. This overlaps S1995 rather than adding an independent comprehension replication.",
+      "results": "More complex Procedure A showed comprehension/location gains; Procedure B did not. No significant time difference under a time limit without time pressure. Authors recommend actual procedure performance, representative users and varied complexity.",
+      "limits": "130 participants denotes the tested sample in this account, not a confirmed final analysis count in the unavailable 1995 full paper. This account describes native/non-native effects more strongly than the 1995 abstract; retain the abstract's explicit limitation instead of resolving the discrepancy.",
+      "evaluation_implication": "Separate realistic document tests from minimal rule-pair tests. Predefine success and critical errors; measure actual execution before claiming task benefits.",
+      "verification": "Firecrawl rejected for insufficient credits; Parallel full-content extraction fallback. 2014-02-11 search metadata is not publication year."
+    }
+  ],
+  "evaluation_design": {
+    "status": "proposal, not validated protocol",
+    "conditions": [
+      "Original text",
+      "General clear Korean edit",
+      "Korean Protocol edit with recoverable omissions"
+    ],
+    "controls": [
+      "Same facts, actors, conditions, quantities, negation and obligation strength; blind semantic audit before user testing.",
+      "Same layout/font/navigation; randomize or counterbalance conditions so no participant sees multiple versions of the same item.",
+      "Stratify easy/complex texts and status/action tasks; include target-domain novices and experienced readers."
+    ],
+    "primary_outcomes": [
+      "Correct task completion with predefined critical-error counts.",
+      "Correct interpretation of actor, object, scope, precondition and obligation."
+    ],
+    "secondary_outcomes": [
+      "Information location accuracy",
+      "Correct-answer or correct-task completion time; report speed/accuracy jointly",
+      "Clarification requests and subjective preference"
+    ],
+    "rule_ablation": [
+      "Compare same item with/without subject omission.",
+      "Compare same item with/without case particle omission; separately retain meaning-bearing auxiliary particles.",
+      "Compare -ㅁ/-음 and finite narrative endings while preserving modality.",
+      "Include ambiguous antecedent and scope-loss adversarial items."
+    ],
+    "analysis": [
+      "Pre-register outcome definitions and unacceptable semantic-loss threshold; report all conditions and uncertainty intervals.",
+      "Use participant and item variability; sample size follows pilot variance and a stated minimum meaningful difference.",
+      "LLM judges can screen errors but cannot replace human comprehension or actual task testing."
+    ],
+    "claims_allowed_before_testing": "External studies motivate the evaluation dimensions; they do not demonstrate Korean Protocol effectiveness.",
+    "no_implementation": "No experiment was run and no repository file was modified."
+  },
+  "retrieval": {
+    "pipeline": "Parallel discovery → Firecrawl limited 20-page extraction attempted → Parallel fallback after credit rejection",
+    "firecrawl_success_pages": 6,
+    "firecrawl_followup_error": "Insufficient credits",
+    "billing_link": "https://www.firecrawl.dev/app/settings?tab=billing",
+    "papers_found": 4,
+    "independent_human_comprehension_experiments": 2,
+    "korean_human_comprehension_experiment_found": false
+  }
+}

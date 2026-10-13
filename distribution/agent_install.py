@@ -39,7 +39,7 @@ import tempfile
 from contextlib import contextmanager
 import types
 
-VERSION = '0.2.0'
+VERSION = '0.3.0'
 TOOL_NAME = 'agent-tool'
 TOOL_FILES = ('agent-install.py', 'runtime/kproto.py')
 LIMIT = 4 * 1024 * 1024
@@ -251,10 +251,12 @@ def read_status(runtime, root, host, verify_cache=True):
                     metadata.get('files') != hashes or manifest_hashes != hashes):
                 raise AgentError('Cached protocol integrity check failed', 5)
             verified = True
-    return dict(state, installed=bool(state.get('target')), verified=verified,
+    enabled, honorifics = runtime.application_settings(state)
+    return dict(state, installed=bool(state.get('target')), enabled=bool(state.get('target')) and enabled,
+                honorifics=honorifics, content_verified=verified, verified=verified and enabled,
                 autoupdate=config.get('mode', 'off'), source=config.get('source'),
                 scheduler=runtime.scheduler_status(config, root),
-                recovery_required=journal_path.exists())
+                recovery_required=journal_path.exists() or safe_path(root/'scheduler-migration.json').exists())
 
 
 def persist_tool(runtime, root, host, bundle):
@@ -379,7 +381,7 @@ def capture_remote(runtime, source, key, fingerprint, root):
 
 
 @contextmanager
-def mutation_guard(runtime, root, host, signed, target=None):
+def mutation_guard(runtime, root, host, signed, target=None, installation=True):
     runtime.Controller(root)
     path = safe_path(root / 'agent-action.lock')
     parent = runtime.open_directory(path.parent)
@@ -398,7 +400,7 @@ def mutation_guard(runtime, root, host, signed, target=None):
         current = read_status(runtime, root, host, verify_cache=target is not None)
         if target is not None and current.get('target') and current['target'] != str(target):
             raise AgentError('Installed host target changed before installation', 7)
-        if target is not None and not signed and (current.get('trust') == 'signed' or (root / 'trust/public_key').exists()):
+        if installation and target is not None and not signed and (current.get('trust') == 'signed' or (root / 'trust/public_key').exists()):
             raise AgentError('Existing signed trust requires explicit signed installation; local downgrade is refused', 5)
         yield
     finally:
@@ -460,7 +462,9 @@ class JsonParser(argparse.ArgumentParser):
 
 def main(argv=None):
     parser = JsonParser(description=__doc__)
-    parser.add_argument('action', choices=['plan', 'install', 'status', 'uninstall'])
+    parser.add_argument('action', choices=['plan', 'install', 'status', 'configure', 'uninstall'])
+    parser.add_argument('--protocol', choices=['on', 'off'])
+    parser.add_argument('--honorifics', choices=['on', 'off'])
     parser.add_argument('--host', required=True, choices=['codex', 'claude-code'])
     parser.add_argument('--state-dir', type=Path)
     parser.add_argument('--codex-home', type=Path)
@@ -477,6 +481,10 @@ def main(argv=None):
     try:
         args = parser.parse_args(argv)
         result.update(action=args.action, host=args.host)
+        if args.action != 'configure' and (args.protocol is not None or args.honorifics is not None):
+            raise AgentError('Application settings apply only to configure')
+        if args.action == 'configure' and args.protocol is None and args.honorifics is None:
+            raise AgentError('Choose --protocol or --honorifics')
         bundle = find_bundle(__file__)
         runtime = load_runtime(bundle)
         managed = managed_bundle(bundle)
@@ -499,7 +507,7 @@ def main(argv=None):
         result['target_matches'] = not status['installed'] or status['target'] == str(target)
         if status['installed'] and status['target'] != str(target):
             # Removal must address the recorded file even if discovery changed.
-            if args.action == 'install':
+            if args.action in ('install', 'configure'):
                 raise AgentError('Current host target differs from installed target; existing instructions preserved', 7)
             result['target'] = status['target']
         captured = None
@@ -560,13 +568,25 @@ def main(argv=None):
                                                                     durable.host_budget(args, target), host_context=context)
                     controller.configure(mode='off')
             result['install_validated'] = True
+        elif args.action == 'configure':
+            if not status['installed'] and not status['recovery_required']:
+                raise AgentError('No installed protocol', 4)
+            with mutation_guard(runtime, root, args.host, False, target, installation=False):
+                tool = persist_tool(runtime, root, args.host, bundle)
+                tool_available = True
+                runtime = load_runtime(tool)
+                result['changed'] = runtime.Controller(root).configure_application(
+                    enabled=None if args.protocol is None else args.protocol == 'on',
+                    honorifics=None if args.honorifics is None else args.honorifics == 'on')
         elif args.action == 'uninstall':
             if not status['installed'] and not status['recovery_required']:
                 raise AgentError('No installed protocol', 4)
             with mutation_guard(runtime, root, args.host, False):
                 runtime.Controller(root).uninstall()
             result['changed'] = True
-        result.update(read_status(runtime, root, args.host))
+        final_status = read_status(runtime, root, args.host)
+        final_status['content_verified'] = final_status['content_verified'] or bool(result.get('content_verified'))
+        result.update(final_status)
         if result['installed'] and not result['target_matches']:
             result['verified'] = False
         if args.action == 'plan':
@@ -593,7 +613,10 @@ def main(argv=None):
         home = args.codex_home if args.host == 'codex' else args.claude_home
         common += ['--codex-home' if args.host == 'codex' else '--claude-home', str(home)]
         routes = {action: [sys.executable, '-B', str(tool / 'agent-install.py'), action] + common
-                  for action in ('status', 'uninstall')}
+                  for action in ('status', 'configure', 'uninstall')}
+        for setting, option in (('protocol', '--protocol'), ('honorifics', '--honorifics')):
+            for value in ('on', 'off'):
+                routes[setting + '_' + value] = routes['configure'] + [option, value]
         result['management_argv'] = routes
         result['management_commands'] = {action: shlex.join(command) for action, command in routes.items()}
         base = [sys.executable, '-B', str(tool / 'runtime/kproto.py'), '--state-dir', result['state_dir']]

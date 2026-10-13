@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-13",
+  "question": "한국어의 복원 가능한 주어·조사·지시어 생략과 -ㅁ/-음 상태 종결을 허용하되 명확성·행위성·범위를 보존할 수 있는가",
+  "pipeline": {
+    "lanes": [
+      "한국어 생략 및 명사형 종결의 문법적 허용 범위",
+      "STE 영어 관사 규칙과 공식 기술문서 제목의 적용 범위"
+    ],
+    "discovery": "Parallel Search MCP; basic mode intended, connector has no mode parameter, no Task processor used",
+    "verification": "Firecrawl scrape markdown, maxAge=3600000, onlyMainContent=true; Parallel targeted extract for STE cross-check",
+    "source_budget": 5
+  },
+  "sources": [
+    {
+      "id": "NIKL-PARTICLE",
+      "title": "국립국어원 온라인가나다: 조사 생략",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id&pageIndex=1&qna_seq=332372",
+      "document_date": "2026-06-16",
+      "rationale": "조사 생략의 의미 보존 조건과 보조사 예외를 직접 설명한다.",
+      "claim": "격조사는 의미가 달라지지 않고 복원할 조사가 문맥상 명확하면 생략을 인정한다. 보조사를 없애면 보조사가 더하는 의미도 사라진다.",
+      "boundary": "모든 조사 삭제를 허용하지 않는다. 화자 의도에 따른 개별 문장 해석은 확정하지 않는다.",
+      "fetch_status": 200,
+      "fetch_cache_state": "miss"
+    },
+    {
+      "id": "NIKL-SUBJECT",
+      "title": "국립국어원 온라인가나다: 주어가 생략된 문장",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=&qna_seq=329142&pageIndex=1&searchCondition=&searchKeyword=",
+      "document_date": "2026-04-10",
+      "rationale": "문맥에서 드러나는 주어의 생략을 실제 문장 분석으로 인정한다.",
+      "claim": "나쁜 기억을 지운 뒤 편안해졌다는 예문을 문맥상 주어가 생략된 문장으로 본다.",
+      "boundary": "주어 복원의 일반 알고리즘이나 모든 문맥에서의 생략 허용을 제시하지 않는다. 문장 구조 분석의 학설 차이를 명시한다.",
+      "fetch_status": 200,
+      "fetch_cache_state": "miss"
+    },
+    {
+      "id": "NIKL-NOMINAL",
+      "title": "국립국어원 온라인가나다: 명사형 종결어미",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&qna_seq=305147",
+      "document_date": "2024-10-30",
+      "rationale": "-ㅁ/-음 종결을 문장으로 인정할 수 있는지 직접 답한다.",
+      "claim": "-ㅁ/-음은 명사 구실을 하게 하는 어미이며 이 어미로 문장을 종결할 수 있다.",
+      "boundary": "명사형이 더 잘 읽힌다거나 모든 지시문을 명사형으로 써야 한다는 근거는 아니다.",
+      "fetch_status": 200,
+      "fetch_cache_state": "miss"
+    },
+    {
+      "id": "STE9",
+      "title": "ASD-STE100 Issue 9",
+      "url": "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf",
+      "document_date": "2025-01-15",
+      "rationale": "한국어 생략을 영어 STE에 무리하게 귀속시키지 않도록 원문 경계를 확인한다.",
+      "locator": "Rule 4.2; Rule 4.5 pp.1-4-8–1-4-9; Rules 5.2–5.4 pp.1-5-2 onward",
+      "claim": "4.2는 문장을 줄이려는 단어 생략을 금지한다. 4.5는 필요한 관사/지시형용사를 유지한다. 일반 개념은 무관사로 쓰고, 긴 열거에서는 첫 명사에 관사를 둘 수 있으며, 뒤따르는 영숫자 식별자가 명사를 특정하면 정관사를 쓰지 않는다. 관사의 반복은 수식 범위를 구별한다. 5.2는 동시 행동 외에는 한 문장에 지시 하나를 둔다. 5.3은 지시문에 명령형을 쓰며, 5.4는 먼저 알아야 할 조건을 지시 앞에 둔다.",
+      "boundary": "한국어의 조사·주어 생략 허용 근거가 아니다. 한국어 이/그를 관사에 대응시켜 일률적으로 추가할 근거도 아니다.",
+      "retrieval_notes": "Parallel indexed extract와 Firecrawl PDF 추출이 일치함. Firecrawl statusCode=200, 434 pages. Parallel metadata publish_date=2026-03-02는 문서 내 판본일과 달라 발행일로 채택하지 않음.",
+      "fetch_status": 200,
+      "fetch_cache_state": "miss"
+    },
+    {
+      "id": "MS-HEADINGS",
+      "title": "Microsoft Writing Style Guide: Headings",
+      "url": "https://learn.microsoft.com/en-us/style-guide/scannable-content/headings",
+      "document_date": "2018-07-24",
+      "rationale": "기술문서의 제목은 본문 지시문과 다른 형태를 쓸 수 있음을 공식 작성 지침으로 확인한다.",
+      "claim": "제목은 짧고 구체적으로 쓴다. 같은 수준의 제목에는 병렬 구조를 쓰며, 작업이 아닌 제목에는 명사구를 사용할 수 있다.",
+      "boundary": "제목 규칙을 모든 본문이나 절차 문장에 확대하지 않는다. 페이지 UI에는 인증 안내가 섞였으나 본문과 공개 원본 메타데이터가 함께 추출됨.",
+      "fetch_status": 200,
+      "fetch_cache_state": "miss"
+    }
+  ],
+  "proposals": [
+    {
+      "status": "project_design_inference",
+      "text": "공유된 문맥에서 대상과 역할을 하나로 복원할 수 있고 뜻이 달라지지 않으면 주어·조사·지시어의 반복을 줄인다."
+    },
+    {
+      "status": "project_design_inference",
+      "text": "조건·수량·부정·범위·의무/가능·담당 역할을 바꾸는 생략은 금지한다. 보조사 '만/도/는'은 뜻을 확인한 뒤 결정한다."
+    },
+    {
+      "status": "project_design_inference",
+      "text": "상태 보고에는 '표기된 담당자 없음.'과 같은 -ㅁ/-음 종결을 허용한다. 명사 나열과 문장 종결을 동일시하지 않는다."
+    },
+    {
+      "status": "project_design_inference",
+      "text": "지시에서는 독자가 무엇을 해야 하는지 알 수 있게 행동·대상·조건을 남긴다. 상태 종결 선호를 모든 절차에 강제하지 않는다."
+    }
+  ],
+  "limitations": [
+    "담당자 없음과 표기된 담당자 없음은 관찰 범위가 다르므로 '표기된'을 삭제할 수 없다.",
+    "한국어 명사형의 읽기 속도·오류율 우월성은 검증하지 않았다.",
+    "지시어 생략은 별도 직접 근거가 아니라 의미·지시대상 보존에 따른 프로젝트 설계 추론이다.",
+    "온라인가나다는 질의별 설명이며 최근 2년 자료만 공개하므로 링크의 장기 지속성이 보장되지 않는다.",
+    "이 조사에서는 동료심사 논문을 사용하지 않았다. 확보한 5개 1차 근거로 문법적 허용/규격 경계를 확인했으며 효과 비교는 별도 실험이 필요하다."
+  ],
+  "tool_usage": {
+    "firecrawl_credits_reported": [
+      {
+        "id": "NIKL-PARTICLE",
+        "credits": 1
+      },
+      {
+        "id": "NIKL-SUBJECT",
+        "credits": 1
+      },
+      {
+        "id": "NIKL-NOMINAL",
+        "credits": 1
+      },
+      {
+        "id": "STE9",
+        "credits": 434
+      },
+      {
+        "id": "MS-HEADINGS",
+        "credits": 1
+      }
+    ],
+    "note": "PDF scrape returned all 434 pages; saved evidence contains only concise paraphrases, not the full standard."
+  }
+}

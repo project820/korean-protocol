@@ -40,6 +40,7 @@ import stat
 import subprocess
 import sys
 import time
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -474,6 +475,25 @@ def download_worker_main():
     return 0
 
 
+def application_settings(state):
+    enabled = state.get('protocol_enabled', True)
+    honorifics = state.get('honorifics', False)
+    if type(enabled) is not bool or type(honorifics) is not bool:
+        raise InputError('Application settings must be booleans')
+    return enabled, honorifics
+
+
+def speech_overlay(honorifics):
+    level = ('새 설명·보고 문장의 종결형만 존댓말(~습니다/~ㅂ니다)로 맞춘다. 행위자와 뜻을 바꾸지 않는다.'
+             if honorifics else
+             '새 설명·보고 문장의 종결형만 ~다/~한다로 맞춘다. 뜻을 유지하며 불필요한 주체 높임을 줄인다.')
+    return ('말투(프로필보다 우선):\n- ' + level + '\n'
+            "- 짧은 상태 표시('표기된 담당자 없음.')는 유지한다. 종결형을 맞추려고 문장을 늘리지 않는다.\n"
+            '- 절차 주체를 분명히 쓴다. 행위자를 지어내거나 모델 자신의 실행 계획으로 바꾸지 않는다.\n'
+            '- 뜻·행위자·조건·발화 기능을 보존한다. 허락·요청·제안·질문을 명령이나 단정으로 바꾸지 않는다.\n'
+            '- 인용·코드·식별자·기존 문체는 보존한다. 사용자 지정 말투·장르를 우선한다.\n').encode()
+
+
 class Controller:
     def __init__(self, state_dir):
         self.root = safe_path(state_dir)
@@ -486,6 +506,7 @@ class Controller:
         self.state_path = self.root/'state.json'
         self.config_path = self.root/'config.json'
         self.journal_path = self.root/'journal.json'
+        self.scheduler_journal_path = self.root/'scheduler-migration.json'
 
     def _json(self, path, default):
         return strict_json(read_bytes(path,MAX_TOTAL_BYTES)) if path.exists() else default
@@ -545,7 +566,9 @@ class Controller:
         state = self._state()
         result = dict(state)
         result['installed'] = bool(state.get('target'))
-        result['recovery_required'] = self.journal_path.exists()
+        enabled, honorifics = application_settings(state)
+        result.update(enabled=result['installed'] and enabled, honorifics=honorifics)
+        result['recovery_required'] = self.journal_path.exists() or self.scheduler_journal_path.exists()
         result['autoupdate'] = self._config().get('mode','off')
         result['scheduler'] = scheduler_status(self._config(), self.root)
         return result
@@ -617,75 +640,77 @@ class Controller:
     def register_scheduler(self):
         with self.lock():
             self._recover()
-            cfg = self._config()
-            if sys.platform != 'darwin':
-                raise CompatibilityError('Scheduler registration supports macOS only')
-            if cfg.get('mode') != 'scheduled' or self._state().get('trust') != 'signed':
-                raise TrustError('Scheduler registration requires a signed installation and scheduled mode')
-            validate_source(cfg.get('source', ''))
-            if cfg.get('token_env'):
-                raise InputError('Scheduler registration cannot persist a private endpoint shell credential')
-            runtime = safe_path(__file__)
-            if self.root not in runtime.parents or not runtime.is_file():
-                raise InputError('Scheduler registration requires the durable runtime inside its state directory')
-            runtime_info = runtime.stat()
-            if runtime_info.st_uid != os.getuid() or stat.S_IMODE(runtime_info.st_mode) & 0o022:
-                raise InputError('Durable runtime has unsafe ownership or permissions')
-            for parent in runtime.parents:
-                info = parent.stat()
-                if info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) & 0o022:
-                    raise InputError('Durable runtime directory has unsafe ownership or permissions')
-                if parent == self.root:
-                    break
-            path, label = self._agent_path()
-            args = [str(Path(sys.executable).resolve()), str(runtime), '--state-dir', str(self.root), 'update', '--scheduled']
-            if any('\n' in arg or '\r' in arg for arg in [str(path), *args]):
-                raise InputError('Scheduler paths cannot contain line breaks')
-            job = {'Label': label, 'ProgramArguments': args, 'RunAtLoad': True,
-                   'StartCalendarInterval': {'Minute': 0}, 'Umask': 0o077,
-                   'StandardOutPath': str(self.root/'scheduled.stdout.log'),
-                   'StandardErrorPath': str(self.root/'scheduled.stderr.log')}
-            safe_path(job['StandardOutPath'])
-            safe_path(job['StandardErrorPath'])
-            data = plistlib.dumps(job, sort_keys=True)
-            record = {'path': str(path), 'label': label, 'hash': digest(data), 'arguments': args}
-            previous = cfg.get('scheduler', {}).get('launch_agent')
-            if previous:
-                _, previous_data = self._agent_bytes(previous)
-                probe = scheduler_probe(previous)
-                if previous_data == data and probe['registered'] is True and probe['live_owned']:
-                    return scheduler_status(cfg, self.root)
-                self._unregister_scheduler(cfg)
-                atomic_write(self.config_path, json_bytes(cfg))
-            path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
-            safe_path(path.parent)
-            info = path.parent.stat()
-            if info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) & 0o022:
-                raise InputError('LaunchAgents directory has unsafe ownership or permissions')
-            with self._target_lock(path):
-                if path.exists():
-                    raise ConflictError('Existing LaunchAgent is not owned; file preserved')
-                probe = scheduler_probe(record)
-                if probe['registered'] is not False:
-                    raise ConflictError('Scheduler label is already loaded or its status is unknown; job preserved')
-                cfg['scheduler']['launch_agent'] = record
-                # Persist ownership before loading: a failed final state write
-                # must still leave a safe, explicit removal route.
-                atomic_write(self.config_path, json_bytes(cfg))
-                try:
-                    atomic_write(path, data, expected=b'')
-                    result = launchctl('bootstrap', 'gui/'+str(os.getuid()), str(path))
-                    probe = scheduler_probe(record)
-                    if result.returncode != 0 or probe['registered'] is not True or not probe['live_owned']:
-                        raise WriteError('Scheduler registration was not confirmed')
-                except (ProtocolError, OSError):
-                    try:
-                        self._unregister_scheduler(cfg, locked=True)
-                        atomic_write(self.config_path, json_bytes(cfg))
-                    except (ProtocolError, OSError):
-                        raise WriteError('Scheduler registration failed and cleanup is incomplete; use scheduler status/unregister') from None
-                    raise WriteError('Scheduler registration failed; owned LaunchAgent was removed') from None
+            self._register_scheduler(self._config())
         return self.status()['scheduler']
+
+    def _register_scheduler(self,cfg):
+        if sys.platform != 'darwin':
+            raise CompatibilityError('Scheduler registration supports macOS only')
+        if cfg.get('mode') != 'scheduled' or self._state().get('trust') != 'signed':
+            raise TrustError('Scheduler registration requires a signed installation and scheduled mode')
+        validate_source(cfg.get('source', ''))
+        if cfg.get('token_env'):
+            raise InputError('Scheduler registration cannot persist a private endpoint shell credential')
+        runtime = safe_path(__file__)
+        if self.root not in runtime.parents or not runtime.is_file():
+            raise InputError('Scheduler registration requires the durable runtime inside its state directory')
+        runtime_info = runtime.stat()
+        if runtime_info.st_uid != os.getuid() or stat.S_IMODE(runtime_info.st_mode) & 0o022:
+            raise InputError('Durable runtime has unsafe ownership or permissions')
+        for parent in runtime.parents:
+            info = parent.stat()
+            if info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) & 0o022:
+                raise InputError('Durable runtime directory has unsafe ownership or permissions')
+            if parent == self.root:
+                break
+        path, label = self._agent_path()
+        args = [str(Path(sys.executable).resolve()), str(runtime), '--state-dir', str(self.root), 'update', '--scheduled']
+        if any('\n' in arg or '\r' in arg for arg in [str(path), *args]):
+            raise InputError('Scheduler paths cannot contain line breaks')
+        job = {'Label': label, 'ProgramArguments': args, 'RunAtLoad': True,
+               'StartCalendarInterval': {'Minute': 0}, 'Umask': 0o077,
+               'StandardOutPath': str(self.root/'scheduled.stdout.log'),
+               'StandardErrorPath': str(self.root/'scheduled.stderr.log')}
+        safe_path(job['StandardOutPath'])
+        safe_path(job['StandardErrorPath'])
+        data = plistlib.dumps(job, sort_keys=True)
+        record = {'path': str(path), 'label': label, 'hash': digest(data), 'arguments': args}
+        previous = cfg.get('scheduler', {}).get('launch_agent')
+        if previous:
+            _, previous_data = self._agent_bytes(previous)
+            probe = scheduler_probe(previous)
+            if previous_data == data and probe['registered'] is True and probe['live_owned']:
+                return scheduler_status(cfg, self.root)
+            self._unregister_scheduler(cfg)
+            atomic_write(self.config_path, json_bytes(cfg))
+        path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        safe_path(path.parent)
+        info = path.parent.stat()
+        if info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) & 0o022:
+            raise InputError('LaunchAgents directory has unsafe ownership or permissions')
+        with self._target_lock(path):
+            if path.exists():
+                raise ConflictError('Existing LaunchAgent is not owned; file preserved')
+            probe = scheduler_probe(record)
+            if probe['registered'] is not False:
+                raise ConflictError('Scheduler label is already loaded or its status is unknown; job preserved')
+            cfg['scheduler']['launch_agent'] = record
+            # Persist ownership before loading: a failed final state write
+            # must still leave a safe, explicit removal route.
+            atomic_write(self.config_path, json_bytes(cfg))
+            try:
+                atomic_write(path, data, expected=b'')
+                result = launchctl('bootstrap', 'gui/'+str(os.getuid()), str(path))
+                probe = scheduler_probe(record)
+                if result.returncode != 0 or probe['registered'] is not True or not probe['live_owned']:
+                    raise WriteError('Scheduler registration was not confirmed')
+            except (ProtocolError, OSError):
+                try:
+                    self._unregister_scheduler(cfg, locked=True)
+                    atomic_write(self.config_path, json_bytes(cfg))
+                except (ProtocolError, OSError):
+                    raise WriteError('Scheduler registration failed and cleanup is incomplete; use scheduler status/unregister') from None
+                raise WriteError('Scheduler registration failed; owned LaunchAgent was removed') from None
 
     def configure(self,mode=None,source=None,token_env=None,interval_hours=None,emit=None):
         with self.lock():
@@ -835,7 +860,7 @@ class Controller:
             raise ConflictError('User modified managed block; original preserved')
         return data[:start],block,data[end:]
 
-    def _activate(self,version,raw,files,target,profile,trust,sequence,budget,signature=None,pin=None,host_context=None):
+    def _activate(self,version,raw,files,target,profile,trust,sequence,budget,signature=None,pin=None,host_context=None,settings=None):
         if profile not in ('coding-agent','chat','work-document'):
             raise InputError('Unknown protocol profile')
         target=safe_path(target)
@@ -859,13 +884,31 @@ class Controller:
             raise ConflictError('This state owns a different host target')
         cache_id=version+'-'+digest(raw)
         cache=self.root/'releases'/cache_id
-        cache.mkdir(parents=True,exist_ok=True,mode=0o700)
-        for name,data in files.items():
-            atomic_write(cache/name,data)
-        atomic_write(cache/'metadata.json',json_bytes({'version':version,'trust':trust,'hash':digest(raw),'files':{name:digest(data) for name,data in files.items()}}))
-        atomic_write(cache/'release.json',raw)
+        enabled, honorifics = application_settings(state)
+        if settings is not None:
+            enabled, honorifics = settings
+        cache_bytes = dict(files)
+        cache_bytes['metadata.json'] = json_bytes({'version':version,'trust':trust,'hash':digest(raw),'files':{name:digest(data) for name,data in files.items()}})
+        cache_bytes['release.json'] = raw
         if signature is not None:
-            atomic_write(cache/'release.json.sig',signature)
+            cache_bytes['release.json.sig'] = signature
+        if cache.exists():
+            for name, data in cache_bytes.items():
+                if read_bytes(cache/name) != data:
+                    raise TrustError('Cached content changed; existing cache preserved')
+        else:
+            cache.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+            staged=Path(tempfile.mkdtemp(prefix='.cache-',dir=cache.parent))
+            for name, data in cache_bytes.items():
+                atomic_write(staged/name,data,expected=b'')
+            parent=open_directory(cache.parent)
+            try:
+                if cache.exists():
+                    raise ConflictError('Release cache appeared during staging; existing cache preserved')
+                os.rename(staged.name,cache.name,src_dir_fd=parent,dst_dir_fd=parent)
+                os.fsync(parent)
+            finally:
+                os.close(parent)
         with self._target_lock(target):
             old=read_bytes(target,MAX_TOTAL_BYTES) if target.exists() else b''
             if context and context.get('host')=='claude-code':
@@ -875,7 +918,10 @@ class Controller:
                     raise ConflictError('Claude rule file has a YAML frontmatter delimiter; startup-wide protocol requires an unscoped file; existing content preserved')
             prefix,block,suffix=self._split(old,state)
             body=files['profiles/'+profile+'.md']
-            new_block=BEGIN+b'\n'+('Korean Protocol '+version+'\n').encode()+body.rstrip(b'\n')+b'\n'+('전체 규칙·사전: '+str(cache)+'\n').encode()+END
+            if enabled:
+                new_block=BEGIN+b'\n'+('Korean Protocol '+version+'\n').encode()+body.rstrip(b'\n')+b'\n'+speech_overlay(honorifics)+('전체 규칙·사전: '+str(cache)+'\n').encode()+END
+            else:
+                new_block=BEGIN+b'\nKorean Protocol is disabled.\n'+END
             if len(new_block)>MAX_MANAGED_BYTES:
                 raise InputError('Managed block exceeds 30 KiB budget')
             separator=state.get('separator','').encode('ascii') if block else (b'' if not old or old.endswith(b'\n') else b'\n')
@@ -884,7 +930,7 @@ class Controller:
                 raise InputError('Instruction or installer file budget exceeded; existing instructions preserved')
             new=dict(state)
             new.update({'version':version,'cache_id':cache_id,'trust':trust,'target':str(target),'profile':profile,'budget':budget,'block_hash':digest(new_block),'separator':separator.decode('ascii'),'pin':pin,'highest_sequence':max(sequence,state.get('highest_sequence',0))})
-            new.update({'profile_bytes':len(body),'managed_bytes':len(new_block)})
+            new.update({'profile_bytes':len(body),'managed_bytes':len(new_block),'protocol_enabled':enabled,'honorifics':honorifics})
             if context:
                 new['host_context']=context
             new['budget_kind']='codex-project-chain-remaining' if context and context['host']=='codex' and context['scope']=='project' else 'installer-file-safety' if context else 'caller-file-bound'
@@ -913,6 +959,7 @@ class Controller:
             raise WriteError('Atomic update failed; previous content restored') from None
 
     def _recover(self,locked_target=None):
+        self._recover_scheduler()
         if not self.journal_path.exists():
             return
         j=strict_json(read_bytes(self.journal_path,MAX_JOURNAL_BYTES))
@@ -936,6 +983,152 @@ class Controller:
         with self.lock():
             self._recover()
 
+    def _load_cache(self,cache_id,version,trust):
+        if not isinstance(cache_id,str) or not re.fullmatch(re.escape(version)+r'-[0-9a-f]{64}',cache_id):
+            raise TrustError('Invalid cached release identity')
+        cache=safe_path(self.root/'releases'/cache_id)
+        metadata=self._json(cache/'metadata.json',{})
+        files=content_files(cache)
+        raw=read_bytes(cache/'release.json',65536)
+        hashes={name:digest(data) for name,data in files.items()}
+        if (cache_id != version+'-'+digest(raw) or metadata.get('version') != version or
+                metadata.get('trust') != trust or digest(raw) != metadata.get('hash') or
+                hashes != metadata.get('files')):
+            raise TrustError('Cached content changed')
+        sig=None
+        seq=0
+        if trust=='signed':
+            manifest,raw,files=self._load_signed(cache,fresh=False)
+            if manifest['version'] != version:
+                raise TrustError('Cached release version differs from state')
+            seq=manifest['sequence']
+            sig=read_bytes(cache/'release.json.sig',16384)
+        elif trust=='local-snapshot':
+            manifest=strict_json(raw)
+            if manifest.get('snapshot_version') != version or manifest.get('files') != hashes:
+                raise TrustError('Cached snapshot manifest changed')
+        else:
+            raise TrustError('Unknown cached release trust')
+        return raw,files,seq,sig
+
+    def _recover_scheduler(self):
+        if not self.scheduler_journal_path.exists():
+            return
+        journal=strict_json(read_bytes(self.scheduler_journal_path,MAX_JOURNAL_BYTES))
+        if not isinstance(journal,dict) or set(journal) != {'target','before','after_hash','old_config','new_config'}:
+            raise ConflictError('Invalid scheduler migration journal; files preserved')
+        target=safe_path(journal['target'])
+        before=base64.b64decode(journal['before'],validate=True)
+        old_config=base64.b64decode(journal['old_config'],validate=True)
+        new_config=base64.b64decode(journal['new_config'],validate=True)
+        old=strict_json(old_config)
+        new=strict_json(new_config)
+        if (not isinstance(old,dict) or not isinstance(new,dict) or
+                old.get('scheduler',{}).get('path') != str(target) or
+                new.get('scheduler',{}).get('path') != str(target) or
+                old.get('scheduler',{}).get('hash') != digest(before) or
+                new.get('scheduler',{}).get('hash') != journal['after_hash']):
+            raise ConflictError('Scheduler recovery target has no ownership; files preserved')
+        with self._target_lock(target):
+            current=read_bytes(target)
+            config=read_bytes(self.config_path,MAX_TOTAL_BYTES)
+            if config not in (old_config,new_config) or (current != before and digest(current) != journal['after_hash']):
+                raise ConflictError('Interrupted scheduler migration changed; user files preserved')
+            if config == new_config and digest(current) == journal['after_hash']:
+                self.scheduler_journal_path.unlink()
+                return
+            if current != before:
+                atomic_write(target,before,expected=current)
+            if config != old_config:
+                atomic_write(self.config_path,old_config,expected=config)
+            self.scheduler_journal_path.unlink()
+
+    def _scheduler_transaction(self,target,before,after,cfg):
+        old_config=read_bytes(self.config_path,MAX_TOTAL_BYTES)
+        new_config=json_bytes(cfg)
+        journal={'target':str(target),'before':base64.b64encode(before).decode(),
+                 'after_hash':digest(after),'old_config':base64.b64encode(old_config).decode(),
+                 'new_config':base64.b64encode(new_config).decode()}
+        journal_bytes=json_bytes(journal)
+        if len(journal_bytes) > MAX_JOURNAL_BYTES:
+            raise InputError('Scheduler migration journal exceeds safety budget')
+        with self._target_lock(target):
+            atomic_write(self.scheduler_journal_path,journal_bytes,expected=b'')
+            try:
+                atomic_write(target,after,expected=before)
+                atomic_write(self.config_path,new_config,expected=old_config)
+                self.scheduler_journal_path.unlink()
+            except OSError:
+                # Release the target lock before the common journal recovery path.
+                pass
+            else:
+                return
+        self._recover_scheduler()
+        raise WriteError('Scheduler migration failed; previous generated output restored')
+
+    def _refresh_application_scheduler(self):
+        cfg=self._config()
+        scheduler=cfg.get('scheduler',{})
+        current=str(safe_path(__file__))
+        record=scheduler.get('launch_agent')
+        generated=safe_path(scheduler['path']) if scheduler.get('path') else None
+        data=read_bytes(generated) if generated and generated.exists() else None
+        job=None
+        if data is not None:
+            if digest(data) != scheduler.get('hash'):
+                raise ConflictError('User modified scheduler output; file preserved')
+            try:
+                job=plistlib.loads(data)
+            except (ValueError,plistlib.InvalidFileException):
+                raise ConflictError('Invalid owned scheduler output; file preserved') from None
+            if (not isinstance(job,dict) or job.get('Label') != scheduler.get('label') or
+                    not isinstance(job.get('ProgramArguments'),list) or len(job['ProgramArguments']) < 2):
+                raise ConflictError('Generated scheduler identity differs; file preserved')
+        if record and (not isinstance(record,dict) or not isinstance(record.get('arguments'),list) or len(record['arguments']) < 2):
+            raise ConflictError('Recorded scheduler arguments are invalid; job preserved')
+        migrate_record=record and record['arguments'][1] != current
+        migrate_output=job and job['ProgramArguments'][1] != current
+        pending=scheduler.get('runtime_migration_registration_required',False)
+        if not migrate_record and not migrate_output and not pending:
+            return
+        runtime=Path(current)
+        if self.root not in runtime.parents or not runtime.is_file():
+            raise InputError('Scheduler migration requires the durable runtime inside its state directory')
+        info=runtime.stat()
+        if info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) & 0o022:
+            raise InputError('Durable runtime has unsafe ownership or permissions')
+        # Stop the old executable before committing application settings. A failed
+        # migration leaves the requested settings unchanged and fails closed.
+        if migrate_record:
+            self._unregister_scheduler(cfg)
+            scheduler['runtime_migration_registration_required']=True
+        if migrate_output:
+            job['ProgramArguments'][1]=current
+            updated=plistlib.dumps(job,sort_keys=True)
+            scheduler['hash']=digest(updated)
+            self._scheduler_transaction(generated,data,updated,cfg)
+        if migrate_record or pending:
+            self._register_scheduler(cfg)
+            cfg['scheduler'].pop('runtime_migration_registration_required',None)
+            atomic_write(self.config_path,json_bytes(cfg))
+
+    def configure_application(self,enabled=None,honorifics=None):
+        if enabled is None and honorifics is None:
+            raise InputError('Choose --protocol or --honorifics')
+        if any(value is not None and type(value) is not bool for value in (enabled,honorifics)):
+            raise InputError('Application settings must be booleans')
+        with self.lock():
+            self._recover()
+            state=self._state()
+            if not state.get('target'):
+                raise MissingError('No installed protocol')
+            current_enabled,current_honorifics=application_settings(state)
+            settings=(current_enabled if enabled is None else enabled,
+                      current_honorifics if honorifics is None else honorifics)
+            raw,files,seq,sig=self._load_cache(state.get('cache_id'),state['version'],state['trust'])
+            self._refresh_application_scheduler()
+            return self._activate(state['version'],raw,files,Path(state['target']),state['profile'],state['trust'],seq,state['budget'],sig,pin=state.get('pin'),settings=settings)
+
     def rollback(self,version):
         version_tuple(version)
         with self.lock():
@@ -948,16 +1141,7 @@ class Controller:
                 raise MissingError('Requested cached version is missing or ambiguous')
             cache=candidates[0]
             metadata=self._json(cache/'metadata.json',{})
-            files=content_files(cache)
-            raw=read_bytes(cache/'release.json',65536)
-            if digest(raw)!=metadata.get('hash') or {name:digest(data) for name,data in files.items()}!=metadata.get('files'):
-                raise TrustError('Cached content changed')
-            sig=None
-            seq=0
-            if metadata['trust']=='signed':
-                manifest,raw,files=self._load_signed(cache,fresh=False)
-                seq=manifest['sequence']
-                sig=read_bytes(cache/'release.json.sig',16384)
+            raw,files,seq,sig=self._load_cache(cache.name,version,metadata.get('trust'))
             self._activate(version,raw,files,Path(state['target']),state['profile'],metadata['trust'],seq,state['budget'],sig,pin=version)
 
     def uninstall(self):

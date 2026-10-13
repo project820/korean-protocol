@@ -1,0 +1,60 @@
+{
+  "frozen_files": {
+    "cases.json": "b96c8c6f31cf823f8974afcc1a3398e0198cbbf5507e4ce7730e23b3a365c52e",
+    "gold.json": "4ab52045da4709207b274bbbfb6403cb9cfa4e3ff76ec7e64041ea4412afb123",
+    "plan.md": "10e409d81c2fcf9279fd2cb666e1e692bfaf0b1e6d30982ddc7de8de70a6b5cd",
+    "kp-profile.md": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60",
+    "ste-profile.md": "8b1fba691988ced69b82bbe10d3836f5cb694d9e2ccde0e132da76c18a22e262"
+  },
+  "runs": {
+    "baseline-r1": {
+      "structure_valid": true,
+      "output_sha256": "492054ccb67a39166895e2075cf156bf93170df0ed34805c03c1a8b14ac87a57",
+      "requested_model": "gpt-6.1-sol",
+      "profile_mounted": false,
+      "lexicons_mounted": false,
+      "raw_trace_tools": false
+    },
+    "baseline-r2": {
+      "structure_valid": true,
+      "output_sha256": "0dba18cdbc6139496a1808b71365029af34009706f3e295272fc3bac21b7a388",
+      "requested_model": "gpt-6.1-sol",
+      "profile_mounted": false,
+      "lexicons_mounted": false,
+      "raw_trace_tools": false
+    },
+    "treatment-r1": {
+      "structure_valid": true,
+      "output_sha256": "eb543f5d61cfb9f0d0598f5d7f7c3b5ec722155abab703f8fc5c0daabaa7ccde",
+      "requested_model": "gpt-6.1-sol",
+      "profile_mounted": true,
+      "lexicons_mounted": true,
+      "raw_trace_tools": false
+    },
+    "treatment-r2": {
+      "structure_valid": true,
+      "output_sha256": "b9a971a8ce87b965497609d50402987ac7d15d1a830fd9aa34e780c36e7c6986",
+      "requested_model": "gpt-6.1-sol",
+      "profile_mounted": true,
+      "lexicons_mounted": true,
+      "raw_trace_tools": false
+    },
+    "ste-r1": {
+      "structure_valid": true,
+      "output_sha256": "d3244f9293f366e68d587ad3a57321ea4af22684ba78cbe06f2df7b43fc69312",
+      "requested_model": "gpt-6.1-sol",
+      "profile_mounted": true,
+      "lexicons_mounted": false,
+      "raw_trace_tools": false
+    },
+    "ste-r2": {
+      "structure_valid": true,
+      "output_sha256": "78c01827d1c200c2ed83418acc609ac94d2db0344fcc3711f8b958aff683b2ef",
+      "requested_model": "gpt-6.1-sol",
+      "profile_mounted": true,
+      "lexicons_mounted": false,
+      "raw_trace_tools": false
+    }
+  },
+  "limitations": "No explicit tool calls in six raw traces. Dictionaries were mounted in KP but no explicit reads observed. Provider identity/fallback not exposed by CLI; requested model is not proof of upstream model."
+}

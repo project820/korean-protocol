@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-10-13",
+  "reviewer": "final_normative_review",
+  "independence": "Reviewed independently of the release metadata implementation; approved through parent task /root.",
+  "purpose": "metadata-only functional-design-review carryforward",
+  "verdict": "approved",
+  "snapshot_path": "evaluation/release-0.3.0-20261013/before",
+  "before_manifest_path": "evaluation/release-0.3.0-20261013/before-manifest.json",
+  "source_equivalence": [
+    {
+      "path": "specification/rules.json",
+      "before_version": "0.2.0-draft",
+      "after_version": "0.3.0-draft",
+      "before_sha256": "d58196b167a048b339d687d5d81954c9d482083494c5b19a03202c59def09408",
+      "after_sha256": "e1e921b1d3cfc7e5039a0d6ba8447e05a21bf47331cadcd393c982a4c2272f03",
+      "parsed_equal_excluding_top_level_version": true,
+      "byte_diff_only_top_level_version": true
+    },
+    {
+      "path": "lexicon/core.json",
+      "before_version": "0.2.0-draft",
+      "after_version": "0.3.0-draft",
+      "before_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+      "after_sha256": "2f8ad8315fe23a3e63406a02aa1b58188cc60a79a06e1a4239e3ed7cbf1b1bad",
+      "parsed_equal_excluding_top_level_version": true,
+      "byte_diff_only_top_level_version": true
+    },
+    {
+      "path": "lexicon/domains/software.json",
+      "before_version": "0.2.0-draft",
+      "after_version": "0.3.0-draft",
+      "before_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+      "after_sha256": "2e537f1178e85e4efb63f357a5f8da13927749ada2f58647f8bff879661db688",
+      "parsed_equal_excluding_top_level_version": true,
+      "byte_diff_only_top_level_version": true
+    }
+  ],
+  "canonical_functional_review": {
+    "path": "evaluation/functional-review.json",
+    "before_sha256": "9cea6e3451ed2372716707466a5f4bf90dd618e855cb0f9de0b9b37710fb4f9b",
+    "after_sha256": "abe2e1fe4d6214e01df5d89c7b06ab35f4b533ebd080860e771dab72274541a8",
+    "only_changed_key": "reviewed_rules_sha256",
+    "before_rules_sha256": "d58196b167a048b339d687d5d81954c9d482083494c5b19a03202c59def09408",
+    "after_rules_sha256": "e1e921b1d3cfc7e5039a0d6ba8447e05a21bf47331cadcd393c982a4c2272f03",
+    "all_other_parsed_fields_equal": true
+  },
+  "functional_design": {
+    "passed": 49,
+    "total": 53,
+    "scope": "existing design judgment carried forward after metadata-only comparison"
+  },
+  "semantic_verified": false,
+  "new_empirical_result": false,
+  "new_holdout_result": false,
+  "frozen_model_evaluation_files_preserved": 1233,
+  "limitations": [
+    "The source version bump changes no rule requirement, lexicon entry, entry ID, since field, or entry version.",
+    "The 49/53 result is a functional-design correspondence review, not semantic-performance or reader-comprehension evidence.",
+    "No new model generation, output scoring, holdout execution, or public release was performed by this metadata review."
+  ],
+  "compiled_profiles": [
+    {
+      "path": "profiles/coding-agent.md",
+      "sha256": "53ebc2f02ddcffce961cae668c5a71851e46fa0d9fe09b9b67169b8cdaebae60",
+      "byte_identical_to_before": true
+    },
+    {
+      "path": "profiles/chat.md",
+      "sha256": "90cfea2e019fac15f68a277149d95c85e7d04ba2fc424f009761d6fbd2fc4394",
+      "byte_identical_to_before": true
+    },
+    {
+      "path": "profiles/work-document.md",
+      "sha256": "97569176f17d90c3dbfd49ab4350de1784f36313a03ffba7400a9460e99b341d",
+      "byte_identical_to_before": true
+    },
+    {
+      "path": "pack/protocol.md",
+      "sha256": "7e444b90ec3800f9f1563b4593b023895d982e9ca1c7f052b62397d7050345ce",
+      "byte_identical_to_before": true
+    }
+  ],
+  "compile_command": "python3 -B -m validation.compile --root . --output .",
+  "compile_result": "pass; four outputs byte-identical to preserved before snapshot"
+}

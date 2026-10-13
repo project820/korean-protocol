@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-13T19:01:31.942002+09:00",
+  "scope": "isolated agent homes; no global agent configuration or scheduler registration",
+  "hosts": {
+    "codex": {
+      "signed_public_install": true,
+      "off_removed_active_rules": true,
+      "off_survived_live_refresh": true,
+      "honorifics_setting_while_off": true,
+      "on_restored_verified_profile": true,
+      "honorifics_on_off": true,
+      "cache_bytes_and_mtimes_unchanged": true,
+      "uninstall_restored_user_bytes": true
+    },
+    "claude-code": {
+      "signed_public_install": true,
+      "off_removed_active_rules": true,
+      "off_survived_live_refresh": true,
+      "honorifics_setting_while_off": true,
+      "on_restored_verified_profile": true,
+      "honorifics_on_off": true,
+      "cache_bytes_and_mtimes_unchanged": true,
+      "uninstall_restored_user_bytes": true
+    }
+  },
+  "source_hashes": {
+    "runtime/kproto.py": "b1e19233e11fca9c0770ccfa70b0fec89e4f4034dc8bfb2d43856fbad266c40b",
+    "distribution/agent_install.py": "6332d08f7fac25c080bcc85ce0c95b1d52fbfd15c11a10a1e1fb4c2b7896602f"
+  },
+  "new_python_crash_reports": []
+}

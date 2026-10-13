@@ -1,0 +1,1722 @@
+{
+  "reviews": [
+    {
+      "id": "ck01_protocol_definition",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": false,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "기술 문서 작성 규약의 정의, 세 구성 요소와 실제 적용 예시를 제공한다. 정의와 가상 예시를 구분한다. 고정 gold의 필수 의미인 효과 검증 시험 미실시 상태를 누락한다. 출력은 “설정 파일의 값을 수정한다.”로 예시를 끝내며 시험 상태를 어느 곳에도 설명하지 않는다. 정의와 예시라는 직접 과업은 수행했으므로 task_pass는 통과다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "기술 문서 작성 규약의 정의, 세 구성 요소와 실제 적용 예시를 제공한다. 정의와 가상 예시를 구분한다. 효과 검증 시험 미실시 상태도 명시한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "기술 문서 작성 규약의 정의, 세 구성 요소와 실제 적용 예시를 제공한다. 정의와 가상 예시를 구분한다. 효과 검증 시험 미실시 상태도 명시한다. plain_style 실패: 새 본문의 “규약입니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck02_global_condition_procedure",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "전원 꺼짐과 0 kPa를 함께 요구하고 조건을 모든 단계에 적용한다. 열기·교체·닫기의 순서와 조건 불충족 시 시작 금지·관리자 통보를 보존한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "전원 꺼짐과 0 kPa를 함께 요구하고 조건을 모든 단계에 적용한다. 열기·교체·닫기의 순서와 조건 불충족 시 시작 금지·관리자 통보를 보존한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "전원 꺼짐과 0 kPa를 함께 요구하고 조건을 모든 단계에 적용한다. 열기·교체·닫기의 순서와 조건 불충족 시 시작 금지·관리자 통보를 보존한다. plain_style 실패: 새 본문의 “작업 전 조건을 확인하세요.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck03_simultaneous_action",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "두 버튼을 동시에 3초 동안 누르기, 녹색 표시등 점등 후 놓기, 점등의 보정 시작 의미를 모두 보존한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "두 버튼을 동시에 3초 동안 누르기, 녹색 표시등 점등 후 놓기, 점등의 보정 시작 의미를 모두 보존한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "두 버튼을 동시에 3초 동안 누르기, 녹색 표시등 점등 후 놓기, 점등의 보정 시작 의미를 모두 보존한다. plain_style 실패: 새 본문의 “동시에 3초 동안 누르세요.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck04_permission_and_duty",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "접수 후 선택 가능한 대기 구역 이용과 건물 안에서의 출입증 착용 의무를 구분한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": true,
+          "rationale": "접수 후 선택 가능한 대기 구역 이용과 건물 안에서의 출입증 착용 의무를 구분한다. no_surplus 실패: “대기 구역 이용은 선택 사항이다.” 허용 문장 다음의 선택 설명과 착용 의무 문장 다음의 의무 설명이 이미 전달한 두 양태를 각각 되풀이한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": false,
+          "rationale": "접수 후 선택 가능한 대기 구역 이용과 건물 안에서의 출입증 착용 의무를 구분한다. no_surplus 실패: “대기 구역 이용은 선택 사항입니다.” 앞의 원하는 경우 이용할 수 있다는 문장이 선택임을 이미 명시한다. plain_style 실패: 새 본문의 “대기 구역을 이용할 수 있습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck05_possibility_warning",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "50 °C 초과라는 경계와 보호 회로 차단의 가능성을 보존한다. 확률이나 새 대응 절차를 만들지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "50 °C 초과라는 경계와 보호 회로 차단의 가능성을 보존한다. 확률이나 새 대응 절차를 만들지 않는다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "50 °C 초과라는 경계와 보호 회로 차단의 가능성을 보존한다. 확률이나 새 대응 절차를 만들지 않는다. plain_style 실패: 새 본문의 “전원을 차단할 수 있습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck06_completion_and_unverified_report",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "버튼 문구 수정·타입 검사 통과·Safari 실제 로그인 시험 미실행·비활성화 전언·원인 미조사를 구분한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "버튼 문구 수정·타입 검사 통과·Safari 실제 로그인 시험 미실행·비활성화 전언·원인 미조사를 구분한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "버튼 문구 수정·타입 검사 통과·Safari 실제 로그인 시험 미실행·비활성화 전언·원인 미조사를 구분한다. plain_style 실패: 새 본문의 “로그인 버튼의 문구를 수정했습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck07_ambiguous_noun_roles",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "메모만으로 두 역할을 확정할 수 없음을 밝히고 검토 후 발송이라는 순서를 보존한다. 사람에게 근거 없는 역할을 배정하지 않는다. “각각 누가 맡는지 알려 달라”는 물음표가 없어도 검토·발송 두 역할의 정보를 직접 요청한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": true,
+          "rationale": "메모만으로 두 역할을 확정할 수 없음을 밝히고 검토 후 발송이라는 순서를 보존한다. 사람에게 근거 없는 역할을 배정하지 않는다. “각각 누구인가?”로 두 역할을 직접 묻는다. 첫 문장의 확정 불가는 전체 지시문에 관한 것으로 읽으며, 다음 문장에서 확인된 순서를 명시한다. no_surplus 실패: “두 담당자는 서로 다른 사람이다.” 누락된 두 역할을 확인하는 데 필요하지 않은 배경을 다시 옮긴다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": false,
+          "rationale": "메모만으로 두 역할을 확정할 수 없음을 밝히고 검토 후 발송이라는 순서를 보존한다. 사람에게 근거 없는 역할을 배정하지 않는다. “검토 담당자와 도면 발송 담당자를 먼저 확인해야 합니다”를 두 역할의 확인을 요구하는 기능적 요청으로 인정한다. 직접적인 정보 제출 요청을 요구하는 엄격한 해석은 uncertainties에 분리했다. no_surplus 실패: “발주처 담당자 김민수와 시공사 담당자 이지현은 서로 다른 사람이며” 두 역할이 명시되지 않았다는 핵심 설명에 불필요한 사람 구분 배경을 덧붙인다. plain_style 실패: 새 본문의 “작성할 수 없습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck08_inclusive_endpoints_units",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "양 끝을 포함하는 -5 °C~35 °C 범위를 밝히고 A와 B의 합격, C의 불합격을 단위와 함께 표로 제공한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "양 끝을 포함하는 -5 °C~35 °C 범위를 밝히고 A와 B의 합격, C의 불합격을 단위와 함께 표로 제공한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "양 끝을 포함하는 -5 °C~35 °C 범위를 밝히고 A와 B의 합격, C의 불합격을 단위와 함께 표로 제공한다. plain_style 실패: 새 본문의 “35 °C 이하입니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck09_same_object_names",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "동일한 T-07의 수위 확인·배출 밸브 닫기·외벽 누수 확인을 주어진 순서와 일관된 명칭으로 전달한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "동일한 T-07의 수위 확인·배출 밸브 닫기·외벽 누수 확인을 주어진 순서와 일관된 명칭으로 전달한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "동일한 T-07의 수위 확인·배출 밸브 닫기·외벽 누수 확인을 주어진 순서와 일관된 명칭으로 전달한다. plain_style 실패: 새 본문의 “다음 순서대로 점검하세요.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck10_preserve_polite_quote",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "고객 인용문의 글자와 문장부호를 보존하고 B-214의 발송 예정일 변경, 안내 미실시와 담당 팀의 안내 작업을 구분한다. 인용문 안의 존댓말은 보존해야 하므로 문체 감점 대상이 아니다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "고객 인용문의 글자와 문장부호를 보존하고 B-214의 발송 예정일 변경, 안내 미실시와 담당 팀의 안내 작업을 구분한다. 인용문 안의 존댓말은 보존해야 하므로 문체 감점 대상이 아니다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "고객 인용문의 글자와 문장부호를 보존하고 B-214의 발송 예정일 변경, 안내 미실시와 담당 팀의 안내 작업을 구분한다. plain_style 실패: 새 본문의 “변경되었습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "ck11_explicit_polite_genre",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": true,
+          "rationale": "B-214의 발송 예정일이 2026년 10월 15일에서 16일로 변경됐다는 내용을 요청한 정중한 문자로 작성한다. no_surplus 실패: “도착 예정일은 아직 정해지지 않았습니다.” 요청한 발송 일정 변경 안내에 도착 일정의 미정 상태를 덧붙인다. plain_style은 기본 비존대의 기계적 적용이 아니라 요청한 존댓말 장르 준수로 통과 처리한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": true,
+          "rationale": "B-214의 발송 예정일이 2026년 10월 15일에서 16일로 변경됐다는 내용을 요청한 정중한 문자로 작성한다. no_surplus 실패: “도착 예정일은 아직 정해지지 않았습니다.” 요청한 발송 일정 변경 안내에 도착 일정의 미정 상태를 덧붙인다. plain_style은 기본 비존대의 기계적 적용이 아니라 요청한 존댓말 장르 준수로 통과 처리한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": true,
+          "rationale": "B-214의 발송 예정일이 2026년 10월 15일에서 16일로 변경됐다는 내용을 요청한 정중한 문자로 작성한다. no_surplus 실패: “이용에 참고해 주시기 바랍니다.” 도착 일정 미정이라는 추가 배경과 이 일반적인 안내 문구를 더한다. 존댓말·인사·감사 자체는 실패 사유가 아니다. plain_style은 기본 비존대의 기계적 적용이 아니라 요청한 존댓말 장르 준수로 통과 처리한다."
+        }
+      }
+    },
+    {
+      "id": "ck12_simple_fact_answer",
+      "collection": "final",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "예약 접수의 마감 시각을 17:00으로 직접 답한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "예약 접수의 마감 시각을 17:00으로 직접 답한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "예약 접수의 마감 시각을 17:00으로 직접 답한다. plain_style 실패: 새 본문의 “마감해요.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh01_and_or_shared_exception",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "대관 승인 AND (보증금 납부 OR 면제 승인)을 세 작업에 적용하고 정기 점검일에는 세 작업 모두 금지한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "대관 승인 AND (보증금 납부 OR 면제 승인)을 세 작업에 적용하고 정기 점검일에는 세 작업 모두 금지한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "대관 승인 AND (보증금 납부 OR 면제 승인)을 세 작업에 적용하고 정기 점검일에는 세 작업 모두 금지한다. plain_style 실패: 새 본문의 “시작할 수 있습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh02_independent_actions",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "바코드 스캔·결과 확인·위치 입력·저장의 순서를 보존한다. 문장이나 단계 수가 달라도 독립 작업의 선후 관계를 읽을 수 있다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "바코드 스캔·결과 확인·위치 입력·저장의 순서를 보존한다. 문장이나 단계 수가 달라도 독립 작업의 선후 관계를 읽을 수 있다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": false,
+          "rationale": "바코드 스캔·결과 확인·위치 입력·저장의 순서를 보존한다. 문장이나 단계 수가 달라도 독립 작업의 선후 관계를 읽을 수 있다. no_surplus 실패: “바코드 스캔, 위치 입력, 저장은 각각 별도로 수행하는 작업입니다.” 앞의 절차가 이미 세 작업과 그 순서를 전달한 뒤 작업 독립성을 메타 설명으로 다시 적는다. plain_style 실패: 새 본문의 “다음 순서로 반납을 처리하세요.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh03_overlapping_actions",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "핀 삽입 중 아래쪽을 계속 받치는 겹치는 동작과 완전 삽입 후 손 떼기를 보존한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "핀 삽입 중 아래쪽을 계속 받치는 겹치는 동작과 완전 삽입 후 손 떼기를 보존한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": false,
+          "rationale": "핀 삽입 중 아래쪽을 계속 받치는 겹치는 동작과 완전 삽입 후 손 떼기를 보존한다. no_surplus 실패: “잠금핀을 끼우는 동안에는 아래쪽을 계속 받쳐야 합니다.” 앞의 받친 상태에서 잠금핀을 끼우라는 지시와 같은 유지 동작을 연속해 반복한다. 안전 의미는 정확하다. plain_style 실패: 새 본문의 “잠금핀을 끼우세요.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh04_actor_recipient",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "디자인팀의 제작, 운영팀의 법무팀 검토 요청, 법무팀의 검토와 운영팀으로의 결과 회신을 구분한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "디자인팀의 제작, 운영팀의 법무팀 검토 요청, 법무팀의 검토와 운영팀으로의 결과 회신을 구분한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "디자인팀의 제작, 운영팀의 법무팀 검토 요청, 법무팀의 검토와 운영팀으로의 결과 회신을 구분한다. plain_style 실패: 새 본문의 “포스터 초안을 작성합니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh05_unfinished_reported_status",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "신청서 작성 완료와 미제출, 직원의 예약 가능 전언과 미승인, 장소 확정 후 다과 주문을 구분한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "신청서 작성 완료와 미제출, 직원의 예약 가능 전언과 미승인, 장소 확정 후 다과 주문을 구분한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "신청서 작성 완료와 미제출, 직원의 예약 가능 전언과 미승인, 장소 확정 후 다과 주문을 구분한다. plain_style 실패: 새 본문의 “아직 제출하지 않았습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh06_capability_and_possibility",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "한 번에 최대 8개라는 기능 한도와 연결 중단 시 대기 상태가 될 가능성을 구분한다. 항상 대기가 된다고 단정하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": true,
+          "rationale": "한 번에 최대 8개라는 기능 한도와 연결 중단 시 대기 상태가 될 가능성을 구분한다. 항상 대기가 된다고 단정하지 않는다. no_surplus 실패: “대기 상태에서 자동으로 다시 전송하는 기능에 관한 정보는 제공되지 않았다.” 요청한 첨부 한도와 연결 중단 상태 설명에 자료의 미제공 정보를 복사한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": false,
+          "rationale": "한 번에 최대 8개라는 기능 한도와 연결 중단 시 대기 상태가 될 가능성을 구분한다. 항상 대기가 된다고 단정하지 않는다. no_surplus 실패: “대기 상태에서 자동으로 다시 전송하는 기능이 있는지는 제공된 정보로 확인할 수 없습니다.” 요청한 첨부 한도와 연결 중단 상태 설명에 자료의 미제공 정보를 복사한다. plain_style 실패: 새 본문의 “첨부할 수 있습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh07_permission_recommendation",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "유효 입장권·공연 전이라는 로비 이용 조건을 보존하고 이용 허용과 의무가 아닌 진동 모드 권고를 구분한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "유효 입장권·공연 전이라는 로비 이용 조건을 보존하고 이용 허용과 의무가 아닌 진동 모드 권고를 구분한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "유효 입장권·공연 전이라는 로비 이용 조건을 보존하고 이용 허용과 의무가 아닌 진동 모드 권고를 구분한다. plain_style 실패: 새 본문의 “이용할 수 있습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh08_asymmetric_weight_bounds",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "0.8 kg 포함·4.6 kg 제외 범위와 R 가능·S 불가·U 가능 판정을 값과 단위를 갖춘 표로 제공한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "0.8 kg 포함·4.6 kg 제외 범위와 R 가능·S 불가·U 가능 판정을 값과 단위를 갖춘 표로 제공한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "0.8 kg 포함·4.6 kg 제외 범위와 R 가능·S 불가·U 가능 판정을 값과 단위를 갖춘 표로 제공한다. plain_style 실패: 새 본문의 “4.6 kg 미만입니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh09_single_cart_aliases",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "같은 C-92의 서랍 닫기·바퀴 브레이크 해제·배식 구역 이동을 순서대로 안내한다. 별칭을 다른 설비로 나누지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "같은 C-92의 서랍 닫기·바퀴 브레이크 해제·배식 구역 이동을 순서대로 안내한다. 별칭을 다른 설비로 나누지 않는다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "같은 C-92의 서랍 닫기·바퀴 브레이크 해제·배식 구역 이동을 순서대로 안내한다. 별칭을 다른 설비로 나누지 않는다. plain_style 실패: 새 본문의 “이동하세요.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh10_customer_quote_boundary",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "고객 인용문을 그대로 보존하고 미승인 상태 및 빈 좌석 확인 후 승인 여부 통보를 전달한다. 인용문 안의 존댓말은 보존해야 하므로 문체 감점 대상이 아니다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": true,
+          "rationale": "고객 인용문을 그대로 보존하고 미승인 상태 및 빈 좌석 확인 후 승인 여부 통보를 전달한다. no_surplus 실패: “고객의 현재 좌석 번호는 이 자료에 없다.” 현재 좌석 번호의 자료 미기재는 요청한 인용 및 처리 순서에 필요하지 않다. 인용문 안의 존댓말은 보존해야 하므로 문체 감점 대상이 아니다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": false,
+          "plain_style": false,
+          "rationale": "고객 인용문을 그대로 보존하고 미승인 상태 및 빈 좌석 확인 후 승인 여부 통보를 전달한다. no_surplus 실패: “고객의 현재 좌석 번호는 이 자료에 제공되어 있지 않습니다.” 현재 좌석 번호의 자료 미기재는 요청한 인용 및 처리 순서에 필요하지 않다. plain_style 실패: 새 본문의 “안내해야 합니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kh11_requested_honorific_email",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "2026년 11월 4일·하늘홀·리허설 09:20·발표 10:10을 요청한 존댓말 이메일로 전달한다. 이름과 종료 시각을 만들지 않는다. plain_style은 기본 비존대의 기계적 적용이 아니라 요청한 존댓말 장르 준수로 통과 처리한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "2026년 11월 4일·하늘홀·리허설 09:20·발표 10:10을 요청한 존댓말 이메일로 전달한다. 이름과 종료 시각을 만들지 않는다. plain_style은 기본 비존대의 기계적 적용이 아니라 요청한 존댓말 장르 준수로 통과 처리한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "2026년 11월 4일·하늘홀·리허설 09:20·발표 10:10을 요청한 존댓말 이메일로 전달한다. 이름과 종료 시각을 만들지 않는다. plain_style은 기본 비존대의 기계적 적용이 아니라 요청한 존댓말 장르 준수로 통과 처리한다."
+        }
+      }
+    },
+    {
+      "id": "kh12_easy_definition",
+      "collection": "holdout",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "정족수를 회의 성립에 필요한 최소 참석 인원으로 설명한다. 14명 예시와 찬성표 기준과의 구분은 정의 이해를 돕는 관련 설명이다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "정족수를 회의 성립에 필요한 최소 참석 인원으로 설명한다. 14명 예시와 찬성표 기준과의 구분은 정의 이해를 돕는 관련 설명이다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "정족수를 회의 성립에 필요한 최소 참석 인원으로 설명한다. 14명 예시와 찬성표 기준과의 구분은 정의 이해를 돕는 관련 설명이다. 해체의 “뜻해”와 “기준이야”는 비존대다. 특정 ~다 어미를 강제하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc01_select_relevant_result",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "겨울길의 선정 결과를 직접 답하고 접수 경위와 전시 장소를 불필요하게 복사하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "겨울길의 선정 결과를 직접 답하고 접수 경위와 전시 장소를 불필요하게 복사하지 않는다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "겨울길의 선정 결과를 직접 답하고 접수 경위와 전시 장소를 불필요하게 복사하지 않는다. plain_style 실패: 새 본문의 “선정입니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc02_undocumented_not_absent",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "책자 미기재와 실제 시설 유무를 구분하고 엘리베이터 부재를 단정할 수 없다고 답한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "책자 미기재와 실제 시설 유무를 구분하고 엘리베이터 부재를 단정할 수 없다고 답한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "책자 미기재와 실제 시설 유무를 구분하고 엘리베이터 부재를 단정할 수 없다고 답한다. plain_style 실패: 새 본문의 “말할 수 없습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc03_no_record_not_no_action",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "물주기 기록 없음과 실제 물주기 미확인을 구분하고 미실시 보고를 정당화하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "물주기 기록 없음과 실제 물주기 미확인을 구분하고 미실시 보고를 정당화하지 않는다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "물주기 기록 없음과 실제 물주기 미확인을 구분하고 미실시 보고를 정당화하지 않는다. plain_style 실패: 새 본문의 “보고할 수는 없습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc04_known_features_only",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "촬영일별 자동 분류와 사진별 직접 별점 지정이라는 확인된 두 기능만 소개한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "촬영일별 자동 분류와 사진별 직접 별점 지정이라는 확인된 두 기능만 소개한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "촬영일별 자동 분류와 사진별 직접 별점 지정이라는 확인된 두 기능만 소개한다. plain_style 실패: 새 본문의 “사진 정리 앱입니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc05_conditions_and_item_exception",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "교사 승인 AND (수업 종료 OR 휴강일)을 세 단계에 적용하고 수거·포장·이동 순서를 보존한다. 대여 표시 작품에는 모든 작업을 금지하고 교사에게 알린다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "교사 승인 AND (수업 종료 OR 휴강일)을 세 단계에 적용하고 수거·포장·이동 순서를 보존한다. 대여 표시 작품에는 모든 작업을 금지하고 교사에게 알린다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "교사 승인 AND (수업 종료 OR 휴강일)을 세 단계에 적용하고 수거·포장·이동 순서를 보존한다. 대여 표시 작품에는 모든 작업을 금지하고 교사에게 알린다. plain_style 실패: 새 본문의 “진행합니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc06_roles_and_return_path",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "송은재의 수집·문다온의 지도 반영·민예람의 검수와 민예람에서 문다온으로의 수정 사항 전달을 보존한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "송은재의 수집·문다온의 지도 반영·민예람의 검수와 민예람에서 문다온으로의 수정 사항 전달을 보존한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "송은재의 수집·문다온의 지도 반영·민예람의 검수와 민예람에서 문다온으로의 수정 사항 전달을 보존한다. plain_style 실패: 새 본문의 “지도에 반영합니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc07_time_and_certainty",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "2026년 12월 7일 현재 미공개 상태와 12월 9일 공개 예정·미확정을 구분한다. 자막 작업은 현재 상태와 관련된 보충 정보다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "2026년 12월 7일 현재 미공개 상태와 12월 9일 공개 예정·미확정을 구분한다. 자막 작업은 현재 상태와 관련된 보충 정보다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "2026년 12월 7일 현재 미공개 상태와 12월 9일 공개 예정·미확정을 구분한다. 자막 작업은 현재 상태와 관련된 보충 정보다. plain_style 실패: 새 본문의 “진행하고 있습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc08_one_list_multiple_names",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "하나의 명단에 중복 행 제거·이름 가나다순 정렬·누락 연락처 표시를 순서대로 적용한다. 별칭을 반복해야 한다는 조건은 부과하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "하나의 명단에 중복 행 제거·이름 가나다순 정렬·누락 연락처 표시를 순서대로 적용한다. 별칭을 반복해야 한다는 조건은 부과하지 않는다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "하나의 명단에 중복 행 제거·이름 가나다순 정렬·누락 연락처 표시를 순서대로 적용한다. 별칭을 반복해야 한다는 조건은 부과하지 않는다. plain_style 실패: 새 본문의 “표시해 주세요.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc09_preserve_source_honorifics",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "참가자 문의의 글자와 문장부호를 그대로 인용하고 부문 미확인 상태 및 접수 담당자의 확인 후 답변을 전달한다. 인용문 안의 존댓말은 보존해야 하므로 문체 감점 대상이 아니다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "참가자 문의의 글자와 문장부호를 그대로 인용하고 부문 미확인 상태 및 접수 담당자의 확인 후 답변을 전달한다. 인용문 안의 존댓말은 보존해야 하므로 문체 감점 대상이 아니다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "참가자 문의의 글자와 문장부호를 그대로 인용하고 부문 미확인 상태 및 접수 담당자의 확인 후 답변을 전달한다. plain_style 실패: 새 본문의 “답변해 주세요.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc10_requested_polite_message",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "우산 반환 시각을 내일 19:30으로 보존하고 명시적으로 요청한 존댓말을 사용한다. 감사 표현은 요청한 메시지 장르에 맞는다. plain_style은 기본 비존대의 기계적 적용이 아니라 요청한 존댓말 장르 준수로 통과 처리한다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "우산 반환 시각을 내일 19:30으로 보존하고 명시적으로 요청한 존댓말을 사용한다. 감사 표현은 요청한 메시지 장르에 맞는다. plain_style은 기본 비존대의 기계적 적용이 아니라 요청한 존댓말 장르 준수로 통과 처리한다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "우산 반환 시각을 내일 19:30으로 보존하고 명시적으로 요청한 존댓말을 사용한다. 감사 표현은 요청한 메시지 장르에 맞는다. plain_style은 기본 비존대의 기계적 적용이 아니라 요청한 존댓말 장르 준수로 통과 처리한다."
+        }
+      }
+    },
+    {
+      "id": "kc11_inclusive_measurement_unit",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "V의 왼쪽 여백이 7 mm이며 하한을 포함하므로 기준에 맞는다고 답한다. 전체 인쇄물이나 오른쪽 여백의 합격으로 확장하지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "V의 왼쪽 여백이 7 mm이며 하한을 포함하므로 기준에 맞는다고 답한다. 전체 인쇄물이나 오른쪽 여백의 합격으로 확장하지 않는다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "V의 왼쪽 여백이 7 mm이며 하한을 포함하므로 기준에 맞는다고 답한다. 전체 인쇄물이나 오른쪽 여백의 합격으로 확장하지 않는다. plain_style 실패: 새 본문의 “기준에 맞습니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    },
+    {
+      "id": "kc12_direct_winner_answer",
+      "collection": "confirmation",
+      "ratings": {
+        "A": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "당첨자를 조한별로 직접 답하고 경품 수령이나 추첨 배경을 덧붙이지 않는다."
+        },
+        "B": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": true,
+          "rationale": "당첨자를 조한별로 직접 답하고 경품 수령이나 추첨 배경을 덧붙이지 않는다."
+        },
+        "C": {
+          "meaning_pass": true,
+          "task_pass": true,
+          "structure_pass": true,
+          "no_surplus": true,
+          "plain_style": false,
+          "rationale": "당첨자를 조한별로 직접 답하고 경품 수령이나 추첨 배경을 덧붙이지 않는다. plain_style 실패: 새 본문의 “조한별입니다.”가 명시적으로 존댓말을 요청하지 않은 과업의 기본 비존대 문체와 다르다. 의미·과업·구조 실패로 중복 계산하지 않는다."
+        }
+      }
+    }
+  ],
+  "summary": {
+    "method": "Independent single-model blind qualitative review of supplied synthetic inputs, fixed gold and anonymous A/B/C outputs; not a human study. Ratings were manually judged; Python only serialized decisions and counted them.",
+    "metric_policy": {
+      "meaning_pass": "Fixed-gold required meaning and prohibited changes; irrelevant source facts need not be copied. Honorific preference is separate except explicitly requested polite genres and exact quotations.",
+      "task_pass": "Provides the artifact or answer the task_intent requests; scored separately from gold-only semantic completeness and default register.",
+      "structure_pass": "Makes required scope, order, simultaneity, roles, tables and quote boundaries usable. Does not require an exact word choice, one sentence per fact, question mark, or ~다 ending.",
+      "no_surplus": "Assesses dispensable source metadata, background and repetition, independently of semantic accuracy. Allows useful boundary/uncertainty explanations, identification of repeated objects, requested flow summaries and normal polite-genre greetings.",
+      "plain_style": "Uses default non-honorific prose, preserves original quotation register, and obeys explicitly requested polite genres. Plain casual endings and complete status phrases are valid."
+    },
+    "by_collection": {
+      "final": {
+        "cases": 12,
+        "ratings": 36,
+        "conditions": {
+          "A": {
+            "n": 12,
+            "meaning_pass": {
+              "pass": 11,
+              "fail": 1,
+              "pass_rate": 0.916667
+            },
+            "task_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "structure_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "no_surplus": {
+              "pass": 11,
+              "fail": 1,
+              "pass_rate": 0.916667
+            },
+            "plain_style": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "all_five_pass": 10
+          },
+          "B": {
+            "n": 12,
+            "meaning_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "task_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "structure_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "no_surplus": {
+              "pass": 9,
+              "fail": 3,
+              "pass_rate": 0.75
+            },
+            "plain_style": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "all_five_pass": 9
+          },
+          "C": {
+            "n": 12,
+            "meaning_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "task_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "structure_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "no_surplus": {
+              "pass": 9,
+              "fail": 3,
+              "pass_rate": 0.75
+            },
+            "plain_style": {
+              "pass": 1,
+              "fail": 11,
+              "pass_rate": 0.083333
+            },
+            "all_five_pass": 0
+          }
+        }
+      },
+      "holdout": {
+        "cases": 12,
+        "ratings": 36,
+        "conditions": {
+          "A": {
+            "n": 12,
+            "meaning_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "task_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "structure_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "no_surplus": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "plain_style": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "all_five_pass": 12
+          },
+          "B": {
+            "n": 12,
+            "meaning_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "task_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "structure_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "no_surplus": {
+              "pass": 10,
+              "fail": 2,
+              "pass_rate": 0.833333
+            },
+            "plain_style": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "all_five_pass": 10
+          },
+          "C": {
+            "n": 12,
+            "meaning_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "task_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "structure_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "no_surplus": {
+              "pass": 8,
+              "fail": 4,
+              "pass_rate": 0.666667
+            },
+            "plain_style": {
+              "pass": 2,
+              "fail": 10,
+              "pass_rate": 0.166667
+            },
+            "all_five_pass": 2
+          }
+        }
+      },
+      "confirmation": {
+        "cases": 12,
+        "ratings": 36,
+        "conditions": {
+          "A": {
+            "n": 12,
+            "meaning_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "task_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "structure_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "no_surplus": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "plain_style": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "all_five_pass": 12
+          },
+          "B": {
+            "n": 12,
+            "meaning_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "task_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "structure_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "no_surplus": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "plain_style": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "all_five_pass": 12
+          },
+          "C": {
+            "n": 12,
+            "meaning_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "task_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "structure_pass": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "no_surplus": {
+              "pass": 12,
+              "fail": 0,
+              "pass_rate": 1.0
+            },
+            "plain_style": {
+              "pass": 1,
+              "fail": 11,
+              "pass_rate": 0.083333
+            },
+            "all_five_pass": 1
+          }
+        }
+      }
+    },
+    "development_first_24": {
+      "cases": 24,
+      "ratings": 72,
+      "conditions": {
+        "A": {
+          "n": 24,
+          "meaning_pass": {
+            "pass": 23,
+            "fail": 1,
+            "pass_rate": 0.958333
+          },
+          "task_pass": {
+            "pass": 24,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "structure_pass": {
+            "pass": 24,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "no_surplus": {
+            "pass": 23,
+            "fail": 1,
+            "pass_rate": 0.958333
+          },
+          "plain_style": {
+            "pass": 24,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "all_five_pass": 22
+        },
+        "B": {
+          "n": 24,
+          "meaning_pass": {
+            "pass": 24,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "task_pass": {
+            "pass": 24,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "structure_pass": {
+            "pass": 24,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "no_surplus": {
+            "pass": 19,
+            "fail": 5,
+            "pass_rate": 0.791667
+          },
+          "plain_style": {
+            "pass": 24,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "all_five_pass": 19
+        },
+        "C": {
+          "n": 24,
+          "meaning_pass": {
+            "pass": 24,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "task_pass": {
+            "pass": 24,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "structure_pass": {
+            "pass": 24,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "no_surplus": {
+            "pass": 17,
+            "fail": 7,
+            "pass_rate": 0.708333
+          },
+          "plain_style": {
+            "pass": 3,
+            "fail": 21,
+            "pass_rate": 0.125
+          },
+          "all_five_pass": 2
+        }
+      }
+    },
+    "confirmation_new_12": {
+      "cases": 12,
+      "ratings": 36,
+      "conditions": {
+        "A": {
+          "n": 12,
+          "meaning_pass": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "task_pass": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "structure_pass": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "no_surplus": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "plain_style": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "all_five_pass": 12
+        },
+        "B": {
+          "n": 12,
+          "meaning_pass": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "task_pass": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "structure_pass": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "no_surplus": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "plain_style": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "all_five_pass": 12
+        },
+        "C": {
+          "n": 12,
+          "meaning_pass": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "task_pass": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "structure_pass": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "no_surplus": {
+            "pass": 12,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "plain_style": {
+            "pass": 1,
+            "fail": 11,
+            "pass_rate": 0.083333
+          },
+          "all_five_pass": 1
+        }
+      }
+    },
+    "all_36_descriptive_only": {
+      "cases": 36,
+      "ratings": 108,
+      "conditions": {
+        "A": {
+          "n": 36,
+          "meaning_pass": {
+            "pass": 35,
+            "fail": 1,
+            "pass_rate": 0.972222
+          },
+          "task_pass": {
+            "pass": 36,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "structure_pass": {
+            "pass": 36,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "no_surplus": {
+            "pass": 35,
+            "fail": 1,
+            "pass_rate": 0.972222
+          },
+          "plain_style": {
+            "pass": 36,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "all_five_pass": 34
+        },
+        "B": {
+          "n": 36,
+          "meaning_pass": {
+            "pass": 36,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "task_pass": {
+            "pass": 36,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "structure_pass": {
+            "pass": 36,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "no_surplus": {
+            "pass": 31,
+            "fail": 5,
+            "pass_rate": 0.861111
+          },
+          "plain_style": {
+            "pass": 36,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "all_five_pass": 31
+        },
+        "C": {
+          "n": 36,
+          "meaning_pass": {
+            "pass": 36,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "task_pass": {
+            "pass": 36,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "structure_pass": {
+            "pass": 36,
+            "fail": 0,
+            "pass_rate": 1.0
+          },
+          "no_surplus": {
+            "pass": 29,
+            "fail": 7,
+            "pass_rate": 0.805556
+          },
+          "plain_style": {
+            "pass": 4,
+            "fail": 32,
+            "pass_rate": 0.111111
+          },
+          "all_five_pass": 3
+        }
+      }
+    },
+    "confirmed_semantic_failures": [
+      {
+        "id": "ck01_protocol_definition",
+        "condition": "A",
+        "issue": "Fixed-gold mandatory unperformed effect-validation test status omitted; no explicit false claim or fabricated experimental result."
+      }
+    ],
+    "validation": {
+      "unique_case_ids": 36,
+      "rating_count": 108,
+      "expected": {
+        "case_ids": 36,
+        "ratings": 108
+      },
+      "all_false_fields_have_quoted_rationale": true
+    }
+  },
+  "uncertainties": [
+    {
+      "id": "ck01_protocol_definition",
+      "condition": "A",
+      "issue": "Fixed gold explicitly makes unperformed effect validation mandatory, while the direct request asks only for definition and one example.",
+      "main_reading": "meaning_pass=false follows the fixed gold; task_pass=true follows the stated task intent.",
+      "sensitivity": "A request-only meaning rubric that does not require unrelated test status would pass meaning here; final A meaning changes from 11/12 to 12/12. This is omission sensitivity, not evidence of factual invention."
+    },
+    {
+      "id": "ck07_ambiguous_noun_roles",
+      "condition": "C",
+      "quote": "검토 담당자와 도면 발송 담당자를 먼저 확인해야 합니다.",
+      "main_reading": "A functionally clear request to confirm both missing roles; meaning_pass and task_pass pass.",
+      "strict_variant": {
+        "meaning_pass": false,
+        "task_pass": false,
+        "reason": "A strict rubric requiring an explicit request that the user provide the two names would treat the sentence as advice about future confirmation rather than elicitation. Under that rubric final C meaning and task each become 11/12, and development C each becomes 23/24."
+      }
+    },
+    {
+      "id": "ck07_ambiguous_noun_roles",
+      "condition": "B",
+      "quote": "제공된 메모만으로는 담당자와 작업 순서를 확정한 업무 지시문을 작성할 수 없다.",
+      "main_reading": "The whole instruction cannot be finalized; the immediately following sentence explicitly confirms review-before-send order. The sentence about no role-defining content is confined to the memo.",
+      "alternate_reading": "Reading the first sentence in isolation can suggest that order is also unknown. Reading missing memo content as actual absence of an assigned person adds an assertion that this output does not make. Neither is a proven semantic error in the full output."
+    },
+    {
+      "metric": "no_surplus",
+      "borderline_cases": [
+        "ck04/B",
+        "ck04/C",
+        "ck07/B",
+        "ck07/C",
+        "ck11/A",
+        "ck11/B",
+        "ck11/C",
+        "kh02/C",
+        "kh03/C"
+      ],
+      "issue": "Emphasis, repeated background and an unknown delivery date can be regarded as useful reinforcement by a more permissive editor. Main ratings prioritize compact task-relevant prose; these judgments are separate from semantic accuracy.",
+      "permissive_sensitivity": "If all listed borderline no_surplus failures are allowed, final no_surplus is A 12/12, B 12/12, C 12/12; holdout remains A 12/12, B 10/12, C 10/12 because auto-retransmission and current-seat metadata remain surplus. Confirmation is unchanged at 12/12 for all conditions."
+    }
+  ],
+  "limitations": [
+    "Only release-blind-input.json was read; no condition identities, generation settings, traces, keys, profiles, prior ratings or other repository files were consulted.",
+    "Thirty-six synthetic cases and one model reviewer do not establish human comprehension, reader preference, population-level reliability or a general winning condition.",
+    "The first 24 cases are development material; the 12 new confirmation cases are reported separately and must not be described as 36 independent held-out cases.",
+    "Binary structure scores pass for all outputs because required relationships remain readable; this does not imply identical reading effort or optimum formatting.",
+    "No real reader execution, readability timing or external factual verification was performed. Evaluations concern fidelity to the supplied facts and fixed gold.",
+    "Default honorific failures are specification adherence results, not evidence that polite Korean is inherently less clear.",
+    "No length reward compensates for lost meaning; the only fixed-gold meaning failure retains its separate semantic flag even though its task and brevity ratings pass."
+  ]
+}

@@ -1,10 +1,16 @@
 import hashlib
+import json
 from pathlib import Path
+import posixpath
+import re
 import tempfile
 import unittest
+from urllib.parse import urlsplit
 import zipfile
 
-from distribution.build import INPUTS, build
+from distribution.build import INPUTS, PREFIX, build
+from distribution.agent_install import VERSION
+from distribution.launcher import PREVIEW_VERSION
 
 
 class DistributionTests(unittest.TestCase):
@@ -40,6 +46,56 @@ class DistributionTests(unittest.TestCase):
         other = self.output.with_name('second.zip')
         build(self.root,other)
         self.assertEqual(self.output.read_bytes(),other.read_bytes())
+
+    def test_control_documents_and_evidence_are_packaged_without_raw_research(self):
+        required = (
+            'docs/spec/control-expression.md',
+            'docs/distribution/application-controls.md',
+            'research/2026-10-13-ellipsis/research-note.md',
+            'research/2026-10-13-ellipsis/sourceevidence.json',
+        )
+        raw = self.root/'research/2026-10-13-ellipsis/source-download.pdf'
+        raw.write_bytes(b'local research download')
+        build(self.root,self.output)
+        with zipfile.ZipFile(self.output) as archive:
+            prefix = next(n for n in archive.namelist() if n.endswith('/SHA256SUMS')).removesuffix('SHA256SUMS')
+            for source in required:
+                self.assertEqual((self.root/source).read_bytes(),archive.read(prefix+source))
+            self.assertNotIn(prefix+'research/2026-10-13-ellipsis/source-download.pdf',archive.namelist())
+
+    def test_repository_control_document_links_resolve_in_archive(self):
+        build(Path(__file__).resolve().parents[1],self.output)
+        with zipfile.ZipFile(self.output) as archive:
+            prefix = next(n for n in archive.namelist() if n.endswith('/SHA256SUMS')).removesuffix('SHA256SUMS')
+            packaged = {name.removeprefix(prefix) for name in archive.namelist()}
+            linked = set()
+            for source in ('docs/spec/control-expression.md','docs/distribution/application-controls.md'):
+                content = archive.read(prefix+source).decode()
+                for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)',content):
+                    url = urlsplit(target)
+                    if url.scheme or url.netloc or not url.path:
+                        continue
+                    destination = posixpath.normpath(posixpath.join(posixpath.dirname(source),url.path))
+                    self.assertIn(destination,packaged,(source,target))
+                    linked.add(destination)
+            self.assertIn('specification/rules.json',linked)
+            self.assertIn('research/2026-10-13-ellipsis/research-note.md',linked)
+            self.assertIn('(docs/distribution/application-controls.md)',archive.read(prefix+'INSTALL.md').decode())
+            self.assertIn('(control-expression.md)',archive.read(prefix+'docs/spec/korean-rules.md').decode())
+
+    def test_repository_package_and_offline_defaults_match_source_version(self):
+        repo = Path(__file__).resolve().parents[1]
+        versions = {json.loads((repo/name).read_text())['version'] for name in
+                    ('specification/rules.json', 'lexicon/core.json',
+                     'lexicon/domains/software.json')}
+        self.assertEqual(1, len(versions))
+        version = versions.pop()
+        self.assertEqual('korean-protocol-' + version, PREFIX)
+        self.assertEqual(version.removesuffix('-draft'), VERSION)
+        self.assertEqual(VERSION, PREVIEW_VERSION)
+        guide = (repo/'distribution/START-HERE.md').read_text()
+        self.assertIn(PREFIX, guide)
+        self.assertIn('--version ' + VERSION, guide)
 
     def test_chat_attachment_preserves_full_rules_and_dictionaries(self):
         build(self.root,self.output)

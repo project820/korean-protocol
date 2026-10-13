@@ -1,0 +1,50 @@
+{
+  "condition": "ste",
+  "model_requested": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "task_mode": "generation",
+  "case_count": 12,
+  "samples_per_condition": 1,
+  "prepared_only": true,
+  "global_user_config_loaded": false,
+  "global_user_agents_loaded": false,
+  "disabled_skill_count": 57,
+  "skill_policy": "frozen per-skill disabled catalog overrides; filesystem reads require trace audit",
+  "isolation_feature_overrides": [
+    "features.skip_host_skill_discovery=true",
+    "features.plugins=false",
+    "features.remote_plugin=false",
+    "features.skill_search=false",
+    "features.skill_mcp_dependency_install=false",
+    "features.hooks=false"
+  ],
+  "read_boundary_limit": "Read boundaries are prompt instructions and require raw tool-trace audit; the CLI read-only sandbox does not guarantee cwd-only reads. Frozen per-skill overrides disable catalog entries, not filesystem access.",
+  "trace_audit": "required; not performed",
+  "trace_audit_source": "stdout.jsonl tool calls and results",
+  "semantic_evaluation": "not performed",
+  "automatic_fallback": false,
+  "upstream_provider_observed": null,
+  "fallback_observed": null,
+  "input_contract": {
+    "runner_sha256": "df45c7751f316f85795144e80e60fbde98e5ab2df13b6d2697802f0241927a3e",
+    "shared_runner_sha256": "643be853e32ec08ebb79b5c6e625b9d114e1ad068ce76e3bbc6e69348644496c",
+    "cases_sha256": "26e491ee031cbc3a74f0633c3b7eb15514d0838bdce42fd29a04b193c1600886",
+    "profile_sha256": "8b1fba691988ced69b82bbe10d3836f5cb694d9e2ccde0e132da76c18a22e262",
+    "core_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+    "software_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+    "plan_sha256": "58f27669ded5721eb094cd3682b9444eb6aa45c0a4f75a800e2cc42b0a1f4214",
+    "adjudication_sha256": "983dbe9fb4816388cb2a69a8c872d5fa22b58322259258f688e409a3f71ba27a",
+    "disabled_skills_sha256": "29b4d2ffa3e7ccafcbddf5dbca8734834c7d6fc59d6a0ad1933825ab1cba7055",
+    "prompt_sha256": "ce0543bda5487a476c3d3a7259b40c3e6a653adba6197d5fc56c2765894b24d3",
+    "case_count": 12,
+    "task_mode": "generation",
+    "permitted_models": [
+      "gpt-6.1-sol",
+      "anthropic/claude-opus-5-5"
+    ],
+    "reasoning_effort": "high"
+  },
+  "mounted_files_sha256": {
+    "AGENTS.md": "8b1fba691988ced69b82bbe10d3836f5cb694d9e2ccde0e132da76c18a22e262"
+  }
+}

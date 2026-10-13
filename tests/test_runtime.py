@@ -113,6 +113,105 @@ class RuntimeTests(unittest.TestCase):
             server.server_close()
             thread.join(timeout=1)
 
+    def test_speech_controls_preserve_compact_status_and_procedure_actor(self):
+        self.install()
+        for honorifics in (False, True):
+            with self.subTest(honorifics=honorifics):
+                self.controller.configure_application(honorifics=honorifics)
+                active=self.target.read_bytes()
+                self.assertIn('새 설명·보고 문장의 종결형만'.encode(),active)
+                self.assertIn('기존 문체는 보존한다.'.encode(),active)
+                self.assertIn('표기된 담당자 없음.'.encode(),active)
+                self.assertIn('종결형을 맞추려고 문장을 늘리지 않는다.'.encode(),active)
+                self.assertIn('절차 주체를 분명히 쓴다.'.encode(),active)
+                self.assertIn('모델 자신의 실행 계획으로 바꾸지 않는다.'.encode(),active)
+
+    def test_application_controls_preserve_cache_user_bytes_and_survive_reinstall(self):
+        self.install()
+        state = self.controller.status()
+        self.assertTrue(state.get('enabled'))
+        self.assertFalse(state['honorifics'])
+        self.assertIn('~다/~한다'.encode(), self.target.read_bytes())
+        cache = self.controller.root / 'releases' / state['cache_id']
+        cached = {str(p.relative_to(cache)): (p.read_bytes(), p.stat().st_mtime_ns)
+                  for p in cache.rglob('*') if p.is_file()}
+        self.target.write_bytes(b'# Manual\r\n' + self.target.read_bytes())
+        self.assertTrue(self.controller.configure_application(enabled=False, honorifics=True))
+        self.assertTrue(self.controller.status()['installed'])
+        self.assertFalse(self.controller.status()['enabled'])
+        self.assertNotIn('뜻과 조건'.encode(), self.target.read_bytes())
+        self.assertNotIn(str(cache).encode(), self.target.read_bytes())
+        self.install()
+        self.assertFalse(self.controller.status()['enabled'])
+        restarted = self.k.Controller(self.controller.root)
+        self.assertTrue(restarted.configure_application(enabled=True))
+        self.assertTrue(restarted.status()['honorifics'])
+        self.assertFalse(restarted.configure_application(enabled=True, honorifics=True))
+        self.assertIn('~습니다/~ㅂ니다'.encode(), self.target.read_bytes())
+        self.assertEqual(cached, {str(p.relative_to(cache)): (p.read_bytes(), p.stat().st_mtime_ns)
+                                 for p in cache.rglob('*') if p.is_file()})
+        restarted.uninstall()
+        self.assertEqual(b'# Manual\r\n' + self.original, self.target.read_bytes())
+
+    def test_off_preserves_settings_across_cached_rollback(self):
+        self.install()
+        self.controller.configure_application(enabled=False, honorifics=True)
+        (self.bundle / 'profiles/coding-agent.md').write_text('새 내용이다.\n')
+        self.install('0.2.0')
+        self.controller.rollback('0.1.0')
+        self.assertFalse(self.controller.status()['enabled'])
+        self.assertTrue(self.controller.status()['honorifics'])
+        self.assertNotIn('뜻과 조건'.encode(), self.target.read_bytes())
+        self.controller.configure_application(enabled=True)
+        self.assertIn('뜻과 조건'.encode(), self.target.read_bytes())
+
+    def test_configuration_failure_rolls_back_host_and_settings(self):
+        self.install()
+        before = self.target.read_bytes()
+        state_before = self.controller.state_path.read_bytes()
+        write = self.k.atomic_write
+        def interrupted(path, data, **kwargs):
+            if Path(path) == self.controller.state_path:
+                raise OSError('injected state failure')
+            return write(path, data, **kwargs)
+        with mock.patch.object(self.k, 'atomic_write', side_effect=interrupted):
+            with self.assertRaises(self.k.WriteError):
+                self.controller.configure_application(enabled=False, honorifics=True)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(state_before, self.controller.state_path.read_bytes())
+
+    def test_cached_tamper_is_rejected_before_reactivation(self):
+        self.install()
+        self.controller.configure_application(enabled=False)
+        cache = self.controller.root / 'releases' / self.controller.status()['cache_id']
+        (cache / 'profiles/coding-agent.md').write_bytes(b'tampered')
+        before = self.target.read_bytes()
+        with self.assertRaises(self.k.TrustError):
+            self.controller.configure_application(enabled=True)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertFalse(self.controller.status()['enabled'])
+
+    def test_interrupted_new_cache_creation_does_not_poison_valid_retry(self):
+        write=self.k.atomic_write
+        count=0
+        def interrupted(path,data,**kwargs):
+            nonlocal count
+            if 'releases' in Path(path).parts:
+                count+=1
+                if count==2:
+                    raise OSError('injected cache write failure')
+            return write(path,data,**kwargs)
+        with mock.patch.object(self.k,'atomic_write',side_effect=interrupted):
+            with self.assertRaises(OSError):
+                self.install()
+        self.assertEqual(self.original,self.target.read_bytes())
+        try:
+            retried=self.install()
+        except self.k.ProtocolError as error:
+            self.fail('Valid retry must recover after partial cache write: '+str(error))
+        self.assertTrue(retried)
+        self.assertTrue(self.controller.status()['installed'])
+
     def test_install_is_idempotent_and_preserves_original_bytes(self):
         self.install()
         installed = self.target.read_bytes()
@@ -506,7 +605,7 @@ c.install_snapshot(Path(sys.argv[2]),Path(sys.argv[3]),'0.2.0')
         home=self.root/'home'
         home.mkdir()
         (home/'AGENTS.md').write_bytes(b'g'*400)
-        (home/'config.toml').write_text('project_doc_max_bytes = 1024\n')
+        (home/'config.toml').write_text('project_doc_max_bytes = 1536\n')
         project=self.root/'repo'
         project.mkdir()
         (project/'.git').mkdir()
@@ -518,7 +617,7 @@ c.install_snapshot(Path(sys.argv[2]),Path(sys.argv[3]),'0.2.0')
         target=child/'AGENTS.md'
         context={'host':'codex','scope':'project','project_root':str(child),'codex_home':str(home)}
         self.controller.install_snapshot(self.bundle,target,'0.1.0',host_context=context)
-        self.assertEqual(824,self.controller.status()['budget'])
+        self.assertEqual(1336,self.controller.status()['budget'])
         installed=target.read_bytes()
         selected.write_bytes(b'a'*1000)
         with self.assertRaises(self.k.InputError):
@@ -799,6 +898,71 @@ class SignedRuntimeTests(RuntimeTests):
         p = subprocess.run([self.ssh,'-Y','sign','-f',str(self.key),'-n','kproto-release-v1'], input=self.manifest.read_bytes(), capture_output=True)
         self.assertEqual(0,p.returncode,p.stderr)
         (self.bundle/'release.json.sig').write_bytes(p.stdout)
+
+    def test_off_signed_update_rollback_and_restart_preserve_settings_for_both_hosts(self):
+        for host in ('codex','claude-code'):
+            with self.subTest(host=host):
+                ctrl=self.k.Controller(self.root/('signed-controls-'+host))
+                public=Path(str(self.key)+'.pub')
+                ctrl.trust_key(public,self.k.key_fingerprint(public))
+                home=self.root/(host+'-home')
+                target=home/('AGENTS.md' if host=='codex' else 'rules/korean-protocol.md')
+                target.parent.mkdir(parents=True)
+                original=b'# User instructions\r\n'
+                target.write_bytes(original)
+                context={'host':host,'scope':'user','project_root':None,
+                         'codex_home' if host=='codex' else 'claude_home':str(home)}
+                self.sign('0.1.0',1)
+                ctrl.install_signed(self.bundle,target,host_context=context)
+                ctrl.configure(mode='interval',source='https://example.test/kproto')
+                config_before=ctrl.config_path.read_bytes()
+                ctrl.configure_application(enabled=False,honorifics=True)
+                self.assertEqual(config_before,ctrl.config_path.read_bytes())
+                target.write_bytes(b'# Later manual instruction\n'+target.read_bytes())
+                self.sign('0.2.0',2)
+                def download(url,maximum,deadline=None):
+                    name=url.rsplit('/',1)[1] if '/stable/' in url else url.split('/releases/0.2.0/',1)[1]
+                    return (self.bundle/name).read_bytes()
+                with mock.patch.object(ctrl,'fetch',side_effect=download):
+                    self.assertTrue(ctrl.update(scheduled=True))
+                self.assertFalse(ctrl.status()['enabled'])
+                self.assertTrue(ctrl.status()['honorifics'])
+                self.assertNotIn('뜻과 조건'.encode(),target.read_bytes())
+                ctrl.rollback('0.1.0')
+                self.assertFalse(ctrl.status()['enabled'])
+                restarted=self.k.Controller(ctrl.root)
+                restarted.configure_application(enabled=True)
+                self.assertEqual(2,restarted.status()['highest_sequence'])
+                self.assertEqual('0.1.0',restarted.status()['pin'])
+                self.assertIn('~습니다/~ㅂ니다'.encode(),target.read_bytes())
+                self.assertTrue(target.read_bytes().startswith(b'# Later manual instruction\n'+original))
+                self.sign('0.0.9',1)
+                with self.assertRaises(self.k.TrustError):
+                    restarted.install_signed(self.bundle,target)
+
+    def test_off_cache_signature_and_key_tamper_cannot_reactivate(self):
+        self.sign()
+        self.controller.install_signed(self.bundle,self.target)
+        self.controller.configure_application(enabled=False)
+        cache=self.controller.root/'releases'/self.controller.status()['cache_id']
+        before=self.target.read_bytes()
+        state_before=self.controller.state_path.read_bytes()
+        signature=cache/'release.json.sig'
+        original=signature.read_bytes()
+        signature.write_bytes(b'invalid signature')
+        with self.assertRaises(self.k.TrustError):
+            self.controller.configure_application(enabled=True)
+        signature.write_bytes(original)
+        public=self.controller.root/'trust/public_key'
+        original=public.read_bytes()
+        other=self.root/'other-key'
+        subprocess.run([self.ssh,'-q','-t','ed25519','-N','','-f',str(other)],check=True,capture_output=True)
+        public.write_bytes(Path(str(other)+'.pub').read_bytes())
+        with self.assertRaises(self.k.TrustError):
+            self.controller.configure_application(enabled=True)
+        public.write_bytes(original)
+        self.assertEqual(before,self.target.read_bytes())
+        self.assertEqual(state_before,self.controller.state_path.read_bytes())
 
     def test_real_signature_verification_rejects_manifest_tampering(self):
         self.sign()

@@ -63,6 +63,94 @@ class AgentInstallTests(unittest.TestCase):
     def target(self, host):
         return self.codex / 'AGENTS.md' if host == 'codex' else self.claude / 'rules/korean-protocol.md'
 
+    def test_controls_are_durable_and_report_inactive_verification_for_both_hosts(self):
+        routes = {}
+        for host in ('codex', 'claude-code'):
+            self.state = self.root / ('controls-' + host)
+            target = self.target(host)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(b'# User bytes\r\n')
+            code, value = self.run_cli('install', host)
+            self.assertEqual(0, code, value)
+            self.assertTrue(value.get('enabled'))
+            self.assertFalse(value['honorifics'])
+            code, value = self.run_cli('configure', host, extras=['--protocol', 'off', '--honorifics', 'on'])
+            self.assertEqual(0, code, value)
+            self.assertTrue(value['installed'])
+            self.assertFalse(value['enabled'])
+            self.assertFalse(value['verified'])
+            self.assertTrue(value['content_verified'])
+            self.assertTrue(value['honorifics'])
+            self.assertNotIn('뜻과 조건'.encode(), target.read_bytes())
+            routes[host] = value['management_argv']
+            code, value = self.run_cli('install', host)
+            self.assertEqual(0, code, value)
+            self.assertFalse(value['enabled'])
+        shutil.rmtree(self.bundle)
+        for host, commands in routes.items():
+            result = subprocess.run(commands['protocol_on'], env=self.env, cwd=self.root,
+                                    capture_output=True, text=True, timeout=15)
+            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+            value = json.loads(result.stdout)
+            self.assertTrue(value['verified'])
+            self.assertTrue(value['honorifics'])
+            self.assertIn('~습니다/~ㅂ니다'.encode(), self.target(host).read_bytes())
+            result = subprocess.run(commands['honorifics_off'], env=self.env, cwd=self.root,
+                                    capture_output=True, text=True, timeout=15)
+            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+            self.assertFalse(json.loads(result.stdout)['honorifics'])
+            self.assertTrue(self.target(host).read_bytes().startswith(b'# User bytes\r\n'))
+
+    def test_configure_persists_current_helper_when_managing_older_tool(self):
+        code, value = self.run_cli('install')
+        self.assertEqual(0, code, value)
+        old_helper = Path(value['management_argv']['status'][2])
+        self.script.write_bytes(self.script.read_bytes() + b'\n# distinct helper identity\n')
+        code, value = self.run_cli('configure', extras=['--protocol', 'off'])
+        self.assertEqual(0, code, value)
+        new_helper = Path(value['management_argv']['status'][2])
+        self.assertNotEqual(old_helper, new_helper)
+        self.assertTrue(new_helper.exists())
+        self.assertTrue(value['tool_available'])
+        self.assertTrue(old_helper.exists())
+
+    def test_configure_refuses_changed_claude_home_without_mutation(self):
+        code, value = self.run_cli('install','claude-code')
+        self.assertEqual(0,code,value)
+        other=self.root/'other-claude-home'
+        before=self.tree()
+        code,value=self.run_cli('configure','claude-code',extras=['--claude-home',str(other),'--protocol','off'])
+        self.assertEqual(7,code,value)
+        self.assertEqual(before,self.tree())
+
+    def test_configuration_rejects_manual_block_edits_for_both_hosts(self):
+        for host in ('codex','claude-code'):
+            self.state=self.root/('manual-controls-'+host)
+            code,value=self.run_cli('install',host)
+            self.assertEqual(0,code,value)
+            target=self.target(host)
+            target.write_bytes(target.read_bytes().replace('뜻과'.encode(),'사실과'.encode()))
+            before=self.tree()
+            code,value=self.run_cli('configure',host,extras=['--protocol','off'])
+            self.assertEqual(7,code,value)
+            self.assertEqual(before,self.tree())
+
+    def test_configure_requires_installed_matching_target_and_explicit_settings(self):
+        before = self.tree()
+        code, value = self.run_cli('configure', extras=['--protocol', 'off'])
+        self.assertEqual(4, code, value)
+        self.assertEqual(before, self.tree())
+        code, value = self.run_cli('install')
+        self.assertEqual(0, code, value)
+        code, value = self.run_cli('configure')
+        self.assertEqual(2, code, value)
+        override = self.codex / 'AGENTS.override.md'
+        override.write_bytes(b'override')
+        before = self.tree()
+        code, value = self.run_cli('configure', extras=['--protocol', 'off'])
+        self.assertEqual(7, code, value)
+        self.assertEqual(before, self.tree())
+
     def test_plan_and_status_have_no_writes_for_both_hosts(self):
         for host in ('codex', 'claude-code'):
             for action in ('plan', 'status'):
@@ -92,7 +180,7 @@ class AgentInstallTests(unittest.TestCase):
                 self.assertTrue(value['changed'])
                 self.assertEqual('off', value['autoupdate'])
                 self.assertEqual('local-snapshot', value['trust'])
-                self.assertEqual('0.2.0', value['version'])
+                self.assertEqual('0.3.0', value['version'])
                 installed = target.read_bytes()
                 self.assertTrue(installed.startswith(original))
                 code, value = self.run_cli('install', host)

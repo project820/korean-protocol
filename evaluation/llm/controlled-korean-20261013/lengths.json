@@ -1,0 +1,11 @@
+{
+  "measurement": "Unicode characters including whitespace and punctuation",
+  "counts": {
+    "final-ste": 1671,
+    "final-baseline": 1779,
+    "final-kp": 1509,
+    "holdout-ste": 1490,
+    "holdout-baseline": 1554,
+    "holdout-kp": 1549
+  }
+}
