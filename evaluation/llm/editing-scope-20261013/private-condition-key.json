@@ -1,0 +1,25 @@
+{
+  "condition_key": {
+    "A": "old",
+    "B": "new"
+  },
+  "case_ids_by_position": [
+    "LX01",
+    "LX02",
+    "LX03",
+    "LX04",
+    "LX05",
+    "LX06",
+    "LX07",
+    "LX08",
+    "LX09",
+    "LX10",
+    "LX11",
+    "LX12"
+  ],
+  "run_directories": {
+    "old": "sol-old",
+    "new": "sol-new"
+  },
+  "packet_sha256": "4805fecf749a28025f3f449e4ab309b7ec79ca91e738da98a79f6cf159e0284b"
+}

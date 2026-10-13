@@ -1,0 +1,10 @@
+{
+  "cases_source": "evaluation/llm/lexicon-usage-20261013/cases.json",
+  "adjudication_source": "evaluation/llm/lexicon-usage-20261013/gold-adjudication.json",
+  "old_commit": "45f86c668d4eb82ddc2aad6d210655e0d2c91c70",
+  "old_profile_source": "profiles/coding-agent.md",
+  "independent_validation": false,
+  "development_regression": true,
+  "case_count": 12,
+  "copies_byte_identical": true
+}

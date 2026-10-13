@@ -1,0 +1,605 @@
+{
+  "reviewed_at": "2026-10-13T05:19:17.341472+00:00",
+  "scope": "Manual explicit command and returned-output audit; no operating-system read-confinement proof; no semantic self-ratings",
+  "conditions": {
+    "old": {
+      "run_directory": "sol-old",
+      "exit_code": 0,
+      "structure_valid": true,
+      "execution_completed": true,
+      "mounted_files_sha256_before": {
+        "AGENTS.md": "c3171890012b5eb60414fdf61c4656c68c24b3c984ba7e16b194f88c72bbfd9b",
+        "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e"
+      },
+      "mounted_files_sha256_after": {
+        "AGENTS.md": "c3171890012b5eb60414fdf61c4656c68c24b3c984ba7e16b194f88c72bbfd9b",
+        "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e"
+      },
+      "mounted_file_set_and_bytes_unchanged": true,
+      "explicit_task_material_accesses": "relative lexicon/core.json and lexicon/domains/software.json; OLD also pwd and lexicon file listing",
+      "explicit_outside_task_material_access_observed": false,
+      "explicit_network_or_other_model_or_agent_call_observed": false,
+      "manual_boundary_review": "All six completed commands reviewed per run. Visible file arguments only identify mounted lexicon files; no visible external task-material reads or network calls.",
+      "opaque_cli_internal_read_scope": "Unverified: each run emitted path=unknown sandbox violation; trace does not identify the attempted path or prove zero outside reads.",
+      "stderr_exact": "2026-10-13T05:14:58.486830Z  WARN codex_sandboxing::violation: recorded sandbox violation: resource=filesystem backend=seatbelt reason=operation_not_permitted path=unknown\n",
+      "environment_warning_context": "Python command invoked the macOS toolchain, which emitted denied /tmp/xcrun_db cache creation and Darwin cache/temp path warnings; commands exited 0. These warnings do not identify external task-material reads.",
+      "tool_commands": [
+        {
+          "id": "item_1",
+          "command": "/bin/zsh -lc 'pwd; rg --files lexicon'",
+          "exit_code": 0,
+          "output_sha256": "1ee181cb54f0ed846dd4704456b18ad9168cde06566f0ca261392e92c9a6b76c",
+          "output_characters": 149,
+          "environment_warning_lines_exact": []
+        },
+        {
+          "id": "item_2",
+          "command": "/bin/zsh -lc \"rg -n '가능|문제|권한|지원|갱신|접수|승인|검증|확정|보관|제외|삭제|백업|복원|권장|명목|오차|최대|간격|끊기|재시도|완료' lexicon/core.json lexicon/domains/software.json\"",
+          "exit_code": 0,
+          "output_sha256": "0cab749716514fe36ffe18e4f25cada1cd28aebbbb09df3e331ff5ea8b0ec04c",
+          "output_characters": 75068,
+          "environment_warning_lines_exact": []
+        },
+        {
+          "id": "item_3",
+          "command": "/bin/zsh -lc \"python3 -c 'import json,re\nfor p in [\\\"lexicon/core.json\\\",\\\"lexicon/domains/software.json\\\"]:\n d=json.load(open(p)); print(p,list(d) if isinstance(d,dict) else \\\"list\\\")\n def walk(v):\n  if isinstance(v,dict):\n   if \\\"lemma\\\" in v:\n    if re.search(\\\"가능|문제|권한|지원|갱신|접수|승인|검증|확정|보관|제외|삭제|백업|복원|권장|명목|오차|최대|간격|완료|수 있다|끝나다\\\",v[\\\"lemma\\\"]): print(json.dumps({k:v[k] for k in [\\\"id\\\",\\\"lemma\\\",\\\"sense_id\\\"] if k in v},ensure_ascii=False))\n   else:\n    for x in v.values(): walk(x)\n  elif isinstance(v,list):\n   for x in v: walk(x)\n walk(d)'\"",
+          "exit_code": 0,
+          "output_sha256": "75c9364fd8456dec0073400e69c819871eac2a1808d332966df992f6f45ef452",
+          "output_characters": 2291,
+          "environment_warning_lines_exact": [
+            "python3: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead",
+            "python3: error: couldn't create cache file '/tmp/xcrun_db-E5z8tIOM' (errno=Operation not permitted)",
+            "2026-10-13 14:15:07.177 xcodebuild[42025:214019322]  DVTFilePathFSEvents: Failed to start fs event stream.",
+            "2026-10-13 14:15:07.334 xcodebuild[42025:214019321] [MT] DVTDeveloperPaths: Failed to get length of DARWIN_USER_CACHE_DIR from confstr(3), error = Error Domain=NSPOSIXErrorDomain Code=5 \"Input/output error\". Using NSCachesDirectory instead.",
+            "python3: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead",
+            "python3: error: couldn't create cache file '/tmp/xcrun_db-xUbClsgM' (errno=Operation not permitted)",
+            "2026-10-13 14:15:07.812 xcodebuild[42029:214019343]  DVTFilePathFSEvents: Failed to start fs event stream.",
+            "2026-10-13 14:15:07.925 xcodebuild[42029:214019341] [MT] DVTDeveloperPaths: Failed to get length of DARWIN_USER_CACHE_DIR from confstr(3), error = Error Domain=NSPOSIXErrorDomain Code=5 \"Input/output error\". Using NSCachesDirectory instead."
+          ]
+        },
+        {
+          "id": "item_4",
+          "command": "/bin/zsh -lc \"jq -r '.entries[] | [.id,.lemma,.sense_id] | @tsv' lexicon/core.json lexicon/domains/software.json\"",
+          "exit_code": 0,
+          "output_sha256": "4b80451c2a12c916c980e623b4d9fa68d9bfee4d65bf04809f94ef43042b09a6",
+          "output_characters": 4417,
+          "environment_warning_lines_exact": []
+        },
+        {
+          "id": "item_5",
+          "command": "/bin/zsh -lc \"jq '.entries[] | select(.id == \\\"KPL-0069\\\" or .id == \\\"KPL-0123\\\" or .id == \\\"KPL-SW-0026\\\" or .id == \\\"KPL-0072\\\" or .id == \\\"KPL-SW-0003\\\" or .id == \\\"KPL-0088\\\" or .id == \\\"KPL-SW-0029\\\" or .id == \\\"KPL-0087\\\" or .id == \\\"KPL-0047\\\" or .id == \\\"KPL-0030\\\") | {id,lemma,meaning,conditions,avoid_senses,frames,examples,alternatives}' lexicon/core.json lexicon/domains/software.json\"",
+          "exit_code": 0,
+          "output_sha256": "d811976f6c48d183d018c2b595d80dea6f378ea0005a60822fddc46d6a1a9ed4",
+          "output_characters": 8601,
+          "environment_warning_lines_exact": []
+        },
+        {
+          "id": "item_6",
+          "command": "/bin/zsh -lc \"jq '.entries[] | select(.id == \\\"KPL-0002\\\" or .id == \\\"KPL-0008\\\" or .id == \\\"KPL-0140\\\" or .id == \\\"KPL-0012\\\" or .id == \\\"KPL-SW-0009\\\" or .id == \\\"KPL-0128\\\" or .id == \\\"KPL-0095\\\" or .id == \\\"KPL-0098\\\" or .id == \\\"KPL-0064\\\" or .id == \\\"KPL-0061\\\") | {id,lemma,meaning,conditions,avoid_senses,frames,examples,alternatives}' lexicon/core.json lexicon/domains/software.json\"",
+          "exit_code": 0,
+          "output_sha256": "70d89143ce09b06eaced5e127d98cbc5f63350d002e56f4a57dedad3f8653dbd",
+          "output_characters": 7201,
+          "environment_warning_lines_exact": []
+        }
+      ],
+      "other_completed_tool_item_types": [],
+      "exact_returned_lexicon_record_count": 20,
+      "exact_returned_record_fields": {
+        "KPL-0030": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0047": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0069": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0072": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0087": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0088": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0123": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-SW-0003": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-SW-0026": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-SW-0029": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0002": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0008": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0012": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0061": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0064": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0095": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0098": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0128": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0140": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-SW-0009": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ]
+      },
+      "unique_self_reported_entry_ids": [
+        "KPL-0008",
+        "KPL-0012",
+        "KPL-0030",
+        "KPL-0047",
+        "KPL-0061",
+        "KPL-0064",
+        "KPL-0069",
+        "KPL-0072",
+        "KPL-0087",
+        "KPL-0088",
+        "KPL-0095",
+        "KPL-0098",
+        "KPL-0123",
+        "KPL-0128",
+        "KPL-0140",
+        "KPL-SW-0003",
+        "KPL-SW-0026"
+      ],
+      "self_reported_ids_not_found_as_exact_structured_records": [],
+      "entry_usage_limit": "Self-report IDs and returned records do not establish correct semantic application or understanding of all supplied entries."
+    },
+    "new": {
+      "run_directory": "sol-new",
+      "exit_code": 0,
+      "structure_valid": true,
+      "execution_completed": true,
+      "mounted_files_sha256_before": {
+        "AGENTS.md": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+        "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e"
+      },
+      "mounted_files_sha256_after": {
+        "AGENTS.md": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+        "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e"
+      },
+      "mounted_file_set_and_bytes_unchanged": true,
+      "explicit_task_material_accesses": "relative lexicon/core.json and lexicon/domains/software.json; OLD also pwd and lexicon file listing",
+      "explicit_outside_task_material_access_observed": false,
+      "explicit_network_or_other_model_or_agent_call_observed": false,
+      "manual_boundary_review": "All six completed commands reviewed per run. Visible file arguments only identify mounted lexicon files; no visible external task-material reads or network calls.",
+      "opaque_cli_internal_read_scope": "Unverified: each run emitted path=unknown sandbox violation; trace does not identify the attempted path or prove zero outside reads.",
+      "stderr_exact": "2026-10-13T05:16:39.797001Z  WARN codex_sandboxing::violation: recorded sandbox violation: resource=filesystem backend=seatbelt reason=operation_not_permitted path=unknown\n",
+      "environment_warning_context": "Python command invoked the macOS toolchain, which emitted denied /tmp/xcrun_db cache creation and Darwin cache/temp path warnings; commands exited 0. These warnings do not identify external task-material reads.",
+      "tool_commands": [
+        {
+          "id": "item_1",
+          "command": "/bin/zsh -lc \"rg -n '\\\"(id|headword|term)\\\"|가능|지원|접수|검증|갱신|확정|보관|삭제|복원|권장|명목|오차' lexicon/core.json lexicon/domains/software.json\"",
+          "exit_code": 0,
+          "output_sha256": "c38766e7d7cf3da6573b3e489e05abd550b14d553613a98528d38356fff6b609",
+          "output_characters": 37044,
+          "environment_warning_lines_exact": []
+        },
+        {
+          "id": "item_2",
+          "command": "/bin/zsh -lc \"sed -n '1,32p' lexicon/core.json\nrg -n '\\\"(lemma|headword|term)\\\":.*(수 있다|지원|접수|승인|검증|갱신|확정|보관|숨기|삭제|제외|복원|권장|좋다|명목|최대|오차|이내|완료|끝|간격)' lexicon/core.json lexicon/domains/software.json\"",
+          "exit_code": 0,
+          "output_sha256": "9363ef9c488ed92c085f25cf279d0718ca142982d766f1573e137beaae918d91",
+          "output_characters": 1204,
+          "environment_warning_lines_exact": []
+        },
+        {
+          "id": "item_3",
+          "command": "/bin/zsh -lc \"python3 -c 'import json; terms=[\\\"지원\\\",\\\"접수\\\",\\\"갱신\\\",\\\"확정\\\",\\\"보관\\\",\\\"숨\\\",\\\"권장\\\",\\\"명목\\\",\\\"오차\\\",\\\"이내\\\",\\\"권한\\\",\\\"간격\\\",\\\"허용\\\",\\\"예산\\\",\\\"진행\\\",\\\"캐시\\\",\\\"재시도\\\"]; [(print(e[\\\"id\\\"],e[\\\"lemma\\\"],e.get(\\\"meaning\\\",\\\"\\\"))) for p in [\\\"lexicon/core.json\\\",\\\"lexicon/domains/software.json\\\"] for e in json.load(open(p))[\\\"entries\\\"] if any(t in e.get(\\\"lemma\\\",\\\"\\\") or t in e.get(\\\"meaning\\\",\\\"\\\") for t in terms)]'\"",
+          "exit_code": 0,
+          "output_sha256": "d8acea341c877b9cddc92268757dc79af09dce2adca956442abea73d2f3a414c",
+          "output_characters": 2278,
+          "environment_warning_lines_exact": [
+            "python3: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead",
+            "python3: error: couldn't create cache file '/tmp/xcrun_db-hCxb5GP4' (errno=Operation not permitted)",
+            "2026-10-13 14:16:47.840 xcodebuild[44265:214047750]  DVTFilePathFSEvents: Failed to start fs event stream.",
+            "2026-10-13 14:16:48.056 xcodebuild[44265:214047749] [MT] DVTDeveloperPaths: Failed to get length of DARWIN_USER_CACHE_DIR from confstr(3), error = Error Domain=NSPOSIXErrorDomain Code=5 \"Input/output error\". Using NSCachesDirectory instead.",
+            "python3: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead",
+            "python3: error: couldn't create cache file '/tmp/xcrun_db-TaXRMiNi' (errno=Operation not permitted)",
+            "2026-10-13 14:16:48.658 xcodebuild[44274:214047895]  DVTFilePathFSEvents: Failed to start fs event stream.",
+            "2026-10-13 14:16:48.766 xcodebuild[44274:214047894] [MT] DVTDeveloperPaths: Failed to get length of DARWIN_USER_CACHE_DIR from confstr(3), error = Error Domain=NSPOSIXErrorDomain Code=5 \"Input/output error\". Using NSCachesDirectory instead."
+          ]
+        },
+        {
+          "id": "item_4",
+          "command": "/bin/zsh -lc \"sed -n '5880,6045p' lexicon/core.json\nsed -n '531,587p' lexicon/core.json\nsed -n '4555,4605p' lexicon/core.json\"",
+          "exit_code": 0,
+          "output_sha256": "6cfa0154d39e9b692ae49880560640f124ed498733dff3cf9d5b33e77a471aa2",
+          "output_characters": 7287,
+          "environment_warning_lines_exact": []
+        },
+        {
+          "id": "item_6",
+          "command": "/bin/zsh -lc \"jq '.entries[] | select(.id == \\\"KPL-0008\\\" or .id == \\\"KPL-0027\\\" or .id == \\\"KPL-0030\\\" or .id == \\\"KPL-0047\\\" or .id == \\\"KPL-0064\\\" or .id == \\\"KPL-0072\\\" or .id == \\\"KPL-0088\\\" or .id == \\\"KPL-0140\\\") | {id,lemma,meaning,conditions,avoid_senses,frames,examples,alternatives}' lexicon/core.json\njq '.entries[] | select(.id == \\\"KPL-SW-0003\\\" or .id == \\\"KPL-SW-0026\\\" or .id == \\\"KPL-SW-0029\\\") | {id,lemma,meaning,conditions,avoid_senses,frames,examples,alternatives}' lexicon/domains/software.json\"",
+          "exit_code": 0,
+          "output_sha256": "1c23ebd8e03a09d415439a24ef2118f46e080ad21cc932f22897a58df9cd6407",
+          "output_characters": 9038,
+          "environment_warning_lines_exact": []
+        },
+        {
+          "id": "item_7",
+          "command": "/bin/zsh -lc \"rg -n '권고|권장|추천|명목|오차|이내|접수|확정|갱신|보관하다|숨기다' lexicon/core.json lexicon/domains/software.json\"",
+          "exit_code": 0,
+          "output_sha256": "ab73ba79857dc2764cd0e4acb0bd979a3ce4f3d888ed90dc72ddeea4b5b46396",
+          "output_characters": 9676,
+          "environment_warning_lines_exact": []
+        }
+      ],
+      "other_completed_tool_item_types": [],
+      "exact_returned_lexicon_record_count": 15,
+      "exact_returned_record_fields": {
+        "KPL-0123": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "deprecated_since",
+          "domains",
+          "examples",
+          "forms",
+          "frames",
+          "id",
+          "lemma",
+          "meaning",
+          "pos",
+          "provenance",
+          "sense_id",
+          "since",
+          "status"
+        ],
+        "KPL-0124": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "deprecated_since",
+          "domains",
+          "examples",
+          "forms",
+          "frames",
+          "id",
+          "lemma",
+          "meaning",
+          "pos",
+          "provenance",
+          "sense_id",
+          "since",
+          "status"
+        ],
+        "KPL-0125": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "deprecated_since",
+          "domains",
+          "examples",
+          "forms",
+          "frames",
+          "id",
+          "lemma",
+          "meaning",
+          "pos",
+          "provenance",
+          "sense_id",
+          "since",
+          "status"
+        ],
+        "KPL-0012": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "deprecated_since",
+          "domains",
+          "examples",
+          "forms",
+          "frames",
+          "id",
+          "lemma",
+          "meaning",
+          "pos",
+          "provenance",
+          "sense_id",
+          "since",
+          "status"
+        ],
+        "KPL-0008": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0027": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0030": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0047": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0064": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0072": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0088": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0140": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-SW-0003": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-SW-0026": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-SW-0029": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ]
+      },
+      "unique_self_reported_entry_ids": [
+        "KPL-0008",
+        "KPL-0012",
+        "KPL-0027",
+        "KPL-0030",
+        "KPL-0047",
+        "KPL-0064",
+        "KPL-0072",
+        "KPL-0088",
+        "KPL-0095",
+        "KPL-0123",
+        "KPL-0124",
+        "KPL-0140",
+        "KPL-SW-0003",
+        "KPL-SW-0026"
+      ],
+      "self_reported_ids_not_found_as_exact_structured_records": [
+        "KPL-0095"
+      ],
+      "entry_usage_limit": "Self-report IDs and returned records do not establish correct semantic application or understanding of all supplied entries."
+    }
+  },
+  "actual_external_task_material_access_identified": false,
+  "comparison_limit": "The unspecified sandbox warning leaves opaque CLI attempts unverified. Visible task calls stay within the frozen mounted dictionary paths."
+}

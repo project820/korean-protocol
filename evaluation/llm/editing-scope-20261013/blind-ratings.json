@@ -1,0 +1,231 @@
+{
+  "evaluation_basis": "Only blind-review-instructions.md and blind-review-input.json; array order preserved; supplied gold unchanged.",
+  "ratings": [
+    {
+      "case_position": 1,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "문맥이 연결 재시도 화면으로 범위를 정하며, “문제가 있을 수 있습니다”가 발생 가능성을 보존한다. 발생률·조건·원인은 추가하지 않았다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "문맥이 연결 재시도 화면으로 범위를 정하며, “문제가 있을 수 있습니다”가 발생 가능성을 보존한다. 발생률·조건·원인은 추가하지 않았다."
+      }
+    },
+    {
+      "case_position": 2,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“현재 계정”, “공유 폴더의 쓰기 권한이 없어”, “업로드 요청이 거부”를 모두 복원한다. 도구의 기능 미지원으로 바뀐 후보를 수정해야 하므로 rewrite가 적절하다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“현재 계정”, “공유 폴더의 쓰기 권한이 없어”, “업로드 요청이 거부”를 모두 복원한다. 도구의 기능 미지원으로 바뀐 후보를 수정해야 하므로 rewrite가 적절하다."
+      }
+    },
+    {
+      "case_position": 3,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "버튼 이름인지 상태 표시인지 질문하며 갱신이 진행 중이라고 단정하지 않는다. 용도가 제공되지 않았고 gold가 용도 확인을 허용하므로 clarify는 불필요한 질문이 아니다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "버튼 이름인지 상태 표시인지 질문하며 갱신이 진행 중이라고 단정하지 않는다. 용도가 제공되지 않았고 gold가 용도 확인을 허용하므로 clarify는 불필요한 질문이 아니다."
+      }
+    },
+    {
+      "case_position": 4,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“요청은 접수됐지만 교체는 끝나지 않았습니다”가 접수와 미완료를 구분하며 작업 진행을 단정하지 않는다. gold의 keep을 따른다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“요청은 접수됐지만 교체는 끝나지 않았습니다”가 접수와 미완료를 구분하며 작업 진행을 단정하지 않는다. gold의 keep을 따른다."
+      }
+    },
+    {
+      "case_position": 5,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“공사 예산은 승인”과 “성능은 다음 주에 측정”을 복원한다. 검증 완료라는 후보의 잘못된 주장을 제거하므로 rewrite가 필요하다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“공사 예산은 승인”과 “성능은 다음 주에 측정”을 복원한다. 검증 완료라는 후보의 잘못된 주장을 제거하므로 rewrite가 필요하다."
+      }
+    },
+    {
+      "case_position": 6,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“목요일 회의 전까지”를 유지하면서 예산안·운영 일정·둘 다 중 확정 대상을 묻는다. 미확정 대상을 선택하지 않으며 gold가 요구한 clarify를 수행한다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“목요일 회의 전까지”를 유지하면서 예산안·운영 일정·둘 다 중 확정 대상을 묻는다. 미확정 대상을 선택하지 않으며 gold가 요구한 clarify를 수행한다."
+      }
+    },
+    {
+      "case_position": 7,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“기본 목록에서 숨겨지며”와 “보관함에서 다시 볼 수 있습니다”가 표시 제외와 재조회 가능성을 보존한다. 후보에 수정할 의미 오류가 없고 keep이 허용된 행동이다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“기본 목록에서 숨겨지며”와 “보관함에서 다시 볼 수 있습니다”가 표시 제외와 재조회 가능성을 보존한다. 후보에 수정할 의미 오류가 없고 keep이 허용된 행동이다."
+      }
+    },
+    {
+      "case_position": 8,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“이번 집계에서 제외”와 “원본 파일에는 그대로 남아”를 복원한다. 후보의 원본 삭제 주장을 수정하며 빈 계약일의 원인을 추정하지 않는다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“이번 집계에서 제외”와 “원본 파일에는 그대로 남아”를 복원한다. 후보의 원본 삭제 주장을 수정하며 빈 계약일의 원인을 추정하지 않는다."
+      }
+    },
+    {
+      "case_position": 9,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "7일 전체 백업과 8일 변경분 백업 중 사용할 백업을 질문하므로 구성 확인이라는 gold의 허용 경로를 따른다. 변경분만으로 복원이 가능하다고 단정하지 않는다. 질문이 전체 복원 절차를 확정하지 않는다는 사실은 제공된 gold에서 오류 조건이 아니다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "7일 전체 백업과 8일 변경분 백업 중 사용할 백업을 질문하므로 구성 확인이라는 gold의 허용 경로를 따른다. 변경분만으로 복원이 가능하다고 단정하지 않는다. 질문이 전체 복원 절차를 확정하지 않는다는 사실은 제공된 gold에서 오류 조건이 아니다."
+      }
+    },
+    {
+      "case_position": 10,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“설치하도록 권장합니다”가 권장 강도를 보존하며 의무·구체 높이·타 위치 금지를 추가하지 않는다. 적절한 후보를 keep한다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“설치하도록 권장합니다”가 권장 강도를 보존하며 의무·구체 높이·타 위치 금지를 추가하지 않는다. 적절한 후보를 keep한다."
+      }
+    },
+    {
+      "case_position": 11,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "명목 유량 18리터/분과 시험 최대 유량 23리터/분을 구분해 복원한다. 최대 측정값을 명목값으로 바꾼 후보를 수정하며 연속 운전 보증을 추가하지 않는다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "명목 유량 18리터/분과 시험 최대 유량 23리터/분을 구분해 복원한다. 최대 측정값을 명목값으로 바꾼 후보를 수정하며 연속 운전 보증을 추가하지 않는다."
+      }
+    },
+    {
+      "case_position": 12,
+      "A": {
+        "semantic_preserved": true,
+        "action_correct": false,
+        "unnecessary_clarification": true,
+        "unnecessary_rewrite": false,
+        "rationale": "“±2 mm의 허용 오차를 적용할 기준 간격”이라는 질문은 ±2 mm를 기준값에 대한 허용 오차로 유지하며 실제 간격 상한이나 기준값을 만들어 내지 않는다. 의미 왜곡과 별개로, 원문의 간격 오차 관리 지시를 되살리는 데 기준 간격의 수치는 필요하지 않고 gold는 rewrite만 허용하므로 clarify 선택은 잘못됐고 불필요하다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "action_correct": true,
+        "unnecessary_clarification": false,
+        "unnecessary_rewrite": false,
+        "rationale": "“덮개와 지지판 사이”는 공개 문맥에서 가져오고 “간격 오차는 ±2 mm 이내로 관리한다”는 원문의 허용 오차 지시를 보존한다. 실제 간격을 2 mm 이하로 바꾼 후보를 수정하므로 rewrite가 필요하다."
+      }
+    }
+  ],
+  "aggregate": {
+    "A": {
+      "case_count": 12,
+      "semantic_preserved_count": 12,
+      "action_correct_count": 11,
+      "unnecessary_clarification_count": 1,
+      "unnecessary_rewrite_count": 0
+    },
+    "B": {
+      "case_count": 12,
+      "semantic_preserved_count": 12,
+      "action_correct_count": 12,
+      "unnecessary_clarification_count": 0,
+      "unnecessary_rewrite_count": 0
+    }
+  },
+  "unresolved_gold_conflicts": [],
+  "limitations": [
+    "기존 합성 12개를 재사용한 개발 회귀이며 신규 또는 독립 테스트셋의 일반화 성능을 나타내지 않는다.",
+    "판정은 제공된 공개 문맥과 gold에 한정한다. 의미 보존은 미확인 사실을 추가하거나 허용 오차를 상한으로 바꾸는지와 구분해 판정했으며, 12번 A의 편집 미완료는 행동 오류와 불필요한 확인 질문으로 집계했다.",
+    "9번 질문은 복원 구성 전체를 결정하지 않지만 gold가 구성 확인을 허용하고 백업 단독 사용 가능성을 단정하지 않으므로 실패로 추가 집계하지 않았다."
+  ]
+}

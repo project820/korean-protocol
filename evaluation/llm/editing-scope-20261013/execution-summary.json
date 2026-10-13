@@ -1,0 +1,18 @@
+{
+  "actual_cli_calls": 2,
+  "capacity_errors_observed": false,
+  "opus_calls": 0,
+  "semantic_retries": 0,
+  "requested_model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "requested_route": "subscription_router http://127.0.0.1:10100/v1",
+  "upstream_provider_observed": null,
+  "fallback_observed": null,
+  "fallback_markers_in_raw_streams": {
+    "old": false,
+    "new": false
+  },
+  "semantic_evaluation": "Completed by separate blinded reviewer; see blind-ratings.json and summary.json",
+  "both_condition_argument": "treatment",
+  "reuse_limit": "Reused 12 synthetic cases and preexisting gold; development regression, not independent validation."
+}

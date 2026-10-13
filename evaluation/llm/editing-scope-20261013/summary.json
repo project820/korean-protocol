@@ -1,0 +1,48 @@
+{
+  "scope": "reused synthetic development regression; one paired batch; not new independent validation",
+  "conditions": {
+    "old": {
+      "case_count": 12,
+      "semantic_preserved_count": 12,
+      "action_correct_count": 11,
+      "unnecessary_clarification_count": 1,
+      "unnecessary_rewrite_count": 0
+    },
+    "new": {
+      "case_count": 12,
+      "semantic_preserved_count": 12,
+      "action_correct_count": 12,
+      "unnecessary_clarification_count": 0,
+      "unnecessary_rewrite_count": 0
+    }
+  },
+  "case_count": 12,
+  "condition_key": {
+    "A": "old",
+    "B": "new"
+  },
+  "blind_packet_sha256": "4805fecf749a28025f3f449e4ab309b7ec79ca91e738da98a79f6cf159e0284b",
+  "ratings_sha256": "2ce9b2cbff1163de086dc7944de3cbe339a19b7006140ddec52a2cd7e5cfe256",
+  "general_improvement_proven": false,
+  "case_12": {
+    "old": {
+      "id": "LX12",
+      "action": "clarify",
+      "text": "±2 mm의 허용 오차를 적용할 기준 간격은 얼마인가요?",
+      "reason": "기준값에 대한 허용 오차를 실제 간격의 상한으로 바꿀 수 없으며 기준 간격이 제공되지 않았습니다.",
+      "used_entry_ids": [
+        "KPL-0064",
+        "KPL-0098"
+      ]
+    },
+    "new": {
+      "id": "LX12",
+      "action": "rewrite",
+      "text": "덮개와 지지판 사이의 간격 오차는 ±2 mm 이내로 관리한다.",
+      "reason": "실제 간격의 상한으로 바뀐 뜻을 허용 오차로 되돌립니다. 기준 간격을 새로 정할 필요는 없습니다.",
+      "used_entry_ids": [
+        "KPL-0064"
+      ]
+    }
+  }
+}

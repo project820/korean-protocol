@@ -1,0 +1,27 @@
+{
+  "scope": "temporary homes only; actual profile installation and durable management; no model generation or public update",
+  "fixture_correction": "Initial smoke asserted Claude content in CLAUDE.md; host_target uses rules/korean-protocol.md. Corrected observer path only; no product change.",
+  "profile_sha256": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+  "hosts": {
+    "codex": {
+      "verified": true,
+      "exact_current_profile_present": true,
+      "original_instruction_preserved": true,
+      "status_after_clone_move": true,
+      "uninstall_after_clone_move": true,
+      "original_instruction_restored": true
+    },
+    "claude-code": {
+      "verified": true,
+      "exact_current_profile_present": true,
+      "original_instruction_preserved": true,
+      "status_after_clone_move": true,
+      "uninstall_after_clone_move": true,
+      "original_instruction_restored": true
+    }
+  },
+  "archive_sha256": "ceb0d2ae133d1e281257434f0aa6740f7d7938388075e8c11ec65713e103e4fa",
+  "archive_bytes": 387809,
+  "archive_files": 30,
+  "checksums_match": true
+}

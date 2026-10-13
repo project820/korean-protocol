@@ -1,0 +1,17 @@
+{
+  "runner_sha256": "fc8de6468ef087743bac98d226be9b5a52df42b7a777384c8ac751486ffbcdb4",
+  "shared_runner_sha256": "643be853e32ec08ebb79b5c6e625b9d114e1ad068ce76e3bbc6e69348644496c",
+  "cases_sha256": "89d3ed028a465305896cd5e3192770a200c2cb34c814318a6b627153985253c9",
+  "profile_sha256": "c3171890012b5eb60414fdf61c4656c68c24b3c984ba7e16b194f88c72bbfd9b",
+  "core_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+  "software_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+  "plan_sha256": "1e900570aeb3ab8333fc1f199331365a2b548d80f32e324e55ebbdaf8fb45d1e",
+  "adjudication_sha256": "b4c3f3d15b6cf6d5e6bfa311b76833b89c8a04266ab30a0667fcdd37ee2eebfc",
+  "prompt_sha256": "c4ff0b8e482f0f58cab06ddd5b7b0bf29c91044ab6900fb5790822b333f1ef23",
+  "case_count": 12,
+  "permitted_models": [
+    "gpt-6.1-sol",
+    "anthropic/claude-opus-5-5"
+  ],
+  "reasoning_effort": "high"
+}
