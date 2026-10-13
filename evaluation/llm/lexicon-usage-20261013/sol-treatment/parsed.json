@@ -1,0 +1,119 @@
+{
+  "structure_valid": true,
+  "errors": [],
+  "results": [
+    {
+      "id": "LX01",
+      "action": "keep",
+      "text": "재시도 중 문제가 있을 수 있습니다.",
+      "reason": "화면 문맥에서 문제의 범위가 연결 재시도로 정해지며, 발생 가능성을 유지합니다.",
+      "used_entry_ids": [
+        "KPL-0123"
+      ]
+    },
+    {
+      "id": "LX02",
+      "action": "rewrite",
+      "text": "현재 계정에 공유 폴더의 쓰기 권한이 없어 업로드 요청이 거부됐습니다.",
+      "reason": "계정의 권한 부족을 도구의 기능 미지원으로 바꿨으므로 확인된 거부 사유를 복원합니다.",
+      "used_entry_ids": [
+        "KPL-0072",
+        "KPL-SW-0003"
+      ]
+    },
+    {
+      "id": "LX03",
+      "action": "clarify",
+      "text": "‘캐시 갱신’은 버튼 이름인가요, 상태 표시인가요?",
+      "reason": "문구의 역할과 실행 상태가 확인되지 않아 갱신 중이라고 확정할 수 없습니다.",
+      "used_entry_ids": [
+        "KPL-0088"
+      ]
+    },
+    {
+      "id": "LX04",
+      "action": "keep",
+      "text": "장비 교체 요청은 접수됐지만 교체는 끝나지 않았습니다.",
+      "reason": "요청 접수와 교체 미완료를 구별하며, 작업을 시작했다고 단정하지 않습니다.",
+      "used_entry_ids": [
+        "KPL-0027"
+      ]
+    },
+    {
+      "id": "LX05",
+      "action": "rewrite",
+      "text": "방음 공사 예산은 승인됐으며, 방음 성능은 다음 주에 측정합니다.",
+      "reason": "예산 승인을 성능 검증 완료로 바꿨으므로 승인 대상과 측정 시점을 복원합니다.",
+      "used_entry_ids": [
+        "KPL-0047",
+        "KPL-0030",
+        "KPL-0033"
+      ]
+    },
+    {
+      "id": "LX06",
+      "action": "clarify",
+      "text": "목요일 회의 전까지 확정할 대상은 예산안인가요, 운영 일정인가요, 둘 다인가요?",
+      "reason": "확정 대상이 지정되지 않아 예산안만을 선택할 근거가 없습니다.",
+      "used_entry_ids": []
+    },
+    {
+      "id": "LX07",
+      "action": "keep",
+      "text": "보관한 신청서는 기본 목록에서 숨겨지며, 보관함에서 다시 볼 수 있습니다.",
+      "reason": "목록에서 숨기는 동작과 보관함에서 다시 보는 기능을 구별해 데이터 유지의 뜻을 보존합니다.",
+      "used_entry_ids": [
+        "KPL-0008",
+        "KPL-0124"
+      ]
+    },
+    {
+      "id": "LX08",
+      "action": "rewrite",
+      "text": "계약일이 없는 행은 이번 집계에서 제외했으며, 원본 파일에는 그대로 남아 있습니다.",
+      "reason": "집계에서 제외한 것을 원본 삭제로 바꿨으므로 제외 범위와 원본 유지 상태를 복원합니다.",
+      "used_entry_ids": [
+        "KPL-0140",
+        "KPL-0008"
+      ]
+    },
+    {
+      "id": "LX09",
+      "action": "clarify",
+      "text": "어느 백업 시점의 상태로 복원하기를 원하시나요?",
+      "reason": "복원 기준이 지정되지 않아 8일 변경분 백업으로 임의 확정할 수 없습니다.",
+      "used_entry_ids": [
+        "KPL-0012"
+      ]
+    },
+    {
+      "id": "LX10",
+      "action": "keep",
+      "text": "표시기를 눈높이에 설치하도록 권장합니다.",
+      "reason": "눈높이 설치를 필수 조건으로 바꾸지 않고 권장이라는 발화 목적을 유지합니다.",
+      "used_entry_ids": []
+    },
+    {
+      "id": "LX11",
+      "action": "rewrite",
+      "text": "명목 유량은 분당 18리터이며, 시험에서 측정한 최대 유량은 분당 23리터입니다.",
+      "reason": "시험 최대 측정값을 명목값으로 바꿨으므로 두 값의 성격과 단위를 복원합니다.",
+      "used_entry_ids": [
+        "KPL-0095",
+        "KPL-0033"
+      ]
+    },
+    {
+      "id": "LX12",
+      "action": "clarify",
+      "text": "간격 오차 ±2 mm의 기준이 되는 덮개와 지지판 사이의 간격은 얼마인가요?",
+      "reason": "허용 오차를 실제 간격의 상한으로 바꿨으며, 기준 간격이 없어 구체적인 허용 범위를 확정할 수 없습니다.",
+      "used_entry_ids": [
+        "KPL-0064",
+        "KPL-0098"
+      ]
+    }
+  ],
+  "semantic_evaluation": "not performed; independent gold adjudication required",
+  "entry_usage_evidence": "self-report only; audit stdout.jsonl tool calls and results"
+}

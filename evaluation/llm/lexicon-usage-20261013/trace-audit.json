@@ -1,0 +1,487 @@
+{
+  "scope": "Manual review of explicit command/file accesses plus exact extracted-record comparison; not an OS-level read confinement proof",
+  "conditions": {
+    "baseline": {
+      "exit_code": 0,
+      "structure_valid": true,
+      "workspace_unchanged": true,
+      "explicit_task_material_accesses": "relative lexicon/core.json and lexicon/domains/software.json only",
+      "no_explicit_outside_material_or_network_commands": true,
+      "tool_commands": [
+        {
+          "id": "item_0",
+          "command": "/bin/zsh -lc \"rg -n '가능|권한|지원|갱신|접수|승인|검증|확정|보관|제외|삭제|백업|복원|권장|명목|유량|오차|간격' lexicon/core.json lexicon/domains/software.json\"",
+          "exit_code": 2,
+          "output_sha256": "4a7731ff745bbfb8fd70f53912eb15f03728d314be4347d1c185dda2f1eb3a4c",
+          "output_characters": 136
+        }
+      ],
+      "returned_record_count": 0,
+      "returned_records_fields": {},
+      "case_usage": [
+        {
+          "id": "LX01",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX02",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX03",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX04",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX05",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX06",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX07",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX08",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX09",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX10",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX11",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX12",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        }
+      ],
+      "unique_reported_entries": [],
+      "cases_with_entry_ids": 0,
+      "dictionary_understanding_limit": "Returned records and IDs do not prove every supplied entry was understood or applied correctly."
+    },
+    "treatment": {
+      "exit_code": 0,
+      "structure_valid": true,
+      "workspace_unchanged": true,
+      "explicit_task_material_accesses": "relative lexicon/core.json and lexicon/domains/software.json only",
+      "no_explicit_outside_material_or_network_commands": true,
+      "tool_commands": [
+        {
+          "id": "item_1",
+          "command": "/bin/zsh -lc \"rg -n '\\\"(id|term|lemma)\\\"|가능|지원|권한|갱신|접수|승인|검증|확정|보관|제외|삭제|복원|권장|명목|오차|최대|최근' lexicon/core.json lexicon/domains/software.json\"",
+          "exit_code": 0,
+          "output_sha256": "69b71db6fdb1b6d3e08e355c9339254710197ae6284272b68aac07ed09e2c2ec",
+          "output_characters": 83087
+        },
+        {
+          "id": "item_2",
+          "command": "/bin/zsh -lc \"python3 -c 'import json,re\npat=re.compile(\\\"가능|수 있다|지원|권한|갱신|접수|받다|승인|검증|확정|보관|제외|삭제|복원|권장|명목|오차|최대|최근|중|끝나다|완료|유지|숨기\\\")\nfor p in [\\\"lexicon/core.json\\\",\\\"lexicon/domains/software.json\\\"]:\n d=json.load(open(p)); print(p)\n entries=d if isinstance(d,list) else d.get(\\\"entries\\\",[])\n for e in entries:\n  if pat.search(e.get(\\\"lemma\\\",\\\"\\\")): print(e[\\\"id\\\"],e[\\\"lemma\\\"],e.get(\\\"sense\\\",\\\"\\\"))'\"",
+          "exit_code": 0,
+          "output_sha256": "76b6c204e7ed6892b7786191d3501f858d68503ada93ee5b60a2bf7bc20eceb6",
+          "output_characters": 1433
+        },
+        {
+          "id": "item_3",
+          "command": "/bin/zsh -lc \"python3 -c 'import json,re\nwanted={\\\"KPL-0003\\\",\\\"KPL-0008\\\",\\\"KPL-0012\\\",\\\"KPL-0027\\\",\\\"KPL-0030\\\",\\\"KPL-0047\\\",\\\"KPL-0052\\\",\\\"KPL-0072\\\",\\\"KPL-0087\\\",\\\"KPL-0088\\\",\\\"KPL-0095\\\",\\\"KPL-0123\\\",\\\"KPL-0124\\\",\\\"KPL-0125\\\",\\\"KPL-0140\\\",\\\"KPL-SW-0003\\\"}\nfor p in [\\\"lexicon/core.json\\\",\\\"lexicon/domains/software.json\\\"]:\n d=json.load(open(p))\n for e in d.get(\\\"entries\\\",[]):\n  if e[\\\"id\\\"] in wanted:\n   print(json.dumps({k:e[k] for k in [\\\"id\\\",\\\"lemma\\\",\\\"meaning\\\",\\\"conditions\\\",\\\"avoid_senses\\\",\\\"frames\\\",\\\"examples\\\",\\\"alternatives\\\"] if k in e},ensure_ascii=False))\n  elif re.search(\\\"권장|명목|허용 오차|접수|캐시|갱신\\\",e.get(\\\"lemma\\\",\\\"\\\")+e.get(\\\"meaning\\\",\\\"\\\")):\n   print(\\\"RELATED\\\",e[\\\"id\\\"],e[\\\"lemma\\\"],e.get(\\\"meaning\\\",\\\"\\\"))'\"",
+          "exit_code": 0,
+          "output_sha256": "47b39dcf9c85eb2899e23bfd7e0aa58cfd9f6d6cf48243c3508ffe64a95a85fe",
+          "output_characters": 10447
+        },
+        {
+          "id": "item_4",
+          "command": "/bin/zsh -lc \"python3 -c 'import json,re\npat=re.compile(\\\"좋|권고|권장|추천|이하|이내|초과|미만|오차|기준|측정|끝내|정하다|지정|받|접수\\\")\nfor p in [\\\"lexicon/core.json\\\",\\\"lexicon/domains/software.json\\\"]:\n for e in json.load(open(p)).get(\\\"entries\\\",[]):\n  if pat.search(e.get(\\\"lemma\\\",\\\"\\\")) or e[\\\"id\\\"]==\\\"KPL-SW-0029\\\":\n   print(json.dumps({k:e[k] for k in [\\\"id\\\",\\\"lemma\\\",\\\"meaning\\\",\\\"conditions\\\",\\\"avoid_senses\\\",\\\"frames\\\",\\\"examples\\\",\\\"alternatives\\\"] if k in e},ensure_ascii=False))'\"",
+          "exit_code": 0,
+          "output_sha256": "ba6e8ff9ce3e0b83444990be444419db0c889dbb6c6e83fea68a45099b08b905",
+          "output_characters": 6961
+        }
+      ],
+      "returned_record_count": 25,
+      "returned_records_fields": {
+        "KPL-0003": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0008": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0012": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0027": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0030": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0047": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0052": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0072": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0087": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0088": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0095": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0123": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0124": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0125": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0140": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-SW-0003": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0005": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0033": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0037": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0064": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0098": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0099": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-0100": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-SW-0025": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ],
+        "KPL-SW-0029": [
+          "alternatives",
+          "avoid_senses",
+          "conditions",
+          "examples",
+          "frames",
+          "id",
+          "lemma",
+          "meaning"
+        ]
+      },
+      "case_usage": [
+        {
+          "id": "LX01",
+          "reported_entry_ids": [
+            "KPL-0123"
+          ],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX02",
+          "reported_entry_ids": [
+            "KPL-0072",
+            "KPL-SW-0003"
+          ],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX03",
+          "reported_entry_ids": [
+            "KPL-0088"
+          ],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX04",
+          "reported_entry_ids": [
+            "KPL-0027"
+          ],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX05",
+          "reported_entry_ids": [
+            "KPL-0047",
+            "KPL-0030",
+            "KPL-0033"
+          ],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX06",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX07",
+          "reported_entry_ids": [
+            "KPL-0008",
+            "KPL-0124"
+          ],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX08",
+          "reported_entry_ids": [
+            "KPL-0140",
+            "KPL-0008"
+          ],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX09",
+          "reported_entry_ids": [
+            "KPL-0012"
+          ],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX10",
+          "reported_entry_ids": [],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX11",
+          "reported_entry_ids": [
+            "KPL-0095",
+            "KPL-0033"
+          ],
+          "all_reported_entries_returned_as_exact_records": true
+        },
+        {
+          "id": "LX12",
+          "reported_entry_ids": [
+            "KPL-0064",
+            "KPL-0098"
+          ],
+          "all_reported_entries_returned_as_exact_records": true
+        }
+      ],
+      "unique_reported_entries": [
+        "KPL-0008",
+        "KPL-0012",
+        "KPL-0027",
+        "KPL-0030",
+        "KPL-0033",
+        "KPL-0047",
+        "KPL-0064",
+        "KPL-0072",
+        "KPL-0088",
+        "KPL-0095",
+        "KPL-0098",
+        "KPL-0123",
+        "KPL-0124",
+        "KPL-0140",
+        "KPL-SW-0003"
+      ],
+      "cases_with_entry_ids": 10,
+      "dictionary_understanding_limit": "Returned records and IDs do not prove every supplied entry was understood or applied correctly."
+    }
+  },
+  "environment_observation": "Treatment Python helper calls emitted Xcode cache write denial warnings under read-only sandbox; all four commands exited0 and provided lexicon results. No global configuration was changed."
+}

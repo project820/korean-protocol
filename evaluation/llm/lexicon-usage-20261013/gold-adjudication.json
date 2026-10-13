@@ -1,0 +1,204 @@
+{
+  "phase": "before_any_evaluation_model_execution",
+  "reviewer": "separate gpt-6-astra medium agent; only original cases read; no lexicon/profile/old fixtures access",
+  "original_cases_preserved": true,
+  "human_expert_review": false,
+  "cases": [
+    {
+      "id": "LX01",
+      "required_meaning": [
+        "재시도 중 문제가 발생할 가능성을 표현한다.",
+        "문제가 반드시 발생한다고 단정하지 않는다."
+      ],
+      "forbidden_inferences": [
+        "문제의 발생률이나 특정 발생 조건을 추가한다.",
+        "가능성 표현만을 이유로 후보를 모호하다고 판정한다.",
+        "연결 장애의 원인을 특정한다."
+      ],
+      "allowed_actions": [
+        "keep",
+        "rewrite"
+      ],
+      "review": "문맥이 분명한 가능성 표현은 유지할 수 있으며, 원문에 있는 연결 끊김을 구체화한 충실한 수정도 허용한다. 수정 자체를 개선으로 계산하지 않는다."
+    },
+    {
+      "id": "LX02",
+      "required_meaning": [
+        "현재 계정에 해당 폴더의 쓰기 권한이 없다.",
+        "그 권한 부족으로 업로드 요청이 거부됐다."
+      ],
+      "forbidden_inferences": [
+        "도구에 업로드 기능이 없다고 단정한다.",
+        "관리자가 권한을 승인했거나 변경했다고 말한다.",
+        "네트워크 장애를 원인으로 추가한다."
+      ],
+      "allowed_actions": [
+        "rewrite"
+      ],
+      "review": "원본 의미 기준을 유지한다."
+    },
+    {
+      "id": "LX03",
+      "required_meaning": [
+        "진행 중이라는 미확인 상태를 주장하지 않는다.",
+        "중립적인 원문 표제 캐시 갱신으로 되돌리거나, 문구 용도를 확인할 수 있다."
+      ],
+      "forbidden_inferences": [
+        "캐시 갱신이 이미 시작됐다고 단정한다.",
+        "문구가 버튼에 쓰인다고 단정한다.",
+        "갱신이 완료됐다고 단정한다."
+      ],
+      "allowed_actions": [
+        "rewrite",
+        "clarify"
+      ],
+      "review": "UI 용도의 확인을 편집의 필수 전제로 만들지 않는다."
+    },
+    {
+      "id": "LX04",
+      "required_meaning": [
+        "요청이 접수됐다.",
+        "장비 교체는 완료되지 않았다."
+      ],
+      "forbidden_inferences": [
+        "접수를 작업 완료로 바꾼다.",
+        "교체 작업이 진행 중이라고 단정한다.",
+        "담당자나 완료 기한을 새로 정한다.",
+        "수동 표현이라는 이유만으로 후보를 수정한다."
+      ],
+      "allowed_actions": [
+        "keep"
+      ],
+      "review": "원본 의미 기준을 유지한다."
+    },
+    {
+      "id": "LX05",
+      "required_meaning": [
+        "승인된 대상은 방음 공사의 예산이다.",
+        "방음 성능 측정은 다음 주에 실시할 예정이다."
+      ],
+      "forbidden_inferences": [
+        "방음 성능이 검증됐다고 말한다.",
+        "측정 결과가 합격이라고 말한다.",
+        "공사 완료 여부를 추가한다."
+      ],
+      "allowed_actions": [
+        "rewrite"
+      ],
+      "review": "원본 의미 기준을 유지한다."
+    },
+    {
+      "id": "LX06",
+      "required_meaning": [
+        "확정할 대상이 예산안인지 운영 일정인지 또는 둘 다인지 확인한다.",
+        "목요일 회의 전이라는 기한을 보존한다."
+      ],
+      "forbidden_inferences": [
+        "예산안만 확정 대상이라고 단정한다.",
+        "운영 일정만 확정 대상이라고 단정한다.",
+        "둘 다 확정해야 한다고 단정한다.",
+        "회의 시각이나 승인자를 추가한다."
+      ],
+      "allowed_actions": [
+        "clarify"
+      ],
+      "review": "원본 의미 기준을 유지한다."
+    },
+    {
+      "id": "LX07",
+      "required_meaning": [
+        "보관한 신청서는 기본 목록에 표시되지 않는다.",
+        "보관한 신청서를 다시 조회할 수 있다."
+      ],
+      "forbidden_inferences": [
+        "신청서 데이터가 삭제됐다고 말한다.",
+        "보관 기간이나 자동 삭제 시점을 추가한다.",
+        "신청서가 승인됐다고 단정한다."
+      ],
+      "allowed_actions": [
+        "keep"
+      ],
+      "review": "원본 의미 기준을 유지한다."
+    },
+    {
+      "id": "LX08",
+      "required_meaning": [
+        "계약일이 없는 행을 이번 집계에서 제외했다.",
+        "해당 행은 원본 파일에 남아 있다."
+      ],
+      "forbidden_inferences": [
+        "원본 파일의 행을 삭제했다고 말한다.",
+        "누락된 계약일을 채웠다고 말한다.",
+        "계약일이 없는 행을 오류 또는 무효 계약으로 단정한다."
+      ],
+      "allowed_actions": [
+        "rewrite"
+      ],
+      "review": "원본 의미 기준을 유지한다."
+    },
+    {
+      "id": "LX09",
+      "required_meaning": [
+        "원문의 최근 백업 복원 요청을 유지하거나 필요한 복원 구성을 확인한다."
+      ],
+      "forbidden_inferences": [
+        "변경분 백업만으로 복원할 수 있다고 단정한다.",
+        "7일 전체 백업만 사용해야 한다고 단정한다.",
+        "백업 성공을 복원 검증 완료로 바꾼다."
+      ],
+      "allowed_actions": [
+        "keep",
+        "rewrite",
+        "clarify"
+      ],
+      "review": "최근은 주어진 기록에서 8일을 가리킬 수 있다. 후보가 변경분만 단독 사용한다고 명시하지 않았으므로 keep도 허용한다. 행동 판별력이 낮은 사례로 따로 보고한다."
+    },
+    {
+      "id": "LX10",
+      "required_meaning": [
+        "눈높이 설치는 권장 사항이다."
+      ],
+      "forbidden_inferences": [
+        "눈높이 설치를 의무로 바꾼다.",
+        "구체적인 설치 높이를 추가한다.",
+        "다른 위치의 설치를 금지한다."
+      ],
+      "allowed_actions": [
+        "keep"
+      ],
+      "review": "원본 의미 기준을 유지한다."
+    },
+    {
+      "id": "LX11",
+      "required_meaning": [
+        "명목 유량은 분당 18리터다.",
+        "시험 최대 측정 유량은 분당 23리터다."
+      ],
+      "forbidden_inferences": [
+        "시험 최대 측정값을 명목값으로 바꾼다.",
+        "분당 23리터의 연속 운전을 보증한다.",
+        "특정 시험 압력이나 온도를 추가한다."
+      ],
+      "allowed_actions": [
+        "rewrite"
+      ],
+      "review": "원본 의미 기준을 유지한다."
+    },
+    {
+      "id": "LX12",
+      "required_meaning": [
+        "기준값에 대한 허용 오차 ±2 mm를 유지한다.",
+        "허용 오차를 실제 간격의 상한으로 바꾸지 않는다."
+      ],
+      "forbidden_inferences": [
+        "실제 간격의 상한을 2 mm로 정한다.",
+        "기준 간격을 0 mm로 가정한다.",
+        "기준 간격이나 도면 번호를 만들어 낸다."
+      ],
+      "allowed_actions": [
+        "rewrite"
+      ],
+      "review": "기준 치수는 실제 검사 실행에 필요하지만 잘못된 후보를 상대 오차 문장으로 고치는 데에는 필요하지 않다. 기준 질문만 반환하면 불필요한 확인으로 기록한다."
+    }
+  ]
+}

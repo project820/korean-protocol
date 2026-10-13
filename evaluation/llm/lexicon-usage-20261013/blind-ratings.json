@@ -1,0 +1,226 @@
+{
+  "judge": {
+    "method": "Independent blind judgment using only blind-review-input.json; no external consultation and no model calls.",
+    "scope": "Synthetic evaluation, not an expert study.",
+    "condition_identity": "Not inferred; A and B evaluated separately.",
+    "semantic_policy": "Semantic pass concerns stated meaning and forbidden factual inferences, separately from whether the requested editing action was delivered. LX12 preserves relative tolerance semantics but fails action appropriateness.",
+    "unnecessary_change_policy": "Unnecessary intervention includes a clarification explicitly adjudicated unnecessary. Explicitly allowed clarification in LX03 and LX09 is not penalized solely because a rewrite or keep is also allowed.",
+    "low_action_discrimination_case_ids": [
+      "LX09"
+    ]
+  },
+  "cases": [
+    {
+      "id": "LX01",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “재시도 중 연결이 다시 끊기는 현상”에 대해 “재시도 중 문제가 있을 수 있습니다”를 그대로 유지하며 발생을 단정하지 않는다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “재시도 중 연결이 다시 끊기는 현상”에 대해 “재시도 중 문제가 있을 수 있습니다”를 그대로 유지하며 발생을 단정하지 않는다."
+      }
+    },
+    {
+      "id": "LX02",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “읽기 권한만”과 “권한 거부 응답”을 “쓰기 권한이 없어 업로드 요청이 거부됐습니다”로 보존하며 기능 미지원 주장을 바로잡는다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “읽기 권한만”과 “권한 거부 응답”을 “쓰기 권한이 없어 업로드 요청이 거부됐습니다”로 보존하며 기능 미지원 주장을 바로잡는다."
+      }
+    },
+    {
+      "id": "LX03",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥은 “버튼 이름인지 상태 표시인지 기록되어 있지 않다”고 한다. 출력의 “버튼 이름인가요”와 “상태 표시인가요”는 용도를 질문하며 갱신 진행을 단정하지 않는다. 동결 기준은 이 확인을 명시적으로 허용한다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥은 “버튼 이름인지 상태 표시인지 기록되어 있지 않다”고 한다. 출력의 “버튼 이름인가요, 상태 표시인가요”는 미확인 용도를 질문하며 갱신 진행을 단정하지 않는다. 동결 기준은 이 확인을 명시적으로 허용한다."
+      }
+    },
+    {
+      "id": "LX04",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “접수 목록에 등록됐다”와 “아직 교체 작업을 시작하지 않았다”에 맞게 “접수됐지만 교체는 끝나지 않았습니다”를 유지하며 진행 중이라는 사실을 추가하지 않는다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “접수 목록에 등록됐다”와 “아직 교체 작업을 시작하지 않았다”에 맞게 “접수됐지만 교체는 끝나지 않았습니다”를 유지하며 진행 중이라는 사실을 추가하지 않는다."
+      }
+    },
+    {
+      "id": "LX05",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “예산 사용을 승인했다”와 “측정은 다음 주”를 “예산은 승인됐으며, 방음 성능은 다음 주에 측정합니다”로 보존하며 성능 검증 완료 주장을 제거한다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “예산 사용을 승인했다”와 “측정은 다음 주”를 “예산은 승인됐으며, 방음 성능은 다음 주에 측정합니다”로 보존하며 성능 검증 완료 주장을 제거한다."
+      }
+    },
+    {
+      "id": "LX06",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “어느 항목을 가리키는지 밝히지 않았다”에 대응해 “예산안인가요, 운영 일정인가요, 아니면 둘 다인가요”를 질문하며 “목요일 회의 전까지”를 보존한다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “어느 항목을 가리키는지 밝히지 않았다”에 대응해 “예산안인가요, 운영 일정인가요, 둘 다인가요”를 질문하며 “목요일 회의 전까지”를 보존한다."
+      }
+    },
+    {
+      "id": "LX07",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “기본 목록에서 숨긴다”와 “보관함에서 다시 볼 수 있다”를 출력의 “숨겨지며, 보관함에서 다시 볼 수 있습니다”가 보존하며 후보를 유지한다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “기본 목록에서 숨긴다”와 “보관함에서 다시 볼 수 있다”를 출력의 “숨겨지며, 보관함에서 다시 볼 수 있습니다”가 보존하며 후보를 유지한다."
+      }
+    },
+    {
+      "id": "LX08",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “집계에서 제외했다”와 “원본 파일의 행은 변경하지 않았다”를 “집계에서 제외했으며, 원본 파일에는 그대로 남아 있습니다”로 보존하며 삭제 주장을 바로잡는다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “집계에서 제외했다”와 “원본 파일의 행은 변경하지 않았다”를 “집계에서 제외했으며, 원본 파일에는 그대로 남아 있습니다”로 보존하며 삭제 주장을 바로잡는다."
+      }
+    },
+    {
+      "id": "LX09",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “어느 백업을 뜻하는지 지정하지 않았다”에 대해 “7일 전체 백업인가요, 8일 변경분 백업인가요”를 질문한다. 변경분 단독 복원이 가능하다고 단정하지 않으며 동결 기준은 확인을 허용한다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “복원 방식과 복원 시점은 별도로 합의되지 않았다”에 대해 “어느 백업 시점의 상태”를 질문한다. 특정 백업만 사용하라고 단정하지 않으며 동결 기준은 확인을 허용한다."
+      }
+    },
+    {
+      "id": "LX10",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “눈높이는 필수 설치 조건이 아니다”에 맞게 “눈높이에 설치하도록 권장합니다”를 유지하며 설치 의무를 추가하지 않는다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “눈높이는 필수 설치 조건이 아니다”에 맞게 “눈높이에 설치하도록 권장합니다”를 유지하며 설치 의무를 추가하지 않는다."
+      }
+    },
+    {
+      "id": "LX11",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “명목 유량은 분당 18리터”와 “측정한 최대 유량은 분당 23리터”를 출력이 각각 보존하며 23리터를 명목값으로 표시한 오류를 바로잡는다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": true,
+        "unnecessary_change": false,
+        "concise_reason": "문맥의 “명목 유량은 분당 18리터”와 “측정한 최대 유량은 분당 23리터”를 출력이 각각 보존하며 23리터를 명목값으로 표시한 오류를 바로잡는다."
+      }
+    },
+    {
+      "id": "LX12",
+      "unresolved_gold_conflict": false,
+      "A": {
+        "semantic_pass": true,
+        "action_appropriate": false,
+        "unnecessary_change": true,
+        "concise_reason": "문맥의 “기준 간격이나 기준 도면은 제시되지 않았다”에 대해 출력은 “간격 오차 ±2 mm의 기준”을 질문하므로 상대 오차 의미를 보존하고 실제 간격 상한을 만들지 않는다. 그러나 동결 기준은 기준 치수 없이 수정할 수 있다고 명시하므로 질문만 반환한 clarify는 부적절하며 불필요하다."
+      },
+      "B": {
+        "semantic_pass": true,
+        "action_appropriate": false,
+        "unnecessary_change": true,
+        "concise_reason": "문맥의 “기준 간격이나 기준 도면은 제시되지 않았다”에 대해 출력은 “간격 오차 ±2 mm의 기준”을 질문하므로 상대 오차 의미를 보존하고 실제 간격 상한을 만들지 않는다. 그러나 동결 기준은 기준 치수 없이 수정할 수 있다고 명시하므로 질문만 반환한 clarify는 부적절하며 불필요하다."
+      }
+    }
+  ],
+  "counts": {
+    "A": {
+      "total": 12,
+      "semantic_pass": 12,
+      "semantic_fail": 0,
+      "action_appropriate": 11,
+      "action_inappropriate": 1,
+      "unnecessary_change": 1,
+      "unresolved_gold_conflict": 0
+    },
+    "B": {
+      "total": 12,
+      "semantic_pass": 12,
+      "semantic_fail": 0,
+      "action_appropriate": 11,
+      "action_inappropriate": 1,
+      "unnecessary_change": 1,
+      "unresolved_gold_conflict": 0
+    }
+  }
+}

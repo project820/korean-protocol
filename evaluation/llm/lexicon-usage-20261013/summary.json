@@ -1,0 +1,49 @@
+{
+  "source_commit": "445110e12ee7fec1f57b1992c5dc37d1ea654555",
+  "models_requested": [
+    "gpt-6.1-sol"
+  ],
+  "effort": "high",
+  "actual_cli_calls": 2,
+  "automatic_fallback_used": false,
+  "upstream_provider_observed": null,
+  "independent_case_authorship": "new synthetic cases authored without project dictionaries/profile/old fixtures",
+  "gold_adjudication": "separate before-run review preserved original and allowed faithful alternatives",
+  "comparison": {
+    "baseline": {
+      "denominator": 12,
+      "semantic_pass": 12,
+      "action_appropriate": 11,
+      "unnecessary_change": 1,
+      "failed_action_ids": [
+        "LX12"
+      ]
+    },
+    "treatment": {
+      "denominator": 12,
+      "semantic_pass": 12,
+      "action_appropriate": 11,
+      "unnecessary_change": 1,
+      "failed_action_ids": [
+        "LX12"
+      ]
+    }
+  },
+  "dictionary_access": {
+    "full_files_available": 2,
+    "entries_available": 193,
+    "exact_records_returned": 25,
+    "cases_reporting_entries": 10,
+    "distinct_reported_entries": 15,
+    "all_reported_ids_seen_in_returned_records": true
+  },
+  "improvement_proven": false,
+  "limitations": [
+    "one batch per condition; twelve synthetic contexts",
+    "A/B output evaluator is a model, not a human language expert or reader experiment",
+    "LX09 has weak action discrimination",
+    "file-read traces and supplied records do not establish comprehension of all193entries",
+    "source facts and faithful repairs can be sufficient without operational detail; LX12 clarification remains unnecessary inbothconditions",
+    "read-only sandbox doesnotguaranteecwd-onlyreads; explicit commands manuallyaudited andpre/postfilehashesmatched"
+  ]
+}

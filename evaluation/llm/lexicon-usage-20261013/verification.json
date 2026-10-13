@@ -1,0 +1,11 @@
+{
+  "frozen_sources_unchanged": true,
+  "freeze_precedes_both_model_calls": true,
+  "identical_public_inputs_and_prompts": true,
+  "both_workspaces_unchanged": true,
+  "structural_checks_passed": true,
+  "offline_runner_tests": 14,
+  "python_crash_reports_after": 18,
+  "new_python_crash_reports": [],
+  "no_semantic_score_inferred_from_structure": true
+}

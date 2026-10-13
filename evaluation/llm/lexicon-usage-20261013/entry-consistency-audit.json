@@ -1,0 +1,115 @@
+{
+  "reviewer": "separate read-only gpt-6-luna/high explorer; reviewed frozen entries, contexts, output and trace after execution",
+  "case_counts": {
+    "pass": 9,
+    "partial": 1,
+    "none": 2
+  },
+  "unique_entry_counts": {
+    "pass": 13,
+    "partial": 2,
+    "overlap": 0
+  },
+  "cases": [
+    {
+      "id": "LX01",
+      "entry_ids": [
+        "KPL-0123"
+      ],
+      "relevance": "pass",
+      "reason": "가능성 표현과 문맥이 일치한다."
+    },
+    {
+      "id": "LX02",
+      "entry_ids": [
+        "KPL-0072",
+        "KPL-SW-0003"
+      ],
+      "relevance": "pass",
+      "reason": "권한 범위와 업로드 기능을 구분한다."
+    },
+    {
+      "id": "LX03",
+      "entry_ids": [
+        "KPL-0088"
+      ],
+      "relevance": "pass",
+      "reason": "진행 중의 시작·미완료 조건이 관련된다."
+    },
+    {
+      "id": "LX04",
+      "entry_ids": [
+        "KPL-0027"
+      ],
+      "relevance": "pass",
+      "reason": "완료 상태와 작업 시작 여부를 혼동하지 않는다."
+    },
+    {
+      "id": "LX05",
+      "entry_ids": [
+        "KPL-0047",
+        "KPL-0030",
+        "KPL-0033"
+      ],
+      "relevance": "pass",
+      "reason": "승인·검증·측정의 의미를 구분한다."
+    },
+    {
+      "id": "LX06",
+      "entry_ids": [],
+      "relevance": "none",
+      "reason": "보고 ID가 없다."
+    },
+    {
+      "id": "LX07",
+      "entry_ids": [
+        "KPL-0008",
+        "KPL-0124"
+      ],
+      "relevance": "pass",
+      "reason": "삭제와 조회 기능의 차이가 관련된다."
+    },
+    {
+      "id": "LX08",
+      "entry_ids": [
+        "KPL-0140",
+        "KPL-0008"
+      ],
+      "relevance": "pass",
+      "reason": "집계 제외와 원본 삭제를 구분한다."
+    },
+    {
+      "id": "LX09",
+      "entry_ids": [
+        "KPL-0012"
+      ],
+      "relevance": "pass",
+      "reason": "복원의 기준 시점 조건이 관련되지만 허용 행동이 여럿이다."
+    },
+    {
+      "id": "LX10",
+      "entry_ids": [],
+      "relevance": "none",
+      "reason": "보고 ID가 없다."
+    },
+    {
+      "id": "LX11",
+      "entry_ids": [
+        "KPL-0095",
+        "KPL-0033"
+      ],
+      "relevance": "pass",
+      "reason": "측정 최댓값과 명목값을 구분한다."
+    },
+    {
+      "id": "LX12",
+      "entry_ids": [
+        "KPL-0064",
+        "KPL-0098"
+      ],
+      "relevance": "partial",
+      "reason": "기준·상한 개념은 관련되지만 상대 허용 오차와 실제 간격 상한의 차이를 충분히 나타내지는 않는다."
+    }
+  ],
+  "limit": "unblinded relevance/consistency audit; not causal evidence of model understanding or action correctness"
+}

@@ -1,0 +1,23 @@
+{
+  "method": "codex exec --help plus offline codex debug prompt-input under isolated empty CODEX_HOME and temporary project",
+  "auth_or_model_calls": false,
+  "ignore_rules_help": "Do not load user or project execpolicy .rules files",
+  "debug_accepts_exec_ignore_flags": false,
+  "profile_bytes": 28652,
+  "profile_sha256": "c3171890012b5eb60414fdf61c4656c68c24b3c984ba7e16b194f88c72bbfd9b",
+  "baseline_profile_present": false,
+  "treatment_full_profile_present": true,
+  "exit_codes": [
+    0,
+    0
+  ],
+  "stderr_bytes": [
+    0,
+    0
+  ],
+  "render_hashes": {
+    "baseline": "e503a5b3e8bb1fba6b6c36e81dac603afde56a054e2c8dfb8978f9b600cf4425",
+    "treatment": "2dfadcb414d4ad4193ef5d3202678e166749ce592458a18ad656d89fc8a21f19"
+  },
+  "limit": "verifies loader bytes and documented flag meaning, not model compliance"
+}
