@@ -1,0 +1,16 @@
+{
+  "command": "python3 -B -m unittest discover -s evaluation/llm/scope-holdout-20261013 -p test_run.py",
+  "test_count": 11,
+  "exit_code": 0,
+  "scope": "offline runner behavior only; no semantic model claims",
+  "source_hashes": {
+    "evaluation/llm/scope-holdout-20261013/run.py": "5d567065604d74dd1ab824d808acc1f46ea78c06f5380167b27913b20ac1e482",
+    "evaluation/llm/scope-holdout-20261013/test_run.py": "ba440bbf3333360d12e56813802f3cd6eb9d78bdd2172001d9004ef467dfbfba",
+    "evaluation/llm/runner.py": "643be853e32ec08ebb79b5c6e625b9d114e1ad068ce76e3bbc6e69348644496c"
+  },
+  "shared_runner_tests": {
+    "command": "python3 -B -m unittest tests.test_model_evaluation",
+    "test_count": 8,
+    "exit_code": 0
+  }
+}

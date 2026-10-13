@@ -1,0 +1,283 @@
+{
+  "independence": {
+    "did_author_cases_rules_or_runner": false,
+    "read_only_authorized_sources": [
+      "blind-review-instructions.md",
+      "blind-review-input.json"
+    ],
+    "condition_key_or_other_materials_read": false,
+    "external_model_calls": false,
+    "method": "A와 B 각각을 제공된 사실, 요청, 고정 gold에 대조했다. 조건의 정체를 추정하거나 상대 응답의 문체 차이를 개선으로 세지 않았다."
+  },
+  "ratings": [
+    {
+      "case_position": 1,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "배포일, 점검 완료, 완료 시각 확인 중, 시작 시각 미확정을 정중한 두 문장으로 보존했다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "배포 예정 표현은 주어진 미래 배포 일정과 일치하며 나머지 미확정 상태도 정중한 두 문장으로 보존했다."
+      }
+    },
+    {
+      "case_position": 2,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "누락된 완료 시각을 정확히 식별했고 20:00 경계를 포함한 두 조건부 분기를 제시했다. 추가 질문은 실제 판정에 필요한 사실을 묻는다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "완료 시각 부재로 실제 판정이 불가함을 명시하고 정확한 두 분기를 제시했다. 직접 질문이 없어도 확인 기능을 충족한다."
+      }
+    },
+    {
+      "case_position": 3,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "48건 완료, 전체 건수 집계 중, 완료율 미산출을 간결한 한 문장으로 보존했다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "48건 완료, 전체 건수 집계 중, 완료율 미산출을 간결한 한 문장으로 보존했다."
+      }
+    },
+    {
+      "case_position": 4,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "실제 분모가 없어 확정할 수 없음을 밝혔고 60건 경계값을 올바르게 계산했다. 전체 대상 건수 질문은 필요하다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "실제 분모 부재를 명시하고 60건 이하와 초과를 조건부로 구분했다. 60건을 실제 분모로 단정하지 않았다."
+      }
+    },
+    {
+      "case_position": 5,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "수요일 완료 기한과 원문 언어 확인에 따른 담당자 배정 대기를 자연스럽게 보존했다. 요청에는 한 문장이라는 수량 제한이 없다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "수요일 완료 기한과 원문 언어 확인에 따른 담당자 배정 대기를 자연스러운 문장으로 보존했다."
+      }
+    },
+    {
+      "case_position": 6,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "원문 언어 부재를 판정 불가 사유로 식별하고 한국어·영어의 담당 규칙을 정확히 제시했다. 언어 확인 질문은 필요하다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "원문 언어 부재를 명시하고 지수·민호의 배정을 조건부로 정확히 제시했다. 사용자 요청 언어로 담당자를 추정하지 않았다."
+      }
+    },
+    {
+      "case_position": 7,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "생성 시각 확인 중, 만 경과 일수 미계산, 삭제 대상 여부 미판정을 모두 보존하며 실제 분류나 삭제 실행을 주장하지 않았다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "생성 시각 확인 중, 만 경과 일수 미계산, 삭제 대상 여부 미판정을 모두 보존하며 실제 분류나 삭제 실행을 주장하지 않았다."
+      }
+    },
+    {
+      "case_position": 8,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "만 경과 일수가 없어 판정할 수 없음을 명시하고 14일 이상·미만의 기준을 정확히 제시했다. 첫 문장의 만 일수 기준이 후속 분기에도 적용된다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "만 경과 일수 부재를 명시하고 만 14일 이상·미만의 분류를 정확히 조건부로 제시했다. 실제 보관 또는 삭제 대상으로 확정하지 않았다."
+      }
+    },
+    {
+      "case_position": 9,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "두 작업 준비 완료와 지난주 검색 필터 8건·내보내기 집계 중 상태를 회의록용 두 문장으로 보존했다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "두 작업 준비 완료와 지난주 검색 필터 8건·내보내기 집계 중 상태를 회의록용 두 문장으로 보존했다."
+      }
+    },
+    {
+      "case_position": 10,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "내보내기 접수 건수 부재를 식별했고 8건 이하에는 동률 규칙을 포함해 검색 필터를 선택했다. 건수 확인 질문은 필요하다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "내보내기 접수 건수 부재를 식별하고 8건 초과·이하의 우선순위를 정확히 조건부로 제시했다. 실제 작업 선택이나 실행으로 단정하지 않았다."
+      }
+    },
+    {
+      "case_position": 11,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "편집 대상 A 또는 B를 확인하는 필요한 질문만 제시했다. 배포 우선순위로 편집 대상을 추정하거나 두 초안을 편집하지 않았다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "편집 대상 A 또는 B를 확인하는 필요한 질문을 제시했다. 배포 우선순위로 편집 대상을 추정하거나 두 초안을 편집하지 않았다."
+      }
+    },
+    {
+      "case_position": 12,
+      "A": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "검토 통과 조건과 A 우선 규칙을 근거로 A를 먼저 배포할 대상으로 확정했다. 실제 배포 실행을 주장하지 않았다."
+      },
+      "B": {
+        "semantic_preserved": true,
+        "task_completed": true,
+        "unnecessary_clarification": false,
+        "unsupported_assertion": false,
+        "rationale": "A를 먼저 배포할 대상으로 확정하고 두 대시보드 검토 통과와 배포 규칙을 근거로 제시했다. 문맥상 배포 결정이며 실행 완료 주장이 아니다."
+      }
+    }
+  ],
+  "aggregate": {
+    "A": {
+      "cases": 12,
+      "semantic_preserved": {
+        "true": 12,
+        "false": 0,
+        "null": 0
+      },
+      "task_completed": {
+        "true": 12,
+        "false": 0,
+        "null": 0
+      },
+      "unnecessary_clarification": {
+        "true": 0,
+        "false": 12,
+        "null": 0
+      },
+      "unsupported_assertion": {
+        "true": 0,
+        "false": 12,
+        "null": 0
+      },
+      "answer_cases_completed": 6,
+      "clarify_cases_completed": 6
+    },
+    "B": {
+      "cases": 12,
+      "semantic_preserved": {
+        "true": 12,
+        "false": 0,
+        "null": 0
+      },
+      "task_completed": {
+        "true": 12,
+        "false": 0,
+        "null": 0
+      },
+      "unnecessary_clarification": {
+        "true": 0,
+        "false": 12,
+        "null": 0
+      },
+      "unsupported_assertion": {
+        "true": 0,
+        "false": 12,
+        "null": 0
+      },
+      "answer_cases_completed": 6,
+      "clarify_cases_completed": 6
+    }
+  },
+  "paired_comparison": {
+    "equal_outcome_cases": 12,
+    "A_only_task_completed": 0,
+    "B_only_task_completed": 0,
+    "interpretation": "네 평가 항목에서 두 조건은 모두 동률이다. 직접 확인 질문의 유무는 정확한 정보 부족 설명과 조건부 판단의 기능 차이로 세지 않았다."
+  },
+  "unresolved_gold_conflicts": [],
+  "limitations": [
+    "한 배치의 합성 사례 12개이며 여섯 주제의 짝지은 요청으로 구성되어 있다.",
+    "한 독립 평가자의 정성 판정이며 사람 독해 실험이나 복수 평가자 일치도 검증이 아니다.",
+    "제공된 답변 텍스트만 판정했으므로 실제 실행, 생성 과정, 다른 입력에서의 성능은 검증하지 않았다.",
+    "모든 사례에서 두 조건이 통과했으므로 이 배치로 조건 간 우열이나 일반적 개선 효과를 주장할 수 없다."
+  ]
+}

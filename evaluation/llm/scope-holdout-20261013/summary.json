@@ -1,0 +1,55 @@
+{
+  "scope": "new independent-authored synthetic v2 tasks; pre-run gold audit; single paired batch",
+  "source_commit": "9367bde484fe96d43700f4513a5aeb5c3d7a4330",
+  "case_count": 12,
+  "conditions": {
+    "treatment": {
+      "semantic_preserved": {
+        "true": 12,
+        "false": 0,
+        "null": 0
+      },
+      "task_completed": {
+        "true": 12,
+        "false": 0,
+        "null": 0
+      },
+      "unnecessary_clarification": {
+        "true": 0,
+        "false": 12,
+        "null": 0
+      },
+      "unsupported_assertion": {
+        "true": 0,
+        "false": 12,
+        "null": 0
+      }
+    },
+    "baseline": {
+      "semantic_preserved": {
+        "true": 12,
+        "false": 0,
+        "null": 0
+      },
+      "task_completed": {
+        "true": 12,
+        "false": 0,
+        "null": 0
+      },
+      "unnecessary_clarification": {
+        "true": 0,
+        "false": 12,
+        "null": 0
+      },
+      "unsupported_assertion": {
+        "true": 0,
+        "false": 12,
+        "null": 0
+      }
+    }
+  },
+  "general_improvement_proven": false,
+  "human_comprehension_tested": false,
+  "unresolved_gold_conflicts": [],
+  "sample_gate_passed": true
+}

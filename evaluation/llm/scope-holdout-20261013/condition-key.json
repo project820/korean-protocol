@@ -1,0 +1,21 @@
+{
+  "conditions": {
+    "A": "treatment",
+    "B": "baseline"
+  },
+  "case_ids": [
+    "scope_deploy_edit",
+    "scope_deploy_action",
+    "scope_metric_edit",
+    "scope_metric_decision",
+    "scope_owner_edit",
+    "scope_owner_action",
+    "scope_retention_edit",
+    "scope_retention_decision",
+    "scope_queue_edit",
+    "scope_queue_decision",
+    "scope_control_edit",
+    "scope_control_decision"
+  ],
+  "packet_sha256": "ec2e07e74671e172bfd125368a70800a5dda172be36c682b0a76b7a1d30b8fa3"
+}

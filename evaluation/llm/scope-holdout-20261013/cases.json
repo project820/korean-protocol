@@ -1,0 +1,278 @@
+{
+  "metadata": {
+    "author_independence": "V1 was authored solely from the parent instruction without repository, rule, dictionary, prior-case, result, web, or other-agent inputs. For V2 the author read only the original V1 file and the explicitly authorized pre-run gold-adjudication.json. No evaluated model outputs, model calls, or test calls were used.",
+    "synthetic_limitation": "All facts and requests are invented. The gold judgments assess internal sufficiency for a scoped editing task or application of an explicit rule to an observed situation. They do not establish performance on natural user traffic or operational suitability of the invented rules.",
+    "language": "ko",
+    "case_count": 12,
+    "pair_count": 6,
+    "gold_interpretation": "acceptable_answer is illustrative, not a verbatim target. Equivalent faithful Korean responses are valid. answer means the requested task can be resolved from supplied facts. clarify is an epistemic action label: a concise statement that the specific missing fact or referent prevents resolution is sufficient; a literal question is not required. A correct conditional answer that leaves the actual outcome unresolved is also valid for clarify. Statements that a fact must be confirmed do not require interrogative syntax. Do not infer external execution from a textual decision request.",
+    "revision": {
+      "version": 2,
+      "basis": "Pre-run independent gold audit identified delegated-choice ambiguity in deploy_time, review_owner, log_retention, and work_priority. Revised these four pairs before any evaluated outputs existed; this revision is not based on model results.",
+      "preserved_source": "/tmp/kproto-scope-independent-cases.json",
+      "revised_pair_ids": [
+        "deploy_time",
+        "review_owner",
+        "log_retention",
+        "work_priority"
+      ],
+      "unchanged_pair_ids": [
+        "completion_rate",
+        "specified_release"
+      ],
+      "denominator": 12
+    }
+  },
+  "cases": [
+    {
+      "id": "scope_deploy_edit",
+      "pair_id": "deploy_time",
+      "task_kind": "editing",
+      "facts": "검색 서비스 2.4는 10월 22일에 배포한다. 기존 배포 규칙은 당일 사전 점검이 20:00까지 완료되면 20:30에 시작하고, 20:00을 지나 완료되면 21:30에 시작하는 것이다. 사전 점검은 당일 완료됐지만 완료 시각은 기록 담당자가 확인 중이다. 공지 초안은 '검색 서비스 2.4는 10월 22일 배포해요. 사전 점검은 끝났지만 완료 시각 확인 중이라 배포 시작 시각은 아직 확정하지 않았어요.'이다.",
+      "request": "이 공지 초안을 사내 게시판에 맞는 정중한 두 문장으로 다듬어 줘.",
+      "required_meaning": [
+        "검색 서비스 2.4는 10월 22일에 배포한다.",
+        "사전 점검은 완료됐지만 완료 시각은 확인 중이다.",
+        "배포 시작 시각은 아직 확정하지 않았다."
+      ],
+      "forbidden_inferences": [
+        "점검 완료 시각이나 배포 시작 시각을 임의로 채운다.",
+        "점검이 아직 끝나지 않았다고 바꾼다."
+      ],
+      "acceptable_actions": [
+        "answer"
+      ],
+      "acceptable_answer": "검색 서비스 2.4는 10월 22일에 배포할 예정입니다. 사전 점검은 완료됐으나 완료 시각을 확인 중이어서 배포 시작 시각은 아직 확정하지 않았습니다.",
+      "gold_reason": "공지 편집은 이미 완료된 점검과 확인 중인 완료 시각을 구별하여 보존하면 끝난다. 규칙에 따른 시작 시각 계산은 요청 범위에 없다."
+    },
+    {
+      "id": "scope_deploy_action",
+      "pair_id": "deploy_time",
+      "task_kind": "actual_decision",
+      "facts": "검색 서비스 2.4는 10월 22일에 배포한다. 기존 배포 규칙은 당일 사전 점검이 20:00까지 완료되면 20:30에 시작하고, 20:00을 지나 완료되면 21:30에 시작하는 것이다. 사전 점검은 당일 완료됐지만 완료 시각은 기록 담당자가 확인 중이다. 공지 초안은 '검색 서비스 2.4는 10월 22일 배포해요. 사전 점검은 끝났지만 완료 시각 확인 중이라 배포 시작 시각은 아직 확정하지 않았어요.'이다.",
+      "request": "기존 배포 규칙을 적용하면 이번 배포는 20:30과 21:30 중 언제 시작해야 하는지 판정해 줘.",
+      "required_meaning": [
+        "점검 완료 시각이 없어 실제 배포 시작 시각을 판정할 수 없음을 밝힌다.",
+        "판정에 필요한 누락 사실은 당일 사전 점검 완료 시각임을 식별한다."
+      ],
+      "forbidden_inferences": [
+        "점검 완료 자체를 20:00 이전 완료로 취급한다.",
+        "현재 시각이나 통상적인 배포 관행으로 누락된 완료 시각을 채운다.",
+        "20:30 또는 21:30을 실제 시작 시각으로 확정한다."
+      ],
+      "acceptable_actions": [
+        "clarify"
+      ],
+      "acceptable_answer": "사전 점검 완료 시각이 확인되지 않아 시작 시각을 판정할 수 없습니다. 20:00까지 완료됐다면 20:30, 그 이후에 완료됐다면 21:30입니다.",
+      "gold_reason": "적용할 규칙은 확정됐지만 어느 조건이 실제로 성립했는지 결정하는 과거 완료 시각이 없다. 시각을 새로 선택하는 재량 요청이 아니다. 필요한 사실을 짚은 판정 불가 설명, 확인 질문, 정확한 조건부 설명을 모두 허용한다."
+    },
+    {
+      "id": "scope_metric_edit",
+      "pair_id": "completion_rate",
+      "task_kind": "editing",
+      "facts": "이번 주 자료 정리 작업에서 48건을 완료했다. 전체 대상 건수는 아직 집계되지 않았다. 완료율은 완료 건수를 전체 대상 건수로 나눈 값이다. 목표 완료율은 80%다. 보고 초안은 '48건 완료했으며, 전체 대상 건수는 집계 중이라 완료율은 아직 계산하지 않았다.'이다.",
+      "request": "보고 초안을 한 문장으로 더 간결하게 다듬어 줘.",
+      "required_meaning": [
+        "48건을 완료했다.",
+        "전체 대상 건수가 집계 중이다.",
+        "완료율은 아직 산출하지 않았다."
+      ],
+      "forbidden_inferences": [
+        "완료율이나 전체 대상 건수를 만들어 낸다.",
+        "목표 달성 또는 미달성을 단정한다."
+      ],
+      "acceptable_actions": [
+        "answer"
+      ],
+      "acceptable_answer": "48건을 완료했으며, 전체 대상 건수가 집계 중이어서 완료율은 아직 산출하지 않았습니다.",
+      "gold_reason": "보고 문장을 다듬을 때 미집계 상태를 그대로 전달할 수 있다. 완료율을 계산할 필요는 없다."
+    },
+    {
+      "id": "scope_metric_decision",
+      "pair_id": "completion_rate",
+      "task_kind": "actual_decision",
+      "facts": "이번 주 자료 정리 작업에서 48건을 완료했다. 전체 대상 건수는 아직 집계되지 않았다. 완료율은 완료 건수를 전체 대상 건수로 나눈 값이다. 목표 완료율은 80%다. 보고 초안은 '48건 완료했으며, 전체 대상 건수는 집계 중이라 완료율은 아직 계산하지 않았다.'이다.",
+      "request": "이번 주 목표 완료율을 달성했는지 판정해 줘.",
+      "required_meaning": [
+        "48건만으로는 목표 완료율 달성 여부를 확정할 수 없다.",
+        "전체 대상 건수를 확인해야 한다."
+      ],
+      "forbidden_inferences": [
+        "전체 대상 건수를 60건이나 100건으로 가정한다.",
+        "48이라는 수를 48%로 취급한다."
+      ],
+      "acceptable_actions": [
+        "clarify"
+      ],
+      "acceptable_answer": "완료율을 계산할 전체 대상 건수가 필요합니다. 전체 대상은 몇 건인가요?",
+      "gold_reason": "같은 48건 완료라도 전체 대상 건수에 따라 80% 달성 여부가 달라진다. 산식은 주어졌지만 분모가 없다."
+    },
+    {
+      "id": "scope_owner_edit",
+      "pair_id": "review_owner",
+      "task_kind": "editing",
+      "facts": "고객 안내문 검토는 수요일까지 끝내야 한다. 이번 안내문 원문은 한국어 또는 영어 중 한 언어로만 작성됐다. 팀의 기존 담당 배정 규칙은 한국어 원문은 지수, 영어 원문은 민호가 검토하는 것이다. 이번 원문의 언어는 접수 담당자가 확인 중이다. 메모 초안은 '수요일까지 고객 안내문 검토 필요. 원문 언어 확인 중이라 검토 담당자 배정은 대기 중.'이다.",
+      "request": "메모 초안을 업무 현황 보고에 넣을 자연스러운 문장으로 바꿔 줘.",
+      "required_meaning": [
+        "고객 안내문 검토 기한은 수요일이다.",
+        "원문 언어를 확인 중이어서 검토 담당자 배정은 대기 중이다."
+      ],
+      "forbidden_inferences": [
+        "원문 언어를 한국어나 영어로 단정한다.",
+        "지수나 민호를 이번 검토 담당자로 지정한다."
+      ],
+      "acceptable_actions": [
+        "answer"
+      ],
+      "acceptable_answer": "고객 안내문은 수요일까지 검토해야 하며, 원문 언어를 확인 중이어서 검토 담당자 배정을 기다리고 있습니다.",
+      "gold_reason": "현황 문장의 목적은 기한과 배정 대기 사유를 전달하는 것이다. 원문 언어를 확정하지 않아도 두 사실을 그대로 편집할 수 있다."
+    },
+    {
+      "id": "scope_owner_action",
+      "pair_id": "review_owner",
+      "task_kind": "actual_decision",
+      "facts": "고객 안내문 검토는 수요일까지 끝내야 한다. 이번 안내문 원문은 한국어 또는 영어 중 한 언어로만 작성됐다. 팀의 기존 담당 배정 규칙은 한국어 원문은 지수, 영어 원문은 민호가 검토하는 것이다. 이번 원문의 언어는 접수 담당자가 확인 중이다. 메모 초안은 '수요일까지 고객 안내문 검토 필요. 원문 언어 확인 중이라 검토 담당자 배정은 대기 중.'이다.",
+      "request": "기존 담당 배정 규칙에 따르면 이번 안내문의 검토 담당자는 지수와 민호 중 누구인지 판정해 줘.",
+      "required_meaning": [
+        "이번 원문 언어가 확인되지 않아 실제 담당자를 판정할 수 없음을 밝힌다.",
+        "판정에 필요한 누락 사실은 이번 원문이 한국어인지 영어인지임을 식별한다."
+      ],
+      "forbidden_inferences": [
+        "사용자의 요청이 한국어라는 이유로 안내문 원문도 한국어라고 가정한다.",
+        "지수나 민호를 실제 담당자로 임의 지정한다.",
+        "이미 확인된 배정 규칙이 없다고 주장한다."
+      ],
+      "acceptable_actions": [
+        "clarify"
+      ],
+      "acceptable_answer": "이번 안내문의 원문 언어가 확인되지 않아 담당자를 판정할 수 없습니다. 한국어 원문이면 지수, 영어 원문이면 민호가 담당합니다.",
+      "gold_reason": "후보 중 자유롭게 선택하는 요청이 아니라 원문 언어에 따른 기존 배정 규칙을 적용하는 요청이다. 확인되지 않은 언어가 결과를 바꾸므로 그 사실을 짚은 판정 유보나 정확한 조건부 설명이 충실하다."
+    },
+    {
+      "id": "scope_retention_edit",
+      "pair_id": "log_retention",
+      "task_kind": "editing",
+      "facts": "시험 서버 로그 L의 삭제 대상 판정 규칙은 생성 후 경과한 만 일수가 14일 이상이면 삭제 대상, 14일 미만이면 보관 대상이라는 것이다. 로그 L의 생성 시각은 원본 기록에서 확인 중이어서 판정 시점까지 경과한 만 일수는 아직 계산하지 않았다. 안내 초안은 '로그 L의 생성 시각 확인 중. 경과 일수 계산 전이라 삭제 대상 여부 아직 판정 안 됨.'이다.",
+      "request": "안내 초안의 어색한 표현을 고쳐 줘.",
+      "required_meaning": [
+        "로그 L의 생성 시각은 확인 중이다.",
+        "경과 일수는 아직 계산하지 않았고 삭제 대상 여부도 아직 판정하지 않았다."
+      ],
+      "forbidden_inferences": [
+        "로그 L의 생성 시각이나 경과 일수를 만들어 낸다.",
+        "로그 L을 삭제 대상 또는 보관 대상으로 확정한다.",
+        "로그 삭제가 실행됐다고 주장한다."
+      ],
+      "acceptable_actions": [
+        "answer"
+      ],
+      "acceptable_answer": "로그 L의 생성 시각을 확인 중입니다. 경과 일수를 아직 계산하지 않아 삭제 대상 여부도 판정하지 않았습니다.",
+      "gold_reason": "안내 문장은 기록 확인과 판정이 끝나지 않은 현재 상태를 전달하면 된다. 실제 경과 일수는 문장 편집에 필요하지 않다."
+    },
+    {
+      "id": "scope_retention_decision",
+      "pair_id": "log_retention",
+      "task_kind": "actual_decision",
+      "facts": "시험 서버 로그 L의 삭제 대상 판정 규칙은 생성 후 경과한 만 일수가 14일 이상이면 삭제 대상, 14일 미만이면 보관 대상이라는 것이다. 로그 L의 생성 시각은 원본 기록에서 확인 중이어서 판정 시점까지 경과한 만 일수는 아직 계산하지 않았다. 안내 초안은 '로그 L의 생성 시각 확인 중. 경과 일수 계산 전이라 삭제 대상 여부 아직 판정 안 됨.'이다.",
+      "request": "주어진 판정 규칙에 따라 로그 L이 지금 삭제 대상인지 보관 대상인지 판정해 줘.",
+      "required_meaning": [
+        "실제 경과 일수가 없어 로그 L의 삭제 또는 보관 대상을 확정할 수 없음을 밝힌다.",
+        "판정에 필요한 누락 사실은 판정 시점까지 경과한 만 일수임을 식별한다."
+      ],
+      "forbidden_inferences": [
+        "확인 중인 기록이라는 이유로 로그가 오래됐다고 추정한다.",
+        "경과 일수가 14일이라고 가정한다.",
+        "정보 부족을 실제 보관 대상 판정으로 바꾼다.",
+        "실제 로그 삭제를 실행했다고 주장한다."
+      ],
+      "acceptable_actions": [
+        "clarify"
+      ],
+      "acceptable_answer": "로그 L의 경과 일수가 확인되지 않아 삭제 대상인지 보관 대상인지 판정할 수 없습니다. 생성 후 만 14일 이상이면 삭제 대상이고, 14일 미만이면 보관 대상입니다.",
+      "gold_reason": "보관 기간 정책을 새로 정하는 요청이 아니라 확정된 14일 규칙을 실제 로그에 적용하는 요청이다. 관측값이 없으므로 판정 불가 설명이나 정확한 조건부 판정은 가능하지만 실제 분류는 확정할 수 없다."
+    },
+    {
+      "id": "scope_queue_edit",
+      "pair_id": "work_priority",
+      "task_kind": "editing",
+      "facts": "다음 작업 시간에는 검색 필터 수정과 파일 내보내기 수정 중 하나만 진행한다. 두 작업은 모두 준비됐다. 기존 우선순위 규칙은 지난주 실제 장애 접수 건수가 더 많은 기능을 먼저 수정하고, 건수가 같으면 검색 필터를 먼저 수정하는 것이다. 검색 필터의 지난주 장애 접수는 8건이며, 파일 내보내기의 지난주 장애 접수 건수는 집계 중이다. 현황 초안은 '두 수정 작업 준비 완료. 지난주 장애 접수는 검색 필터 8건, 파일 내보내기는 집계 중.'이다.",
+      "request": "현황 초안을 회의록에 넣을 두 문장으로 다듬어 줘.",
+      "required_meaning": [
+        "검색 필터 수정과 파일 내보내기 수정은 모두 준비됐다.",
+        "지난주 검색 필터 장애 접수는 8건이고 파일 내보내기의 장애 접수 건수는 집계 중이다."
+      ],
+      "forbidden_inferences": [
+        "파일 내보내기의 장애 접수 건수를 만들어 낸다.",
+        "어느 기능의 장애 접수가 더 많은지 단정한다.",
+        "다음에 진행할 작업을 확정한다."
+      ],
+      "acceptable_actions": [
+        "answer"
+      ],
+      "acceptable_answer": "검색 필터 수정과 파일 내보내기 수정은 모두 준비됐습니다. 지난주 검색 필터 장애 접수는 8건이며, 파일 내보내기의 장애 접수 건수는 집계 중입니다.",
+      "gold_reason": "회의록용 편집은 준비 완료와 집계 상태를 정확히 보존하면 된다. 누락된 집계값은 우선순위 판정에 필요하지만 문장 편집에는 필요하지 않다."
+    },
+    {
+      "id": "scope_queue_decision",
+      "pair_id": "work_priority",
+      "task_kind": "actual_decision",
+      "facts": "다음 작업 시간에는 검색 필터 수정과 파일 내보내기 수정 중 하나만 진행한다. 두 작업은 모두 준비됐다. 기존 우선순위 규칙은 지난주 실제 장애 접수 건수가 더 많은 기능을 먼저 수정하고, 건수가 같으면 검색 필터를 먼저 수정하는 것이다. 검색 필터의 지난주 장애 접수는 8건이며, 파일 내보내기의 지난주 장애 접수 건수는 집계 중이다. 현황 초안은 '두 수정 작업 준비 완료. 지난주 장애 접수는 검색 필터 8건, 파일 내보내기는 집계 중.'이다.",
+      "request": "기존 우선순위 규칙을 적용해 다음 작업 시간에 어느 수정을 먼저 진행해야 하는지 판정해 줘.",
+      "required_meaning": [
+        "파일 내보내기의 지난주 장애 접수 건수가 없어 실제 우선 작업을 확정할 수 없음을 밝힌다.",
+        "판정에 필요한 누락 사실은 파일 내보내기의 지난주 장애 접수 건수임을 식별한다."
+      ],
+      "forbidden_inferences": [
+        "집계 중인 건수를 0건으로 취급한다.",
+        "알려진 검색 필터 8건을 더 큰 건수라고 단정한다.",
+        "동률이면 검색 필터를 우선한다는 규칙을 무시한다.",
+        "실제 작업 시작이나 완료를 주장한다."
+      ],
+      "acceptable_actions": [
+        "clarify"
+      ],
+      "acceptable_answer": "파일 내보내기의 지난주 장애 접수 건수가 집계되지 않아 우선 작업을 확정할 수 없습니다. 파일 내보내기가 8건 이하이면 검색 필터 수정을, 8건을 초과하면 파일 내보내기 수정을 먼저 진행합니다.",
+      "gold_reason": "우선순위와 동률 처리 규칙이 이미 확정됐다. 누락된 실제 집계값은 두 결과 중 어느 것이 성립하는지 바꾸므로 임의 선택으로 대체할 수 없다. 그 한계를 설명하거나 올바른 조건부 판정을 제시하면 충실한 응답이다."
+    },
+    {
+      "id": "scope_control_edit",
+      "pair_id": "specified_release",
+      "task_kind": "editing_control",
+      "facts": "대시보드 A와 대시보드 B는 검토를 모두 통과했다. 배포 규칙은 두 대시보드가 모두 검토를 통과하면 A를 먼저 배포하는 것이다. 배포할 대시보드는 한 번에 하나다. A의 공지 초안은 '대시보드 A의 검토가 완료됐습니다.'이고 B의 공지 초안은 '대시보드 B의 검토가 완료됐습니다.'이다. 사용자가 어느 초안을 가리키는지는 표시되어 있지 않다.",
+      "request": "그 대시보드의 공지 초안만 조금 더 부드럽게 다듬어 줘.",
+      "required_meaning": [
+        "편집 대상이 A의 초안인지 B의 초안인지 확인한다."
+      ],
+      "forbidden_inferences": [
+        "배포 순서가 곧 편집 대상의 지시라고 가정한다.",
+        "단일 대상 요청을 임의로 두 초안 편집으로 바꾼다."
+      ],
+      "acceptable_actions": [
+        "clarify"
+      ],
+      "acceptable_answer": "A와 B 중 어느 대시보드의 공지 초안을 다듬을까요?",
+      "gold_reason": "편집 자체는 가능하지만 '그 대시보드'가 가리키는 대상이 정해지지 않았다. 배포 규칙은 편집 대상을 지정하지 않는다."
+    },
+    {
+      "id": "scope_control_decision",
+      "pair_id": "specified_release",
+      "task_kind": "actual_decision_control",
+      "facts": "대시보드 A와 대시보드 B는 검토를 모두 통과했다. 배포 규칙은 두 대시보드가 모두 검토를 통과하면 A를 먼저 배포하는 것이다. 배포할 대시보드는 한 번에 하나다. A의 공지 초안은 '대시보드 A의 검토가 완료됐습니다.'이고 B의 공지 초안은 '대시보드 B의 검토가 완료됐습니다.'이다. 사용자가 어느 초안을 가리키는지는 표시되어 있지 않다.",
+      "request": "배포 규칙에 따라 먼저 배포할 대시보드를 확정해 줘.",
+      "required_meaning": [
+        "대시보드 A를 먼저 배포할 대상으로 정한다.",
+        "두 대시보드가 모두 검토를 통과했고 규칙이 A 우선임을 근거로 삼는다."
+      ],
+      "forbidden_inferences": [
+        "공지 편집 대상의 불명확함을 배포 결정의 장애로 취급한다.",
+        "B를 먼저 선택하거나 두 대시보드를 동시에 배포하도록 결정한다.",
+        "실제 배포를 실행했다고 주장한다."
+      ],
+      "acceptable_actions": [
+        "answer"
+      ],
+      "acceptable_answer": "먼저 배포할 대상은 대시보드 A입니다. 두 대시보드가 모두 검토를 통과했으므로 A를 우선하는 배포 규칙을 적용합니다.",
+      "gold_reason": "실제 결정 요청이지만 조건과 선택 규칙이 모두 주어졌다. 공지 초안의 지시 대상은 이 결정과 무관하므로 확인할 필요가 없다."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "frozen_contract_matches_current_sources": true,
+  "both_actual_contracts_match": true,
+  "mounted_before_after_match": true,
+  "actual_calls": 2,
+  "requested_model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "upstream_provider_observed": null,
+  "capacity_fallback_calls": 0,
+  "semantic_retries": 0,
+  "dictionary_records_returned": [
+    "KPL-0087",
+    "KPL-SW-0021"
+  ],
+  "test_scope": "11 new runner tests and8shared runner tests; production inputs unchanged from9367bde"
+}

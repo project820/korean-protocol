@@ -1,0 +1,33 @@
+{
+  "source_commit": "9367bde484fe96d43700f4513a5aeb5c3d7a4330",
+  "tag": "v0.2.0-preview.7",
+  "archive_bytes": 387809,
+  "archive_sha256": "ceb0d2ae133d1e281257434f0aa6740f7d7938388075e8c11ec65713e103e4fa",
+  "identical_to_tested_package": true,
+  "package_smoke": "evaluation/editing-scope-20261013/package-smoke.json",
+  "archive_files": 30,
+  "unsigned_preview": true,
+  "public_publication": false,
+  "assets": {
+    "korean-protocol-0.2.0-draft.zip": {
+      "bytes": 387809,
+      "sha256": "ceb0d2ae133d1e281257434f0aa6740f7d7938388075e8c11ec65713e103e4fa"
+    },
+    "KOREAN-PROTOCOL.md": {
+      "bytes": 478646,
+      "sha256": "666a2e6f94f960cf844d150185a16b98cc5bdb0274ca9f91d37f79b5697b8bef"
+    },
+    "SHA256SUMS": {
+      "bytes": 2586,
+      "sha256": "ab45b90f33fe1b4212ebf736a6f896536a314fdd3456c3c6b9dae5799479ab31"
+    }
+  },
+  "github_url": "https://github.com/project820/korean-protocol/releases/tag/untagged-6a555125a9306823a585",
+  "github_draft_confirmed": true,
+  "github_downloaded_assets_match": true,
+  "github_asset_digests": {
+    "korean-protocol-0.2.0-draft.zip": "sha256:ceb0d2ae133d1e281257434f0aa6740f7d7938388075e8c11ec65713e103e4fa",
+    "KOREAN-PROTOCOL.md": "sha256:666a2e6f94f960cf844d150185a16b98cc5bdb0274ca9f91d37f79b5697b8bef",
+    "SHA256SUMS": "sha256:ab45b90f33fe1b4212ebf736a6f896536a314fdd3456c3c6b9dae5799479ab31"
+  }
+}

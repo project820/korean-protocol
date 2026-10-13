@@ -1,0 +1,74 @@
+{
+  "scope": "visible completed tool calls only; not OS-level proof of all file reads",
+  "conditions": {
+    "baseline": {
+      "exit_code": 0,
+      "structure_valid": true,
+      "mounted_hashes_before": {},
+      "mounted_hashes_after": {},
+      "mounted_unchanged": true,
+      "tool_commands": [],
+      "other_completed_tool_items": [],
+      "stderr_exact": "",
+      "fallback_marker_observed": false,
+      "exact_dictionary_records_returned": [],
+      "environment_warning_lines": [],
+      "manual_explicit_command_review": "Baseline: no completed tools. Treatment: two commands search/read only relative mounted dictionaries; full command text reviewed.",
+      "explicit_external_task_material_access_observed": false,
+      "explicit_network_or_other_agent_call_observed": false,
+      "opaque_cli_internal_access_verified": false,
+      "limitation": "Unknown-path sandbox warning does not reveal attempted path; visible commands do not prove OS read confinement. Dictionary lookup does not prove semantic efficacy."
+    },
+    "treatment": {
+      "exit_code": 0,
+      "structure_valid": true,
+      "mounted_hashes_before": {
+        "AGENTS.md": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+        "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e"
+      },
+      "mounted_hashes_after": {
+        "AGENTS.md": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+        "lexicon/core.json": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "lexicon/domains/software.json": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e"
+      },
+      "mounted_unchanged": true,
+      "tool_commands": [
+        {
+          "command": "/bin/zsh -lc \"rg -n '\\\"(배포|완료|검토|판정|집계|로그|대시보드|내보내기|필터)\\\"' lexicon/core.json lexicon/domains/software.json\"",
+          "exit_code": 0,
+          "output_sha256": "76e090430d13be86e985481a3426193cd88863ed098ec54aa0b8d046c371dd98",
+          "output_characters": 183
+        },
+        {
+          "command": "/bin/zsh -lc \"python3 -c 'import json; terms={\\\"완료\\\",\\\"배포\\\",\\\"검토\\\",\\\"판정\\\",\\\"집계\\\",\\\"로그\\\",\\\"대시보드\\\",\\\"내보내기\\\",\\\"필터\\\",\\\"삭제\\\",\\\"보관\\\",\\\"확인\\\"};\ndef walk(x):\n if isinstance(x,dict):\n  if x.get(\\\"lemma\\\") in terms: print(json.dumps(x,ensure_ascii=False))\n  else:\n   for v in x.values(): walk(v)\n elif isinstance(x,list):\n  for v in x: walk(v)\nfor path in [\\\"lexicon/core.json\\\",\\\"lexicon/domains/software.json\\\"]:\n with open(path) as f: walk(json.load(f))'\"",
+          "exit_code": 0,
+          "output_sha256": "2696901644886530d80d708d718d4199067bf608e5ee3b85d7816940ae54d9c2",
+          "output_characters": 2897
+        }
+      ],
+      "other_completed_tool_items": [],
+      "stderr_exact": "2026-10-13T05:38:45.499107Z  WARN codex_sandboxing::violation: recorded sandbox violation: resource=filesystem backend=seatbelt reason=operation_not_permitted path=unknown\n",
+      "fallback_marker_observed": false,
+      "exact_dictionary_records_returned": [
+        "KPL-0087",
+        "KPL-SW-0021"
+      ],
+      "environment_warning_lines": [
+        "python3: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead",
+        "python3: error: couldn't create cache file '/tmp/xcrun_db-cykIboOT' (errno=Operation not permitted)",
+        "2026-10-13 14:38:56.865 xcodebuild[69311:214355203]  DVTFilePathFSEvents: Failed to start fs event stream.",
+        "2026-10-13 14:38:57.039 xcodebuild[69311:214355202] [MT] DVTDeveloperPaths: Failed to get length of DARWIN_USER_CACHE_DIR from confstr(3), error = Error Domain=NSPOSIXErrorDomain Code=5 \"Input/output error\". Using NSCachesDirectory instead.",
+        "python3: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead",
+        "python3: error: couldn't create cache file '/tmp/xcrun_db-CwatOIYy' (errno=Operation not permitted)",
+        "2026-10-13 14:38:57.473 xcodebuild[69319:214355302]  DVTFilePathFSEvents: Failed to start fs event stream.",
+        "2026-10-13 14:38:57.576 xcodebuild[69319:214355301] [MT] DVTDeveloperPaths: Failed to get length of DARWIN_USER_CACHE_DIR from confstr(3), error = Error Domain=NSPOSIXErrorDomain Code=5 \"Input/output error\". Using NSCachesDirectory instead."
+      ],
+      "manual_explicit_command_review": "Baseline: no completed tools. Treatment: two commands search/read only relative mounted dictionaries; full command text reviewed.",
+      "explicit_external_task_material_access_observed": false,
+      "explicit_network_or_other_agent_call_observed": false,
+      "opaque_cli_internal_access_verified": false,
+      "limitation": "Unknown-path sandbox warning does not reveal attempted path; visible commands do not prove OS read confinement. Dictionary lookup does not prove semantic efficacy."
+    }
+  }
+}

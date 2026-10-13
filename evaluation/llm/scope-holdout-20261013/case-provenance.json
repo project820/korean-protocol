@@ -1,0 +1,33 @@
+{
+  "author": "scope_holdout_author; separate model agent not human expert",
+  "gold_reviewer": "scope_holdout_gold; separate from author and evaluated model",
+  "evaluated_outputs_seen_during_design": false,
+  "initial_cases_path": "pre-run-v1/cases.json",
+  "initial_gold_path": "pre-run-v1/gold-adjudication.json",
+  "final_cases_path": "cases.json",
+  "final_gold_path": "gold-adjudication.json",
+  "changed_case_ids_before_freeze": [
+    "scope_deploy_edit",
+    "scope_deploy_action",
+    "scope_owner_edit",
+    "scope_owner_action",
+    "scope_retention_edit",
+    "scope_retention_decision",
+    "scope_queue_edit",
+    "scope_queue_decision"
+  ],
+  "unchanged_case_ids": [
+    "scope_metric_edit",
+    "scope_metric_decision",
+    "scope_control_edit",
+    "scope_control_decision"
+  ],
+  "case_count_before": 12,
+  "case_count_after": 12,
+  "reason": "Pre-run independent gold review found delegated choices did not imply mandatory clarification; replaced four pairs with explicit existing rules applied to missing observations. No model outcome was used.",
+  "limitations": [
+    "Synthetic data; no human expert or natural traffic study",
+    "Paired topics in one batch may offer contextual cues",
+    "Task boundary evaluation does not cover free discretionary choice globally"
+  ]
+}
