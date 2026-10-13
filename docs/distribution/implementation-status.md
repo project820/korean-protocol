@@ -16,7 +16,7 @@ python3 -m runtime.kproto --state-dir /ABS/STATE uninstall
 
 bundle에는 고정 일곱 콘텐츠 파일이 있어야 한다. 개인 snapshot은 `release.json` 없이 설치할 수 있으며 발행자 인증을 표시하지 않는다. 실제 JSON은 schema version `"1.0"`, version 문자열, 비어 있지 않은 rules/entries object 배열을 확인한다. 전체 규칙·어휘 schema와 의미 보존 검증은 publication validator가 수행한다.
 
-한 상태 루트는 호스트 대상 파일 하나를 관리한다. host adapter는 `codex`, `gemini-cli`를 지원하며 사용자·프로젝트 scope를 구분한다. Codex 프로젝트 scope는 가까운 Git marker부터 설치 대상 디렉터리까지 선택된 지침의 합계에 32KiB 또는 단순 top-level 설정 상한을 적용하며 global 파일을 차감하지 않는다. 사용자 scope에는 프로젝트 상한을 적용하지 않고 설치기 자체의 최종 파일 4MiB 보호 상한을 사용한다. 절대 host context를 저장하여 매 활성화 때 현재 발견 파일·설정·상위 체인을 다시 계산한다. 향후 더 깊은 작업 디렉터리·다른 project root 발견 규칙·custom fallback 전체 발견은 미지원이다. Claude/Cursor adapter, Windows ACL·원자 교체, Linux/Windows scheduler는 설계 상태이다.
+한 상태 루트는 호스트 대상 파일 하나를 관리한다. host adapter는 `codex`, `claude-code`, `gemini-cli`를 지원하며 사용자·프로젝트 scope를 구분한다. Codex 프로젝트 scope는 가까운 Git marker부터 설치 대상 디렉터리까지 선택된 지침의 합계에 32KiB 또는 단순 top-level 설정 상한을 적용하며 global 파일을 차감하지 않는다. 사용자 scope에는 프로젝트 상한을 적용하지 않고 설치기 자체의 최종 파일 4MiB 보호 상한을 사용한다. 절대 host context를 저장하여 매 활성화 때 현재 발견 파일·설정·상위 체인을 다시 계산한다. 향후 더 깊은 작업 디렉터리·다른 project root 발견 규칙·custom fallback 전체 발견은 미지원이다. Cursor adapter, Windows ACL·원자 교체, Linux/Windows scheduler는 설계 상태이다.
 
 ## 콘텐츠 자동 갱신을 연결하는 조건
 
@@ -60,7 +60,7 @@ HTTP header/body blocking은 worker process deadline으로 종료하고 private 
 python3 -m unittest discover -s tests -p test_runtime.py
 ```
 
-이 명령은 78 tests를 실행하여 `OK`로 끝났다. 데이터 fixtures·network 주입과 실제 macOS ssh-keygen을 사용했으며 실제 HTTPS 서버·사용자 host 추론·launchctl 등록 성공을 시험한 것으로 확대하지 않는다.
+이 명령은 104 tests를 실행하여 `OK`로 끝났다. 데이터 fixtures·network 주입과 실제 macOS ssh-keygen을 사용했으며 실제 HTTPS 서버·사용자 host 추론·launchctl 등록 성공을 시험한 것으로 확대하지 않는다.
 
 ## 남은 연결
 
@@ -71,3 +71,5 @@ python3 -m unittest discover -s tests -p test_runtime.py
 `runtime.kproto`에는 검사기 통합 명령, diff/dry-run, 관리 블록 재소유, host별 상세 status, 자동 trust key rotation, 실제 scheduler registration이 없다. 검사는 validation CLI를 별도로 사용한다. uninstall은 backup/cache를 유지하고 사용자 내용이 생긴 파일을 지우지 않는다. 처음 없던 빈 파일을 완전히 삭제하는 복원은 아직 구현하지 않았으며 제거 후 빈 파일이 남을 수 있다.
 
 프로젝트 지침 체인 자체가 32KiB에 가까워 28KiB profile을 더 넣을 수 없으면 프로젝트 설치가 실패한다. 같은 global 지침은 이 프로젝트 예산에 포함하지 않으며 사용자 설치를 프로젝트 상한으로 거부하지 않는다. 설치기는 기존 지침을 삭제하거나 host 상한을 늘리지 않는다. 더 큰 상한을 설정한 프로젝트도 최종 대상이 설치기의 4MiB 파일 보호 상한을 넘으면 거부한다. 3.2MiB 사용자 원문을 설치하고 state commit 전에 중단한 뒤 base64가 커진 journal에서 무손실 복구하는 경계 시험도 통과했다.
+
+Claude Code 어댑터의 사용자·프로젝트 설치와 실제 로더·HTTPS 검증은 [코딩 에이전트 지원 기록](coding-agent-support.md)에 추가했다.

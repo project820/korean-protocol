@@ -1,4 +1,4 @@
-"""Interactive, offline Codex preview launcher using only Python's stdlib."""
+"""Interactive, offline coding-agent preview launcher using Python's stdlib."""
 import argparse
 from pathlib import Path
 import subprocess
@@ -7,6 +7,7 @@ import types
 
 
 PREVIEW_VERSION = '0.2.0'
+HOST_NAMES = {'codex': 'Codex', 'claude-code': 'Claude Code'}
 
 
 def find_bundle(script):
@@ -26,8 +27,8 @@ def load_runtime(bundle):
     return module
 
 
-def default_state_dir(runtime):
-    return runtime.default_state_dir().parent / 'korean-protocol-codex'
+def default_state_dir(runtime, host='codex'):
+    return runtime.default_state_dir().parent / ('korean-protocol-' + host)
 
 
 def read_status(runtime, state_dir):
@@ -46,11 +47,11 @@ def read_status(runtime, state_dir):
                 recovery_required=(root / 'journal.json').exists())
 
 
-def show_status(runtime, state_dir, codex_home):
+def show_status(runtime, state_dir, codex_home, host='codex', claude_home=None):
     target = runtime.host_target(argparse.Namespace(
-        host='codex', scope='user', project_root=None, codex_home=codex_home))
+        host=host, scope='user', project_root=None, codex_home=codex_home, claude_home=claude_home))
     status = read_status(runtime, state_dir)
-    print('\nCodex 사용자 범위 대상: ' + str(target))
+    print('\n' + HOST_NAMES[host] + ' 사용자 범위 대상: ' + str(target))
     print('상태 폴더: ' + str(state_dir))
     print('설치 상태: ' + ('설치됨' if status['installed'] else '미설치'))
     if status['installed']:
@@ -64,15 +65,17 @@ def show_status(runtime, state_dir, codex_home):
     return status
 
 
-def run_runtime(bundle, state_dir, action, codex_home):
+def run_runtime(bundle, state_dir, action, codex_home, host='codex', claude_home=None):
     command = [sys.executable, str(bundle / 'runtime/kproto.py'),
                '--state-dir', str(state_dir), action]
     if action == 'install':
-        command += ['--bundle', str(bundle), '--host', 'codex', '--scope', 'user',
+        command += ['--bundle', str(bundle), '--host', host, '--scope', 'user',
                     '--profile', 'coding-agent', '--local-snapshot', '--version', PREVIEW_VERSION,
                     '--autoupdate', 'off']
-        if codex_home is not None:
+        if host == 'codex' and codex_home is not None:
             command += ['--codex-home', str(codex_home)]
+        if host == 'claude-code' and claude_home is not None:
+            command += ['--claude-home', str(claude_home)]
     # Capture stderr so a Ctrl-C in the child does not emit its Python traceback.
     result = subprocess.run(command, shell=False, stderr=subprocess.PIPE, text=True)
     if result.stderr:
@@ -82,27 +85,41 @@ def run_runtime(bundle, state_dir, action, codex_home):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description='Korean Protocol 오프라인 Codex 미리보기 메뉴')
+    parser = argparse.ArgumentParser(description='Korean Protocol 오프라인 Codex·Claude Code 미리보기 메뉴')
+    parser.add_argument('--host', choices=['codex', 'claude-code'], help='설치할 코딩 에이전트를 지정합니다.')
     parser.add_argument('--state-dir', type=Path, help='격리된 설치 상태 폴더를 지정합니다.')
     parser.add_argument('--codex-home', type=Path, help='Codex 사용자 지침 폴더를 지정합니다.')
+    parser.add_argument('--claude-home', type=Path, help='Claude Code 사용자 설정 폴더를 지정합니다.')
     args = parser.parse_args(argv)
     runtime = None
     try:
+        host = args.host
+        if host is None:
+            print('Korean Protocol · 코딩 에이전트 선택')
+            while host is None:
+                print('\n1. Codex\n2. Claude Code\n0. 종료')
+                choice = input('번호를 입력하세요: ').strip()
+                if choice == '0':
+                    return 0
+                host = {'1': 'codex', '2': 'claude-code'}.get(choice)
+                if host is None:
+                    print('0, 1, 2 중 하나를 입력하세요.')
         bundle = find_bundle(__file__)
         runtime = load_runtime(bundle)
-        state_dir = (args.state_dir or default_state_dir(runtime)).absolute()
+        state_dir = (args.state_dir or default_state_dir(runtime, host)).absolute()
         codex_home = args.codex_home.absolute() if args.codex_home is not None else None
-        print('Korean Protocol · Codex 미리보기')
-        show_status(runtime, state_dir, codex_home)
+        claude_home = args.claude_home.absolute() if args.claude_home is not None else None
+        print('Korean Protocol · ' + HOST_NAMES[host] + ' 미리보기')
+        show_status(runtime, state_dir, codex_home, host, claude_home)
         while True:
-            print('\n1. Codex 사용자 범위에 설치\n2. 설치 상태 확인\n3. 설치한 규약 제거\n0. 종료')
+            print('\n1. ' + HOST_NAMES[host] + ' 사용자 범위에 설치\n2. 설치 상태 확인\n3. 설치한 규약 제거\n0. 종료')
             choice = input('번호를 입력하세요: ').strip()
             if choice == '0':
                 return 0
             if choice == '2':
-                show_status(runtime, state_dir, codex_home)
+                show_status(runtime, state_dir, codex_home, host, claude_home)
             elif choice in ('1', '3'):
-                status = show_status(runtime, state_dir, codex_home)
+                status = show_status(runtime, state_dir, codex_home, host, claude_home)
                 if choice == '1':
                     print('기존 지침에 규약 블록을 추가합니다. 기존 지침 보존은 실행기가 검사합니다.')
                     prompt = '이 파일에 서명 없는 미리보기를 설치할까요? [y/n]: '
@@ -114,7 +131,7 @@ def main(argv=None):
                 if input(prompt).strip().lower() != 'y':
                     print('취소했습니다. 파일을 변경하지 않았습니다.')
                     continue
-                code = run_runtime(bundle, state_dir, 'install' if choice == '1' else 'uninstall', codex_home)
+                code = run_runtime(bundle, state_dir, 'install' if choice == '1' else 'uninstall', codex_home, host, claude_home)
                 if code:
                     return code
             else:

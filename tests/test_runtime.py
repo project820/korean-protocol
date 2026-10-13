@@ -1,4 +1,5 @@
 import importlib
+import argparse
 import io
 import http.client
 import json
@@ -408,6 +409,208 @@ c.install_snapshot(Path(sys.argv[2]),Path(sys.argv[3]),'0.2.0')
             self.controller.install_snapshot(self.bundle,self.target,'0.1.0',host_context=context)
         self.assertEqual(self.original,self.target.read_bytes())
 
+    def test_claude_user_target_uses_explicit_environment_and_default_home(self):
+        args=argparse.Namespace(host='claude-code',scope='user',project_root=None,claude_home=None)
+        with mock.patch.dict(os.environ, {'HOME':str(self.root),'CLAUDE_CONFIG_DIR':str(self.root/'env-claude')}):
+            self.assertEqual(self.root/'env-claude/rules/korean-protocol.md',self.k.host_target(args))
+            args.claude_home=self.root/'explicit-claude'
+            self.assertEqual(self.root/'explicit-claude/rules/korean-protocol.md',self.k.host_target(args))
+        args.claude_home=None
+        with mock.patch.dict(os.environ, {'HOME':str(self.root)}, clear=True):
+            self.assertEqual(self.root/'.claude/rules/korean-protocol.md',self.k.host_target(args))
+
+    def test_claude_project_target_requires_root_and_ignores_user_home(self):
+        args=argparse.Namespace(host='claude-code',scope='project',project_root=self.target.parent)
+        self.assertEqual(self.target.parent/'.claude/rules/korean-protocol.md',self.k.host_target(args))
+        args.project_root=None
+        with self.assertRaises(self.k.InputError):
+            self.k.host_target(args)
+
+    def test_claude_install_reinstall_and_uninstall_preserve_rules_and_claude_md(self):
+        for scope in ('user','project'):
+            with self.subTest(scope=scope):
+                home=self.root/('claude-'+scope)
+                project=self.root/('repo-'+scope)
+                root=home if scope=='user' else project/'.claude'
+                (root/'rules').mkdir(parents=True)
+                target=root/'rules/korean-protocol.md'
+                original=b'# User rule\r\n'
+                target.write_bytes(original)
+                (root/'rules/other.md').write_bytes(b'Other rule\n')
+                claude_md=(home if scope=='user' else project)/'CLAUDE.md'
+                claude_md.write_bytes(b'Existing main instructions\n')
+                ctrl=self.k.Controller(self.root/('state-'+scope))
+                context={'host':'claude-code','scope':scope,'project_root':str(project) if scope=='project' else None,'claude_home':str(home)}
+                ctrl.install_snapshot(self.bundle,target,'0.2.0',host_context=context)
+                installed=target.read_bytes()
+                ctrl.install_snapshot(self.bundle,target,'0.2.0',host_context=context)
+                self.assertEqual(installed,target.read_bytes())
+                self.assertTrue(installed.startswith(original))
+                self.assertFalse(installed.startswith(b'---'))
+                self.assertEqual(self.k.MAX_TOTAL_BYTES,ctrl.status()['budget'])
+                self.assertEqual('installer-file-safety',ctrl.status()['budget_kind'])
+                target.write_bytes(b'# Added outside block\n'+installed)
+                ctrl.uninstall()
+                self.assertEqual(b'# Added outside block\n'+original,target.read_bytes())
+                self.assertEqual(b'Other rule\n',(root/'rules/other.md').read_bytes())
+                self.assertEqual(b'Existing main instructions\n',claude_md.read_bytes())
+
+    def test_claude_cli_persists_resolved_config_home_in_isolated_home(self):
+        for explicit in (False,True):
+            with self.subTest(explicit=explicit):
+                home=self.root/('isolated-'+str(explicit))
+                home.mkdir()
+                state=self.root/('cli-claude-state-'+str(explicit))
+                command=[shutil.which('python3'),'-m','runtime.kproto','--state-dir',str(state),'install','--bundle',str(self.bundle),'--local-snapshot','--host','claude-code','--scope','user','--version','0.2.0']
+                selected=home/('explicit' if explicit else 'env-config')
+                if explicit:
+                    command+=['--claude-home',str(selected)]
+                with mock.patch.dict(os.environ,{'HOME':str(home),'CLAUDE_CONFIG_DIR':str(home/'env-config')}):
+                    result=subprocess.run(command,capture_output=True,text=True)
+                self.assertEqual(0,result.returncode,result.stderr)
+                record=json.loads((state/'state.json').read_text())
+                self.assertEqual('0.2.0',record['version'])
+                self.assertEqual(str(selected),record['host_context']['claude_home'])
+                self.assertEqual(str(selected/'rules/korean-protocol.md'),record['target'])
+                self.assertTrue((selected/'rules/korean-protocol.md').exists())
+                self.assertFalse((home/'.claude/CLAUDE.md').exists())
+
+    def test_claude_project_cli_install_and_uninstall_are_isolated_from_home(self):
+        home=self.root/'project-isolated-home'
+        home.mkdir()
+        project=self.root/'isolated-project'
+        project.mkdir()
+        (project/'CLAUDE.md').write_bytes(b'User project instructions\n')
+        state=self.root/'project-cli-state'
+        target=project/'.claude/rules/korean-protocol.md'
+        command=[shutil.which('python3'),'-B','-m','runtime.kproto','--state-dir',str(state)]
+        with mock.patch.dict(os.environ,{'HOME':str(home),'CLAUDE_CONFIG_DIR':str(home/'custom-config')}):
+            result=subprocess.run(command+['install','--bundle',str(self.bundle),'--local-snapshot','--host','claude-code','--scope','project','--project-root',str(project),'--version','0.2.0'],capture_output=True,text=True)
+            self.assertEqual(0,result.returncode,result.stderr)
+            self.assertTrue(target.exists())
+            record=json.loads((state/'state.json').read_text())
+            self.assertNotIn('claude_home',record['host_context'])
+            result=subprocess.run(command+['uninstall'],capture_output=True,text=True)
+            self.assertEqual(0,result.returncode,result.stderr)
+        self.assertEqual(b'',target.read_bytes())
+        self.assertFalse((home/'custom-config').exists())
+        self.assertFalse((home/'.claude').exists())
+        self.assertEqual(b'User project instructions\n',(project/'CLAUDE.md').read_bytes())
+
+    def test_claude_project_install_ignores_symlinked_user_config_home(self):
+        home=self.root/'project-home'
+        home.mkdir()
+        outside=self.root/'outside-config'
+        outside.mkdir()
+        marker=outside/'CLAUDE.md'
+        marker.write_bytes(b'Unrelated user instructions\n')
+        link=home/'config-link'
+        link.symlink_to(outside,target_is_directory=True)
+        project=self.root/'safe-project'
+        project.mkdir()
+        target=project/'.claude/rules/korean-protocol.md'
+        state=self.root/'project-symlink-env-state'
+        command=[shutil.which('python3'),'-B','-m','runtime.kproto','--state-dir',str(state),'install','--bundle',str(self.bundle),'--local-snapshot','--host','claude-code','--scope','project','--project-root',str(project),'--version','0.2.0']
+        with mock.patch.dict(os.environ,{'HOME':str(home),'CLAUDE_CONFIG_DIR':str(link)}):
+            result=subprocess.run(command,capture_output=True,text=True)
+        self.assertEqual(0,result.returncode,result.stderr)
+        self.assertTrue(target.exists())
+        record=json.loads((state/'state.json').read_text())
+        self.assertNotIn('claude_home',record['host_context'])
+        ctrl=self.k.Controller(state)
+        context={'host':'claude-code','scope':'project','project_root':str(project),'claude_home':str(link)}
+        ctrl.install_snapshot(self.bundle,target,'0.2.0',host_context=context)
+        self.assertNotIn('claude_home',ctrl.status()['host_context'])
+        self.assertEqual(b'Unrelated user instructions\n',marker.read_bytes())
+        self.assertFalse((outside/'rules').exists())
+
+    def test_claude_project_install_rejects_symlinked_project_rules(self):
+        project=self.root/'linked-project-rules'
+        (project/'.claude').mkdir(parents=True)
+        outside=self.root/'outside-rules'
+        outside.mkdir()
+        (project/'.claude/rules').symlink_to(outside,target_is_directory=True)
+        args=argparse.Namespace(host='claude-code',scope='project',project_root=project)
+        with self.assertRaises(self.k.InputError):
+            self.k.host_target(args)
+        self.assertFalse((outside/'korean-protocol.md').exists())
+
+    def test_claude_install_rejects_existing_yaml_frontmatter_and_preserves_state(self):
+        home=self.root/'frontmatter-claude'
+        target=home/'rules/korean-protocol.md'
+        target.parent.mkdir(parents=True)
+        context={'host':'claude-code','scope':'user','project_root':None,'claude_home':str(home)}
+        for index,original in enumerate((b'---\npaths: ["src/**"]\n---\nUser scoped rule\n',
+                         b'---\r\npaths: ["src/**"]\r\n---\r\nUser scoped rule\r\n',
+                         b'\xef\xbb\xbf---\npaths: ["src/**"]\n---\nUser scoped rule\n',
+                         b' \r\n---\npaths: ["src/**"]\n---\nUser scoped rule\n')):
+            with self.subTest(original=original):
+                target.write_bytes(original)
+                ctrl=self.k.Controller(self.root/('frontmatter-state-'+str(index)))
+                state_before=ctrl.status()
+                with self.assertRaisesRegex(self.k.ConflictError,'frontmatter'):
+                    ctrl.install_snapshot(self.bundle,target,'0.2.0',host_context=context)
+                self.assertEqual(original,target.read_bytes())
+                self.assertEqual(state_before,ctrl.status())
+
+    def test_codex_install_preserves_existing_frontmatter(self):
+        original=b'---\npaths: ["src/**"]\n---\nUser instruction\n'
+        self.target.write_bytes(original)
+        context={'host':'codex','scope':'project','project_root':str(self.target.parent),'codex_home':str(self.root/'codex-home')}
+        self.controller.install_snapshot(self.bundle,self.target,'0.2.0',host_context=context)
+        self.assertTrue(self.target.read_bytes().startswith(original))
+
+    def test_claude_file_budget_preserves_large_rule_and_refuses_exceeding_installer_bound(self):
+        home=self.root/'large-claude'
+        target=home/'rules/korean-protocol.md'
+        target.parent.mkdir(parents=True)
+        original=b'x'*(40*1024)
+        target.write_bytes(original)
+        context={'host':'claude-code','scope':'user','project_root':None,'claude_home':str(home)}
+        self.controller.install_snapshot(self.bundle,target,'0.2.0',host_context=context)
+        self.assertTrue(target.read_bytes().startswith(original))
+        self.controller.uninstall()
+        target.write_bytes(b'x'*(self.k.MAX_TOTAL_BYTES-10))
+        before=target.read_bytes()
+        with self.assertRaises(self.k.InputError):
+            self.controller.install_snapshot(self.bundle,target,'0.2.0',host_context=context)
+        self.assertEqual(before,target.read_bytes())
+
+    def test_claude_host_context_freezes_environment_home_before_rollback(self):
+        home=self.root/'first-claude'
+        target=home/'rules/korean-protocol.md'
+        context={'host':'claude-code','scope':'user','project_root':None}
+        with mock.patch.dict(os.environ,{'CLAUDE_CONFIG_DIR':str(home)}):
+            self.controller.install_snapshot(self.bundle,target,'0.1.0',host_context=context)
+        with mock.patch.dict(os.environ,{'CLAUDE_CONFIG_DIR':str(self.root/'different-claude')}):
+            self.controller.install_snapshot(self.bundle,target,'0.2.0')
+            self.controller.rollback('0.1.0')
+        self.assertEqual(str(home),self.controller.status()['host_context']['claude_home'])
+        self.assertEqual(str(target),self.controller.status()['target'])
+        self.assertFalse((self.root/'different-claude').exists())
+
+    def test_claude_rejects_symlink_home_rules_directory_and_target(self):
+        outside=self.root/'outside'
+        outside.mkdir()
+        for component in ('home','rules','target'):
+            with self.subTest(component=component):
+                home=self.root/('linked-'+component)
+                target=home/'rules/korean-protocol.md'
+                if component=='home':
+                    home.symlink_to(outside,target_is_directory=True)
+                elif component=='rules':
+                    home.mkdir()
+                    (home/'rules').symlink_to(outside,target_is_directory=True)
+                else:
+                    target.parent.mkdir(parents=True)
+                    other=outside/'user.md'
+                    other.write_bytes(b'Untouched\n')
+                    target.symlink_to(other)
+                args=argparse.Namespace(host='claude-code',scope='user',project_root=None,claude_home=home)
+                with self.assertRaises(self.k.InputError):
+                    self.controller.install_snapshot(self.bundle,self.k.host_target(args),'0.2.0',host_context=vars(args))
+        self.assertEqual(b'Untouched\n',(outside/'user.md').read_bytes())
+
 
 class SignedRuntimeTests(RuntimeTests):
     def setUp(self):
@@ -437,6 +640,54 @@ class SignedRuntimeTests(RuntimeTests):
         with self.assertRaises(self.k.TrustError):
             self.controller.install_signed(self.bundle, self.target)
         self.assertEqual(installed,self.target.read_bytes())
+
+    def test_claude_signed_remote_update_and_rollback_keep_recorded_home(self):
+        home=self.root/'signed-claude'
+        target=home/'rules/korean-protocol.md'
+        context={'host':'claude-code','scope':'user','project_root':None}
+        self.sign('0.1.0',1)
+        with mock.patch.dict(os.environ,{'CLAUDE_CONFIG_DIR':str(home)}):
+            self.controller.install_signed(self.bundle,target,host_context=context)
+        self.controller.configure(mode='interval',source='https://example.test/kproto')
+        (self.bundle/'profiles/coding-agent.md').write_text('업데이트한 규약이다.\n')
+        self.sign('0.2.0',2)
+
+        def download(url,maximum,deadline=None):
+            name=url.rsplit('/',1)[1] if '/stable/' in url else url.split('/releases/0.2.0/',1)[1]
+            return (self.bundle/name).read_bytes()
+
+        with mock.patch.dict(os.environ,{'CLAUDE_CONFIG_DIR':str(self.root/'later-claude')}):
+            with mock.patch.object(self.controller,'fetch',side_effect=download):
+                self.assertTrue(self.controller.update())
+            self.assertIn('업데이트한 규약이다.'.encode(),target.read_bytes())
+            self.controller.rollback('0.1.0')
+        self.assertEqual('signed',self.controller.status()['trust'])
+        self.assertEqual(str(home),self.controller.status()['host_context']['claude_home'])
+        self.assertIn('뜻과 조건을 유지한다.'.encode(),target.read_bytes())
+        self.assertFalse((self.root/'later-claude').exists())
+
+    def test_claude_signed_update_rejects_user_added_frontmatter_and_preserves_state(self):
+        home=self.root/'signed-frontmatter-claude'
+        target=home/'rules/korean-protocol.md'
+        context={'host':'claude-code','scope':'user','project_root':None,'claude_home':str(home)}
+        self.sign('0.1.0',1)
+        self.controller.install_signed(self.bundle,target,host_context=context)
+        self.controller.configure(mode='interval',source='https://example.test/kproto')
+        target.write_bytes(b'---\npaths: ["src/**"]\n---\n'+target.read_bytes())
+        before=target.read_bytes()
+        state_before=self.controller.state_path.read_bytes()
+        self.sign('0.2.0',2)
+
+        def download(url,maximum,deadline=None):
+            name=url.rsplit('/',1)[1] if '/stable/' in url else url.split('/releases/0.2.0/',1)[1]
+            return (self.bundle/name).read_bytes()
+
+        with mock.patch.object(self.controller,'fetch',side_effect=download):
+            with self.assertRaisesRegex(self.k.ConflictError,'frontmatter'):
+                self.controller.update()
+        self.assertEqual(before,target.read_bytes())
+        self.assertEqual(state_before,self.controller.state_path.read_bytes())
+        self.assertFalse(self.controller.status()['recovery_required'])
 
     def test_real_signature_rejects_payload_tampering(self):
         self.sign()

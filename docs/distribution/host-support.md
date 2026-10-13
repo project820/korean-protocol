@@ -1,6 +1,6 @@
 # 호스트 지원과 적용 범위
 
-2026-10-12 기준 공식 문서와 로컬 환경을 확인했다. Codex/Gemini의 POSIX Markdown adapter는 구현했고 임시 파일로 설치를 시험했다. Codex는 [임시 사용자·프로젝트 설치와 실제 loader](../status/local-install-smoke.json)를 확인했다. 별도 [실제 모델 평가](../../evaluation/llm/candidate-validation-report.md)는 시험한 입력과 프로필의 결과이며 모든 호스트의 준수를 입증하지 않는다. Codex·ChatGPT 문서는 OpenAI Docs 도구로 조회한 원문을 사용했다.
+2026-10-12 기준 공식 문서와 로컬 환경을 확인했다. Codex·Claude Code·Gemini의 POSIX Markdown adapter는 구현했고 임시 파일로 설치를 시험했다. Codex는 [임시 사용자·프로젝트 설치와 실제 loader](../status/local-install-smoke.json)를 확인했다. 별도 [실제 모델 평가](../../evaluation/llm/candidate-validation-report.md)는 시험한 입력과 프로필의 결과이며 모든 호스트의 준수를 입증하지 않는다. Codex·ChatGPT 문서는 OpenAI Docs 도구로 조회한 원문을 사용했다.
 
 ## 지원표
 
@@ -9,7 +9,7 @@
 | Codex CLI | 사용자 `$CODEX_HOME/AGENTS.md` 또는 `~/.codex/AGENTS.md`, 프로젝트 `AGENTS.md`에 관리 블록을 넣는다. | 설치기가 실제 선택되는 파일을 확인한다. 새 실행에서 읽으며 기존 세션 갱신을 보장하지 않는다. | 로컬 0.162.1의 실제 loader에서 임시 사용자·프로젝트 설치의 72개 규칙을 확인했다. 실제 사용자 전역 설치는 하지 않았다. |
 | Codex desktop·IDE의 로컬 작업 | 같은 home과 실제 프로젝트 루트를 쓰는 instruction adapter를 설계한다. | 앱의 로컬/원격 실행 위치별 파일 경로를 확인한다. desktop 설치만으로 cloud·다른 기기의 적용을 보장하지 않는다. | OpenAI 문서의 global/project 모델을 확인했다. 각 앱 loader·다중 root 적용은 실측 전이다. |
 | Codex Cloud | 해당 cloud checkout의 프로젝트 `AGENTS.md`를 대상으로 한다. | 로컬 사용자 home은 전달되지 않는다. repository 반영이나 cloud setup의 로컬 배포 연결이 필요하다. | 로컬 updater가 cloud 파일을 자동 바꾼다고 표시하지 않는다. cloud setup 자동 연결은 v1 미지원이다. |
-| Claude Code | 사용자 `~/.claude/rules/korean-protocol.md`, 프로젝트 `.claude/rules/korean-protocol.md`의 실제 파일을 사용한다. | `paths` frontmatter 없이 시작할 때 읽게 한다. 파일 import·외부 symlink 승인을 요구하는 구조를 피한다. | 공식 rule 위치를 확인했다. CLAUDE.md 전용 adapter·설치 실행·OpenCodex 라우팅에서의 실제 로드는 시험 전이다. |
+| Claude Code | 사용자 `~/.claude/rules/korean-protocol.md`, 프로젝트 `.claude/rules/korean-protocol.md`의 실제 파일을 사용한다. | `paths` frontmatter 없이 시작할 때 읽게 한다. 파일 import·외부 symlink 승인을 요구하는 구조를 피한다. | 사용자·프로젝트 규칙 파일 설치를 구현했다. Claude Code 2.1.296의 로컬 모의 요청에서 72개 규칙 로딩을 확인했으며 모델 준수·OpenCodex 경유 실제 추론은 별도다. |
 | Gemini CLI | 사용자 `~/.gemini/GEMINI.md`, 프로젝트 `GEMINI.md`에 관리 블록을 넣는다. | 사용자·workspace·JIT 맥락 계층을 유지한다. 이름이 설정으로 바뀐 환경은 자동 추측하지 않고 명시 대상이 필요하다. | 공식 문서만 확인했다. 로컬 gemini 명령은 발견하지 못했다. |
 | Cursor Agent | 프로젝트 `.cursor/rules/korean-protocol.mdc`에 `alwaysApply: true`와 본문을 넣는다. | 프로젝트 Agent 세션에서 적용한다. 사용자 전역 Rules는 설정 화면에 내보낸 프로필을 직접 넣는다. | 공식 문서만 확인했다. Cursor Tab·Inline Edit 전역 적용은 지원하지 않는다. |
 | ChatGPT Chat·Work 웹/모바일 | Custom Instructions 또는 선택한 프로젝트 instructions에 내보낸 짧은 프로필을 넣는다. | UI에 저장한 복사본은 로컬 업데이트로 자동 바뀌지 않는다. 현재 공식 로컬 쓰기·동기화 API를 확인하지 못했으므로 v1은 export/manual 설치만 제공한다. | 공식 personalization·project 범위를 확인했다. 계정별 글자 제한·설치 UI·응답 준수는 시험 전이다. |

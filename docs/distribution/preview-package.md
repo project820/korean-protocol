@@ -24,3 +24,7 @@ python3 -m unittest discover -s tests -p test_distribution.py
 후속 ZIP은 25개 파일, 369,314바이트이며 SHA-256은 `60ac5f76032d06477115a1e0cbe5ade8a9722c1325f8e984cd676032a1443c74`이다. `start.py` 설치 메뉴와 `CHAT-START.md`, 전체 규약·사전을 묶은 `KOREAN-PROTOCOL.md`를 추가했다. [실제 패키지 시험](convenience-package-smoke.json)은 기본 상태 경로의 설치·상태 조회·제거, 취소 시 쓰기 없음, 사용자 내용 보존을 확인했다. 초기 ZIP의 증거는 이전 버전 기록으로 유지한다.
 
 일반 채팅용 안내는 OpenAI 공식 프로젝트·개인화 문서를 확인해 작성했으며 실제 사용자 계정 설정이나 응답 효과를 시험한 것은 아니다. 독립 검토에서 발견한 상태 경로 안내 불일치는 메뉴에 표시된 경로를 사용하도록 고쳤다. 설치 메뉴 14개·패키지 생성기 7개와 전체 테스트 150개가 통과했다.
+
+## 코딩 에이전트 우선 미리보기를 추가했다
+
+새 ZIP은 Codex·Claude Code 선택을 제공한다. 25개 파일, 370,105바이트이며 SHA-256은 `c37b11078ebad2411bc962a89a46f77d8b3df0e36a23e00a6636f20625422a20`이다. [두 도구 설치 시험](coding-agent-package-smoke.json)은 별도 상태 폴더, 한 도구 제거 시 다른 도구 보존, 14개 캐시 파일의 원본 일치를 확인했다. [호스트 지원 기록](coding-agent-support.md)에 실제 Claude 로더와 HTTPS 시험의 범위를 구분했다.

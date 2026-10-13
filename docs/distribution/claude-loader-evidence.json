@@ -1,0 +1,77 @@
+{
+  "test": "installed Claude Code rules in local fixture requests",
+  "model_inference_performed": false,
+  "temporary_environment_only": true,
+  "profile_sha256": "282cbdcea153cf6eec5361eda2431c7d2ee2c66d04e71c3fca19639a875c46ee",
+  "script_sha256": "7463cb29a911620fc6711dae42ffbc86d274c673c1bc52eb5a5c6c5297d63e00",
+  "rules_sha256": "c3be69747df248d6ec76f00788cc38a6e72ff5bc952ad73f0c2a8f8a106e736c",
+  "runtime_sha256": "ae46fc8f432e02b885b7afd7778b4f37f67937f60be852122f84ffe17862fc07",
+  "cli_version": "2.1.296 (Claude Code)",
+  "records": [
+    {
+      "scope": "user",
+      "install_exit": 0,
+      "cli_exit": 1,
+      "fixture_http_status": 400,
+      "requests": [
+        {
+          "sha256": "4de622c3f011f8c2498e72ccc870541c9fa443683c1b339f7e10e0ca83aa3c36",
+          "rule_ids": 72,
+          "requirements": 72
+        },
+        {
+          "sha256": "4664a8c3991a16446dca3ac38b131a5fec163e7a38163a5830f7870ec142ee81",
+          "rule_ids": 72,
+          "requirements": 72
+        }
+      ],
+      "stdout_bytes": 1228,
+      "stderr_bytes": 0,
+      "pass": true
+    },
+    {
+      "scope": "project",
+      "install_exit": 0,
+      "cli_exit": 1,
+      "fixture_http_status": 400,
+      "requests": [
+        {
+          "sha256": "6e19bcaa8a082e7aca38ad8874d1d4116b05b22279e0837804f707e52b02f04c",
+          "rule_ids": 72,
+          "requirements": 72
+        },
+        {
+          "sha256": "2f28743e96146712e652ba99f3e885450d420e041e03035322c0f6aa9d30c968",
+          "rule_ids": 72,
+          "requirements": 72
+        }
+      ],
+      "stdout_bytes": 1228,
+      "stderr_bytes": 0,
+      "pass": true
+    },
+    {
+      "scope": "custom-config-user",
+      "install_exit": 0,
+      "cli_exit": 1,
+      "fixture_http_status": 400,
+      "requests": [
+        {
+          "sha256": "fed5b8e8ff8e5e64b55408b64f11ab932838d8a77241cd7a79fa816da6562a94",
+          "rule_ids": 72,
+          "requirements": 72
+        },
+        {
+          "sha256": "39323186bb93dbe57b125158de4687e98dd92739ea6fd0736c1883040c2098e4",
+          "rule_ids": 72,
+          "requirements": 72
+        }
+      ],
+      "stdout_bytes": 1228,
+      "stderr_bytes": 0,
+      "pass": true
+    }
+  ],
+  "result": "pass",
+  "limitation": "Observed loader requests, not model compliance; HTTP 400 and CLI nonzero are intentional."
+}

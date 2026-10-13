@@ -1,0 +1,34 @@
+{
+  "archive_sha256": "c37b11078ebad2411bc962a89a46f77d8b3df0e36a23e00a6636f20625422a20",
+  "archive_bytes": 370105,
+  "host_priority": [
+    "codex",
+    "claude-code"
+  ],
+  "signed": false,
+  "steps": [
+    {
+      "step": "codex-install",
+      "exit_code": 0
+    },
+    {
+      "step": "claude-install",
+      "exit_code": 0
+    },
+    {
+      "step": "codex-remove-keeps-claude",
+      "exit_code": 0
+    },
+    {
+      "step": "claude-remove-keeps-original",
+      "exit_code": 0
+    }
+  ],
+  "result": "pass",
+  "members": 25,
+  "states_separate": true,
+  "one_host_removal_preserves_other": true,
+  "cache_files_checked": 14,
+  "temporary_environment_only": true,
+  "source_files_match": true
+}

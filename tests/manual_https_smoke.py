@@ -38,7 +38,7 @@ def sha256(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def run_smoke(runtime_root, port, via_local_proxy=False):
+def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
     runtime_root = runtime_root.resolve()
     runtime_file = runtime_root / 'runtime/kproto.py'
     script_hash = sha256(Path(__file__).read_bytes())
@@ -46,6 +46,7 @@ def run_smoke(runtime_root, port, via_local_proxy=False):
         'schema_version': 1,
         'tested_at': datetime.now(timezone.utc).isoformat(),
         'test': 'temporary localhost TLS signed-content CLI update',
+        'host_adapter': host,
         'runtime_root': str(runtime_root),
         'runtime_sha256': sha256(runtime_file.read_bytes()),
         'script_sha256': script_hash,
@@ -245,7 +246,8 @@ def run_smoke(runtime_root, port, via_local_proxy=False):
                     'direct_port_443_bind_tested':False,
                 }
             original = '사용자의 기존 승인 정책을 유지한다.\n'.encode('utf-8')
-            target = codex_home/'AGENTS.md'
+            target = codex_home/('rules/korean-protocol.md' if host=='claude-code' else 'AGENTS.md')
+            target.parent.mkdir(parents=True,exist_ok=True)
             target.write_bytes(original)
             env = dict(os.environ,HOME=str(home),CODEX_HOME=str(codex_home),SSL_CERT_FILE=str(ca_cert))
             env['NO_PROXY'] = '127.0.0.1,localhost'
@@ -265,7 +267,8 @@ def run_smoke(runtime_root, port, via_local_proxy=False):
                     raise RuntimeError(label+' returned exit '+str(process.returncode)+' instead of '+str(expected))
                 return process.stdout
 
-            cli('signed-install-local-bundle',['install','--bundle',str(bundles['0.2.0']),'--host','codex','--scope','user','--codex-home',str(codex_home),'--trust-key',str(public_key),'--expected-fingerprint',fingerprint])
+            home_option = '--claude-home' if host=='claude-code' else '--codex-home'
+            cli('signed-install-local-bundle',['install','--bundle',str(bundles['0.2.0']),'--host',host,'--scope','user',home_option,str(codex_home),'--trust-key',str(public_key),'--expected-fingerprint',fingerprint])
             initial = json.loads(cli('initial-status',['status','--json']))
             if initial['version']!='0.2.0' or initial['trust']!='signed':
                 raise RuntimeError('Initial signed state was not installed')
@@ -332,7 +335,7 @@ def run_smoke(runtime_root, port, via_local_proxy=False):
             auto_state.mkdir(mode=0o700)
             auto_home.mkdir(mode=0o700)
             cli('auto-install-initial',['install','--bundle',str(bundles['0.2.0']),
-                '--host','codex','--scope','user','--codex-home',str(auto_home),
+                '--host',host,'--scope','user',home_option,str(auto_home),
                 '--trust-key',str(public_key),'--expected-fingerprint',fingerprint],state_root=auto_state)
             cli('auto-configure',['autoupdate','configure','--mode','interval','--source',source],state_root=auto_state)
             before_auto_gets = len(requests)
@@ -385,10 +388,10 @@ def run_smoke(runtime_root, port, via_local_proxy=False):
     return report
 
 
-def snapshot_locator_check(runtime_root):
+def snapshot_locator_check(runtime_root,host='codex'):
     """Inspect the real installed profile even when TLS prerequisites are blocked."""
     runtime_root=runtime_root.resolve()
-    result={'transport':'none','trust':'local-snapshot','actual_https':False,'model_file_read_observed':False}
+    result={'transport':'none','trust':'local-snapshot','actual_https':False,'model_file_read_observed':False,'host_adapter':host}
     source=(runtime_root/'runtime/kproto.py').read_text()
     result['render_function']='Controller._activate'
     result['render_line']=next(index for index,line in enumerate(source.splitlines(),1) if '전체 규칙·사전: ' in line)
@@ -397,12 +400,14 @@ def snapshot_locator_check(runtime_root):
         home,codex_home,state=[root/name for name in ('home','codex','state')]
         for path in (home,codex_home,state):
             path.mkdir(mode=0o700)
-        target=codex_home/'AGENTS.md'
+        target=codex_home/('rules/korean-protocol.md' if host=='claude-code' else 'AGENTS.md')
+        target.parent.mkdir(parents=True,exist_ok=True)
         original='사용자의 기존 승인 정책을 유지한다.\n'.encode('utf-8')
         target.write_bytes(original)
         env=dict(os.environ,HOME=str(home),CODEX_HOME=str(codex_home))
         command=[sys.executable,'-m','runtime.kproto','--state-dir',str(state)]
-        install=subprocess.run(command+['install','--bundle',str(runtime_root),'--host','codex','--scope','user','--codex-home',str(codex_home),'--local-snapshot','--version','0.2.0'],cwd=str(runtime_root),env=env,capture_output=True,timeout=30)
+        home_option='--claude-home' if host=='claude-code' else '--codex-home'
+        install=subprocess.run(command+['install','--bundle',str(runtime_root),'--host',host,'--scope','user',home_option,str(codex_home),'--local-snapshot','--version','0.2.0'],cwd=str(runtime_root),env=env,capture_output=True,timeout=30)
         result['install_exit_code']=install.returncode
         if install.returncode:
             result['result']='failed'
@@ -441,10 +446,11 @@ def main():
     parser.add_argument('--runtime-root',type=Path,required=True)
     parser.add_argument('--port',type=int,default=443)
     parser.add_argument('--via-local-proxy',action='store_true',help='Use an ephemeral loopback CONNECT fixture for https://localhost:443 without a privileged listener')
+    parser.add_argument('--host',choices=['codex','claude-code'],default='codex')
     parser.add_argument('--output',type=Path,required=True)
     args=parser.parse_args()
-    report=run_smoke(args.runtime_root,args.port,args.via_local_proxy)
-    report['dictionary_locator_local_snapshot']=snapshot_locator_check(args.runtime_root)
+    report=run_smoke(args.runtime_root,args.port,args.via_local_proxy,args.host)
+    report['dictionary_locator_local_snapshot']=snapshot_locator_check(args.runtime_root,args.host)
     if report['result']=='blocked':
         report['main_https_branches']='not executed because prerequisite bind failed; script syntax and independent locator branch were checked only'
     compile(Path(__file__).read_text(),str(Path(__file__)),'exec')

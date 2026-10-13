@@ -4,12 +4,12 @@
   "tests": {
     "command": "python3 -m unittest discover -s tests -p 'test_*.py'",
     "exit_code": 0,
-    "passed": 150,
-    "runtime": 78,
+    "passed": 182,
+    "runtime": 104,
     "validation": 43,
     "evaluation_runner": 8,
     "distribution": 7,
-    "launcher": 14
+    "launcher": 20
   },
   "schema": {
     "tool": "jsonschema",
@@ -273,5 +273,24 @@
     "distribution_tests": 7,
     "chat_attachment": "KOREAN-PROTOCOL.md",
     "chat_actual_account_setup_tested": false
+  },
+  "first_support_priority": {
+    "hosts": [
+      "codex",
+      "claude-code"
+    ],
+    "user_confirmed": "2026-10-13"
+  },
+  "claude_support": {
+    "runtime_sha256": "ae46fc8f432e02b885b7afd7778b4f37f67937f60be852122f84ffe17862fc07",
+    "loader_evidence": "../distribution/claude-loader-evidence.json",
+    "loader_scopes": 3,
+    "loader_rules_per_scope": 72,
+    "actual_model_inference": false,
+    "https_evidence": "../distribution/claude-https-smoke.json",
+    "https_steps_passed": 16,
+    "real_user_global_installation": false,
+    "package_evidence": "../distribution/coding-agent-package-smoke.json",
+    "archive_sha256": "c37b11078ebad2411bc962a89a46f77d8b3df0e36a23e00a6636f20625422a20"
   }
 }

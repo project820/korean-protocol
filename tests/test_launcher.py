@@ -43,7 +43,7 @@ class LauncherTests(unittest.TestCase):
                 path.write_text(json.dumps(value), encoding='utf-8')
             else:
                 path.write_text('뜻과 조건을 유지한다.\n', encoding='utf-8')
-        self.args = ['--state-dir', str(self.state), '--codex-home', str(self.home)]
+        self.args = ['--host', 'codex', '--state-dir', str(self.state), '--codex-home', str(self.home)]
 
     def run_main(self, answers, result=0):
         output = io.StringIO()
@@ -104,7 +104,7 @@ class LauncherTests(unittest.TestCase):
     def test_target_preview_uses_codex_home_and_nonempty_override(self):
         override = self.home / 'AGENTS.override.md'
         override.write_text('별도 지침이다.\n')
-        args = ['--state-dir', str(self.state)]
+        args = ['--host', 'codex', '--state-dir', str(self.state)]
         with mock.patch.dict(os.environ, {'CODEX_HOME': str(self.home)}):
             with mock.patch.object(self.launcher, '__file__', str(self.script)), \
                     mock.patch('builtins.input', side_effect=['0']), redirect_stdout(io.StringIO()) as output:
@@ -168,7 +168,87 @@ class LauncherTests(unittest.TestCase):
                                 capture_output=True, text=True, timeout=10)
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertIn('--codex-home', result.stdout)
+        self.assertIn('--claude-home', result.stdout)
+        self.assertIn('--host', result.stdout)
         self.assertFalse(self.state.exists())
+
+    def test_first_host_choice_exit_or_closed_input_creates_no_files(self):
+        self.args = []
+        for answers, expected in ((['0'],0),([EOFError()],0),([KeyboardInterrupt()],130)):
+            with self.subTest(answers=answers):
+                before=sorted(str(path.relative_to(self.root)) for path in self.root.rglob('*'))
+                code,output,child=self.run_main(answers)
+                self.assertEqual(expected,code)
+                self.assertIn('1. Codex',output)
+                self.assertIn('2. Claude Code',output)
+                self.assertNotIn('사용자 범위 대상',output)
+                child.assert_not_called()
+                self.assertEqual(before,sorted(str(path.relative_to(self.root)) for path in self.root.rglob('*')))
+
+    def test_first_host_choice_routes_to_claude_install_with_separate_default_state(self):
+        home=self.root/'claude home'
+        self.args=['--claude-home',str(home)]
+        with mock.patch.dict(os.environ,{'HOME':str(self.root),'CLAUDE_CONFIG_DIR':str(self.root/'env claude')}):
+            code,output,child=self.run_main(['invalid','2','1','y','0'])
+        self.assertEqual(0,code)
+        self.assertIn('Claude Code 사용자 범위 대상: '+str(home/'rules/korean-protocol.md'),output)
+        command=child.call_args.args[0]
+        self.assertEqual('claude-code',command[command.index('--host')+1])
+        self.assertEqual(str(home),command[command.index('--claude-home')+1])
+        self.assertEqual('0.2.0',command[command.index('--version')+1])
+        self.assertTrue(command[command.index('--state-dir')+1].endswith('korean-protocol-claude-code'))
+        self.assertNotIn('--codex-home',command)
+        self.assertFalse(home.exists())
+
+    def test_first_host_choice_routes_to_codex_menu_without_writes(self):
+        self.args=['--state-dir',str(self.state),'--codex-home',str(self.home)]
+        code,output,child=self.run_main(['1','0'])
+        self.assertEqual(0,code)
+        self.assertIn('Codex 사용자 범위 대상: '+str(self.target),output)
+        self.assertFalse(self.state.exists())
+        child.assert_not_called()
+
+    def test_explicit_claude_status_uses_config_environment_without_writes(self):
+        home=self.root/'env claude'
+        self.args=['--host','claude-code','--state-dir',str(self.state)]
+        with mock.patch.dict(os.environ,{'CLAUDE_CONFIG_DIR':str(home)}):
+            code,output,child=self.run_main(['2','0'])
+        self.assertEqual(0,code)
+        self.assertIn(str(home/'rules/korean-protocol.md'),output)
+        self.assertFalse(home.exists())
+        self.assertFalse(self.state.exists())
+        child.assert_not_called()
+
+    def test_real_first_choice_decline_does_not_create_bytecode_or_state(self):
+        before=sorted(str(path.relative_to(self.root)) for path in self.root.rglob('*'))
+        result=subprocess.run([sys.executable,'-B',str(self.script)],input='0\n',cwd=self.root,
+                              env=dict(os.environ,HOME=str(self.root)),capture_output=True,text=True,timeout=10)
+        self.assertEqual(0,result.returncode,result.stderr)
+        self.assertIn('2. Claude Code',result.stdout)
+        self.assertEqual(before,sorted(str(path.relative_to(self.root)) for path in self.root.rglob('*')))
+
+    def test_real_claude_install_reinstall_status_and_uninstall_preserve_rules(self):
+        home=self.root/'isolated HOME'
+        home.mkdir()
+        claude=home/'.claude'
+        (claude/'rules').mkdir(parents=True)
+        target=claude/'rules/korean-protocol.md'
+        original=b'User rule\r\n'
+        target.write_bytes(original)
+        (claude/'CLAUDE.md').write_bytes(b'User main instructions\n')
+        (claude/'rules/other.md').write_bytes(b'Other rule\n')
+        args=['--host','claude-code','--state-dir',str(self.state)]
+        environment=dict(os.environ,HOME=str(home))
+        environment.pop('CLAUDE_CONFIG_DIR',None)
+        result=subprocess.run([sys.executable,str(self.script),*args],input='1\ny\n1\ny\n2\n3\ny\n0\n',cwd=self.root,
+                              env=environment,capture_output=True,text=True,timeout=20)
+        self.assertEqual(0,result.returncode,result.stderr)
+        self.assertIn('설치됨',result.stdout)
+        self.assertIn(str(target),result.stdout)
+        self.assertEqual(original,target.read_bytes())
+        self.assertEqual(b'User main instructions\n',(claude/'CLAUDE.md').read_bytes())
+        self.assertEqual(b'Other rule\n',(claude/'rules/other.md').read_bytes())
+        self.assertEqual('off',json.loads((self.state/'config.json').read_text())['mode'])
 
     def test_real_install_status_uninstall_from_path_with_spaces_and_other_cwd(self):
         original = self.target.read_bytes()

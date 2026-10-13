@@ -586,7 +586,12 @@ class Controller:
         context=host_context or state.get('host_context')
         if context:
             context=dict(context)
-            for key in ('project_root','codex_home'):
+            if context.get('host')=='claude-code':
+                if context.get('scope')=='user':
+                    context['claude_home']=str(claude_home(argparse.Namespace(**context)))
+                else:
+                    context.pop('claude_home',None)
+            for key in ('project_root','codex_home','claude_home'):
                 if context.get(key) is not None:
                     context[key]=str(safe_path(context[key]))
             if host_target(argparse.Namespace(**context)) != target:
@@ -605,6 +610,11 @@ class Controller:
             atomic_write(cache/'release.json.sig',signature)
         with self._target_lock(target):
             old=read_bytes(target,MAX_TOTAL_BYTES) if target.exists() else b''
+            if context and context.get('host')=='claude-code':
+                # Conservatively reject frontmatter without parsing or changing user metadata.
+                header=old[3:] if old.startswith(b'\xef\xbb\xbf') else old
+                if header.lstrip(b' \t\r\n').split(b'\n',1)[0].strip(b' \t\r')==b'---':
+                    raise ConflictError('Claude rule file has a YAML frontmatter delimiter; startup-wide protocol requires an unscoped file; existing content preserved')
             prefix,block,suffix=self._split(old,state)
             body=files['profiles/'+profile+'.md']
             new_block=BEGIN+b'\n'+('Korean Protocol '+version+'\n').encode()+body.rstrip(b'\n')+b'\n'+('전체 규칙·사전: '+str(cache)+'\n').encode()+END
@@ -818,19 +828,25 @@ def default_state_dir():
     return Path(os.environ.get('XDG_DATA_HOME',str(Path.home()/'.local/share')))/'korean-protocol'
 
 
+def claude_home(args):
+    return safe_path(getattr(args,'claude_home',None) or os.environ.get('CLAUDE_CONFIG_DIR') or Path.home()/'.claude')
+
+
 def host_target(args):
-    if args.host not in ('codex','gemini-cli'):
-        raise CompatibilityError('Only Codex and Gemini Markdown adapters are implemented')
+    if args.host not in ('codex','claude-code','gemini-cli'):
+        raise CompatibilityError('Only Codex, Claude Code and Gemini Markdown adapters are implemented')
     if args.scope=='project':
         if not args.project_root:
             raise InputError('Project scope requires --project-root')
         root=safe_path(args.project_root)
     else:
-        root=Path(args.codex_home or os.environ.get('CODEX_HOME',str(Path.home()/'.codex'))) if args.host=='codex' else Path.home()/'.gemini'
+        root=Path(getattr(args,'codex_home',None) or os.environ.get('CODEX_HOME',str(Path.home()/'.codex'))) if args.host=='codex' else claude_home(args) if args.host=='claude-code' else Path.home()/'.gemini'
         root=safe_path(root)
     if args.host=='codex':
         override=root/'AGENTS.override.md'
         return override if override.exists() and read_bytes(override).strip() else root/'AGENTS.md'
+    if args.host=='claude-code':
+        return safe_path((root/'.claude' if args.scope=='project' else root)/'rules/korean-protocol.md')
     return root/'GEMINI.md'
 
 
@@ -838,7 +854,7 @@ def host_budget(args,target):
     # These are installer file bounds, not model context limits.
     if args.host != 'codex' or args.scope=='user':
         return MAX_TOTAL_BYTES
-    home=safe_path(args.codex_home or os.environ.get('CODEX_HOME',str(Path.home()/'.codex')))
+    home=safe_path(getattr(args,'codex_home',None) or os.environ.get('CODEX_HOME',str(Path.home()/'.codex')))
     limit=32768
     config=home/'config.toml'
     if config.exists():
@@ -887,10 +903,11 @@ def main(argv=None):
     sub=parser.add_subparsers(dest='command',required=True)
     install=sub.add_parser('install')
     install.add_argument('--bundle',type=Path,required=True)
-    install.add_argument('--host',choices=['codex','gemini-cli'],default='codex')
+    install.add_argument('--host',choices=['codex','claude-code','gemini-cli'],default='codex')
     install.add_argument('--scope',choices=['user','project'],default='project')
     install.add_argument('--project-root',type=Path)
     install.add_argument('--codex-home',type=Path)
+    install.add_argument('--claude-home',type=Path)
     install.add_argument('--profile',choices=['coding-agent','chat','work-document'],default='coding-agent')
     install.add_argument('--local-snapshot',action='store_true')
     install.add_argument('--version',default='0.1.0')
@@ -920,6 +937,10 @@ def main(argv=None):
             target=host_target(args)
             budget=host_budget(args,target)
             context={'host':args.host,'scope':args.scope,'project_root':str(args.project_root) if args.project_root else None,'codex_home':str(args.codex_home or os.environ.get('CODEX_HOME',str(Path.home()/'.codex')))}
+            if args.host=='claude-code':
+                context.pop('codex_home')
+                if args.scope=='user':
+                    context['claude_home']=str(claude_home(args))
             if args.local_snapshot:
                 ctrl.install_snapshot(args.bundle,target,args.version,args.profile,budget,host_context=context)
             else:
