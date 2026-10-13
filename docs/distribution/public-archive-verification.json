@@ -1,0 +1,18 @@
+{
+  "verified_at": "2026-10-13T16:03:53.430888+09:00",
+  "archive_signature_and_receipt_verified": true,
+  "live_stable_matches_archive": true,
+  "provenance": {
+    "artifact_id": 11793539175,
+    "content_sha256": "36c20f343e41de2bda3c80233e5c1b7f0be91848599e472f62b6830f592779d0",
+    "head_sha": "91526bb325175992701cd4eb4e1e3e56731a1cdd",
+    "rehearsal": false,
+    "repository": "project820/korean-protocol",
+    "run_id": 38359118074,
+    "schema_version": 1,
+    "sequence": 1,
+    "signing_attempt": 1,
+    "version": "0.2.0"
+  },
+  "initial_probe": "Rejected unresolved macOS temp symlink; rerun uses resolved path."
+}

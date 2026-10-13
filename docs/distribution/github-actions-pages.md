@@ -1,8 +1,8 @@
-# GitHub Actions에서 서명하고 Pages 배포를 준비한다
+# GitHub Actions에서 서명하고 Pages에 배포한다
 
 발행 개인키는 GitHub의 kproto-release 환경 Secret인 KPROTO_SIGNING_KEY에 보관한다. 환경의 배포 브랜치 정책은 main만 허용한다. 저장소에는 distribution/trust/publisher.pub와 publisher.json의 공개키 지문만 둔다. 로컬 키 생성에 사용한 임시 개인키 사본은 등록 후 제거했다.
 
-현재 저장소는 비공개로 유지한다. KPROTO_PAGES_ENABLED와 KPROTO_ALLOW_FIRST_PUBLICATION 저장소 변수는 모두 false다. 서명 검증용 실행은 비공개 Actions artifact만 만들며 Pages 사이트를 만들거나 게시하지 않는다.
+저장소 project820/korean-protocol은 공개 상태이며 공개 endpoint는 https://project820.github.io/korean-protocol 이다. KPROTO_PAGES_ENABLED 저장소 변수는 true다. KPROTO_ALLOW_FIRST_PUBLICATION은 첫 게시 후 false로 되돌렸다. publish를 false로 둔 서명 검증용 실행은 Actions artifact만 만들며 Pages에 게시하지 않는다.
 
 ## 서명키의 일치를 확인한다
 
@@ -24,7 +24,21 @@ gh workflow run release.yml --repo project820/korean-protocol --ref main -f vers
 
 공개 게시는 저장소가 공개 상태이고 배포 변수와 명시적인 publish 입력이 모두 허용할 때만 실행한다. 최초 게시는 KPROTO_ALLOW_FIRST_PUBLICATION도 필요하다. 이 조건을 만족하지 않는 게시 요청을 서명 성공이나 공개 성공으로 표시하지 않는다.
 
-정식 공개 전에는 Pages의 Actions 게시 설정, 이전 발행물 보존, 실제 HTTPS 주소와 클라이언트 업데이트를 확인한다. 예정 주소는 https://project820.github.io/korean-protocol 이며, 현재 가동 중인 endpoint로 안내하지 않는다. 사이트 공개와 저장소 공개 시점은 사용자와 정한 개발 완료 시점을 따른다.
+후속 공개 게시는 first_release를 false, publish를 true로 지정한다. version은 이전 게시보다 커야 하며 순번은 워크플로가 이전 이력에서 증가시킨다.
+
+```sh
+gh workflow run release.yml --repo project820/korean-protocol --ref main -f version=NEXT_VERSION -f first_release=false -f publish=true
+```
+
+게시 후에는 실제 HTTPS 주소의 서명·콘텐츠와 클라이언트 갱신을 별도 설치 상태에서 확인한다.
+
+## 첫 공개 발행을 완료했다
+
+2026-10-13 [Actions 실행 38359118074](https://github.com/project820/korean-protocol/actions/runs/38359118074)는 원본 commit 91526bb325175992701cd4eb4e1e3e56731a1cdd에서 버전 0.2.0, 순번 1을 발행했다. sign·publish·receipt·archive job이 모두 성공했다. 장기 이력은 kproto-history-0.2.0-1 Release에 보관했다. manifest의 유효기간은 2026-10-13T06:51:53Z부터 2026-11-12T06:51:53Z까지다.
+
+[익명 다운로드 확인](public-download-verification.json)은 인증 정보 없이 공개 주소에서 9개 파일을 받아 서명을 콘텐츠보다 먼저 검증했고, 모든 콘텐츠 해시가 원본과 일치했다. [공개 배포 예약 실행 시험](public-scheduler-verification.json)은 임시 Codex 설치본의 실제 macOS 예약 작업으로 같은 버전을 확인했다. 새 버전으로의 갱신, 후속 발행, 재로그인·절전 복귀는 아직 검증하지 않았다.
+
+manifest가 만료된 뒤에도 기존 설치본은 설치한 규약을 유지하지만 원격의 만료된 manifest는 새로 수락하지 않는다. 신규 설치와 자동 갱신을 계속 제공하려면 만료 전에 후속 버전을 발행한다.
 
 ## 이전 발행물을 보존한다
 
@@ -61,6 +75,8 @@ gh workflow run release.yml --repo project820/korean-protocol --ref main -f arch
 [갱신된 Actions 실행 38344642913](https://github.com/project820/korean-protocol/actions/runs/38344642913)에서도 관련 시험 90개와 실제 Secret 서명이 통과했다. 내려받은 artifact의 서명을 다시 검증했으며 publish·receipt·archive job은 모두 건너뛰었다.
 
 이 결과는 실제 공개 Pages 게시, 게시 후 발행 영수증 서명, 운영 예약 갱신 성공을 뜻하지 않는다. 해당 경로의 실제 운영 확인은 저장소 공개 시점에 수행한다.
+
+이 절의 비공개 상태는 첫 공개 발행 이전 기록이다. 공개 이후 결과는 [첫 공개 발행](#첫-공개-발행을-완료했다)에 기록했다.
 
 ## GitHub의 공식 계약을 따른다
 

@@ -1,0 +1,34 @@
+{
+  "started_at": "2026-10-13T16:04:28.350561+09:00",
+  "python": "3.9.6 (default, Aug 25 2026, 21:26:21) \n[Clang 21.0.0 (clang-2100.3.34.2)]",
+  "source": "https://project820.github.io/korean-protocol",
+  "hosts": {
+    "codex": {
+      "plan_verified_without_host_state_mutation": true,
+      "anonymous_signed_install": true,
+      "version": "0.2.0",
+      "manual_same_version_refresh": true,
+      "wrapper_started": true,
+      "repeat_install_preserved_bytes": true,
+      "persistent_management_from_other_directory": true,
+      "uninstall_restored_user_bytes": true
+    },
+    "claude-code": {
+      "plan_verified_without_host_state_mutation": true,
+      "anonymous_signed_install": true,
+      "version": "0.2.0",
+      "manual_same_version_refresh": true,
+      "wrapper_started": true,
+      "repeat_install_preserved_bytes": true,
+      "persistent_management_from_other_directory": true,
+      "uninstall_restored_user_bytes": true
+    }
+  },
+  "source_hashes": {
+    "distribution/agent_install.py": "9117770ea14942e0f192d0bf6330a7c8e3271225507d64ae007f47aa76b31b83",
+    "runtime/kproto.py": "7b86b7258cef99fd29d3208b7d31ebeda35a1197bdc4562c182060aa85b15457"
+  },
+  "initial_probe": "Harness expected JSON from silent successful runtime update; corrected stdout handling and reran both hosts.",
+  "new_python_crash_reports": [],
+  "finished_at": "2026-10-13T16:04:48.460922+09:00"
+}

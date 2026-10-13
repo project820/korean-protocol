@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Offline, noninteractive coding-agent installation and durable management."""
+"""Noninteractive local or signed HTTPS coding-agent installation and management."""
 import sys
 # macOS Python writes imported stdlib bytecode below HOME unless disabled.
 # Read-only plan/status must avoid those side effects as well as state writes.
@@ -336,6 +336,48 @@ def capture_signed(runtime, directory, key, fingerprint, root):
     return manifest, raw, files, signature, key_data
 
 
+def capture_remote(runtime, source, key, fingerprint, root):
+    # Download and trust state are disposable. Only the existing local key may
+    # authorize content; a publisher endpoint cannot supply its own trust anchor.
+    deadline = runtime.time.monotonic() + 60
+    key_data = read_file(key, maximum=16384)
+    try:
+        key_data.decode('ascii')
+    except UnicodeError:
+        raise AgentError('Trust key must use ASCII public key encoding') from None
+    with tempfile.TemporaryDirectory(prefix='kproto-agent-download-') as temporary:
+        temporary = Path(temporary).resolve()
+        public = temporary / 'public_key'
+        public.write_bytes(key_data)
+        controller = runtime.Controller(temporary / 'state')
+        controller.trust_key(public, fingerprint)
+        trust = safe_path(root / 'trust/public_key')
+        if trust.exists():
+            read_file(trust, owned=True, maximum=16384)
+            if runtime.key_fingerprint(trust) != fingerprint:
+                raise runtime.TrustError('Existing trust anchor cannot be replaced by this installer')
+        runtime.atomic_write(controller.config_path, runtime.json_bytes({'source': source, 'mode': 'off'}))
+        directory = temporary / 'static'
+        stable = directory / 'stable'
+        stable.mkdir(parents=True)
+        raw = controller._download(source + '/stable/release.json', 65536, deadline)
+        runtime.atomic_write(stable / 'release.json', raw)
+        signature = controller._download(source + '/stable/release.json.sig', 16384, deadline)
+        runtime.atomic_write(stable / 'release.json.sig', signature)
+        manifest = runtime.validate_manifest(runtime.strict_json(raw))
+        controller._verify_signature(stable, raw, manifest)
+        for entry in manifest['files']:
+            data = controller._download(source + '/releases/' + manifest['version'] + '/' + entry['path'],
+                                        entry['size'], deadline)
+            runtime.atomic_write(directory / 'releases' / manifest['version'] / entry['path'], data)
+        # Reuse the offline capture's full size/hash/schema/version checks, with
+        # the immutable key snapshot that authenticated the manifest above.
+        captured = capture_signed(runtime, directory, public, fingerprint, root)
+        if runtime.time.monotonic() >= deadline:
+            raise runtime.NetworkError('Bootstrap time budget exhausted')
+        return captured
+
+
 @contextmanager
 def mutation_guard(runtime, root, host, signed, target=None):
     runtime.Controller(root)
@@ -426,7 +468,7 @@ def main(argv=None):
     parser.add_argument('--signed-directory', type=Path, help='Sealed static stable/releases directory')
     parser.add_argument('--trust-key', type=Path)
     parser.add_argument('--expected-fingerprint')
-    parser.add_argument('--source')
+    parser.add_argument('--source', help='Signed HTTPS source for bootstrap or subsequent updates')
     parser.add_argument('--autoupdate', choices=['off', 'interval', 'scheduled'], default='off')
     parser.add_argument('--register-scheduler', action='store_true', help='Explicitly register a signed macOS scheduled update LaunchAgent')
     runtime = None
@@ -461,14 +503,14 @@ def main(argv=None):
                 raise AgentError('Current host target differs from installed target; existing instructions preserved', 7)
             result['target'] = status['target']
         captured = None
-        if args.action not in ('plan', 'install') and (args.signed_directory or args.trust_key or args.expected_fingerprint or args.source or args.autoupdate != 'off' or args.register_scheduler):
+        if args.action not in ('plan', 'install') and (args.signed_directory is not None or args.trust_key is not None or args.expected_fingerprint is not None or args.source is not None or args.autoupdate != 'off' or args.register_scheduler):
             raise AgentError('Signed installation options apply only to plan/install')
         if args.action in ('plan', 'install'):
-            if args.register_scheduler and (not args.signed_directory or args.autoupdate != 'scheduled' or not args.source):
-                raise AgentError('Scheduler registration requires --signed-directory, --autoupdate scheduled, and --source')
-            if args.signed_directory:
+            if args.register_scheduler and (args.autoupdate != 'scheduled' or not args.source):
+                raise AgentError('Scheduler registration requires signed installation, --autoupdate scheduled, and --source')
+            if args.signed_directory is not None or args.source is not None:
                 if not args.trust_key or not args.expected_fingerprint:
-                    raise AgentError('Signed directory requires --trust-key and --expected-fingerprint')
+                    raise AgentError('Signed installation requires --trust-key and --expected-fingerprint')
                 args.trust_key = safe_path(args.trust_key)
                 if args.source is not None:
                     args.source = runtime.validate_source(args.source)
@@ -476,7 +518,10 @@ def main(argv=None):
                     raise AgentError('Automatic updates require --source')
                 if args.autoupdate == 'scheduled' and sys.platform != 'darwin':
                     raise AgentError('Scheduler generation currently supports macOS only', 6)
-                captured = capture_signed(runtime, args.signed_directory, args.trust_key, args.expected_fingerprint, root)
+                if args.signed_directory is not None:
+                    captured = capture_signed(runtime, args.signed_directory, args.trust_key, args.expected_fingerprint, root)
+                else:
+                    captured = capture_remote(runtime, args.source, args.trust_key, args.expected_fingerprint, root)
                 result.update(content_verified=True, planned_version=captured[0]['version'])
                 if args.register_scheduler and (root/'config.json').exists() and json_object(root/'config.json', owned=True).get('token_env'):
                     raise AgentError('Scheduler registration cannot persist a private endpoint shell credential')

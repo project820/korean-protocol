@@ -344,6 +344,255 @@ class AgentInstallTests(unittest.TestCase):
         (static / 'stable/release.json.sig').write_bytes(signature)
         return ['--signed-directory', str(static), '--trust-key', str(public), '--expected-fingerprint', fingerprint]
 
+    def remote_fixture(self):
+        local = self.signed_static()
+        static = Path(local[1])
+        source = 'https://updates.example/protocol'
+        return static, source, ['--source', source, *local[2:]]
+
+    def remote_cli(self, action, extras, fetch, host='codex'):
+        original_load = self.agent.load_runtime
+        def load(bundle):
+            return self.runtime if bundle == self.bundle else original_load(bundle)
+        with mock.patch.dict(os.environ, self.env), \
+                mock.patch.object(self.agent, 'load_runtime', side_effect=load), \
+                mock.patch.object(self.runtime.Controller, 'fetch', autospec=True, side_effect=fetch), \
+                redirect_stdout(io.StringIO()) as output:
+            code = self.agent.main([action, '--host', host, '--state-dir', str(self.state), *extras])
+        return code, json.loads(output.getvalue())
+
+    def test_remote_bootstrap_authenticates_before_payload_and_plans_without_host_writes(self):
+        static, source, extras = self.remote_fixture()
+        events, deadlines = [], []
+        verify = self.runtime.Controller._verify_signature
+        def authenticate(controller, stage, raw, manifest):
+            verify(controller, stage, raw, manifest)
+            events.append('authenticated')
+        def fetch(controller, url, maximum, deadline=None):
+            self.assertNotEqual(self.state, controller.root)
+            self.assertEqual(source, controller._config()['source'])
+            self.assertNotIn('token_env', controller._config())
+            self.assertTrue(url.startswith(source + '/'))
+            name = url[len(source) + 1:]
+            if name.startswith('releases/'):
+                self.assertIn('authenticated', events)
+                manifest = json.loads((static / 'stable/release.json').read_bytes())
+                entry = next(item for item in manifest['files'] if name.endswith('/' + item['path']))
+                self.assertEqual(entry['size'], maximum)
+            else:
+                self.assertEqual(65536 if name.endswith('.json') else 16384, maximum)
+            self.assertIsNotNone(deadline)
+            deadlines.append(deadline)
+            events.append(name)
+            return (static / name).read_bytes()
+        before = self.tree()
+        with mock.patch.object(self.runtime.Controller, '_verify_signature', new=authenticate):
+            code, value = self.remote_cli('plan', extras, fetch)
+        self.assertEqual(0, code, value)
+        self.assertTrue(value['content_verified'])
+        self.assertFalse(value['install_validated'])
+        self.assertEqual('0.3.0', value['planned_version'])
+        self.assertEqual(before, self.tree())
+        self.assertEqual(1, len(set(deadlines)))
+        self.assertEqual(['stable/release.json', 'stable/release.json.sig', 'authenticated'], events[:3])
+
+    def test_remote_install_is_signed_and_idempotent_for_both_hosts(self):
+        static, source, extras = self.remote_fixture()
+        def fetch(controller, url, maximum, deadline=None):
+            return (static / url[len(source) + 1:]).read_bytes()
+        for host in ('codex', 'claude-code'):
+            with self.subTest(host=host):
+                self.state = self.root / ('remote-state-' + host)
+                target = self.target(host)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(b'existing user instructions\n')
+                code, value = self.remote_cli('install', extras, fetch, host)
+                self.assertEqual(0, code, value)
+                self.assertTrue(value['changed'])
+                self.assertTrue(value['verified'])
+                self.assertEqual(('signed', source, 'off'), (value['trust'], value['source'], value['autoupdate']))
+                installed = target.read_bytes()
+                self.assertTrue(installed.startswith(b'existing user instructions\n'))
+                code, value = self.remote_cli('install', extras, fetch, host)
+                self.assertEqual(0, code, value)
+                self.assertFalse(value['changed'])
+                self.assertEqual(installed, target.read_bytes())
+                code, value = self.run_cli('status', host)
+                self.assertEqual(0, code, value)
+                self.assertTrue(value['verified'])
+
+    def test_remote_signature_and_payload_failures_preserve_existing_host_state(self):
+        static, source, extras = self.remote_fixture()
+        code, value = self.run_cli('install')
+        self.assertEqual(0, code, value)
+        scenarios = ('signature', 'hash', 'network', 'deadline', 'oversize')
+        for scenario in scenarios:
+            calls = []
+            def fetch(controller, url, maximum, deadline=None):
+                name = url[len(source) + 1:]
+                calls.append(name)
+                if scenario == 'network':
+                    raise self.runtime.NetworkError('HTTPS content download failed')
+                if scenario == 'deadline':
+                    raise self.runtime.NetworkError('Network time budget exhausted')
+                if scenario == 'signature' and name.endswith('.sig'):
+                    return b'invalid signature'
+                if scenario == 'hash' and name.endswith('profiles/coding-agent.md'):
+                    return b'tampered content\n'
+                if scenario == 'oversize':
+                    worker = mock.Mock(returncode=0)
+                    worker.communicate.return_value = (b'\x01' + b'x' * (maximum + 1), None)
+                    worker.poll.return_value = 0
+                    with mock.patch.object(self.runtime.subprocess, 'Popen', return_value=worker):
+                        return original_fetch(controller, url, maximum, deadline)
+                return (static / name).read_bytes()
+            original_fetch = self.runtime.Controller.fetch
+            before = self.tree()
+            with self.subTest(scenario=scenario):
+                code, value = self.remote_cli('install', extras, fetch)
+                self.assertEqual(5 if scenario in ('signature', 'hash') else 3, code, value)
+                self.assertTrue(calls)
+                self.assertFalse(value['ok'])
+                self.assertEqual(before, self.tree())
+                if scenario == 'signature':
+                    self.assertEqual(['stable/release.json', 'stable/release.json.sig'], calls)
+
+    def test_remote_invalid_options_and_wrong_anchor_fail_before_fetch(self):
+        static, source, extras = self.remote_fixture()
+        invalid = ([*extras[:2]], [*extras[:4]],
+                   ['--source', source, *extras[4:]],
+                   ['--source', '', *extras[2:]],
+                   ['--source', 'http://updates.example', *extras[2:]],
+                   ['--source', 'https://user:password@updates.example', *extras[2:]],
+                   ['--source', 'https://updates.example?secret=value', *extras[2:]],
+                   [*extras[:-1], 'SHA256:wrong'],
+                   [*extras, '--register-scheduler'])
+        def fetch(*args, **kwargs):
+            self.fail('Invalid bootstrap arguments must fail before network access')
+        for arguments in invalid:
+            with self.subTest(arguments=arguments):
+                before = self.tree()
+                code, value = self.remote_cli('install', arguments, fetch)
+                self.assertNotEqual(0, code, value)
+                self.assertEqual(before, self.tree())
+        for arguments in (extras, ['--source', '']):
+            before = self.tree()
+            code, value = self.remote_cli('status', arguments, fetch)
+            self.assertNotEqual(0, code, value)
+            self.assertEqual(before, self.tree())
+
+    def test_remote_bootstrap_keeps_runtime_cross_origin_and_deadline_protection(self):
+        static, source, extras = self.remote_fixture()
+        fetch = self.runtime.Controller.fetch
+        for scenario in ('cross-origin', 'expired-deadline'):
+            def protected(controller, url, maximum, deadline=None):
+                if scenario == 'cross-origin':
+                    return fetch(controller, 'https://elsewhere.example/stable/release.json', maximum, deadline)
+                return fetch(controller, url, maximum, self.runtime.time.monotonic() - 1)
+            before = self.tree()
+            with self.subTest(scenario=scenario), mock.patch.object(self.runtime.subprocess, 'Popen') as worker:
+                code, value = self.remote_cli('install', extras, protected)
+                self.assertNotEqual(0, code, value)
+                worker.assert_not_called()
+                self.assertEqual(before, self.tree())
+
+    def test_remote_malformed_and_expired_manifests_stop_before_payload(self):
+        static, source, extras = self.remote_fixture()
+        original = json.loads((static / 'stable/release.json').read_bytes())
+        for scenario in ('schema', 'expired', 'path', 'signer'):
+            manifest = json.loads(json.dumps(original))
+            if scenario == 'schema':
+                manifest['schema_version'] = 999
+            elif scenario == 'expired':
+                manifest.update(issued_at='2020-01-01T00:00:00Z', expires_at='2020-02-01T00:00:00Z')
+            elif scenario == 'path':
+                manifest['files'][0]['path'] = '../untrusted'
+            else:
+                manifest['signing']['key_id'] = 'SHA256:' + 'a' * 43
+            calls = []
+            def fetch(controller, url, maximum, deadline=None):
+                name = url[len(source) + 1:]
+                calls.append(name)
+                self.assertFalse(name.startswith('releases/'))
+                return self.runtime.json_bytes(manifest) if name.endswith('.json') else (static / name).read_bytes()
+            before = self.tree()
+            with self.subTest(scenario=scenario):
+                code, value = self.remote_cli('install', extras, fetch)
+                self.assertEqual({'schema': 6, 'expired': 5, 'path': 2, 'signer': 5}[scenario], code, value)
+                self.assertEqual(['stable/release.json', 'stable/release.json.sig'], calls)
+                self.assertEqual(before, self.tree())
+
+    def test_remote_nonascii_local_trust_key_fails_without_fetch(self):
+        static, source, extras = self.remote_fixture()
+        key = Path(extras[3])
+        key.write_bytes(b'\xffinvalid key')
+        def fetch(*args, **kwargs):
+            self.fail('Invalid local key must fail before network access')
+        before = self.tree()
+        code, value = self.remote_cli('install', extras, fetch)
+        self.assertEqual(2, code, value)
+        self.assertEqual(before, self.tree())
+
+    def test_remote_existing_trust_anchor_cannot_be_replaced_before_fetch(self):
+        local = self.signed_static()
+        code, value = self.run_cli('install', extras=local)
+        self.assertEqual(0, code, value)
+        other = self.signed_static('0.4.0', 2, self.root / 'other signing key')
+        extras = ['--source', 'https://updates.example/protocol', *other[2:]]
+        def fetch(*args, **kwargs):
+            self.fail('Existing trust anchor must be checked before network access')
+        before = self.tree()
+        code, value = self.remote_cli('install', extras, fetch)
+        self.assertEqual(5, code, value)
+        self.assertEqual(before, self.tree())
+
+    def test_remote_download_deadline_is_shared_across_requests(self):
+        static, source, extras = self.remote_fixture()
+        clock = [100.0]
+        calls = []
+        def fetch(controller, url, maximum, deadline=None):
+            calls.append(url)
+            clock[0] = deadline
+            return (static / 'stable/release.json').read_bytes()
+        before = self.tree()
+        with mock.patch.object(self.runtime.time, 'monotonic', side_effect=lambda: clock[0]):
+            code, value = self.remote_cli('install', extras, fetch)
+        self.assertEqual(3, code, value)
+        self.assertEqual([source + '/stable/release.json'], calls)
+        self.assertEqual(before, self.tree())
+
+    @unittest.skipUnless(sys.platform == 'darwin', 'macOS scheduler only')
+    def test_remote_scheduler_plan_is_readonly_and_install_uses_durable_runtime(self):
+        static, source, extras = self.remote_fixture()
+        extras += ['--autoupdate', 'scheduled', '--register-scheduler']
+        def fetch(controller, url, maximum, deadline=None):
+            return (static / url[len(source) + 1:]).read_bytes()
+        before = self.tree()
+        code, value = self.remote_cli('plan', extras, fetch)
+        self.assertEqual(0, code, value)
+        self.assertTrue(value['scheduler_registration_requested'])
+        self.assertEqual(before, self.tree())
+        original_load = self.agent.load_runtime
+        registered = []
+        def load(bundle):
+            module = original_load(bundle)
+            if bundle != self.bundle:
+                def register(controller):
+                    registered.append((Path(module.__file__), controller.root,
+                                       controller._state()['trust'], controller._config()['mode']))
+                module.Controller.register_scheduler = register
+            return module
+        with mock.patch.object(self.agent, 'load_runtime', side_effect=load):
+            code, value = self.remote_cli('install', extras, fetch)
+        self.assertEqual(0, code, value)
+        self.assertEqual(1, len(registered))
+        script, root, trust, mode = registered[0]
+        self.assertEqual(('signed', 'scheduled'), (trust, mode))
+        self.assertIn(root, script.parents)
+        self.assertNotIn(self.bundle, script.parents)
+        job = plistlib.loads(Path(value['scheduler']['path']).read_bytes())
+        self.assertEqual(value['runtime_argv']['update'][2], job['ProgramArguments'][1])
+
     def test_signed_plan_and_install_for_both_hosts(self):
         extras = self.signed_static() + ['--source', 'https://updates.example/protocol', '--autoupdate', 'interval']
         for host in ('codex', 'claude-code'):

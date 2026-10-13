@@ -1,6 +1,6 @@
 # 서명 콘텐츠 발행물을 준비한다
 
-발행 도구는 규약을 검사하고, 외부에서 서명한 결과를 검증해 정적 HTTPS 서버에 올릴 폴더를 만든다. 이 로컬 도구는 서버 업로드·저장소 공개 전환·키 생성을 수행하지 않는다. 프로젝트의 발행키는 [GitHub Actions 환경 Secret](github-actions-pages.md)에 등록했으며, Pages 공개 갱신 주소는 아직 게시하지 않았다.
+발행 도구는 규약을 검사하고, 외부에서 서명한 결과를 검증해 정적 HTTPS 서버에 올릴 폴더를 만든다. 이 로컬 도구는 서버 업로드·저장소 공개 전환·키 생성을 수행하지 않는다. 프로젝트의 정식 발행은 [GitHub Actions 워크플로](github-actions-pages.md)가 환경 Secret의 발행키로 같은 검사·서명을 수행해 `https://project820.github.io/korean-protocol`에 게시한다. 이 문서의 로컬 절차는 발행 도구의 동작과 수동 발행을 설명한다.
 
 ## 발행 입력을 준비한다
 
@@ -49,8 +49,10 @@ releases/<version>/pack/protocol.md
 
 발행자가 관리하는 같은 origin의 HTTPS 주소에 버전별 콘텐츠를 먼저 올리고, stable의 서명과 manifest를 마지막에 게시한다. 두 stable 파일이 교체되는 순간 불일치하면 클라이언트가 해당 갱신을 거부하고 기존 규약을 유지한다. 이전 버전 디렉터리는 보존한다. ZIP 미리보기·실행 코드·개인키·검사 로그를 콘텐츠 endpoint에 섞지 않는다.
 
-게시 후 실제 주소의 서명·TLS·업데이트·오프라인 유지를 별도 설치 상태에서 확인한다. 정식 공개키 지문과 endpoint가 정해지기 전에는 설치 안내에 가짜 운영 주소를 넣거나 자동 갱신이 활성화됐다고 표시하지 않는다. 설치·자동 갱신 연결 명령은 [런타임 실행 안내](implementation-status.md)를 따른다.
+게시 후 실제 주소의 서명·TLS·업데이트·오프라인 유지를 별도 설치 상태에서 확인한다. 정식 공개키 지문은 `SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc`이고 공개 endpoint는 `https://project820.github.io/korean-protocol`이다. 다른 키로 만든 발행물은 기존 설치본이 거부하므로 이 endpoint에 게시하지 않는다. 설치·자동 갱신 연결 명령은 [서명 설치 안내](signed-install.md)를 따른다.
 
 ## 검증 범위를 구분한다
 
 [발행 도구 시험 기록](publisher-verification.json)에 원본 해시와 검사 범위를 기록했다. 발행 전용 테스트 13개와 전체 테스트 209개가 통과했다. 임시 Ed25519 키로 최초·후속 발행물을 만들고 두 호스트의 격리된 상태에 서명 설치했으며, 변조·다른 키·기존 출력 경로를 거부했다. 독립 검토자도 발행 전용 테스트 13개를 다시 실행했다. 정식 키 관리·공개 HTTPS 게시·실제 예약 갱신 등록은 검증하지 않았다.
+
+위 기록은 첫 공개 발행 이전의 범위다. 2026-10-13 [Actions 실행 38359118074](https://github.com/project820/korean-protocol/actions/runs/38359118074)가 원본 `91526bb`의 `0.2.0` 순번 `1`을 정식 키로 서명해 공개 Pages에 게시했다. [익명 다운로드 확인](public-download-verification.json)은 공개 주소의 9개 파일 서명과 해시를 검증했다. 후속 버전 발행은 아직 실행하지 않았다.

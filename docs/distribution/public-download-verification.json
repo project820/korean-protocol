@@ -1,0 +1,18 @@
+{
+  "source": "https://project820.github.io/korean-protocol",
+  "workflow_run_id": 38359118074,
+  "workflow_url": "https://github.com/project820/korean-protocol/actions/runs/38359118074",
+  "workflow_commit": "91526bb325175992701cd4eb4e1e3e56731a1cdd",
+  "anonymous_https": true,
+  "credential_headers_used": false,
+  "signature_before_payload": true,
+  "signature_verified": true,
+  "file_count": 9,
+  "all_payload_hashes_match_sources": true,
+  "manifest_sha256": "58880d6d835d12c73afa3f7c9fc708eadc03d94fef5ccad08559b83b8e7623c9",
+  "version": "0.2.0",
+  "sequence": 1,
+  "fingerprint": "SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc",
+  "issued_at": "2026-10-13T06:51:53Z",
+  "expires_at": "2026-11-12T06:51:53Z"
+}

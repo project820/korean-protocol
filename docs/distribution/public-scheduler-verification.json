@@ -1,0 +1,29 @@
+{
+  "bootstrap": "anonymous signed HTTPS via --source; final installer",
+  "scope": "temporary signed Codex home and owned real macOS LaunchAgent; no normal user agent configuration changed",
+  "started_at": "2026-10-13T16:04:10.012487+09:00",
+  "registered": true,
+  "live_identity_verified": true,
+  "persistent_plist_verified": true,
+  "not_due_run": {
+    "runs": 1,
+    "last_exit_code": 0
+  },
+  "public_endpoint_run": {
+    "runs": 2,
+    "last_exit_code": 0
+  },
+  "authenticated_scheduled_refresh": true,
+  "cached_profile_preserved": true,
+  "off_removed_plist": true,
+  "live_job_absent": true,
+  "uninstall_restored_user_bytes": true,
+  "finished_at": "2026-10-13T16:04:27.794529+09:00",
+  "source_hashes": {
+    "runtime/kproto.py": "7b86b7258cef99fd29d3208b7d31ebeda35a1197bdc4562c182060aa85b15457",
+    "distribution/agent_install.py": "9117770ea14942e0f192d0bf6330a7c8e3271225507d64ae007f47aa76b31b83",
+    "tests/test_scheduler.py": "b40173a8ba1805e94d858865414277f0849a2c75de32f2379eec6a73884641bd",
+    "tests/test_agent_install.py": "401bf43edc4222f246e6ea097249e74e3de3548a5083d96317c22bdb20cad40f",
+    "tests/test_runtime.py": "7d7872295fa17ee8c37da7dad93cedc8a9da6fb5447ca576ce445475743fc986"
+  }
+}
