@@ -1,0 +1,64 @@
+{
+  "channel": "stable",
+  "compatibility": {
+    "engine_max_exclusive": "1.0.0",
+    "engine_min": "0.1.0",
+    "lexicon_schema_version": 1,
+    "rules_schema_version": 1
+  },
+  "expires_at": "2026-11-12T06:36:36Z",
+  "files": [
+    {
+      "path": "profiles/coding-agent.md",
+      "role": "profile",
+      "sha256": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+      "size": 28666
+    },
+    {
+      "path": "profiles/chat.md",
+      "role": "profile",
+      "sha256": "d1587c8b6eaaf4ca74f9f2c740525c9793c707a6f95ed1aec14472f518e4ef63",
+      "size": 28636
+    },
+    {
+      "path": "profiles/work-document.md",
+      "role": "profile",
+      "sha256": "3a3cb806f0cf98066aaf28ca016149be335036afe9e67890291da825ce17f216",
+      "size": 28645
+    },
+    {
+      "path": "specification/rules.json",
+      "role": "rules",
+      "sha256": "12368f51c779dec529b0c108879a19bca11bb00fc50d524b2315c7c777a39697",
+      "size": 171416
+    },
+    {
+      "path": "lexicon/core.json",
+      "role": "lexicon",
+      "sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+      "size": 302864
+    },
+    {
+      "path": "lexicon/domains/software.json",
+      "role": "lexicon",
+      "sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+      "size": 83473
+    },
+    {
+      "path": "pack/protocol.md",
+      "role": "protocol",
+      "sha256": "fea7f3879b3567c466ce126e5f11deba52fe8f449da71ee00c85c908f5b2b038",
+      "size": 93902
+    }
+  ],
+  "issued_at": "2026-10-13T06:36:36Z",
+  "schema_version": 1,
+  "sequence": 1,
+  "signing": {
+    "format": "openssh-sshsig",
+    "key_id": "SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc",
+    "namespace": "kproto-release-v1",
+    "principal": "kproto-release"
+  },
+  "version": "0.2.0"
+}

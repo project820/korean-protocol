@@ -1,0 +1,55 @@
+{
+  "source_commit": "e5d0c5d80aba8b0122e252358f6fc8133d05f2c4",
+  "license": "MIT",
+  "copyright_holder": "Korean Protocol contributors",
+  "archive_sha256": "cec56ce395e8d270a185e60a2322c055619be3ca0c7a691dcd8bc662f89447b2",
+  "archive_bytes": 393478,
+  "hosts": {
+    "codex": {
+      "installed": true,
+      "profile_unchanged": true,
+      "cached_pack_has_full_notices": true,
+      "persistent_helpers_have_full_mit": true,
+      "management_after_source_move": true,
+      "uninstall_restored_original": true
+    },
+    "claude-code": {
+      "installed": true,
+      "profile_unchanged": true,
+      "cached_pack_has_full_notices": true,
+      "persistent_helpers_have_full_mit": true,
+      "management_after_source_move": true,
+      "uninstall_restored_original": true
+    }
+  },
+  "validation": {
+    "full_suite_count": 300,
+    "full_suite_exit_code": 0,
+    "full_suite_seconds": 34.687,
+    "initial_test_error": "New assertion assumed legacy agent-tool directory; corrected to returned management_argv path before the passing full rerun."
+  },
+  "review": "Independent Astra/high review found no actionable defect; helpers AST and three profiles unchanged.",
+  "archive_files": 32,
+  "zip_notices_match": true,
+  "standalone_notices_once": true,
+  "checksums_match": true,
+  "unsigned_preview": true,
+  "public_publication": false,
+  "assets": {
+    "korean-protocol-0.2.0-draft.zip": {
+      "bytes": 393478,
+      "sha256": "cec56ce395e8d270a185e60a2322c055619be3ca0c7a691dcd8bc662f89447b2"
+    },
+    "KOREAN-PROTOCOL.md": {
+      "bytes": 480823,
+      "sha256": "d66873b121893ccef718d5ff7ad4210d808a678275fb00dffcd4c21d39c6c864"
+    },
+    "SHA256SUMS": {
+      "bytes": 2736,
+      "sha256": "98ee27e3c5cd0065ded62ca5fa889c9a0adbaccae103b5700eeca15600b886c5"
+    }
+  },
+  "github_url": "https://github.com/project820/korean-protocol/releases/tag/untagged-7cf837d2c3ac9241b318",
+  "github_draft_confirmed": true,
+  "github_downloaded_assets_match": true
+}

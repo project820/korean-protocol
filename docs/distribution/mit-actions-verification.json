@@ -1,0 +1,40 @@
+{
+  "workflow_run_id": 38357637401,
+  "workflow_url": "https://github.com/project820/korean-protocol/actions/runs/38357637401",
+  "workflow_commit": "e5d0c5d80aba8b0122e252358f6fc8133d05f2c4",
+  "artifact_id": 11793470869,
+  "manifest_sha256": "0ed6394a9e4f5d9153a538f89d05461590c5b901b9d90b820828cfca10952f46",
+  "fingerprint": "SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc",
+  "version": "0.2.0",
+  "sequence": 1,
+  "issued_at": "2026-10-13T06:36:36Z",
+  "expires_at": "2026-11-12T06:36:36Z",
+  "all_content_matches_sources": true,
+  "signed_pack_full_notices_once": true,
+  "hosts": {
+    "codex": {
+      "signature_verified": true,
+      "cached_pack_matches_signed_licensed_pack": true,
+      "uninstall_restored_original": true
+    },
+    "claude-code": {
+      "signature_verified": true,
+      "cached_pack_matches_signed_licensed_pack": true,
+      "uninstall_restored_original": true
+    }
+  },
+  "scope": "actual GitHub Secret signing and temporary signed installs; no public publication or forward-version update",
+  "preserved_manifest": "docs/distribution/mit-actions-artifact/release.json",
+  "preserved_signature": "docs/distribution/mit-actions-artifact/release.json.sig",
+  "actions_targeted_tests": {
+    "count": 95,
+    "exit_code": 0,
+    "seconds": 10.36
+  },
+  "jobs": {
+    "sign": "success",
+    "publish": "skipped",
+    "receipt": "skipped",
+    "archive": "skipped"
+  }
+}
