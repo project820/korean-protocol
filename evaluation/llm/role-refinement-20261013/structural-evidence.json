@@ -1,0 +1,20 @@
+{
+  "freeze_matches": true,
+  "profile_bytes": 28652,
+  "runs": {
+    "sol-baseline": {
+      "exit_code": 0,
+      "structure_valid": true,
+      "model_requested": "gpt-6.1-sol",
+      "fallback_label_present": false,
+      "final_sha256": "0580aec754f73e2a5da16fbcf0d3dff1d79561fa7bcba75978f0f56bc06a46a2"
+    },
+    "sol-treatment": {
+      "exit_code": 0,
+      "structure_valid": true,
+      "model_requested": "gpt-6.1-sol",
+      "fallback_label_present": false,
+      "final_sha256": "027915f9d59bc17df735a01f1a6fd934ce762cae803c2072a3b7bc5d17566867"
+    }
+  }
+}

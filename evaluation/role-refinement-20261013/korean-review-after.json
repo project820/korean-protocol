@@ -1,0 +1,462 @@
+{
+  "schema_version": "1.0",
+  "review_type": "post-role-refinement current-rule normative re-review of the same frozen cases",
+  "reviewer_role": "independent reviewer; not the case author",
+  "reviewed_head": "afc88b566cc49797ca8c1d888b61c930aba4210e",
+  "source_hashes": {
+    "specification/rules.json": "6667f1bc3aa5dd5cdad867e3bd41629fb2829d15e9632b0352d1f23f210c5507",
+    "docs/spec/korean-rules.md": "f1ce25b65bd1598a14a808e8a80417afc59025f98bed7492e0ccd5d59670a3c2",
+    "evaluation/korean-independent/cases.json": "cc8c501b7e6c0d7e35c577cd8600491ddfc87e1d75c4cd4be52999e98eaf8504",
+    "evaluation/korean-independent/supplement.json": "166e61eb5cdc65bda9300d2738377342532faaa6a0cfb314d4fbda2cc8337268",
+    "evaluation/korean-independent/replacement-negation.json": "b25bb08516713d0ae6771d4c78f2a008195f7ddf6591e209271686c4e26e5a34",
+    "evaluation/korean-independent/review.json": "7bfbe6b4a851d580c10983a9a72fe30ecb759b1621b9f21eee9efad61fe16eb7",
+    "evaluation/korean-independent/supplement-review.json": "57b58fc689e407fae897e9dfddb3211be8fdc11395ff0a171840fa4bb2c3a691",
+    "evaluation/korean-independent/replacement-negation-review.json": "a974e4eb5b9ae8f283e78e9a187b08f9793d77075df44b77cdff6660be9b7f3d",
+    "evaluation/korean-independent/report.md": "dff24f92e2d24bf9f25d43043c2c6113988f6e160c8b5cff1bf946344617f1ca",
+    "/tmp/kproto-current-korean-review.json": "6bb9f50469bb9f5e5fd5c71c8302f526c61b5dfc6e6b571768b2815a618c536e"
+  },
+  "verdict_contract": {
+    "pass": "명시 문맥에서 사례 기대값이 성립하고 현행 전용 규칙의 요구·조건·예외가 해당 판단을 구체적으로 뒷받침한다.",
+    "fail": "사례의 기대값이 명시 문맥과 충돌하거나 적용 규칙이 잘못된 편집을 요구한다.",
+    "unconfirmed": "의미 판정은 맞지만 의도한 세부 기능을 포괄하는 현행 전용 규칙의 적용 조건을 확인하지 못했다. 포괄 의미 보존만으로 전용 조건 충족을 대체하지 않는다."
+  },
+  "excluded_cases": [
+    {
+      "case_id": "KI-NEG-03",
+      "reason": "기존 충분성·상한·재량 해석 이견에 따른 제외를 그대로 보존했다. 이번 재검토의 30개 분모에 넣지 않았다."
+    }
+  ],
+  "reviews": [
+    {
+      "case_id": "KI-PAR-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "accept",
+      "rule_ids": [
+        "KP-KO-001",
+        "KP-KO-002",
+        "KP-EDIT-001"
+      ],
+      "rationale": "문맥의 유일한 전달자 미루와 수신자 다온, 빨간 봉투가 분열문에서도 유지된다. 현행 KO-001은 조사가 있는 문장의 논항 편집을 포함하므로 어순·구조가 바뀌어도 이 대응을 직접 보존한다. KO-002의 사실을 구별하는 대조가 없는 경우의 자연스러운 조사 선택 예외도 유지된다."
+    },
+    {
+      "case_id": "KI-PAR-02",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "reject",
+      "rule_ids": [
+        "KP-KO-001",
+        "KP-EDIT-001"
+      ],
+      "rationale": "요청자 이솔과 요청을 받은 라온을 바꾸는 후보는 조사가 있는 문장의 논항 편집이다. 현행 KO-001의 확장된 조건이 직접 적용되고 행위자·수신자 대응 보존 요구에 어긋나므로 거절한다. 허용 대안의 은에서 이로 바뀐 조사도 동일 역할을 유지한다. 기존 전용 조건 공백이 해소되었다."
+    },
+    {
+      "case_id": "KI-PAR-03",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "keep",
+      "rule_ids": [
+        "KP-KO-001",
+        "KP-EDIT-001",
+        "KP-EDIT-003"
+      ],
+      "rationale": "원문은 연필을 도구로, 봉투를 표시 위치로 이미 명확하게 연결한다. 현행 KO-001은 도구·장소 대응을 보존하고 조사가 있는 문장의 논항 편집에도 적용하므로 원문을 유지하며 봉투로 연필에라는 거절 출력의 역할 역전을 직접 거부한다. 원문에 주체나 설명을 추가할 의무는 생기지 않는다. 기존 전용 조건 공백이 해소되었다."
+    },
+    {
+      "case_id": "KI-OMI-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "accept",
+      "rule_ids": [
+        "KP-SYN-001",
+        "KP-SYN-003"
+      ],
+      "rationale": "연속 보고의 유일한 주체 서린을 이어받아 주어를 생략하므로 SYN-001 조건을 충족한다. 그 상자는 직전의 유일한 상자와 연결되므로 SYN-003도 충족한다. 다른 상자로 바꾸는 거절 출력은 이 연결을 훼손한다."
+    },
+    {
+      "case_id": "KI-OMI-02",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "reject",
+      "rule_ids": [
+        "KP-SYN-001",
+        "KP-SYN-003"
+      ],
+      "rationale": "두 번째 행동 주체는 문맥상 태오인데 후보는 오린의 연속 행동으로 결합한다. SYN-001은 주체 변경 때 이름을 요구하고 SYN-003은 경쟁 후보가 있는 지시어에 확인된 이름을 요구하므로 태오를 밝힌 대안이 맞다."
+    },
+    {
+      "case_id": "KI-OMI-03",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "keep",
+      "rule_ids": [
+        "KP-SYN-001",
+        "KP-SYN-002",
+        "KP-SYN-003",
+        "KP-EDIT-003"
+      ],
+      "rationale": "한 참가자, 작성 중인 한 종이, 함께 보는 받침대로 주체·대상·장소가 회복된다. SYN-001의 명령문 주체 생략 예외와 SYN-002의 한 대상 절차 예외가 적용되며 여기는 지시된 받침대와 하나로 연결된다. 접수실 제출·담당자 승인 추가에는 문맥 근거가 없다."
+    },
+    {
+      "case_id": "KI-MOD-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "accept",
+      "rule_ids": [
+        "KP-SYN-004",
+        "KP-SYN-005",
+        "KP-EDIT-003"
+      ],
+      "rationale": "두 어순 모두 파란이 점을 꾸미며 단일 관형절은 같은 봉투를 고른다. SYN-004의 관계가 하나로 정해진 어순 예외와 SYN-005의 명확한 단일 관형절 예외가 대안을 허용한다. 거절 출력은 파란의 대상을 봉투로 바꾸고 점 찍기 행동을 추가한다."
+    },
+    {
+      "case_id": "KI-MOD-02",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "reject",
+      "rule_ids": [
+        "KP-SYN-004",
+        "KP-SYN-005"
+      ],
+      "rationale": "지난주에는 채용을 수식하고 안내서 제작은 이번 주다. 후보가 지난주를 제작에 붙이므로 SYN-004의 수식 대상 보존을 위반한다. 중첩 관형절의 주체·시점·대상을 확인하는 SYN-005도 이를 구별한다. 허용 대안의 중첩 유지 자체는 관계가 명확한 짧은 중첩 예외에 든다."
+    },
+    {
+      "case_id": "KI-MOD-03",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "keep",
+      "rule_ids": [
+        "KP-SYN-004",
+        "KP-SYN-005"
+      ],
+      "rationale": "오른쪽은 서랍을, 작은은 상자를 수식하고 관형절이 꺼낼 상자를 하나로 고른다. 명확한 수식 관계와 단일 관형절을 유지하는 예외가 적용된다. 상자에 딸린 서랍으로 바꾸는 출력은 대상과 소속 관계를 뒤집는다."
+    },
+    {
+      "case_id": "KI-NEG-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "accept",
+      "rule_ids": [
+        "KP-KO-003",
+        "KP-NUM-005"
+      ],
+      "rationale": "켜지지 않은 표시창이 없다는 전칭 부정은 네 표시창 모두 켜짐과 동치다. KO-003의 전면·부분 부정 구별과 NUM-005의 모두 범위 보존이 대응한다. 켜짐을 모두 꺼짐으로 바꾸는 출력은 허용되지 않는다."
+    },
+    {
+      "case_id": "KI-NEG-02",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "reject",
+      "rule_ids": [
+        "KP-KO-003",
+        "KP-NUM-005"
+      ],
+      "rationale": "모두 뒤집은 것은 아니다는 전부 뒤집음을 부정하지만 하나도 뒤집지 않음은 아니다. 세 장을 뒤집은 문맥에서 후보의 전면 부정은 KO-003과 NUM-005를 위반한다. 뒤집지 않은 카드가 있다는 대안은 원문의 주장 강도를 유지한다."
+    },
+    {
+      "case_id": "KI-ASP-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "accept",
+      "rule_ids": [
+        "KP-VER-007"
+      ],
+      "rationale": "동시 처리할 수 있다는 이 문맥에서 능력이며 동시 처리가 가능하다는 같은 기능 설명이다. VER-007이 요구하는 능력과 의무 구별을 유지한다. 명사형 대안은 허용 대안일 뿐 필수 수정이 아니다."
+    },
+    {
+      "case_id": "KI-ASP-02",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "reject",
+      "rule_ids": [
+        "KP-VER-007",
+        "KP-PROC-006"
+      ],
+      "rationale": "재시작 여부가 담당자 재량이라고 명시되어 있으므로 반드시 재시작해야 한다는 후보가 허락을 의무로 바꾼다. VER-007과 방법 선택을 위임한 경우 행동을 창작하지 않는 PROC-006 예외가 거절을 뒷받침한다."
+    },
+    {
+      "case_id": "KI-ASP-03",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "keep",
+      "rule_ids": [
+        "KP-VER-007",
+        "KP-VER-008",
+        "KP-EDIT-003"
+      ],
+      "rationale": "지연 가능성이 문맥과 원문에 같고 시간·원인은 없다. VER-007은 가능성을 유지하며 VER-008 예외는 대상과 가능성이 공유된 짧은 경고에 이유·확률·확인 약속을 요구하지 않는다. 항상 3초는 빈도와 수치를 창작하므로 거절한다."
+    },
+    {
+      "case_id": "KI-PAS-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "accept",
+      "rule_ids": [
+        "KP-VER-005",
+        "KP-KO-007",
+        "KP-VER-002",
+        "KP-EDIT-003"
+      ],
+      "rationale": "닫혀 있다와 닫힌 상태다는 확인된 현재 결과 상태를 보존한다. VER-005가 결과 상태를 남기며 KO-007은 능동화를 강제하지 않는다. 행위자가 알려지지 않은 상태 알림은 VER-002 예외에도 들고 관리자를 새로 넣을 근거가 없다."
+    },
+    {
+      "case_id": "KI-PAS-02",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "reject",
+      "rule_ids": [
+        "KP-KO-007"
+      ],
+      "rationale": "나린은 지시자이고 현우는 실제 부착 행위자다. 현행 KO-007은 모든 피동·사동 편집을 조건으로 사동주·행위자·대상을 보존하므로 나린의 직접 실행으로 바꾸는 후보를 직접 거절한다. 문맥에 부착 완료가 있어 지시로 현우가 붙였다는 대안도 성립한다."
+    },
+    {
+      "case_id": "KI-PAS-03",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "keep",
+      "rule_ids": [
+        "KP-KO-007",
+        "KP-VER-002",
+        "KP-VER-007"
+      ],
+      "rationale": "자동 번호 부여 안내는 이용자 행동을 요구하지 않는다. KO-007의 능동화 비강제와 VER-002의 결과 상태 예외가 피동 유지를 허용한다. 이용자의 직접 입력 의무로 바꾸는 출력은 행위자와 양태를 함께 바꾼다."
+    },
+    {
+      "case_id": "KI-HON-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "accept",
+      "rule_ids": [
+        "KP-KO-005"
+      ],
+      "rationale": "문맥은 능력 질문이 아닌 정중한 낭독 요청이다. 하십시오체에서 해요체로 바꾸면서 지금·한 번·현재 문장·청자 요청을 유지하므로 KO-005가 직접 적용된다."
+    },
+    {
+      "case_id": "KI-HON-02",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "reject",
+      "rule_ids": [
+        "KP-VER-002",
+        "KP-EDIT-001"
+      ],
+      "related_but_incomplete_rule_ids": [
+        "KP-KO-005"
+      ],
+      "rationale": "화자의 확인 약속은 후속 행동 책임을 화자에게 두며 청자에게 확인을 부탁한 것이 아니다. VER-002가 책임·역할·후속 행동의 확인된 행위자를 요구하므로 요청자로 바뀐 후보를 거절할 직접 근거가 있다. KO-005는 약속을 열거하지 않으므로 약속 보존의 직접 규칙이라고 과장하지 않는다."
+    },
+    {
+      "case_id": "KI-HON-03",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "keep",
+      "rule_ids": [
+        "KP-VER-008",
+        "KP-EDIT-004",
+        "KP-KO-006"
+      ],
+      "rationale": "선생님의 과거 발화를 보고하는 인용이므로 VER-008의 전언·출처 구별을 유지해야 한다. EDIT-004의 인용 고정 문자열 예외와 KO-006의 실제 인물 높임 보존 취지도 유지에 부합한다. 인용 부분만 남기면 보고자가 현재 요청하는 것으로 바뀐다."
+    },
+    {
+      "case_id": "KI-CON-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "accept",
+      "rule_ids": [
+        "KP-PROC-005",
+        "KP-SYN-006",
+        "KP-WARN-004"
+      ],
+      "rationale": "명시 문맥은 시작 순간의 두 조건 동시 충족만 요구한다. 고와 때만으로 바꾸어도 PROC-005의 시간 관계와 WARN-004의 조건부 실행 범위를 유지한다. 거절 출력의 또는은 SYN-006의 추가·선택 구별을 위반하며 한 조건만으로 실행 범위를 넓힌다."
+    },
+    {
+      "case_id": "KI-CON-02",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "reject",
+      "rule_ids": [
+        "KP-PROC-005",
+        "KP-PROC-001"
+      ],
+      "rationale": "한 신호에서 두 사람이 동시에 각 버튼을 누르는 절차이므로 다음은 동시성을 순서로 바꾼다. PROC-005는 동시에 관계를 보존하고 PROC-001은 동시에 할 행동을 한 실행 단위에 두도록 하므로 후보를 거절한다."
+    },
+    {
+      "case_id": "KI-CON-03",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "keep",
+      "rule_ids": [
+        "KP-PROC-003",
+        "KP-EDIT-001",
+        "KP-EDIT-003"
+      ],
+      "rationale": "값이 0인 조건을 중단 지시 앞에 둔 명확한 원문은 PROC-003을 충족한다. 0이 아닌 경우는 정해지지 않았으므로 반대 조건의 계속 전송을 추가하면 원문의 조건부 지시 범위를 바꾼다. 원문 유지에 반대 조건 설명은 필요하지 않다."
+    },
+    {
+      "case_id": "KI-SUP-ASP-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "accept",
+      "rule_ids": [
+        "KP-VER-003",
+        "KP-VER-005"
+      ],
+      "rationale": "그리는 중이다와 그리고 있다는 명시 문맥에서 현재 미완료 작업을 나타낸다. VER-003의 단계 보존과 현행 VER-005의 문맥상 진행 해석이 대안을 지지한다. 완성된 점 수는 추정하지 않으며 다 그렸다는 거절 출력은 완료를 창작한다."
+    },
+    {
+      "case_id": "KI-SUP-ASP-02",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "reject",
+      "rule_ids": [
+        "KP-VER-005"
+      ],
+      "rationale": "관찰 전에 안경을 썼고 현재는 착용 상태만 유지한다. 현행 VER-005는 -고 있다의 진행과 결과 유지를 동사 뜻·문맥으로 구별하도록 명시하므로 쓰는 중이다의 동작 진행 해석을 직접 거절한다. 이전 검토의 구체 규칙 공백은 이 사례에 대해 해소되었다."
+    },
+    {
+      "case_id": "KI-SUP-ASP-03",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "keep",
+      "rule_ids": [
+        "KP-VER-003"
+      ],
+      "rationale": "도형 그리기 완료가 확정되어 다 그렸다는 간단한 완료 서술을 유지한다. VER-003의 완료 표지 보존 및 간단한 완료 서술 예외가 직접 근거다. 그리고 있다는 이 문맥의 끝난 작업을 진행으로 바꾼다."
+    },
+    {
+      "case_id": "KI-SUP-CAU-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "accept",
+      "rule_ids": [
+        "KP-KO-007"
+      ],
+      "rationale": "문맥에서 세나의 지시와 이든의 실제 절단이 모두 확인되므로 한 문장에서도 사동주·실행자·완료를 유지한다. 현행 KO-007의 조건은 피동·사동 편집 전체를 포함하며 원인·명령·허락 관계를 구별하므로 직접 적용된다."
+    },
+    {
+      "case_id": "KI-SUP-CAU-02",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "keep",
+      "rule_ids": [
+        "KP-KO-007"
+      ],
+      "rationale": "선오의 농담이 원인이고 웃은 사람은 다미이며 명령은 없다. 현행 KO-007과 상세 판정 절차는 어휘 사동의 원인 관계를 명령으로 바꾸지 않고 실제 참여자를 유지하도록 명시하므로 웃겼다를 그대로 둘 수 있다. 거절 출력은 인과를 명령으로 바꾸면서 인물 역할도 뒤집는다."
+    },
+    {
+      "case_id": "KI-SUP-PAS-01",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "reject",
+      "rule_ids": [
+        "KP-KO-007"
+      ],
+      "rationale": "밀린 사람은 지후이고 민 사람은 예나다. 현행 KO-007은 일반 피동 편집에도 행위자·대상 대응 보존을 요구하므로 후보의 역전을 직접 거절한다. 예나가 지후를 밀었다는 허용 대안이고 원래 피동을 유지해도 된다."
+    },
+    {
+      "case_id": "KI-NEG-04",
+      "verdict": "pass",
+      "semantic_verdict": "pass",
+      "expected_decision": "keep",
+      "rule_ids": [
+        "KP-KO-003",
+        "KP-KO-004",
+        "KP-NUM-001"
+      ],
+      "rationale": "이번 5분의 한 번도 깜빡이지 않음은 발생 0회를 말하며 불능 원인을 말하지 않는다. KO-003의 범위가 이미 하나인 짧은 부정문 예외와 KO-004의 원인 없는 비수행 이력 유지 예외가 직접 근거다. NUM-001은 횟수·시간 대상을 남기게 한다. 한 번만 깜빡였다는 발생 1회와 모순이며 대상 하나의 횟수이므로 NUM-005를 적용하지 않았다."
+    }
+  ],
+  "findings": [],
+  "summary": {
+    "reviewed_case_count": 30,
+    "semantic_pass_count": 30,
+    "current_specific_normative_pass_count": 30,
+    "current_specific_normative_unconfirmed_count": 0,
+    "current_specific_normative_fail_count": 0,
+    "family_count": 8,
+    "specific_normative_cells_supported": 24,
+    "specific_normative_cells_total": 24,
+    "unconfirmed_cells": [],
+    "historical_30_of_31_revised": false,
+    "conclusion": "고정 30개 의미 판정과 현행 전용 규칙 매핑을 모두 뒷받침한다. 8개 범주의 정상·오용·유지 최소 24칸 규범 관문을 충족하며 포괄 EDIT 규칙만으로 남겨 둔 두 역할 매핑 공백은 해소되었다."
+  },
+  "limitations": [
+    "이번 검토는 같은 고정 사례의 현행 규범 매핑 재검토이며 새 holdout이 아니다.",
+    "8개 범주 정상·오용·유지 24칸은 최소 기능 관문이고 한국어의 모든 조사·시상·양태·화행을 포괄한 증명이 아니다.",
+    "실제 LLM 출력 성능, 사람 독자 이해도, 읽기 시간, STE 90% 기능 수준 달성은 이 검토로 주장하지 않는다.",
+    "KI-NEG-03 제외와 기존 리뷰·고정 사례 파일을 그대로 보존했다. 이전 /tmp 검토 파일도 덮어쓰지 않았다.",
+    "독립 기능 53개 평가, profile 생성·용량·실제 실행 검증은 이 검토 결과에 포함하지 않는다.",
+    "저장소 파일을 수정하지 않았다. 새 검토 JSON은 /tmp/kproto-current-korean-after-role.json에만 작성했다."
+  ],
+  "reviewed_state": "HEAD plus uncommitted KO-001 requirement and condition changes only in the two normative source files",
+  "delta_evidence": {
+    "baseline_commit": "afc88b566cc49797ca8c1d888b61c930aba4210e",
+    "baseline_rule_sha256": "c3be69747df248d6ec76f00788cc38a6e72ff5bc952ad73f0c2a8f8a106e736c",
+    "baseline_document_sha256": "fe477655f7de1f35ef730209bcb7788d9ef52d2816773efd3a93e9991df551bf",
+    "changed_fields": [
+      "KP-KO-001.requirement",
+      "KP-KO-001.conditions"
+    ],
+    "unchanged_fields": "Other 71 rules, all metadata, and every other KO-001 field including exceptions are byte/structure equivalent to the reviewed baseline. The Markdown diff changes only the same requirement and condition.",
+    "rules_json_utf8_byte_delta": 25,
+    "korean_rules_md_utf8_byte_delta": 25,
+    "profile_length_verified": false,
+    "profile_note": "소스 순증가 25바이트를 확인했다. 실제 생성 profile 길이와 모델 실행은 이 검토 범위에서 측정하지 않았다."
+  },
+  "carryforward": {
+    "method": "Prior independent semantic reading plus exact normative-source delta inspection; no new holdout or model performance run.",
+    "newly_rechecked_case_ids": [
+      "KI-PAR-01",
+      "KI-PAR-02",
+      "KI-PAR-03"
+    ],
+    "unchanged_other_case_ids": [
+      "KI-OMI-01",
+      "KI-OMI-02",
+      "KI-OMI-03",
+      "KI-MOD-01",
+      "KI-MOD-02",
+      "KI-MOD-03",
+      "KI-NEG-01",
+      "KI-NEG-02",
+      "KI-ASP-01",
+      "KI-ASP-02",
+      "KI-ASP-03",
+      "KI-PAS-01",
+      "KI-PAS-02",
+      "KI-PAS-03",
+      "KI-HON-01",
+      "KI-HON-02",
+      "KI-HON-03",
+      "KI-CON-01",
+      "KI-CON-02",
+      "KI-CON-03",
+      "KI-SUP-ASP-01",
+      "KI-SUP-ASP-02",
+      "KI-SUP-ASP-03",
+      "KI-SUP-CAU-01",
+      "KI-SUP-CAU-02",
+      "KI-SUP-PAS-01",
+      "KI-NEG-04"
+    ],
+    "unchanged_other_count": 27,
+    "note": "이전 pass 28개는 모두 pass를 유지한다. 그중 PAR-01은 새 직접 매핑까지 재확인했다. 나머지 27개는 사례 파일이 동일하고 관련 규칙·예외가 동일함을 baseline diff로 확인했으므로 개별 판정과 근거를 그대로 이월했다."
+  },
+  "resolved_findings": [
+    {
+      "id": "CURRENT-KO-001-CONDITION-GAP",
+      "case_ids": [
+        "KI-PAR-02",
+        "KI-PAR-03"
+      ],
+      "resolution": "이미 조사가 있는 문장의 조사·논항 편집을 적용 조건에 포함하고 행위자·대상·수신자·도구·장소의 대응 보존을 명시하여 직접 규칙 근거가 생겼다."
+    }
+  ],
+  "semantic_regression_review": [
+    "원문의 역할을 보존하도록 했으며 새 행위자·담당자·원인·결과를 추가하라는 요구가 없다.",
+    "역할이 문맥에서 하나로 회복되면 본문 구어·압축 표현도 조사 생략을 허용한다는 요구를 유지했다. 기존 예외는 그대로여서 수량·책임 대비가 사라지는 생략은 허용되지 않는다.",
+    "파일 저장했어요라는 기존 반례는 유일한 파일·공유된 주체가 회복되므로 계속 허용된다. 주어를 모든 문장에 강제하는 변화가 없다.",
+    "표면 이/가를 행위자로 정의하지 않는다. 지후가 예나에게 밀렸다의 실제 역할은 KO-007의 피동 관계·문맥 판정과 함께 유지되므로 피동을 능동으로 강제하지 않는다.",
+    "한국어 독립 사례의 생략·관형절·부정·시상·양태·높임·조건 판정과 충돌하는 새 요구를 찾지 못했다. 이 판단은 검토한 사례와 규범 비교에 한정된다."
+  ]
+}

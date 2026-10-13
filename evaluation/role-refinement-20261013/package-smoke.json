@@ -1,0 +1,20 @@
+{
+  "archive_sha256": "280e150dc5ad50e48f4cd5c2088f66b5a01061ebacaee2645531156d79075434",
+  "archive_bytes": 382276,
+  "hosts": {
+    "codex": {
+      "verified": true,
+      "status_after_clone_move": true,
+      "uninstall_after_clone_move": true
+    },
+    "claude-code": {
+      "verified": true,
+      "status_after_clone_move": true,
+      "uninstall_after_clone_move": true
+    }
+  },
+  "profile_sha256": "c3171890012b5eb60414fdf61c4656c68c24b3c984ba7e16b194f88c72bbfd9b",
+  "scope": "temporary HOME; no user global install or model inference",
+  "archive_files": 28,
+  "checksums_match": true
+}

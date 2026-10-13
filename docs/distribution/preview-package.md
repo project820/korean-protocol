@@ -44,3 +44,7 @@ python3 -m unittest discover -s tests -p test_distribution.py
 ZIP은 28개 파일, 382,239바이트이며 SHA-256은 `fc90f008e3fcdb636fa96e87e6201ac60edf6606610b1c3e9f3d6fcce0d3dd62`이다. [추출 패키지 시험](signed-bootstrap-smoke.json)에서 두 호스트의 미서명·서명 설치 네 경로와 원래 복제본 경로가 없어진 후의 상태 확인·제거를 통과했다. 전체 테스트 222개와 독립 검토를 통과했으며, 동시 설치 시 신뢰키 불일치와 미서명 덮어쓰기를 거부한다.
 
 예약 설정은 `registered: false`이며 실제 예약 등록을 완료한 상태가 아니다. 정식 키·HTTPS 서버·사용자 환경 연결은 수행하지 않았다.
+
+## 조사·논항 보완본을 담았다
+
+후속 ZIP은 KP-KO-001의 보완된 요구·조건과 다시 생성한 프로필·규약을 담았다. 28개 파일, 382,276바이트이며 SHA-256은 `280e150dc5ad50e48f4cd5c2088f66b5a01061ebacaee2645531156d79075434`이다. [패키지 시험](../../evaluation/role-refinement-20261013/package-smoke.json)은 체크섬과 Codex·Claude Code 설치, 복제본 이동 후 상태 확인·제거를 확인했다. 이 ZIP도 미서명 미리보기이며 자동 갱신을 기본으로 켜지 않는다.

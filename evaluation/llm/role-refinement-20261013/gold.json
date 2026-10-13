@@ -1,0 +1,70 @@
+{
+  "cases": [
+    {
+      "id": "KI-PAR-01",
+      "family": "particles_and_argument_roles",
+      "case_type": "normal",
+      "explicit_context": "가상의 자료 전달 장면이다. 미루가 보내는 사람이고 다온이 받는 사람이다. 전달한 물건은 빨간 봉투 하나다.",
+      "source": "미루가 다온에게 빨간 봉투를 건넸다.",
+      "candidate": "다온에게 빨간 봉투를 건넨 사람은 미루다.",
+      "expected_decision": "accept",
+      "acceptable_output": "다온에게 빨간 봉투를 건넨 사람은 미루다.",
+      "rejected_output": "다온이 미루에게 빨간 봉투를 건넸다.",
+      "rationale": "주제를 바꾸어도 전달자 미루와 수령자 다온의 논항 역할은 유지된다. 거절 예문은 두 사람의 역할을 뒤집는다.",
+      "preserved_facts": [
+        "미루가 전달했다.",
+        "다온이 받았다.",
+        "전달 대상은 빨간 봉투다.",
+        "전달은 이미 이루어졌다."
+      ],
+      "prohibited_changes": [
+        "전달자와 수령자를 바꾸지 않는다.",
+        "봉투의 색이나 전달 시점을 바꾸지 않는다."
+      ]
+    },
+    {
+      "id": "KI-PAR-02",
+      "family": "particles_and_argument_roles",
+      "case_type": "failure",
+      "explicit_context": "가상의 요청 기록이다. 이솔이 요청자이고 라온이 요청을 받은 사람이다. 라온이 이솔에게 요청한 일은 없다.",
+      "source": "이솔은 라온에게 빈 상자를 가져다 달라고 부탁했다.",
+      "candidate": "라온은 이솔에게 빈 상자를 가져다 달라고 부탁했다.",
+      "expected_decision": "reject",
+      "acceptable_output": "이솔이 라온에게 빈 상자를 가져다 달라고 부탁했다.",
+      "rejected_output": "라온은 이솔에게 빈 상자를 가져다 달라고 부탁했다.",
+      "rationale": "조사 자체는 문법적으로 맞지만 요청자와 수신자가 바뀌었다. 출발 문장과 명시한 요청 기록은 이솔의 요청만 뒷받침한다.",
+      "preserved_facts": [
+        "요청자는 이솔이다.",
+        "요청을 받은 사람은 라온이다.",
+        "요청 내용은 빈 상자를 가져다 달라는 것이다.",
+        "실제 운반 완료 여부는 제시되지 않았다."
+      ],
+      "prohibited_changes": [
+        "인물의 역할을 뒤집지 않는다.",
+        "부탁을 운반 완료 사실로 바꾸지 않는다."
+      ]
+    },
+    {
+      "id": "KI-PAR-03",
+      "family": "particles_and_argument_roles",
+      "case_type": "keep",
+      "explicit_context": "가상의 표시 작업 기록이다. 유나는 연필을 도구로 사용했다. 표시는 봉투에 했고 책상에는 하지 않았다.",
+      "source": "유나는 연필로 봉투에 작은 별을 그렸다.",
+      "candidate": "유나는 연필로 봉투에 작은 별을 그렸다.",
+      "expected_decision": "keep",
+      "acceptable_output": "유나는 연필로 봉투에 작은 별을 그렸다.",
+      "rejected_output": "유나는 봉투로 연필에 작은 별을 그렸다.",
+      "rationale": "도구를 나타내는 로와 표시 위치를 나타내는 에가 자연스럽게 역할을 구분한다. 이미 명확한 문장을 풀어 쓰거나 조사만 교체할 이유가 없다.",
+      "preserved_facts": [
+        "행위자는 유나다.",
+        "도구는 연필이다.",
+        "표시 위치는 봉투다.",
+        "그린 모양은 작은 별이다."
+      ],
+      "prohibited_changes": [
+        "도구와 위치를 바꾸지 않는다.",
+        "별의 목적이나 그린 이유를 덧붙이지 않는다."
+      ]
+    }
+  ]
+}

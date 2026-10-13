@@ -1,0 +1,20 @@
+{
+  "runner_sha256": "643be853e32ec08ebb79b5c6e625b9d114e1ad068ce76e3bbc6e69348644496c",
+  "frozen_sha256": {
+    "plan.md": "602cff974f620742b027d5dff0830ccf9a4eb5462fd7d90b654e418bea267f7d",
+    "gold.json": "a071d9f8c15fc9b88caa5b74778f66c81bfbd5d18e8eeba5d7c7eb94f2c4628b",
+    "public-input.json": "204799e37351ae59cd5d3dbd7881f8457a908d31553bb21d6a41acfa149cc530",
+    "prompt-prefix.txt": "21a8f2c107d15040dd171545fc6f1602998c16913362a9245598e8dc6978a7ed",
+    "prompt.txt": "3069bf4992c3fc0e09cf75105cd49153b6066f45a7ca1055611b17a0d062f798",
+    "frozen-profile.md": "c3171890012b5eb60414fdf61c4656c68c24b3c984ba7e16b194f88c72bbfd9b"
+  },
+  "max_attempts": 4,
+  "primary_model": "gpt-6.1-sol",
+  "fallback_model": "anthropic/claude-opus-5-5",
+  "effort": "high",
+  "conditions": [
+    "baseline",
+    "treatment"
+  ],
+  "scope": "three reused role cases; targeted diagnostic, not fresh holdout or efficacy"
+}
