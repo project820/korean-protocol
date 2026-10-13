@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "tested_at": "2026-10-13T05:58:10.007875+00:00",
+  "test": "temporary localhost TLS signed-content CLI update",
+  "host_adapter": "claude-code",
+  "runtime_root": "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor",
+  "runtime_sha256": "5e87c278d2fc6d17855320f0387da5ada0bb8f94209ebc893304588d899ea005",
+  "script_sha256": "bb994f5384a87d0c89d6b71fe08d4d2c365140c077085519fdebbd33773004a1",
+  "python_version": "3.11.15",
+  "python_executable": "/Users/m5max/.local/bin/python3.11",
+  "ssl_version": "OpenSSL 3.5.6 7 Apr 2026",
+  "transport": {
+    "scheme": "https",
+    "host": "localhost",
+    "port": 443,
+    "via_local_connect_proxy": true,
+    "proxy_listener_port": 49973,
+    "tls_listener_port": 49969,
+    "direct_port_443_bind_tested": false
+  },
+  "result": "pass",
+  "steps": [
+    {
+      "step": "signed-install-local-bundle",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "initial-status",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 1049,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "configure-source",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "reject-invalid-ca-file",
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "stdout_bytes": 0,
+      "stderr_bytes": 30
+    },
+    {
+      "step": "reject-valid-unrelated-ca",
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "stdout_bytes": 0,
+      "stderr_bytes": 30
+    },
+    {
+      "step": "actual-https-same-version-refresh",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "updated-status",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 1054,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "reject-invalid-release-signature-over-https",
+      "exit_code": 5,
+      "expected_exit_code": 5,
+      "stdout_bytes": 0,
+      "stderr_bytes": 39
+    },
+    {
+      "step": "auto-install-initial",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "auto-configure",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "wrapper-triggered-https-update",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "auto-updated-status",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 1065,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "offline-update-fails-safely",
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "stdout_bytes": 0,
+      "stderr_bytes": 30
+    },
+    {
+      "step": "offline-status",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 1054,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "disable-autoupdate",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "offline-wrapper-local-host",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    }
+  ],
+  "scope": {
+    "actual_https": true,
+    "intended_transport": "https",
+    "temporary_ca_and_signing_keys_only": false,
+    "publisher_artifact_consumed": true,
+    "publisher_private_key_used": false,
+    "forward_version_advancement_tested": false,
+    "ssl_cert_file_subprocess_only": true,
+    "user_trust_store_changed": false,
+    "real_user_global_installed": false,
+    "launchctl_registered": false,
+    "external_endpoint_tested": false,
+    "model_compliance_tested": false,
+    "private_keys_preserved": false,
+    "temporary_ca_only_publisher_signature_reused": true
+  },
+  "random_port_preflight": {
+    "port": 49965,
+    "source_validation": "rejected",
+    "exit_code": 2,
+    "reason": "Source must be credential-free HTTPS on port 443"
+  },
+  "ca_certificate_sha256": "bba797975c61a729c10a8f09fe828cc5df91f84b1d4d427d68e4c06ffd88b12f",
+  "server_certificate_sha256": "0de62aa52d0b94c7e98423932518dc74aef69a4e181761e5b27324a8c7794b7c",
+  "releases": {
+    "0.2.0": {
+      "sequence": 1,
+      "manifest_sha256": "7bf0a7ca0a9143401086ceb7903ec54236d5664000d55f4177e7a3a1937e8d0f",
+      "files": {
+        "profiles/coding-agent.md": {
+          "sha256": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+          "bytes": 28666
+        },
+        "profiles/chat.md": {
+          "sha256": "d1587c8b6eaaf4ca74f9f2c740525c9793c707a6f95ed1aec14472f518e4ef63",
+          "bytes": 28636
+        },
+        "profiles/work-document.md": {
+          "sha256": "3a3cb806f0cf98066aaf28ca016149be335036afe9e67890291da825ce17f216",
+          "bytes": 28645
+        },
+        "specification/rules.json": {
+          "sha256": "12368f51c779dec529b0c108879a19bca11bb00fc50d524b2315c7c777a39697",
+          "bytes": 171416
+        },
+        "lexicon/core.json": {
+          "sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+          "bytes": 302864
+        },
+        "lexicon/domains/software.json": {
+          "sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+          "bytes": 83473
+        },
+        "pack/protocol.md": {
+          "sha256": "632745a9f4e79c446b11711dee02ff0b6ec8955d02c5ebc5a228293c5f19e51a",
+          "bytes": 91725
+        }
+      },
+      "fixture_only": false
+    }
+  },
+  "publisher_artifact": {
+    "source": "/Users/m5max/Documents/ChatGPT/ASD-STE100 Kor/output/distribution/2026-10-13-current-actions/static",
+    "files": {
+      "releases/0.2.0/lexicon/core.json": {
+        "sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "bytes": 302864
+      },
+      "releases/0.2.0/lexicon/domains/software.json": {
+        "sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+        "bytes": 83473
+      },
+      "releases/0.2.0/pack/protocol.md": {
+        "sha256": "632745a9f4e79c446b11711dee02ff0b6ec8955d02c5ebc5a228293c5f19e51a",
+        "bytes": 91725
+      },
+      "releases/0.2.0/profiles/chat.md": {
+        "sha256": "d1587c8b6eaaf4ca74f9f2c740525c9793c707a6f95ed1aec14472f518e4ef63",
+        "bytes": 28636
+      },
+      "releases/0.2.0/profiles/coding-agent.md": {
+        "sha256": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+        "bytes": 28666
+      },
+      "releases/0.2.0/profiles/work-document.md": {
+        "sha256": "3a3cb806f0cf98066aaf28ca016149be335036afe9e67890291da825ce17f216",
+        "bytes": 28645
+      },
+      "releases/0.2.0/specification/rules.json": {
+        "sha256": "12368f51c779dec529b0c108879a19bca11bb00fc50d524b2315c7c777a39697",
+        "bytes": 171416
+      },
+      "stable/release.json": {
+        "sha256": "7bf0a7ca0a9143401086ceb7903ec54236d5664000d55f4177e7a3a1937e8d0f",
+        "bytes": 1801
+      },
+      "stable/release.json.sig": {
+        "sha256": "58bc5169cba14a04794a895e75c4d6240bf9b230b1bc532e9bb638870eff869c",
+        "bytes": 314
+      }
+    },
+    "authentication": "Pinned SSHSIG verified offline before serving captured bytes",
+    "serving_tree_matches_publisher_bytes": true,
+    "source_bytes_unchanged": true
+  },
+  "signer_fingerprint": "SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc",
+  "proxy_rejects_other_authority": true,
+  "negative_tls_requests_reached_http": 0,
+  "authenticated_update_requests": [
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/releases/0.2.0/profiles/coding-agent.md",
+    "/releases/0.2.0/profiles/chat.md",
+    "/releases/0.2.0/profiles/work-document.md",
+    "/releases/0.2.0/specification/rules.json",
+    "/releases/0.2.0/lexicon/core.json",
+    "/releases/0.2.0/lexicon/domains/software.json",
+    "/releases/0.2.0/pack/protocol.md"
+  ],
+  "update_behavior": "authenticated same-version refresh",
+  "dictionary_locator": {
+    "render_function": "Controller._activate",
+    "render_behavior": "Full profile body plus absolute cache directory footer; relative dictionary names resolve against that advertised cache root.",
+    "absolute_cache_directory_advertised": true,
+    "advertised_root_matches_active_cache": true,
+    "files": {
+      "lexicon/core.json": {
+        "exists": true,
+        "sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "manifest_sha256_matches": true,
+        "absolute_file_locator_in_body": false
+      },
+      "lexicon/domains/software.json": {
+        "exists": true,
+        "sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+        "manifest_sha256_matches": true,
+        "absolute_file_locator_in_body": false
+      }
+    },
+    "model_file_read_observed": false
+  },
+  "initial_version": "0.2.0",
+  "updated_version": "0.2.0",
+  "highest_sequence": 1,
+  "installed_profile_sha256": "1761a5432fb5ed1ee9c71dfc412ff416c498ce784da478930db2295040cd0b65",
+  "original_user_bytes_preserved": true,
+  "invalid_signature_preserved_profile_cache_state": true,
+  "automatic_update": {
+    "trigger": "run host wrapper",
+    "version": "0.2.0",
+    "trust": "signed",
+    "new_http_requests": 9,
+    "host_exit": 0,
+    "scheduler_registered": false
+  },
+  "offline": {
+    "server_stopped": true,
+    "version": "0.2.0",
+    "installed_profile_unchanged": true,
+    "cache_bytes_unchanged": true,
+    "cached_dictionaries_still_readable": true,
+    "wrapper_host_exit": 0
+  },
+  "requests": [
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/releases/0.2.0/profiles/coding-agent.md",
+    "/releases/0.2.0/profiles/chat.md",
+    "/releases/0.2.0/profiles/work-document.md",
+    "/releases/0.2.0/specification/rules.json",
+    "/releases/0.2.0/lexicon/core.json",
+    "/releases/0.2.0/lexicon/domains/software.json",
+    "/releases/0.2.0/pack/protocol.md",
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/releases/0.2.0/profiles/coding-agent.md",
+    "/releases/0.2.0/profiles/chat.md",
+    "/releases/0.2.0/profiles/work-document.md",
+    "/releases/0.2.0/specification/rules.json",
+    "/releases/0.2.0/lexicon/core.json",
+    "/releases/0.2.0/lexicon/domains/software.json",
+    "/releases/0.2.0/pack/protocol.md"
+  ],
+  "connect_tunnels": [
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443"
+  ],
+  "runtime_unchanged_during_smoke": true,
+  "temporary_material_removed": true,
+  "limitation": "Localhost TLS and CLI wiring only; no public release endpoint, launchd registration, real user installation or model compliance validation.",
+  "dictionary_locator_local_snapshot": {
+    "transport": "none",
+    "trust": "local-snapshot",
+    "actual_https": false,
+    "model_file_read_observed": false,
+    "host_adapter": "claude-code",
+    "render_function": "Controller._activate",
+    "render_line": 856,
+    "install_exit_code": 0,
+    "status_exit_code": 0,
+    "absolute_cache_directory_advertised": true,
+    "advertised_root_matches_active_cache": true,
+    "installed_version": "0.2.0",
+    "original_user_bytes_preserved": true,
+    "installed_profile_sha256": "c3a56aaac25a7a05e7c756bf3d67da77490805469f07fa31038aa91fe69f4b53",
+    "files": {
+      "lexicon/core.json": {
+        "cached_file_exists": true,
+        "source_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "cached_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "explicit_absolute_file_locator_in_body": false,
+        "source_hash_matches_cache": true
+      },
+      "lexicon/domains/software.json": {
+        "cached_file_exists": true,
+        "source_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+        "cached_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+        "explicit_absolute_file_locator_in_body": false,
+        "source_hash_matches_cache": true
+      }
+    },
+    "result": "pass",
+    "locator_contract": "Relative lexicon/core.json and lexicon/domains/software.json resolve against the footer-advertised absolute cache directory; file-specific absolute locators are not inserted.",
+    "temporary_material_removed": true
+  },
+  "script_validation": {
+    "python_compile": "pass",
+    "actual_https_branch_executed": true
+  }
+}

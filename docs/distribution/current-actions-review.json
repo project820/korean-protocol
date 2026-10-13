@@ -1,0 +1,48 @@
+{
+  "script_sha256": "bb994f5384a87d0c89d6b71fe08d4d2c365140c077085519fdebbd33773004a1",
+  "runtime_sha256": "5e87c278d2fc6d17855320f0387da5ada0bb8f94209ebc893304588d899ea005",
+  "targeted_tests": {
+    "command": "python3 -B -m unittest tests.test_manual_https_smoke tests.test_release",
+    "count": 19,
+    "exit_code": 0
+  },
+  "independent_review": {
+    "reviewer": "signed_static_smoke_review; gpt-6-astra/high",
+    "initial_findings": [
+      "relative publisher-key path differed across subprocess working directory",
+      "expected request ordering must follow authenticated manifest"
+    ],
+    "resolved": true,
+    "remaining_concrete_findings": 0,
+    "reviewer_reran_network_smokes": false
+  },
+  "reports": {
+    "current-actions-https-codex.json": {
+      "sha256": "306e723eec2422cf44471193b09d8bab61f0c1c6b0b6b48454a0f45cef6fb4cc",
+      "result": "pass",
+      "steps": 16,
+      "manual_gets": 9,
+      "wrapper_gets": 9,
+      "update_behavior": "authenticated same-version refresh",
+      "python_version": "3.11.15"
+    },
+    "current-actions-https-claude.json": {
+      "sha256": "c9a9eb2505661d6775df22f5dbb1ddb777c9a4fdefff2f700f03b9d31f752175",
+      "result": "pass",
+      "steps": 16,
+      "manual_gets": 9,
+      "wrapper_gets": 9,
+      "update_behavior": "authenticated same-version refresh",
+      "python_version": "3.11.15"
+    },
+    "current-fixture-https.json": {
+      "sha256": "5948536b190244ff389f8a26499d52a4bf5b83eed6293f15d6048e25b111d4e5",
+      "result": "pass",
+      "steps": 16,
+      "manual_gets": 9,
+      "wrapper_gets": 9,
+      "update_behavior": "forward-version upgrade",
+      "python_version": "3.11.15"
+    }
+  }
+}

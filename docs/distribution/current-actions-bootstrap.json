@@ -1,0 +1,50 @@
+{
+  "workflow_run_id": 38353292401,
+  "workflow_url": "https://github.com/project820/korean-protocol/actions/runs/38353292401",
+  "workflow_commit": "a16776de0df8436e0d6fdf38e886dc2b07ab5034",
+  "artifact_id": 11791059945,
+  "sign": "success",
+  "publish": "skipped",
+  "receipt": "skipped",
+  "archive": "skipped",
+  "fingerprint": "SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc",
+  "manifest_sha256": "7bf0a7ca0a9143401086ceb7903ec54236d5664000d55f4177e7a3a1937e8d0f",
+  "version": "0.2.0",
+  "sequence": 1,
+  "all_content_matches_current_sources": true,
+  "hosts": {
+    "codex": {
+      "signature_verified": true,
+      "installed_exact_profile": true,
+      "reinstall_preserved_bytes": true,
+      "durable_status_verified": true,
+      "original_user_content_preserved": true,
+      "uninstall_restored_original": true
+    },
+    "claude-code": {
+      "signature_verified": true,
+      "installed_exact_profile": true,
+      "reinstall_preserved_bytes": true,
+      "durable_status_verified": true,
+      "original_user_content_preserved": true,
+      "uninstall_restored_original": true
+    }
+  },
+  "scope": "Actual GitHub Secret signature; temporary local installer CLI; no global install, public Pages, registered jobs or forward-version upgrade.",
+  "source_hashes": {
+    "runtime/kproto.py": "5e87c278d2fc6d17855320f0387da5ada0bb8f94209ebc893304588d899ea005",
+    "distribution/agent_install.py": "f17381c048ceaa95b3a3c5504ba9e6d80075bf194c17f9b03b5dc679df659c4c",
+    ".github/workflows/release.yml": "3444080d6ff3af5351e66f6a6cff86627685a8ba67316aa6f8a115ef253670bb",
+    "distribution/trust/publisher.pub": "67e81449136186d892ccf5dd1ce2898629b889bdeed7e9a6401686f9199cae98"
+  },
+  "actions_targeted_tests": {
+    "count": 90,
+    "result": "pass",
+    "seconds": 9.541
+  },
+  "preserved_manifest": "docs/distribution/current-actions-artifact/release.json",
+  "preserved_signature": "docs/distribution/current-actions-artifact/release.json.sig",
+  "payload_reconstruction_commit": "a16776de0df8436e0d6fdf38e886dc2b07ab5034",
+  "issued_at": "2026-10-13T05:48:46Z",
+  "expires_at": "2026-11-12T05:48:46Z"
+}

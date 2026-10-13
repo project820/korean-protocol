@@ -1,0 +1,10 @@
+{
+  "scope": "tracked repository only; known literal patterns and file-name inventory, not comprehensive secret/IP clearance",
+  "tracked_files": 591,
+  "known_pattern_hits": [],
+  "credential_filenames": [],
+  "license_filenames": [],
+  "binary_reference_files": [],
+  "source_commit": "a16776de0df8436e0d6fdf38e886dc2b07ab5034",
+  "license_decision": "pending user choice"
+}

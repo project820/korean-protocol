@@ -10,6 +10,8 @@ TemporaryDirectory and are removed on exit. SSL_CERT_FILE is subprocess-local.
 Use --via-local-proxy with a Python whose default SSL context honors
 SSL_CERT_FILE to test real TLS through an ephemeral loopback CONNECT fixture.
 This mode does not prove direct binding to 443 or external release hosting.
+Use --signed-static to consume a sealed publisher artifact verbatim and test
+an authenticated refresh of the same version; no publisher key is generated.
 """
 import argparse
 from datetime import datetime, timezone
@@ -38,7 +40,65 @@ def sha256(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
+def publisher_trust(module, runtime_root, public_key, fingerprint):
+    public_key = module.safe_path(public_key or runtime_root/'distribution/trust/publisher.pub')
+    fingerprint = fingerprint or module.strict_json(module.read_bytes(
+        runtime_root/'distribution/trust/publisher.json'))['fingerprint']
+    return public_key, fingerprint
+
+
+def release_requests(manifest):
+    return ['/stable/release.json','/stable/release.json.sig'] + [
+        '/releases/'+manifest['version']+'/'+item['path'] for item in manifest['files']]
+
+
+def static_files(module, root):
+    """Capture regular files without following links or modifying the source."""
+    root = module.safe_path(root)
+    files = {}
+    for path in root.rglob('*'):
+        module.safe_path(path)
+        if path.is_file():
+            files[path.relative_to(root).as_posix()] = module.read_bytes(path)
+        elif not path.is_dir():
+            raise module.InputError('Static artifact contains a nonregular entry')
+    return files
+
+
+def load_signed_static(module, signed_static, public_key, fingerprint):
+    """Authenticate a captured static tree before returning its exact bytes."""
+    payload = static_files(module, signed_static)
+    raw = module.read_bytes(module.safe_path(signed_static) / 'stable/release.json', 65536)
+    manifest = module.validate_manifest(module.strict_json(raw))
+    prefix = 'releases/' + manifest['version'] + '/'
+    expected = {prefix + name for name in module.CONTENT_PATHS}
+    expected.update(('stable/release.json', 'stable/release.json.sig'))
+    if set(payload) != expected:
+        raise module.InputError('Static artifact contains unlisted or missing files')
+    if payload['stable/release.json'] != raw:
+        raise module.ConflictError('Static manifest changed during capture')
+    with tempfile.TemporaryDirectory(prefix='kproto-smoke-verify-') as temporary:
+        root = Path(temporary).resolve()
+        bundle = root / 'bundle'
+        for name in module.CONTENT_PATHS:
+            destination = bundle / name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(payload[prefix + name])
+        for name in ('release.json', 'release.json.sig'):
+            (bundle / name).write_bytes(payload['stable/' + name])
+        controller = module.Controller(root / 'state')
+        controller.trust_key(public_key, fingerprint)
+        controller._load_signed(bundle)
+        for name in module.CONTENT_PATHS:
+            if name.endswith('.json'):
+                version = module.strict_json(payload[prefix + name])['version']
+                if not re.fullmatch(re.escape(manifest['version']) + r'(?:-[a-z0-9.-]+)?', version):
+                    raise module.InputError('Content source version differs from the signed release')
+    return manifest, payload
+
+
+def run_smoke(runtime_root, port, via_local_proxy=False, host='codex',
+              signed_static=None, publisher_key=None, expected_fingerprint=None):
     runtime_root = runtime_root.resolve()
     runtime_file = runtime_root / 'runtime/kproto.py'
     script_hash = sha256(Path(__file__).read_bytes())
@@ -60,6 +120,9 @@ def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
             'actual_https': False,
             'intended_transport': 'https',
             'temporary_ca_and_signing_keys_only': True,
+            'publisher_artifact_consumed': signed_static is not None,
+            'publisher_private_key_used': False,
+            'forward_version_advancement_tested': False,
             'ssl_cert_file_subprocess_only': True,
             'user_trust_store_changed': False,
             'real_user_global_installed': False,
@@ -142,13 +205,50 @@ def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
             report['ca_certificate_sha256'] = sha256(ca_cert.read_bytes())
             report['server_certificate_sha256'] = sha256(server_cert.read_bytes())
 
-            signing_key = root/'fixture-signing-key'
-            checked_tool([ssh_keygen,'-q','-t','ed25519','-N','','-f',str(signing_key)])
-            public_key = Path(str(signing_key)+'.pub')
-            fingerprint = module.key_fingerprint(public_key)
-            report['signer_fingerprint'] = fingerprint
             bundles = {}
-            for version, sequence in [('0.2.0',1),('0.2.1',2)]:
+            publisher_payload = None
+            if signed_static is not None:
+                public_key, fingerprint = publisher_trust(module, runtime_root, publisher_key, expected_fingerprint)
+                manifest, publisher_payload = load_signed_static(module, signed_static, public_key, fingerprint)
+                for name, data in publisher_payload.items():
+                    destination = content/name
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    destination.write_bytes(data)
+                version = manifest['version']
+                bundle = root/'install-bundle'
+                for name in module.CONTENT_PATHS:
+                    destination = bundle/name
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    destination.write_bytes(publisher_payload['releases/'+version+'/'+name])
+                for name in ('release.json','release.json.sig'):
+                    (bundle/name).write_bytes(publisher_payload['stable/'+name])
+                bundles[version] = bundle
+                report['releases'] = {version:{
+                    'sequence':manifest['sequence'],
+                    'manifest_sha256':sha256(publisher_payload['stable/release.json']),
+                    'files':{item['path']:{'sha256':item['sha256'],'bytes':item['size']} for item in manifest['files']},
+                    'fixture_only':False,
+                }}
+                report['publisher_artifact'] = {
+                    'source':str(module.safe_path(signed_static)),
+                    'files':{name:{'sha256':sha256(data),'bytes':len(data)} for name,data in sorted(publisher_payload.items())},
+                    'authentication':'Pinned SSHSIG verified offline before serving captured bytes',
+                    'serving_tree_matches_publisher_bytes':static_files(module,content)==publisher_payload,
+                }
+                report['scope']['temporary_ca_and_signing_keys_only'] = False
+                report['scope']['temporary_ca_only_publisher_signature_reused'] = True
+                initial_version = target_version = version
+                target_sequence = manifest['sequence']
+                fixture_releases = []
+            else:
+                signing_key = root/'fixture-signing-key'
+                checked_tool([ssh_keygen,'-q','-t','ed25519','-N','','-f',str(signing_key)])
+                public_key = Path(str(signing_key)+'.pub')
+                fingerprint = module.key_fingerprint(public_key)
+                initial_version, target_version, target_sequence = '0.2.0', '0.2.1', 2
+                fixture_releases = [('0.2.0',1),('0.2.1',2)]
+            report['signer_fingerprint'] = fingerprint
+            for version, sequence in fixture_releases:
                 bundle = content/'releases'/version
                 bundle.mkdir(parents=True)
                 for name in module.CONTENT_PATHS:
@@ -173,9 +273,10 @@ def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
                     'fixture_only':True,
                 }
             stable = content/'stable'
-            stable.mkdir()
-            for name in ('release.json','release.json.sig'):
-                (stable/name).write_bytes((bundles['0.2.1']/name).read_bytes())
+            if signed_static is None:
+                stable.mkdir()
+                for name in ('release.json','release.json.sig'):
+                    (stable/name).write_bytes((bundles[target_version]/name).read_bytes())
             tls = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
             tls.load_cert_chain(str(server_cert),str(server_key))
             server.socket = tls.wrap_socket(server.socket,server_side=True)
@@ -268,9 +369,9 @@ def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
                 return process.stdout
 
             home_option = '--claude-home' if host=='claude-code' else '--codex-home'
-            cli('signed-install-local-bundle',['install','--bundle',str(bundles['0.2.0']),'--host',host,'--scope','user',home_option,str(codex_home),'--trust-key',str(public_key),'--expected-fingerprint',fingerprint])
+            cli('signed-install-local-bundle',['install','--bundle',str(bundles[initial_version]),'--host',host,'--scope','user',home_option,str(codex_home),'--trust-key',str(public_key),'--expected-fingerprint',fingerprint])
             initial = json.loads(cli('initial-status',['status','--json']))
-            if initial['version']!='0.2.0' or initial['trust']!='signed':
+            if initial['version']!=initial_version or initial['trust']!='signed':
                 raise RuntimeError('Initial signed state was not installed')
             cli('configure-source',['autoupdate','configure','--mode','interval','--source',source])
 
@@ -286,11 +387,18 @@ def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
             if target.read_bytes()!=before_failed or len(requests)!=before_gets:
                 raise RuntimeError('Unrelated CA allowed HTTP or changed active profile')
             report['negative_tls_requests_reached_http'] = len(requests)-before_gets
-            cli('actual-https-update',['update'])
+            before_update_gets = len(requests)
+            cli('actual-https-same-version-refresh' if signed_static is not None else 'actual-https-update',['update'])
             report['scope']['actual_https']=True
+            report['authenticated_update_requests'] = requests[before_update_gets:]
+            expected_requests = release_requests(manifest)
+            if report['authenticated_update_requests'] != expected_requests:
+                raise RuntimeError('Authenticated HTTPS update did not fetch the exact nine publisher files')
             updated = json.loads(cli('updated-status',['status','--json']))
-            if updated['version']!='0.2.1' or updated['highest_sequence']!=2 or updated['trust']!='signed':
-                raise RuntimeError('HTTPS update did not activate authenticated version 0.2.1')
+            if updated['version']!=target_version or updated['highest_sequence']!=target_sequence or updated['trust']!='signed':
+                raise RuntimeError('HTTPS update did not activate the authenticated target release')
+            report['scope']['forward_version_advancement_tested'] = module.version_tuple(updated['version']) > module.version_tuple(initial['version'])
+            report['update_behavior'] = 'authenticated same-version refresh' if signed_static is not None else 'forward-version upgrade'
             installed = target.read_bytes()
             if not installed.startswith(original):
                 raise RuntimeError('Installer changed original user instructions')
@@ -302,7 +410,7 @@ def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
             locators = {}
             for name in ('lexicon/core.json','lexicon/domains/software.json'):
                 path = cache/name
-                locators[name] = {'exists':path.is_file(),'sha256':sha256(path.read_bytes()),'manifest_sha256_matches':sha256(path.read_bytes())==report['releases']['0.2.1']['files'][name]['sha256'],'absolute_file_locator_in_body':str(path) in installed.decode('utf-8')}
+                locators[name] = {'exists':path.is_file(),'sha256':sha256(path.read_bytes()),'manifest_sha256_matches':sha256(path.read_bytes())==report['releases'][target_version]['files'][name]['sha256'],'absolute_file_locator_in_body':str(path) in installed.decode('utf-8')}
             if not cache.is_absolute() or cache!=expected_cache or not all(item['exists'] and item['manifest_sha256_matches'] for item in locators.values()):
                 raise RuntimeError('Advertised cache root did not resolve controlled dictionaries')
             report['dictionary_locator'] = {
@@ -321,11 +429,14 @@ def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
 
             signature_path = stable/'release.json.sig'
             valid_signature = signature_path.read_bytes()
+            cached_before = static_files(module,cache)
+            state_before = (state/'state.json').read_bytes()
             signature_path.write_bytes(b'invalid smoke signature\n')
             try:
                 cli('reject-invalid-release-signature-over-https',['update'],expected=5)
-                if target.read_bytes()!=installed:
-                    raise RuntimeError('Invalid release signature changed active profile')
+                if target.read_bytes()!=installed or static_files(module,cache)!=cached_before or (state/'state.json').read_bytes()!=state_before:
+                    raise RuntimeError('Invalid release signature changed the active profile, cache or state')
+                report['invalid_signature_preserved_profile_cache_state'] = True
             finally:
                 signature_path.write_bytes(valid_signature)
 
@@ -334,14 +445,14 @@ def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
             auto_state, auto_home = root/'auto-state', root/'auto-codex'
             auto_state.mkdir(mode=0o700)
             auto_home.mkdir(mode=0o700)
-            cli('auto-install-initial',['install','--bundle',str(bundles['0.2.0']),
+            cli('auto-install-initial',['install','--bundle',str(bundles[initial_version]),
                 '--host',host,'--scope','user',home_option,str(auto_home),
                 '--trust-key',str(public_key),'--expected-fingerprint',fingerprint],state_root=auto_state)
             cli('auto-configure',['autoupdate','configure','--mode','interval','--source',source],state_root=auto_state)
             before_auto_gets = len(requests)
             cli('wrapper-triggered-https-update',['run','--',sys.executable,'-c','raise SystemExit(0)'],state_root=auto_state)
             automatic = json.loads(cli('auto-updated-status',['status','--json'],state_root=auto_state))
-            if automatic['version']!='0.2.1' or len(requests)<=before_auto_gets:
+            if automatic['version']!=target_version or automatic['highest_sequence']!=target_sequence or automatic['trust']!='signed' or requests[before_auto_gets:]!=expected_requests:
                 raise RuntimeError('Host wrapper did not trigger the authenticated HTTPS update')
             report['automatic_update'] = {'trigger':'run host wrapper','version':automatic['version'],
                 'trust':automatic['trust'],'new_http_requests':len(requests)-before_auto_gets,
@@ -353,11 +464,11 @@ def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
             server = None
             cli('offline-update-fails-safely',['update'],expected=3)
             offline = json.loads(cli('offline-status',['status','--json']))
-            if offline['version']!='0.2.1' or target.read_bytes()!=installed:
+            if offline['version']!=target_version or target.read_bytes()!=installed or static_files(module,cache)!=cached_before:
                 raise RuntimeError('Offline update changed last known good profile')
             cli('disable-autoupdate',['autoupdate','configure','--mode','off'])
             cli('offline-wrapper-local-host',['run','--',sys.executable,'-c','raise SystemExit(0)'])
-            report['offline'] = {'server_stopped':True,'version':offline['version'],'installed_profile_unchanged':True,'cached_dictionaries_still_readable':all((cache/name).is_file() for name in locators),'wrapper_host_exit':0}
+            report['offline'] = {'server_stopped':True,'version':offline['version'],'installed_profile_unchanged':True,'cache_bytes_unchanged':True,'cached_dictionaries_still_readable':all((cache/name).read_bytes()==cached_before[name] for name in locators),'wrapper_host_exit':0}
             report['requests'] = requests
             if via_local_proxy:
                 report['connect_tunnels'] = tunnels
@@ -366,6 +477,10 @@ def run_smoke(runtime_root, port, via_local_proxy=False, host='codex'):
             report['runtime_unchanged_during_smoke'] = sha256(runtime_file.read_bytes())==report['runtime_sha256']
             if not report['runtime_unchanged_during_smoke']:
                 raise RuntimeError('Authoritative runtime changed during smoke; repeat on a stable snapshot')
+            if publisher_payload is not None:
+                report['publisher_artifact']['source_bytes_unchanged'] = static_files(module,signed_static)==publisher_payload
+                if not report['publisher_artifact']['source_bytes_unchanged']:
+                    raise RuntimeError('Supplied publisher artifact changed during smoke')
             report['result'] = 'pass'
         except (RuntimeError,subprocess.SubprocessError,OSError,ValueError,module.ProtocolError) as error:
             report['result'] = 'failed'
@@ -447,9 +562,15 @@ def main():
     parser.add_argument('--port',type=int,default=443)
     parser.add_argument('--via-local-proxy',action='store_true',help='Use an ephemeral loopback CONNECT fixture for https://localhost:443 without a privileged listener')
     parser.add_argument('--host',choices=['codex','claude-code'],default='codex')
+    parser.add_argument('--signed-static',type=Path,help='Sealed first-release static artifact; authenticate and refresh its exact version without signing')
+    parser.add_argument('--publisher-key',type=Path,help='Publisher public key; defaults to runtime-root distribution/trust/publisher.pub')
+    parser.add_argument('--expected-fingerprint',help='Separately verified fingerprint; defaults to runtime-root distribution/trust/publisher.json')
     parser.add_argument('--output',type=Path,required=True)
     args=parser.parse_args()
-    report=run_smoke(args.runtime_root,args.port,args.via_local_proxy,args.host)
+    if args.signed_static is None and (args.publisher_key is not None or args.expected_fingerprint is not None):
+        parser.error('--publisher-key and --expected-fingerprint require --signed-static')
+    report=run_smoke(args.runtime_root,args.port,args.via_local_proxy,args.host,
+                     args.signed_static,args.publisher_key,args.expected_fingerprint)
     report['dictionary_locator_local_snapshot']=snapshot_locator_check(args.runtime_root,args.host)
     if report['result']=='blocked':
         report['main_https_branches']='not executed because prerequisite bind failed; script syntax and independent locator branch were checked only'

@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "tested_at": "2026-10-13T05:58:10.007878+00:00",
+  "test": "temporary localhost TLS signed-content CLI update",
+  "host_adapter": "codex",
+  "runtime_root": "/Users/m5max/.codex/worktrees/editing-information/ASD-STE100 Kor",
+  "runtime_sha256": "5e87c278d2fc6d17855320f0387da5ada0bb8f94209ebc893304588d899ea005",
+  "script_sha256": "bb994f5384a87d0c89d6b71fe08d4d2c365140c077085519fdebbd33773004a1",
+  "python_version": "3.11.15",
+  "python_executable": "/Users/m5max/.local/bin/python3.11",
+  "ssl_version": "OpenSSL 3.5.6 7 Apr 2026",
+  "transport": {
+    "scheme": "https",
+    "host": "localhost",
+    "port": 443,
+    "via_local_connect_proxy": true,
+    "proxy_listener_port": 49971,
+    "tls_listener_port": 49968,
+    "direct_port_443_bind_tested": false
+  },
+  "result": "pass",
+  "steps": [
+    {
+      "step": "signed-install-local-bundle",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "initial-status",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 1027,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "configure-source",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "reject-invalid-ca-file",
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "stdout_bytes": 0,
+      "stderr_bytes": 30
+    },
+    {
+      "step": "reject-valid-unrelated-ca",
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "stdout_bytes": 0,
+      "stderr_bytes": 30
+    },
+    {
+      "step": "actual-https-update",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "updated-status",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 1032,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "reject-invalid-release-signature-over-https",
+      "exit_code": 5,
+      "expected_exit_code": 5,
+      "stdout_bytes": 0,
+      "stderr_bytes": 39
+    },
+    {
+      "step": "auto-install-initial",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "auto-configure",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "wrapper-triggered-https-update",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "auto-updated-status",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 1043,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "offline-update-fails-safely",
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "stdout_bytes": 0,
+      "stderr_bytes": 30
+    },
+    {
+      "step": "offline-status",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 1032,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "disable-autoupdate",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "step": "offline-wrapper-local-host",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    }
+  ],
+  "scope": {
+    "actual_https": true,
+    "intended_transport": "https",
+    "temporary_ca_and_signing_keys_only": true,
+    "publisher_artifact_consumed": false,
+    "publisher_private_key_used": false,
+    "forward_version_advancement_tested": true,
+    "ssl_cert_file_subprocess_only": true,
+    "user_trust_store_changed": false,
+    "real_user_global_installed": false,
+    "launchctl_registered": false,
+    "external_endpoint_tested": false,
+    "model_compliance_tested": false,
+    "private_keys_preserved": false
+  },
+  "random_port_preflight": {
+    "port": 49966,
+    "source_validation": "rejected",
+    "exit_code": 2,
+    "reason": "Source must be credential-free HTTPS on port 443"
+  },
+  "ca_certificate_sha256": "4338b6ca9928cc48af5a9be7dd083baa0043232dabd92e944456f95163e9f562",
+  "server_certificate_sha256": "14402f249d76b80edd41ab9feabb91a8e10b70a2b34b510075718ddba3c8f637",
+  "signer_fingerprint": "SHA256:7KTYZA7OWjN+bdR6Mn4POkAjqEfdMPncQwG1HdgaNE0",
+  "releases": {
+    "0.2.0": {
+      "sequence": 1,
+      "manifest_sha256": "a97831bbef3592fc9d1a4c84523e68cc563de322d3af62211fd081cd5e1c6ddf",
+      "files": {
+        "profiles/coding-agent.md": {
+          "sha256": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+          "bytes": 28666
+        },
+        "profiles/chat.md": {
+          "sha256": "d1587c8b6eaaf4ca74f9f2c740525c9793c707a6f95ed1aec14472f518e4ef63",
+          "bytes": 28636
+        },
+        "profiles/work-document.md": {
+          "sha256": "3a3cb806f0cf98066aaf28ca016149be335036afe9e67890291da825ce17f216",
+          "bytes": 28645
+        },
+        "specification/rules.json": {
+          "sha256": "12368f51c779dec529b0c108879a19bca11bb00fc50d524b2315c7c777a39697",
+          "bytes": 171416
+        },
+        "lexicon/core.json": {
+          "sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+          "bytes": 302864
+        },
+        "lexicon/domains/software.json": {
+          "sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+          "bytes": 83473
+        },
+        "pack/protocol.md": {
+          "sha256": "632745a9f4e79c446b11711dee02ff0b6ec8955d02c5ebc5a228293c5f19e51a",
+          "bytes": 91725
+        }
+      },
+      "fixture_only": true
+    },
+    "0.2.1": {
+      "sequence": 2,
+      "manifest_sha256": "5adfe5c4a460b48076171a49f273e99a7301488c92e85af343e21099403db943",
+      "files": {
+        "profiles/coding-agent.md": {
+          "sha256": "786cddbe11388e15c0776204c76fa2fd1ff2f32885447a1343a048477c10025b",
+          "bytes": 28666
+        },
+        "profiles/chat.md": {
+          "sha256": "d1587c8b6eaaf4ca74f9f2c740525c9793c707a6f95ed1aec14472f518e4ef63",
+          "bytes": 28636
+        },
+        "profiles/work-document.md": {
+          "sha256": "3a3cb806f0cf98066aaf28ca016149be335036afe9e67890291da825ce17f216",
+          "bytes": 28645
+        },
+        "specification/rules.json": {
+          "sha256": "12368f51c779dec529b0c108879a19bca11bb00fc50d524b2315c7c777a39697",
+          "bytes": 171416
+        },
+        "lexicon/core.json": {
+          "sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+          "bytes": 302864
+        },
+        "lexicon/domains/software.json": {
+          "sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+          "bytes": 83473
+        },
+        "pack/protocol.md": {
+          "sha256": "aee04870777165583e95735841e4153be870234ae3c1d4ea84ec080ae0c34b1f",
+          "bytes": 91793
+        }
+      },
+      "fixture_only": true
+    }
+  },
+  "proxy_rejects_other_authority": true,
+  "negative_tls_requests_reached_http": 0,
+  "authenticated_update_requests": [
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/releases/0.2.1/profiles/coding-agent.md",
+    "/releases/0.2.1/profiles/chat.md",
+    "/releases/0.2.1/profiles/work-document.md",
+    "/releases/0.2.1/specification/rules.json",
+    "/releases/0.2.1/lexicon/core.json",
+    "/releases/0.2.1/lexicon/domains/software.json",
+    "/releases/0.2.1/pack/protocol.md"
+  ],
+  "update_behavior": "forward-version upgrade",
+  "dictionary_locator": {
+    "render_function": "Controller._activate",
+    "render_behavior": "Full profile body plus absolute cache directory footer; relative dictionary names resolve against that advertised cache root.",
+    "absolute_cache_directory_advertised": true,
+    "advertised_root_matches_active_cache": true,
+    "files": {
+      "lexicon/core.json": {
+        "exists": true,
+        "sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "manifest_sha256_matches": true,
+        "absolute_file_locator_in_body": false
+      },
+      "lexicon/domains/software.json": {
+        "exists": true,
+        "sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+        "manifest_sha256_matches": true,
+        "absolute_file_locator_in_body": false
+      }
+    },
+    "model_file_read_observed": false
+  },
+  "initial_version": "0.2.0",
+  "updated_version": "0.2.1",
+  "highest_sequence": 2,
+  "installed_profile_sha256": "3aaefd3a5ad9eb486b71a321d28d6f9819e7ddf6a437ea55656f4b5907637eff",
+  "original_user_bytes_preserved": true,
+  "invalid_signature_preserved_profile_cache_state": true,
+  "automatic_update": {
+    "trigger": "run host wrapper",
+    "version": "0.2.1",
+    "trust": "signed",
+    "new_http_requests": 9,
+    "host_exit": 0,
+    "scheduler_registered": false
+  },
+  "offline": {
+    "server_stopped": true,
+    "version": "0.2.1",
+    "installed_profile_unchanged": true,
+    "cache_bytes_unchanged": true,
+    "cached_dictionaries_still_readable": true,
+    "wrapper_host_exit": 0
+  },
+  "requests": [
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/releases/0.2.1/profiles/coding-agent.md",
+    "/releases/0.2.1/profiles/chat.md",
+    "/releases/0.2.1/profiles/work-document.md",
+    "/releases/0.2.1/specification/rules.json",
+    "/releases/0.2.1/lexicon/core.json",
+    "/releases/0.2.1/lexicon/domains/software.json",
+    "/releases/0.2.1/pack/protocol.md",
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/stable/release.json",
+    "/stable/release.json.sig",
+    "/releases/0.2.1/profiles/coding-agent.md",
+    "/releases/0.2.1/profiles/chat.md",
+    "/releases/0.2.1/profiles/work-document.md",
+    "/releases/0.2.1/specification/rules.json",
+    "/releases/0.2.1/lexicon/core.json",
+    "/releases/0.2.1/lexicon/domains/software.json",
+    "/releases/0.2.1/pack/protocol.md"
+  ],
+  "connect_tunnels": [
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443",
+    "localhost:443"
+  ],
+  "runtime_unchanged_during_smoke": true,
+  "temporary_material_removed": true,
+  "limitation": "Localhost TLS and CLI wiring only; no public release endpoint, launchd registration, real user installation or model compliance validation.",
+  "dictionary_locator_local_snapshot": {
+    "transport": "none",
+    "trust": "local-snapshot",
+    "actual_https": false,
+    "model_file_read_observed": false,
+    "host_adapter": "codex",
+    "render_function": "Controller._activate",
+    "render_line": 856,
+    "install_exit_code": 0,
+    "status_exit_code": 0,
+    "absolute_cache_directory_advertised": true,
+    "advertised_root_matches_active_cache": true,
+    "installed_version": "0.2.0",
+    "original_user_bytes_preserved": true,
+    "installed_profile_sha256": "45daa6a555708d813f60a12a054bd9c54b0650b89486048340e13ab0ec19bbb5",
+    "files": {
+      "lexicon/core.json": {
+        "cached_file_exists": true,
+        "source_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "cached_sha256": "c7a2529ea389071e094aac58e1f39ffbf0ad8bb4854786f3d7800b48e25f33ce",
+        "explicit_absolute_file_locator_in_body": false,
+        "source_hash_matches_cache": true
+      },
+      "lexicon/domains/software.json": {
+        "cached_file_exists": true,
+        "source_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+        "cached_sha256": "c7c413548c530b9d93b01702aba0f1c2b94cd5a4cecd363e1be38924b754ae3e",
+        "explicit_absolute_file_locator_in_body": false,
+        "source_hash_matches_cache": true
+      }
+    },
+    "result": "pass",
+    "locator_contract": "Relative lexicon/core.json and lexicon/domains/software.json resolve against the footer-advertised absolute cache directory; file-specific absolute locators are not inserted.",
+    "temporary_material_removed": true
+  },
+  "script_validation": {
+    "python_compile": "pass",
+    "actual_https_branch_executed": true
+  }
+}
