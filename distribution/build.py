@@ -21,6 +21,7 @@ INPUTS = (
     'distribution/CHAT-START.md', 'distribution/launcher.py',
     'INSTALL.md', 'distribution/agent_install.py',
     'docs/distribution/signed-install.md',
+    'distribution/trust/publisher.pub', 'distribution/trust/publisher.json',
 )
 ALIASES = {
     'distribution/START-HERE.md':'START-HERE.md',

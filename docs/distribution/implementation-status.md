@@ -22,7 +22,7 @@ bundle에는 고정 일곱 콘텐츠 파일이 있어야 한다. 개인 snapshot
 
 ## 콘텐츠 자동 갱신을 연결하는 조건
 
-원격 갱신에는 사용자가 별도로 확인한 Ed25519 공개키·지문과 그 키로 서명한 bundle, 동일 origin HTTPS source가 필요하다. 이 저장소의 실제 발행키·릴리스 endpoint는 아직 정하지 않았다. 서명 bootstrap을 마친 뒤에는 주기적인 수동 update가 필요하지 않으며 규약 사용 자체는 오프라인에서도 가능하다.
+원격 갱신에는 사용자가 별도로 확인한 Ed25519 공개키·지문과 그 키로 서명한 bundle, 동일 origin HTTPS source가 필요하다. 발행키는 [GitHub Actions 환경 Secret](github-actions-pages.md)에 등록했고 공개키는 저장소에 고정했다. 릴리스 endpoint는 아직 게시하지 않았다. 서명 bootstrap을 마친 뒤에는 주기적인 수동 update가 필요하지 않으며 규약 사용 자체는 오프라인에서도 가능하다.
 
 ```sh
 python3 -m runtime.kproto --state-dir /ABS/STATE install --bundle /ABS/SIGNED_BUNDLE --host codex --scope project --project-root /ABS/PROJECT --trust-key /ABS/PUBLISHER.pub --expected-fingerprint SHA256:VERIFIED_FINGERPRINT --source https://publisher.example/kproto --autoupdate interval

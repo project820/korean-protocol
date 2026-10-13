@@ -57,6 +57,8 @@ class DistributionTests(unittest.TestCase):
             self.assertIn(prefix+'agent-install.py',archive.namelist())
             self.assertIn(prefix+'INSTALL.md',archive.namelist())
             self.assertIn(prefix+'docs/distribution/signed-install.md',archive.namelist())
+            self.assertIn(prefix+'distribution/trust/publisher.pub',archive.namelist())
+            self.assertIn(prefix+'distribution/trust/publisher.json',archive.namelist())
 
     def test_existing_output_is_preserved(self):
         self.output.write_bytes(b'existing')

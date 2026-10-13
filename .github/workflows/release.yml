@@ -1,0 +1,104 @@
+name: Signed protocol release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Numeric content version matching the checked-in source
+        required: true
+        default: '0.2.0'
+        type: string
+      first_release:
+        description: Explicit first release (rejected once publication history exists)
+        required: true
+        default: false
+        type: boolean
+      previous_artifact_id:
+        description: Artifact ID from the latest successful Pages publication
+        required: false
+        default: ''
+        type: string
+      publish:
+        description: Publish publicly (requires public repository and enabled Pages gate)
+        required: true
+        default: false
+        type: boolean
+
+permissions: {}
+
+concurrency:
+  group: kproto-release
+  cancel-in-progress: false
+
+jobs:
+  sign:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: kproto-release
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout trusted main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Validate release and publication behavior
+        run: python3 -B -m unittest tests.test_validation tests.test_release tests.test_actions_release
+      - name: Validate source and authenticated publication history
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_VERSION: ${{ inputs.version }}
+          INPUT_FIRST_RELEASE: ${{ inputs.first_release }}
+          INPUT_PREVIOUS_ARTIFACT_ID: ${{ inputs.previous_artifact_id }}
+          INPUT_PUBLISH: ${{ inputs.publish }}
+          PAGES_ENABLED: ${{ vars.KPROTO_PAGES_ENABLED }}
+          ALLOW_FIRST_PUBLICATION: ${{ vars.KPROTO_ALLOW_FIRST_PUBLICATION }}
+        run: python3 -m distribution.actions_release prepare --work "$RUNNER_TEMP"
+      - name: Sign manifest with ephemeral key
+        env:
+          KPROTO_SIGNING_KEY: ${{ secrets.KPROTO_SIGNING_KEY }}
+        run: python3 -m distribution.actions_release sign --work "$RUNNER_TEMP"
+      - name: Seal and verify exact public content
+        run: python3 -m distribution.actions_release seal --work "$RUNNER_TEMP"
+      - name: Save sealed static content
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: kproto-static-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/ready/
+          retention-days: 90
+          if-no-files-found: error
+          include-hidden-files: false
+      - name: Prepare Pages artifact after publication gates
+        if: inputs.publish && !github.event.repository.private && vars.KPROTO_PAGES_ENABLED == 'true'
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: ${{ runner.temp }}/ready/
+
+  publish:
+    name: publish
+    needs: sign
+    if: github.ref == 'refs/heads/main' && inputs.publish && !github.event.repository.private && vars.KPROTO_PAGES_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Verify live repository visibility and reject publication reruns
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 -c 'import os, sys; sys.exit("Publication reruns are forbidden; start a fresh workflow_dispatch to recheck release history") if os.environ.get("GITHUB_RUN_ATTEMPT") != "1" else None'
+          visibility="$(gh api "repos/$GITHUB_REPOSITORY" --jq '.private')"
+          if [ "$visibility" != "false" ]; then
+            echo "Publication is blocked because the live repository is private or its visibility could not be verified."
+            exit 1
+          fi
+      - name: Publish sealed Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
