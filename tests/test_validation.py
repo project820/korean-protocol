@@ -21,6 +21,8 @@ def fixture(root):
         path = root / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(value,ensure_ascii=False),encoding='utf-8')
+    for name in ('LICENSE','NOTICE.md'):
+        (root/name).write_bytes((Path(__file__).resolve().parents[1]/name).read_bytes())
     return data
 
 
@@ -270,6 +272,34 @@ class CompilerTests(FixtureTests):
             self.assertIn('허락을 명령',text)
             self.assertIn('행위자',text)
         self.assertIn('lexicon/core.json',(self.root/'profiles/chat.md').read_text())
+
+    def test_pack_preserves_notices_without_changing_profiles(self):
+        self.compile()
+        profiles = {name:(self.root/name).read_bytes() for name in
+                    ('profiles/coding-agent.md','profiles/chat.md','profiles/work-document.md')}
+        pack = (self.root/'pack/protocol.md').read_bytes()
+        for name in ('LICENSE','NOTICE.md'):
+            self.assertIn((self.root/name).read_bytes(),pack)
+            with (self.root/name).open('a',encoding='utf-8') as handle:
+                handle.write('Additional fixture notice.\n')
+        self.compile()
+        for name,original in profiles.items():
+            self.assertEqual(original,(self.root/name).read_bytes())
+            self.assertNotIn(b'Additional fixture notice.',original)
+        pack = (self.root/'pack/protocol.md').read_bytes()
+        for name in ('LICENSE','NOTICE.md'):
+            self.assertIn((self.root/name).read_bytes(),pack)
+
+    def test_missing_license_or_notice_prevents_any_compiled_output(self):
+        for name in ('LICENSE','NOTICE.md'):
+            with self.subTest(name=name):
+                path = self.root/name
+                original = path.read_bytes()
+                path.rename(path.with_suffix('.missing'))
+                with self.assertRaises(FileNotFoundError):
+                    self.compile()
+                self.assertFalse((self.root/'profiles/chat.md').exists())
+                path.write_bytes(original)
 
     def test_invalid_input_does_not_write_profiles(self):
         self.change('examples/rule-cases.json',lambda d:d.update(cases=[]))

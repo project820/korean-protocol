@@ -17,6 +17,8 @@ class DistributionTests(unittest.TestCase):
             path = self.root/name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(('fixture '+name+'\n').encode())
+        for name in ('LICENSE','NOTICE.md'):
+            (self.root/name).write_bytes((Path(__file__).resolve().parents[1]/name).read_bytes())
         self.output = Path(self.temp.name)/'preview.zip'
 
     def test_allowlist_and_checksums_exclude_extra_files(self):
@@ -46,6 +48,28 @@ class DistributionTests(unittest.TestCase):
             content = archive.read(name)
             for source in ('pack/protocol.md','lexicon/core.json','lexicon/domains/software.json'):
                 self.assertIn((self.root/source).read_bytes(),content)
+
+    def test_archive_and_standalone_preserve_full_license_and_notice(self):
+        build(self.root,self.output)
+        with zipfile.ZipFile(self.output) as archive:
+            name = next(n for n in archive.namelist() if n.endswith('/KOREAN-PROTOCOL.md'))
+            prefix = name.removesuffix('KOREAN-PROTOCOL.md')
+            content = archive.read(name)
+            for source in ('LICENSE','NOTICE.md'):
+                original = (self.root/source).read_bytes()
+                self.assertEqual(original,archive.read(prefix+source))
+                self.assertIn(original,content)
+
+    def test_standalone_does_not_duplicate_notices_already_in_pack(self):
+        pack = self.root/'pack/protocol.md'
+        for source in ('LICENSE','NOTICE.md'):
+            pack.write_bytes(pack.read_bytes()+b'\n'+(self.root/source).read_bytes())
+        build(self.root,self.output)
+        with zipfile.ZipFile(self.output) as archive:
+            name = next(n for n in archive.namelist() if n.endswith('/KOREAN-PROTOCOL.md'))
+            content = archive.read(name)
+            for source in ('LICENSE','NOTICE.md'):
+                self.assertEqual(1,content.count((self.root/source).read_bytes()))
 
     def test_launcher_is_next_to_runtime_in_archive(self):
         build(self.root,self.output)

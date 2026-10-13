@@ -9,6 +9,7 @@ import zipfile
 
 PREFIX = 'korean-protocol-0.2.0-draft'
 INPUTS = (
+    'LICENSE', 'NOTICE.md',
     'runtime/__init__.py', 'runtime/kproto.py',
     'profiles/coding-agent.md', 'profiles/chat.md', 'profiles/work-document.md',
     'specification/rules.json', 'specification/ste-crosswalk.json',
@@ -51,6 +52,11 @@ def build(root, output):
         chat.append('\n## 원본: '+name+'\n\nSHA-256: '+hashlib.sha256(files[name]).hexdigest()+'\n\n')
         text = files[name].decode('utf-8')
         chat.append('```json\n'+text+'\n```\n' if name.endswith('.json') else text)
+    # Compiled packs already carry the notices; retain them for standalone use
+    # even when an older pack is supplied, without duplicating current notices.
+    for name in ('LICENSE','NOTICE.md'):
+        if files[name] not in files['pack/protocol.md']:
+            chat.append('\n## 원본: '+name+'\n\n'+files[name].decode('utf-8'))
     files['KOREAN-PROTOCOL.md'] = ''.join(chat).encode('utf-8')
     files['docs/distribution/README.md'] = (
         '# Installation\n\nSee [the offline preview guide](../../START-HERE.md). '

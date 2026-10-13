@@ -12,7 +12,7 @@ import tempfile
 
 from runtime import kproto as k
 from validation.check import FILES
-from validation.compile import PROFILE_PATHS, compile_profiles
+from validation.compile import NOTICE_PATHS, PROFILE_PATHS, compile_profiles
 
 
 def _new_output(output):
@@ -95,6 +95,8 @@ def _validated_source(root, version):
         for name in FILES:
             if not isinstance(capture(name), dict):
                 raise k.InputError('Source validation JSON must be a top-level object')
+        for name in NOTICE_PATHS:
+            capture(name)
         crosswalk = k.strict_json(captured[FILES[1]])
         for item in crosswalk.get('items', []):
             if not isinstance(item, dict) or item.get('status') != 'verified':

@@ -1827,3 +1827,37 @@
 ## 어휘 적용
 
 `lexicon/core.json`·`lexicon/domains/software.json`에서 뜻·활용·논항·조건을 확인한다. deprecated 대안은 쓰지 않는다.
+
+## License
+
+MIT License
+
+Copyright (c) 2026 Korean Protocol contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Notices
+
+# 라이선스와 외부 자료의 권리를 구분한다
+
+Korean Protocol에서 직접 작성한 코드·규약·사전·용례·문서는 루트 LICENSE의 MIT License로 제공한다. 저작권 표기는 `Copyright (c) 2026 Korean Protocol contributors`를 사용한다. 복사본이나 상당 부분을 재배포할 때 저작권 표시와 MIT 허가문을 함께 보존한다.
+
+ASD-STE100 원문, 외부 논문·표준, 인용문과 제3자 자료의 권리는 각 권리자에게 있다. 이 저장소의 MIT License는 해당 외부 자료에 새로운 이용 허락을 부여하지 않는다. 출처 링크와 인용 표시는 원자료의 권리를 이전하거나 대체하지 않는다.
+
+Korean Protocol은 ASD-STE100의 작성 기능을 참고해 한국어에 맞게 설계한 독립 프로젝트다. ASD의 공식 번역판·공인 한국어판·인증 규격으로 표시하지 않는다. 이 고지는 MIT License에 새로운 사용 제한을 추가하는 문서가 아니라 프로젝트 자체 저작물과 외부 자료의 범위를 설명한다.

@@ -220,7 +220,8 @@ class ActionsSigningTests(unittest.TestCase):
         source.mkdir()
         repo = Path(__file__).resolve().parents[1]
         names = set(k.CONTENT_PATHS) | set(FILES) | {
-            'evaluation/functional-review.json', 'evaluation/functional-cases.json', 'docs/spec/korean-rules.md'}
+            'evaluation/functional-review.json', 'evaluation/functional-cases.json', 'docs/spec/korean-rules.md',
+            'LICENSE', 'NOTICE.md'}
         for name in names:
             destination = source / name
             destination.parent.mkdir(parents=True, exist_ok=True)

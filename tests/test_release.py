@@ -7,6 +7,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from distribution import release
 from runtime import kproto as k
@@ -25,7 +26,7 @@ class ReleaseTests(unittest.TestCase):
         repo = Path(__file__).resolve().parents[1]
         names = set(k.CONTENT_PATHS) | set(FILES) | {
             'evaluation/functional-review.json', 'evaluation/functional-cases.json',
-            'docs/spec/korean-rules.md',
+            'docs/spec/korean-rules.md', 'LICENSE', 'NOTICE.md',
         }
         for name in names:
             destination = self.source / name
@@ -112,6 +113,44 @@ class ReleaseTests(unittest.TestCase):
             self.assertFalse(self.unsigned.exists())
             path.write_bytes(before)
 
+    def test_missing_license_or_notice_prevents_release_output(self):
+        for name in ('LICENSE','NOTICE.md'):
+            with self.subTest(name=name):
+                path = self.source/name
+                original = path.read_bytes()
+                path.rename(path.with_suffix('.missing'))
+                with self.assertRaises(k.MissingError):
+                    self.prepare()
+                self.assertFalse(self.unsigned.exists())
+                path.write_bytes(original)
+
+    def test_compiler_receives_captured_notices_when_source_changes(self):
+        originals = {name:(self.source/name).read_bytes() for name in ('LICENSE','NOTICE.md')}
+
+        def compile_snapshot(snapshot, output):
+            for name,original in originals.items():
+                self.assertEqual(original,(snapshot/name).read_bytes())
+                (self.source/name).write_bytes(original+b'Concurrent fixture change.\n')
+            return compile_profiles(snapshot, output)
+
+        with patch.object(release, 'compile_profiles', side_effect=compile_snapshot):
+            self.assertEqual('0.2.0-draft',self.prepare())
+        pack = (self.unsigned/'releases/0.2.0/pack/protocol.md').read_bytes()
+        for original in originals.values():
+            self.assertIn(original,pack)
+        self.assertNotIn(b'Concurrent fixture change.',pack)
+
+    def test_changed_license_or_notice_requires_recompiled_pack(self):
+        for name in ('LICENSE','NOTICE.md'):
+            with self.subTest(name=name):
+                path = self.source/name
+                original = path.read_bytes()
+                path.write_bytes(original+b'Changed fixture notice.\n')
+                with self.assertRaisesRegex(k.InputError, 'Compiled content is stale: pack/protocol.md'):
+                    self.prepare()
+                self.assertFalse(self.unsigned.exists())
+                path.write_bytes(original)
+
     def test_source_version_and_schema_mismatch_are_rejected(self):
         path = self.source / 'lexicon/core.json'
         original = json.loads(path.read_bytes())
@@ -150,7 +189,7 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(b'keep', sentinel.read_bytes())
 
     def test_rejects_symlink_source_payload_evidence_output_and_parent(self):
-        for name in ('profiles/chat.md', 'evaluation/functional-review.json'):
+        for name in ('profiles/chat.md', 'evaluation/functional-review.json', 'LICENSE', 'NOTICE.md'):
             path = self.source / name
             real = self.root / 'real'
             real.write_bytes(path.read_bytes())

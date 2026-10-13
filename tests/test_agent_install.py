@@ -114,6 +114,13 @@ class AgentInstallTests(unittest.TestCase):
             code, value = self.run_cli('install', host)
             self.assertEqual(0, code, value)
             routes[host] = value['management_argv']
+            header = '\n'.join('# '+line if line else '#' for line in
+                               (ROOT/'LICENSE').read_text().splitlines()).encode()+b'\n'
+            tool = Path(routes[host]['status'][2]).parent
+            for name in self.agent.TOOL_FILES:
+                self.assertTrue((tool/name).read_bytes().startswith(header))
+            self.assertEqual(set(self.agent.TOOL_FILES),
+                             set(json.loads((tool/'owner.json').read_bytes())['files']))
         shutil.rmtree(self.bundle)
         for host, commands in routes.items():
             with self.subTest(host=host):

@@ -41,3 +41,7 @@ python3 -B distribution/agent_install.py uninstall --host codex
 제거는 규약의 관리 블록을 없애고 사용자 지침의 나머지를 보존한다. 상태·백업·캐시와 관리 도구는 남긴다. 관리 블록을 직접 수정해 충돌이 발생하면 덮어쓰지 않고 충돌을 보고한다.
 
 서명된 정식 배포물을 설치하고 갱신을 연결하는 절차는 [서명 설치 안내](docs/distribution/signed-install.md)를 따른다. 정식 배포 정보가 없는 현재 미리보기에 임의의 키나 주소를 넣지 않는다.
+
+## 라이선스를 함께 보존한다
+
+직접 작성한 코드·규약·사전·문서는 MIT License로 제공한다. 저장소와 ZIP의 `LICENSE`·`NOTICE.md`를 함께 보존한다. 설치 캐시의 `pack/protocol.md`와 지속 관리 Python 파일에도 허가문이 포함되며, 규약 또는 설치 코드를 재배포할 때 해당 고지를 함께 제공한다. 외부 ASD-STE100 원문 등의 권리는 프로젝트의 MIT License로 바뀌지 않는다.

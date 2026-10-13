@@ -5,6 +5,7 @@ import sys
 import tempfile
 from .check import Checker, FILES, validate_root
 
+NOTICE_PATHS=('LICENSE','NOTICE.md')
 PROFILE_PATHS=('profiles/coding-agent.md','profiles/chat.md','profiles/work-document.md','pack/protocol.md')
 GUARDS='''사용자의 상위 지침·작업 범위를 따른다. 뜻·확실성·시상·발화 목적을 보존한다.
 가능성을 사실로, 허락을 명령으로 바꾸지 않는다. 명확한 주체는 생략할 수 있다.
@@ -24,6 +25,7 @@ def compile_profiles(root, output, budget=28*1024):
     if report['errors']:
         raise ValueError('Input validation failed: '+'; '.join(error['code']+' '+error['path'] for error in report['errors']))
     if type(budget) is not int or budget<=0:raise ValueError('Profile byte budget must be a positive integer.')
+    notices={name:(root/name).read_text(encoding='utf-8') for name in NOTICE_PATHS}
     reader=Checker(root)
     rules=sorted(reader.read(FILES[0])['rules'],key=lambda rule:rule['id'])
     # Compile publication requirements only, never research references or case inputs.
@@ -52,6 +54,7 @@ def compile_profiles(root, output, budget=28*1024):
             '그대로 허용하는 문맥: '+allowed['context']+'\n',
             '허용 문장: '+allowed['text']+'\n허용 이유: '+allowed['why_allowed']+'\n'])
     detail.extend(['## 어휘 적용\n',dictionary])
+    detail.extend(['## License\n',notices['LICENSE'],'## Notices\n',notices['NOTICE.md']])
     contents['pack/protocol.md']='\n'.join(detail)
     for name,text in contents.items():
         if name.startswith('profiles/') and len(text.encode('utf-8'))>budget:
