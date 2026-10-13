@@ -1,6 +1,6 @@
 {
-  "archive_sha256": "30f8a16b750b3c00e63b3c45d404ba6db64d9069a40d2936929d812a89dcad52",
-  "archive_bytes": 376934,
+  "archive_sha256": "d33de9f921aa2b71dfaf4754f1b80ffd2756bbacc6c6a0edbdb9efff3ef8eb14",
+  "archive_bytes": 377103,
   "hosts": {
     "codex": {
       "install_verified": true,

@@ -242,6 +242,22 @@ class AgentInstallTests(unittest.TestCase):
         code, value = self.run_cli('status')
         self.assertEqual(2, code, value)
 
+    def test_cache_content_and_metadata_tamper_cannot_bypass_snapshot_hashes(self):
+        code, value = self.run_cli('install')
+        self.assertEqual(0, code, value)
+        cache = self.state / 'releases' / value['cache_id']
+        profile = cache / 'profiles/coding-agent.md'
+        profile.write_bytes(b'modified protocol content\n')
+        metadata_path = cache / 'metadata.json'
+        metadata = json.loads(metadata_path.read_text())
+        metadata['files']['profiles/coding-agent.md'] = self.agent.digest(profile.read_bytes())
+        metadata_path.write_text(json.dumps(metadata))
+        before = self.tree()
+        code, value = self.run_cli('status')
+        self.assertEqual(5, code, value)
+        self.assertFalse(value['verified'])
+        self.assertEqual(before, self.tree())
+
     def test_active_codex_override_drift_is_not_verified_but_removal_uses_recorded_target(self):
         code, value = self.run_cli('install')
         self.assertEqual(0, code, value)

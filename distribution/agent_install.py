@@ -174,10 +174,21 @@ def read_status(runtime, root, host, verify_cache=True):
             cache = safe_path(root / 'releases' / cache_id)
             metadata = json_object(cache / 'metadata.json', owned=True)
             release_hash = digest(read_file(cache / 'release.json', owned=True))
+            release = json_object(cache / 'release.json', owned=True)
             files = runtime.content_files(cache)
+            hashes = {name: digest(data) for name, data in files.items()}
+            if state.get('trust') == 'local-snapshot':
+                manifest_hashes = release.get('files')
+                if release.get('snapshot_version') != state.get('version'):
+                    raise AgentError('Cached snapshot version differs from recorded installation', 5)
+            elif state.get('trust') == 'signed':
+                manifest = runtime.validate_manifest(release, fresh=False)
+                manifest_hashes = {entry['path']: entry['sha256'] for entry in manifest['files']}
+            else:
+                raise AgentError('Unknown recorded release trust', 5)
             if (metadata.get('version') != state.get('version') or metadata.get('trust') != state.get('trust') or
                     metadata.get('hash') != release_hash or cache_id != str(state.get('version')) + '-' + release_hash or
-                    metadata.get('files') != {name: digest(data) for name, data in files.items()}):
+                    metadata.get('files') != hashes or manifest_hashes != hashes):
                 raise AgentError('Cached protocol integrity check failed', 5)
             verified = True
     return dict(state, installed=bool(state.get('target')), verified=verified,
@@ -219,7 +230,7 @@ def main(argv=None):
     parser.add_argument('--codex-home', type=Path)
     parser.add_argument('--claude-home', type=Path)
     runtime = None
-    result = {'ok': False}
+    result = {'ok': False, 'verified': False}
     try:
         args = parser.parse_args(argv)
         result.update(action=args.action, host=args.host)
