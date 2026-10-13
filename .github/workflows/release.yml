@@ -23,6 +23,16 @@ on:
         required: true
         default: false
         type: boolean
+      archive_only:
+        description: Recover durable archival for an already successful Pages publication
+        required: true
+        default: false
+        type: boolean
+      archive_run_id:
+        description: Original successful publication run ID (required for archive_only)
+        required: false
+        default: ''
+        type: string
 
 permissions: {}
 
@@ -32,7 +42,7 @@ concurrency:
 
 jobs:
   sign:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && !inputs.archive_only
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: kproto-release
@@ -45,7 +55,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Validate release and publication behavior
-        run: python3 -B -m unittest tests.test_validation tests.test_release tests.test_actions_release
+        run: python3 -B -m unittest tests.test_validation tests.test_release tests.test_actions_release tests.test_history_store
       - name: Validate source and authenticated publication history
         env:
           GH_TOKEN: ${{ github.token }}
@@ -55,6 +65,8 @@ jobs:
           INPUT_PUBLISH: ${{ inputs.publish }}
           PAGES_ENABLED: ${{ vars.KPROTO_PAGES_ENABLED }}
           ALLOW_FIRST_PUBLICATION: ${{ vars.KPROTO_ALLOW_FIRST_PUBLICATION }}
+          ARCHIVE_ONLY: ${{ inputs.archive_only }}
+          ARCHIVE_RUN_ID: ${{ inputs.archive_run_id }}
         run: python3 -m distribution.actions_release prepare --work "$RUNNER_TEMP"
       - name: Sign manifest with ephemeral key
         env:
@@ -79,7 +91,7 @@ jobs:
   publish:
     name: publish
     needs: sign
-    if: github.ref == 'refs/heads/main' && inputs.publish && !github.event.repository.private && vars.KPROTO_PAGES_ENABLED == 'true'
+    if: github.ref == 'refs/heads/main' && !inputs.archive_only && inputs.publish && !github.event.repository.private && vars.KPROTO_PAGES_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -102,3 +114,59 @@ jobs:
       - name: Publish sealed Pages artifact
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+
+  receipt:
+    name: receipt
+    needs: [sign, publish]
+    if: always() && github.ref == 'refs/heads/main' && (needs.publish.result == 'success' || inputs.archive_only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: kproto-release
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout receipt verifier
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Authenticate completed publication before receipt signing
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARCHIVE_RUN_ID: ${{ inputs.archive_run_id }}
+          ARCHIVE_ONLY: ${{ inputs.archive_only }}
+          INPUT_PUBLISH: ${{ inputs.publish }}
+        run: python3 -m distribution.actions_release receipt-prepare --work "$RUNNER_TEMP"
+      - name: Sign post-publication receipt with ephemeral key
+        env:
+          KPROTO_SIGNING_KEY: ${{ secrets.KPROTO_SIGNING_KEY }}
+        run: python3 -m distribution.actions_release receipt-sign --work "$RUNNER_TEMP"
+      - name: Retain signed receipt for archive job
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: kproto-publication-receipt-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/publication/
+          retention-days: 90
+          if-no-files-found: ignore
+
+  archive:
+    name: archive
+    needs: receipt
+    if: always() && github.ref == 'refs/heads/main' && needs.receipt.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout durable archive verifier
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Store verified signed content and publication receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARCHIVE_RUN_ID: ${{ inputs.archive_run_id }}
+          ARCHIVE_ONLY: ${{ inputs.archive_only }}
+          INPUT_PUBLISH: ${{ inputs.publish }}
+        run: python3 -m distribution.actions_release archive --work "$RUNNER_TEMP"

@@ -21,6 +21,12 @@ MAX_ARCHIVE = 64 * 1024 * 1024
 MAX_VERSIONS = 32
 
 
+class APIError(k.NetworkError):
+    def __init__(self, status):
+        super().__init__('GitHub API request failed')
+        self.status = status
+
+
 def boolean(value):
     if value not in ('true', 'false'):
         raise k.InputError('Boolean inputs must be true or false')
@@ -32,6 +38,14 @@ def publication_attempt(publish, attempt):
         raise k.TrustError('Publication reruns are forbidden; start a fresh workflow_dispatch to recheck release history')
 
 
+def validate_dispatch(archive_only, publish, archive_run_id):
+    if archive_only:
+        if publish or not re.fullmatch('[1-9][0-9]{0,19}', archive_run_id):
+            raise k.InputError('archive_only requires a positive original run ID and cannot publish Pages')
+    elif archive_run_id:
+        raise k.InputError('archive_run_id is reserved for archive_only recovery')
+
+
 class GitHub:
     def __init__(self, repository, token):
         if not re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', repository):
@@ -40,9 +54,13 @@ class GitHub:
             raise k.InputError('GitHub token is required for release-history verification')
         self.repository, self.token = repository, token
 
-    def request(self, path, binary=False):
-        request = urllib.request.Request('https://api.github.com/repos/' + self.repository + path,
-            headers={'Authorization': 'Bearer ' + self.token, 'Accept': 'application/vnd.github+json',
+    def request(self, path, binary=False, method='GET', data=None, upload=False):
+        base = 'https://uploads.github.com/repos/' if upload else 'https://api.github.com/repos/'
+        body = data if isinstance(data, bytes) else k.json_bytes(data) if data is not None else None
+        request = urllib.request.Request(base + self.repository + path, data=body, method=method,
+            headers={'Authorization': 'Bearer ' + self.token,
+                     'Accept': 'application/octet-stream' if binary and path.startswith('/releases/assets/') else 'application/vnd.github+json',
+                     'Content-Type': 'application/octet-stream' if upload else 'application/json',
                      'X-GitHub-Api-Version': '2022-11-28'})
         # Artifact download uses a signed storage redirect. urllib does not strip
         # Authorization on cross-host redirects, so handle the redirect explicitly.
@@ -59,7 +77,7 @@ class GitHub:
         except urllib.error.HTTPError as error:
             destination = handler.destination
             if not binary or error.code != 302 or not isinstance(destination, str) or not destination.startswith('https://'):
-                raise k.NetworkError('GitHub API request or artifact redirect failed') from None
+                raise APIError(error.code) from None
             error.close()
             response = urllib.request.urlopen(urllib.request.Request(handler.destination), timeout=30)
         with response:
@@ -68,10 +86,10 @@ class GitHub:
             raise k.InputError('GitHub response exceeds release-history size limit')
         return data if binary else k.strict_json(data)
 
-    def pages(self, path, field):
+    def pages(self, path, field=None):
         for page in range(1, 101):
             result = self.request(path + ('&' if '?' in path else '?') + 'per_page=100&page=' + str(page))
-            items = result[field]
+            items = result[field] if field else result
             yield from items
             if len(items) < 100:
                 return
@@ -79,10 +97,21 @@ class GitHub:
 
     def published_run(self):
         latest = None
-        for run in self.pages('/actions/workflows/release.yml/runs?branch=main&status=completed', 'workflow_runs'):
+        try:
+            runs = list(self.pages('/actions/workflows/release.yml/runs?branch=main&status=completed', 'workflow_runs'))
+        except APIError as error:
+            if error.status == 404:
+                return None
+            raise
+        for run in runs:
             if run.get('event') != 'workflow_dispatch' or run.get('path') != WORKFLOW:
                 continue
-            jobs = list(self.pages('/actions/runs/' + str(run['id']) + '/jobs?filter=all', 'jobs'))
+            try:
+                jobs = list(self.pages('/actions/runs/' + str(run['id']) + '/jobs?filter=all', 'jobs'))
+            except APIError as error:
+                if error.status == 404:
+                    continue
+                raise
             for published in jobs:
                 if published.get('name') != 'publish' or published.get('conclusion') != 'success':
                     continue
@@ -102,8 +131,8 @@ class GitHub:
         return latest
 
 
-def preflight(api, publish, enabled, first_release, artifact_id, allow_first=False):
-    if bool(artifact_id) == bool(first_release):
+def preflight(api, publish, enabled, first_release, artifact_id, allow_first=False, durable=None, durable_checked=False):
+    if first_release and (artifact_id or durable) or not first_release and not (artifact_id or durable):
         raise k.InputError('Choose exactly one of first_release=true or previous_artifact_id')
     if artifact_id and not re.fullmatch(r'[1-9][0-9]{0,19}', artifact_id):
         raise k.InputError('previous_artifact_id must be a positive numeric artifact ID')
@@ -115,6 +144,11 @@ def preflight(api, publish, enabled, first_release, artifact_id, allow_first=Fal
     if publish and not enabled:
         raise k.TrustError('Publication requires KPROTO_PAGES_ENABLED=true')
     previous_run = api.published_run()
+    if durable:
+        if previous_run and (previous_run['id'] != durable['run_id'] or
+                previous_run['signing_attempt'] != durable['signing_attempt']):
+            raise k.TrustError('Durable archive conflicts with the latest actual publication; archive recovery is required')
+        return durable
     if first_release:
         if previous_run:
             raise k.TrustError('Published history exists; first-release reset is forbidden')
@@ -123,6 +157,8 @@ def preflight(api, publish, enabled, first_release, artifact_id, allow_first=Fal
         return None
     if not previous_run:
         raise k.TrustError('No successful prior Pages publication was found')
+    if durable_checked:
+        raise k.TrustError('Successful publication has no durable archive; archive recovery is required')
     artifact = api.request('/actions/artifacts/' + artifact_id)
     expected = 'kproto-static-' + str(previous_run['id']) + '-' + str(previous_run['signing_attempt'])
     if (artifact.get('expired') is not False or artifact.get('name') != expected or
@@ -201,7 +237,15 @@ def authenticated_history(previous, public_key, fingerprint):
     return current, payload
 
 
-def sign(prepared, secret, public_key):
+def static_files(path):
+    return {file.relative_to(path).as_posix(): k.read_bytes(file) for file in Path(path).rglob('*') if file.is_file()}
+
+
+def tree_digest(files):
+    return k.digest(k.json_bytes({name: k.digest(value) for name, value in sorted(files.items())}))
+
+
+def sign_file(path, secret, public_key, namespace):
     if not secret:
         raise k.InputError('KPROTO_SIGNING_KEY is not configured')
     # The temporary key is never printed, exported, or copied to an artifact.
@@ -216,10 +260,14 @@ def sign(prepared, secret, public_key):
         trusted = k.read_bytes(public_key).decode('ascii').split()[:2]
         if actual.returncode or actual.stdout.decode('ascii').split()[:2] != trusted:
             raise k.TrustError('Signing secret does not match the checked-in public key')
-        result = subprocess.run(['ssh-keygen', '-Y', 'sign', '-f', str(key), '-n', 'kproto-release-v1',
-                                 str(Path(prepared) / 'stable/release.json')], capture_output=True, env=child_env)
+        result = subprocess.run(['ssh-keygen', '-Y', 'sign', '-f', str(key), '-n', namespace,
+                                 str(path)], capture_output=True, env=child_env)
         if result.returncode:
             raise k.TrustError('OpenSSH release signing failed')
+
+
+def sign(prepared, secret, public_key):
+    sign_file(Path(prepared) / 'stable/release.json', secret, public_key, 'kproto-release-v1')
 
 
 def confirm_empty_pages(repository):
@@ -243,15 +291,23 @@ def execute(command, root, work):
         if os.environ.get('GITHUB_REF') != 'refs/heads/main':
             raise k.TrustError('Only main may prepare an Actions release')
         publish = boolean(os.environ.get('INPUT_PUBLISH', 'false'))
+        validate_dispatch(boolean(os.environ.get('ARCHIVE_ONLY', 'false')), publish, os.environ.get('ARCHIVE_RUN_ID', ''))
         publication_attempt(publish, os.environ.get('GITHUB_RUN_ATTEMPT', ''))
         first = boolean(os.environ.get('INPUT_FIRST_RELEASE', 'false'))
         api = GitHub(os.environ.get('GITHUB_REPOSITORY', ''), os.environ.get('GH_TOKEN', ''))
+        from distribution import history_store
+        durable = history_store.latest(api, public, fingerprint, work / 'durable')
+        if first and durable:
+            raise k.TrustError('Durable publication history exists; first-release reset is forbidden')
         artifact = preflight(api, publish, os.environ.get('PAGES_ENABLED') == 'true', first,
                              os.environ.get('INPUT_PREVIOUS_ARTIFACT_ID', ''),
-                             os.environ.get('ALLOW_FIRST_PUBLICATION') == 'true')
+                             os.environ.get('ALLOW_FIRST_PUBLICATION') == 'true', durable=durable, durable_checked=True)
         sequence = 1
         if artifact:
-            extract_artifact(api.request('/actions/artifacts/' + str(artifact['id']) + '/zip', binary=True), previous)
+            if durable:
+                release._write_tree(previous, static_files(work / 'durable'))
+            else:
+                extract_artifact(api.request('/actions/artifacts/' + str(artifact['id']) + '/zip', binary=True), previous)
             prior, _ = authenticated_history(previous, public, fingerprint)
             if prior['sequence'] >= MAX_VERSIONS:
                 raise k.InputError('Release history reached the 32-version limit; publication is blocked')
@@ -267,8 +323,9 @@ def execute(command, root, work):
             handle.write(k.json_bytes({'first_release': first}))
     elif command == 'sign':
         sign(prepared, os.environ.get('KPROTO_SIGNING_KEY', ''), public)
-    else:
-        first = k.strict_json(k.read_bytes(state))['first_release']
+    elif command == 'seal':
+        metadata = k.strict_json(k.read_bytes(state))
+        first = metadata['first_release']
         ready = work / 'ready'
         release.seal(prepared, prepared / 'stable/release.json.sig', ready, public, fingerprint,
                      previous=previous if not first else None, first_release=first)
@@ -280,11 +337,29 @@ def execute(command, root, work):
                 with destination.open('xb') as handle:
                     handle.write(data)
         authenticated_history(ready, public, fingerprint)
+    elif command == 'receipt-sign':
+        from distribution import history_store
+        history_store.sign_receipt(work, os.environ.get('KPROTO_SIGNING_KEY', ''), public, fingerprint)
+    else:
+        from distribution import history_store
+        api = GitHub(os.environ.get('GITHUB_REPOSITORY', ''), os.environ.get('GH_TOKEN', ''))
+        archive_only = boolean(os.environ.get('ARCHIVE_ONLY', 'false'))
+        if command != 'rehearse':
+            validate_dispatch(archive_only, boolean(os.environ.get('INPUT_PUBLISH', 'false')), os.environ.get('ARCHIVE_RUN_ID', ''))
+        run_id = os.environ.get('ARCHIVE_RUN_ID') or os.environ.get('GITHUB_RUN_ID', '')
+        if command == 'receipt-prepare':
+            history_store.prepare_receipt(api, run_id, public, fingerprint, work)
+        else:
+            if boolean(os.environ.get('ARCHIVE_ONLY', 'false')) and boolean(os.environ.get('INPUT_PUBLISH', 'false')):
+                raise k.InputError('archive_only cannot request a new Pages publication')
+            history_store.archive_run(api, run_id, public, fingerprint, work, rehearsal=command == 'rehearse',
+                receipt_run_id=os.environ.get('GITHUB_RUN_ID') or str(run_id),
+                receipt_attempt=os.environ.get('GITHUB_RUN_ATTEMPT', '1'))
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=('prepare', 'sign', 'seal'))
+    parser.add_argument('command', choices=('prepare', 'sign', 'seal', 'receipt-prepare', 'receipt-sign', 'archive', 'rehearse'))
     parser.add_argument('--root', type=Path, default=Path('.'))
     parser.add_argument('--work', type=Path, required=True)
     args = parser.parse_args(argv)
@@ -292,7 +367,7 @@ def main(argv=None):
         execute(args.command, args.root, args.work)
     except (k.ProtocolError, OSError, ValueError, TypeError, KeyError, zipfile.BadZipFile):
         # Never expose raw HTTP responses, environment values, or subprocess output.
-        print('Actions release failed; check inputs, pinned trust key, publication gates, and authenticated history (artifact retention: 90 days; history limit: 32 versions).', file=sys.stderr)
+        print('Actions release failed; check inputs, trust key, publication gates, and signed receipt/archive recovery (32 versions / 64 MiB).', file=sys.stderr)
         return 2
     print(args.command + ': verified')
     return 0

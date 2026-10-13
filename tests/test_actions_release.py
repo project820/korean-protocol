@@ -153,8 +153,12 @@ class PublicationGateTests(unittest.TestCase):
             return io.BytesIO(b'fixture-archive')
         with patch('urllib.request.build_opener', side_effect=opener), patch('urllib.request.urlopen', side_effect=storage):
             self.assertEqual(b'fixture-archive', api.request('/actions/artifacts/17/zip', binary=True))
+            self.assertEqual(b'fixture-archive', api.request('/releases/assets/17', binary=True))
         self.assertTrue(requests[0].has_header('Authorization'))
         self.assertFalse(requests[1].has_header('Authorization'))
+        self.assertEqual('application/vnd.github+json', requests[0].get_header('Accept'))
+        self.assertEqual('application/octet-stream', requests[2].get_header('Accept'))
+        self.assertFalse(requests[3].has_header('Authorization'))
 
     def test_pages_first_publication_requires_exact_404(self):
         import urllib.error
@@ -231,7 +235,8 @@ class ActionsSigningTests(unittest.TestCase):
                        'INPUT_VERSION': '0.2.0', 'INPUT_FIRST_RELEASE': 'true', 'INPUT_PUBLISH': 'false',
                        'INPUT_PREVIOUS_ARTIFACT_ID': '', 'KPROTO_SIGNING_KEY': self.key.read_text(),
                        'RUNNER_TEMP': str(work)}
-        with patch.dict(os.environ, environment), patch.object(actions, 'GitHub', return_value=FakeGitHub()):
+        with patch.dict(os.environ, environment), patch.object(actions, 'GitHub', return_value=FakeGitHub()), \
+                patch('distribution.history_store.latest', return_value=None):
             for command in ('prepare', 'sign', 'seal'):
                 actions.execute(command, source, work)
         self.assertEqual(9, len([path for path in (work / 'ready').rglob('*') if path.is_file()]))

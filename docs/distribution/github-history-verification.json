@@ -1,0 +1,55 @@
+{
+  "scope": "actual private GitHub draft storage, download, pinned signature verification, exact content comparison and idempotent repeat; no Pages publication or real publication receipt",
+  "source_run_id": 38342135371,
+  "release_id": 411252977,
+  "release_url": "https://github.com/project820/korean-protocol/releases/tag/untagged-8e39bb8089938598787f",
+  "tag": "kproto-rehearsal-0.2.0-1",
+  "draft": true,
+  "private": true,
+  "signature_verified": true,
+  "file_count": 9,
+  "manifest_sha256": "c93358d523de63de520a12f6612a7e0959b3cf9bca896f84abb52fdd648d0228",
+  "provenance": {
+    "artifact_id": 11787575523,
+    "content_sha256": "56cbae3da539ffa7aca482a2c5d45b77b0c6a2c46cafcd7b77937511b1a110d2",
+    "head_sha": "d6b8d65a1c58c54a14652223c76c6e71d4a27498",
+    "rehearsal": true,
+    "repository": "project820/korean-protocol",
+    "run_id": 38342135371,
+    "schema_version": 1,
+    "sequence": 1,
+    "signing_attempt": 1,
+    "version": "0.2.0"
+  },
+  "assets": [
+    {
+      "name": "signed-content.zip",
+      "id": 635832043,
+      "size": 133274
+    }
+  ],
+  "idempotent_repeat": true,
+  "excluded_from_publication_history": true,
+  "reproduced_and_fixed_failure": {
+    "endpoint": "Actions artifact ZIP download",
+    "http_status": 415,
+    "cause": "binary download incorrectly requested application/octet-stream from Actions API",
+    "fix": "Actions requests use application/vnd.github+json; Release asset binary requests use application/octet-stream; redirected storage receives no token"
+  },
+  "source_hashes": {
+    "distribution/actions_release.py": "2ef7748363696d929403af751a7bc1d52ee2c3cca5526d1fc5b4022f02a3e3de",
+    "distribution/history_store.py": "c7d2d364aa07b819bbd6ef105b243d4f30eea55701c9daf8d1b3bbcbd5cdb624",
+    ".github/workflows/release.yml": "3444080d6ff3af5351e66f6a6cff86627685a8ba67316aa6f8a115ef253670bb",
+    "tests/test_actions_release.py": "df2cd6f0abe9f7e07459c42532e03dc889099071b9cfe726ca8f2ceaab402c78",
+    "tests/test_history_store.py": "1a8a861f5fe4c30ace129b7ae31927edb251d75a82af00c94ffc41410c6c8747"
+  },
+  "validation": {
+    "command": "python3 -B -m unittest discover -s tests",
+    "tests": 256,
+    "result": "passed",
+    "seconds": 24.222,
+    "targeted_tests": 90,
+    "new_durable_tests": 14,
+    "independent_security_review": "no blocking findings after endpoint-specific Accept header correction"
+  }
+}
