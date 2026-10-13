@@ -1,0 +1,9 @@
+{
+  "archive_files": 30,
+  "archive_bytes": 383004,
+  "archive_sha256": "846f1a716c2dd7e47ee10243a627e6d12ec66b39b3c060276fd487ca00cedf52",
+  "checksums_match": true,
+  "public_key_matches_source": true,
+  "private_key_marker_absent": true,
+  "scope": "archive structure and trust files; actual signed installation tested separately in github-actions-verification.json"
+}

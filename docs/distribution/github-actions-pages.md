@@ -32,6 +32,12 @@ gh workflow run release.yml --repo project820/korean-protocol --ref main -f vers
 
 현재 구현은 artifact 보존을 90일로 요청하며 최대 32개 콘텐츠 버전을 처리한다. 이전 artifact가 만료되거나 없어지면 후속 발행을 거부한다. 장기 보존 경로를 연결하기 전에는 운영 배포 준비가 모두 끝났다고 표시하지 않는다.
 
+## 실제 비공개 서명 실행을 확인했다
+
+[Actions 실행 38342135371](https://github.com/project820/korean-protocol/actions/runs/38342135371)은 GitHub Secret을 사용한 서명·검증·artifact 업로드에 성공했다. Pages artifact 준비와 publish job은 건너뛰었다. GitHub runner의 관련 테스트 76개와 로컬 전체 테스트 242개가 통과했다.
+
+[검증 기록](github-actions-verification.json)은 실행 commit과 공개키·워크플로 해시를 고정한다. 내려받은 artifact는 manifest·서명·콘텐츠 일곱 개만 포함했고, 실제 발행키의 서명을 Codex·Claude Code의 임시 설치 환경에서 검증해 설치·제거했다. 공개 Pages나 실제 사용자 예약 실행을 검증한 결과는 아니다.
+
 ## GitHub의 공식 계약을 따른다
 
 [GitHub Pages 사용자 지정 워크플로](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)의 게시 job은 Pages 쓰기 권한과 OIDC 권한을 사용한다. 서명 job에는 이 권한을 주지 않는다. [GitHub Actions 보안 지침](https://docs.github.com/en/actions/reference/security/secure-use)은 action을 전체 commit SHA에 고정하도록 권고한다.

@@ -1,0 +1,33 @@
+{
+  "workflow_run_id": 38342135371,
+  "workflow_url": "https://github.com/project820/korean-protocol/actions/runs/38342135371",
+  "workflow_commit": "d6b8d65a1c58c54a14652223c76c6e71d4a27498",
+  "sign": "success",
+  "publish": "skipped",
+  "fingerprint": "SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc",
+  "manifest_sha256": "c93358d523de63de520a12f6612a7e0959b3cf9bca896f84abb52fdd648d0228",
+  "artifact_file_count": 9,
+  "version": "0.2.0",
+  "sequence": 1,
+  "hosts": {
+    "codex": {
+      "signature_verified": true,
+      "installed": true,
+      "uninstall_passed": true
+    },
+    "claude-code": {
+      "signature_verified": true,
+      "installed": true,
+      "uninstall_passed": true
+    }
+  },
+  "local_tests": 242,
+  "actions_targeted_tests": 76,
+  "scope": "actual GitHub Secret signing; temporary local installs; no public Pages, user global install or launchctl registration",
+  "source_hashes": {
+    ".github/workflows/release.yml": "7a96946a8dfd2fd419e196c0f914c463f4cc6dd9db7f500d26e76421c8f1d4bc",
+    "distribution/actions_release.py": "a46178d70403e503bb7b9e727ad43eec5d70bc70fc66d184860122c9c74c6aa3",
+    "distribution/trust/publisher.pub": "67e81449136186d892ccf5dd1ce2898629b889bdeed7e9a6401686f9199cae98",
+    "distribution/trust/publisher.json": "abdcf16e82e1373989dd00f16efc2992af0b489eb932bf58280a413ab61c7f37"
+  }
+}

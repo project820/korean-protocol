@@ -48,3 +48,7 @@ ZIP은 28개 파일, 382,239바이트이며 SHA-256은 `fc90f008e3fcdb636fa96e87
 ## 조사·논항 보완본을 담았다
 
 후속 ZIP은 KP-KO-001의 보완된 요구·조건과 다시 생성한 프로필·규약을 담았다. 28개 파일, 382,276바이트이며 SHA-256은 `280e150dc5ad50e48f4cd5c2088f66b5a01061ebacaee2645531156d79075434`이다. [패키지 시험](../../evaluation/role-refinement-20261013/package-smoke.json)은 체크섬과 Codex·Claude Code 설치, 복제본 이동 후 상태 확인·제거를 확인했다. 이 ZIP도 미서명 미리보기이며 자동 갱신을 기본으로 켜지 않는다.
+
+## 공개키를 설치 패키지에 포함했다
+
+GitHub Actions용 공개키와 지문을 포함한 ZIP은 30개 파일, 383,004바이트이며 SHA-256은 `846f1a716c2dd7e47ee10243a627e6d12ec66b39b3c060276fd487ca00cedf52`이다. [파일·공개키 검사](actions-ready-package.json)는 체크섬과 원본 공개키 일치를 확인했다. 별도의 [실제 Actions 서명 시험](github-actions-verification.json)은 GitHub Secret으로 서명한 정적 콘텐츠의 두 호스트 설치를 확인했다. ZIP 자체는 여전히 미서명이며 공개키를 함께 받았다는 사실만으로 신뢰가 성립한다고 설명하지 않는다.
