@@ -1,0 +1,37 @@
+{
+  "archive_sha256": "fc90f008e3fcdb636fa96e87e6201ac60edf6606610b1c3e9f3d6fcce0d3dd62",
+  "archive_bytes": 382239,
+  "scenarios": [
+    {
+      "mode": "snapshot",
+      "host": "codex",
+      "verified": true
+    },
+    {
+      "mode": "snapshot",
+      "host": "claude-code",
+      "verified": true
+    },
+    {
+      "mode": "signed",
+      "host": "codex",
+      "verified": true
+    },
+    {
+      "mode": "signed",
+      "host": "claude-code",
+      "verified": true
+    }
+  ],
+  "scope": "temporary keys/HOME; no global install, network, launchctl or model inference",
+  "archive_files": 28,
+  "checksums_match": true,
+  "status_and_uninstall_after_clone_move": true,
+  "source_hashes": {
+    "distribution/agent_install.py": "2d727d5159780abe3453113fdd8f3d40ccf9f5812a57fa3e86d687eddefa110c",
+    "runtime/kproto.py": "ae46fc8f432e02b885b7afd7778b4f37f67937f60be852122f84ffe17862fc07",
+    "tests/test_agent_install.py": "b8f612f1a4e2cf77977c50ca144b8c9faf0fb5de05c6ad9e5b4bcb864cfaf4dd"
+  },
+  "all_tests_passed": 222,
+  "installer_tests": 27
+}

@@ -39,3 +39,5 @@ python3 -B distribution/agent_install.py uninstall --host codex
 ```
 
 제거는 규약의 관리 블록을 없애고 사용자 지침의 나머지를 보존한다. 상태·백업·캐시와 관리 도구는 남긴다. 관리 블록을 직접 수정해 충돌이 발생하면 덮어쓰지 않고 충돌을 보고한다.
+
+서명된 정식 배포물을 설치하고 갱신을 연결하는 절차는 [서명 설치 안내](docs/distribution/signed-install.md)를 따른다. 정식 배포 정보가 없는 현재 미리보기에 임의의 키나 주소를 넣지 않는다.
