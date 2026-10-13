@@ -51,5 +51,24 @@
     "targeted_tests": 90,
     "new_durable_tests": 14,
     "independent_security_review": "no blocking findings after endpoint-specific Accept header correction"
+  },
+  "current_workflow_verification": {
+    "run_id": 38344642913,
+    "url": "https://github.com/project820/korean-protocol/actions/runs/38344642913",
+    "head_sha": "56bc4df36942892aedd55d3b7386e6ac8f5fc6c0",
+    "conclusion": "success",
+    "jobs": {
+      "sign": "success",
+      "publish": "skipped",
+      "receipt": "skipped",
+      "archive": "skipped"
+    },
+    "actions_tests": 90,
+    "artifact_id": 11787908333,
+    "manifest_sha256": "8fc014e3ef15282d624eff04bcadeeefd9fa4e6ae94c421d2f0b93b8e1f20050",
+    "downloaded_signature_verified": true,
+    "version": "0.2.0",
+    "sequence": 1,
+    "private": true
   }
 }

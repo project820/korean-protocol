@@ -58,6 +58,8 @@ gh workflow run release.yml --repo project820/korean-protocol --ref main -f arch
 
 로컬 전체 시험 256개와 관련 시험 90개가 통과했다. 이 중 새 장기 보관 시험 14개는 기록 만료·서명과 내용 변조·불완전 업로드·재시도·실제 최신 버전과의 불일치를 다룬다. 독립 보안 리뷰 후 실제 GitHub 다운로드에서 발견한 HTTP 415 오류를 수정하고 재시험했다. Actions artifact 요청은 JSON Accept를 사용하고 Release 파일 다운로드는 octet-stream을 사용한다.
 
+[갱신된 Actions 실행 38344642913](https://github.com/project820/korean-protocol/actions/runs/38344642913)에서도 관련 시험 90개와 실제 Secret 서명이 통과했다. 내려받은 artifact의 서명을 다시 검증했으며 publish·receipt·archive job은 모두 건너뛰었다.
+
 이 결과는 실제 공개 Pages 게시, 게시 후 발행 영수증 서명, 운영 예약 갱신 성공을 뜻하지 않는다. 해당 경로의 실제 운영 확인은 저장소 공개 시점에 수행한다.
 
 ## GitHub의 공식 계약을 따른다
