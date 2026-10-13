@@ -1,0 +1,25 @@
+{
+  "result": "pass",
+  "test_command": "python3 -B -m unittest discover -s tests -p 'test_*.py'",
+  "tests": 209,
+  "publisher_tests": 13,
+  "sources": {
+    "distribution/release.py": "3fbf893d2ec20d1d78a7402715ea4e4497842332b0ae3d4cbe639be267d0a8fc",
+    "tests/test_release.py": "5282445ea41e8138f6a92bb13e65233d84bca7fc8540afcb04eec10226564aa2",
+    "runtime/kproto.py": "ae46fc8f432e02b885b7afd7778b4f37f67937f60be852122f84ffe17862fc07"
+  },
+  "coverage": [
+    "source validation and compiled freshness",
+    "deterministic manifest",
+    "external SSHSIG with ephemeral keys",
+    "signed initial and strictly increasing subsequent release",
+    "runtime signed install for Codex and Claude Code in temporary homes",
+    "tamper, wrong signer, invalid signature, symlink and existing output rejection"
+  ],
+  "not_verified": [
+    "production signing key management",
+    "public HTTPS publication",
+    "actual scheduled update registration",
+    "LLM response compliance"
+  ]
+}

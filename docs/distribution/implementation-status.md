@@ -18,6 +18,8 @@ bundle에는 고정 일곱 콘텐츠 파일이 있어야 한다. 개인 snapshot
 
 한 상태 루트는 호스트 대상 파일 하나를 관리한다. host adapter는 `codex`, `claude-code`, `gemini-cli`를 지원하며 사용자·프로젝트 scope를 구분한다. Codex 프로젝트 scope는 가까운 Git marker부터 설치 대상 디렉터리까지 선택된 지침의 합계에 32KiB 또는 단순 top-level 설정 상한을 적용하며 global 파일을 차감하지 않는다. 사용자 scope에는 프로젝트 상한을 적용하지 않고 설치기 자체의 최종 파일 4MiB 보호 상한을 사용한다. 절대 host context를 저장하여 매 활성화 때 현재 발견 파일·설정·상위 체인을 다시 계산한다. 향후 더 깊은 작업 디렉터리·다른 project root 발견 규칙·custom fallback 전체 발견은 미지원이다. Cursor adapter, Windows ACL·원자 교체, Linux/Windows scheduler는 설계 상태이다.
 
+[발행물 준비 안내](publisher.md)는 원본 검사·서명 입력 생성·외부 서명·검증된 정적 폴더 생성을 설명한다. 실제 발행키나 서버 연결과는 구분한다.
+
 ## 콘텐츠 자동 갱신을 연결하는 조건
 
 원격 갱신에는 사용자가 별도로 확인한 Ed25519 공개키·지문과 그 키로 서명한 bundle, 동일 origin HTTPS source가 필요하다. 이 저장소의 실제 발행키·릴리스 endpoint는 아직 정하지 않았다. 서명 bootstrap을 마친 뒤에는 주기적인 수동 update가 필요하지 않으며 규약 사용 자체는 오프라인에서도 가능하다.
