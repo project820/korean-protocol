@@ -1,0 +1,45 @@
+{
+  "date_kst": "2026-10-15",
+  "status": "experimental_not_adopted",
+  "production_adopted": false,
+  "release_performed": false,
+  "reader_benefit_proven": false,
+  "development_documents": 16,
+  "runs": {
+    "v7-r1": {
+      "outputs": 32,
+      "semantic": {
+        "changed": 2,
+        "preserved": 27,
+        "uncertain": 3
+      },
+      "structural": {
+        "partially_satisfied": 9,
+        "satisfied": 23
+      },
+      "local_review_summary_sha256": "f72e35d90ff2453d4cdfb7e5756a57d8949c598e23d1a56db6e146a666974122"
+    },
+    "v7-r2": {
+      "outputs": 32,
+      "semantic": {
+        "changed": 6,
+        "preserved": 23,
+        "uncertain": 3
+      },
+      "structural": {
+        "partially_satisfied": 16,
+        "satisfied": 16
+      },
+      "local_review_summary_sha256": "811f24aa394b00bace09ef4b6bea50da35dc1ce10079fdacc059a3bc6c69cef5"
+    }
+  },
+  "separate_long_document_diagnostic": {
+    "outputs": 4,
+    "semantic": {
+      "preserved": 2,
+      "changed": 2
+    },
+    "source_and_outputs_published": false
+  },
+  "evidence_scope": "Locally recorded model-review aggregates; raw responses, review packets and source corpus are not published in this snapshot. These aggregates cannot be independently audited from this package. Reused development documents are not a holdout or reader trial."
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "status": "experimental_not_adopted",
+  "production_adopted": false,
+  "files": {
+    "parent-v6-profile.md": {
+      "bytes": 28669,
+      "sha256": "4bdfe175653b0cbd2d5229a37d193cff6a53a4b41194305e35f36c259e4b8537"
+    },
+    "r1-supplement.md": {
+      "bytes": 6684,
+      "sha256": "f556a82989adb7ffdf8724ea2db5f310f0361de5d81ae0501c5883ac21bf2633"
+    },
+    "r2-supplement.md": {
+      "bytes": 8679,
+      "sha256": "bc6c31989d8a9f284832b570bf3c7ad80e1987eae2b37ef93000ff9100a4316c"
+    },
+    "profile-v7-r1.md": {
+      "bytes": 35353,
+      "sha256": "f94fe97310dcf3dbbf924b51c0d904c92e2efecb5855ef48e62ff6340c5e168c"
+    },
+    "profile-v7-r2.md": {
+      "bytes": 37348,
+      "sha256": "58413651917d5a335f7c900acc54a65d856aedc07c16448e1691ff28daf29cd1"
+    }
+  },
+  "compositions": {
+    "profile-v7-r1.md": [
+      "r1-supplement.md",
+      "parent-v6-profile.md"
+    ],
+    "profile-v7-r2.md": [
+      "parent-v6-profile.md",
+      "r2-supplement.md"
+    ]
+  },
+  "snapshot_scope": "Exact frozen profiles and their byte-preserving components; no production compiler output or evaluation corpus is included."
+}
