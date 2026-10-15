@@ -16,13 +16,20 @@ Korean Protocol은 LLM의 한국어 표현을 위한 규약이다. 어휘의 뜻
 Codex 또는 Claude Code에 다음 문구를 복사한다.
 
 ```text
-https://github.com/project820/korean-protocol 의 INSTALL.md를 읽고, 지금 사용하는 코딩 에이전트의 사용자 범위에 서명된 Korean Protocol을 설치해줘. macOS에서는 예약 자동 갱신을 등록하고, 설치 버전과 갱신 연결 상태를 확인해줘.
+https://github.com/project820/korean-protocol 의 INSTALL.md를 읽어줘.
+지금 사용하는 코딩 에이전트의 사용자 범위에 서명된 Korean Protocol을 설치해줘.
+macOS에서는 예약 자동 갱신을 등록해줘.
+설치 버전과 갱신 연결 상태를 확인해줘.
 ```
 
 기존 설치에서 0.7.0으로 올릴 때는 [최신 관리 도구로 재설치](INSTALL.md#기존-설치의-관리-도구를-먼저-갱신한다)가 필요하다. 콘텐츠 0.7.0은 관리 엔진 0.2.0 이상을 요구하며 구버전 0.1.0의 자동 갱신은 기존 콘텐츠를 유지한다. 에이전트에는 다음 문구를 복사한다.
 
 ```text
-최신 https://github.com/project820/korean-protocol 의 INSTALL.md에 따라 기존 Korean Protocol 설치의 관리 도구를 0.2.0 이상으로 갱신한 뒤 서명된 0.7.0을 설치하고 status로 확인해줘. 기존 설치 경로와 규약·높임말·자동 갱신 설정은 보존해줘.
+최신 https://github.com/project820/korean-protocol 의 INSTALL.md를 읽어줘.
+기존 Korean Protocol 설치의 관리 도구를 0.2.0 이상으로 갱신해줘.
+그 뒤 서명된 0.7.0을 설치해줘.
+기존 설치 경로와 규약·높임말·자동 갱신 설정은 보존해줘.
+status로 설치 버전과 상태를 확인해줘.
 ```
 
 저장소와 [HTTPS 배포](https://project820.github.io/korean-protocol)는 공개되어 있으며 GitHub 인증 없이 사용할 수 있다. 자동 갱신은 끌 수 있고 [미서명 오프라인 설치](INSTALL.md#오프라인-미서명-설치를-명시적으로-선택한다)도 제공한다.
@@ -45,7 +52,7 @@ https://github.com/project820/korean-protocol 의 INSTALL.md를 읽고, 지금 �
 | --- | --- |
 | 원본 버전 | **0.7.0-draft**이며 V7 보완본 **r2**의 구조 규칙을 채택했다. |
 | 채택 기준 | 사용자가 r2의 가독성을 선택했으며 더 짧게 만든 r3는 채택하지 않았다. |
-| 콘텐츠 발행 | **0.7.0**의 공개 서명 발행과 실제 설치 갱신은 검증 대기 중이다. |
+| 콘텐츠 발행 | **0.7.0·순번 3**을 공개했고 두 호스트의 서명 HTTPS 갱신과 기존 로컬 설치 갱신을 [검증했다](docs/distribution/public-0.7.0-verification.md). |
 | 효과 검증 | V7 실험의 의미 변경·미확정 결과가 남아 있으며 실제 독자 시험은 수행하지 않았다. |
 
 [채택 기록](experiments/v7/adoption.md)은 결정과 한계를, [고정 실험 기록](experiments/v7/README.md)은 당시 프로필과 실패 집계를 보존한다. 사용자 선택은 모든 출력의 의미 보존이나 독자 이해 효과를 입증한 결과가 아니다. 0.3.0 당시의 기능 대응 49/53과 모델 평가를 포함한 근거는 [연구·검증 기록](docs/status/research-evidence.md)에 모았다.

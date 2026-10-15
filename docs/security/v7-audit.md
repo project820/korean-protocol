@@ -1,52 +1,62 @@
-# V7 adoption security audit
+# V7 보안 감사에서 임시 다운로드 누적 결함을 수정했다
 
-The review found and remediated one P3 availability issue and found no confirmed P0–P2 vulnerability in the inspected installer, updater, and release paths. This result does not certify arbitrary publisher content or a compromised local account as safe.
+설치·갱신·발행 경로에서 P3 가용성 결함 한 건을 확인하고 수정했다. 조사 범위에서 P0–P2 취약점은 확인하지 못했다. 이 결과가 임의의 게시자 콘텐츠나 침해된 로컬 계정의 안전을 보증하지는 않는다.
 
-The source baseline is `52008bdd1eabf0d5e3d359898bedcaebaf057e0a`. The audit ran on 2026-10-15 and changed only the updater's transient-stage lifecycle, its regression tests, and this report. The audit did not change live agent instructions, credentials, LaunchAgents, or remote services. Concurrent V7 profile work was outside this runtime review.
+최초 감사는 2026-10-15에 `52008bdd1eabf0d5e3d359898bedcaebaf057e0a`를 기준으로 진행했다. 감사 작업은 갱신용 임시 폴더의 정리 방식, 회귀 테스트, 이 보고서만 변경했다. 실제 에이전트 지침·자격 증명·LaunchAgent·원격 서비스는 변경하지 않았다. 병행한 V7 프로필 수정은 이 런타임 감사 범위에 포함하지 않았다.
 
-## Remediated finding: P3 — update staging had no retention bound
+## P3 임시 다운로드 누적 결함을 수정했다
 
-The baseline `runtime/kproto.py:1248–1266` created `downloads/<uuid>` before every update and left it behind after successful updates, unchanged releases, and rejected manifests. The HTTPS endpoint could therefore retain unauthenticated response bytes on disk even when authentication correctly prevented activation. The per-request byte limit and scheduled retry backoff limited growth per attempt, but neither limited total retained bytes.
+기준 소스의 `runtime/kproto.py:1248–1266`은 갱신할 때마다 `downloads/<uuid>`를 만들고 성공·동일 버전·manifest 거부 후에도 남겼다. 따라서 인증이 콘텐츠 적용을 막아도 HTTPS 서버가 보낸 미인증 응답은 디스크에 누적됐다. 요청별 크기 제한과 예약 재시도 간격은 한 번의 증가량을 제한했지만 전체 보관량은 제한하지 않았다.
 
-A disposable signed fixture produced these results:
+수정 전 임시 서명 설치에서 다음 결과를 재현했다.
 
-| Reproduction condition | Observed result |
+| 재현 조건 | 관찰 결과 |
 | --- | --- |
-| Three explicit updates serving the identical valid signed release | Each returned `False`; three directories retained 27 files and 7,335 bytes. |
-| Three further explicit updates serving a maximum-size invalid manifest and signature | Each failed; six total directories retained 33 files and 253,095 bytes. |
-| Host instructions after all six attempts | The original installed bytes remained unchanged. |
+| 같은 유효 서명 배포물로 명시적 갱신을 세 번 실행했다. | 모두 `False`를 반환했고 폴더 3개에 파일 27개·7,335바이트가 남았다. |
+| 최대 크기의 잘못된 manifest·서명으로 세 번 더 실행했다. | 모두 실패했고 누적 폴더 6개에 파일 33개·253,095바이트가 남았다. |
+| 여섯 번의 실행 후 호스트 지침을 대조했다. | 설치된 지침 바이트가 그대로 유지됐다. |
 
-The invalid-response growth was exactly 81,920 bytes per attempt: 65,536 manifest bytes plus 16,384 signature bytes. Scheduled failures back off to at most one attempt per 24 hours; explicit updates bypass that schedule. This finding concerns cumulative disk retention, not instruction injection, signature bypass, or execution of downloaded code.
+잘못된 응답은 시도당 81,920바이트를 남겼다. manifest 65,536바이트와 서명 16,384바이트의 합이다. 예약 실행은 실패가 반복되면 재시도 간격을 24시간까지 늘리며 명시적 갱신은 이 간격을 적용하지 않는다. 확인한 결함은 디스크 누적이며 지침 삽입·서명 우회·다운로드 코드 실행은 재현되지 않았다.
 
-The fix in `runtime/kproto.py:1248–1269` uses an exclusive `TemporaryDirectory` beneath the checked downloads path, so normal context exit cleans only the stage created by that attempt. It does not remove historical download directories, authenticated release caches, or backups. Abrupt process termination can still leave a stage behind; this change does not promise cleanup after `SIGKILL` or power loss.
+`runtime/kproto.py:1248–1269`의 수정은 검사한 다운로드 경로 아래에 전용 `TemporaryDirectory`를 만든다. 정상적인 컨텍스트 종료 시 해당 시도가 만든 폴더만 정리한다. 과거 다운로드 폴더·인증된 배포 캐시·백업은 제거하지 않는다. `SIGKILL`이나 전원 손실처럼 프로세스가 갑자기 끝나면 임시 폴더가 남을 수 있으며 이번 수정은 그 정리까지 보장하지 않는다.
 
-Three regressions in `tests/test_runtime.py` first failed against the baseline and then passed after the fix. They cover successful activation, repeated unchanged releases, network failure, malformed manifests, invalid signatures, modified payloads, and filesystem errors. They also verify that an injected symlink inside a stage does not delete its external target, historical directories survive, host/state bytes survive failed updates, cached settings remain usable, and cached rollback still succeeds.
+`tests/test_runtime.py`의 새 회귀 테스트 세 개는 수정 전 실패하고 수정 후 통과했다. 성공 적용·동일 버전 반복·네트워크 실패·잘못된 manifest·유효하지 않은 서명·변조 본문·파일 시스템 오류를 검사한다. 폴더 안의 심볼릭 링크가 가리키는 외부 파일과 과거 폴더를 보존하며, 실패한 갱신은 호스트·설치 상태를 바꾸지 않는지도 검사한다. 캐시를 이용한 설정 변경과 롤백도 통과했다.
 
-The reproduction used `tests.test_runtime.SignedRuntimeTests` to generate a temporary Ed25519 key, a signed seven-file content bundle, and a disposable host target. It called `install_signed`, configured `https://example.test`, and patched only `Controller.fetch` to serve those fixture bytes for three updates. It then patched `fetch` to return `b'x' * maximum` for three updates and counted regular files under `state/downloads`. No live endpoint or production key was used.
+재현은 `tests.test_runtime.SignedRuntimeTests`로 임시 Ed25519 키·서명한 콘텐츠 파일 7개·임시 호스트 대상을 만들었다. `install_signed`로 설치하고 `https://example.test`를 설정한 뒤 `Controller.fetch`만 대체해 같은 시험 바이트로 세 번 갱신했다. 이어 `fetch`가 `b'x' * maximum`을 반환하게 바꿔 세 번 갱신하고 `state/downloads`의 일반 파일을 셌다. 실제 서버나 운영 키는 사용하지 않았다.
 
-## Inspected controls and evidence
+## 설치·갱신·발행 경계를 검사했다
 
-| Boundary | Source and verification evidence |
+아래 줄 번호는 최초 감사 기준을 가리킨다. 후속 엔진·프로필 한도 변경은 다음 절의 독립 검토 기록을 따른다.
+
+| 검사 경계 | 소스와 검증 근거를 기록했다. |
 | --- | --- |
-| HTTPS origin and redirects | `runtime/kproto.py:428–474,1168–1232` requires a credential-free HTTPS source on port 443, compares fetch origins, rejects redirects, and bounds downloaded bodies. Tests exercised real TLS through a local proxy, refused cross-origin redirects, and checked secret-free failure messages. |
-| macOS proxy discovery and subprocess cleanup | `runtime/kproto.py:1192–1224` starts a fresh interpreter with `-I -B`, sends request data through stdin, discards worker diagnostics, applies the remaining deadline, and kills/reaps unfinished workers. Tests checked dynamic runtime loading, inherited proxy discovery, blocked readers, malformed input, and worker termination. |
-| Content authentication and rollback | `runtime/kproto.py:779–843,987–1012,1132–1145` checks the local Ed25519 anchor, SSHSIG namespace/principal, file sizes/hashes, compatibility, and installed sequence high-water mark. Cached rollback rechecks content/signatures and pins the selected version. Tests rejected modified manifests, payloads, wrong namespaces, replayed sequences, and changed cached data. |
-| Bootstrap anchor and durable helper | `distribution/agent_install.py:123–187,284–458` verifies recorded helper hashes/ownership, captures signed input, preserves an existing trust anchor, and refuses unsigned replacement of an existing signed installation. Tests covered concurrent anchor changes, unsigned downgrade attempts, altered helpers, and clone-independent management. |
-| Paths and archives | `runtime/kproto.py:130–230` uses descriptor walks and `O_NOFOLLOW`, bounds regular-file reads, rejects hardlinked files, and checks parent/target identities before replacement. `distribution/actions_release.py:170–186` rejects archive traversal, duplicate paths, symlinks, oversized files, and oversized history. Targeted tests exercised those rejections and FIFO locks. |
-| Host instructions and scheduler | `runtime/kproto.py:845–985,646–713,1288–1356` uses marker/hash ownership, preserves bytes outside the managed block, rechecks the selected host target, and requires an explicit signed scheduled installation for registration. Scheduler tests covered modified files, loaded-label collisions, unknown live identity, interrupted migration, and cleanup failure. |
-| GitHub token redirects | `distribution/actions_release.py:57–89` handles the artifact-storage redirect separately without forwarding GitHub Authorization. `test_artifact_redirect_does_not_forward_github_authorization` exercised that behavior. |
-| Signing secrets and workflow authority | `distribution/actions_release.py:249–267` writes the key into a private temporary directory, excludes its environment value from signer child processes, verifies its public identity, and captures signer diagnostics. `.github/workflows/release.yml` pins all referenced actions to full 40-character SHAs, disables checkout credential persistence, separates Pages write/OIDC authority from signing, and scopes the signing secret to the signing steps. Tests checked wrong-key rejection, temporary-key cleanup, rerun rejection, and publication-history continuity. |
+| HTTPS 주소·리디렉션을 검사했다. | `runtime/kproto.py:428–474,1168–1232`는 자격 증명 없는 443 포트 HTTPS 주소를 요구하고 요청 출처를 대조하며 리디렉션과 본문 초과를 거부한다. 로컬 프록시를 통한 실제 TLS 시험에서 다른 출처 리디렉션을 거부하고 실패 메시지에 비밀 값이 없음을 확인했다. |
+| macOS 프록시 탐색·자식 프로세스 종료를 검사했다. | `runtime/kproto.py:1192–1224`는 `-I -B`로 새 인터프리터를 실행하고 표준 입력으로 요청을 전달한다. 작업자 진단 출력을 버리고 남은 제한 시간을 적용하며 종료하지 않은 작업자를 강제 종료한 뒤 회수한다. 동적 런타임 로딩·기존 프록시 탐색·읽기 지연·잘못된 입력·작업자 종료를 시험했다. |
+| 콘텐츠 인증·롤백을 검사했다. | `runtime/kproto.py:779–843,987–1012,1132–1145`는 로컬 Ed25519 키·SSHSIG namespace/principal·파일 크기와 해시·호환성·설치된 최대 순번을 확인한다. 캐시 롤백은 콘텐츠와 서명을 다시 검사하고 선택 버전을 고정한다. 변조된 manifest·본문·캐시, 잘못된 namespace, 순번 재사용을 거부했다. |
+| 최초 설치의 신뢰 키·영구 관리 도구를 검사했다. | `distribution/agent_install.py:123–187,284–458`은 관리 도구의 기록된 해시·소유권을 검사하고 서명 입력을 고정해 읽으며 기존 신뢰 키를 보존한다. 기존 서명 설치를 서명 없이 덮어쓰지 않는다. 동시 키 변경·서명 없는 다운그레이드·관리 도구 변조를 거부하고 원래 복제본을 제거한 뒤에도 관리할 수 있음을 확인했다. |
+| 파일 경로·압축 파일을 검사했다. | `runtime/kproto.py:130–230`은 디렉터리 파일 서술자와 `O_NOFOLLOW`를 사용하며 일반 파일의 읽기 크기를 제한한다. 하드링크를 거부하고 교체 전 상위 폴더·대상 파일의 동일성을 확인한다. `distribution/actions_release.py:170–186`은 상위 경로 탈출·중복 경로·심볼릭 링크·파일 및 이력 크기 초과를 거부한다. 해당 거부 경로와 FIFO 잠금 파일을 시험했다. |
+| 호스트 지침·예약 실행을 검사했다. | `runtime/kproto.py:845–985,646–713,1288–1356`은 관리 표식·해시로 소유권을 확인하고 관리 블록 밖의 바이트를 보존하며 호스트 대상을 다시 검사한다. 예약 작업 등록은 명시적인 서명·예약 설치를 요구한다. 변조 파일·실행 중인 동일 레이블·확인할 수 없는 실행 상태·이관 중단·정리 실패를 시험했다. |
+| GitHub 토큰 전달을 검사했다. | `distribution/actions_release.py:57–89`는 압축 파일 저장소 리디렉션을 별도로 처리하며 GitHub Authorization을 전달하지 않는다. `test_artifact_redirect_does_not_forward_github_authorization`이 이 동작을 확인했다. |
+| 서명 비밀 값·워크플로 권한을 검사했다. | `distribution/actions_release.py:249–267`은 비공개 임시 폴더에 키를 쓰고 서명 자식 프로세스의 환경에서 비밀 값을 제외한다. 공개키 일치를 확인하고 서명기 출력을 수집한다. `.github/workflows/release.yml`은 모든 action을 전체 40자리 SHA로 고정하고 체크아웃 자격 증명 보관을 끄며 Pages 쓰기·OIDC 권한을 서명 작업과 분리한다. 서명 비밀 값은 서명 단계에만 전달한다. 잘못된 키 거부·임시 키 정리·재실행 거부·발행 이력 연속성을 시험했다. |
 
-## Validation and limits
+## 후속 통합 검사와 독립 검토를 확인했다
 
-Before the fix, `python3 -B -m unittest tests.test_runtime tests.test_agent_install tests.test_release tests.test_actions_release tests.test_history_store tests.test_scheduler tests.test_launcher` passed all 269 tests in 45.079 seconds. The duplicate-ZIP-name warning came from the archive rejection fixture. These passing tests supported the named controls but did not cover the staging-retention finding.
+[최종 검증 기록](../status/v7-verification.json)은 `python3 -B -m unittest discover -s tests -p 'test_*.py'`로 통합 테스트 376개가 통과했음을 기록한다. [Astra의 독립 검토](v7-independent-review.md)는 집중 검사 224개 통과와 미해결 지적 0건을 기록한다. 두 검사는 대상이 겹치므로 테스트 수를 합산하지 않는다.
 
-After the fix, the three new staging regressions passed in 0.444 seconds. `python3 -B -m unittest tests.test_runtime tests.test_scheduler` then passed all 157 tests in 15.671 seconds, and `git diff --check` reported no whitespace errors.
+독립 검토는 엔진 `0.2.0`, 프로필 상한 30KiB, 관리 블록 상한 32KiB를 확인했다. 파일 7개의 허용 경로·파일별 및 전체 크기 제한·서명 namespace/principal·로컬 신뢰 키·최대 순번·명시적 캐시 롤백 요구는 유지됐다. 실제 호스트의 남은 지침 예산은 별도로 검사하며 Codex 프로젝트 설정을 자동으로 늘리지 않는다. 실제 구버전 엔진 `0.1.0`이 새 manifest와 서명만 받은 뒤 본문 다운로드 전에 호환 오류를 반환하고 설치 대상·상태를 보존한 시험도 독립 검토에 기록했다.
 
-A broad rerun executed 272 tests in 43.729 seconds and reported four assertion failures and nine errors during concurrent V7 source migration. Nine errors and three assertion failures reported stale compiled `profiles/coding-agent.md`; the remaining assertion exercised a legacy-helper fixture with signed `0.3.0` after the installer version became `0.4.0`, which correctly triggered the downgrade guard. Those integration checks require compiled-profile regeneration and fixture alignment before the final adoption verdict.
+오프라인 패키지 문서의 P3 링크 결함은 다운로드 누적과 별개의 지적이다. [독립 검토](v7-independent-review.md)는 해당 링크 수정과 배포 테스트 통과를 확인했으며 원격 문서가 실제로 게시됐다는 뜻으로 확대하지 않았다.
 
-A read-only pattern scan covered 1,526 tracked regular files and found no PEM private-key header, OpenAI-key-shaped token, GitHub-token-shaped token, or AWS-access-key-shaped token. The scan printed no matched values and cannot prove the absence of other credential formats or credentials in untracked files, Git history, external logs, or configured services.
+## 최초 검사 수치와 한계를 보존했다
 
-The audit treated the installed Python runtime, the local account, the explicitly selected offline bundle, and the separately checked publisher key as trust anchors. Content signatures authenticate the seven content files, not the Python installer or helper code. The durable helper's self-recorded hashes detect accidental or partial modification; they do not protect against an attacker who can replace both code and its ownership metadata as the same local user.
+다음은 2026-10-15의 수정·통합 과정에서 얻은 이력이며 현재의 미해결 실패를 뜻하지 않는다.
 
-The review did not invoke production signing, publishing, actual LaunchAgent registration, or live GitHub environment/branch-protection configuration. Scheduler mutation tests used fixtures/mocks. The configured repository environment's human approval rules, administrator access, GitHub action commit provenance, production key storage, and the content of future publisher-signed instructions require their owning operational checks.
+- 수정 전 `python3 -B -m unittest tests.test_runtime tests.test_agent_install tests.test_release tests.test_actions_release tests.test_history_store tests.test_scheduler tests.test_launcher`는 269개를 45.079초에 통과했다. 중복 ZIP 이름 경고는 압축 파일 거부 시험에서 나왔다. 이 검사에는 임시 폴더 누적 회귀 검사가 없었다.
+- 수정 후 새 회귀 테스트 세 개는 0.444초에 통과했다. `python3 -B -m unittest tests.test_runtime tests.test_scheduler`는 157개를 15.671초에 통과했고 `git diff --check`는 공백 오류를 보고하지 않았다.
+- 병행 수정 중 넓은 범위로 재실행한 272개 검사는 43.729초에 단언 실패 4건·오류 9건을 보고했다. 오류 9건과 단언 실패 3건은 갱신 전 `profiles/coding-agent.md` 때문이었다. 나머지 한 건은 설치기 버전을 `0.4.0`으로 바꾼 뒤 시험 데이터가 서명 `0.3.0`을 설치해 정상적인 다운그레이드 차단을 만난 결과였다. 이후 통합 검사 376개 통과가 이 중간 실패 기록을 대체한다.
+
+읽기 전용 패턴 검사는 추적된 일반 파일 1,526개에서 PEM 개인키 헤더·OpenAI 키 형태·GitHub 토큰 형태·AWS 액세스 키 형태를 찾지 못했다. 일치 값은 출력하지 않았다. 이 결과는 다른 형식의 자격 증명이나 미추적 파일·Git 이력·외부 로그·설정된 서비스에 비밀 값이 없음을 입증하지 않는다.
+
+이 감사는 설치된 Python 런타임·로컬 계정·명시적으로 선택한 오프라인 배포물·별도로 확인한 게시자 키를 신뢰 기준으로 삼았다. 콘텐츠 서명은 콘텐츠 파일 7개를 인증하며 Python 설치기나 관리 도구 코드를 인증하지 않는다. 관리 도구가 자체 기록한 해시는 우발적·부분적 변경을 감지하지만 같은 로컬 사용자 권한으로 코드와 소유권 기록을 함께 바꾸는 공격자는 막지 못한다.
+
+이 감사는 운영 서명·공개 게시·실제 LaunchAgent 등록·GitHub 환경 및 브랜치 보호 설정 변경을 실행하지 않았다. 예약 실행 변경 검사는 시험 데이터와 모의 호출을 사용했다. 저장소 환경의 사람 승인 규칙·관리자 접근·GitHub action 커밋 출처·운영 키 보관·향후 게시자가 서명할 지침의 내용은 각 운영 경로에서 별도로 확인해야 한다.

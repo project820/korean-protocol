@@ -33,7 +33,7 @@ SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc
 
 ## 공개 배포에서 서명 설치한다
 
-공개 배포 주소는 `https://project820.github.io/korean-protocol`이다. 원본 0.7.0-draft는 V7 r2를 채택했으며 콘텐츠 0.7.0의 공개 발행·갱신 검증은 대기 중이다. 아래 명령은 공개 서버가 실제로 제공하는 서명본을 설치하므로 상태 결과의 버전을 확인한다. 이전 공개본 0.3.0·순번 2의 [발행 기록](https://github.com/project820/korean-protocol/blob/main/docs/distribution/public-0.3.0-verification.md)은 이번 발행의 증거가 아니다.
+공개 배포 주소는 `https://project820.github.io/korean-protocol`이다. 현재 공개본은 V7 r2를 채택한 콘텐츠 0.7.0·순번 3이며 [발행·갱신 기록](https://github.com/project820/korean-protocol/blob/main/docs/distribution/public-0.7.0-verification.md)에 정식 게시자 서명과 두 호스트의 실제 HTTPS 갱신 결과를 남겼다. 아래 명령은 공개 서버가 제공하는 서명본을 설치하므로 상태 결과의 버전을 확인한다.
 
 Codex 예시이며, Claude Code에서는 모든 명령의 `--host codex`를 `--host claude-code`로 바꾼다. 각 명령은 JSON을 출력한다. 명령이 실패하면 원인과 종료 코드를 보고하고 성공으로 표시하지 않는다.
 

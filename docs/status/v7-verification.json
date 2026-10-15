@@ -39,5 +39,27 @@
       "Source and disposable tests, not a penetration test of GitHub infrastructure."
     ]
   },
-  "publication": "pending_actual_signed_release"
+  "publication": {
+    "status": "verified",
+    "content_version": "0.7.0",
+    "source_version": "0.7.0-draft",
+    "sequence": 3,
+    "release_source_commit": "67f537ee9127215ab57c4ee24fb91003948c2f31",
+    "issued_at": "2026-10-15T02:28:04Z",
+    "actions_run_url": "https://github.com/project820/korean-protocol/actions/runs/38671093558",
+    "successful_jobs": [
+      "sign",
+      "publish",
+      "receipt",
+      "archive"
+    ],
+    "public_endpoint": "https://project820.github.io/korean-protocol",
+    "history_release_url": "https://github.com/project820/korean-protocol/releases/tag/kproto-history-0.7.0-3",
+    "detailed_verification": "docs/distribution/public-0.7.0-verification.json",
+    "verification_report": "docs/distribution/public-0.7.0-verification.md",
+    "signed_https_upgrade_installations": 2,
+    "existing_local_snapshot_updates": 2,
+    "global_installations_created": false,
+    "scheduler_registration_performed": false
+  }
 }

@@ -2,7 +2,7 @@
 
 Python 3.9 표준 라이브러리로 POSIX 설치기와 서명 콘텐츠 updater를 구현했다. 초기 시험 수와 환경은 [2026-10-12 기록](../status/host-environment-20261012.md)에 보존한다. 별도 임시 설치본의 실제 macOS 예약 등록·실행·해제는 [후속 시험](scheduler-registration-verification.json)에서 확인했다.
 
-현재 원본은 V7 r2를 채택한 0.7.0-draft이며 콘텐츠 발행 버전은 0.7.0이다. 공개 서명 발행·실제 설치 갱신 검증은 대기 중이며 [V7 채택 기록](../../experiments/v7/adoption.md)에 상태를 구분한다. 이전 시험 결과를 0.7.0의 새 검증 결과로 사용하지 않는다.
+현재 원본은 V7 r2를 채택한 0.7.0-draft이며 공개 콘텐츠는 0.7.0·순번 3이다. [공개 발행·설치 갱신 기록](public-0.7.0-verification.md)은 정식 게시자 서명·콘텐츠 7개 해시와 두 호스트의 갱신 결과를 확인한다. 이전 시험 결과를 0.7.0의 새 검증 결과로 사용하지 않는다.
 
 콘텐츠 0.7.0은 엔진 0.2.0 이상을 요구한다. 프로필은 30 KiB, 관리 블록은 32 KiB까지 수용하며 Codex 프로젝트의 실제 잔여 예산은 별도로 검사한다. 엔진 0.1.0은 새 콘텐츠를 거부하고 기존 설치본을 유지하므로 [최신 INSTALL.md의 재설치 절차](../../INSTALL.md#기존-설치의-관리-도구를-먼저-갱신한다)로 관리 도구를 먼저 교체한다.
 
@@ -26,7 +26,7 @@ bundle에는 고정 일곱 콘텐츠 파일이 있어야 한다. 개인 snapshot
 
 ## 콘텐츠 자동 갱신을 연결하는 조건
 
-원격 갱신에는 사용자가 별도로 확인한 Ed25519 공개키·지문과 그 키로 서명한 bundle, 동일 origin HTTPS source가 필요하다. 발행키는 [GitHub Actions 환경 Secret](github-actions-pages.md)에 등록했고 공개키는 저장소에 고정했다. 공개 주소는 `https://project820.github.io/korean-protocol`이며 이번 0.7.0 발행 검증은 대기 중이다. 서명 bootstrap을 마친 뒤에는 주기적인 수동 update가 필요하지 않으며 규약 사용 자체는 오프라인에서도 가능하다.
+원격 갱신에는 사용자가 별도로 확인한 Ed25519 공개키·지문과 그 키로 서명한 bundle, 동일 origin HTTPS source가 필요하다. 발행키는 [GitHub Actions 환경 Secret](github-actions-pages.md)에 등록했고 공개키는 저장소에 고정했다. 공개 주소 `https://project820.github.io/korean-protocol`에서 0.7.0·순번 3의 서명과 실제 HTTPS 갱신을 검증했다. 서명 bootstrap을 마친 뒤에는 주기적인 수동 update가 필요하지 않으며 규약 사용 자체는 오프라인에서도 가능하다.
 
 ```sh
 python3 -m runtime.kproto --state-dir /ABS/STATE install --bundle /ABS/SIGNED_BUNDLE --host codex --scope project --project-root /ABS/PROJECT --trust-key /ABS/PUBLISHER.pub --expected-fingerprint SHA256:VERIFIED_FINGERPRINT --source https://publisher.example/kproto --autoupdate interval

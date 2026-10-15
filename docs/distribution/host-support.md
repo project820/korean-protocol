@@ -1,6 +1,6 @@
 # 호스트 지원과 적용 범위
 
-현재 원본 0.7.0-draft는 V7 r2를 채택한다. 콘텐츠 0.7.0의 공개 발행·실제 설치 갱신은 검증 대기 중이며 [채택 기록](../../experiments/v7/adoption.md)에서 상태를 구분한다. 새 프로필의 구조 규칙도 기존 호스트 경로와 바이트 예산을 따른다.
+현재 원본 0.7.0-draft는 V7 r2를 채택한다. 콘텐츠 0.7.0·순번 3의 [공개 발행·갱신 기록](public-0.7.0-verification.md)은 Codex·Claude Code의 서명 HTTPS 갱신과 기존 로컬 설치 갱신을 구분한다. 새 프로필의 구조 규칙도 기존 호스트 경로와 바이트 예산을 따른다.
 
 아래 호스트 발견·loader 증거는 2026-10-12부터 수행한 당시 환경의 결과다. Codex·Claude Code·Gemini의 POSIX Markdown adapter는 구현했고 임시 파일로 설치를 시험했다. Codex는 [임시 사용자·프로젝트 설치와 실제 loader](../status/local-install-smoke.json)를 확인했다. 별도 [실제 모델 평가](../../evaluation/llm/candidate-validation-report.md)는 시험한 입력과 프로필의 결과이며 모든 호스트의 준수를 입증하지 않는다.
 
