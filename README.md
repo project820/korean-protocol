@@ -10,8 +10,10 @@ Korean Protocol은 LLM의 한국어 표현을 위한 규약이다. 어휘의 뜻
 
 | 코딩 에이전트 | 일반 채팅 |
 | --- | --- |
-| [INSTALL.md](INSTALL.md)를 에이전트에 전달한다. Codex·Claude Code의 로컬 지침과 캐시에 설치한다. | [채팅용 시작 안내](distribution/CHAT-START.md)를 따라 패키지의 `KOREAN-PROTOCOL.md`를 프로젝트에 올린다. |
+| [INSTALL.md](INSTALL.md)를 에이전트에 전달한다. Codex·Claude Code의 로컬 지침과 캐시에 설치한다. | [채팅용 시작 안내](distribution/CHAT-START.md)를 따라 [KOREAN-PROTOCOL.md](https://github.com/project820/korean-protocol/releases/download/v0.7.0/KOREAN-PROTOCOL.md)를 프로젝트에 올린다. |
 | 서명된 콘텐츠를 설치하며 macOS 예약 갱신 또는 Linux 시작 wrapper를 연결한다. | 업로드한 파일을 계속 사용하며 새 버전은 직접 교체한다. |
+
+[0.7.0 다운로드](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)에서 미서명 오프라인 ZIP·채팅용 파일·체크섬을 받는다. 서명 콘텐츠의 자동 갱신과 별도 경로이며 `SHA256SUMS`는 발행자 인증을 대신하지 않는다.
 
 Codex 또는 Claude Code에 다음 문구를 복사한다.
 
@@ -32,7 +34,7 @@ macOS에서는 예약 자동 갱신을 등록해줘.
 status로 설치 버전과 상태를 확인해줘.
 ```
 
-저장소와 [HTTPS 배포](https://project820.github.io/korean-protocol)는 공개되어 있으며 GitHub 인증 없이 사용할 수 있다. 자동 갱신은 끌 수 있고 [미서명 오프라인 설치](INSTALL.md#오프라인-미서명-설치를-명시적으로-선택한다)도 제공한다.
+저장소와 [서명 배포 manifest](https://project820.github.io/korean-protocol/stable/release.json)는 공개되어 있으며 GitHub 인증 없이 사용할 수 있다. 자동 갱신은 끌 수 있고 [미서명 오프라인 설치](INSTALL.md#오프라인-미서명-설치를-명시적으로-선택한다)도 제공한다.
 
 ## 문장과 구조를 함께 다듬는다
 

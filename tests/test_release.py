@@ -15,6 +15,39 @@ from validation.check import FILES
 from validation.compile import compile_profiles
 
 
+class ReleaseSchemaTests(unittest.TestCase):
+    def test_schema_profile_size_bounds_accept_current_and_boundary_manifests(self):
+        repo = Path(__file__).resolve().parents[1]
+        schema = json.loads((repo / 'schemas/release.schema.json').read_text())
+        item_schema = schema['properties']['files']['items']
+        manifest = k.make_manifest(repo, '0.7.0', 1, 'SHA256:' + 'a' * 43)
+        k.validate_manifest(manifest)
+        for item in manifest['files']:
+            if item['role'] != 'profile':
+                continue
+            # Evaluate the schema's size restrictions for this allowlisted path.
+            # This targeted contract test needs no external JSON Schema package.
+            limits = [item_schema['properties']['size']['maximum']]
+            for branch in item_schema['allOf']:
+                condition = branch['if']['properties']['path']
+                if (item['path'] in condition.get('enum', []) or
+                        item['path'] == condition.get('const')):
+                    limit = branch['then']['properties'].get('size', {}).get('maximum')
+                    if limit is not None:
+                        limits.append(limit)
+            maximum = min(limits)
+            with self.subTest(path=item['path']):
+                self.assertLessEqual(item['size'], maximum)
+                item['size'] = 30 * 1024
+                k.validate_manifest(manifest)
+                self.assertLessEqual(item['size'], maximum)
+                item['size'] += 1
+                self.assertGreater(item['size'], maximum)
+                with self.assertRaises(k.InputError):
+                    k.validate_manifest(manifest)
+                item['size'] -= 1
+
+
 @unittest.skipUnless(shutil.which('ssh-keygen'), 'OpenSSH signing is required')
 class ReleaseTests(unittest.TestCase):
     def setUp(self):

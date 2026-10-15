@@ -14,7 +14,7 @@
 | Claude Code | 사용자 `~/.claude/rules/korean-protocol.md`, 프로젝트 `.claude/rules/korean-protocol.md`의 실제 파일을 사용한다. | `paths` frontmatter 없이 시작할 때 읽게 한다. 파일 import·외부 symlink 승인을 요구하는 구조를 피한다. | 사용자·프로젝트 규칙 파일 설치를 구현했다. Claude Code 2.1.296의 로컬 모의 요청에서 72개 규칙 로딩을 확인했으며 모델 준수·OpenCodex 경유 실제 추론은 별도다. |
 | Gemini CLI | 사용자 `~/.gemini/GEMINI.md`, 프로젝트 `GEMINI.md`에 관리 블록을 넣는다. | 사용자·workspace·JIT 맥락 계층을 유지한다. 이름이 설정으로 바뀐 환경은 자동 추측하지 않고 명시 대상이 필요하다. | 공식 문서만 확인했다. 로컬 gemini 명령은 발견하지 못했다. |
 | Cursor Agent | 설계상 프로젝트 `.cursor/rules/korean-protocol.mdc`에 `alwaysApply: true`와 본문을 둔다. | 현재 설치기의 자동 설치 대상이 아니다. 사용자 전역 Rules는 설정 화면에 프로필을 직접 넣어야 한다. | 공식 문서만 확인했다. Cursor Tab·Inline Edit 전역 적용은 지원하지 않는다. |
-| ChatGPT Chat·Work 웹/모바일 | Custom Instructions 또는 선택한 프로젝트 instructions에 내보낸 짧은 프로필을 넣는다. | UI에 저장한 복사본은 로컬 업데이트로 자동 바뀌지 않는다. 현재 공식 로컬 쓰기·동기화 API를 확인하지 못했으므로 v1은 export/manual 설치만 제공한다. | 공식 personalization·project 범위를 확인했다. 계정별 글자 제한·설치 UI·응답 준수는 시험 전이다. |
+| ChatGPT Chat·Work 웹/모바일 | [채팅용 시작 안내](../../distribution/CHAT-START.md)에 따라 프로젝트에 `KOREAN-PROTOCOL.md`를 올리고 시작 지침을 저장한다. | 첨부한 복사본은 로컬 업데이트로 자동 바뀌지 않는다. 짧은 사용자 지침만으로 전체 규약과 사전이 설치됐다고 표시하지 않는다. | 공식 personalization·project 범위를 확인했다. 계정별 저장·첨부 제한과 실제 설정 UI·응답 준수는 시험 전이다. |
 | Claude/Gemini 일반 채팅 웹·모바일 | 해당 앱이 제공하는 사용자 지침 UI용 프로필을 내보낸다. | 파일 경로를 제시하는 것만으로 읽기·갱신을 보장하지 않는다. | v1은 앱별 자동 adapter를 지원하지 않는다. 각 제품의 저장 지침 방식 확인이 필요하다. |
 | 자체 LLM 앱·로컬 모델 | 앱 소유자가 로컬 profile을 앱의 지침 맥락에 연결한다. | 앱별 자동 연결과 출력 차단 필터는 제공하지 않는다. | provider별 연결과 tokenizer는 앱 소유자가 시험해야 한다. 설치기가 임의의 앱을 가로채지 않는다. |
 

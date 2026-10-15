@@ -250,6 +250,21 @@ class ValidationTests(FixtureTests):
         (self.root/'specification/rules.json').write_text('{"schema_version":"1.0","schema_version":"9.0","version":"0.2.0","rules":[]}')
         self.assertError('file_invalid')
 
+    def test_deeply_nested_json_returns_invalid_file_report_without_traceback(self):
+        source = self.root/'specification/rules.json'
+        original = '{"nested":' + '[' * 2000 + '0' + ']' * 2000 + '}'
+        source.write_text(original)
+        result = subprocess.run(
+            [sys.executable, '-B', '-m', 'validation.check', '--root', str(self.root), '--json'],
+            capture_output=True, text=True, timeout=10)
+        self.assertEqual(1, result.returncode)
+        self.assertEqual('', result.stderr)
+        report = json.loads(result.stdout)
+        self.assertFalse(report['ok'])
+        self.assertIn({'code': 'file_invalid', 'path': 'specification/rules.json'},
+                      [{key: error[key] for key in ('code', 'path')} for error in report['errors']])
+        self.assertEqual(original, source.read_text())
+
     def test_cli_returns_nonzero_and_json_for_invalid_data(self):
         self.change('specification/rules.json',lambda d:d.update(rules=None))
         result=subprocess.run([sys.executable,'-m','validation.check','--root',str(self.root),'--json'],capture_output=True,text=True)

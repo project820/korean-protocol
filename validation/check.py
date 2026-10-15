@@ -37,7 +37,7 @@ class Checker:
         except FileNotFoundError:
             self.error('file_missing',name,'Required file does not exist.')
             return {}
-        except (OSError, UnicodeError, ValueError) as exc:
+        except (OSError, UnicodeError, ValueError, RecursionError) as exc:
             self.error('file_invalid',name,str(exc))
             return {}
         if not isinstance(value,dict):

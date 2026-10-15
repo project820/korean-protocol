@@ -52,7 +52,7 @@ python3 -m runtime.kproto --state-dir /ABS/STATE update --pin CURRENT_VERSION
 python3 -m runtime.kproto --state-dir /ABS/STATE update --unpin
 ```
 
-off는 자신이 등록한 job의 실행 경로·인자와 plist 해시를 확인한 뒤 해제하고, 소유한 예약 파일을 제거한다. 등록 정보가 없거나 사용자가 바꾼 외부 job을 임의로 해제하지 않는다. mode off에서는 원격 조회를 수행하지 않는다. `CURRENT_VERSION`에는 실제 활성 버전을 넣는다. pin은 현재 버전만 지정하며 다른 버전 pin은 cache rollback을 먼저 수행한다.
+off는 자신이 등록한 job의 실행 경로·인자와 plist 해시를 확인한 뒤 해제하고, 소유한 예약 파일을 제거한다. 등록 정보가 없거나 사용자가 바꾼 외부 job을 임의로 해제하지 않는다. mode off에서는 자동 원격 조회를 수행하지 않는다. 사용자가 명시적으로 실행한 `update`는 off에서도 원격 조회를 수행한다. `CURRENT_VERSION`에는 실제 활성 버전을 넣는다. pin은 현재 버전만 지정하며 다른 버전 pin은 cache rollback을 먼저 수행한다.
 
 ## 확인한 실패 처리
 

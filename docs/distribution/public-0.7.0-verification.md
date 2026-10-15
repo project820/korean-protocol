@@ -8,7 +8,7 @@
 | --- | --- |
 | 원본 | `67f537ee9127215ab57c4ee24fb91003948c2f31`의 `0.7.0-draft`를 발행했다. |
 | 실행 | [Actions 38671093558](https://github.com/project820/korean-protocol/actions/runs/38671093558)의 sign·publish·receipt·archive가 성공했다. |
-| 공개 버전 | [HTTPS 배포](https://project820.github.io/korean-protocol)는 콘텐츠 `0.7.0`, 순번 `3`을 제공한다. |
+| 공개 버전 | [서명 배포 manifest](https://project820.github.io/korean-protocol/stable/release.json)는 콘텐츠 `0.7.0`, 순번 `3`을 제공한다. |
 | 발행 시각 | manifest의 발행 시각은 `2026-10-15T02:28:04Z`다. |
 | 보관 이력 | [kproto-history-0.7.0-3](https://github.com/project820/korean-protocol/releases/tag/kproto-history-0.7.0-3)에 발행물을 보관했다. |
 | 호환 조건 | 엔진 `0.2.0` 이상을 요구하며 코딩 에이전트 프로필은 30,137바이트다. |

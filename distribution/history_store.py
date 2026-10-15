@@ -17,6 +17,8 @@ from runtime import kproto as k
 RECEIPT_NAMESPACE = 'kproto-publication-receipt-v1'
 RECEIPT_FILES = ('publication-receipt.json', 'publication-receipt.json.sig')
 CONTENT_ASSET = 'signed-content.zip'
+PROVENANCE_ASSET = 'archive-provenance.json'
+MAX_METADATA = 65536
 TAG = re.compile(r'kproto-history-([0-9]+\.[0-9]+\.[0-9]+)-([1-9][0-9]*)')
 
 
@@ -137,6 +139,8 @@ def extract_receipt(data, output):
 
 
 def body_schema(body):
+    if not isinstance(body, str) or len(body.encode()) > MAX_METADATA:
+        raise k.InputError('Durable archive provenance exceeds its size limit')
     value = k.strict_json(body.encode())
     fields = {'schema_version', 'repository', 'run_id', 'signing_attempt', 'head_sha',
               'artifact_id', 'content_sha256', 'version', 'sequence', 'rehearsal'}
@@ -151,29 +155,67 @@ def body_schema(body):
     return value
 
 
-def read_archive(api, record, public, fingerprint, output, rehearsal=False):
-    provenance = body_schema(record['body'])
+def presentation(provenance):
+    """Keep public release notes readable; provenance lives in a bounded asset."""
+    repository, version = provenance['repository'], provenance['version']
+    base = 'https://github.com/' + repository + '/blob/main/'
+    name = 'Korean Protocol ' + version + ' · 배포 검증 기록'
+    body = (
+        'Korean Protocol ' + version + '의 서명된 콘텐츠 배포 기록이다.\n\n'
+        '- **목적:** 한국어 답변에서 대상·조건·행동·기한을 명확하게 전달하도록 돕는다.\n'
+        '- **사용:** [설치 안내](' + base + 'INSTALL.md)를 따라 코딩 에이전트에 설치하거나 '
+        '[채팅용 안내](' + base + 'distribution/CHAT-START.md)를 확인한다.\n'
+        '- **검증:** 콘텐츠와 발행 영수증의 서명을 확인한다. 서명 검증은 문장 품질이나 '
+        '독자 이해 효과의 검증을 뜻하지 않는다. [검증 범위](' + base + 'docs/status/requirements.md)를 확인한다.\n\n'
+        '첨부한 `signed-content.zip`은 서명 검증과 배포 이력 복구에 사용한다. '
+        '`publication-receipt.json`과 `.sig`는 발행 영수증과 서명이다. '
+        '`archive-provenance.json`은 자동 검증용 출처 정보다.\n'
+    )
+    return name, body
+
+
+def archive_data(api, record, rehearsal=False):
+    """Read only the exact bounded assets; permit an authenticated migration midpoint."""
+    expected = {CONTENT_ASSET} if rehearsal else {CONTENT_ASSET, *RECEIPT_FILES}
+    assets = list(api.pages('/releases/' + str(record['id']) + '/assets'))
+    names = [asset['name'] for asset in assets]
+    if len(set(names)) != len(names) or set(names) not in (expected, expected | {PROVENANCE_ASSET}):
+        raise k.InputError('Durable archive assets are incomplete or contain unlisted files')
+    data = {}
+    for asset in assets:
+        limit = a.MAX_ARCHIVE if asset['name'] == CONTENT_ASSET else MAX_METADATA
+        if type(asset['size']) is not int or not 0 < asset['size'] <= limit:
+            raise k.InputError('Durable archive asset exceeds its size limit')
+        raw = api.request('/releases/assets/' + str(asset['id']), binary=True)
+        if len(raw) != asset['size'] or len(raw) > limit:
+            raise k.TrustError('Durable archive asset length differs from API metadata')
+        data[asset['name']] = raw
+    body = record.get('body')
+    if not isinstance(body, str) or len(body.encode()) > MAX_METADATA:
+        raise k.InputError('Durable archive body is missing or exceeds its size limit')
+    legacy = body.lstrip().startswith('{')
+    if PROVENANCE_ASSET in data:
+        provenance = body_schema(data[PROVENANCE_ASSET].decode('utf-8'))
+        if legacy and body_schema(body) != provenance:
+            raise k.TrustError('Durable archive metadata differs from legacy provenance')
+    elif legacy:
+        provenance = body_schema(body)
+    else:
+        raise k.InputError('Durable archive provenance asset is missing')
+    return provenance, data
+
+
+def read_archive(api, record, public, fingerprint, output, rehearsal=False, _snapshot=None):
+    if record.get('draft') is not rehearsal:
+        raise k.TrustError('Durable archive namespace or completion state is invalid')
+    provenance, data = archive_data(api, record, rehearsal)
     prefix = 'kproto-rehearsal-' if rehearsal else 'kproto-history-'
     expected_tag = prefix + provenance['version'] + '-' + str(provenance['sequence'])
     if (record.get('tag_name') != expected_tag or provenance['repository'] != api.repository or
             provenance['rehearsal'] != rehearsal or record.get('draft') is not rehearsal):
         raise k.TrustError('Durable archive namespace or completion state is invalid')
-    expected_assets = {CONTENT_ASSET} if rehearsal else {CONTENT_ASSET, *RECEIPT_FILES}
-    assets = list(api.pages('/releases/' + str(record['id']) + '/assets'))
-    if len(assets) != len(expected_assets) or {asset['name'] for asset in assets} != expected_assets:
-        raise k.InputError('Durable archive assets are incomplete or contain unlisted files')
-    content, receipt_data = None, {}
-    for asset in assets:
-        limit = a.MAX_ARCHIVE if asset['name'] == CONTENT_ASSET else 65536
-        if type(asset['size']) is not int or not 0 < asset['size'] <= limit:
-            raise k.InputError('Durable archive asset exceeds its size limit')
-        data = api.request('/releases/assets/' + str(asset['id']), binary=True)
-        if len(data) != asset['size'] or len(data) > limit:
-            raise k.TrustError('Durable archive asset length differs from API metadata')
-        if asset['name'] == CONTENT_ASSET:
-            content = data
-        else:
-            receipt_data[asset['name']] = data
+    content = data[CONTENT_ASSET]
+    receipt_data = {name: data[name] for name in RECEIPT_FILES if name in data}
     if k.digest(content) != provenance['content_sha256']:
         raise k.TrustError('Durable archive content digest differs from provenance')
     a.extract_artifact(content, output)
@@ -202,6 +244,8 @@ def read_archive(api, record, public, fingerprint, output, rehearsal=False):
         ref = api.request('/git/ref/tags/' + expected_tag)
         if ref.get('object', {}).get('type') != 'commit' or ref['object']['sha'] != provenance['head_sha']:
             raise k.TrustError('Durable archive tag differs from its verified source commit')
+    if _snapshot is not None:
+        _snapshot.update(data)
     return provenance
 
 
@@ -244,16 +288,21 @@ def store(api, provenance, assets):
     rehearsal = provenance['rehearsal']
     tag = ('kproto-rehearsal-' if rehearsal else 'kproto-history-') + provenance['version'] + '-' + str(provenance['sequence'])
     body = k.json_bytes(provenance).decode()
+    name, readable = presentation(provenance)
+    assets = dict(assets)
     records = [record for record in api.pages('/releases') if record.get('tag_name') == tag]
     if len(records) > 1:
         raise k.TrustError('Durable archive tag is ambiguous')
     if records:
         record = records[0]
-        if record.get('body') != body or record.get('target_commitish') != provenance['head_sha']:
+        if record.get('body') not in (body, readable) or record.get('target_commitish') != provenance['head_sha']:
             raise k.TrustError('Existing durable archive differs; preserve it and resolve the conflict')
     else:
         record = api.request('/releases', method='POST', data={'tag_name': tag, 'target_commitish': provenance['head_sha'],
-            'name': tag, 'body': body, 'draft': True, 'prerelease': rehearsal, 'make_latest': 'false'})
+            'name': tag if rehearsal else name, 'body': body if rehearsal else readable,
+            'draft': True, 'prerelease': rehearsal, 'make_latest': 'false'})
+    if record.get('body') == readable:
+        assets[PROVENANCE_ASSET] = k.json_bytes(provenance)
     existing = list(api.pages('/releases/' + str(record['id']) + '/assets'))
     if len({asset['name'] for asset in existing}) != len(existing) or any(asset['name'] not in assets for asset in existing):
         raise k.TrustError('Existing archive contains unexpected or duplicate assets')
@@ -278,10 +327,63 @@ def store(api, provenance, assets):
     return tag
 
 
+def migrate_presentation(api, record, public, fingerprint, work):
+    if api.request('').get('private') is not False:
+        raise k.TrustError('History presentation migration requires a public repository')
+    work = k.safe_path(work)
+    work.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='kproto-presentation-', dir=work) as temporary:
+        return _migrate_presentation(api, dict(record), public, fingerprint, Path(temporary))
+
+
+def _migrate_presentation(api, record, public, fingerprint, work):
+    """Authenticate first, add provenance, then change only public presentation.
+
+    Repeating after either request recovers safely. Old workflow revisions cannot
+    read the fourth asset: deploy the new verifier before migrating archives and
+    use a fresh dispatch on that revision for subsequent archive recovery.
+    """
+    snapshot = {}
+    provenance = read_archive(api, record, public, fingerprint, Path(work) / 'before', _snapshot=snapshot)
+    name, body = presentation(provenance)
+    legacy = record['body'].lstrip().startswith('{')
+    if not legacy and (record.get('name') != name or record['body'] != body):
+        raise k.TrustError('Existing authored release notes differ; preserve them and resolve the conflict')
+    records = [item for item in api.pages('/releases') if TAG.fullmatch(item.get('tag_name', ''))]
+    sequences = [int(TAG.fullmatch(item['tag_name'])[2]) for item in records]
+    if (not records or len(records) > a.MAX_VERSIONS or len(set(sequences)) != len(sequences) or
+            any(item.get('draft') is not False for item in records)):
+        raise k.TrustError('Durable archive history is incomplete or has conflicting sequences')
+    metadata = k.json_bytes(provenance)
+    if PROVENANCE_ASSET not in snapshot:
+        api.request('/releases/' + str(record['id']) + '/assets?name=' + PROVENANCE_ASSET,
+                    method='POST', data=metadata, upload=True)
+    elif snapshot[PROVENANCE_ASSET] != metadata:
+        raise k.TrustError('Existing provenance bytes differ; preserve them and resolve the conflict')
+    expected = dict(snapshot, **{PROVENANCE_ASSET: metadata})
+    midpoint = {}
+    read_archive(api, record, public, fingerprint, Path(work) / 'midpoint', _snapshot=midpoint)
+    if midpoint != expected:
+        raise k.TrustError('Authenticated archive changed during presentation migration')
+    fresh = api.request('/releases/' + str(record['id']))
+    for field in ('tag_name', 'target_commitish', 'body', 'name', 'draft', 'prerelease'):
+        if fresh.get(field) != record.get(field):
+            raise k.TrustError('Release changed during migration; preserve it and retry after review')
+    if legacy or record.get('name') != name:
+        api.request('/releases/' + str(record['id']), method='PATCH', data={
+            'name': name, 'body': body, 'make_latest': 'false'})
+    final = api.request('/releases/' + str(record['id']))
+    after = {}
+    read_archive(api, final, public, fingerprint, Path(work) / 'after', _snapshot=after)
+    if after != expected or final.get('name') != name or final.get('body') != body:
+        raise k.TrustError('Release presentation or authenticated assets differ after migration')
+    return provenance
+
+
 def completed_for_run(api, run_id, public, fingerprint, output):
     for record in api.pages('/releases'):
         if TAG.fullmatch(record.get('tag_name', '')) and record.get('draft') is False:
-            metadata = body_schema(record['body'])
+            metadata, _ = archive_data(api, record)
             if metadata['run_id'] == int(run_id):
                 return read_archive(api, record, public, fingerprint, output)
     return None

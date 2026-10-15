@@ -2,6 +2,8 @@
 
 현재 패키지 원본은 V7 r2를 채택한 `0.7.0-draft`다. [설치 안내](../../distribution/START-HERE.md)에 따라 ZIP을 풀고 사용하며 로컬 설치 상태에는 콘텐츠 버전 `0.7.0`을 기록한다. ZIP은 미서명 오프라인 설치용이며 서명 설치는 [INSTALL.md](../../INSTALL.md)의 공개 HTTPS 경로를 따른다.
 
+[0.7.0 릴리스](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)에서 [ZIP](https://github.com/project820/korean-protocol/releases/download/v0.7.0/korean-protocol-0.7.0-draft.zip), [채팅용 단독 파일](https://github.com/project820/korean-protocol/releases/download/v0.7.0/KOREAN-PROTOCOL.md), [체크섬](https://github.com/project820/korean-protocol/releases/download/v0.7.0/SHA256SUMS)을 받는다. `kproto-history-*` 릴리스는 서명 콘텐츠의 발행 이력이며 오프라인 설치 ZIP과 구분한다.
+
 현재 ZIP을 만들려면 기존 파일과 겹치지 않는 출력 경로를 준비한다. 명령 성공과 실제 설치·제거 검증은 구분한다.
 
 ```sh

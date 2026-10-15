@@ -281,7 +281,13 @@ def confirm_empty_pages(repository):
             raise k.NetworkError('First publication requires a verified Pages 404') from None
 
 
-def execute(command, root, work):
+def execute(command, root, work, archive_tag=None):
+    from distribution import history_store
+    if command == 'present-history':
+        if not isinstance(archive_tag, str) or not history_store.TAG.fullmatch(archive_tag):
+            raise k.InputError('present-history requires one exact history tag')
+    elif archive_tag is not None:
+        raise k.InputError('--tag is reserved for present-history')
     root, work = k.safe_path(root), k.safe_path(work)
     public = root / 'distribution/trust/publisher.pub'
     fingerprint = k.strict_json(k.read_bytes(root / 'distribution/trust/publisher.json'))['fingerprint']
@@ -337,6 +343,12 @@ def execute(command, root, work):
                 with destination.open('xb') as handle:
                     handle.write(data)
         authenticated_history(ready, public, fingerprint)
+    elif command == 'present-history':
+        api = GitHub(os.environ.get('GITHUB_REPOSITORY', ''), os.environ.get('GH_TOKEN', ''))
+        records = [item for item in api.pages('/releases') if item.get('tag_name') == archive_tag]
+        if len(records) != 1:
+            raise k.TrustError('History tag is missing or ambiguous')
+        history_store.migrate_presentation(api, records[0], public, fingerprint, work)
     elif command == 'receipt-sign':
         from distribution import history_store
         history_store.sign_receipt(work, os.environ.get('KPROTO_SIGNING_KEY', ''), public, fingerprint)
@@ -359,12 +371,13 @@ def execute(command, root, work):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=('prepare', 'sign', 'seal', 'receipt-prepare', 'receipt-sign', 'archive', 'rehearse'))
+    parser.add_argument('command', choices=('prepare', 'sign', 'seal', 'receipt-prepare', 'receipt-sign', 'archive', 'rehearse', 'present-history'))
+    parser.add_argument('--tag', help='Exact public history tag for present-history only')
     parser.add_argument('--root', type=Path, default=Path('.'))
     parser.add_argument('--work', type=Path, required=True)
     args = parser.parse_args(argv)
     try:
-        execute(args.command, args.root, args.work)
+        execute(args.command, args.root, args.work, args.tag)
     except (k.ProtocolError, OSError, ValueError, TypeError, KeyError, zipfile.BadZipFile):
         # Never expose raw HTTP responses, environment values, or subprocess output.
         print('Actions release failed; check inputs, trust key, publication gates, and signed receipt/archive recovery (32 versions / 64 MiB).', file=sys.stderr)
@@ -374,4 +387,6 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    # Use one module identity so history_store catches this adapter's APIError.
+    from distribution.actions_release import main as canonical_main
+    sys.exit(canonical_main())

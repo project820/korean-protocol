@@ -33,6 +33,7 @@
 | 기존 연구와 모델 평가를 찾는다. | [연구·검증 근거 모음](status/research-evidence.md)에서 기존 README의 근거와 한계를 찾는다. |
 | 규칙의 연구 근거를 확인한다. | [연구 근거와 계획](research-basis.md)과 [선별 문헌 보고서](../research/2026-10-12/research-report.html)를 읽는다. |
 | 과거 검사를 재현한다. | [과거 검증 재현 안내](status/historical-verification.md)에서 당시 원본을 지정한다. |
+| 과거 점검·평가의 적용 버전을 확인한다. | [상태 기록 목차](status/README.md), [평가 기록 목차](../evaluation/README.md), [실험 목차](../experiments/README.md)에서 현재 안내와 고정 증거를 구분한다. |
 | 초기 규약과 개발 순서를 확인한다. | [초기 12개 규칙](protocol-draft.md)과 [2026-10-13까지의 연혁](status/chronology-20261013.md)을 읽는다. |
 | 공개 전 보안 점검을 확인한다. | [V7 보안 감사](security/v7-audit.md)에서 검사 범위와 남은 항목을 확인한다. |
 

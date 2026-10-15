@@ -41,6 +41,31 @@ class DistributionTests(unittest.TestCase):
                 self.assertEqual(digest,hashlib.sha256(archive.read(prefix+name)).hexdigest())
             self.assertEqual(len(names)-1,len(archive.read(checksum_name).decode().splitlines()))
 
+    def test_packaged_links_follow_aliases_and_omitted_documents_are_online(self):
+        guide = self.root/'distribution/START-HERE.md'
+        guide.write_text('[install](../INSTALL.md#setup) [chat](CHAT-START.md) '
+                         '[omitted](../docs/status/requirements.md#status) '
+                         '[external](https://example.com/a)\n'
+                         '```md\n[sample](../INSTALL.md)\n```\n')
+        build(self.root,self.output)
+        with zipfile.ZipFile(self.output) as archive:
+            content = archive.read(PREFIX+'/START-HERE.md').decode()
+        self.assertIn('[install](INSTALL.md#setup)', content)
+        self.assertIn('[chat](CHAT-START.md)', content)
+        self.assertIn('https://github.com/project820/korean-protocol/blob/main/docs/status/requirements.md#status', content)
+        self.assertIn('[external](https://example.com/a)', content)
+        self.assertIn('```md\n[sample](../INSTALL.md)\n```', content)
+
+    def test_signed_content_markdown_is_never_rewritten(self):
+        from runtime.kproto import CONTENT_PATHS
+        for name in CONTENT_PATHS:
+            if name.endswith('.md'):
+                (self.root/name).write_text('[signed](../omitted.md)\n')
+        build(self.root,self.output)
+        with zipfile.ZipFile(self.output) as archive:
+            for name in CONTENT_PATHS:
+                self.assertEqual((self.root/name).read_bytes(), archive.read(PREFIX+'/'+name))
+
     def test_reproducible_bytes(self):
         build(self.root,self.output)
         other = self.output.with_name('second.zip')

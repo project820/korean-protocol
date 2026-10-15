@@ -46,6 +46,20 @@ manifest가 만료된 뒤에도 기존 설치본은 설치한 규약을 유지�
 
 ## 이전 발행물을 보존한다
 
+사용자용 릴리스 `v<버전>`과 검증용 보관 릴리스 `kproto-history-<버전>-<순번>`을 구분한다. 사용자용 릴리스에는 미서명 오프라인 ZIP·`KOREAN-PROTOCOL.md`·`SHA256SUMS`를 제공하며 최신 릴리스로 표시한다. 보관 릴리스의 본문은 사람이 읽는 안내이고, 자동 검증용 출처 정보는 `archive-provenance.json`에 둔다. 콘텐츠 ZIP·발행 영수증·서명·기존 태그는 그대로 보존한다.
+
+새 공개 발행은 `archive` 성공 후 `product` 작업에서 사용자용 파일을 만든다. `distribution.product_release`는 실제 main 커밋·패키지 입력과 도구 소스·최신 서명 이력·콘텐츠 일곱 개의 해시를 확인한다. 임시 릴리스에 파일을 올려 다시 확인한 뒤 공개하며, 다른 내용의 기존 파일이나 더 높은 버전이 있으면 덮어쓰지 않는다. `archive_only` 복구는 사용자용 릴리스를 만들거나 최신 표시를 바꾸지 않는다.
+
+기존 JSON 본문을 바꾸기 전에는 새 검증기를 main에 먼저 반영한다. 이전 워크플로의 검증기는 새 메타데이터 파일을 허용하지 않으므로 과거 실행을 재실행하지 않는다. 복구는 갱신된 main에서 새 `workflow_dispatch`를 시작하고 원래 게시 실행의 `archive_run_id`를 지정한다.
+
+검토한 main에서 관리자가 아래 명령으로 보관 릴리스 하나를 이관한다. `GITHUB_REPOSITORY`와 `GH_TOKEN`은 해당 저장소에 인증된 관리 환경에서 제공하며 토큰 값을 문서·명령 이력에 적지 않는다. `WORK_DIR`은 임시 검증용 경로로 바꾼다.
+
+```sh
+python3 -B -m distribution.actions_release present-history --root . --work WORK_DIR --tag kproto-history-0.7.0-3
+```
+
+이 명령은 기존 서명과 파일을 먼저 검증하고 출처 정보 파일을 추가한 뒤 제목·본문을 바꾼다. 중간에 멈추면 같은 명령으로 이어갈 수 있다. 기존 파일 바이트가 다르거나 다른 작성자가 본문을 바꿨으면 중단한다. 새 검증기는 이전 JSON 본문, 정보 파일만 추가된 중간 상태, 새 안내 본문을 모두 확인한다.
+
 후속 정적 배포물은 이전 버전의 콘텐츠와 서명된 manifest를 보존한다. 이전 입력의 출처·서명·버전·순번이 확인되지 않으면 첫 발행으로 초기화하지 않고 중단한다. 장기 이력은 서명된 발행 영수증과 함께 GitHub Releases에 보관한다.
 
 Actions artifact는 90일 보관을 요청한다. [GitHub 보관 정책](https://docs.github.com/en/organizations/managing-organization-settings/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-organization)은 2026년 10월 1일부터 실행 기록에도 적용되므로, artifact와 실행 기록을 장기 발행 이력으로 의존하지 않는다.

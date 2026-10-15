@@ -6,6 +6,8 @@
 
 첫 지원 대상은 Codex·Claude Code 코딩 에이전트다. 저장소 주소와 설치 요청을 에이전트에게 전달하면 [INSTALL.md](../../INSTALL.md)의 비대화형 설치 절차를 따른다. 직접 설치할 때는 메뉴를 사용하며, 일반 채팅용 파일은 보조 경로로 제공한다. ZIP의 첫 안내는 `START-HERE.md`이며 사용자에게 사전 JSON 구조나 발행키 설정부터 요구하지 않는다.
 
+[0.7.0 다운로드](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)에서 [오프라인 ZIP](https://github.com/project820/korean-protocol/releases/download/v0.7.0/korean-protocol-0.7.0-draft.zip)과 [채팅용 파일](https://github.com/project820/korean-protocol/releases/download/v0.7.0/KOREAN-PROTOCOL.md)을 받는다. 미서명 파일의 `SHA256SUMS`는 손상 확인용이며 서명 콘텐츠의 발행자 인증과 구분한다.
+
 | 사용하는 도구 | 처음 할 일 | 유지 방식 |
 | --- | --- | --- |
 | ChatGPT | ZIP의 `CHAT-START.md`를 따라 프로젝트에 `KOREAN-PROTOCOL.md` 하나를 올리고 시작 지침을 저장한다. | 그 프로젝트 안에서 기존 파일을 계속 쓴다. 업로드한 복사본의 자동 동기화는 제공하지 않는다. |

@@ -1,6 +1,6 @@
 # 에이전트가 Korean Protocol을 설치한다
 
-이 문서는 사용자가 Korean Protocol 설치를 요청했을 때 적용한다. 저장소를 읽거나 개발하는 것만으로 사용자 환경에 설치하지 않는다. Codex와 Claude Code의 사용자 범위 설치를 지원하며 Python 3.9 이상, OpenSSH `ssh-keygen`, POSIX 환경이 필요하다.
+이 문서는 사용자가 Korean Protocol 설치를 요청했을 때 적용한다. 저장소를 읽거나 개발하는 것만으로 사용자 환경에 설치하지 않는다. Codex와 Claude Code의 사용자 범위 설치를 지원하며 Python 3.9 이상과 POSIX 환경이 필요하다. 서명 설치에는 OpenSSH `ssh-keygen`도 필요하다.
 
 ## 설치할 에이전트를 정한다
 

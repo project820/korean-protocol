@@ -3,6 +3,11 @@ import argparse
 import hashlib
 import io
 from pathlib import Path
+import posixpath
+import re
+from urllib.parse import quote, unquote, urlsplit, urlunsplit
+
+from runtime.kproto import CONTENT_PATHS, MAX_FILE_BYTES
 import stat
 import zipfile
 
@@ -36,7 +41,42 @@ ALIASES = {
 }
 
 
-def build(root, output):
+def package_links(data, source, source_ref='main'):
+    """Resolve guide links from their source directory into the offline layout."""
+    destination = ALIASES.get(source, source)
+    def replace(match):
+        target = match[2]
+        url = urlsplit(target)
+        if url.scheme or url.netloc or not url.path:
+            return match[0]
+        resolved = posixpath.normpath(posixpath.join(posixpath.dirname(source), unquote(url.path)))
+        if resolved == '..' or resolved.startswith('../') or resolved.startswith('/'):
+            raise ValueError('Distribution link leaves the repository: '+source)
+        if resolved in INPUTS:
+            path = posixpath.relpath(ALIASES.get(resolved, resolved), posixpath.dirname(destination) or '.')
+            rewritten = urlunsplit(('', '', quote(path, safe='/.-_'), url.query, url.fragment))
+        else:
+            rewritten = ('https://github.com/project820/korean-protocol/blob/' + source_ref + '/' +
+                         quote(resolved, safe='/.-_') + ('?'+url.query if url.query else '') +
+                         ('#'+url.fragment if url.fragment else ''))
+        return match[1]+rewritten+match[3]
+    lines, fence = [], None
+    for line in data.decode('utf-8').splitlines(keepends=True):
+        marker = re.match(r'^\s*(`{3,}|~{3,})', line)
+        if marker:
+            if fence is None:
+                fence = marker[1][0]
+            elif marker[1][0] == fence:
+                fence = None
+            lines.append(line)
+        elif fence is None:
+            lines.append(re.sub(r'(\[[^\]\n]*\]\()([^\s)]+)(\))', replace, line))
+        else:
+            lines.append(line)
+    return ''.join(lines).encode('utf-8')
+
+
+def build(root, output, source_ref='main'):
     root, output = Path(root).resolve(), Path(output)
     files = {}
     for name in INPUTS:
@@ -49,7 +89,11 @@ def build(root, output):
         if not path.is_file():
             raise FileNotFoundError('Missing distribution input: '+name)
         destination = ALIASES.get(name,name)
-        files[destination] = path.read_bytes()
+        if path.stat().st_size > MAX_FILE_BYTES:
+            raise ValueError('Distribution input exceeds size limit: '+name)
+        data = path.read_bytes()
+        files[destination] = (package_links(data, name, source_ref)
+                              if name.endswith('.md') and name not in CONTENT_PATHS else data)
     chat = ['# Korean Protocol — 규칙과 사전\n\n이 파일은 0.7.0-draft 연구·개발 초안의 전체 규약 본문과 사전 원본을 함께 제공한다. '
             '첨부만으로 모델의 준수나 전체 사전 읽기를 보장하지 않는다.\n']
     for name in ('pack/protocol.md','lexicon/core.json','lexicon/domains/software.json'):

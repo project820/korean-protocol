@@ -5,6 +5,7 @@ from pathlib import Path
 import shutil
 import stat
 import subprocess
+import sys
 import tempfile
 from types import SimpleNamespace
 import unittest
@@ -255,6 +256,37 @@ class ActionsSigningTests(unittest.TestCase):
         self.assertEqual(9, len([path for path in (work / 'ready').rglob('*') if path.is_file()]))
         release._load_static(work / 'ready', self.public, self.fingerprint)
         self.assertEqual([], list(work.glob('kproto-key-*')))
+
+    def test_module_cli_preserves_deleted_run_404_fallback_error_identity(self):
+        script = r"""
+import io
+import json
+import runpy
+import sys
+import urllib.error
+from unittest.mock import patch
+from distribution import history_store as h
+class Opener:
+    def open(self, request, timeout):
+        if '/actions/runs/4' in request.full_url:
+            raise urllib.error.HTTPError(request.full_url, 404, 'not found', {}, None)
+        if '/releases?' in request.full_url:
+            return io.BytesIO(json.dumps([{'id': 1, 'tag_name': 'kproto-history-0.2.0-1'}]).encode())
+        raise AssertionError('Unexpected API route')
+def migrate(api, *args):
+    assert h.publication(api, 4, allow_missing=True) is None
+    print('deleted-run404 fallback verified')
+sys.argv = ['actions_release', 'present-history', '--root', sys.argv[1],
+            '--work', sys.argv[2], '--tag', 'kproto-history-0.2.0-1']
+with patch('urllib.request.build_opener', return_value=Opener()), patch.object(h, 'migrate_presentation', side_effect=migrate):
+    runpy.run_module('distribution.actions_release', run_name='__main__')
+"""
+        repo = Path(__file__).resolve().parents[1]
+        environment = dict(os.environ, GITHUB_REPOSITORY='project820/korean-protocol', GH_TOKEN='fixture-token')
+        result = subprocess.run([sys.executable, '-B', '-c', script, str(repo), str(self.root / 'cli-fallback')],
+                                cwd=repo, env=environment, capture_output=True, text=True)
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn('deleted-run404 fallback verified', result.stdout)
 
     def test_wrong_secret_is_rejected_and_cleaned_without_key_output(self):
         other = self.root / 'other'

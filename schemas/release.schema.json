@@ -273,7 +273,7 @@
                   "const": "profile"
                 },
                 "size": {
-                  "maximum": 28672
+                  "maximum": 30720
                 }
               }
             }

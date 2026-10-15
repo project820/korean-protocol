@@ -55,7 +55,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Validate release and publication behavior
-        run: python3 -B -m unittest tests.test_validation tests.test_release tests.test_actions_release tests.test_history_store
+        run: python3 -B -m unittest tests.test_validation tests.test_release tests.test_actions_release tests.test_history_store tests.test_product_release tests.test_distribution
       - name: Validate source and authenticated publication history
         env:
           GH_TOKEN: ${{ github.token }}
@@ -170,3 +170,23 @@ jobs:
           ARCHIVE_ONLY: ${{ inputs.archive_only }}
           INPUT_PUBLISH: ${{ inputs.publish }}
         run: python3 -m distribution.actions_release archive --work "$RUNNER_TEMP"
+
+  product:
+    name: product
+    needs: archive
+    if: always() && github.ref == 'refs/heads/main' && needs.archive.result == 'success' && !inputs.archive_only && inputs.publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout trusted product source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify signed content and publish user downloads as Latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PRODUCT_VERSION: ${{ inputs.version }}
+        run: python3 -m distribution.product_release --work "$RUNNER_TEMP" --version "$PRODUCT_VERSION"

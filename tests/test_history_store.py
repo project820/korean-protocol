@@ -20,6 +20,8 @@ class MemoryGitHub:
         self.missing = False
         self.metadata_error = None
         self.fail_asset = None
+        self.fail_patch = False
+        self.latest_id = None
         self.mutations = []
 
     def request(self, path, binary=False, method='GET', data=None, upload=False):
@@ -40,11 +42,21 @@ class MemoryGitHub:
             self.mutations.append(('upload', name))
             return asset
         if method == 'PATCH':
+            if self.fail_patch:
+                raise a.APIError(503)
             record = next(item for item in self.records if item['id'] == int(path.split('/')[2]))
             record.update(data)
+            if data.get('make_latest') == 'true':
+                self.latest_id = record['id']
             self.refs[record['tag_name']] = record['target_commitish']
             self.mutations.append(('complete', record['id']))
             return record
+        if path == '/releases/latest':
+            if self.latest_id is None:
+                raise a.APIError(404)
+            return next(item for item in self.records if item['id'] == self.latest_id)
+        if path.startswith('/releases/') and path.split('/')[-1].isdigit() and not binary:
+            return next(item for item in self.records if item['id'] == int(path.split('/')[-1]))
         if path == '':
             return {'private': self.private, 'full_name': self.repository}
         if path.startswith('/actions/runs/'):
@@ -111,6 +123,147 @@ class HistoryStoreTests(unittest.TestCase):
             artifact_id=17, content_sha256=k.digest(self.api.downloads[17]), version='0.2.0', sequence=1, rehearsal=False)
         h.store(self.api, body, {h.CONTENT_ASSET: self.api.downloads[17], **receipt_files})
         return self.api.records[0], work
+
+    def legacy(self):
+        record, work = self.completed()
+        metadata = next((item for item in self.api.assets[record['id']]
+                         if item['name'] == 'archive-provenance.json'), None)
+        if metadata:
+            record['body'] = self.api.downloads[metadata['id']].decode()
+            self.api.assets[record['id']].remove(metadata)
+        record['name'] = record['tag_name']
+        self.api.latest_id = None
+        return record, work
+
+    def test_new_archives_use_readable_notes_and_separate_provenance(self):
+        record, _ = self.completed()
+        self.assertIn('배포 검증 기록', record['name'])
+        self.assertIn('목적', record['body'])
+        self.assertIn('사용', record['body'])
+        self.assertIn('검증', record['body'])
+        self.assertFalse(record['body'].startswith('{'))
+        self.assertIn('archive-provenance.json', {item['name'] for item in self.api.assets[record['id']]})
+        self.assertIsNone(self.api.latest_id)
+        self.assertEqual('false', record['make_latest'])
+        h.read_archive(self.api, record, self.public, self.fingerprint, self.root / 'new-layout')
+
+    def test_legacy_migration_preserves_signed_assets_and_is_idempotent(self):
+        record, _ = self.legacy()
+        original = {item['name']: self.api.downloads[item['id']] for item in self.api.assets[record['id']]}
+        h.migrate_presentation(self.api, record, self.public, self.fingerprint, self.root / 'migration')
+        for item in self.api.assets[record['id']]:
+            if item['name'] in original:
+                self.assertEqual(original[item['name']], self.api.downloads[item['id']])
+        self.assertIn('배포 검증 기록', record['name'])
+        before = list(self.api.mutations)
+        h.migrate_presentation(self.api, record, self.public, self.fingerprint, self.root / 'repeat')
+        self.assertEqual(before, self.api.mutations)
+        h.completed_for_run(self.api, 4, self.public, self.fingerprint, self.root / 'lookup')
+
+    def test_interrupted_migration_is_readable_and_resumes(self):
+        record, _ = self.legacy()
+        self.api.fail_patch = True
+        with self.assertRaises(a.APIError):
+            h.migrate_presentation(self.api, record, self.public, self.fingerprint, self.root / 'interrupted')
+        self.assertTrue(record['body'].startswith('{'))
+        h.read_archive(self.api, record, self.public, self.fingerprint, self.root / 'midpoint')
+        self.api.fail_patch = False
+        h.migrate_presentation(self.api, record, self.public, self.fingerprint, self.root / 'resume')
+        self.assertFalse(record['body'].startswith('{'))
+        self.assertEqual(1, sum(item['name'] == 'archive-provenance.json' for item in self.api.assets[record['id']]))
+
+    def test_migration_authenticates_legacy_before_any_mutation(self):
+        record, _ = self.legacy()
+        asset = next(item for item in self.api.assets[record['id']] if item['name'] == h.RECEIPT_FILES[1])
+        self.api.downloads[asset['id']] = b'x' * asset['size']
+        before = list(self.api.mutations)
+        with self.assertRaises(k.TrustError):
+            h.migrate_presentation(self.api, record, self.public, self.fingerprint, self.root / 'tampered')
+        self.assertEqual(before, self.api.mutations)
+
+    def test_failed_metadata_upload_preserves_readable_legacy_archive(self):
+        record, _ = self.legacy()
+        before = list(self.api.mutations)
+        self.api.fail_asset = 'archive-provenance.json'
+        with self.assertRaises(a.APIError):
+            h.migrate_presentation(self.api, record, self.public, self.fingerprint, self.root / 'upload-failure')
+        self.assertEqual(before, self.api.mutations)
+        h.read_archive(self.api, record, self.public, self.fingerprint, self.root / 'still-legacy')
+
+    def test_migration_preserves_authored_notes_and_rejects_extra_or_partial_assets(self):
+        record, _ = self.completed()
+        record['body'] = '사용자가 작성한 릴리스 노트입니다.'
+        before = list(self.api.mutations)
+        with self.assertRaisesRegex(k.TrustError, 'authored'):
+            h.migrate_presentation(self.api, record, self.public, self.fingerprint, self.root / 'authored')
+        self.assertEqual(before, self.api.mutations)
+        self.api.assets[record['id']].append(dict(id=999, name='extra.txt', size=1))
+        with self.assertRaises(k.InputError):
+            h.migrate_presentation(self.api, record, self.public, self.fingerprint, self.root / 'extra-migrate')
+        self.api.assets[record['id']].pop()
+        self.api.assets[record['id']].pop(0)
+        with self.assertRaises(k.InputError):
+            h.migrate_presentation(self.api, record, self.public, self.fingerprint, self.root / 'partial-migrate')
+        self.assertEqual(before, self.api.mutations)
+
+    def test_migration_detects_authenticated_asset_change_before_patching(self):
+        record, _ = self.legacy()
+        original_request = self.api.request
+        def request(path, **kwargs):
+            result = original_request(path, **kwargs)
+            if kwargs.get('upload'):
+                record['body'] = record['body'].replace('"artifact_id": 17', '"artifact_id": 18')
+            return result
+        with patch.object(self.api, 'request', side_effect=request):
+            with self.assertRaises(k.TrustError):
+                h.migrate_presentation(self.api, record, self.public, self.fingerprint, self.root / 'concurrent')
+        self.assertEqual(('upload', 'archive-provenance.json'), self.api.mutations[-1])
+        self.assertEqual(record['tag_name'], record['name'])
+
+    def test_new_metadata_tampering_missing_extra_and_oversize_fail_closed(self):
+        record, _ = self.completed()
+        asset = next(item for item in self.api.assets[record['id']] if item['name'] == 'archive-provenance.json')
+        raw = self.api.downloads[asset['id']]
+        changed = k.strict_json(raw)
+        changed['run_id'] = 5
+        self.api.downloads[asset['id']] = k.json_bytes(changed)
+        asset['size'] = len(self.api.downloads[asset['id']])
+        with self.assertRaisesRegex(k.TrustError, 'receipt'):
+            h.read_archive(self.api, record, self.public, self.fingerprint, self.root / 'metadata-tamper')
+        self.api.downloads[asset['id']], asset['size'] = raw, len(raw)
+        self.api.assets[record['id']].append(dict(id=999, name='extra.txt', size=1))
+        with self.assertRaises(k.InputError):
+            h.read_archive(self.api, record, self.public, self.fingerprint, self.root / 'extra')
+        self.api.assets[record['id']].pop()
+        asset['size'] = 65537
+        with self.assertRaises(k.InputError):
+            h.read_archive(self.api, record, self.public, self.fingerprint, self.root / 'oversize')
+        self.api.assets[record['id']].remove(asset)
+        with self.assertRaises(k.InputError):
+            h.read_archive(self.api, record, self.public, self.fingerprint, self.root / 'missing')
+
+    def test_transitional_metadata_must_match_legacy_body(self):
+        record, _ = self.completed()
+        asset = next(item for item in self.api.assets[record['id']] if item['name'] == 'archive-provenance.json')
+        changed = k.strict_json(self.api.downloads[asset['id']])
+        changed['artifact_id'] += 1
+        record['body'] = k.json_bytes(changed).decode()
+        with self.assertRaises(k.TrustError):
+            h.read_archive(self.api, record, self.public, self.fingerprint, self.root / 'midpoint-conflict')
+
+    def test_maintenance_cli_migrates_only_the_explicit_archive(self):
+        record, _ = self.legacy()
+        trust = self.root / 'distribution/trust'
+        trust.mkdir(parents=True)
+        (trust / 'publisher.pub').write_bytes(self.public.read_bytes())
+        (trust / 'publisher.json').write_bytes(k.json_bytes({'fingerprint': self.fingerprint}))
+        with patch.dict('os.environ', {'GITHUB_REPOSITORY': self.api.repository, 'GH_TOKEN': 'fixture-token'}), \
+                patch.object(a, 'GitHub', return_value=self.api):
+            result = a.main(['present-history', '--root', str(self.root), '--work', str(self.root / 'cli'),
+                             '--tag', record['tag_name']])
+        self.assertEqual(0, result)
+        self.assertIn('배포 검증 기록', record['name'])
+        self.assertEqual('false', record['make_latest'])
 
     def test_post_publication_receipt_requires_successful_publish_and_binds_tree(self):
         work = self.signed_receipt()
