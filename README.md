@@ -74,7 +74,7 @@ macOS에서는 예약 자동 갱신을 등록해줘.
 
 <table>
 <thead>
-<tr><th width="33%" scope="col">원문</th><th width="33%" scope="col">Korean Protocol 0.7</th><th width="33%" scope="col">STE 원칙 적용<br>한국어 참고</th></tr>
+<tr><th width="33%" scope="col" nowrap>원문</th><th width="33%" scope="col" nowrap>Korean Protocol 0.7</th><th width="33%" scope="col" nowrap>STE 원칙 적용 · 한국어 참고</th></tr>
 </thead>
 <tbody>
 <tr><th colspan="3" align="left"><a id="1-반납-대상을-먼저-찾는다"></a>1. 반납 대상을 먼저 찾는다</th></tr>
