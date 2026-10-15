@@ -1,5 +1,7 @@
 # 공개 배포와 실제 설치·갱신 확인을 완료했다
 
+> **과거 기록을 보존한다.** 아래 버전·검증 수치·미완료 항목은 작성 당시의 상태다. 현행 0.7의 사용법은 [설치 안내](../../INSTALL.md), 확인 범위는 [현재 상태](requirements.md)를 따른다. 과거 결과를 0.7의 재검증으로 계산하지 않는다.
+
 2026-10-13 사용자의 공개 승인에 따라 project820/korean-protocol 저장소를 PUBLIC으로 전환하고 GitHub Pages에 첫 서명 콘텐츠를 게시했다. [Actions 실행 38359118074](https://github.com/project820/korean-protocol/actions/runs/38359118074)의 sign·publish·receipt·archive 작업이 모두 성공했다. 게시 원본은 `91526bb325175992701cd4eb4e1e3e56731a1cdd`이며 버전은 `0.2.0`, 순번은 `1`이다. 이전 점검 문서의 비공개·게시 대기 상태는 당시 기록으로 보존한다.
 
 ## 공개 경로와 보관 이력을 확인했다

@@ -13,7 +13,7 @@ Korean Protocol은 LLM의 한국어 표현을 위한 규약이다. 어휘의 뜻
 | [INSTALL.md](INSTALL.md)를 에이전트에 전달한다. Codex·Claude Code의 로컬 지침과 캐시에 설치한다. | [채팅용 시작 안내](distribution/CHAT-START.md)를 따라 [KOREAN-PROTOCOL.md](https://github.com/project820/korean-protocol/releases/download/v0.7.0/KOREAN-PROTOCOL.md)를 프로젝트에 올린다. |
 | 서명된 콘텐츠를 설치하며 macOS 예약 갱신 또는 Linux 시작 wrapper를 연결한다. | 업로드한 파일을 계속 사용하며 새 버전은 직접 교체한다. |
 
-[0.7.0 다운로드](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)에서 미서명 오프라인 ZIP·채팅용 파일·체크섬을 받는다. 서명 콘텐츠의 자동 갱신과 별도 경로이며 `SHA256SUMS`는 발행자 인증을 대신하지 않는다.
+[0.7.0 다운로드](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)에서 미서명 오프라인 ZIP·채팅용 파일·체크섬을 받는다. 서명 콘텐츠의 자동 갱신과 별도 경로이며 `SHA256SUMS`는 발행자 인증을 대신하지 않는다. 이 릴리스의 설치 도구·안내는 `7e01d53` 기준이며 이후 main의 문서 수정은 기존 ZIP에 자동 반영되지 않는다.
 
 Codex 또는 Claude Code에 다음 문구를 복사한다.
 
@@ -52,9 +52,10 @@ status로 설치 버전과 상태를 확인해줘.
 
 | 항목 | 현재 상태 |
 | --- | --- |
-| 원본 버전 | **0.7.0-draft**이며 V7 보완본 **r2**의 구조 규칙을 채택했다. |
+| 원본 버전 | **0.7.0-draft**이며 규칙 72개·규칙 작성자 사례 296개·사전 193뜻을 제공한다. V7 이전 보완본 **r2**의 구조 규칙을 채택했다. |
 | 채택 기준 | 사용자가 r2의 가독성을 선택했으며 더 짧게 만든 r3는 채택하지 않았다. |
 | 콘텐츠 발행 | **0.7.0·순번 3**을 공개했고 두 호스트의 서명 HTTPS 갱신과 기존 로컬 설치 갱신을 [검증했다](docs/distribution/public-0.7.0-verification.md). |
+| 기능 대응 | 현행 대응표는 설계 49개·검증 0개·부분 4개다. 이전 49/53 독립 검토를 현재 검증 점수로 사용하지 않는다. |
 | 효과 검증 | V7 실험의 의미 변경·미확정 결과가 남아 있으며 실제 독자 시험은 수행하지 않았다. |
 
 [채택 기록](experiments/v7/adoption.md)은 결정과 한계를, [고정 실험 기록](experiments/v7/README.md)은 당시 프로필과 실패 집계를 보존한다. 사용자 선택은 모든 출력의 의미 보존이나 독자 이해 효과를 입증한 결과가 아니다. 0.3.0 당시의 기능 대응 49/53과 모델 평가를 포함한 근거는 [연구·검증 기록](docs/status/research-evidence.md)에 모았다.

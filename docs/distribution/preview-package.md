@@ -1,79 +1,42 @@
-# 오프라인 설치 패키지와 과거 검증을 구분한다
+# 공개 0.7.0 패키지를 내려받거나 로컬에서 만든다
 
-현재 패키지 원본은 V7 r2를 채택한 `0.7.0-draft`다. [설치 안내](../../distribution/START-HERE.md)에 따라 ZIP을 풀고 사용하며 로컬 설치 상태에는 콘텐츠 버전 `0.7.0`을 기록한다. ZIP은 미서명 오프라인 설치용이며 서명 설치는 [INSTALL.md](../../INSTALL.md)의 공개 HTTPS 경로를 따른다.
+[v0.7.0 릴리스](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)는 V7 r2의 오프라인 설치 ZIP과 채팅 파일을 제공한다. 서명 콘텐츠를 보관하는 `kproto-history-*` 릴리스와 구분한다.
 
-[0.7.0 릴리스](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)에서 [ZIP](https://github.com/project820/korean-protocol/releases/download/v0.7.0/korean-protocol-0.7.0-draft.zip), [채팅용 단독 파일](https://github.com/project820/korean-protocol/releases/download/v0.7.0/KOREAN-PROTOCOL.md), [체크섬](https://github.com/project820/korean-protocol/releases/download/v0.7.0/SHA256SUMS)을 받는다. `kproto-history-*` 릴리스는 서명 콘텐츠의 발행 이력이며 오프라인 설치 ZIP과 구분한다.
+## 공개 산출물을 선택한다
 
-현재 ZIP을 만들려면 기존 파일과 겹치지 않는 출력 경로를 준비한다. 명령 성공과 실제 설치·제거 검증은 구분한다.
+| 파일 | 용도 |
+| --- | --- |
+| [korean-protocol-0.7.0-draft.zip](https://github.com/project820/korean-protocol/releases/download/v0.7.0/korean-protocol-0.7.0-draft.zip) | 설치 도구·규칙·사전·안내를 함께 내려받아 로컬 설치한다. |
+| [KOREAN-PROTOCOL.md](https://github.com/project820/korean-protocol/releases/download/v0.7.0/KOREAN-PROTOCOL.md) | 일반 채팅에 규약 본문과 사전 데이터를 첨부한다. |
+| [SHA256SUMS](https://github.com/project820/korean-protocol/releases/download/v0.7.0/SHA256SUMS) | 위 두 공개 파일의 손상을 확인한다. 발행자 인증은 제공하지 않는다. |
+
+공개 패키지 원본은 `7e01d537d5e2364a5a5730e7e4d2e9aff9d5f911`이다. 서명된 일곱 콘텐츠의 원본 `67f537e`와 구분하며 두 산출물의 콘텐츠는 같다. ZIP은 규약 원본 0.7.0-draft·설치 콘텐츠 0.7.0·엔진 0.2.0을 담는다.
+
+공개 파일은 고정 산출물이다. 이후 main의 문서나 빌드 도구가 바뀌어도 같은 v0.7.0 첨부물이 자동 교체되지 않는다. 공개 파일의 근거는 [0.7.0 발행·갱신 기록](public-0.7.0-verification.md)을 따른다.
+
+## 압축을 풀고 사용한다
+
+ZIP 루트의 `START-HERE.md`와 `INSTALL.md`를 읽는다. [오프라인 안내](../../distribution/START-HERE.md)는 `python3 start.py` 메뉴와 `agent-install.py` 비대화형 명령을 구분한다. [채팅 안내](../../distribution/CHAT-START.md)는 프로젝트 첨부 경로를 설명한다.
+
+ZIP의 기본 설치는 미서명 `local-snapshot`이며 자동 갱신은 OFF다. 서명 설치가 필요하면 검토한 공개키·지문·HTTPS source를 명시한다. 기존 서명 설치를 ZIP의 로컬 모드로 덮어쓰지 않는다.
+
+기존 설치를 관리하려면 같은 홈·상태 경로와 반환된 지속 관리 명령을 사용한다. 서명 재설치에서 자동 갱신 옵션을 생략하면 OFF로 설정되며 규약·높임말 설정과 별개다.
+
+## 현재 checkout의 별도 패키지를 만든다
+
+출력 부모 폴더를 먼저 준비하고 존재하지 않는 출력 파일을 지정한다.
 
 ```sh
-python3 distribution/build.py --root . --output /ABS/korean-protocol-0.7.0-draft.zip
-python3 -m unittest discover -s tests -p test_distribution.py
+python3 -B -m distribution.build --root . --output /ABS/korean-protocol-0.7.0-draft.zip
+python3 -B -m unittest tests.test_distribution
 ```
 
-## 이전 패키지의 구성과 검증을 보존한다
+이 명령은 현재 checkout으로 새 로컬 ZIP을 만들며 공개 v0.7.0의 바이트를 재현한다고 보장하지 않는다. 파일명에 같은 버전이 있어도 문서·설치 도구가 바뀌면 ZIP 해시는 다르다. 공개 산출물을 조용히 덮어쓰는 용도로 사용하지 않는다.
 
-아래의 ZIP 크기·해시·테스트 수·공개 여부는 각 미리보기의 당시 기록이다. 현재 패키지의 바이트·서명·호스트 로딩 증거로 사용하지 않는다. 현재 발행과 설치 상태는 [검증 상태](../status/requirements.md)를 따른다.
+빌더는 고정 허용 목록만 담고 symlink·누락 파일·기존 출력 덮어쓰기를 거부한다. 저장소 전부·평가 로그·발행 개인키·자격 정보를 묶지 않는다. Markdown은 ZIP 안으로 옮긴 경로에 맞춰 상대 링크를 바꾸며 포함하지 않은 근거는 저장소 문서로 연결한다.
 
-`korean-protocol-0.2.0-draft.zip`은 저장소 없이 설치할 수 있는 미서명 미리보기다. 자동 갱신용 정식 릴리스와 발행자 인증을 제공하는 패키지는 아니다. [설치 안내 원본](../../distribution/START-HERE.md)이 ZIP의 `START-HERE.md`로 들어간다.
+ZIP 내부 `SHA256SUMS`는 내부 파일을, 공개 릴리스의 별도 `SHA256SUMS`는 ZIP과 채팅 파일을 검사한다. 두 범위 모두 해시이며 서명이 아니다.
 
-초기 ZIP은 289,879바이트이며 SHA-256은 `9ea66d49a45120a1cb387ad0a033fcfbc5df718584226a9d4350151aa0866be7`이다. 이 해시는 손상 확인용이며 서명을 대신하지 않는다. 검증한 ZIP의 위치와 세부 실행 결과는 [패키지 시험 기록](preview-package-smoke.json)에 남겼다.
+## 이전 미리보기 근거를 찾는다
 
-패키지에는 고정 허용 목록의 런타임·규칙·프로필·사전·용례·스키마·설치 안내와 `SHA256SUMS`를 합쳐 22개 파일이 들어간다. 키·자격 정보·연구 실행 기록·모델 출력 로그는 포함하지 않는다. 다음 명령은 이미 존재하는 출력 파일을 덮어쓰지 않으며, 출력 부모 디렉터리는 먼저 준비해야 한다.
-
-```sh
-python3 distribution/build.py --root . --output /ABS/korean-protocol-0.2.0-draft.zip
-python3 -m unittest discover -s tests -p test_distribution.py
-```
-
-같은 입력과 압축 환경에서는 파일 순서·시각·권한을 고정해 같은 ZIP bytes를 생성한다. 파일 누락, 심볼릭 링크 입력, 기존 출력 파일 덮어쓰기를 거부하는 검사를 포함해 5개 테스트가 통과했다. 다른 압축 라이브러리 버전에서도 동일한 ZIP bytes를 보장한다고 주장하지 않는다.
-
-실제 ZIP을 공백이 있는 임시 경로에 풀고 다른 작업 디렉터리에서 추출한 런타임을 실행했다. 설치·상태 조회·중복 설치·오프라인 wrapper·제거가 통과했으며 일곱 캐시 파일은 ZIP의 콘텐츠와 같았다. Codex의 읽기 전용 prompt 렌더링에서 당시 프로필의 72개 규칙 ID와 지침을 확인했다. 네트워크 모델 평가나 응답 준수 검증으로 계산하지 않는다.
-
-제거 후에는 원래 프로젝트 지침과 설치 뒤에 덧붙인 사용자 문장이 모두 보존됐다. 시험용 사용자·프로젝트·상태 폴더만 사용했고 실제 사용자 전역 설치는 하지 않았다. 독립 Astra 검토자는 ZIP 구성·원본 bytes·체크섬·CRC·설치 안내를 대조하고 패키지 테스트 5개를 다시 실행했다. 검토자는 설치와 Codex 렌더링 시험 자체를 다시 실행하지 않았다.
-
-정식 자동 갱신에는 발행자가 관리하는 서명키, 별도로 확인 가능한 공개키 지문, 동일 origin HTTPS 콘텐츠 배포 주소가 필요하다. 당시 저장소는 비공개였으며 확장본 24fab97을 main에 게시했다. 첫 공개 발행과 자동 갱신 연결은 이후에 수행했다. 이 미리보기를 서명 없이 원격 업데이트하는 방식은 제공하지 않는다.
-
-## 편의성 개선 미리보기를 추가했다
-
-후속 ZIP은 25개 파일, 369,314바이트이며 SHA-256은 `60ac5f76032d06477115a1e0cbe5ade8a9722c1325f8e984cd676032a1443c74`이다. `start.py` 설치 메뉴와 `CHAT-START.md`, 전체 규약·사전을 묶은 `KOREAN-PROTOCOL.md`를 추가했다. [실제 패키지 시험](convenience-package-smoke.json)은 기본 상태 경로의 설치·상태 조회·제거, 취소 시 쓰기 없음, 사용자 내용 보존을 확인했다. 초기 ZIP의 증거는 이전 버전 기록으로 유지한다.
-
-일반 채팅용 안내는 OpenAI 공식 프로젝트·개인화 문서를 확인해 작성했으며 실제 사용자 계정 설정이나 응답 효과를 시험한 것은 아니다. 독립 검토에서 발견한 상태 경로 안내 불일치는 메뉴에 표시된 경로를 사용하도록 고쳤다. 설치 메뉴 14개·패키지 생성기 7개와 전체 테스트 150개가 통과했다.
-
-## 코딩 에이전트 우선 미리보기를 추가했다
-
-새 ZIP은 Codex·Claude Code 선택을 제공한다. 25개 파일, 370,105바이트이며 SHA-256은 `c37b11078ebad2411bc962a89a46f77d8b3df0e36a23e00a6636f20625422a20`이다. [두 도구 설치 시험](coding-agent-package-smoke.json)은 별도 상태 폴더, 한 도구 제거 시 다른 도구 보존, 14개 캐시 파일의 원본 일치를 확인했다. [호스트 지원 기록](coding-agent-support.md)에 실제 Claude 로더와 HTTPS 시험의 범위를 구분했다.
-
-## 저장소 주소로 설치를 맡기는 경로를 추가했다
-
-[INSTALL.md](../../INSTALL.md)는 Codex·Claude Code가 설치 요청을 받아 비대화형으로 계획·설치·상태 확인·제거를 실행하는 절차를 제공한다. 관리 코드를 상태 폴더에 보존하므로 설치용 복제본에 계속 의존하지 않는다. 상태 확인은 관리 블록·캐시 해시와 호스트가 선택하는 지침 경로를 검사한다. 실제 모델 응답 준수와는 구분한다.
-
-새 ZIP은 27개 파일, 377,103바이트이며 SHA-256은 `d33de9f921aa2b71dfaf4754f1b80ffd2756bbacc6c6a0edbdb9efff3ef8eb14`이다. [추출 패키지 시험](agent-bootstrap-smoke.json)에서 두 호스트의 설치·검증과 원래 복제본 경로를 없앤 후의 상태 확인·제거를 통과했다. 전체 자동 테스트 196개가 통과했으며 실제 사용자 전역 설정은 바꾸지 않았다.
-
-당시 개발 중에는 저장소를 비공개로 유지했다. 미리보기는 자동 갱신을 끈 상태였으며 정식 발행키·공개 HTTPS 배포 경로는 연결 전이었다.
-
-## 서명 설치 연결을 추가했다
-
-새 ZIP의 설치 도구는 서명된 정적 배포물과 별도로 확인한 공개키 지문을 받아 설치할 수 있다. 기본 미리보기 설치는 계속 미서명 로컬 모드를 사용하며 원격 갱신을 끈다. [서명 설치 안내](signed-install.md)는 실행 시 갱신과 macOS 예약 설정 파일 생성을 구분한다.
-
-ZIP은 28개 파일, 382,239바이트이며 SHA-256은 `fc90f008e3fcdb636fa96e87e6201ac60edf6606610b1c3e9f3d6fcce0d3dd62`이다. [추출 패키지 시험](signed-bootstrap-smoke.json)에서 두 호스트의 미서명·서명 설치 네 경로와 원래 복제본 경로가 없어진 후의 상태 확인·제거를 통과했다. 전체 테스트 222개와 독립 검토를 통과했으며, 동시 설치 시 신뢰키 불일치와 미서명 덮어쓰기를 거부한다.
-
-예약 설정은 `registered: false`이며 실제 예약 등록을 완료한 상태가 아니다. 정식 키·HTTPS 서버·사용자 환경 연결은 수행하지 않았다.
-
-## 조사·논항 보완본을 담았다
-
-후속 ZIP은 KP-KO-001의 보완된 요구·조건과 다시 생성한 프로필·규약을 담았다. 28개 파일, 382,276바이트이며 SHA-256은 `280e150dc5ad50e48f4cd5c2088f66b5a01061ebacaee2645531156d79075434`이다. [패키지 시험](../../evaluation/role-refinement-20261013/package-smoke.json)은 체크섬과 Codex·Claude Code 설치, 복제본 이동 후 상태 확인·제거를 확인했다. 이 ZIP도 미서명 미리보기이며 자동 갱신을 기본으로 켜지 않는다.
-
-## 공개키를 설치 패키지에 포함했다
-
-GitHub Actions용 공개키와 지문을 포함한 ZIP은 30개 파일, 383,004바이트이며 SHA-256은 `846f1a716c2dd7e47ee10243a627e6d12ec66b39b3c060276fd487ca00cedf52`이다. [파일·공개키 검사](actions-ready-package.json)는 체크섬과 원본 공개키 일치를 확인했다. 별도의 [실제 Actions 서명 시험](github-actions-verification.json)은 GitHub Secret으로 서명한 정적 콘텐츠의 두 호스트 설치를 확인했다. ZIP 자체는 여전히 미서명이며 공개키를 함께 받았다는 사실만으로 신뢰가 성립한다고 설명하지 않는다.
-
-## 충돌 수정과 편집 범위 보완을 미리보기 7에 반영했다
-
-미리보기 7은 9367bde의 런타임·규약·사전을 담은 비공개 GitHub 초안이다. macOS 다운로드를 새 Python 인터프리터에서 실행하는 수정, 소유한 예약 갱신 작업의 등록·해제, KP-EDIT-002의 편집 정보 범위 보완을 포함한다. ZIP은 30개 파일, 387,809바이트이며 SHA-256은 `ceb0d2ae133d1e281257434f0aa6740f7d7938388075e8c11ec65713e103e4fa`다.
-
-[패키지 대조 기록](preview7-verification.json)은 당시 빌드가 앞서 두 임시 호스트에서 설치·보존·복제본 이동 후 관리·제거를 시험한 ZIP과 바이트가 같음을 확인했다. GitHub에서 내려받은 세 첨부물도 로컬 원본과 대조했다. 이전 미리보기는 당시 증거로 보존하며 최신 런타임을 포함한다고 설명하지 않는다. 이 ZIP은 미서명 오프라인 설치본이고 원격 자동 갱신을 기본으로 켜지 않는다. 당시 저장소 공개와 Pages 활성화는 수행하지 않았다.
-
-## MIT 고지를 미리보기 8에 포함했다
-
-미리보기 8은 MIT License와 외부 자료 고지를 ZIP·단독 문서·설치 캐시·지속 관리 코드에 보존한다. ZIP은 32개 파일, 393,478바이트이며 SHA-256은 `cec56ce395e8d270a185e60a2322c055619be3ca0c7a691dcd8bc662f89447b2`다. [MIT 배포 검증](mit-distribution.md)은 전체 시험 300개, 실제 설치와 GitHub 첨부물 대조, 실제 Secret 서명물의 두 호스트 설치를 기록한다. 비공개 초안과 미서명 ZIP이라는 상태는 유지한다.
+0.2.0 미리보기 1~8의 크기·해시·당시 시험 수는 [개정 전 패키지 기록](https://github.com/project820/korean-protocol/blob/dacbbc239fc9dbb22f2ddb87119d4ac7161b2e3c/docs/distribution/preview-package.md)에 보존한다. 그 수치를 현재 ZIP이나 엔진의 검증 결과로 옮기지 않는다. 현재 설치·발행·언어 효과의 범위는 [현재 검증 상태](../status/requirements.md)를 따른다.

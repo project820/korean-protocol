@@ -1,31 +1,23 @@
-# 사용하는 LLM에서 시작한다
+# Korean Protocol 0.7.0의 사용 경로를 고른다
 
-현재 원본은 V7 r2를 채택한 0.7.0-draft다. 콘텐츠 0.7.0·순번 3의 [공개 발행·갱신](public-0.7.0-verification.md)을 검증했으며 채택 기준과 언어 효과의 한계는 [V7 채택 기록](../../experiments/v7/adoption.md)에 남긴다.
+코딩 에이전트는 서명 설치 또는 오프라인 ZIP을, 일반 채팅은 파일 첨부를 사용한다. 현재 V7 r2는 대상·조건·수량·기한을 구분하며 원문보다 짧게 만들 것을 요구하지 않는다.
 
-기존 설치에서 0.7.0을 받으려면 [최신 INSTALL.md](../../INSTALL.md#기존-설치의-관리-도구를-먼저-갱신한다)에 따라 관리 도구를 엔진 0.2.0 이상으로 먼저 갱신한다. 구버전 0.1.0의 자동 갱신은 기존 콘텐츠를 유지하며 관리 코드를 자동으로 교체하지 않는다.
-
-첫 지원 대상은 Codex·Claude Code 코딩 에이전트다. 저장소 주소와 설치 요청을 에이전트에게 전달하면 [INSTALL.md](../../INSTALL.md)의 비대화형 설치 절차를 따른다. 직접 설치할 때는 메뉴를 사용하며, 일반 채팅용 파일은 보조 경로로 제공한다. ZIP의 첫 안내는 `START-HERE.md`이며 사용자에게 사전 JSON 구조나 발행키 설정부터 요구하지 않는다.
-
-[0.7.0 다운로드](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)에서 [오프라인 ZIP](https://github.com/project820/korean-protocol/releases/download/v0.7.0/korean-protocol-0.7.0-draft.zip)과 [채팅용 파일](https://github.com/project820/korean-protocol/releases/download/v0.7.0/KOREAN-PROTOCOL.md)을 받는다. 미서명 파일의 `SHA256SUMS`는 손상 확인용이며 서명 콘텐츠의 발행자 인증과 구분한다.
-
-| 사용하는 도구 | 처음 할 일 | 유지 방식 |
+| 목적 | 시작 경로 | 유지 방식 |
 | --- | --- | --- |
-| ChatGPT | ZIP의 `CHAT-START.md`를 따라 프로젝트에 `KOREAN-PROTOCOL.md` 하나를 올리고 시작 지침을 저장한다. | 그 프로젝트 안에서 기존 파일을 계속 쓴다. 업로드한 복사본의 자동 동기화는 제공하지 않는다. |
-| Codex CLI | 에이전트에게 INSTALL.md의 서명 설치를 요청하거나 ZIP에서 `python3 start.py`를 실행한다. | 서명 설치는 예약·시작 wrapper 갱신을 선택한다. ZIP 메뉴는 미서명 오프라인 설치다. |
-| Claude Code | 에이전트에게 INSTALL.md의 서명 설치를 요청하거나 ZIP의 설치 메뉴에서 Claude Code를 선택한다. | 별도 규칙 파일과 로컬 캐시에 남는다. 서명 설치와 ZIP의 미서명 오프라인 설치를 구분한다. |
-| 다른 채팅 앱 | 첨부와 저장 지침 기능을 확인하고 채팅용 자료로 먼저 시험한다. | 해당 앱의 설정 범위를 따른다. 현재 자동 설치 지원으로 표시하지 않는다. |
+| Codex·Claude Code에 서명 설치한다. | 에이전트에 [INSTALL.md](../../INSTALL.md)를 전달한다. | 예약 갱신·시작 wrapper·자동 조회 OFF 중 선택한다. |
+| 기존 설치를 0.7.0으로 갱신한다. | 같은 홈·상태 경로에서 [관리 도구를 재설치](../../INSTALL.md#기존-설치의-관리-도구를-먼저-갱신한다)한다. | 규약·높임말은 유지한다. 자동 갱신 옵션은 다시 명시한다. |
+| 인터넷 없이 로컬 설치한다. | [ZIP](https://github.com/project820/korean-protocol/releases/download/v0.7.0/korean-protocol-0.7.0-draft.zip)을 풀고 `python3 start.py` 또는 [비대화형 안내](../../distribution/START-HERE.md)를 사용한다. | 미서명 `local-snapshot`으로 설치하며 자동 갱신은 끈다. |
+| ChatGPT에서 사용한다. | [KOREAN-PROTOCOL.md](https://github.com/project820/korean-protocol/releases/download/v0.7.0/KOREAN-PROTOCOL.md)를 받고 [채팅 안내](../../distribution/CHAT-START.md)를 따른다. | 프로젝트에 저장한 복사본은 직접 교체한다. |
+| 다른 앱에서 사용한다. | 첨부·저장 지침의 실제 지원 범위를 확인한다. | 현재 자동 설치 지원으로 표시하지 않는다. |
 
-[ChatGPT 공식 프로젝트 문서](https://learn.chatgpt.com/docs/projects)는 프로젝트 안의 채팅에서 파일과 지침을 공유하는 방식을 설명한다. [사용자 지침 문서](https://learn.chatgpt.com/docs/personalize)는 여러 채팅에 응답 선호를 저장하는 방식을 설명한다. 이 두 기능을 구분하며, 짧은 시작 지침만 저장한 것을 전체 규칙·사전 설치라고 부르지 않는다. 2026-10-13에 공식 문서 본문을 확인했으며 계정의 실제 설정 UI와 언어 효과는 별도 검증 대상이다.
+## 공개 버전과 원본을 구분한다
 
-## 배포에서 유지할 기준을 정한다
+서명 콘텐츠는 0.7.0·순번 3이며 관리 엔진 0.2.0 이상을 요구한다. 데이터 schema는 1.0이다. 엔진 0.1.0은 새 콘텐츠를 거부하고 기존 규약을 보존하며 자동 갱신으로 관리 코드를 바꾸지 않는다.
 
-- 사용자용 ZIP에는 설치·상태 확인·제거와 채팅용 파일을 함께 제공한다.
-- 서버가 없어도 이미 설치한 로컬 규약을 계속 사용할 수 있게 한다.
-- 새 버전은 콘텐츠만 검증해 교체하며 실행 코드를 자동 내려받아 실행하지 않는다.
-- 설치 위치와 변경 대상을 보여 주고 기존 지침은 보존한다.
-- 공개 서명본은 저장소의 신뢰 키·지문과 HTTPS 주소로 검증하며 발행·설치 결과의 버전을 확인한다.
-- 웹 채팅의 공식 동기화 경로가 확인되기 전에는 브라우저 확장이나 계정 조작으로 자동 갱신을 가장하지 않는다.
+[v0.7.0 릴리스](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)의 ZIP·단독 파일·[체크섬](https://github.com/project820/korean-protocol/releases/download/v0.7.0/SHA256SUMS)은 `7e01d53`의 고정 산출물이다. 최신 main의 안내와 혼동하지 않는다. 미서명 파일의 체크섬과 HTTPS 콘텐츠의 게시자 서명은 서로 다른 검사다.
 
-장기적으로는 도구별 설치 어댑터와 서명된 릴리스 다운로드를 같은 시작 화면에서 제공한다. 현재 제공하지 않는 운영체제·호스트 지원을 메뉴에 넣지 않으며, 실제 설치·제거·새 세션 로딩을 확인한 뒤 추가한다.
+## 적용과 갱신을 확인한다
 
-[코딩 에이전트 지원과 검증](coding-agent-support.md)은 두 도구의 상태 분리, Claude 전용 규칙 경로, 실제 로더 요청 확인과 갱신 시험의 범위를 기록한다.
+설치 상태의 버전·신뢰·대상·규약·높임말·자동 갱신 연결을 확인한다. [규약·높임말 설정](application-controls.md)은 콘텐츠와 독립적으로 저장한다. 서명 재설치에서 `--autoupdate`를 생략하면 OFF로 설정하므로 기존 예약 연결을 무조건 보존한다고 보고하지 않는다.
+
+현재 세션에는 검증된 설치 캐시를 참조하며 호스트의 새 세션 로딩과 모델 준수를 구분한다. 지원 환경은 [호스트 지원표](host-support.md), 공개 증거는 [0.7.0 발행 기록](public-0.7.0-verification.md), 언어 효과의 한계는 [현재 검증 상태](../status/requirements.md)를 따른다.

@@ -1,5 +1,7 @@
 # 서명 콘텐츠 발행물을 준비한다
 
+현재 규약 콘텐츠는 0.7.0·순번 3이며 관리 엔진 0.2.0·규칙과 사전 schema 1.0을 사용한다. 서명 콘텐츠의 원본은 `67f537e`, 공개 사용자 패키지의 원본은 `7e01d53`이다. 이 문서는 후속 콘텐츠 발행과 별도 사용자 패키지의 발행 경계를 설명한다.
+
 발행 도구는 규약을 검사하고, 외부에서 서명한 결과를 검증해 정적 HTTPS 서버에 올릴 폴더를 만든다. 이 로컬 도구는 서버 업로드·저장소 공개 전환·키 생성을 수행하지 않는다. 프로젝트의 정식 발행은 [GitHub Actions 워크플로](github-actions-pages.md)가 환경 Secret의 발행키로 같은 검사·서명을 수행해 `https://project820.github.io/korean-protocol`에 게시한다. 이 문서의 로컬 절차는 발행 도구의 동작과 수동 발행을 설명한다.
 
 현재 원본 `0.7.0-draft`의 콘텐츠 `0.7.0`은 이미 발행했다. 후속 발행에는 검증된 최신 이력과 증가한 원본 버전·순번을 사용한다. 아래 명령의 `CONTENT_VERSION`은 새 원본의 숫자 버전, `NEXT_SEQUENCE`는 최신 순번보다 큰 값으로 바꾼다. 실제 발행 결과는 [현재 검증 상태](../status/requirements.md)를 따른다.
@@ -19,7 +21,16 @@
 아래 대문자 값은 발행자가 정할 실제 절대 경로·지문·UTC 시각으로 바꾼다. 시각은 `YYYY-MM-DDTHH:MM:SSZ` 형식이며 발행 시각은 미래일 수 없고 만료 시각은 현재보다 뒤여야 한다. `UNSIGNED_DIR`과 `READY_DIR`은 아직 존재하지 않는 별도 경로를 사용한다.
 
 ```sh
-python3 -B -m distribution.release prepare --root . --output UNSIGNED_DIR --version CONTENT_VERSION --sequence NEXT_SEQUENCE --issued-at ISSUED_UTC --expires-at EXPIRES_UTC --public-key PUBLISHER_PUBLIC_KEY --fingerprint VERIFIED_FINGERPRINT --previous PREVIOUS_SIGNED_STATIC_DIR
+python3 -B -m distribution.release prepare \
+  --root . \
+  --output UNSIGNED_DIR \
+  --version CONTENT_VERSION \
+  --sequence NEXT_SEQUENCE \
+  --issued-at ISSUED_UTC \
+  --expires-at EXPIRES_UTC \
+  --public-key PUBLISHER_PUBLIC_KEY \
+  --fingerprint VERIFIED_FINGERPRINT \
+  --previous PREVIOUS_SIGNED_STATIC_DIR
 ```
 
 `PREVIOUS_SIGNED_STATIC_DIR`에는 최신 서명 발행물을 보존한 정적 폴더를 넣는다. 이전 발행물의 서명·콘텐츠를 확인하고 버전과 sequence가 모두 증가해야 한다. 이전 폴더의 만료는 과거 이력 확인을 막지 않는다. 로컬 도구는 전달한 이전 폴더만 검사하고 서버의 최신 발행 상태를 자동 조회하지 않으므로 발행자는 실제 최신 이력을 전달해야 한다. 이력이 전혀 없는 첫 발행에만 `--previous` 대신 `--first-release`와 순번 1을 사용하며 이 저장소의 후속 발행에는 적용하지 않는다.
@@ -30,7 +41,13 @@ python3 -B -m distribution.release prepare --root . --output UNSIGNED_DIR --vers
 
 ```sh
 ssh-keygen -Y sign -f PUBLISHER_PRIVATE_KEY -n kproto-release-v1 UNSIGNED_DIR/stable/release.json
-python3 -B -m distribution.release seal --prepared UNSIGNED_DIR --signature UNSIGNED_DIR/stable/release.json.sig --output READY_DIR --public-key PUBLISHER_PUBLIC_KEY --fingerprint VERIFIED_FINGERPRINT --previous PREVIOUS_SIGNED_STATIC_DIR
+python3 -B -m distribution.release seal \
+  --prepared UNSIGNED_DIR \
+  --signature UNSIGNED_DIR/stable/release.json.sig \
+  --output READY_DIR \
+  --public-key PUBLISHER_PUBLIC_KEY \
+  --fingerprint VERIFIED_FINGERPRINT \
+  --previous PREVIOUS_SIGNED_STATIC_DIR
 ```
 
 `seal`에는 `prepare`와 같은 이전 발행물을 지정한다. `seal`은 지정한 공개키로 서명을 확인하고 manifest와 일곱 콘텐츠의 해시·크기·경로를 검사한다. 검증을 통과하기 전에는 업로드용 결과를 만들지 않는다. 출력 경로가 존재하면 덮어쓰지 않는다. 실패한 입력을 수정해 다시 실행할 때도 새 출력 경로를 사용한다.
@@ -57,10 +74,25 @@ releases/<version>/pack/protocol.md
 
 ## 사용자용 배포 파일을 구분한다
 
-일반 사용자의 다운로드는 `distribution.product_release`가 별도 `v<버전>` 릴리스로 제공한다. 미서명 ZIP·채팅 파일·체크섬을 서명 검증용 보관 자산과 섞지 않는다. 자동 발행 순서와 기존 보관 본문의 안전한 이관은 [Actions 운영 절차](github-actions-pages.md#이전-발행물을-보존한다)를 따른다. 이전 검증기는 `archive-provenance.json`을 읽지 못하므로 이관 후 복구는 갱신된 main의 새 워크플로 실행을 사용한다.
+일반 사용자의 다운로드는 `distribution.product_release`가 별도 `v<버전>` 릴리스로 제공한다. 미서명 ZIP·채팅 파일·체크섬을 서명 검증용 보관 자산과 섞지 않는다. 자동 발행 순서와 기존 보관 본문의 안전한 이관은 [Actions 운영 절차](github-actions-pages.md#보관-이력과-본문-안내를-분리한다)를 따른다. 이전 검증기는 `archive-provenance.json`을 읽지 못하므로 이관 후 복구는 갱신된 main의 새 워크플로 실행을 사용한다.
 
 ## 과거 발행 도구 검증을 구분한다
 
 [발행 도구 시험 기록](publisher-verification.json)에 원본 해시와 검사 범위를 기록했다. 발행 전용 테스트 13개와 전체 테스트 209개가 통과했다. 임시 Ed25519 키로 최초·후속 발행물을 만들고 두 호스트의 격리된 상태에 서명 설치했으며, 변조·다른 키·기존 출력 경로를 거부했다. 독립 검토자도 발행 전용 테스트 13개를 다시 실행했다. 정식 키 관리·공개 HTTPS 게시·실제 예약 갱신 등록은 검증하지 않았다.
 
 위 기록은 첫 공개 발행 이전의 범위다. 2026-10-13 [Actions 실행 38359118074](https://github.com/project820/korean-protocol/actions/runs/38359118074)가 원본 `91526bb`의 `0.2.0` 순번 `1`을 정식 키로 서명해 공개 Pages에 게시했다. [익명 다운로드 확인](public-download-verification.json)은 공개 주소의 9개 파일 서명과 해시를 검증했다. 이후 [0.3.0 발행 기록](public-0.3.0-verification.md)과 현재 발행 상태는 구분한다.
+
+## 사용자 패키지를 별도 버전으로 발행한다
+
+[v0.7.0 릴리스](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)의 ZIP·채팅용 파일·체크섬은 `7e01d53`의 고정 산출물이다. 현재 main으로 만든 파일을 같은 공개 산출물이라고 설명하거나 새 문서가 이미 포함됐다고 보고하지 않는다. 본문만 고친다고 릴리스 첨부물의 바이트가 바뀌지 않는다.
+
+사용자 패키지 발행 도구는 공개 저장소의 현재 main 전체 SHA·커밋된 입력·인증된 최신 발행 영수증·실제 Pages·콘텐츠 해시를 대조한다. 검증한 임시 draft의 세 첨부물을 확인한 뒤 공개하고 Latest로 지정한다. 일치하는 중단 draft는 재사용하며 충돌이나 더 새 버전은 덮어쓰지 않는다.
+
+```sh
+python3 -B -m distribution.product_release \
+  --work /ABS/NEW_TEMP_DIRECTORY \
+  --source-sha REVIEWED_MAIN_FULL_SHA \
+  --version CONTENT_VERSION
+```
+
+위 명령은 로컬 미리보기 빌드가 아니라 GitHub 릴리스 쓰기 작업이다. 검토·승인된 main과 실제 발행 권한이 준비된 뒤 실행하며 서명 개인키는 사용하지 않는다. 이미 공개한 0.7.0의 파일을 바꾸려고 재실행하지 않는다. 자동 실행·보관 복구의 조건은 [워크플로 안내](github-actions-pages.md)를 따른다.

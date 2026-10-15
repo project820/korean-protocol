@@ -1,5 +1,7 @@
 # 현행 발행물의 실제 서명과 HTTPS 확인을 검증했다
 
+> **과거 기록을 보존한다.** 아래 버전·검증 수치·미완료 항목은 작성 당시의 상태다. 현행 0.7의 사용법은 [설치 안내](../../INSTALL.md), 확인 범위는 [현재 상태](../status/requirements.md)를 따른다. 과거 결과를 0.7의 재검증으로 계산하지 않는다.
+
 GitHub Actions 실행 38353292401은 커밋 a16776de0df8436e0d6fdf38e886dc2b07ab5034에서 실제 GitHub Secret을 사용해 서명했다. sign 작업과 90개 검사가 통과했고 publish·receipt·archive는 건너뛰었다. 저장소 공개나 Pages 설정은 바꾸지 않았다. [실제 실행](https://github.com/project820/korean-protocol/actions/runs/38353292401)과 [설치 검증 기록](current-actions-bootstrap.json)을 함께 확인할 수 있다.
 
 내려받은 artifact 11791059945의 공개키 지문은 `SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc`다. manifest SHA-256은 `7bf0a7ca0a9143401086ceb7903ec54236d5664000d55f4177e7a3a1937e8d0f`이며, 서명을 검증한 일곱 콘텐츠 파일이 현재 원본과 일치한다. 버전은 0.2.0, 순번은 1이다. 이전 비공개 서명 시험과 같은 첫 발행 순번을 사용하는 검증용 실행이며 이미 공개한 릴리스를 교체한 것이 아니다.

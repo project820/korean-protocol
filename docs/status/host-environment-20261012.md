@@ -1,5 +1,7 @@
 # 2026-10-12 로컬 환경 확인 기록
 
+> **과거 기록을 보존한다.** 아래 버전·검증 수치·미완료 항목은 작성 당시의 상태다. 현행 0.7의 사용법은 [설치 안내](../../INSTALL.md), 확인 범위는 [현재 상태](requirements.md)를 따른다. 과거 결과를 0.7의 재검증으로 계산하지 않는다.
+
 이 문서는 호스트 지원표에 있던 당시 환경·시험 기록을 정리한다. 개인 홈 경로는 일반화했으며 정확한 원본은 [당시 저장소 기록](https://github.com/project820/korean-protocol/blob/52008bdd1eabf0d5e3d359898bedcaebaf057e0a/docs/distribution/host-support.md)에 보존한다. 버전과 시험 결과는 2026-10-12의 값이며 현재 설치 안내나 V7 검증 결과가 아니다. 현재 지원 범위는 [호스트 지원표](../distribution/host-support.md)를 따른다.
 
 ## 당시 macOS 시험 범위를 보존한다

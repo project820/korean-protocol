@@ -1,5 +1,7 @@
 # 0.3.0의 공개 발행과 실제 업그레이드를 확인했다
 
+> **과거 기록을 보존한다.** 아래 버전·검증 수치·미완료 항목은 작성 당시의 상태다. 현행 0.7의 사용법은 [설치 안내](../../INSTALL.md), 확인 범위는 [현재 상태](../status/requirements.md)를 따른다. 과거 결과를 0.7의 재검증으로 계산하지 않는다.
+
 2026-10-13 사용자 승인 후 `468322666bb2c85b2700c50fc701e6d4f82a002f`의 규약을 **0.3.0·순번 2**로 공개했다. [발행 실행 38391389450](https://github.com/project820/korean-protocol/actions/runs/38391389450)은 sign·publish·receipt·archive 작업이 모두 성공했고, [저장한 실행 결과](../../evaluation/release-0.3.0-20261013/public-actions-run.json)는 커밋과 각 작업의 결론을 보존한다. [장기 보관 릴리스](https://github.com/project820/korean-protocol/releases/tag/kproto-history-0.3.0-2)는 초안이 아니며 signed-content ZIP과 서명된 발행 영수증을 포함한다. [보관 조회 기록](../../evaluation/release-0.3.0-20261013/public-history-release.json)은 태그와 첨부물의 해시를 기록한다.
 
 공개 설치 주소는 `https://project820.github.io/korean-protocol`이다. 콘텐츠 원본의 `0.3.0-draft` 표시는 연구·개발 초안의 품질 범위로 유지한다. 오프라인 미리보기 ZIP은 계속 미서명 로컬 설치본이며, `SHA256SUMS`만으로 게시자 인증을 대신하지 않는다.

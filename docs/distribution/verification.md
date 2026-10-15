@@ -1,52 +1,45 @@
-# 배포 검증 계획
+# 0.7.0 설치·갱신을 검증한다
 
-이 문서는 설치·자동 갱신의 시험 기준을 정의한다. 첫 macOS 검사 78개는 [2026-10-12 환경 기록](../status/host-environment-20261012.md)의 결과다. 이후 공개 HTTPS 갱신과 예약 등록을 포함한 실제 확인 범위는 [현재 검증 상태](../status/requirements.md)와 [호스트 지원표](host-support.md)를 따른다. 아래 기준의 존재를 모든 환경의 시험 완료로 해석하지 않는다.
+현재 checkout의 코드·패키지·임시 설치를 각각 검사한다. 규약 0.7.0, 엔진 0.2.0, schema 1.0을 구분하며 이전 실행의 테스트 수를 현재 결과로 보고하지 않는다.
 
-## 테스트 실행 조건
+## 현재 원본의 검사를 실행한다
 
-테스트는 Python 표준 라이브러리 `unittest`와 임시 home/state/project root를 사용한다. 실제 사용자 home, 호스트 설정, Keychain, 저장소 토큰, OS 예약 작업을 바꾸지 않는다. 원격 통신은 localhost 시험 서버 또는 주입 가능한 downloader로 대체하고 TLS·origin 검사는 별도 테스트에서 검증한다. 실제 HTTPS/호스트 시험은 별도로 기록한다.
+```sh
+python3 -B -m validation.check --root . --json
+python3 -B -m unittest tests.test_runtime tests.test_agent_install tests.test_scheduler tests.test_distribution tests.test_release tests.test_actions_release tests.test_history_store tests.test_product_release
+```
 
-임시 검증 키를 사용할 때에는 테스트용 SSH keypair임을 기록하고 실제 발행 키를 사용하지 않는다. OpenSSH 검증기가 없으면 암호 시험은 skip 이유를 기록하며 모든 서명 테스트가 통과했다고 표시하지 않는다. mock 검증기로 installer 경로가 통과한 결과는 실제 서명 검증 증거와 구분한다.
+전체 검사가 필요하면 `python3 -B -m unittest discover -s tests -p 'test_*.py'`를 실행한다. CI는 Ubuntu 24.04·macOS 15의 Python 3.11에서 같은 데이터 검사와 전체 테스트를 실행하도록 구성했다. 실제 실행의 성공 여부는 해당 CI 결과로 확인하며 구성만으로 통과했다고 보고하지 않는다.
 
-## 필수 실패 경로
+## 임시 환경에서 실패 경로를 확인한다
 
-| 시험 | 기대 결과를 다음처럼 정한다. |
+실제 사용자 홈·지침·Keychain·예약 작업을 바꾸지 않는다. 임시 홈·상태·프로젝트·시험용 키를 사용하며 실제 공개 다운로드에는 사용자 자격 정보를 보내지 않는다.
+
+| 경계 | 필요한 확인 |
 | --- | --- |
-| 초기 설치와 재설치 | 같은 bundle을 두 번 설치하면 관리 블록 하나만 남고 두 번째가 bytes를 바꾸지 않는다. |
-| 기존 파일 보존 | 원본 bytes·CRLF·권한·블록 외부를 보존하고 backup hash를 확인한다. |
-| upgrade·rollback·uninstall | 업그레이드 후 캐시 rollback과 pin이 작동하고 제거 후 사용자 추가 내용을 보존한다. |
-| 사용자 관리 블록 수정 | 자동 update/uninstall이 수정 내용을 덮지 않고 exit 7로 끝난다. 현재 자동 diff는 제공하지 않으므로 대상과 보존한 백업·캐시를 별도로 비교한다. |
-| 블록 밖 수정 | 블록 밖 변경을 유지하며 현재 파일을 다시 hash 확인한 뒤 관리 블록만 바꾼다. |
-| marker/owner 충돌 | 중복·미완료 마커·다른 state root 소유를 발견하면 두 번째 설치를 거부한다. |
-| 쓰기 중 동시 수정 | 사전 읽기 이후 대상 bytes를 바꾸면 기존 파일과 수정 파일을 모두 보존하고 교체하지 않는다. |
-| 절대경로·탈출 | `/etc/...`, `../...`, `a/../../b`, `C:\...`, UNC, backslash, NUL, `:`, URL-encoded traversal, 대소문자 alias를 manifest 경로로 수락하지 않는다. |
-| 링크 우회 | 부모/대상 symlink, hardlink, Windows reparse point/junction, 교체 직전 link 변경을 거부하며 root 밖에 쓰지 않는다. |
-| unknown payload | `.py`, `.sh`, hook, executable, 알 수 없는 파일·역할, 같은 경로 중복, 허용 파일 누락을 거부한다. |
-| JSON strictness | 중복 키, unknown field, BOM, invalid UTF-8, NaN, 잘못된 semver/time, 지나친 크기를 거부한다. |
-| hash/size 불일치 | 실제 bytes와 manifest가 다르면 targets/state를 바꾸지 않는다. |
-| 실제 SSHSIG | 신뢰한 테스트 키 서명을 수락하며 bytes 한 글자 변조, 다른 키, 다른 namespace/principal, 손상된 서명을 거부한다. |
-| 검증기 부재 | 원격 update는 exit 5로 끝나고 기존 설치 파일을 보존한다. 별도 validation CLI의 데이터 검사와 런타임의 서명 검증을 구분한다. |
-| trust bootstrap | manifest의 key id만 바꿔 새로운 공개키를 trust 파일에 등록할 수 없다. |
-| 재전송·freeze | 낮은 sequence, 같은 sequence의 다른 hash, expired/future-issued를 거부하고 높은 sequence의 낮은 버전을 자동 적용하지 않는다. |
-| compatibility | 지원하지 않는 schema/engine 범위를 exit 6으로 거부한다. host 버전 확인 불가는 검증되지 않은 대상으로 보고하며 자동 적용하지 않는다. |
-| 통신 보안 | HTTP, 잘못된 TLS, cross-origin redirect, downgrade, userinfo/query token, 초과응답·timeout을 거부한다. |
-| private 인증 | 요청이 Authorization을 한 origin에만 보내며 401/403을 기록하고 token 문자열을 stdout/stderr/state/exception에 남기지 않는다. |
-| 절차 중단 | download/verify/prepare/첫 target/state 교체 사이를 각각 중단한 뒤 journal에서 무손실 복구한다. |
-| 쓰기 실패 | 디스크 공간 부족, 읽기 전용·닫히지 않은 파일, os.replace/fsync 실패 후 기존 정상본을 유지하거나 정확한 복구 충돌을 보고한다. |
-| lock과 동시 실행 | 두 프로세스가 같은 대상에 들어갈 때 한 프로세스만 쓰고 다른 state root 경유도 차단한다. |
-| offline·off·pin | 네트워크 완전 차단·mode off·pin에서 규약 읽기와 검사 성공을 확인하고 off/pin의 자동 요청 횟수가 0인지 확인한다. |
-| wrapper 실패 격리 | 갱신 실패에도 호스트가 마지막 정상 프로필로 시작하며 host exit code를 전달한다. |
-| 예약 작업 | 정확한 사용자 작업 하나만 등록·해제하고 login·24시간·절전 복귀·중복 실행에서 정상본을 보존한다. |
-| 프로필 예산 | 30,720-byte 본문/32,768-byte 관리 블록을 검사하고 Codex 프로젝트 체인 상한에서 global을 제외한다. 사용자 scope는 프로젝트 cap을 적용하지 않으며 모든 최종 파일을 설치기 보호 상한 4MiB 이하로 제한한다. |
+| 설치와 재설치 | 중복 관리 블록을 만들지 않고 사용자 본문·규약·높임말을 보존한다. |
+| 자동 갱신 재설정 | 서명 재설치의 명시 옵션을 적용하며 생략하면 OFF가 되는 동작을 확인한다. |
+| 경로와 소유권 | 다른 홈·상태·symlink·hardlink·미완료 marker·관리 블록 수정을 거부한다. |
+| 서명과 콘텐츠 | 실제 시험 키의 양성·변조·다른 키·namespace·경로·크기·해시 오류를 검사한다. |
+| 시간·순번·호환 | 만료·미래 발행·낮은 순번·같은 순번 다른 hash·구버전 엔진 수락을 거부한다. |
+| 통신 | TLS·동일 origin·redirect·시간·크기 제한과 인증값 비노출을 검사한다. |
+| 중단과 경쟁 | 대상 교체·상태 commit 사이 중단과 pin·OFF 변경에서 복구·사용자 본문을 보존한다. |
+| 예산 | 프로필 30,720바이트·관리 블록 32,768바이트와 실제 Codex 프로젝트 잔여 예산을 별도로 검사한다. |
+| 설정과 제거 | OFF·ON·높임말·롤백·pin·제거 뒤의 캐시·대상·본문을 대조한다. |
+| 예약 | 생성과 실제 등록을 구분하고 소유 작업만 등록·확인·해제한다. |
 
-## 호스트 확인
+자동 diff·런타임 `check` 명령은 제공하지 않는다. 콘텐츠 검사와 상태 명령을 실제 지원하는 CLI로 실행하며 미구현 설계를 검증한 것으로 기록하지 않는다.
 
-Codex는 임시 `CODEX_HOME`과 프로젝트에 설치한 뒤 새 실행의 instruction 발견 결과를 확인한다. 상위·프로젝트·하위 override와 이미 큰 AGENTS 파일을 각각 시험한다. 모델이 지침을 요약했다고 해서 모든 응답의 준수로 판단하지 않는다.
+## 공개 0.7.0과 로컬 빌드를 분리한다
 
-Claude Code는 filesystem rule 위치와 `/memory` 또는 공식 audit 기능으로 발견을 확인하며 OpenCodex를 통한 실행 경로를 사용한다. Gemini는 공식 memory 확인 기능을 사용한다. Cursor는 실제 Agent 세션의 rule 상태와 프로필 본문을 확인하며 Tab/Inline Edit로 결과를 확대하지 않는다. 모든 실제 모델 실행은 사용자의 기존 계정·실행 권한 범위에서 별도로 수행한다.
+[공개 manifest](https://project820.github.io/korean-protocol/stable/release.json)는 게시자 서명을 먼저 검증한 뒤 일곱 콘텐츠의 해시·크기를 대조한다. 서명 콘텐츠의 원본은 `67f537e`다.
 
-ChatGPT는 프로젝트에 첨부한 `KOREAN-PROTOCOL.md`와 시작 지침을 새 채팅에서 확인한다. 로컬 pack update 후 웹의 첨부 파일과 지침이 자동 갱신되지 않는 한계를 결과에 남긴다. 앱별 설정 글자 제한과 계정 rollout 차이를 검증 없이 단정하지 않는다.
+[v0.7.0 사용자 패키지](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)는 `7e01d53`의 고정 ZIP·채팅 파일·체크섬이다. 익명으로 받은 세 파일과 기록된 해시를 대조하며 현재 main으로 새로 만든 ZIP이 공개 파일과 같다고 가정하지 않는다. ZIP 내부 파일 체크섬과 외부 ZIP·채팅 파일 체크섬의 범위도 구분한다.
 
-## 완료 조건
+로컬 패키지에서는 포함 파일·CRC·체크섬·Markdown 상대경로·앵커·생성물 일치를 확인한다. 원래 복제본을 옮긴 뒤 지속 관리 도구로 상태·제거가 되는지도 임시 환경에서 확인한다.
 
-배포 구현은 오프라인 설치·상태·검사·충돌·복구·제거 시험과 실제 macOS SSHSIG 양성/음성 시험이 통과해야 로컬 최소 지원으로 표시한다. 원격 updater는 network/credential/replay 검사까지 통과해야 지원으로 표시한다. scheduler는 OS별 실행 증거가 있어야 해당 OS의 자동 예약 지원으로 표시한다. 실제 발행 저장소·공개키·release가 정해지지 않은 상태에서는 배포 완료 또는 자동 최신 규약 수신 완료로 표시하지 않는다.
+## 호스트 로딩과 언어 효과를 따로 판정한다
+
+Codex·Claude Code는 임시 설정으로 새 세션의 지침 발견을 확인한다. 설치 파일과 캐시의 검증만으로 모델이 모든 규칙·사전을 읽었다고 표시하지 않는다. ChatGPT는 첨부 파일과 프로젝트 지침의 적용 범위를 확인하며 로컬 updater가 업로드한 복사본을 바꾼다고 설명하지 않는다.
+
+실제 OS·호스트·모델·프로필·원본 SHA·명령·종료 코드와 미확인 범위를 기록한다. 공개 0.7.0의 기존 증거는 [발행 기록](public-0.7.0-verification.md), 언어 효과는 [V7 검증 기록](../status/v7-verification.md)을 따른다. 실제 독자 시험·다른 모델 일반화·macOS 물리적 절전 복귀는 별도 검증이다.

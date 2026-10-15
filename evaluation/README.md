@@ -21,3 +21,7 @@
 `baselines/`, `before/`, `final-refresh-before/`, `inputs-snapshot/`, `instructions-snapshot/`와 각 실행의 고정 프로필은 당시 입력이다. 그 안의 설치 안내·지침·버전을 최신 안내로 바꾸지 않는다. `report`, `plan`, `final` 등의 파일명은 실행의 역할을 나타내며 최신 버전 표시가 아니다.
 
 과거 검사를 재현할 때는 [재현 안내](../docs/status/historical-verification.md)에 따라 기준본을 지정한다. 해시 불일치가 나면 입력을 최신 파일로 바꾸어 과거 결과를 통과시키지 않는다. 실제 출력·판정의 보존과 현재 규약의 재검증은 별도 작업이다.
+
+## 0.7 문서 개정에서 평가 원본을 보존한다
+
+이 디렉터리의 보고서·계획·지침·스냅샷은 작성 당시 증거다. [0.3 준비 manifest](release-0.3.0-20261013/before-manifest.json)의 `frozen_model_evaluation_files`는 그중 Markdown 156개의 경로와 해시를 고정한다. 이 목차는 현재 안내로 갱신하지만 평가 원문에는 0.7 지침이나 상태 표시를 삽입하지 않는다. 설치 안내가 필요한 독자는 [INSTALL.md](../INSTALL.md)를 사용한다.
