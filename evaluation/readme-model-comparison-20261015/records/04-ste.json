@@ -1,0 +1,35 @@
+{
+  "id": "04-ste",
+  "source_id": "04",
+  "condition": "ste",
+  "started_at": "2026-10-15T04:35:55.413842+00:00",
+  "requested_model": "anthropic/claude-opus-5-5",
+  "effort": "medium",
+  "request_sha256": "f7e34bf647eb9477eb30c641253bebe6d7c5fcce631bd779e19f31cb74c558d1",
+  "source_sha256": "b7f6c9324b1b5c2d27693d5b5099cf24813846404e87c9a76032d0e56d5cc1e6",
+  "retry_count": 0,
+  "tools": [],
+  "previous_response_id_sent": false,
+  "http_status": 200,
+  "response_sha256": "4c7f4faaba993287285d629a388d9b2f448b8c8425854e6a9d4dff9c25a88619",
+  "returned_model": "anthropic/claude-opus-5-5",
+  "response_id": "resp_89d2b8fe5c564d7c9f8086f6072f8250",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 1184,
+    "output_tokens": 906,
+    "total_tokens": 2090,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 1180
+    },
+    "output_tokens_details": {
+      "reasoning_tokens": 707
+    }
+  },
+  "output_sha256": "aea9cb3b5659469e6e432edf6055e91c5cbad3c857710b8a10d05845b847c850",
+  "characters": 198,
+  "fallback_observation": "No model substitution in response metadata; upstream identity is not independently attested.",
+  "elapsed_seconds": 10.742,
+  "finished_at": "2026-10-15T04:36:06.155391+00:00"
+}

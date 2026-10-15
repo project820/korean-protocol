@@ -1,0 +1,29 @@
+{
+  "record_kind": "Parent consolidation of blinded reviewer messages and targeted reconsideration; not a verbatim review transcript",
+  "reviewer_requested_model": "gpt-6.1-sol",
+  "reviewer_reasoning_effort": "high",
+  "generation_model": "anthropic/claude-opus-5-5",
+  "method": "Bidirectional proposition comparison. First reviewer received only blind-packet.json, without model or condition labels. Parent then raised one role-label concern for targeted reconsideration.",
+  "initial_blind_verdict": {"preserved": 12, "changed": 0, "uncertain": 0},
+  "final_verdict": {"preserved": 11, "changed": 0, "uncertain": 1},
+  "results": [
+    {"source_id": "01", "kp": "preserved", "ste": "preserved", "checks": ["All three return objects retained", "Reception actor remains general affairs team", "July 5 18:00 deadline retained"], "unsupported_assertions_found": false},
+    {"source_id": "02", "kp": "preserved", "ste": "uncertain", "checks": ["Two application methods retained", "At least 20 participants AND regular-course condition retained", "Participant applies directly through portal", "Portal deadline remains deadline day 18:00", "Small practical OR external-instructor course alternative retained", "Department representative collects then submits list", "Submission by five business days before course start", "Statutory mandatory education omission check remains automatic regardless of application method"], "finding": "STE adds the role label 신청자 for the department representative; source specifies list collection and submission but does not define that role as applicant."},
+    {"source_id": "03", "kp": "preserved", "ste": "preserved", "checks": ["Confirmed participant cancels by 24 hours before use", "Next waiting person is automatically notified", "Notified waiting person must reply within four hours after notification receipt", "No reply within that period leads to notification of next waiting person"], "unsupported_assertions_found": false},
+    {"source_id": "04", "kp": "preserved", "ste": "preserved", "checks": ["Approval representative and pending-receipt inbox list retained", "Receipt acknowledgment remains obligatory", "Default four-hour timer starts after list check, not submission", "Exception depends on submission outside working hours", "Exception deadline remains next business day 12:00", "Exception replaces the four-hour deadline rather than adding a concurrent obligation"], "unsupported_assertions_found": false},
+    {"source_id": "05", "kp": "preserved", "ste": "preserved", "checks": ["All twelve transformations executed normally", "Semantic review found cancellation-condition omissions in two cases", "Responsible person must repair those two cases", "Deployment prohibited before re-review; automatic permission afterwards not asserted"], "unsupported_assertions_found": false},
+    {"source_id": "06", "kp": "preserved", "ste": "preserved", "checks": ["No responsible person is named in the material", "Actual designation remains unconfirmed rather than negated", "Both outputs equal the source exactly"], "unsupported_assertions_found": false}
+  ],
+  "targeted_reconsideration": {
+    "blind_id": "02-A",
+    "output_id": "02-ste",
+    "initial": "preserved",
+    "revised": "uncertain",
+    "source_evidence": "소규모 실습이나 외부 강사 과정은 부서 담당자가 명단을 취합해 과정 시작 5영업일 전까지 제출한다.",
+    "output_evidence": "**신청자:** 부서 담당자",
+    "reason": "Applicant can mean an administrative submitting actor or a distinct applicant role. The source does not establish their equivalence. The output does not expressly make the representative the course attendee either, so a definite role reassignment is not established.",
+    "required_evidence": "Authoritative definition establishing whether the list compiler and submitter is also the applicant.",
+    "output_repaired": false
+  },
+  "limits": ["Textual equivalence only; underlying operational facts were not independently verified", "One model, one generation per condition per source, six existing public examples", "No human reader study or measured reduction in rereading", "Meaning preservation does not imply every KP structural rule was followed"]
+}

@@ -1,0 +1,27 @@
+{
+  "status": "pass",
+  "verified_at": "2026-10-15T04:41:47.964715+00:00",
+  "wire_slots_verified": 12,
+  "wire_check_summary": [
+    "runner",
+    "cases",
+    "source README",
+    "KP profile",
+    "core dictionary",
+    "software dictionary",
+    "STE profile"
+  ],
+  "all_wire_request_hashes_match": true,
+  "all_wire_response_hashes_match": true,
+  "all_extracted_output_bytes_match": true,
+  "requests_contain_only_declared_inputs": true,
+  "github_markdown_api_cells_verified": 18,
+  "tests": {
+    "command": "python3 -B -m unittest tests.test_readme_comparison tests.test_distribution tests.test_agent_install tests.test_v7_adoption -q",
+    "passed": 81,
+    "elapsed_seconds": 18.265
+  },
+  "meaning_review_separate": "review.json",
+  "limits": "Wire originals are retained locally, not included here. This record is a verification report, not a provider attestation or proof of semantic correctness.",
+  "render_review": "Opus 5.5 high identified four renderer/evidence edge cases. They were reproduced and fixed without changing model outputs; focused suite passed 17 tests."
+}

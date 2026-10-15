@@ -66,9 +66,13 @@ macOS에서는 예약 자동 갱신을 등록해줘.
 
 ## 문장과 구조를 함께 다듬는다
 
-아래 여섯 사례는 **직접 작성한 설명용 예문**이며 실제 모델 실행 결과나 우열 평가가 아니다. 세 열에서 같은 사실·조건·수치·확실성을 유지한다.
+아래는 **기존 원문 6개를 Opus 5.5·medium에서 실제 변환한 결과**다. KP 0.7과 STE 원칙 적용본을 각각 한 번씩 생성했으며, **출력 12건을 추가로 교정하지 않았다.** 굵게 표시와 줄바꿈만 화면에 맞게 표시하며 각 셀에서 출력 원문을 열 수 있다.
 
-**STE 참고 열**은 [ASD-STE100 공식 설명](https://asd-ste100.org/STE_faq.html)의 짧은 문장·능동 표현·조건 우선 배치를 한국어에 적용한 작성 예다. STE는 영어 규격이므로 이 열을 공식 한국어판이나 영어 어휘·문법 규칙을 충족한 결과로 표시하지 않는다. 각 열의 정보 배치와 한국어 끝맺음을 비교한다.
+**의미 검토는 11건 보존·1건 보류로 판정했다.** STE의 교육 신청 예문은 명단 제출자를 ‘신청자’로 표시했다. 원문에 두 역할의 관계가 정의되지 않아 이 표현은 보류했다.
+
+KP에는 **0.7 배포 프로필과 사전 2개 전체**를 제공했다. 각 요청에는 해당 원문과 해당 조건의 지침만 넣었으며 기존 대화·설명용 답안은 넣지 않았다. [실행 조건·검토 결과](evaluation/readme-model-comparison-20261015/README.md)에서 입력과 출력 해시를 확인할 수 있다.
+
+**STE 열**은 [ASD-STE100 공식 설명](https://asd-ste100.org/STE_faq.html)의 공개 원칙을 한국어에 적용한 실험이다. 영어 규격 전체의 준수 결과나 공식 한국어판은 아니다.
 
 [대상 목록](#1-반납-대상을-먼저-찾는다) · [신청 방식](#2-신청-방식별-조건을-묶는다) · [조건부 처리](#3-조건과-후속-처리를-묶는다) · [기한 예외](#4-기한의-기산점과-예외를-구분한다) · [실패 보고](#5-실행-성공과-의미-오류를-구분한다) · [미확인 상태](#6-표기-없음과-지정-없음을-구분한다)
 
@@ -80,43 +84,43 @@ macOS에서는 예약 자동 갱신을 등록해줘.
 <tr><th colspan="3" align="left"><a id="1-반납-대상을-먼저-찾는다"></a>1. 반납 대상을 먼저 찾는다</th></tr>
 <tr>
 <td valign="top">반납 대상은 노트북, 모니터, 출입카드이며 접수 담당은 총무팀이다. 접수 마감은 7월 5일 18:00이다.</td>
-<td valign="top"><strong>반납 대상</strong><br>· 노트북<br>· 모니터<br>· 출입카드<br><br>접수 담당: 총무팀<br>접수 마감: <strong>7월 5일 18:00</strong></td>
-<td valign="top"><strong>반납 대상</strong><br>· 노트북<br>· 모니터<br>· 출입카드<br><br>접수 담당은 총무팀이다.<br>접수 마감은 <strong>7월 5일 18:00</strong>이다.</td>
+<td valign="top"><strong>반납 대상</strong><br>- 노트북<br>- 모니터<br>- 출입카드<br><br>접수 기한: 7월 5일 18:00<br>접수 담당: 총무팀<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/01-kp.txt">모델 출력 원문</a></td>
+<td valign="top">반납 대상은 다음과 같다.<br><br>- 노트북<br>- 모니터<br>- 출입카드<br><br>접수 담당은 총무팀이다.<br><br>접수 마감은 7월 5일 18:00이다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/01-ste.txt">모델 출력 원문</a></td>
 </tr>
 <tr><th colspan="3" align="left"><a id="2-신청-방식별-조건을-묶는다"></a>2. 신청 방식별 조건을 묶는다</th></tr>
 <tr>
 <td valign="top">교육 신청은 포털 신청과 부서 취합으로 나뉜다. 참석자가 20명 이상인 정기 과정은 본인이 포털에서 직접 신청하며 마감은 마감일 18:00이다. 소규모 실습이나 외부 강사 과정은 부서 담당자가 명단을 취합해 과정 시작 5영업일 전까지 제출한다. 법정 의무교육 대상자의 누락 여부는 신청 방식과 관계없이 자동 확인한다.</td>
-<td valign="top"><strong>포털 신청</strong><br>· 대상: 참석자 <strong>20명 이상인 정기 과정</strong><br>· 신청: 본인이 포털에서 직접 신청<br>· 마감: <strong>마감일 18:00</strong><br><br><strong>부서 취합</strong><br>· 대상: 소규모 실습 또는 외부 강사 과정<br>· 제출: 부서 담당자가 명단 취합 후 제출<br>· 기한: <strong>과정 시작 5영업일 전까지</strong><br><br><strong>공통 규칙</strong><br>법정 의무교육 대상자의 누락 여부는 신청 방식과 관계없이 자동 확인한다.</td>
-<td valign="top"><strong>포털 신청</strong><br>참석자가 <strong>20명 이상인 정기 과정</strong>에 사용한다.<br>본인이 포털에서 직접 신청한다.<br>마감은 <strong>마감일 18:00</strong>이다.<br><br><strong>부서 취합</strong><br>소규모 실습 또는 외부 강사 과정에 사용한다.<br>부서 담당자가 명단을 취합한다.<br>부서 담당자가 <strong>과정 시작 5영업일 전까지</strong> 명단을 제출한다.<br><br><strong>공통 규칙</strong><br>법정 의무교육 대상자의 누락 여부는 신청 방식과 관계없이 자동 확인한다.</td>
+<td valign="top">교육 신청은 포털 신청과 부서 취합으로 나뉜다.<br><br><strong>포털 신청</strong><br><br>- 대상: 참석자가 20명 이상인 정기 과정<br>- 신청 기한: 마감일 18:00<br>- 본인이 포털에서 직접 신청한다.<br><br><strong>부서 취합</strong><br><br>- 대상: 소규모 실습이나 외부 강사 과정<br>- 제출 기한: 과정 시작 5영업일 전까지<br>- 부서 담당자가 명단을 취합해 제출한다.<br><br><strong>두 방식 공통</strong><br><br>- 법정 의무교육 대상자의 누락 여부는 신청 방식과 관계없이 자동으로 확인한다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/02-kp.txt">모델 출력 원문</a></td>
+<td valign="top"><strong>교육 신청 방식</strong><br><br>교육 신청 방식은 포털 신청과 부서 취합 두 가지입니다.<br><br><strong>포털 신청</strong><br><br>- <strong>대상 과정:</strong> 참석자가 20명 이상인 정기 과정<br>- <strong>신청자:</strong> 참석자 본인<br>- <strong>방법:</strong> 포털에서 직접 신청합니다.<br>- <strong>마감:</strong> 마감일 18:00<br><br><strong>부서 취합</strong><br><br>- <strong>대상 과정:</strong> 소규모 실습 과정 또는 외부 강사 과정<br>- <strong>신청자:</strong> 부서 담당자<br>- <strong>방법:</strong> 참석자 명단을 취합하여 제출합니다.<br>- <strong>기한:</strong> 과정 시작 5영업일 전까지<br><br><strong>법정 의무교육 대상자 확인</strong><br><br>법정 의무교육 대상자의 누락 여부는 자동으로 확인됩니다. 이 확인은 신청 방식과 관계없이 적용됩니다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/02-ste.txt">모델 출력 원문</a></td>
 </tr>
 <tr><th colspan="3" align="left"><a id="3-조건과-후속-처리를-묶는다"></a>3. 조건과 후속 처리를 묶는다</th></tr>
 <tr>
 <td valign="top">확정자가 이용 24시간 전까지 취소하면 다음 대기자에게 자동 안내가 간다. 안내받은 대기자는 안내 수신 후 4시간 안에 응답해야 한다. 이 기한 안에 응답하지 않으면 다음 대기자에게 안내가 간다.</td>
-<td valign="top"><strong>확정자가 이용 24시간 전까지 취소한 경우</strong><br>1. 다음 대기자에게 자동 안내가 간다.<br>2. 안내받은 대기자는 <strong>안내 수신 후 4시간 안에</strong> 응답해야 한다.<br>3. 이 기한 안에 미응답 시 다음 대기자에게 안내가 간다.</td>
-<td valign="top"><strong>확정자가 이용 24시간 전까지 취소한 경우</strong><br>1. 다음 대기자에게 안내가 자동으로 간다.<br>2. 안내받은 대기자는 <strong>안내 수신 후 4시간 안에</strong> 응답해야 한다.<br>3. 대기자가 이 기한 안에 응답하지 않으면 다음 대기자에게 안내가 간다.</td>
+<td valign="top">확정자가 이용 24시간 전까지 취소하면 다음 대기자에게 안내가 자동으로 간다.<br><br>응답 기한: 안내 수신 후 4시간 안<br>안내받은 대기자는 이 기한 안에 응답해야 한다.<br><br>기한 안에 응답하지 않으면 다음 대기자에게 안내가 간다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/03-kp.txt">모델 출력 원문</a></td>
+<td valign="top">확정자가 이용 24시간 전까지 취소하면 다음 대기자에게 안내가 자동으로 간다.<br><br>안내받은 대기자는 안내를 받은 후 4시간 안에 응답해야 한다.<br><br>대기자가 이 기한 안에 응답하지 않으면 그다음 대기자에게 안내가 간다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/03-ste.txt">모델 출력 원문</a></td>
 </tr>
 <tr><th colspan="3" align="left"><a id="4-기한의-기산점과-예외를-구분한다"></a>4. 기한의 기산점과 예외를 구분한다</th></tr>
 <tr>
 <td valign="top">승인 담당자는 알림함의 ‘수신 대기’ 목록을 확인한 뒤 4시간 안에 수신 확인을 남겨야 한다. 다만 근무시간 밖에 제출된 건은 이 4시간 기한 대신 다음 영업일 12:00까지 수신 확인을 남겨야 한다.</td>
-<td valign="top"><strong>수신 확인</strong><br>담당: 승인 담당자<br>조치: 수신 확인을 남겨야 한다.<br><br><strong>기본 기한</strong><br>알림함의 ‘수신 대기’ 목록을 <strong>확인한 뒤 4시간 안에</strong><br><br><strong>근무시간 밖 제출 건</strong><br>기본 기한 대신 <strong>다음 영업일 12:00까지</strong></td>
-<td valign="top"><strong>수신 확인</strong><br>승인 담당자는 다음 기한까지 수신 확인을 남겨야 한다.<br><br>· 기본 기한: 알림함의 ‘수신 대기’ 목록을 <strong>확인한 뒤 4시간 안에</strong>.<br>· <strong>근무시간 밖에 제출된 건</strong>: 기본 기한 대신 <strong>다음 영업일 12:00까지</strong>.</td>
+<td valign="top">승인 담당자는 알림함의 ‘수신 대기’ 목록을 확인하고 아래 기한 안에 수신 확인을 남겨야 한다.<br><br><strong>기본</strong><br>- 수신 확인 기한: ‘수신 대기’ 목록을 확인한 뒤 4시간 안에<br><br><strong>근무시간 밖에 제출된 건</strong><br>- 수신 확인 기한: 다음 영업일 12:00까지<br>- 이 기한은 4시간 기한을 대신한다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/04-kp.txt">모델 출력 원문</a></td>
+<td valign="top">승인 담당자는 알림함의 &#x27;수신 대기&#x27; 목록을 확인한 뒤 수신 확인을 남겨야 한다. 수신 확인 기한은 건이 제출된 시각에 따라 다르다.<br><br>- <strong>근무시간 밖에 제출된 건:</strong> 다음 영업일 12:00까지 수신 확인을 남겨야 한다. 4시간 기한은 적용하지 않는다.<br>- <strong>그 밖의 건:</strong> &#x27;수신 대기&#x27; 목록을 확인한 뒤 4시간 안에 수신 확인을 남겨야 한다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/04-ste.txt">모델 출력 원문</a></td>
 </tr>
 <tr><th colspan="3" align="left"><a id="5-실행-성공과-의미-오류를-구분한다"></a>5. 실행 성공과 의미 오류를 구분한다</th></tr>
 <tr>
 <td valign="top">변환 12건은 모두 정상 실행되었다. 그러나 의미 검토에서 2건의 취소 조건 누락을 찾았다. 담당자는 해당 2건을 보완해야 한다. 재검토 전에는 배포할 수 없다.</td>
-<td valign="top"><strong>의미 오류: 2건의 취소 조건 누락</strong><br><br>· 실행: 변환 <strong>12건 모두 정상 실행</strong><br>· 조치: 담당자는 해당 <strong>2건을 보완해야 한다.</strong><br>· 배포: <strong>재검토 전에는 불가</strong></td>
-<td valign="top"><strong>의미 오류</strong><br>의미 검토에서 <strong>2건의 취소 조건 누락</strong>을 찾았다.<br><br>· 변환 <strong>12건은 모두 정상 실행</strong>되었다.<br>· 담당자는 해당 <strong>2건을 보완해야 한다.</strong><br>· <strong>재검토 전에는 배포할 수 없다.</strong></td>
+<td valign="top">변환 12건은 모두 정상 실행됐다. 그러나 의미 검토에서 2건의 취소 조건 누락을 찾았다.<br><br>담당자는 해당 2건을 보완해야 한다. 재검토 전에는 배포할 수 없다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/05-kp.txt">모델 출력 원문</a></td>
+<td valign="top">변환 12건은 모두 정상 실행되었다.<br><br>그러나 의미 검토에서 취소 조건 누락 2건을 찾았다.<br><br>담당자는 해당 2건을 보완해야 한다.<br><br>재검토 전에는 배포할 수 없다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/05-ste.txt">모델 출력 원문</a></td>
 </tr>
 <tr><th colspan="3" align="left"><a id="6-표기-없음과-지정-없음을-구분한다"></a>6. 표기 없음과 지정 없음을 구분한다</th></tr>
 <tr>
 <td valign="top">자료에는 담당자가 표기되어 있지 않다. 담당자가 지정되었는지는 확인하지 못했다.</td>
-<td valign="top"><strong>자료에 표기된 담당자 없음.</strong><br>담당자 지정 여부는 미확인.</td>
-<td valign="top">자료에 담당자가 표기되어 있지 않다.<br>담당자 지정 여부는 확인하지 못했다.</td>
+<td valign="top">자료에는 담당자가 표기되어 있지 않다. 담당자가 지정되었는지는 확인하지 못했다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/06-kp.txt">모델 출력 원문</a></td>
+<td valign="top">자료에는 담당자가 표기되어 있지 않다. 담당자가 지정되었는지는 확인하지 못했다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/06-ste.txt">모델 출력 원문</a></td>
 </tr>
 </tbody>
 </table>
 
-문장이 이미 짧고 명확하면 그대로 둔다. 길이를 줄이기 위해 필요한 뜻이나 조건을 없애지 않으며, STE 참고 열도 차이를 만들기 위해 불필요하게 늘리지 않는다. 모바일에서는 표를 좌우로 이동해 세 열을 비교한다.
+**이 표는 모범 답안이 아니라 실제 출력이다.** 문장·구조의 차이와 의미 보존 판정은 [사례별 검토](evaluation/readme-model-comparison-20261015/README.md)에서 구분한다. 모바일에서는 표를 좌우로 이동해 세 열을 비교한다.
 
 ## 현재 버전과 검증 범위를 밝힌다
 
