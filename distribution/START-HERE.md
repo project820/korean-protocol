@@ -1,6 +1,8 @@
 # Korean Protocol 0.7.0을 오프라인으로 설치한다
 
-Korean Protocol은 한국어 답변을 쓰는 규약이다. Codex·Claude Code에는 사용자 지침으로 설치하며 호출형 스킬·별도 모델·출력 후 필터가 아니다. ChatGPT는 [파일 첨부와 지침](CHAT-START.md)으로 사용한다.
+이 문서는 **기존 0.7.0 ZIP의 상시 지침 설치**를 설명한다. 새 보완 스킬은 이 ZIP에 포함되지 않는다. 스킬을 사용하려면 [저장소 설치 안내](../INSTALL.md)를 따른다.
+
+0.7.0은 Codex·Claude Code의 사용자 지침에 설치하며 호출형 스킬이 아니다. ChatGPT는 [파일 첨부와 지침](CHAT-START.md)으로 사용한다.
 
 ## 설치한 뒤 새 대화에서 사용한다
 

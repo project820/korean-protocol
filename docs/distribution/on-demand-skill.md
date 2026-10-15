@@ -1,60 +1,137 @@
-# 필요한 작업에서 Korean Protocol을 호출한다
+# 필요한 작업에서 Korean Protocol 스킬을 호출한다
 
-Korean Protocol 스킬은 **사용자가 선택한 작성·재작성 작업에서 명시적으로 호출하는 실험 규약**이다. 정식 0.7은 상시 사용자 지침으로 설치하며, 이 스킬은 프로젝트에 수동으로 설치한다. 스킬 파일은 [skills/korean-protocol](../../skills/korean-protocol/SKILL.md)에 있다.
+Korean Protocol의 보완 스킬은 사용자가 선택한 한국어 작성·재작성 작업에 적용한다. **사용자 범위에 설치하고 명시적으로 호출**하는 방식이다. 신규 사용자는 [설치 안내](../../INSTALL.md)를 따르며, 기존 0.7 사용자는 먼저 [상시 지침을 OFF로 전환](../../INSTALL.md#기존-07-상시-지침에서-전환한다)한다.
 
-보완 후보는 고정한 개발 사례의 의미·구조 검사를 통과했다. 임시 Codex CLI 프로젝트에서 전체 규약을 읽고 출력한 별도 사례도 확인했다. 이 결과는 현재 대화의 로딩이나 사용자 전역 설치를 확인한 결과가 아니다. [검증 범위](../../evaluation/field-report-20261015/README.md#보완-후보의-검증-범위를-밝힌다)에 모델·시도·한계를 기록했다.
+## 설치 범위를 고른다
 
-## 프로젝트에 설치한다
+| 범위 | Codex | Claude Code |
+| --- | --- | --- |
+| 다른 프로젝트에서도 쓴다. | `~/.agents/skills/korean-protocol`에 설치한다. | `~/.claude/skills/korean-protocol`에 설치한다. 별도 `CLAUDE_CONFIG_DIR`이 있으면 그 아래 `skills/`를 사용한다. |
+| 한 프로젝트에서만 쓴다. | 프로젝트의 `.agents/skills/korean-protocol`에 설치한다. | 프로젝트의 `.claude/skills/korean-protocol`에 설치한다. |
 
-Codex에 다음 내용을 요청한다.
+처음에는 사용자 범위를 권장한다. 같은 이름의 프로젝트 스킬이 이미 있으면 중복 발견·우선순위를 확인한 뒤 하나의 적용본을 선택한다. Codex는 같은 이름의 스킬을 병합하지 않는다. [Codex 문서](https://learn.chatgpt.com/docs/build-skills)와 [Claude Code 문서](https://code.claude.com/docs/en/skills)는 발견 위치와 명시적 호출을 설명한다.
 
-```text
-이 저장소의 skills/korean-protocol 폴더를 사용할 프로젝트의
-.agents/skills/korean-protocol에 설치해줘.
-SKILL.md와 agents/openai.yaml을 함께 복사해줘.
-기존 폴더가 있으면 덮어쓰기 전에 차이를 알려줘.
-AGENTS.md와 전역 설정, 자동 갱신 설정은 변경하지 마.
+## 검증한 파일을 복사한다
+
+이 절은 **Python 3가 있는 로컬 환경의 사용자 범위 설치**다. [고정 커밋 복제](../../INSTALL.md#검증한-스킬을-설치한다)를 마친 저장소 루트에서 실행한다. 아래 명령은 0.7을 끄지 않으므로 기존 사용자는 전환 절차를 먼저 마친다. 다른 호스트·기기·사용자 계정에 자동 설치하지 않는다.
+
+설치할 호스트 하나를 선택한다. 두 곳 모두 원하면 아래 복사 명령을 호스트별로 한 번씩 실행한다.
+
+```sh
+export KP_SKILL_HOST=codex
 ```
 
-이 요청문의 ‘사용할 프로젝트’는 설치할 대상 프로젝트를 뜻한다. 원격 저장소에서 가져올 때는 `https://github.com/project820/korean-protocol`과 `skills/korean-protocol` 경로를 함께 전달한다.
+Claude Code를 선택하려면 위 명령 대신 다음을 사용한다.
 
-복사 후 대상 프로젝트에서 스킬 목록에 Korean Protocol이 있는지 확인한다. 목록에서 스킬을 선택하거나 `$korean-protocol`로 명시적으로 호출한다. 예를 들어 다음처럼 요청한다.
-
-```text
-$korean-protocol 아래 보고서를 정리해줘.
+```sh
+export KP_SKILL_HOST=claude-code
 ```
 
-처음 사용할 때 파일 읽기까지 확인하려면 다음처럼 요청한다.
+다음 명령은 고정 커밋에서 파일을 읽어 복사한다. **기존 폴더나 링크가 있으면 덮어쓰지 않고 중단**한다. 기존 설치를 갱신할 때는 차이·출처·사용자 수정을 확인하고 백업한 뒤 별도로 교체한다.
+
+```sh
+python3 - <<'PY'
+from pathlib import Path
+import hashlib
+import json
+import os
+import subprocess
+
+revision = '909dc9dfa413e1e87e8d1d3dcae68fec18dbbefc'
+expected = 'bff3435ffce9d7c6e7c3906cf65b8e89a170c1365a98ecb614add83d97ee16a9'
+host = os.environ.get('KP_SKILL_HOST')
+if host not in ('codex', 'claude-code'):
+    raise SystemExit('KP_SKILL_HOST를 codex 또는 claude-code로 지정한다.')
+head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+if head != revision:
+    raise SystemExit('INSTALL.md의 검증 커밋을 새 checkout에서 선택한다.')
+if host == 'codex':
+    target = Path.home() / '.agents/skills/korean-protocol'
+else:
+    config = Path(os.environ.get('CLAUDE_CONFIG_DIR') or str(Path.home() / '.claude'))
+    target = config / 'skills/korean-protocol'
+if target.exists() or target.is_symlink():
+    raise SystemExit(f'기존 설치를 보존한다. 차이 확인과 백업이 필요하다: {target}')
+
+files = {
+    'SKILL.md': 'skills/korean-protocol/SKILL.md',
+    'agents/openai.yaml': 'skills/korean-protocol/agents/openai.yaml',
+    'specification/rules.json': 'specification/rules.json',
+    'lexicon/core.json': 'lexicon/core.json',
+    'lexicon/domains/software.json': 'lexicon/domains/software.json',
+    'LICENSE': 'LICENSE',
+    'NOTICE.md': 'NOTICE.md',
+}
+contents = {name: subprocess.check_output(['git', 'show', f'{revision}:{source}'])
+            for name, source in files.items()}
+skill = contents['SKILL.md']
+if hashlib.sha256(skill).hexdigest() != expected:
+    raise SystemExit('검증한 규약 해시와 다르므로 설치를 중단한다.')
+if host == 'claude-code':
+    contents['SKILL.md'] = skill.replace(
+        b'---\n',
+        b'---\ndisable-model-invocation: true\nuser-invocable: true\n', 1)
+    assert contents['SKILL.md'].split(b'---\n', 2)[2] == skill.split(b'---\n', 2)[2]
+
+target.mkdir(parents=True)
+for name, data in contents.items():
+    path = target / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(data)
+manifest = {
+    'source_commit': revision,
+    'host': host,
+    'source_profile_sha256': expected,
+    'explicit_only': True,
+    'files': {name: hashlib.sha256(data).hexdigest() for name, data in contents.items()},
+}
+(target / 'INSTALLATION.json').write_text(json.dumps(manifest, indent=2) + '\n')
+print(f'설치 파일을 복사했다: {target}')
+print('새 대화에서 스킬 발견과 실제 호출을 확인한다.')
+PY
+```
+
+이 스킬은 명령·스크립트를 실행하는 설치기가 아니라 작성 지침이다. 위 Python은 파일 복사용 명령이며 호스트 지침·신뢰 키·예약 갱신 설정을 변경하지 않는다. 복사 중 오류가 나면 설치 완료로 표시하지 않고 대상 파일과 `INSTALLATION.json`을 확인한다.
+
+Codex에는 `agents/openai.yaml`의 `allow_implicit_invocation: false`를 그대로 설치한다. Claude Code에는 수동 호출용 YAML 두 줄만 추가하며 검증한 규약 본문은 유지한다. 사전·규칙 참고 파일은 해당 판단이 필요할 때만 읽는다. 이 파일들이 빠지면 다른 프로젝트에서 조회 경로가 끊어지므로 `SKILL.md`만 복사하지 않는다.
+
+## 설치와 호출을 확인한다
+
+1. **파일을 확인한다.** `INSTALLATION.json`의 커밋·해시와 실제 파일을 대조한다. Codex는 원본 `SKILL.md`와 바이트가 같아야 한다. Claude Code는 수동 호출용 YAML 외의 본문이 같아야 한다.
+2. **호스트에서 발견되는지 확인한다.** 새 대화의 스킬 목록에 `korean-protocol`이 있는지 본다. 다른 프로젝트에서도 쓰려면 그 프로젝트의 새 대화에서도 확인한다. 목록에 없으면 호스트를 다시 시작한다.
+3. **명시적으로 호출한다.** 아래 요청문에 같은 원문을 붙인다.
+
+| 호스트 | 호출문 |
+| --- | --- |
+| Codex | `$korean-protocol 아래 원문을 의미와 조건을 유지하며 정리해줘.` |
+| Claude Code | `/korean-protocol 아래 원문을 의미와 조건을 유지하며 정리해줘.` |
 
 ```text
-$korean-protocol 이 프로젝트의 .agents/skills/korean-protocol/SKILL.md와
-원문 파일의 전체 본문을 읽고 보고서를 정리해줘.
+반납 대상은 노트북, 모니터, 출입카드이며 접수 담당은 총무팀이다. 접수 마감은 7월 5일 18:00이다.
+```
+
+결과에서 물품 세 개가 앞쪽의 개별 목록에 있는지, 총무팀과 `7월 5일 18:00`이 유지되는지 확인한다. 파일·발견·로딩·출력은 각각 확인한다. 모델이 “적용했다”고 말한 것만으로 확인하지 않는다.
+
+Codex에서 읽기 근거를 더 확인하려면 다음처럼 요청한다. 사용자 설치 경로를 대상으로 하며 프로젝트에 새 스킬을 만들지 않는다.
+
+```text
+$korean-protocol 설치된 사용자 스킬의 SKILL.md와 원문 전체를 읽고 정리해줘.
 앞부분 발췌나 파일 크기 확인으로 읽기를 대신하지 마.
 사실·조건·양태를 유지하고 결과 본문만 출력해줘.
 ```
 
-작업 기록에서 규약 전체를 읽은 도구 호출을 확인한다. 모델이 “읽었다”고 답한 것만으로 확인하지 않는다. 실제 검증에서는 첫 시도의 앞부분 읽기를 전체 로딩 증거로 인정하지 않았으며, 별도 전체 읽기 요청의 기록과 최종 출력을 검사했다.
+도구 기록에서 읽은 경로와 전체 본문을 확인한다. Claude Code에서는 메시지 맨 앞의 `/korean-protocol`로 명시적 호출을 확인한다. 자동 호출을 끄면 Claude가 스스로 호출하는 방식은 사용하지 않는다.
 
-새 보고서를 작성할 때도 호출할 수 있다.
+## 적용을 선택하고 문체를 지정한다
 
-```text
-$korean-protocol 이번 작업의 완료 보고를 작성해줘.
-```
+스킬을 사용할 때는 호출하고, 사용하지 않을 때는 새 대화에서 호출하지 않는다. 호출 후 이미 읽은 규약은 대화에 남는다. “OFF”라고 말하거나 파일을 바꿔도 과거 컨텍스트가 지워지지 않는다.
 
-Codex는 프로젝트의 `.agents/skills`에서 스킬을 찾으며, 이름·설명을 먼저 제공하고 선택된 스킬의 본문을 읽는다. 설치한 스킬이 목록에 보이지 않으면 Codex를 다시 시작한 뒤 확인한다. 다른 호스트의 발견 경로·호출 문법은 별도로 확인한다. [공식 스킬 문서](https://learn.chatgpt.com/docs/build-skills)
+높임말을 원하면 “높임말로 써줘”를 요청에 덧붙인다. 스킬은 기존 문서의 확립된 문체와 사용자의 지정 문체를 우선하며, 새 글은 별도 지정이 없으면 높임 없이 쓴다. 0.7 관리 도구의 높임말 설정은 스킬에 동기화되지 않는다.
 
-## 적용 범위를 확인한다
+## 갱신과 검증 범위를 확인한다
 
-`agents/openai.yaml`의 `allow_implicit_invocation: false`는 Codex의 자동 호출을 끈다. 사용자가 선택한 작성 작업에서만 적용하도록 스킬 본문에도 범위를 명시했다. 호출하지 않은 모든 한국어 대화에 자동으로 적용하는 방식은 제공하지 않는다.
+검증본은 커밋에 고정한 수동 설치다. 자동 갱신기를 등록하지 않는다. 새 후보는 파일 차이·검증 결과를 검토한 뒤 백업하고 교체한다. 0.7의 서명 검증·콘텐츠 갱신을 스킬에도 적용했다고 표시하지 않는다.
 
-평소에는 스킬의 이름·설명 등 발견 정보가 컨텍스트에 포함되고, 호출할 때 전체 규약을 읽는다. 호출 후 이미 읽은 본문이 대화에서 자동 삭제되는 것은 아니다. 새 대화는 그 대화의 호출·로딩 상태를 다시 확인한다.
+[보완본 평가](../../evaluation/field-report-20261015/README.md#보완-후보의-검증-범위를-밝힌다)는 의미·구조 개발 사례의 결과다. 규약과 공통 요청문은 실제 최소 요청에서 10,842토큰이었다. 원문·호스트 지침·도구·대화 이력까지 포함한 컨텍스트 크기는 더해 측정한다. 호출하지 않은 상태와 호출 후의 부담을 구분한다.
 
-설치 파일 확인, 실제 스킬 로딩, 결과의 규칙 준수는 서로 다른 검사다. `$korean-protocol`라는 문구가 출력됐다는 이유만으로 로딩이나 품질을 확인했다고 판단하지 않는다. 실험의 [검증 범위](../../evaluation/field-report-20261015/README.md)를 확인한다.
-
-평가 러너는 전체 스킬과 공통 요청문을 직접 입력해 비교한다. 이 입력 실험은 설치된 호스트가 스킬을 발견하거나 호출한 기록을 대신하지 않는다. 현재 후보는 품질을 우선해 6,000토큰 상한을 해제했다. 전체 규약과 공통 요청문, 원문을 포함한 실제 요청의 토큰 수를 각각 측정한다. 호스트의 다른 지침과 대화 이력은 이 계수에 포함되지 않는다.
-
-## 정식 0.7과 함께 사용할 때 범위를 구분한다
-
-정식 0.7이 이미 상시 설치돼 있으면 새 스킬을 호출하지 않아도 기존 지침이 적용될 수 있다. 스킬 호출 효과를 비교하려면 기존 적용 상태를 먼저 확인한다. 이 실험 스킬의 설치만으로 기존 설치를 끄거나 삭제하지 않는다.
-
-이번 스킬은 자동 갱신·서명 배포본을 대체하지 않는다. 정식 0.7 설치기는 이 실험 스킬을 자동으로 설치하지 않는다. 스킬 후보와 실제 실전 비교 결과를 검토한 뒤 정식 배포 방식을 결정한다.
+로컬 macOS에서 사용자 범위 스킬을 설치해 Codex의 두 임시 작업 폴더 발견과 Codex·Claude Code의 짧은 실제 호출을 확인했다. Codex의 전체 파일 읽기는 해시로 대조했다. 이 확인은 다른 운영체제·계정·원격 호스트나 모든 문서의 품질을 보장하지 않는다. 기존 대화와 다른 사용자의 설치 상태는 따로 확인한다.
