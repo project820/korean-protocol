@@ -2,7 +2,7 @@
 
 발행 개인키는 GitHub의 kproto-release 환경 Secret인 KPROTO_SIGNING_KEY에 보관한다. 환경의 배포 브랜치 정책은 main만 허용한다. 저장소에는 distribution/trust/publisher.pub와 publisher.json의 공개키 지문만 둔다. 로컬 키 생성에 사용한 임시 개인키 사본은 등록 후 제거했다.
 
-저장소 project820/korean-protocol은 공개 상태이며 공개 endpoint는 https://project820.github.io/korean-protocol 이다. KPROTO_PAGES_ENABLED 저장소 변수는 true다. KPROTO_ALLOW_FIRST_PUBLICATION은 첫 게시 후 false로 되돌렸다. publish를 false로 둔 서명 검증용 실행은 Actions artifact만 만들며 Pages에 게시하지 않는다.
+저장소 project820/korean-protocol은 공개 상태이며 공개 endpoint는 `https://project820.github.io/korean-protocol` 이다. KPROTO_PAGES_ENABLED 저장소 변수는 true다. KPROTO_ALLOW_FIRST_PUBLICATION은 첫 게시 후 false로 되돌렸다. publish를 false로 둔 서명 검증용 실행은 Actions artifact만 만들며 Pages에 게시하지 않는다.
 
 현재 원본은 V7 r2를 채택한 `0.7.0-draft`이며 콘텐츠 발행 버전은 `0.7.0`이다. 이번 발행은 기존 공개 이력에 잇는 후속 발행이다. 실제 게시·다운로드·설치 갱신 결과는 [현재 검증 상태](../status/requirements.md)에서 확인한다. 아래 첫 비공개 실행과 첫 공개 기록은 당시 절차와 결과로 보존한다.
 
