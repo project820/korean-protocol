@@ -2,10 +2,10 @@
 
 Use an existing OpenSSL Python that honors subprocess-local SSL_CERT_FILE:
   python3 tests/manual_candidate_upgrade_smoke.py --runtime-root . \
-      --output evaluation/release-0.3.0-20261013/candidate-upgrade.json
+      --output evaluation/release-0.7.0-20261015/candidate-upgrade.json
 
 This is current-runtime/current-helper signed CONTENT upgrade evidence. The
-0.3.0 candidate is never published, and the production private key is never
+0.7.0 candidate is never published, and the production private key is never
 read. Both fixture releases are explicitly re-signed with a temporary TEST key.
 The public baseline is authenticated separately with the pinned production key.
 All installations, TLS keys, test signing keys, and proxy settings are temporary.
@@ -109,12 +109,14 @@ def authenticated_public(module, smoke, runtime_root, root):
     return checked_manifest, files, public, fingerprint, payload
 
 
-def test_static(module, files, version, sequence, key, fingerprint, root):
+def test_static(module, files, version, sequence, key, fingerprint, root, engine_min=None):
     """Create a TEST signature without changing any source/content bytes."""
     source_version(module, files, version)
     bundle = root / 'releases' / version
     write_files(bundle, files)
     manifest = module.make_manifest(bundle, version, sequence, fingerprint)
+    if engine_min is not None:
+        manifest['compatibility']['engine_min'] = engine_min
     raw = module.json_bytes(manifest)
     signed = subprocess.run(['ssh-keygen', '-Y', 'sign', '-f', str(key), '-n', 'kproto-release-v1'],
                             input=raw, capture_output=True, check=True, timeout=10)
@@ -211,7 +213,7 @@ def local_tls(root, content):
         proxy_thread.join(timeout=2)
 
 
-def run_smoke(runtime_root, version='0.3.0'):
+def run_smoke(runtime_root, version='0.7.0'):
     runtime_root = runtime_root.resolve()
     code_names = ('runtime/kproto.py', 'distribution/agent_install.py', 'tests/manual_https_smoke.py',
                   'tests/manual_candidate_upgrade_smoke.py')
@@ -412,7 +414,7 @@ def run_smoke(runtime_root, version='0.3.0'):
     if new_crashes:
         report.update(result='failed', failure='New Python crash report observed during smoke')
     report['temporary_material_removed'] = True
-    report['limitations'] = ['No production signature or public production endpoint for candidate 0.3.0',
+    report['limitations'] = ['No production signature or public production endpoint for candidate ' + version,
         'Current runtime/helper only; original 0.2 executable migration not exercised',
         'No real Codex/Claude model invocation, login, sleep/wake or scheduler registration',
         'Local CONNECT transports verified TLS; no direct port-443 listener or global trust change']
@@ -422,7 +424,7 @@ def run_smoke(runtime_root, version='0.3.0'):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--runtime-root', type=Path, required=True)
-    parser.add_argument('--candidate-version', default='0.3.0')
+    parser.add_argument('--candidate-version', default='0.7.0')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     if args.output.exists():

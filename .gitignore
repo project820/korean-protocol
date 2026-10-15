@@ -9,5 +9,15 @@
 __pycache__/
 *.py[cod]
 
+# Generated previews, browser captures and private practical-test data stay local.
+/output/
+/.playwright-cli/
+/evaluation/read-once-real-vehicle-20261015/
+/evaluation/read-once-v56-mobile/
+/evaluation/read-once-v7-r3/
+/evaluation/read-once-20261014/study-v7-real-vehicle/
+/evaluation/read-once-20261014/study-v7-compact-vehicle/
+/evaluation/read-once-20261014/study-v7-adopted-vehicle/
+
 !/research/2026-10-13-ellipsis/controlled-language-papers.md
 !/research/2026-10-13-ellipsis/controlled-language-papers.json

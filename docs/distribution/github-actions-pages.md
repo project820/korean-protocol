@@ -4,6 +4,10 @@
 
 저장소 project820/korean-protocol은 공개 상태이며 공개 endpoint는 https://project820.github.io/korean-protocol 이다. KPROTO_PAGES_ENABLED 저장소 변수는 true다. KPROTO_ALLOW_FIRST_PUBLICATION은 첫 게시 후 false로 되돌렸다. publish를 false로 둔 서명 검증용 실행은 Actions artifact만 만들며 Pages에 게시하지 않는다.
 
+현재 원본은 V7 r2를 채택한 `0.7.0-draft`이며 콘텐츠 발행 버전은 `0.7.0`이다. 이번 발행은 기존 공개 이력에 잇는 후속 발행이다. 실제 게시·다운로드·설치 갱신 결과는 [현재 검증 상태](../status/requirements.md)에서 확인한다. 아래 첫 비공개 실행과 첫 공개 기록은 당시 절차와 결과로 보존한다.
+
+콘텐츠 0.7.0은 엔진 0.2.0 이상을 요구하도록 서명한다. 구버전 0.1.0은 새 콘텐츠를 거부하고 기존 설치본을 유지한다. 사용자는 [최신 INSTALL.md](../../INSTALL.md#기존-설치의-관리-도구를-먼저-갱신한다)의 재설치 절차로 관리 코드를 갱신해야 한다. Pages 콘텐츠 갱신은 실행 코드를 내려받아 교체하는 경로가 아니다.
+
 ## 서명키의 일치를 확인한다
 
 공개키 지문은 SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc이다. 워크플로는 Secret에서 임시 파일을 만들고 공개키와 대조한 뒤 서명한다. Secret 값은 출력하거나 artifact에 넣지 않는다. 설치자는 검토한 저장소 버전의 공개키와 지문을 신뢰 기준으로 사용한다.
@@ -14,7 +18,7 @@
 
 워크플로는 수동 실행으로 시작한다. 첫 서명 검증에는 first_release를 true로 지정하고 publish는 false로 둔다. 후속 발행은 이전 게시 이력을 인증하며 버전과 순번을 증가시킨다. 모든 실행은 검토된 main 코드를 사용한다.
 
-첫 비공개 검증은 다음 명령으로 실행한다. version은 원본의 숫자 버전과 일치해야 하며 manifest의 유효기간은 발행 시각부터 30일이다.
+첫 비공개 검증의 예시 명령은 다음과 같다. 현재 발행에는 아래의 후속 공개 명령을 사용한다. version은 원본의 숫자 버전과 일치해야 하며 manifest의 유효기간은 발행 시각부터 30일이다.
 
 ```sh
 gh workflow run release.yml --repo project820/korean-protocol --ref main -f version=0.2.0 -f first_release=true -f publish=false
@@ -36,7 +40,7 @@ gh workflow run release.yml --repo project820/korean-protocol --ref main -f vers
 
 2026-10-13 [Actions 실행 38359118074](https://github.com/project820/korean-protocol/actions/runs/38359118074)는 원본 commit 91526bb325175992701cd4eb4e1e3e56731a1cdd에서 버전 0.2.0, 순번 1을 발행했다. sign·publish·receipt·archive job이 모두 성공했다. 장기 이력은 kproto-history-0.2.0-1 Release에 보관했다. manifest의 유효기간은 2026-10-13T06:51:53Z부터 2026-11-12T06:51:53Z까지다.
 
-[익명 다운로드 확인](public-download-verification.json)은 인증 정보 없이 공개 주소에서 9개 파일을 받아 서명을 콘텐츠보다 먼저 검증했고, 모든 콘텐츠 해시가 원본과 일치했다. [공개 배포 예약 실행 시험](public-scheduler-verification.json)은 임시 Codex 설치본의 실제 macOS 예약 작업으로 같은 버전을 확인했다. 새 버전으로의 갱신, 후속 발행, 재로그인·절전 복귀는 아직 검증하지 않았다.
+[익명 다운로드 확인](public-download-verification.json)은 인증 정보 없이 공개 주소에서 9개 파일을 받아 서명을 콘텐츠보다 먼저 검증했고 모든 콘텐츠 해시가 원본과 일치했다. [공개 배포 예약 실행 시험](public-scheduler-verification.json)은 임시 Codex 설치본의 macOS 예약 작업으로 같은 버전을 확인했다. 당시 이 시험은 새 버전 갱신·후속 발행·재로그인·절전 복귀를 검증하지 않았다. 이후 [0.3.0 발행·업그레이드](public-0.3.0-verification.md)는 별도 기록으로 남겼다.
 
 manifest가 만료된 뒤에도 기존 설치본은 설치한 규약을 유지하지만 원격의 만료된 manifest는 새로 수락하지 않는다. 신규 설치와 자동 갱신을 계속 제공하려면 만료 전에 후속 버전을 발행한다.
 
@@ -74,7 +78,7 @@ gh workflow run release.yml --repo project820/korean-protocol --ref main -f arch
 
 [갱신된 Actions 실행 38344642913](https://github.com/project820/korean-protocol/actions/runs/38344642913)에서도 관련 시험 90개와 실제 Secret 서명이 통과했다. 내려받은 artifact의 서명을 다시 검증했으며 publish·receipt·archive job은 모두 건너뛰었다.
 
-이 결과는 실제 공개 Pages 게시, 게시 후 발행 영수증 서명, 운영 예약 갱신 성공을 뜻하지 않는다. 해당 경로의 실제 운영 확인은 저장소 공개 시점에 수행한다.
+이 비공개 시험 결과는 공개 Pages 게시, 게시 후 발행 영수증 서명, 운영 예약 갱신 성공을 뜻하지 않는다. 해당 경로의 후속 공개 확인은 첫 공개 발행 기록과 구분한다.
 
 이 절의 비공개 상태는 첫 공개 발행 이전 기록이다. 공개 이후 결과는 [첫 공개 발행](#첫-공개-발행을-완료했다)에 기록했다.
 

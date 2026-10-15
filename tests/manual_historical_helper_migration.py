@@ -2,8 +2,8 @@
 
 No public writes or downloads occur. TEST signatures cover exact historical
 content and exact current candidate bytes. Generated schedulers are never
-registered. The stale external wrapper case demonstrates why users must replace
-saved 0.2 runtime routes with the returned current routes after migration.
+registered. The old engine rejects the new engine requirement before payload
+download; users replace saved runtime routes with the returned current routes.
 """
 import argparse
 from datetime import datetime, timezone
@@ -60,7 +60,7 @@ def run_migration(runtime_root):
         baseline = {name: historical[name] for name in current.CONTENT_PATHS}
         candidate = current.content_files(runtime_root)
         require(source_version(current, baseline, '0.2.0').startswith('0.2.0'), 'Historical source version differs')
-        require(source_version(current, candidate, '0.3.0') == '0.3.0-draft', 'Candidate source version differs')
+        require(source_version(current, candidate, '0.7.0') == '0.7.0-draft', 'Candidate source version differs')
         prior = json.loads((runtime_root / 'evaluation/release-0.3.0-20261013/candidate-upgrade-smoke.json').read_bytes())
         require(prior['result'] == 'pass' and prior['public_baseline']['version'] == '0.2.0', 'Prior authenticated public baseline evidence missing')
         require({name: sha256(raw) for name, raw in baseline.items()} == prior['public_baseline']['files'],
@@ -85,8 +85,8 @@ def run_migration(runtime_root):
                     'TEST key differs from publisher key')
             report['TEST_signer_fingerprint'] = fingerprint
             initial, served = root / 'initial-static', root / 'served-candidate'
-            test_static(current, baseline, '0.2.0', 1, test_key, fingerprint, initial)
-            target_manifest = test_static(current, candidate, '0.3.0', 2, test_key, fingerprint, served)
+            test_static(current, baseline, '0.2.0', 1, test_key, fingerprint, initial, engine_min='0.1.0')
+            test_static(current, candidate, '0.7.0', 2, test_key, fingerprint, served)
             with local_tls(root, served) as (tls_env, requests, tunnels, stop_server):
                 for host in ('codex', 'claude-code'):
                     evidence = {'steps': [], 'result': 'failed'}
@@ -134,7 +134,7 @@ def run_migration(runtime_root):
                             not old_config['scheduler'].get('launch_agent') and not old_config['scheduler']['registered'],
                             'Expected generated-only historical scheduler')
                     target.write_bytes(target.read_bytes() + suffix)
-                    migrated = command('current-0.3-helper-configure-OFF-honorifics-ON',
+                    migrated = command('current-0.7-helper-configure-OFF-honorifics-ON',
                         [sys.executable, '-B', str(runtime_root / 'distribution/agent_install.py'), 'configure'] + common +
                         ['--protocol', 'off', '--honorifics', 'on'])
                     new_manager, new_routes = migrated['management_argv'], migrated['runtime_argv']
@@ -161,27 +161,26 @@ def run_migration(runtime_root):
                         'old_owned_executables_preserved': True, 'generated_scheduler_runtime_replaced': True,
                         'scheduler_other_fields_and_arguments_preserved': True, 'scheduler_registered': False,
                         'generated_plist_before_sha256': sha256(old_plist), 'generated_plist_after_sha256': sha256(scheduler.read_bytes())}
-                    # This deliberately invokes the documented unsupported stale external route.
+                    # The exact old engine must fail closed before new payload bytes.
                     before_gets = len(requests)
-                    command('document-unsupported-saved-0.2-wrapper', old_install['runtime_argv']['run'] +
-                            ['--', sys.executable, '-c', 'raise SystemExit(0)'])
+                    before_old_update = (state / 'state.json').read_bytes()
+                    command('old-engine-rejects-new-minimum-before-payload', old_install['runtime_argv']['update'], expected=6)
                     stale_bytes = target.read_bytes()
                     stale_state = current.strict_json((state / 'state.json').read_bytes())
-                    require(requests[before_gets:] == ['/stable/release.json', '/stable/release.json.sig'] +
-                            ['/releases/0.3.0/' + item['path'] for item in target_manifest['files']], 'Actual old wrapper did not fetch candidate bytes')
+                    require(requests[before_gets:] == ['/stable/release.json', '/stable/release.json.sig'],
+                            'Old incompatible engine downloaded candidate payload')
                     require(stale_state['protocol_enabled'] is False and stale_state['honorifics'] is True and
-                            candidate['profiles/coding-agent.md'].rstrip(b'\n') in stale_bytes and
-                            current.speech_overlay(True) not in stale_bytes, 'Historical OFF/honorific incompatibility was not observed as expected')
-                    require(outside_managed(current, stale_bytes) == original + suffix, 'Stale route altered user bytes')
-                    evidence['unsupported_stale_wrapper'] = {'actual_old_executable_invoked': True,
-                        'fetched_candidate_over_TLS': True, 'ignored_OFF_and_injected_profile': True,
-                        'ignored_honorific_overlay': True, 'persisted_settings_fields_retained': True,
-                        'required_action': 'Replace saved external wrapper with returned runtime_argv.run; never continue using old runtime route'}
-                    command('restore-OFF-with-current-durable-helper', new_manager['configure'] + ['--protocol', 'off', '--honorifics', 'on'])
-                    require(target.read_bytes() == disabled, 'Current helper did not restore exact OFF bytes after stale-route demonstration')
+                            stale_state['version'] == '0.2.0' and stale_bytes == disabled and
+                            (state / 'state.json').read_bytes() == before_old_update,
+                            'Old incompatible engine changed installed baseline or controls')
+                    require(outside_managed(current, stale_bytes) == original + suffix, 'Old engine changed user bytes')
+                    evidence['old_engine_compatibility_guard'] = {'actual_old_executable_invoked': True,
+                        'candidate_manifest_rejected_with_exit_6': True, 'candidate_payload_not_downloaded': True,
+                        'baseline_state_target_controls_preserved': True,
+                        'required_action': 'Use the returned current management and runtime routes after explicit helper upgrade'}
                     command('current-runtime-signed-candidate-update-preserves-OFF', new_routes['update'])
                     updated = command('current-durable-helper-candidate-status', new_manager['status'])
-                    require(updated['version'] == '0.3.0' and updated['highest_sequence'] == 2 and
+                    require(updated['version'] == '0.7.0' and updated['highest_sequence'] == 2 and
                             not updated['enabled'] and updated['honorifics'] and updated['content_verified'] and
                             target.read_bytes() == disabled, 'Current candidate update lost controls or integrity')
                     command('current-wrapper-preserves-OFF-and-host-exit', new_routes['run'] + ['--', sys.executable, '-c', 'raise SystemExit(0)'])
@@ -217,7 +216,7 @@ def run_migration(runtime_root):
         report.update(result='failed', failure='New Python crash report observed')
     report['temporary_material_removed'] = True
     report['limitations'] = ['Local Git source is exact; publication attribution is supplied task context',
-        'TEST signatures only; no production-signed 0.3 release or public upgrade',
+        'TEST signatures only; no production-signed 0.7 release or public upgrade',
         'Generated owned scheduler migration tested; actually registered launchd migration not exercised',
         'External user wrappers require explicit replacement using returned current runtime routes',
         'No automatic code replacement through content updates, real model invocation, login, or sleep/wake']

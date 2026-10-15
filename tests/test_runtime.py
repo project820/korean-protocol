@@ -281,13 +281,46 @@ class RuntimeTests(unittest.TestCase):
             self.install()
 
     def test_rejects_profile_over_budget_and_invalid_json(self):
-        (self.bundle / 'profiles/coding-agent.md').write_bytes(b'x' * (28 * 1024 + 1))
+        (self.bundle / 'profiles/coding-agent.md').write_bytes(b'x' * (30 * 1024 + 1))
         with self.assertRaises(self.k.InputError):
             self.install()
         (self.bundle / 'profiles/coding-agent.md').write_text('본문')
         (self.bundle / 'lexicon/core.json').write_text('{"a":1,"a":2}')
         with self.assertRaises(self.k.InputError):
             self.install()
+
+    def test_profiles_between_28_and_30_KiB_install_complete_inside_32_KiB_block(self):
+        self.assertEqual(32 * 1024, self.k.MAX_MANAGED_BYTES)
+        for size in (28 * 1024 + 1, 30 * 1024):
+            with self.subTest(size=size):
+                profile = b'x' * size
+                (self.bundle / 'profiles/coding-agent.md').write_bytes(profile)
+                self.install()
+                installed = self.target.read_bytes()
+                self.assertIn(profile, installed)
+                self.assertLessEqual(len(installed), 32 * 1024)
+
+    def test_larger_profile_still_rejects_exhausted_32_KiB_project_chain(self):
+        home = self.root / 'budget-home'
+        home.mkdir()
+        config = home / 'config.toml'
+        config.write_text('# Existing user configuration.\n')
+        (self.target.parent / '.git').mkdir()
+        child = self.target.parent / 'nested'
+        child.mkdir()
+        target = child / 'AGENTS.md'
+        original = b'Existing child instructions.\n'
+        target.write_bytes(original)
+        self.target.write_bytes(b'a' * 4096)
+        context = {'host': 'codex', 'scope': 'project', 'project_root': str(child), 'codex_home': str(home)}
+        args = argparse.Namespace(**context)
+        self.assertEqual(32768 - 4096, self.k.host_budget(args, target))
+        (self.bundle / 'profiles/coding-agent.md').write_bytes(b'x' * 30093)
+        with self.assertRaisesRegex(self.k.InputError, 'Instruction or installer file budget exceeded'):
+            self.controller.install_snapshot(self.bundle, target, '0.7.0', host_context=context)
+        self.assertEqual(original, target.read_bytes())
+        self.assertEqual(b'a' * 4096, self.target.read_bytes())
+        self.assertEqual('# Existing user configuration.\n', config.read_text())
 
     def test_explicit_target_budget_is_not_silently_truncated(self):
         self.target.write_bytes(b'x' * 32760)
@@ -899,6 +932,33 @@ class SignedRuntimeTests(RuntimeTests):
         self.assertEqual(0,p.returncode,p.stderr)
         (self.bundle/'release.json.sig').write_bytes(p.stdout)
 
+    def test_new_engine_manifest_blocks_0_1_update_before_payload_and_preserves_0_3(self):
+        with mock.patch.object(self.k, 'ENGINE_VERSION', '0.1.0'):
+            self.sign('0.3.0', 2)
+            self.controller.install_signed(self.bundle, self.target)
+        self.controller.configure(mode='interval', source='https://example.test')
+        installed, state = self.target.read_bytes(), self.controller.state_path.read_bytes()
+        self.sign('0.7.0', 3)
+        manifest = self.k.strict_json(self.manifest.read_bytes())
+        self.assertEqual('0.2.0', manifest['compatibility']['engine_min'])
+        payload = {'release.json': self.manifest.read_bytes(),
+                   'release.json.sig': (self.bundle / 'release.json.sig').read_bytes()}
+        requests = []
+
+        def fetch(url, maximum, deadline=None):
+            name = url.rsplit('/', 1)[-1]
+            requests.append(name)
+            return payload[name]
+
+        with mock.patch.object(self.k, 'ENGINE_VERSION', '0.1.0'), \
+                mock.patch.object(self.controller, '_download', side_effect=fetch):
+            with self.assertRaises(self.k.CompatibilityError):
+                self.controller.update()
+        self.assertEqual(['release.json', 'release.json.sig'], requests)
+        self.assertEqual(installed, self.target.read_bytes())
+        self.assertEqual(state, self.controller.state_path.read_bytes())
+        self.assertEqual('0.3.0', self.controller.status()['version'])
+
     def test_off_signed_update_rollback_and_restart_preserve_settings_for_both_hosts(self):
         for host in ('codex','claude-code'):
             with self.subTest(host=host):
@@ -1068,6 +1128,86 @@ class SignedRuntimeTests(RuntimeTests):
             with self.assertRaises(self.k.NetworkError):
                 self.controller.update()
         self.assertEqual(installed,self.target.read_bytes())
+
+    def test_update_cleans_new_stage_after_success_and_unchanged_release(self):
+        self.sign('0.1.0',1)
+        self.controller.install_signed(self.bundle,self.target)
+        self.controller.configure(source='https://example.test/kproto')
+        historical=self.controller.root/'downloads'/'historical'
+        historical.mkdir(parents=True)
+        (historical/'keep').write_bytes(b'previous download')
+        self.sign('0.2.0',2)
+
+        def download(url,maximum,deadline=None):
+            name=url.rsplit('/',1)[1] if '/stable/' in url else url.split('/releases/0.2.0/',1)[1]
+            return (self.bundle/name).read_bytes()
+
+        with mock.patch.object(self.controller,'fetch',side_effect=download):
+            for changed in (True,False,False):
+                self.assertEqual(changed,self.controller.update())
+                self.assertEqual([historical],list(historical.parent.iterdir()))
+        self.assertEqual(b'previous download',(historical/'keep').read_bytes())
+        self.assertEqual('0.2.0',self.controller.status()['version'])
+        self.controller.configure_application(honorifics=True)
+        self.controller.rollback('0.1.0')
+        self.assertEqual('0.1.0',self.controller.status()['version'])
+        self.assertTrue(any((self.controller.root/'backups').iterdir()))
+
+    def test_update_cleans_new_stage_after_network_trust_and_filesystem_failures(self):
+        self.sign()
+        self.controller.install_signed(self.bundle,self.target)
+        self.controller.configure(source='https://example.test/kproto')
+        installed=self.target.read_bytes()
+        state=self.controller.state_path.read_bytes()
+        historical=self.controller.root/'downloads'/'historical'
+        historical.mkdir(parents=True)
+        (historical/'keep').write_bytes(b'previous download')
+
+        for failure in ('network','manifest','signature','payload','filesystem'):
+            with self.subTest(failure=failure):
+                def download(url,maximum,deadline=None):
+                    if failure=='network':
+                        raise self.k.NetworkError('offline')
+                    name=url.rsplit('/',1)[1] if '/stable/' in url else url.split('/releases/0.1.0/',1)[1]
+                    if (failure=='manifest' and name=='release.json' or
+                            failure=='signature' and name=='release.json.sig' or
+                            failure=='payload' and name=='profiles/coding-agent.md'):
+                        return b'invalid'
+                    return (self.bundle/name).read_bytes()
+
+                write=self.k.atomic_write
+                def interrupted(path,data,**kwargs):
+                    if failure=='filesystem' and Path(path).name=='release.json.sig':
+                        raise OSError('injected stage failure')
+                    return write(path,data,**kwargs)
+
+                with mock.patch.object(self.controller,'fetch',side_effect=download),mock.patch.object(self.k,'atomic_write',side_effect=interrupted):
+                    with self.assertRaises((self.k.ProtocolError,OSError)):
+                        self.controller.update()
+                self.assertEqual([historical],list(historical.parent.iterdir()))
+                self.assertEqual(b'previous download',(historical/'keep').read_bytes())
+                self.assertEqual(installed,self.target.read_bytes())
+                self.assertEqual(state,self.controller.state_path.read_bytes())
+
+    def test_update_stage_cleanup_does_not_follow_injected_symlink(self):
+        self.sign()
+        self.controller.install_signed(self.bundle,self.target)
+        self.controller.configure(source='https://example.test/kproto')
+        outside=self.root/'outside-stage'
+        outside.mkdir()
+        (outside/'keep').write_bytes(b'outside content')
+
+        def interrupted(url,maximum,deadline=None):
+            stages=list((self.controller.root/'downloads').iterdir())
+            self.assertEqual(1,len(stages))
+            (stages[0]/'outside').symlink_to(outside,target_is_directory=True)
+            raise self.k.NetworkError('offline')
+
+        with mock.patch.object(self.controller,'fetch',side_effect=interrupted):
+            with self.assertRaises(self.k.NetworkError):
+                self.controller.update()
+        self.assertEqual([],list((self.controller.root/'downloads').iterdir()))
+        self.assertEqual(b'outside content',(outside/'keep').read_bytes())
 
     def test_wrong_signature_namespace_is_rejected(self):
         self.sign()

@@ -4484,6 +4484,86 @@
       },
       "origin": "author",
       "case_type": "controlled_language"
+    },
+    {
+      "id": "V7-R2-TARGET-STATE",
+      "rule_ids": [
+        "KP-TXT-001",
+        "KP-VER-003"
+      ],
+      "context": "문체 정돈 요청에 따라 점검 안내를 재구성한다.",
+      "input": "기록 담당자는 케이블과 어댑터를 순차 점검 중이다.",
+      "expected": {
+        "decision": "revise",
+        "output": "## 점검 대상\n\n- 케이블\n- 어댑터\n\n기록 담당자가 순차 점검 중이다.",
+        "reason": "대상을 먼저 보여 주고 수행자·순차 처리·진행 상태를 남긴다."
+      },
+      "origin": "author",
+      "case_type": "controlled_language"
+    },
+    {
+      "id": "V7-R2-TIME-ANCHOR",
+      "rule_ids": [
+        "KP-NUM-006",
+        "KP-EDIT-001"
+      ],
+      "context": "문체 정돈 요청에 따라 승인 응답 기한을 독립 항목으로 표시한다.",
+      "input": "승인 담당자는 수신 대기 목록을 확인한 뒤 4시간 안에 응답한다.",
+      "expected": {
+        "decision": "revise",
+        "output": "응답 기한: 수신 대기 목록을 확인한 뒤 4시간 안\n\n승인 담당자가 응답한다.",
+        "reason": "수신이나 제출을 새 기산 사건으로 보충하지 않는다."
+      },
+      "origin": "author",
+      "case_type": "controlled_language"
+    },
+    {
+      "id": "V7-R2-COMMON-SCOPE",
+      "rule_ids": [
+        "KP-PROC-003",
+        "KP-PROC-004"
+      ],
+      "context": "문체 정돈 요청에 따라 조건과 공통 표시 규칙을 구별한다.",
+      "input": "기한 안에 내기 어려우면 담당자에게 알린다. 미반납 물품은 목록에 표시한다.",
+      "expected": {
+        "decision": "revise",
+        "output": "## 기한 안에 내기 어려운 경우\n\n담당자에게 알린다.\n\n## 공통 표시 규칙\n\n미반납 물품은 목록에 표시한다.",
+        "reason": "공통 표시를 앞 조건의 범위로 좁히지 않는다."
+      },
+      "origin": "author",
+      "case_type": "controlled_language"
+    },
+    {
+      "id": "V7-R2-AUTOMATIC-FLOW",
+      "rule_ids": [
+        "KP-PROC-003",
+        "KP-TXT-002"
+      ],
+      "context": "문체 정돈 요청에 따라 시스템의 자동 흐름을 구분한다.",
+      "input": "파일이 접수되면 시스템은 형식을 검사하고 결과를 저장한다.",
+      "expected": {
+        "decision": "revise",
+        "output": "## 파일이 접수된 경우\n\n1. 시스템이 형식을 검사한다.\n2. 시스템이 결과를 저장한다.",
+        "reason": "보고된 자동 처리를 독자에게 주는 지시나 새 담당자 배정으로 바꾸지 않는다."
+      },
+      "origin": "author",
+      "case_type": "controlled_language"
+    },
+    {
+      "id": "V7-R2-EXCEPTION-TIME",
+      "rule_ids": [
+        "KP-PROC-004",
+        "KP-NUM-006"
+      ],
+      "context": "문체 정돈 요청에 따라 대체 기한을 구별한다.",
+      "input": "담당자는 접수 후 2시간 안에 응답한다. 다만 휴일에 접수한 건은 대신 다음 영업일 12:00까지 응답한다.",
+      "expected": {
+        "decision": "revise",
+        "output": "## 응답 기한\n\n- 기본: 접수 후 2시간 안\n- 휴일 접수 건의 대체 기한: 다음 영업일 12:00까지\n\n담당자가 응답한다.",
+        "reason": "대체 기한을 두 기한 모두 지켜야 하는 중복 의무로 바꾸지 않는다."
+      },
+      "origin": "author",
+      "case_type": "controlled_language"
     }
   ]
 }

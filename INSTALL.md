@@ -23,9 +23,19 @@ SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc
 
 공개키와 지문을 같은 미확인 출처에서 함께 받으면 그 둘만으로 발행자를 독립적으로 인증하지 못한다. 첫 신뢰 경계는 `https://github.com/project820/korean-protocol` 저장소이므로 이 저장소에서 받은 것인지 확인한다. 설치기는 배포 서버가 보낸 키를 신뢰 기준으로 사용하지 않으며, 기존 설치의 신뢰 키를 다른 키로 교체하지 않는다.
 
+## 기존 설치의 관리 도구를 먼저 갱신한다
+
+콘텐츠 0.7.0은 관리 엔진 0.2.0 이상을 요구한다. 엔진 0.1.0은 호환성 검사에서 새 콘텐츠를 거부하고 기존 설치본을 유지한다. 콘텐츠 자동 갱신은 관리 코드를 바꾸지 않는다.
+
+검토한 최신 저장소에서 아래 서명 설치의 `install` 명령을 다시 실행한다. 기존 설치와 같은 호스트·홈·상태 경로와 자동 갱신 옵션을 사용한다. 새 설치 도구가 관리 코드를 보존한 뒤 콘텐츠를 검증·설치하며 규약·높임말 설정을 유지한다. 완료 후 같은 도구의 `status` 명령으로 콘텐츠 버전과 검증 상태를 확인한다.
+
+직접 만든 외부 wrapper가 이전 관리 코드를 호출하면 설치 결과의 새 `runtime_argv`로 호출 경로를 교체한다. 사용자 지침이나 Codex 설정의 상한을 늘려서 호환성 검사를 우회하지 않는다.
+
 ## 공개 배포에서 서명 설치한다
 
-공개 배포 주소는 `https://project820.github.io/korean-protocol`이다. 현재 공개 서명본은 0.3.0·순번 2이며 [발행·업그레이드 검증](https://github.com/project820/korean-protocol/blob/main/docs/distribution/public-0.3.0-verification.md)에 확인 결과를 기록했다. Codex 예시이며, Claude Code에서는 모든 명령의 `--host codex`를 `--host claude-code`로 바꾼다. 각 명령은 JSON을 출력한다. 명령이 실패하면 원인과 종료 코드를 보고하고 성공으로 표시하지 않는다.
+공개 배포 주소는 `https://project820.github.io/korean-protocol`이다. 원본 0.7.0-draft는 V7 r2를 채택했으며 콘텐츠 0.7.0의 공개 발행·갱신 검증은 대기 중이다. 아래 명령은 공개 서버가 실제로 제공하는 서명본을 설치하므로 상태 결과의 버전을 확인한다. 이전 공개본 0.3.0·순번 2의 [발행 기록](https://github.com/project820/korean-protocol/blob/main/docs/distribution/public-0.3.0-verification.md)은 이번 발행의 증거가 아니다.
+
+Codex 예시이며, Claude Code에서는 모든 명령의 `--host codex`를 `--host claude-code`로 바꾼다. 각 명령은 JSON을 출력한다. 명령이 실패하면 원인과 종료 코드를 보고하고 성공으로 표시하지 않는다.
 
 macOS에서는 예약 자동 갱신을 명시적으로 등록한다.
 
@@ -48,7 +58,7 @@ macOS에서도 자동 갱신을 원하지 않으면 `--autoupdate off`를 사용
 
 ## 오프라인 미서명 설치를 명시적으로 선택한다
 
-네트워크를 사용할 수 없거나 사용자가 미서명 로컬 설치를 요청하면 서명 옵션 없이 실행한다. 이 경로는 저장소 또는 ZIP의 파일을 그대로 설치하며 자동 갱신은 꺼져 있다. 현재 로컬 원본은 설치 상태에 0.3.0으로 기록한다. 이 미서명 설치 경로의 `trust: local-snapshot`을 공개 서명본의 인증 결과로 표시하지 않는다.
+네트워크를 사용할 수 없거나 사용자가 미서명 로컬 설치를 요청하면 서명 옵션 없이 실행한다. 이 경로는 저장소 또는 ZIP의 파일을 그대로 설치하며 자동 갱신은 꺼져 있다. 현재 로컬 원본은 설치 상태에 0.7.0으로 기록한다. 이 미서명 설치 경로의 `trust: local-snapshot`을 공개 서명본의 인증 결과로 표시하지 않는다.
 
 ```sh
 python3 -B distribution/agent_install.py plan --host codex
@@ -67,7 +77,9 @@ ZIP에서는 `distribution/agent_install.py` 대신 루트의 `agent-install.py`
 
 상태 조회에서 설치 대상과 버전을 확인한다. `installed`만 보지 말고 `verified`와 현재 호스트가 선택하는 대상의 일치 여부도 확인한다. 불일치나 복구 필요 상태를 정상 적용으로 보고하지 않는다. 관리 코드와 규약은 상태 폴더에 보존하므로 설치에 사용한 복제본이 없어져도 상태 확인·갱신·제거가 가능하다.
 
-현재 대화에서는 `profiles/coding-agent.md`를 읽고 지침 우선순위 안에서 적용한다. 어휘 판정이 필요하면 `lexicon/core.json`과 `lexicon/domains/software.json`에서 관련 뜻·조건·예외를 읽는다. 새 세션은 설치된 호스트 지침을 읽는다. 파일 설치 성공과 모델의 모든 규칙 준수를 구분하며, 실제 호스트 로딩을 확인하지 않았다면 확인했다고 보고하지 않는다.
+현재 대화에서는 `profiles/coding-agent.md`를 읽고 지침 우선순위 안에서 적용한다. V7 r2의 대상·선택지·조건·수량·기한 배치를 따르며 원문보다 짧게 만들기 위해 필요한 뜻이나 구분을 없애지 않는다. 어휘 판정이 필요하면 `lexicon/core.json`과 `lexicon/domains/software.json`에서 관련 뜻·조건·예외를 읽는다.
+
+새 세션은 설치된 호스트 지침을 읽는다. 파일 설치 성공과 모델의 모든 규칙 준수를 구분하며, 실제 호스트 로딩을 확인하지 않았다면 확인했다고 보고하지 않는다.
 
 사용자에게 설치한 버전, 대상 경로, 서명 여부, 자동 갱신 방식과 연결 상태, 새 세션 시작 안내를 짧게 알린다. 설치 결과의 `management_commands`와 `runtime_argv`에 나온 지속 관리 명령도 남긴다.
 

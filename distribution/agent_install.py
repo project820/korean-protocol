@@ -39,7 +39,7 @@ import tempfile
 from contextlib import contextmanager
 import types
 
-VERSION = '0.3.0'
+VERSION = '0.7.0'
 TOOL_NAME = 'agent-tool'
 TOOL_FILES = ('agent-install.py', 'runtime/kproto.py')
 LIMIT = 4 * 1024 * 1024

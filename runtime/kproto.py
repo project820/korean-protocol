@@ -49,9 +49,9 @@ import uuid
 if os.name == 'posix':
     import fcntl
 
-ENGINE_VERSION = '0.1.0'
-MAX_PROFILE_BYTES = 28 * 1024
-MAX_MANAGED_BYTES = 30 * 1024
+ENGINE_VERSION = '0.2.0'
+MAX_PROFILE_BYTES = 30 * 1024
+MAX_MANAGED_BYTES = 32 * 1024
 MAX_FILE_BYTES = 1024 * 1024
 MAX_DOWNLOAD_REQUEST_BYTES = 64 * 1024
 MAX_TOTAL_BYTES = 4 * 1024 * 1024
@@ -329,7 +329,7 @@ def content_files(bundle):
         if not data:
             raise InputError('Content file is empty')
         if name.startswith('profiles/') and len(data) > MAX_PROFILE_BYTES:
-            raise InputError('Profile exceeds 28 KiB budget')
+            raise InputError('Profile exceeds 30 KiB budget')
         try:
             data.decode('utf-8')
         except UnicodeError:
@@ -923,7 +923,7 @@ class Controller:
             else:
                 new_block=BEGIN+b'\nKorean Protocol is disabled.\n'+END
             if len(new_block)>MAX_MANAGED_BYTES:
-                raise InputError('Managed block exceeds 30 KiB budget')
+                raise InputError('Managed block exceeds 32 KiB budget')
             separator=state.get('separator','').encode('ascii') if block else (b'' if not old or old.endswith(b'\n') else b'\n')
             after=prefix+separator+new_block+suffix if not block else prefix+new_block+suffix
             if len(after)>budget or len(after)>MAX_TOTAL_BYTES:
@@ -1245,23 +1245,26 @@ class Controller:
         if state.get('trust')!='signed':
             raise TrustError('Local snapshots require explicit signed bootstrap before remote updates')
         source=validate_source(cfg.get('source',''))
-        stage=self.root/'downloads'/uuid.uuid4().hex
-        stage.mkdir(parents=True,mode=0o700)
-        try:
-            raw=self._download(source+'/stable/release.json',65536,deadline)
-            atomic_write(stage/'release.json',raw)
-            atomic_write(stage/'release.json.sig',self._download(source+'/stable/release.json.sig',16384,deadline))
-            manifest=validate_manifest(strict_json(raw))
-            self._verify_signature(stage,raw,manifest)
-            for entry in manifest['files']:
-                if time.monotonic()>deadline:
-                    raise NetworkError('Update time budget exhausted')
-                data=self._download(source+'/releases/'+manifest['version']+'/'+entry['path'],entry['size'],deadline)
-                atomic_write(stage/entry['path'],data)
-            changed=self.install_signed(stage,Path(state['target']),state['profile'],state['budget'],remote_config=cfg)
-        except ProtocolError:
-            self._record_attempt(now,False)
-            raise
+        downloads=safe_path(self.root/'downloads')
+        downloads.mkdir(parents=True,exist_ok=True,mode=0o700)
+        # Only this attempt's exclusive temporary directory is disposable.
+        with tempfile.TemporaryDirectory(prefix='update-',dir=downloads) as temporary:
+            stage=Path(temporary)
+            try:
+                raw=self._download(source+'/stable/release.json',65536,deadline)
+                atomic_write(stage/'release.json',raw)
+                atomic_write(stage/'release.json.sig',self._download(source+'/stable/release.json.sig',16384,deadline))
+                manifest=validate_manifest(strict_json(raw))
+                self._verify_signature(stage,raw,manifest)
+                for entry in manifest['files']:
+                    if time.monotonic()>deadline:
+                        raise NetworkError('Update time budget exhausted')
+                    data=self._download(source+'/releases/'+manifest['version']+'/'+entry['path'],entry['size'],deadline)
+                    atomic_write(stage/entry['path'],data)
+                changed=self.install_signed(stage,Path(state['target']),state['profile'],state['budget'],remote_config=cfg)
+            except ProtocolError:
+                self._record_attempt(now,False)
+                raise
         self._record_attempt(now,True)
         return changed
 

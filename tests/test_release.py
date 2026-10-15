@@ -207,14 +207,23 @@ class ReleaseTests(unittest.TestCase):
     def test_rejects_symlink_source_payload_evidence_output_and_parent(self):
         for name in ('profiles/chat.md', 'evaluation/functional-review.json', 'LICENSE', 'NOTICE.md'):
             path = self.source / name
+            crosswalk_path = self.source / 'specification/ste-crosswalk.json'
+            original_crosswalk = crosswalk_path.read_bytes()
+            if name == 'evaluation/functional-review.json':
+                # Current draft makes no verified claim; exercise a referenced
+                # review before compiler validation rather than unreferenced data.
+                crosswalk = json.loads(original_crosswalk)
+                crosswalk['items'][0]['status'] = 'verified'
+                crosswalk_path.write_text(json.dumps(crosswalk))
             real = self.root / 'real'
             real.write_bytes(path.read_bytes())
             path.unlink()
             path.symlink_to(real)
-            with self.assertRaises(k.InputError):
+            with self.assertRaisesRegex(k.InputError, 'Symbolic links'):
                 self.prepare()
             path.unlink()
             path.write_bytes(real.read_bytes())
+            crosswalk_path.write_bytes(original_crosswalk)
         self.unsigned.symlink_to(self.source, target_is_directory=True)
         with self.assertRaises(k.InputError):
             self.prepare()

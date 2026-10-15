@@ -258,7 +258,7 @@ class ValidationTests(FixtureTests):
 
 
 class CompilerTests(FixtureTests):
-    def compile(self, output=None, budget=28*1024):
+    def compile(self, output=None, budget=30*1024):
         from validation.compile import compile_profiles
         return compile_profiles(self.root,output or self.root,budget=budget)
 
@@ -309,6 +309,28 @@ class CompilerTests(FixtureTests):
     def test_budget_failure_does_not_silently_truncate_or_partial_write(self):
         with self.assertRaises(ValueError):self.compile(budget=40)
         self.assertFalse((self.root/'profiles/chat.md').exists())
+
+    def test_default_30_KiB_budget_keeps_full_boundary_text_and_rejects_one_more_byte(self):
+        from validation.compile import compile_profiles
+        baseline = self.root / 'baseline-output'
+        compile_profiles(self.root, baseline)
+        largest = max((baseline / 'profiles' / (name + '.md')).stat().st_size
+                      for name in ('coding-agent', 'chat', 'work-document'))
+        padding = 'x' * (30 * 1024 - largest)
+        self.change('specification/rules.json', lambda data: data['rules'][0].update(
+            requirement=data['rules'][0]['requirement'] + padding))
+        output = self.root / 'boundary-output'
+        compile_profiles(self.root, output)
+        profiles = [output / 'profiles' / (name + '.md') for name in ('coding-agent', 'chat', 'work-document')]
+        self.assertEqual(30 * 1024, max(path.stat().st_size for path in profiles))
+        for path in profiles:
+            self.assertIn(padding, path.read_text())
+        self.change('specification/rules.json', lambda data: data['rules'][0].update(
+            requirement=data['rules'][0]['requirement'] + 'x'))
+        refused = self.root / 'refused-output'
+        with self.assertRaisesRegex(ValueError, '30720-byte budget'):
+            compile_profiles(self.root, refused)
+        self.assertFalse(refused.exists())
 
     def test_compiler_omits_source_metadata_and_cases(self):
         self.change('specification/rules.json',lambda d:d['rules'][0]['references'][0].update(title='SECRET-RESEARCH-METADATA'))

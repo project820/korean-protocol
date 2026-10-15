@@ -2,6 +2,8 @@
 
 이 경로는 발행자가 서명한 배포물을 저장소의 공개키와 지문으로 검증해 설치한다. 공개 HTTPS 배포 주소는 `https://project820.github.io/korean-protocol`이며, 공개키는 `distribution/trust/publisher.pub`, 지문은 `SHA256:O9IrN/e4GB8ayF+UnwseuZNK1jgDyWAiDQcApMC/OAc`이다. 에이전트 설치 절차는 [INSTALL.md](../../INSTALL.md)를 따른다.
 
+현재 원본 0.7.0-draft는 V7 r2를 채택한다. 아래 명령은 공개 서버가 실제로 제공하는 서명본을 설치하므로 결과의 버전·서명·설치 대상·예약 등록 상태를 확인한다. 콘텐츠 0.7.0의 발행과 갱신 증거는 [현재 검증 상태](../status/requirements.md)에서 구분한다.
+
 ## 설치할 입력을 확인한다
 
 공개키와 지문을 같은 미확인 출처에서 함께 받으면 그 둘만으로 발행자를 독립적으로 인증하지 못한다. 첫 신뢰 경계는 `https://github.com/project820/korean-protocol` 저장소다. 설치기는 배포 주소가 보낸 키를 신뢰 기준으로 사용하지 않고, 로컬에 지정한 공개키와 지문만 사용한다. 개인키는 설치하지 않는다.
@@ -50,18 +52,20 @@ macOS의 `--autoupdate scheduled`는 예약 파일만 만든다. 설치와 함�
 
 설치기는 관리 코드의 해시를 이름에 포함한 새 폴더에 관리 도구를 보존한다. 이전 `agent-tool` 폴더는 검증하고 그대로 남긴다. 규약 업데이트가 Python 코드를 바꾸지 않으며 관리 코드 교체는 새 설치 도구를 명시적으로 실행할 때만 진행한다.
 
+콘텐츠 0.7.0은 엔진 0.2.0 이상을 요구한다. 엔진 0.1.0의 자동 갱신은 새 콘텐츠를 거부하고 기존 설치본을 유지한다. [최신 INSTALL.md](../../INSTALL.md#기존-설치의-관리-도구를-먼저-갱신한다)에 따라 기존 설치와 같은 경로·설정으로 `install`을 다시 실행한 뒤 `status`로 콘텐츠 버전과 검증 상태를 확인한다.
+
 설치 후 JSON의 `management_commands`로 상태·제거를 관리한다. 명시적인 갱신 요청은 `runtime_argv.update`로 실행하고, 자동 갱신 해제는 `runtime_argv.configure_off`로 실행한다. 설치용 복제본 경로를 관리 명령에 직접 적어 두지 않는다. 설치 상태의 `verified`, `target_matches`, 복구 필요 여부를 확인하며 파일 검증 성공을 LLM의 모든 규칙 준수와 동일시하지 않는다.
 
-## 실제 예약 실행을 검증했다
+## 첫 공개 이전의 예약 실행 기록을 보존한다
 
 [임시 설치 시험](scheduler-registration-verification.json)은 실제 macOS에서 예약 등록과 고정 실행 경로를 확인했다. 갱신 시각 전 실행은 종료 코드 0으로 끝났고, 미공개 endpoint 조회는 종료 코드 3으로 끝나면서 기존 규약을 보존했다. `configure_off` 후 plist와 launchd 작업이 없어졌으며 제거 후 원래 사용자 지침을 복원했다. 시험용 Codex 홈과 별도 상태 폴더만 사용했다.
 
 이 초기 기록은 첫 공개 이전의 시험이다. 물리적 절전·복귀나 재로그인은 실행하지 않았다. 실제 다음 버전의 공개 예약 갱신도 아직 시험하지 않았다.
 
-## 공개 endpoint의 다운로드와 예약 실행을 확인했다
+## 0.2.0 공개 다운로드와 예약 실행 기록을 보존한다
 
 2026-10-13 [익명 다운로드 확인](public-download-verification.json)은 인증 정보 없이 공개 주소에서 `0.2.0` 순번 `1` 배포물 9개 파일을 받았다. manifest 서명을 콘텐츠보다 먼저 검증했고, 모든 콘텐츠 해시가 발행 원본 `91526bb`와 일치했다. 이 manifest는 2026-11-12T06:51:53Z에 만료된다.
 
 같은 날 [공개 배포 예약 실행 시험](public-scheduler-verification.json)은 임시 서명 Codex 설치본의 실제 macOS LaunchAgent를 사용했다. 공개 endpoint 조회 실행이 종료 코드 0으로 끝났고 기존 규약을 보존했다. `configure_off` 후 plist와 작업이 없어졌으며, 제거 후 원래 사용자 지침을 복원했다. 같은 버전의 인증된 확인이므로 새 버전으로의 예약 갱신이나 재로그인·절전 복귀를 검증한 결과는 아니다.
 
-최종 예약 실행은 현재 설치기의 `--source` 원격 설치와 예약 등록을 함께 실행했다. 같은 날 [공개 주소 설치 확인](public-install-verification.json)은 현재 설치기로 Codex·Claude Code 임시 환경에 익명 서명 설치를 수행했다. `plan`의 호스트 상태 보존, 같은 버전 수동 갱신, wrapper 시작, 재설치 보존, 제거 후 사용자 지침 복원을 확인했다. 전체 자동 테스트 310개와 독립 보안 검토를 통과했으며, 상세 범위는 [공개 배포 점검](../status/completion-audit-20261013-public.md)에 기록했다.
+당시 최종 예약 실행은 설치기의 `--source` 원격 설치와 예약 등록을 함께 실행했다. 같은 날 [공개 주소 설치 확인](public-install-verification.json)은 당시 설치기로 Codex·Claude Code 임시 환경에 익명 서명 설치를 수행했다. `plan`의 호스트 상태 보존, 같은 버전 수동 갱신, wrapper 시작, 재설치 보존, 제거 후 사용자 지침 복원을 확인했다. 당시 전체 자동 테스트 310개와 독립 보안 검토를 통과했으며 상세 범위는 [공개 배포 점검](../status/completion-audit-20261013-public.md)에 기록했다.

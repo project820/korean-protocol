@@ -1,6 +1,8 @@
 # 설치와 배포 계약 v1
 
-이 문서는 Korean Protocol을 한 번 설치한 뒤 로컬에서 계속 사용하는 배포 계약을 정의한다. POSIX 로컬 설치·서명 검증·콘텐츠 updater·시작 wrapper와 macOS launchd 파일 생성·예약 등록을 구현했다. [현재 공개 발행과 실제 업그레이드](public-0.3.0-verification.md)는 0.3.0·순번 2의 서명·Pages 게시와 두 임시 호스트의 0.2.0→0.3.0 갱신을 확인했다. 사용자 전역 예약 작업은 이 업그레이드 시험에서 변경하지 않았다. [현재 구현과 실행법](implementation-status.md)은 실행 가능한 명령과 남은 설계를 구분한다. 규약은 LLM 응답의 표현을 안내하며 모든 응답의 준수를 보장하지 않는다.
+이 문서는 Korean Protocol을 한 번 설치한 뒤 로컬에서 계속 사용하는 배포 계약을 정의한다. 현재 원본은 V7 r2를 채택한 0.7.0-draft이며 콘텐츠 0.7.0의 공개 서명 발행·설치 갱신은 검증 대기 중이다. [V7 채택 기록](../../experiments/v7/adoption.md)은 사용자 선택과 의미 보존의 한계를 기록한다.
+
+POSIX 로컬 설치·서명 검증·콘텐츠 updater·시작 wrapper와 macOS launchd 파일 생성·예약 등록을 구현했다. [이전 공개 발행과 업그레이드](public-0.3.0-verification.md)는 0.3.0·순번 2의 서명·Pages 게시와 두 임시 호스트의 0.2.0→0.3.0 갱신을 확인했다. [현재 구현과 실행법](implementation-status.md)은 실행 가능한 명령과 남은 설계를 구분한다. 규약은 LLM 응답의 표현을 안내하며 모든 응답의 준수를 보장하지 않는다.
 
 ## 적용 범위
 
@@ -8,7 +10,7 @@
 
 배포물은 UTF-8 Markdown과 JSON만 포함한다. 설치기는 배포물의 스크립트, hooks, 실행 파일, 라이브러리, 셸 명령을 실행하지 않는다. 런타임 코드는 사용자가 별도로 검토하고 교체하며, 콘텐츠 자동 업데이트가 런타임을 갱신하지 않는다. 서명된 콘텐츠에도 임의의 지시가 들어갈 수 있으므로 콘텐츠 릴리스는 발행 전 검토와 의미 보존 회귀 검사를 통과해야 한다.
 
-`profiles`는 모델이 읽는 지침이고 `check`는 정해진 항목을 검사하는 실행 경로이다. 모델의 의미 이해와 검사기의 표면 탐지는 다르다. 검사기가 통과시킨 글도 사실·양태·책임을 바꿀 수 있으며, 프로필을 읽은 모델도 규칙을 어길 수 있다. 응답 공개를 검사 결과로 차단하려면 해당 호스트나 자체 앱이 출력 경로에 검사기를 연결해야 한다.
+`profiles`는 모델이 읽는 지침이며 현재 [validation CLI](../../validation/README.md)는 규칙·어휘·사례 데이터의 구조와 증거 연결을 검사한다. 런타임에 응답 검사·출력 차단 기능은 없다. 데이터 검사 통과나 프로필 설치만으로 모델 출력의 사실·양태·책임 보존을 보장하지 않는다.
 
 ## 저장 구조
 
@@ -55,13 +57,15 @@ Claude/ Cursor의 전용 규칙 파일을 사용할 때에는 파일 전체를 �
 
 발행 공개키는 사용자가 별도로 확인한 채널, 검토한 저장소 commit 또는 조직 관리 정책으로 전달한다. v1에서는 공개키를 remote 콘텐츠로 자동 교체하지 않는다. 키 교체·폐기는 별도 검토와 로컬 trust 설정 교체가 필요하다. 이 제한 때문에 키가 바뀌면 자동 업데이트가 멈출 수 있으며 기존 규약은 계속 작동한다. 재시도만으로 키 변경을 승인하지 않는다.
 
-서명이 없는 개인 checkout은 `install --bundle LOCAL_DIR --local-snapshot --version 0.3.0`으로 설치한다. 이 입력은 release manifest 없이 고정 일곱 콘텐츠 파일을 검증하고 자체 hash metadata를 생성한다. 이 옵션은 로컬 파일을 사용자가 선택했다는 뜻이며 발행자 인증을 뜻하지 않는다. 상태에 `trust=local-snapshot`을 기록하고 원격 자동 업데이트를 거부한다. 서명 없는 원격 다운로드를 checksum만 확인하여 자동 적용하는 모드는 제공하지 않는다.
+서명이 없는 개인 checkout은 `install --bundle LOCAL_DIR --local-snapshot --version 0.7.0`으로 설치한다. 이 입력은 release manifest 없이 고정 일곱 콘텐츠 파일을 검증하고 자체 hash metadata를 생성한다. 이 옵션은 로컬 파일을 사용자가 선택했다는 뜻이며 발행자 인증을 뜻하지 않는다. 상태에 `trust=local-snapshot`을 기록하고 원격 자동 업데이트를 거부한다. 서명 없는 원격 다운로드를 checksum만 확인하여 자동 적용하는 모드는 제공하지 않는다.
 
 ## manifest와 서명
 
 [release.schema.json](../../schemas/release.schema.json)은 릴리스의 구조를 정의한다. 파일 이름은 설치기에도 고정 allowlist로 들어가야 하며 schema만으로 보안을 검증했다고 주장하지 않는다.
 
 릴리스는 버전, stable channel, 단조 증가하는 sequence, 발행·만료 시점, schema 및 engine 호환 범위, 콘텐츠 경로·역할·크기·SHA-256을 담는다. SHA-256은 bytes 손상 검출에 사용한다. 발행자 인증은 이미 신뢰한 공개키의 서명 검증으로 판단한다.
+
+콘텐츠 0.7.0의 `compatibility.engine_min`은 `0.2.0`이다. 엔진 0.2.0은 프로필 본문 30 KiB(30,720 bytes), 관리 블록 32 KiB(32,768 bytes)의 내부 상한을 사용한다. 실제 Codex 프로젝트 지침의 잔여 예산은 별도로 검사하며 사용자 설정은 바꾸지 않는다. 엔진 0.1.0은 호환성 검사에서 새 콘텐츠를 거부하고 기존 설치본을 유지한다. 사용자는 [최신 설치 절차](../../INSTALL.md#기존-설치의-관리-도구를-먼저-갱신한다)로 관리 도구를 먼저 갱신해야 하며 콘텐츠 updater는 이 코드를 자동 교체하지 않는다.
 
 manifest의 rules/lexicon 호환 번호 `1`은 실제 데이터의 `schema_version: "1.0"`을 뜻한다. 런타임은 실제 JSON도 top-level object인지, 해당 schema version과 version 문자열을 갖는지, rules/entries가 비어 있지 않은 object 배열인지 확인한다. 이는 최소 형식 호환 검사이며 개별 규칙·어휘의 의미와 전체 publication schema 검증을 대신하지 않는다.
 
@@ -89,9 +93,9 @@ v1은 GitHub private Releases의 API 조회·asset redirect를 자동 처리하�
 
 자동 조회 실패는 1시간 후부터 재시도하며 연속 실패는 2·4·8·24시간까지 간격을 늘린다. 성공하면 24시간 주기로 돌아간다. 수동 `update`는 이 대기 시간을 무시한다. 상태에는 시도 시각과 성공 시각을 따로 기록하며 시스템 시각이 뒤로 움직이면 자동 조회를 한 번만 시도하고 다음 시각을 다시 계산한다. 한 번의 host 시작이 여러 네트워크 재시도를 수행하지 않는다.
 
-wrapper를 쓰지 않는 macOS 사용자는 OS 예약 작업을 한 번 연결한다. 현재 `autoupdate configure --mode scheduled --interval-hours 24 --emit PATH`는 고정 절대 경로의 Python·CLI·state를 갖는 launchd plist를 생성하며 `registered=false`, `status=generated`로 기록한다. 생성만으로 예약 작업이 등록되지는 않는다. 사용자가 생성한 파일을 검토하여 `launchctl bootstrap`으로 연결해야 하며 이 작업에서는 실제 등록하지 않았다. 시스템이 job을 시작하면 `RunAtLoad`와 24시간 `StartInterval`로 `update --scheduled`를 실행한다. Linux systemd와 Windows Task Scheduler 출력·등록은 미구현이며 wrapper 방식을 제공한다. `--register`는 현재 CLI에 없다.
+wrapper를 쓰지 않는 macOS 사용자는 OS 예약 작업을 한 번 연결한다. `autoupdate configure --mode scheduled --interval-hours 24 --emit PATH`는 launchd plist를 생성하며 생성만으로 예약 작업이 등록되지는 않는다. 서명 설치기에 `--register-scheduler`를 지정하거나 반환된 `scheduler_register` 명령으로 등록한다. 등록한 작업은 로그인 시와 매시 정각에 갱신 시각을 확인한다. Linux systemd와 Windows Task Scheduler 출력·등록은 미구현이며 Linux에는 시작 wrapper를 제공한다.
 
-`autoupdate configure --mode off`는 네트워크 조회를 해제한다. 현재 구현은 hash가 일치하는 자기 생성 plist를 제거하고 `disabled`로 기록하며 설치한 규약과 캐시를 유지한다. 사용자가 외부에서 등록한 job 자체는 자동 bootout하지 않지만 남은 job의 scheduled 호출은 off 설정을 읽고 네트워크를 사용하지 않는다. 실제 job 제거는 사용자의 `launchctl bootout`이 필요하다. 명시적인 `update` 명령은 mode off에서도 네트워크 작업임을 사용자가 지시한 것으로 처리한다. pin이 있으면 원격 조회 및 적용을 하지 않는다. 현재 만료된 릴리스도 로컬 사용과 검사에서는 계속 허용한다. 만료는 새로운 원격 릴리스의 수락 조건이며 오프라인 사용 기한이 아니다.
+`autoupdate configure --mode off`는 네트워크 조회를 해제한다. 자신이 등록한 job의 실행 경로·인자와 plist 해시를 확인한 뒤 해제하고 소유한 예약 파일을 제거한다. 사용자가 바꾼 외부 job은 임의로 해제하지 않으며 설치한 규약과 캐시는 유지한다. 명시적인 `update` 명령은 mode off에서도 네트워크 작업임을 사용자가 지시한 것으로 처리한다. pin이 있으면 원격 조회 및 적용을 하지 않는다. 만료된 릴리스도 로컬 사용과 검사에서는 계속 허용한다. 만료는 새로운 원격 릴리스의 수락 조건이며 오프라인 사용 기한이 아니다.
 
 최초 원격 수락 때에도 미래 발행 시각, 잘못된 시간 형식, 지난 만료를 거부한다. 최고 수락 sequence보다 낮은 릴리스는 원격 업데이트에서 거부한다. 같은 sequence의 다른 manifest hash도 거부한다. 같은 sequence·hash면 변경 없이 성공한다. sequence가 같거나 높아도 현재 버전보다 낮은 콘텐츠는 자동 적용하지 않는다. 해시가 일치하는 캐시의 과거 릴리스를 사용자가 `rollback`하면 sequence 최고값은 유지하고 그 버전으로 pin한다. 이는 rollback 직후 자동 업데이트가 사용자의 선택을 취소하지 않도록 한다.
 
@@ -109,29 +113,36 @@ POSIX 구현은 가능하면 디렉터리 descriptor와 `O_NOFOLLOW`를 사용�
 
 다음 쓰기 명령은 미완료 journal을 먼저 확인한다. state가 후보로 commit되지 않았고 target bytes가 후보이면 원본으로 복원한다. state와 target 모두 commit한 후보와 일치하면 journal 정리만 수행한다. target이 예상 원본/후보 모두와 다르면 쓰기를 중단하며 자동 diff는 제공하지 않는다. 읽기 전용 `status`는 미완료를 보고하며 파일을 복원하지 않는다. wrapper도 복구가 필요한 journal은 host를 시작하기 전에 처리하며 복구 충돌을 무시하지 않는다.
 
-## CLI 계약
+## 현재 CLI 명령
 
-아래 표는 전체 인터페이스 계약이며 현재 지원 여부는 [구현 상태](implementation-status.md)에 따른다. `kproto`는 문서상 명칭이며 현재 실행 명령은 checkout에서 `python3 -m runtime.kproto`이다. 로컬 bundle·경로·source·trust key 값은 사용자가 정하며 예시를 실행한 것으로 표시하지 않는다.
+저장소에서 다음 형식으로 실행한다. `COMMAND`에는 아래 표의 명령을 넣고 `/ABS/STATE`에는 설치할 때 사용한 상태 경로를 넣는다. 대문자 경로·버전·주소는 실제 값으로 바꾸며 예시를 실행한 것으로 표시하지 않는다. 일반 설치에는 [INSTALL.md](../../INSTALL.md)의 호스트별 설치 도구를 사용한다.
 
-| 명령 | 동작을 다음처럼 정한다. |
+```sh
+python3 -m runtime.kproto --state-dir /ABS/STATE COMMAND
+```
+
+| COMMAND에 넣을 명령 | 동작 |
 | --- | --- |
-| `kproto install --bundle LOCAL_DIR --host codex --scope project --project-root ABS_PATH --local-snapshot` | 로컬 규약을 확인하고 프로젝트 파일에 관리 블록을 설치한다. |
-| `kproto install --bundle LOCAL_DIR --host codex --scope user --trust-key PUBLIC_KEY --expected-fingerprint SHA256:... --autoupdate interval --source HTTPS_URL` | 신뢰한 서명 bundle을 설치하고 시작 wrapper의 주기 업데이트를 허용한다. |
-| `kproto status --json` | 설치 버전·hash·trust·대상·충돌·pin·마지막 조회·오프라인 가용 상태를 로컬에서만 읽는다. |
-| `kproto check INPUT --format json` | 활성 규약으로 로컬 검사한다. 모델 API를 호출하지 않는다. 의미 판정 미지원은 결과에 남긴다. |
-| `kproto update` / `kproto update --scheduled` | 신뢰·호환·hash·경로를 검증한 stable 콘텐츠를 적용한다. scheduled 실패는 작업 결과에 남긴다. |
-| `kproto update --pin 0.1.0` / `kproto update --unpin` | pin을 로컬 설정에 기록하거나 해제한다. pin과 자동 원격 하향 적용을 섞지 않는다. |
-| `kproto rollback --version 0.1.0` | 검증 캐시의 과거 버전을 복원하고 pin한다. 캐시가 없으면 exit 4로 끝난다. |
-| `kproto uninstall --host codex --scope user` | 검증된 관리 블록/전용 파일과 자기 예약 연결만 제거하며 다른 bytes를 유지한다. |
-| `kproto autoupdate configure --mode interval\|scheduled\|off` | 자동 갱신 모드를 저장하고 지정한 자기 작업만 생성·해제한다. |
-| `kproto run -- codex` | 갱신 주기가 왔으면 시도한 뒤 정상 로컬 규약으로 호스트를 시작한다. |
+| `install --bundle LOCAL_DIR --host codex --scope project --project-root ABS_PATH --local-snapshot --version 0.7.0` | 로컬 규약을 확인하고 프로젝트 파일에 관리 블록을 설치한다. |
+| `install --bundle LOCAL_DIR --host codex --scope user --trust-key PUBLIC_KEY --expected-fingerprint SHA256:FINGERPRINT --autoupdate interval --source HTTPS_URL` | 신뢰한 서명 bundle을 설치하고 시작 wrapper의 주기 업데이트를 허용한다. |
+| `status --json` | 설치 버전·hash·trust·대상·충돌·pin·마지막 조회·오프라인 가용 상태를 로컬에서 읽는다. |
+| `update` / `update --scheduled` | 신뢰·호환·hash·경로를 검증한 stable 콘텐츠를 적용한다. scheduled 실패는 작업 결과에 남긴다. |
+| `update --pin CURRENT_VERSION` / `update --unpin` | 현재 활성 버전의 pin을 기록하거나 해제한다. 다른 버전으로 고정하려면 먼저 해당 캐시로 rollback한다. |
+| `rollback --version CACHED_VERSION` | 검증 캐시의 과거 버전을 복원하고 pin한다. 캐시가 없으면 exit 4로 끝난다. |
+| `uninstall` | 상태가 소유한 관리 블록과 예약 연결을 제거하며 다른 bytes를 유지한다. host·scope는 이 명령의 인자가 아니다. |
+| `autoupdate configure --mode interval` / `autoupdate configure --mode off` | 시작 wrapper 갱신을 설정하거나 자동 갱신을 끈다. |
+| `autoupdate configure --mode scheduled --interval-hours 24 --emit PLIST_PATH` | macOS 예약 파일을 만들며 OS 등록은 별도다. |
+| `scheduler register` / `scheduler status` / `scheduler unregister` | 소유한 macOS 예약 작업을 등록·확인·해제한다. |
+| `recover` | 미완료 journal을 검사하고 소유권·내용이 맞는 경우 복구한다. |
+| `run -- codex` | 갱신 주기가 왔으면 시도한 뒤 정상 로컬 규약으로 호스트를 시작한다. |
 
-현재 `status --json`은 자격 증명 없는 결과를 stdout에 쓰고 진단은 stderr에 쓴다. `--dry-run`, 자동 diff, `status --host`, 검사 CLI 통합은 장래 인터페이스이며 현재 runtime parser에는 없다. 검사는 별도 validation CLI를 사용한다. source origin과 환경 변수 이름만 설정에 저장하고 secret 값·query credentials를 출력하지 않는다. 런타임 검사 JSON의 상세 계약은 검사 lane이 정의하며 설치기는 그 결과를 과장하지 않는다.
+현재 `status --json`은 자격 증명 없는 결과를 stdout에 쓰고 진단은 stderr에 쓴다. source origin과 환경 변수 이름만 설정에 저장하고 secret 값·query credentials를 출력하지 않는다.
+
+응답 검사 명령, `--dry-run`, 자동 diff와 runtime의 `status --host`는 미구현 설계이며 현재 명령으로 실행하지 않는다. 호스트별 `status --host`는 별도 에이전트 설치 도구의 옵션이다. 데이터 검사는 validation CLI를 사용하며 응답의 의미 판정과 구분한다.
 
 | Exit | CLI는 이 결과를 반환한다. |
 | --- | --- |
 | `0` | 작업을 마쳤거나 같은 내용이어서 변경할 것이 없다. |
-| `1` | 로컬 검사에서 설정한 차단 등급 항목을 찾았다. |
 | `2` | 인자·config·schema·UTF-8·경로 입력이 유효하지 않다. |
 | `3` | 네트워크·시간 제한·private endpoint 인증에 실패했고 정상본을 유지했다. |
 | `4` | 설치본·요청한 캐시·선택한 프로필을 찾지 못했다. |
@@ -158,7 +169,7 @@ uninstall은 상태·원본 backup·검증 캐시를 남겨 복구할 수 있게
 
 설계의 모든 항목이 첫 구현에 포함되었다고 주장하지 않는다. [검증 계획](verification.md)과 [구현 상태](implementation-status.md)는 실제 시험 증거와 남은 공백을 정한다.
 
-[과거 HTTPS 실행 검증](https-transport-verification.md)은 Python 3.11의 실제 TLS·서명 확인·시작 wrapper 갱신·오프라인 유지 결과와 환경별 한계를 기록한다. 당시 공개 배포와 예약 실행 등록을 수행하지 않은 기록이며 현재 공개 상태는 [0.3.0 발행·업그레이드 검증](public-0.3.0-verification.md)을 따른다.
+[과거 HTTPS 실행 검증](https-transport-verification.md)은 Python 3.11의 실제 TLS·서명 확인·시작 wrapper 갱신·오프라인 유지 결과와 환경별 한계를 기록한다. 당시 공개 배포와 예약 실행 등록을 수행하지 않은 기록이다. 이전 [0.3.0 발행·업그레이드 검증](public-0.3.0-verification.md)과 이번 [V7 발행 상태](../../experiments/v7/adoption.md)를 구분한다.
 
 ## 발행용 콘텐츠를 준비한다
 

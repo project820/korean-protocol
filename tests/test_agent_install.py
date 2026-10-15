@@ -180,7 +180,7 @@ class AgentInstallTests(unittest.TestCase):
                 self.assertTrue(value['changed'])
                 self.assertEqual('off', value['autoupdate'])
                 self.assertEqual('local-snapshot', value['trust'])
-                self.assertEqual('0.3.0', value['version'])
+                self.assertEqual('0.7.0', value['version'])
                 installed = target.read_bytes()
                 self.assertTrue(installed.startswith(original))
                 code, value = self.run_cli('install', host)
@@ -850,7 +850,7 @@ class AgentInstallTests(unittest.TestCase):
         metadata['files']['agent-install.py'] = self.agent.digest(helper.read_bytes())
         metadata_path.write_text(json.dumps(metadata))
         before = {str(path.relative_to(legacy)): path.read_bytes() for path in legacy.rglob('*') if path.is_file()}
-        code, value = self.run_cli('install', extras=self.signed_static())
+        code, value = self.run_cli('install', extras=self.signed_static('0.7.0'))
         self.assertEqual(0, code, value)
         self.assertNotEqual(str(helper), value['management_argv']['status'][2])
         self.assertEqual(before, {str(path.relative_to(legacy)): path.read_bytes() for path in legacy.rglob('*') if path.is_file()})

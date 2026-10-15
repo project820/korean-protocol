@@ -15,21 +15,47 @@ _spec.loader.exec_module(smoke)
 _base_spec = importlib.util.spec_from_file_location('base_smoke', Path(__file__).with_name('manual_https_smoke.py'))
 base = importlib.util.module_from_spec(_base_spec)
 _base_spec.loader.exec_module(base)
+_offline_spec = importlib.util.spec_from_file_location('offline_migration', Path(__file__).with_name('manual_offline_candidate_migration.py'))
+offline = importlib.util.module_from_spec(_offline_spec)
+with mock.patch.dict('sys.modules', {'manual_candidate_upgrade_smoke': smoke}):
+    _offline_spec.loader.exec_module(offline)
 
 
 class CandidateSmokeGuardTests(unittest.TestCase):
+    @unittest.skipUnless(shutil.which('ssh-keygen'), 'OpenSSH signing required')
+    def test_offline_legacy_signed_migration_preserves_candidate_controls_and_user_bytes(self):
+        repo = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as temporary:
+            baseline = Path(temporary)
+            for name, raw in k.content_files(repo).items():
+                if name.endswith('.json'):
+                    value = k.strict_json(raw)
+                    value['version'] = '0.3.0-draft'
+                    raw = k.json_bytes(value)
+                elif name == 'profiles/coding-agent.md':
+                    raw = b'Historical signed profile fixture.\n'
+                smoke.write_files(baseline, {name: raw})
+            report = offline.run_migration(repo, baseline)
+        self.assertEqual('pass', report['result'])
+        self.assertEqual('0.7.0', report['candidate_version'])
+        self.assertTrue(report['temporary_material_removed'])
+        for host in ('codex', 'claude-code'):
+            self.assertEqual('pass', report['hosts'][host]['result'])
+            self.assertTrue(report['hosts'][host]['all_seven_cached_files_match_source'])
+            self.assertTrue(report['hosts'][host]['cached_legacy_and_candidate_rollback_pass'])
+
     def test_actual_candidate_source_versions_agree(self):
         repo = Path(__file__).resolve().parents[1]
-        self.assertEqual('0.3.0-draft', smoke.source_version(k, k.content_files(repo), '0.3.0'))
+        self.assertEqual('0.7.0-draft', smoke.source_version(k, k.content_files(repo), '0.7.0'))
 
     def test_mismatched_versions_fail_before_signing_or_writes(self):
-        for versions in [('0.2.0', '0.3.0-draft'), ('0.2.0', '0.2.0')]:
+        for versions in [('0.2.0', '0.7.0-draft'), ('0.2.0', '0.2.0')]:
             with self.subTest(versions=versions), tempfile.TemporaryDirectory() as temporary:
                 root = Path(temporary).resolve()
                 files = {'specification/rules.json': k.json_bytes({'version': versions[0]}),
                          'lexicon/core.json': k.json_bytes({'version': versions[1]})}
                 with mock.patch.object(smoke.subprocess, 'run') as process, self.assertRaises(k.InputError):
-                    smoke.test_static(k, files, '0.3.0', 2, root / 'never-read-key', 'unused', root)
+                    smoke.test_static(k, files, '0.7.0', 2, root / 'never-read-key', 'unused', root)
                 process.assert_not_called()
                 self.assertEqual([], list(root.iterdir()))
 
@@ -63,10 +89,10 @@ class CandidateSmokeGuardTests(unittest.TestCase):
             public = Path(str(key) + '.pub')
             fingerprint = k.key_fingerprint(public)
             static = root / 'static'
-            manifest = smoke.test_static(k, original, '0.3.0', 2, key, fingerprint, static)
+            manifest = smoke.test_static(k, original, '0.7.0', 2, key, fingerprint, static)
             checked, payload = base.load_signed_static(k, static, public, fingerprint)
             self.assertEqual(manifest, checked)
-            self.assertEqual(original, {name: payload['releases/0.3.0/' + name] for name in k.CONTENT_PATHS})
+            self.assertEqual(original, {name: payload['releases/0.7.0/' + name] for name in k.CONTENT_PATHS})
             self.assertEqual(original, k.content_files(repo))
             self.assertNotEqual(k.key_fingerprint(repo / 'distribution/trust/publisher.pub'), fingerprint)
 

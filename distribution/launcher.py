@@ -6,7 +6,7 @@ import sys
 import types
 
 
-PREVIEW_VERSION = '0.3.0'
+PREVIEW_VERSION = '0.7.0'
 HOST_NAMES = {'codex': 'Codex', 'claude-code': 'Claude Code'}
 
 

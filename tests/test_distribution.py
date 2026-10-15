@@ -93,6 +93,8 @@ class DistributionTests(unittest.TestCase):
         self.assertEqual('korean-protocol-' + version, PREFIX)
         self.assertEqual(version.removesuffix('-draft'), VERSION)
         self.assertEqual(VERSION, PREVIEW_VERSION)
+        workflow = (repo/'.github/workflows/release.yml').read_text()
+        self.assertIn("default: '" + VERSION + "'", workflow)
         guide = (repo/'distribution/START-HERE.md').read_text()
         self.assertIn(PREFIX, guide)
         self.assertIn('--version ' + VERSION, guide)
@@ -102,6 +104,7 @@ class DistributionTests(unittest.TestCase):
         with zipfile.ZipFile(self.output) as archive:
             name = next(n for n in archive.namelist() if n.endswith('/KOREAN-PROTOCOL.md'))
             content = archive.read(name)
+            self.assertIn((PREFIX.removeprefix('korean-protocol-') + ' 연구·개발 초안').encode(), content)
             for source in ('pack/protocol.md','lexicon/core.json','lexicon/domains/software.json'):
                 self.assertIn((self.root/source).read_bytes(),content)
 

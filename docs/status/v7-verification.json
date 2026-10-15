@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-15",
+  "content_version": "0.7.0",
+  "engine_version": "0.2.0",
+  "source_rules_sha256": "92dce058cc61f2617ec3c1f72e032ffb991aaa94a820e44c45044fb94156af89",
+  "coding_profile_sha256": "12874bdd7177571d48423b59f20fc880a4b0e34cbcfa6cfa61cc9f15cb7abab9",
+  "coding_profile_bytes": 30137,
+  "integrated_tests": {
+    "command": "python3 -B -m unittest discover -s tests -p 'test_*.py'",
+    "count": 376,
+    "failed": 0
+  },
+  "language_policy_review": {
+    "rules": 72,
+    "publication_records": 34,
+    "original_findings_repaired": 28,
+    "additional_qualifiers_repaired": 4,
+    "unresolved_new_semantic_findings": 0
+  },
+  "private_report_smoke": {
+    "documents": 1,
+    "calls": 1,
+    "source_characters": 7970,
+    "output_characters": 8499,
+    "generator": "anthropic/claude-opus-5-5",
+    "effort": "medium",
+    "semantic_verdict": "preserved",
+    "structural_verdict": "partially_satisfied",
+    "independent_reviewer": "gpt-6.1-sol",
+    "reviewer_effort": "high",
+    "model_and_profile_labels_withheld": true,
+    "raw_source_and_output_published": false,
+    "reader_trial": false
+  },
+  "security_review": {
+    "independent_focused_tests": 224,
+    "open_findings": 0,
+    "limitations": [
+      "Source and disposable tests, not a penetration test of GitHub infrastructure."
+    ]
+  },
+  "publication": "pending_actual_signed_release"
+}

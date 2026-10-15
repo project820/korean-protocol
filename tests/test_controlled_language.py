@@ -111,12 +111,16 @@ class ControlledLanguageTests(unittest.TestCase):
             compile_profiles(ROOT, folder)
             for name in ('coding-agent', 'chat', 'work-document'):
                 path = Path(folder) / 'profiles' / (name + '.md')
-                self.assertLessEqual(path.stat().st_size, 28 * 1024)
+                self.assertLessEqual(path.stat().st_size, 30 * 1024)
                 text = path.read_text()
                 for rule in self.rules:
-                    self.assertIn(rule['id'] + ' ' + rule['requirement'], text)
-                    for sentence in rule['conditions'] + rule['exceptions']:
-                        self.assertIn(sentence, text)
+                    publication = rule.get('publication')
+                    if publication:
+                        self.assertIn(rule['id'] + ' ' + publication['text'], text)
+                    else:
+                        self.assertIn(rule['id'] + ' ' + rule['requirement'], text)
+                        for sentence in rule['conditions'] + rule['exceptions']:
+                            self.assertIn(sentence, text)
 
     def test_compiled_profiles_state_request_scoped_output_contract(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -128,7 +132,7 @@ class ControlledLanguageTests(unittest.TestCase):
                 self.assertIn('미기록을 부재·미배정으로 바꾸지 않는다', text)
         rules = {rule['id']: rule for rule in self.rules}
         self.assertIn('이미 밝힌 범위·양태', rules['KP-DESC-005']['requirement'])
-        self.assertIn('번호 순서로 드러난 선행 조건', rules['KP-DESC-005']['requirement'])
+        self.assertIn('번호 순서의 선행 조건', rules['KP-DESC-005']['requirement'])
         self.assertIn('실제 모호성', rules['KP-DESC-005']['exceptions'][0])
         self.assertIn('동시 유지·전역 조건', rules['KP-DESC-005']['exceptions'][0])
         self.assertIn('누가 맡았는지 묻고', rules['KP-EDIT-002']['requirement'])

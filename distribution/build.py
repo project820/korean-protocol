@@ -7,7 +7,7 @@ import stat
 import zipfile
 
 
-PREFIX = 'korean-protocol-0.3.0-draft'
+PREFIX = 'korean-protocol-0.7.0-draft'
 INPUTS = (
     'LICENSE', 'NOTICE.md',
     'runtime/__init__.py', 'runtime/kproto.py',
@@ -50,7 +50,7 @@ def build(root, output):
             raise FileNotFoundError('Missing distribution input: '+name)
         destination = ALIASES.get(name,name)
         files[destination] = path.read_bytes()
-    chat = ['# Korean Protocol — 규칙과 사전\n\n이 파일은 0.3.0-draft 연구·개발 초안의 전체 규약 본문과 사전 원본을 함께 제공한다. '
+    chat = ['# Korean Protocol — 규칙과 사전\n\n이 파일은 0.7.0-draft 연구·개발 초안의 전체 규약 본문과 사전 원본을 함께 제공한다. '
             '첨부만으로 모델의 준수나 전체 사전 읽기를 보장하지 않는다.\n']
     for name in ('pack/protocol.md','lexicon/core.json','lexicon/domains/software.json'):
         chat.append('\n## 원본: '+name+'\n\nSHA-256: '+hashlib.sha256(files[name]).hexdigest()+'\n\n')

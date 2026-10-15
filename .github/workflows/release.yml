@@ -6,7 +6,7 @@ on:
       version:
         description: Numeric content version matching the checked-in source
         required: true
-        default: '0.2.0'
+        default: '0.7.0'
         type: string
       first_release:
         description: Explicit first release (rejected once publication history exists)
