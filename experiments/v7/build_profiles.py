@@ -46,7 +46,8 @@ def main():
     errors = verify()
     if errors:
         parser.exit(1, '\n'.join(errors) + '\n')
-    print('Verified 5 frozen files and 2 exact profile compositions.')
+    manifest = json.loads((HERE / 'manifest.json').read_text(encoding='utf-8'))
+    print(f"Verified {len(manifest['files'])} frozen files and {len(manifest['compositions'])} exact profile compositions.")
 
 
 if __name__ == '__main__':

@@ -22,6 +22,14 @@
     "profile-v7-r2.md": {
       "bytes": 37348,
       "sha256": "58413651917d5a335f7c900acc54a65d856aedc07c16448e1691ff28daf29cd1"
+    },
+    "profile-v7-r3.md": {
+      "bytes": 34380,
+      "sha256": "cf91212d490b3d8b86f9963d4ede820d651eade51bad254d516073a9e7cfe781"
+    },
+    "r3-supplement.md": {
+      "bytes": 5711,
+      "sha256": "8141486584aea86560392562f54d04f42a6e124f21353ee6d178424c76783cc5"
     }
   },
   "compositions": {
@@ -32,6 +40,10 @@
     "profile-v7-r2.md": [
       "parent-v6-profile.md",
       "r2-supplement.md"
+    ],
+    "profile-v7-r3.md": [
+      "parent-v6-profile.md",
+      "r3-supplement.md"
     ]
   },
   "snapshot_scope": "Exact frozen profiles and their byte-preserving components; no production compiler output or evaluation corpus is included."

@@ -19,11 +19,11 @@ class SnapshotTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / 'v7'
             shutil.copytree(HERE, root)
-            with (root / 'r2-supplement.md').open('ab') as output:
+            with (root / 'r3-supplement.md').open('ab') as output:
                 output.write(b'changed')
             errors = snapshot.verify(root)
-            self.assertIn('r2-supplement.md: frozen bytes differ', errors)
-            self.assertIn('profile-v7-r2.md: component order or content differs', errors)
+            self.assertIn('r3-supplement.md: frozen bytes differ', errors)
+            self.assertIn('profile-v7-r3.md: component order or content differs', errors)
 
     def test_missing_parent_is_detected(self):
         with tempfile.TemporaryDirectory() as temporary:

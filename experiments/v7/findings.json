@@ -41,5 +41,67 @@
     },
     "source_and_outputs_published": false
   },
-  "evidence_scope": "Locally recorded model-review aggregates; raw responses, review packets and source corpus are not published in this snapshot. These aggregates cannot be independently audited from this package. Reused development documents are not a holdout or reader trial."
+  "evidence_scope": "Locally recorded model-review aggregates; raw responses, review packets and source corpus are not published in this snapshot. These aggregates cannot be independently audited from this package. Reused development documents are not a holdout or reader trial.",
+  "compact_long_document_diagnostic": {
+    "version": "v7-r3",
+    "source_characters_including_whitespace_and_markdown": 7970,
+    "documents": 1,
+    "outputs": 4,
+    "generation_repetitions_per_condition_and_model": 1,
+    "captured_http_successes_with_verified_model_identity": 4,
+    "semantic": {
+      "changed": 1,
+      "preserved": 3
+    },
+    "structural": {
+      "partially_satisfied": 3,
+      "satisfied": 1
+    },
+    "results": [
+      {
+        "condition": "v7-r3",
+        "model": "luna",
+        "output_characters": 8704,
+        "length_delta": 734,
+        "semantic": "changed",
+        "structural": "partially_satisfied"
+      },
+      {
+        "condition": "v7-r3",
+        "model": "opus",
+        "output_characters": 7319,
+        "length_delta": -651,
+        "semantic": "preserved",
+        "structural": "satisfied"
+      },
+      {
+        "condition": "ste",
+        "model": "luna",
+        "output_characters": 8950,
+        "length_delta": 980,
+        "semantic": "preserved",
+        "structural": "partially_satisfied"
+      },
+      {
+        "condition": "ste",
+        "model": "opus",
+        "output_characters": 9413,
+        "length_delta": 1443,
+        "semantic": "preserved",
+        "structural": "partially_satisfied"
+      }
+    ],
+    "previous_v7_r2_output_characters": {
+      "luna": 8893,
+      "opus": 8657
+    },
+    "review_visibility": "Cross-model full source/output review; generation model and profile identities withheld.",
+    "local_review_summary_sha256": "da52c22d891705690dc5781ab5fe28157aebcc99fa37ddebc56f5979f001873f",
+    "source_and_outputs_published": false,
+    "limitations": [
+      "Single repeated development case; no generalization or reader-benefit claim.",
+      "Candidate and comparator profiles differ; this is not a comparison of new models.",
+      "No blanket execution-harness or preservation-guard pass is claimed."
+    ]
+  }
 }
