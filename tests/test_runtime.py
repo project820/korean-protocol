@@ -485,7 +485,8 @@ class RuntimeTests(unittest.TestCase):
     def test_generated_launchd_job_has_fixed_local_command_and_no_secrets(self):
         self.install()
         output = self.root/'schedule.plist'
-        config=self.controller.configure(mode='scheduled',source='https://example.test',token_env='KPROTO_TEST_TOKEN',emit=output)
+        with mock.patch.object(self.k.sys, 'platform', 'darwin'):
+            config=self.controller.configure(mode='scheduled',source='https://example.test',token_env='KPROTO_TEST_TOKEN',emit=output)
         job=plistlib.loads(output.read_bytes())
         self.assertTrue(job['RunAtLoad'])
         self.assertEqual(86400,job['StartInterval'])
@@ -499,12 +500,25 @@ class RuntimeTests(unittest.TestCase):
 
     def test_modified_launchd_output_is_preserved_when_disabled(self):
         output=self.root/'schedule.plist'
-        self.controller.configure(mode='scheduled',emit=output)
+        with mock.patch.object(self.k.sys, 'platform', 'darwin'):
+            self.controller.configure(mode='scheduled',emit=output)
         output.write_bytes(output.read_bytes()+b'\n<!-- user -->')
         before=output.read_bytes()
         with self.assertRaises(self.k.ConflictError):
             self.controller.configure(mode='off')
         self.assertEqual(before,output.read_bytes())
+
+    def test_linux_rejects_scheduled_generation_without_changing_installation(self):
+        self.install()
+        self.controller.configure(mode='off', source='https://example.test')
+        output=self.root/'schedule.plist'
+        paths=(self.controller.config_path, self.controller.state_path, self.target)
+        before={path:path.read_bytes() for path in paths}
+        with mock.patch.object(self.k.sys, 'platform', 'linux'):
+            with self.assertRaisesRegex(self.k.CompatibilityError, 'macOS only'):
+                self.controller.configure(mode='scheduled',emit=output)
+        self.assertFalse(output.exists())
+        self.assertEqual(before,{path:path.read_bytes() for path in paths})
 
     def test_cli_does_not_charge_global_against_codex_project_budget(self):
         home=self.root/'codex-home'
