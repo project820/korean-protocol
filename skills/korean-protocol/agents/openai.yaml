@@ -1,0 +1,6 @@
+interface:
+  display_name: "Korean Protocol"
+  short_description: "의미와 조건을 보존하며 한국어 보고서의 판단·대상·기한을 정리한다"
+  default_prompt: "$korean-protocol 이 보고서를 의미와 조건을 유지하면서 정리해줘."
+policy:
+  allow_implicit_invocation: false
