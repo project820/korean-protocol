@@ -174,6 +174,89 @@ class FieldReportTests(unittest.TestCase):
             (self.study / 'token-budget.json').write_bytes(original)
         self.prepare()
 
+    def set_measured_budget(self, count, ceiling=6000):
+        self.budget['ceiling'] = ceiling
+        self.budget['counters'] = {'synthetic': count}
+        raw = terminal(text='confirmed', usage={'input_tokens': count, 'output_tokens': 1})
+        (self.study / 'token-probe/response.raw').write_bytes(raw)
+        self.budget['model_probe']['response_sha256'] = self.runner.sha(raw)
+        (self.study / 'token-budget.json').write_text(json.dumps(self.budget))
+
+    def test_default_core_ceiling_rejects_counters_and_probe_over_6000(self):
+        self.set_measured_budget(6001)
+        with self.assertRaisesRegex(ValueError, '6000'):
+            self.prepare()
+        self.budget['counters'] = {'synthetic': 100}
+        (self.study / 'token-budget.json').write_text(json.dumps(self.budget))
+        with self.assertRaisesRegex(ValueError, '6000'):
+            self.prepare()
+
+    def test_explicit_unbounded_policy_retains_measured_counts_over_6000(self):
+        self.set_measured_budget(8001, ceiling=None)
+        with self.assertRaisesRegex(ValueError, 'ceiling mismatch'):
+            self.prepare()
+        plan = self.runner.prepare(self.study, self.candidate, 'test-model', 'high',
+                                   core_token_ceiling=None)
+        self.assertIsNone(plan['core_token_ceiling'])
+        self.assertEqual({'mode': 'measured-only', 'ceiling': None}, plan['core_token_policy'])
+        self.assertEqual(8001, plan['token_budget']['counters']['synthetic'])
+        self.assertEqual(8001, plan['token_budget']['probe_usage']['input_tokens'])
+        self.runner.verify(self.study, require_complete=False)
+
+    def test_prepare_cli_explicit_none_freezes_unbounded_policy(self):
+        self.set_measured_budget(8001, ceiling=None)
+        args = [str(RUNNER), 'prepare', '--study-dir', str(self.study),
+                '--candidate', str(self.candidate), '--model', 'test-model', '--effort', 'high',
+                '--core-token-ceiling', 'none']
+        with patch.object(self.runner.sys, 'argv', args):
+            self.runner.main()
+        plan = self.runner.verify(self.study, require_complete=False)
+        self.assertIsNone(plan['core_token_ceiling'])
+        self.assertEqual('measured-only', plan['core_token_policy']['mode'])
+        self.assertFalse((self.study / 'run').exists())
+        args = [str(RUNNER), 'verify', '--study-dir', str(self.study), '--core-token-ceiling', 'none']
+        with patch.object(self.runner.sys, 'argv', args), self.assertRaises(SystemExit) as error:
+            self.runner.main()
+        self.assertEqual(2, error.exception.code)
+
+    def test_unbounded_budget_still_requires_measured_counters_and_probe(self):
+        self.set_measured_budget(8001, ceiling=None)
+        for missing in ('counters', 'source_tokens', 'model_probe'):
+            original = (self.study / 'token-budget.json').read_bytes()
+            budget = json.loads(original)
+            budget.pop(missing)
+            (self.study / 'token-budget.json').write_text(json.dumps(budget))
+            with self.subTest(missing=missing), self.assertRaises((ValueError, KeyError)):
+                self.runner.prepare(self.study, self.candidate, 'test-model', 'high',
+                                    core_token_ceiling=None)
+            (self.study / 'token-budget.json').write_bytes(original)
+
+    def test_frozen_core_policy_tampering_fails_verification(self):
+        self.set_measured_budget(8001, ceiling=None)
+        plan = self.runner.prepare(self.study, self.candidate, 'test-model', 'high',
+                                   core_token_ceiling=None)
+        plan['core_token_ceiling'] = 6000
+        (self.study / 'plan.json').write_text(json.dumps(plan))
+        with self.assertRaisesRegex(ValueError, 'Frozen plan drift'):
+            self.runner.verify(self.study, require_complete=False)
+        (self.study / 'freeze.json').write_text(json.dumps({
+            'plan_sha256': self.runner.sha((self.study / 'plan.json').read_bytes())}))
+        with self.assertRaisesRegex(ValueError, 'policy'):
+            self.runner.verify(self.study, require_complete=False)
+
+    def test_legacy_bounded_policy_remains_strict_without_new_policy_field(self):
+        plan = self.prepare()
+        plan.pop('core_token_policy')
+        self.set_measured_budget(6001)
+        raw = (self.study / 'token-budget.json').read_bytes()
+        (self.study / 'inputs/token-budget.json').write_bytes(raw)
+        plan['input_sha256']['token-budget.json'] = self.runner.sha(raw)
+        (self.study / 'plan.json').write_text(json.dumps(plan))
+        (self.study / 'freeze.json').write_text(json.dumps({
+            'plan_sha256': self.runner.sha((self.study / 'plan.json').read_bytes())}))
+        with self.assertRaisesRegex(ValueError, '6000'):
+            self.runner.verify(self.study, require_complete=False)
+
     def test_probe_rejects_contradictory_returned_effort(self):
         raw = terminal(reasoning={'effort': 'low'}, usage={'input_tokens': 100, 'output_tokens': 1})
         (self.study / 'token-probe/response.raw').write_bytes(raw)

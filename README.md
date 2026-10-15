@@ -4,7 +4,7 @@
 
 Korean Protocol(KP)은 **LLM의 한국어 답변 작성 규약**이다. 정식 배포본 **0.7.0**은 Codex·Claude Code가 읽는 **상시 사용자 지침에 설치**한다. 아래의 설치·ON/OFF 안내는 이 정식 배포본에 적용한다.
 
-별도로 **필요한 작성 작업에서 명시적으로 호출하는 실험 스킬**을 제공한다. [프로젝트 설치와 호출 안내](docs/distribution/on-demand-skill.md)에 따라 수동으로 설치하고 `$korean-protocol`로 요청한다. 실험 스킬은 정식 0.7 설치·자동 갱신을 대체하지 않는다. 긴 실전 보고서는 아직 의미·구조 기준을 모두 통과하지 못했으며, 설치 파일·실제 로딩·출력 품질은 각각 확인해야 한다.
+별도로 **필요한 작성 작업에서 명시적으로 호출하는 실험 스킬**을 제공한다. [프로젝트 설치와 호출 안내](docs/distribution/on-demand-skill.md)에 따라 수동으로 설치하고 `$korean-protocol`로 요청한다. 보완 후보는 실전 보고서 2건·기존 예문 6건·추가 사례 8건의 의미·구조 검사를 통과했다. 임시 Codex 프로젝트의 전체 파일 읽기와 별도 출력 1건도 확인했다. [검증 범위와 한계](evaluation/field-report-20261015/README.md#보완-후보의-검증-범위를-밝힌다)를 구분하며, 정식 0.7 설치·자동 갱신은 이 실험 스킬로 교체하지 않았다.
 
 [처음 사용하기](docs/distribution/quick-start.md) · [설치하기](INSTALL.md) · [세 열 예문 비교](#문장과-구조를-함께-다듬는다) · [ON/OFF 설정](docs/distribution/application-controls.md)
 

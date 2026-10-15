@@ -5,12 +5,14 @@ Before prepare, place source.md, criteria.json, claim-ledger.json and
 token-budget.json in --study-dir. Only repository output/<private-directory>
 or an external system temporary directory is accepted. Nothing is published.
 
-Token-budget schema: profile_sha256, ceiling=6000, counters={name: count},
+Token-budget schema: profile_sha256, ceiling=6000 (or explicit null), counters={name: count},
 source_tokens={name: count}, model_probe={profile_sha256, model_requested,
 effort, request_file, response_file, request_sha256, response_sha256}.
 Counters measure core_prompt(candidate_text); source_tokens are separate.
 The probe files must contain probe_request(...) and its actual SSE response.
-All local core counts and actual minimal probe input_tokens must be <=6000.
+By default all local core counts and actual minimal probe input_tokens must be <=6000.
+Prepare --core-token-ceiling none freezes a measured-only policy with no ceiling;
+local counters, source counts and actual probe usage remain required.
 Full report request usage is measured without applying this core-only limit.
 """
 import argparse
@@ -134,15 +136,24 @@ def local_file(study, name):
     return path
 
 
-def validate_token_budget(study, candidate, model, effort):
+def core_token_policy(ceiling):
+    require(ceiling is None or type(ceiling) is int and ceiling == TOKEN_CEILING,
+            'Core token ceiling must be 6000 or explicit none')
+    return {'mode': 'measured-only' if ceiling is None else 'bounded', 'ceiling': ceiling}
+
+
+def validate_token_budget(study, candidate, model, effort, ceiling=TOKEN_CEILING):
+    core_token_policy(ceiling)
     budget = read_json(study / 'token-budget.json')
     profile_hash = sha(candidate)
-    require(budget.get('profile_sha256') == profile_hash and budget.get('ceiling') == TOKEN_CEILING,
+    require(budget.get('profile_sha256') == profile_hash and 'ceiling' in budget
+            and budget['ceiling'] == ceiling,
             'Token budget profile hash or ceiling mismatch')
     counters = budget.get('counters')
     require(isinstance(counters, dict) and bool(counters)
-            and all(type(n) is int and 0 <= n <= TOKEN_CEILING for n in counters.values()),
-            'Every local core token counter must pass 6000')
+            and all(type(n) is int and n >= 0 and (ceiling is None or n <= ceiling)
+                    for n in counters.values()),
+            'Every local core token counter must be measured and pass ' + str(ceiling))
     source_counts = budget.get('source_tokens')
     require(isinstance(source_counts, dict) and bool(source_counts)
             and all(type(n) is int and n >= 0 for n in source_counts.values()),
@@ -158,8 +169,8 @@ def validate_token_budget(study, candidate, model, effort):
             and sha(raw) == probe.get('response_sha256'), 'Actual token probe request/response mismatch')
     response, final = extract_strict(raw, model, effort)
     count = (response.get('usage') or {}).get('input_tokens')
-    require(type(count) is int and 0 <= count <= TOKEN_CEILING,
-            'Actual minimal core token probe exceeds 6000 or has no usage')
+    require(type(count) is int and count >= 0 and (ceiling is None or count <= ceiling),
+            'Actual minimal core token probe exceeds ' + str(ceiling) + ' or has no usage')
     return {'counters': counters, 'source_tokens': source_counts,
             'probe_effort_identity': effort_identity(response, effort),
             'probe_output': final, 'probe_usage': response['usage'],
@@ -177,7 +188,7 @@ def request_for(study, arm, model, effort):
     return encoded(body(core_prompt(profile) + '\n\n원문\n' + source, model, effort))
 
 
-def prepare(study, candidate, model, effort):
+def prepare(study, candidate, model, effort, core_token_ceiling=TOKEN_CEILING):
     study = validate_study_dir(study)
     candidate = candidate.resolve()
     require(bool(model.strip()) and bool(effort.strip()), 'Specify exact model and effort')
@@ -194,7 +205,8 @@ def prepare(study, candidate, model, effort):
     require(bool(materials['source.md'].decode('utf-8').strip()), 'Empty report source')
     for name in ('criteria.json', 'claim-ledger.json'):
         require(isinstance(json.loads(materials[name]), (dict, list)), 'Invalid ' + name)
-    budget = validate_token_budget(study, candidate_bytes, model, effort)
+    policy = core_token_policy(core_token_ceiling)
+    budget = validate_token_budget(study, candidate_bytes, model, effort, core_token_ceiling)
     study.chmod(0o700)
     (study / 'inputs').mkdir(mode=0o700)
     (study / 'requests').mkdir(mode=0o700)
@@ -213,7 +225,7 @@ def prepare(study, candidate, model, effort):
             'task': TASK, 'planned_calls': 4, 'repeats_per_arm': 2, 'conditions': list(ARMS),
             'source_model': 'unknown; historical user-supplied output',
             'input_sha256': {path.name: sha(path.read_bytes()) for path in (study / 'inputs').iterdir()},
-            'token_budget': budget, 'core_token_ceiling': TOKEN_CEILING,
+            'token_budget': budget, 'core_token_ceiling': core_token_ceiling, 'core_token_policy': policy,
             'requests': requests, 'max_concurrency': 2, 'timeout_seconds': 600, 'retry_count': 0,
             'isolation': 'One user message, entire profile, identical neutral task and original source; no tools, prior answers/history, hidden references, criteria or claim ledger.',
             'scope': 'Controlled instruction-text comparison; installed skill loading and upstream model identity are not independently attested.',
@@ -245,8 +257,14 @@ def verify(study, require_complete=True, archived_runner=None, for_dispatch=Fals
         require(sha((study / 'inputs' / name).read_bytes()) == expected, 'Frozen input drift: ' + name)
         if name not in ('baseline.md', 'candidate.md'):
             require(sha((study / name).read_bytes()) == expected, 'Study input drift: ' + name)
+    ceiling = plan.get('core_token_ceiling', TOKEN_CEILING)
+    policy = core_token_policy(ceiling)
+    if 'core_token_policy' in plan:
+        require(plan['core_token_policy'] == policy, 'Frozen core token policy mismatch')
+    else:
+        require(ceiling == TOKEN_CEILING, 'Legacy core token policy must retain 6000')
     budget = validate_token_budget(study, (study / 'inputs/candidate.md').read_bytes(),
-                                   plan['model_requested'], plan['effort'])
+                                   plan['model_requested'], plan['effort'], ceiling)
     if archived_runner is not None and 'probe_effort_identity' not in plan['token_budget']:
         budget.pop('probe_effort_identity')
     require(budget == plan['token_budget'], 'Token probe evidence drift')
@@ -436,14 +454,19 @@ def main():
     parser.add_argument('--candidate', type=Path)
     parser.add_argument('--model')
     parser.add_argument('--effort')
+    parser.add_argument('--core-token-ceiling', choices=('6000', 'none'),
+                        help='Prepare-only core ceiling; default 6000, explicit none measures without a cap')
     parser.add_argument('--archived-runner', type=Path, help='Verify-only retained runner bytes; never executed')
     args = parser.parse_args()
+    if args.core_token_ceiling is not None and args.action != 'prepare':
+        parser.error('--core-token-ceiling is accepted only for prepare; verify uses the frozen policy')
     if args.archived_runner is not None and args.action != 'verify':
         parser.error('--archived-runner is accepted only for verify')
     if args.action == 'prepare':
         if not all((args.candidate, args.model, args.effort)):
             parser.error('prepare requires --candidate, --model and --effort')
-        prepare(args.study_dir, args.candidate, args.model, args.effort)
+        ceiling = None if args.core_token_ceiling == 'none' else TOKEN_CEILING
+        prepare(args.study_dir, args.candidate, args.model, args.effort, core_token_ceiling=ceiling)
         print('Frozen four private requests; no generation calls made.')
     else:
         plan = verify(args.study_dir, require_complete=False, archived_runner=args.archived_runner,
