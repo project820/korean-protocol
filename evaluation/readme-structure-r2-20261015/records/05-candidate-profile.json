@@ -1,0 +1,39 @@
+{
+  "id": "05-candidate-profile",
+  "source_id": "05",
+  "condition": "candidate-profile",
+  "started_at": "2026-10-15T06:51:19.573951+00:00",
+  "requested_model": "anthropic/claude-opus-5-5",
+  "effort": "medium",
+  "source_sha256": "3854cd180ae6469cf8c340f3e0a8f4adbfbdefb408060891ba7616e5e59c2144",
+  "retry_count": 0,
+  "tools": [],
+  "previous_response_id_sent": false,
+  "request_sha256": "23cb8e96d7d83eb7c023c6c29d9ed5f21274e881a12c4ea4d28bee9504cde79d",
+  "http_status": 200,
+  "returned_model": "anthropic/claude-opus-5-5",
+  "response_id": "resp_8e5b69b845104f2297852a378d0a123a",
+  "response_status": "completed",
+  "usage": {
+    "input_tokens": 5802,
+    "output_tokens": 383,
+    "total_tokens": 6185,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 5798
+    },
+    "output_tokens_details": {
+      "reasoning_tokens": 295
+    }
+  },
+  "status": "completed",
+  "output_sha256": "5658c902eb68dc6941d100498679d5d3d8281b4ca361bc837825e6efbc716693",
+  "characters": 87,
+  "fallback_observation": "Response metadata names the requested model; upstream identity is not independently attested.",
+  "token_budget_ceiling": 6000,
+  "token_budget_pass": true,
+  "token_budget_basis": "Returned usage.input_tokens for the complete request; missing usage fails the gate. Raw text remains unchanged.",
+  "response_sha256": "2bdf2fec924fdbf2012a0eae4f0834b069e7cb1a90c335f52f2aa28ade4d0c8d",
+  "elapsed_seconds": 6.446,
+  "finished_at": "2026-10-15T06:51:26.020175+00:00"
+}

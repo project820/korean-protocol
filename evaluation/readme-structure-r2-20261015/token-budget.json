@@ -1,0 +1,32 @@
+{
+  "profile_sha256": "339b95abf9afce14298f326dc710fdf8816534844d6f4200b6faff90aa835023",
+  "ceiling": 6000,
+  "counters": {
+    "o200k_base": 3255,
+    "cl100k_base": 5042
+  },
+  "model_probe": {
+    "model_requested": "anthropic/claude-opus-5-5",
+    "returned_model": "anthropic/claude-opus-5-5",
+    "status": "completed",
+    "usage": {
+      "input_tokens": 5611,
+      "output_tokens": 4,
+      "total_tokens": 5615,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 5607
+      },
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "output": "확인",
+    "request_sha256": "009542b2b001746db1927f021ca4629607235a0e9a84f5ea376eb40d6e5e943d",
+    "response_sha256": "e694ac25b9d2d57887568212c362e7c8cb7c7086ce910886985ffedd3b588a18",
+    "basis": "Entire minimal request including profile and token-probe instruction."
+  },
+  "launcher_sha256": "395f432f0fdd38bef1dc5a50d30c4a68fc2421de276a89a324f5beb9a1f6a711",
+  "counter_limit": "Tokenizers differ; the six final candidate requests must also meet6000 reported input tokens.",
+  "passed": true
+}

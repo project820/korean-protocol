@@ -1,0 +1,30 @@
+{
+  "status": "unreleased compact structural candidate, supersedes the uncompressed proposal before generation",
+  "source_version": "0.7.0",
+  "scope": "Core response behavior is consolidated; rare vocabulary-registration detail remains available on demand. This is not a claim of word-for-word equivalence of all72 full rule statements.",
+  "parent_profile_sha256": "12874bdd7177571d48423b59f20fc880a4b0e34cbcfa6cfa61cc9f15cb7abab9",
+  "candidate_profile_sha256": "339b95abf9afce14298f326dc710fdf8816534844d6f4200b6faff90aa835023",
+  "changes": [
+    "Distinguish expression preservation from required structural rearrangement",
+    "Require numbering for a multi-stage real sequence; retain simultaneous and single-condition exceptions",
+    "Prioritize a source-established limit on final use/completion when rewriting reports",
+    "Separate meaning and structure gates",
+    "Consolidate repeated wording and keep detailed dictionary-registration lookup out of ordinary prompts"
+  ],
+  "static_review_repairs": [
+    "Restored mandatory sequential numbering",
+    "Restored note-to-body relocation of mandatory specifications and limits",
+    "Restored single-condition/single-action sentence exception in the procedure section",
+    "Preserved unfamiliar abbreviation and same-term same-meaning boundaries"
+  ],
+  "author": "Opus5.5 medium proposal with root editing; Solhigh independent static review",
+  "bytes": 12714,
+  "characters": 5462,
+  "local_token_counters": {
+    "o200k_base": 3255,
+    "cl100k_base": 5042
+  },
+  "round": 2,
+  "parent_candidate_sha256": "5bd6db51624557cb823a540eebf96be23837730ca81cb60dceb94fce3f9894a5",
+  "revision_reason": "Round1 case03 failed the frozen common-condition-scope gate. Require source-confirmed common scope, otherwise put each condition inside its own numbered stage; preserve all round1 raw outputs."
+}

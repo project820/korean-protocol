@@ -1,0 +1,133 @@
+{
+  "record_kind": "Parent consolidation of independent blinded reviewer response; not verbatim transcript",
+  "reviewer_requested_model": "gpt-6.1-sol",
+  "effort": "high",
+  "packet_sha256": "d671401293086b2ac7db86c7a1b52c78e039bae55fe03ab8abede519aacbf1f7",
+  "criteria_sha256": "6c06180e338996f559562d6e6cc30c856bc640bed086a71f25466c2f72a502c3",
+  "results": [
+    {
+      "blind_id": "01-A",
+      "source_id": "01",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "All return objects appear first as separate items; responsible team and deadline are preserved."
+    },
+    {
+      "blind_id": "01-B",
+      "source_id": "01",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Objects appear first; deadline and responsible team are independently identifiable."
+    },
+    {
+      "blind_id": "02-A",
+      "source_id": "02",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Separate method groups retain eligibility, actor/action and deadline; automatic check is explicitly common."
+    },
+    {
+      "blind_id": "02-B",
+      "source_id": "02",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Separate method groups retain eligibility, actor/action and deadline; common heading scopes automatic omission check to both."
+    },
+    {
+      "blind_id": "03-A",
+      "source_id": "03",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Numbered stages preserve cancellation trigger, automatic notice, receipt-based response obligation and nonresponse follow-up with local actors."
+    },
+    {
+      "blind_id": "03-B",
+      "source_id": "03",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "fail",
+      "overall": "fail",
+      "reason": "The sequential notification, response and nonresponse stages remain unnumbered. The nonresponding actor remains implicit, although meaning is contextually preserved."
+    },
+    {
+      "blind_id": "04-A",
+      "source_id": "04",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Separate default and exception branches show deadlines, actor and obligation; the exception explicitly replaces the four-hour deadline."
+    },
+    {
+      "blind_id": "04-B",
+      "source_id": "04",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Separate branches preserve deadlines and acknowledgment obligation; replacement of default is explicit."
+    },
+    {
+      "blind_id": "05-A",
+      "source_id": "05",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "First statement identifies semantic omissions; repair and deployment prohibition remain explicit; execution success is separate."
+    },
+    {
+      "blind_id": "05-B",
+      "source_id": "05",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "fail",
+      "overall": "fail",
+      "reason": "First substantive statement reports normal execution; the limiting semantic omission is second, contrary to the frozen structure gate."
+    },
+    {
+      "blind_id": "06-A",
+      "source_id": "06",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Two short sentences distinguish absent notation from unconfirmed designation without adding a procedure or absence claim."
+    },
+    {
+      "blind_id": "06-B",
+      "source_id": "06",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "The original two sentences preserve absent notation and unconfirmed designation as separate states."
+    }
+  ],
+  "nonblocking_observations": [
+    {
+      "blind_ids": [
+        "02-A",
+        "02-B"
+      ],
+      "observation": "The introductory method statement repeats the two headings; no frozen automatic failure threshold applies."
+    },
+    {
+      "blind_ids": [
+        "04-A"
+      ],
+      "observation": "The introductory acknowledgment obligation repeats in the branches; actor/action stays clear."
+    }
+  ],
+  "limits": "Reviewer read only blind packet and frozen criteria. Six known development cases; no human reading-performance or actual host-loading proof."
+}

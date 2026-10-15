@@ -1,0 +1,84 @@
+{
+  "purpose": "Freeze meaning AND structure criteria before candidate generation; do not accept meaning preservation alone.",
+  "status": "development criteria for six known public sources; not a blind holdout",
+  "meaning_gate": "Compare every source assertion to output and every output assertion to source. Preserve objects, actors/roles, condition/exception scope, time trigger and boundary, counts and units, automatic versus manual action, modality, negation, and uncertainty. Any changed or uncertain meaning blocks acceptance.",
+  "structure_gate": "A case passes only if meaning is preserved and all case-specific structural criteria pass. Different wording, honorifics, or valid heading/bullet choices are not independent failures. Raw outputs are never repaired.",
+  "cases": [
+    {
+      "id": "01",
+      "required_structure": [
+        "Return objects appear in the first substantive block as separate list items",
+        "Reception deadline is independently identifiable",
+        "Responsible team remains identifiable without repeating the list in prose"
+      ]
+    },
+    {
+      "id": "02",
+      "required_structure": [
+        "Portal and department collection are separate groups",
+        "Within each group eligibility, actor/action, and deadline are separate visible items or lines",
+        "Automatic mandatory-training omission check is visibly common to both methods, outside the last method's scope"
+      ],
+      "nonblocking_observations": [
+        "Record repeated introductory statements without inventing an automatic failure threshold"
+      ]
+    },
+    {
+      "id": "03",
+      "required_structure": [
+        "The triggering cancellation condition is visible before its automatic notification result",
+        "Notification, response obligation, and nonresponse follow-up are numbered stages in their real sequence",
+        "Receipt-based response deadline remains attached to its response stage",
+        "Each local condition/actor is explicit and no new common condition scope is invented"
+      ]
+    },
+    {
+      "id": "04",
+      "required_structure": [
+        "Default and outside-working-hours exception are separate visible branches",
+        "Each branch has its deadline on an independently identifiable line/item",
+        "The exception explicitly replaces rather than adds to the default deadline",
+        "The acknowledgment action and responsible actor remain connected to both deadlines"
+      ]
+    },
+    {
+      "id": "05",
+      "required_structure": [
+        "The first substantive statement identifies the deployment restriction or semantic omission that limits final use",
+        "Normal execution of all twelve transformations remains separately visible as execution-layer evidence",
+        "Repair duty and prohibition before re-review remain directly identifiable"
+      ],
+      "prohibited_inferences": [
+        "Do not invent an unconditional failure of all transformations",
+        "Do not infer automatic permission after re-review"
+      ]
+    },
+    {
+      "id": "06",
+      "required_structure": [
+        "Absent notation in the material and unconfirmed designation remain distinct",
+        "Do not invent a procedure, numbered workflow, extra action or explanatory paragraph for these two short status facts"
+      ],
+      "allowed": [
+        "Retain the original two sentences",
+        "Use two compact status lines if both scopes remain clear"
+      ]
+    }
+  ],
+  "rule_boundary_review": [
+    "Grammar/spelling-only requests retain the user's structure",
+    "One short condition with one action can remain one sentence",
+    "Independent alternatives/attributes use bullets rather than implied sequence",
+    "Simultaneous obligations must not become sequential steps",
+    "Unknown condition scope must not be resolved by inventing a heading",
+    "A negative fact is not automatically the most important result; the source must establish the limiting relationship",
+    "Missing notation and unknown designation do not establish nonexistence"
+  ],
+  "comparison_limits": [
+    "Old full-dictionary outputs are historical references only. New baseline-profile and candidate-profile arms each use one unchanged source and one profile per request; compare these two matched arms for this trial.",
+    "Profile-only baseline and candidate form a separate matched pair; do not attribute differences across input scopes solely to rule changes",
+    "Provider default instructions, routing internals and actual host loading are outside the text-input experiment",
+    "No human reading-time or rereading measurement is performed"
+  ],
+  "token_gate": "Always-loaded candidate profile must fit6000 tokens in recorded counters. All six complete candidate requests must also report usage.input_tokens <=6000; preserve output even if this gate fails."
+}

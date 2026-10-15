@@ -1,0 +1,36 @@
+{
+  "id": "06-baseline-profile",
+  "source_id": "06",
+  "condition": "baseline-profile",
+  "started_at": "2026-10-15T06:40:52.560645+00:00",
+  "requested_model": "anthropic/claude-opus-5-5",
+  "effort": "medium",
+  "source_sha256": "00d38c7dbff15b47fe73a7eb88b5faae851db959a6aa20fa8687ea78d5070224",
+  "retry_count": 0,
+  "tools": [],
+  "previous_response_id_sent": false,
+  "request_sha256": "538b414dfa71956fa37a9ea2fc4a20a5a4b04a8dab43e13b921a7611bacb7af4",
+  "http_status": 200,
+  "returned_model": "anthropic/claude-opus-5-5",
+  "response_id": "resp_d02e5d517ecd4e2483044c12b5047f9e",
+  "response_status": "completed",
+  "usage": {
+    "input_tokens": 13495,
+    "output_tokens": 200,
+    "total_tokens": 13695,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 13491
+    },
+    "output_tokens_details": {
+      "reasoning_tokens": 154
+    }
+  },
+  "status": "completed",
+  "output_sha256": "00d38c7dbff15b47fe73a7eb88b5faae851db959a6aa20fa8687ea78d5070224",
+  "characters": 44,
+  "fallback_observation": "Response metadata names the requested model; upstream identity is not independently attested.",
+  "response_sha256": "18e57e00315599c3134ead82cdb332a7e6c7d4843c0e2a8b324ea959f515c42c",
+  "elapsed_seconds": 5.453,
+  "finished_at": "2026-10-15T06:40:58.013258+00:00"
+}

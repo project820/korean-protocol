@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "public_freeze_passed": true,
+  "verified_at": "2026-10-15T06:51:05.102276+00:00",
+  "verified_slots": 12,
+  "candidate_token_ceiling": 6000,
+  "slots": [
+    {
+      "id": "01-baseline-profile",
+      "passed": true,
+      "request_sha256": "61dac2141bbec08af9d04dcb46b0aeff37cceb95f1d92ba2e8131aa950a79a2e",
+      "response_sha256": "f74c2740056443b08ee2e6c06b3b7e41cdaff3c2f03e083820af5e3c9f4c770a",
+      "output_sha256": "a4568565776fe2841d2a672ecbab3ee5c6caae6eb26c9d83ea4d84d0a83a1ca1",
+      "input_tokens": 13509
+    },
+    {
+      "id": "01-candidate-profile",
+      "passed": true,
+      "request_sha256": "626038aeab8e7b719b5daf630227ee96a03df3587cc80fcc6ac35332b2682478",
+      "response_sha256": "9ce861816ca38f0d4dd8cb338f247ec4d250e7d63cd9e814de3272a0ab9b4270",
+      "output_sha256": "e5b984ab0c156a69b75e8660eee53aca227f330ad3afe80ee26dd2334222d816",
+      "input_tokens": 5696,
+      "token_budget_pass": true
+    },
+    {
+      "id": "02-baseline-profile",
+      "passed": true,
+      "request_sha256": "b22e9fa09b891502c87ec735ce40b463d49e80b7069fe30764829263baa44bc9",
+      "response_sha256": "3aa4d75d8ab0093543039ddff946a486726121a5e7bd2a60328f37d98dfbd939",
+      "output_sha256": "2bb6edefeebe88bc20bce6491e91586bef556b63bf8f452a26e2dadb9f3babfc",
+      "input_tokens": 13627
+    },
+    {
+      "id": "02-candidate-profile",
+      "passed": true,
+      "request_sha256": "c1240e0b5982d4ecd148283276c168e443356e6cc4301e1decd4a54984a58c8b",
+      "response_sha256": "28f1486c32b43dd39aa7a2c6526382c9d670e9b230f874ea6f24a50c1239c14d",
+      "output_sha256": "1e26790fa47c29f0e1b016c7a00621a7f367c6b54f0aeb680a69522010d25c90",
+      "input_tokens": 5814,
+      "token_budget_pass": true
+    },
+    {
+      "id": "03-baseline-profile",
+      "passed": true,
+      "request_sha256": "441c030231fd35933f95c83123d9c4b4dcbd2424beee60259fddcb85661e8638",
+      "response_sha256": "3d01f2a6c63e6175904745755807012486f238595083b6850d4dcff023d4400a",
+      "output_sha256": "e8e4a921f68ece4fc562ad0e3e2df45d73b2666150e997923cdf793a5acfbf75",
+      "input_tokens": 13559
+    },
+    {
+      "id": "03-candidate-profile",
+      "passed": true,
+      "request_sha256": "ede58aec01553144ae8a0357cec4b3ddccae9d9372490c0472eec0b57393fc33",
+      "response_sha256": "ec25d08f9651d35ee80c46402c7e1728281051f8c76d2b7e2f14c22527d2d467",
+      "output_sha256": "904a1c075669212acb86bfe27710dc41027077e874a96ed912c517b1bf22f22f",
+      "input_tokens": 5746,
+      "token_budget_pass": true
+    },
+    {
+      "id": "04-baseline-profile",
+      "passed": true,
+      "request_sha256": "28826cb91b69c3f0966f0103a7a634f777c8acb1b41f06c500f6dd2c9d604b81",
+      "response_sha256": "78e9b539a725f74878296ecf3da3f00ad0bf5e50dfaa9a04ef543b0229ab50e1",
+      "output_sha256": "fda044af3d70c0d49a89feb19311d174c1698b11c02730b679abc4e41028c4b2",
+      "input_tokens": 13569
+    },
+    {
+      "id": "04-candidate-profile",
+      "passed": true,
+      "request_sha256": "84356572b214ae9fc9bae2b54f5329eb49f7c88489d32dfc0204f86412fbea6b",
+      "response_sha256": "f05e898bb37aebd74cb02749de2572994d4ef08494ebace6a2368e4c6ca21aec",
+      "output_sha256": "34e4a1914793ec9094f55199f650845a5be16a8c9c7e123ad4aed828d6c6bfd5",
+      "input_tokens": 5756,
+      "token_budget_pass": true
+    },
+    {
+      "id": "05-baseline-profile",
+      "passed": true,
+      "request_sha256": "3cef93bc26e376f0be2d40ef2b4f01e600644f4993214b2dd8f5aa09afb1c633",
+      "response_sha256": "cb2f8a8ed263797ec4cc80379844d9292b12029837e23c7cd1a405af3e024aa6",
+      "output_sha256": "98497b1c5e858bcd056dd780ff08991c632a05118036fcf74238eb95ca4f4c95",
+      "input_tokens": 13541
+    },
+    {
+      "id": "05-candidate-profile",
+      "passed": true,
+      "request_sha256": "9632c6a9bd6551e8ca303892afba35d7661438d9ba3456eeef872db7e10e1bd9",
+      "response_sha256": "6c05ac0abecf62d7d2eee4c37da6ef062326a055d861cf5c728e3c1bf1fc95d9",
+      "output_sha256": "d5394e307e28c0a9161b556de50f257231716a0ef1ec0bd427784a61909b34c3",
+      "input_tokens": 5728,
+      "token_budget_pass": true
+    },
+    {
+      "id": "06-baseline-profile",
+      "passed": true,
+      "request_sha256": "538b414dfa71956fa37a9ea2fc4a20a5a4b04a8dab43e13b921a7611bacb7af4",
+      "response_sha256": "18e57e00315599c3134ead82cdb332a7e6c7d4843c0e2a8b324ea959f515c42c",
+      "output_sha256": "00d38c7dbff15b47fe73a7eb88b5faae851db959a6aa20fa8687ea78d5070224",
+      "input_tokens": 13495
+    },
+    {
+      "id": "06-candidate-profile",
+      "passed": true,
+      "request_sha256": "cf87fb295022fad94c2da80d2bfafcf0b3aa9f240cad74e3e0abbb4f6ee61f1a",
+      "response_sha256": "410ce23b0120a8039dd08ed126bf402c8db1c9308b5cf1d564e188cc19b559ca",
+      "output_sha256": "00d38c7dbff15b47fe73a7eb88b5faae851db959a6aa20fa8687ea78d5070224",
+      "input_tokens": 5682,
+      "token_budget_pass": true
+    }
+  ],
+  "limits": "Wire metadata verifies the observed proxy exchange; upstream model identity and provider defaults are not independently attested.",
+  "scope": "Verification of retained local HTTP requests and terminal responses against public frozen inputs, usage and exact output hashes. Raw transport is not published."
+}

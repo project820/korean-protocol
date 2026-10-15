@@ -1,0 +1,52 @@
+{
+  "profile_sha256": "5bd6db51624557cb823a540eebf96be23837730ca81cb60dceb94fce3f9894a5",
+  "ceiling": 6000,
+  "counters": {
+    "o200k_base": 3218,
+    "cl100k_base": 4981
+  },
+  "model_probe": {
+    "model_requested": "anthropic/claude-opus-5-5",
+    "returned_model": "anthropic/claude-opus-5-5",
+    "status": "completed",
+    "usage": {
+      "input_tokens": 5537,
+      "output_tokens": 4,
+      "total_tokens": 5541,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 5533
+      },
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "output": "확인",
+    "request_sha256": "c860488242252383578bfb73536c0d02bb7eb0f7b4dd63cc22c1dc9e891c4df7",
+    "response_sha256": "0c00ca7d007df2be1fb191bf15c98829b702d43bd46e75a9804600b0a3c14678",
+    "basis": "Entire minimal request includes profile and token-probe instruction, hence an upper bound for profile contribution under this route."
+  },
+  "baseline_model_probe": {
+    "label": "baseline",
+    "profile_sha256": "12874bdd7177571d48423b59f20fc880a4b0e34cbcfa6cfa61cc9f15cb7abab9",
+    "model_requested": "anthropic/claude-opus-5-5",
+    "returned_model": "anthropic/claude-opus-5-5",
+    "status": "completed",
+    "usage": {
+      "input_tokens": 13350,
+      "output_tokens": 4,
+      "total_tokens": 13354,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 13346
+      },
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "output": "확인",
+    "note": "Whole minimal probe input including profile and probe instruction; not the six-source quality trial."
+  },
+  "counter_limit": "Tokenizers differ. Local o200k/cl100k counts and actual Opus5.5 probe are reported separately. All six final candidate requests must additionally meet6000 reported input tokens.",
+  "passed": true
+}

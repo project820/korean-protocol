@@ -1,0 +1,50 @@
+{
+  "01-A": {
+    "source_id": "01",
+    "condition": "candidate-profile"
+  },
+  "01-B": {
+    "source_id": "01",
+    "condition": "baseline-profile"
+  },
+  "02-A": {
+    "source_id": "02",
+    "condition": "candidate-profile"
+  },
+  "02-B": {
+    "source_id": "02",
+    "condition": "baseline-profile"
+  },
+  "03-A": {
+    "source_id": "03",
+    "condition": "candidate-profile"
+  },
+  "03-B": {
+    "source_id": "03",
+    "condition": "baseline-profile"
+  },
+  "04-A": {
+    "source_id": "04",
+    "condition": "candidate-profile"
+  },
+  "04-B": {
+    "source_id": "04",
+    "condition": "baseline-profile"
+  },
+  "05-A": {
+    "source_id": "05",
+    "condition": "candidate-profile"
+  },
+  "05-B": {
+    "source_id": "05",
+    "condition": "baseline-profile"
+  },
+  "06-A": {
+    "source_id": "06",
+    "condition": "candidate-profile"
+  },
+  "06-B": {
+    "source_id": "06",
+    "condition": "baseline-profile"
+  }
+}

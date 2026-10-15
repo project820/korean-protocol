@@ -6,6 +6,8 @@ Korean Protocol(KP)은 **LLM의 한국어 답변 작성 규약**이다. 현재 �
 
 [처음 사용하기](docs/distribution/quick-start.md) · [설치하기](INSTALL.md) · [세 열 예문 비교](#문장과-구조를-함께-다듬는다) · [ON/OFF 설정](docs/distribution/application-controls.md)
 
+[6,000토큰 이내 후보를 임시로 적용한다](evaluation/readme-structure-r2-20261015/README.md#다른-프로젝트에서-임시로-적용한다). 같은 원문 6개의 의미·구조 검사에서 후보는 6/6, 0.7 재실행본은 4/6이 통과했다. 실제 입력은 최대 5,888토큰이며 정식 설치본과 구분한다.
+
 ## 설치 후에는 평소처럼 요청한다
 
 1. **설치한 Codex·Claude Code에서 새 대화를 시작한다.**

@@ -1,0 +1,172 @@
+{
+  "record_kind": "Parent consolidation of independent blinded reviewer response; not verbatim transcript",
+  "reviewer_requested_model": "gpt-6.1-sol",
+  "effort": "high",
+  "packet_sha256": "76f51b22d17da19d3270e0c7a6a6aacceaf158688520148e9a8e17ccc424c435",
+  "criteria_sha256": "6c06180e338996f559562d6e6cc30c856bc640bed086a71f25466c2f72a502c3",
+  "results": [
+    {
+      "blind_id": "01-A",
+      "source_id": "01",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "01-B",
+      "source_id": "01",
+      "condition": "historical-full",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "01-C",
+      "source_id": "01",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "02-A",
+      "source_id": "02",
+      "condition": "historical-full",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "02-B",
+      "source_id": "02",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "02-C",
+      "source_id": "02",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "03-A",
+      "source_id": "03",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "fail",
+      "overall": "fail",
+      "reason": "Sequential notification/response/nonresponse flow has no numbered stages."
+    },
+    {
+      "blind_id": "03-B",
+      "source_id": "03",
+      "condition": "candidate-profile",
+      "meaning": "uncertain",
+      "structure": "fail",
+      "overall": "fail",
+      "reason": "Conditional heading applies cancellation to subsequent response obligations without explicit source-confirmed common scope."
+    },
+    {
+      "blind_id": "03-C",
+      "source_id": "03",
+      "condition": "historical-full",
+      "meaning": "preserved",
+      "structure": "fail",
+      "overall": "fail",
+      "reason": "Sequential notification/response/nonresponse flow has no numbered stages."
+    },
+    {
+      "blind_id": "04-A",
+      "source_id": "04",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "04-B",
+      "source_id": "04",
+      "condition": "historical-full",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "04-C",
+      "source_id": "04",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "05-A",
+      "source_id": "05",
+      "condition": "historical-full",
+      "meaning": "preserved",
+      "structure": "fail",
+      "overall": "fail",
+      "reason": "Starts with execution success instead of the source-established deployment limit or semantic omission."
+    },
+    {
+      "blind_id": "05-B",
+      "source_id": "05",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "fail",
+      "overall": "fail",
+      "reason": "Starts with execution success instead of the source-established deployment limit or semantic omission."
+    },
+    {
+      "blind_id": "05-C",
+      "source_id": "05",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "06-A",
+      "source_id": "06",
+      "condition": "historical-full",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "06-B",
+      "source_id": "06",
+      "condition": "baseline-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    },
+    {
+      "blind_id": "06-C",
+      "source_id": "06",
+      "condition": "candidate-profile",
+      "meaning": "preserved",
+      "structure": "pass",
+      "overall": "pass",
+      "reason": "Preserves source meaning and meets the case-specific structural gate."
+    }
+  ],
+  "limits": "Textual semantic and structural review only. No reader study or actual host loading proof."
+}

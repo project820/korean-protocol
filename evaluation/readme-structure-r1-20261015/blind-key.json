@@ -1,0 +1,110 @@
+[
+  {
+    "blind_id": "01-A",
+    "condition": "baseline-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/01-baseline-profile.txt",
+    "sha256": "a4568565776fe2841d2a672ecbab3ee5c6caae6eb26c9d83ea4d84d0a83a1ca1"
+  },
+  {
+    "blind_id": "01-B",
+    "condition": "historical-full",
+    "file": "evaluation/readme-model-comparison-20261015/outputs/01-kp.txt",
+    "sha256": "a4568565776fe2841d2a672ecbab3ee5c6caae6eb26c9d83ea4d84d0a83a1ca1"
+  },
+  {
+    "blind_id": "01-C",
+    "condition": "candidate-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/01-candidate-profile.txt",
+    "sha256": "e5b984ab0c156a69b75e8660eee53aca227f330ad3afe80ee26dd2334222d816"
+  },
+  {
+    "blind_id": "02-A",
+    "condition": "historical-full",
+    "file": "evaluation/readme-model-comparison-20261015/outputs/02-kp.txt",
+    "sha256": "2e98f6233d9310a769a3168fc9d1ab13311264bb99d636009bd86b56d5620d80"
+  },
+  {
+    "blind_id": "02-B",
+    "condition": "candidate-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/02-candidate-profile.txt",
+    "sha256": "1e26790fa47c29f0e1b016c7a00621a7f367c6b54f0aeb680a69522010d25c90"
+  },
+  {
+    "blind_id": "02-C",
+    "condition": "baseline-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/02-baseline-profile.txt",
+    "sha256": "2bb6edefeebe88bc20bce6491e91586bef556b63bf8f452a26e2dadb9f3babfc"
+  },
+  {
+    "blind_id": "03-A",
+    "condition": "baseline-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/03-baseline-profile.txt",
+    "sha256": "e8e4a921f68ece4fc562ad0e3e2df45d73b2666150e997923cdf793a5acfbf75"
+  },
+  {
+    "blind_id": "03-B",
+    "condition": "candidate-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/03-candidate-profile.txt",
+    "sha256": "904a1c075669212acb86bfe27710dc41027077e874a96ed912c517b1bf22f22f"
+  },
+  {
+    "blind_id": "03-C",
+    "condition": "historical-full",
+    "file": "evaluation/readme-model-comparison-20261015/outputs/03-kp.txt",
+    "sha256": "9b259ebb299acd000b365e70b1d9d0bc7e258139775bc857cb5088f9a542d92f"
+  },
+  {
+    "blind_id": "04-A",
+    "condition": "baseline-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/04-baseline-profile.txt",
+    "sha256": "fda044af3d70c0d49a89feb19311d174c1698b11c02730b679abc4e41028c4b2"
+  },
+  {
+    "blind_id": "04-B",
+    "condition": "historical-full",
+    "file": "evaluation/readme-model-comparison-20261015/outputs/04-kp.txt",
+    "sha256": "97e50d80b96fc44acadfcf3352d84eb8d1c327d3a7a55d0defd23445f8a07675"
+  },
+  {
+    "blind_id": "04-C",
+    "condition": "candidate-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/04-candidate-profile.txt",
+    "sha256": "34e4a1914793ec9094f55199f650845a5be16a8c9c7e123ad4aed828d6c6bfd5"
+  },
+  {
+    "blind_id": "05-A",
+    "condition": "historical-full",
+    "file": "evaluation/readme-model-comparison-20261015/outputs/05-kp.txt",
+    "sha256": "85254f42dae8cf33beb39db97ab8ff6bff203f6362bae5530be8c5f0cb8ea870"
+  },
+  {
+    "blind_id": "05-B",
+    "condition": "baseline-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/05-baseline-profile.txt",
+    "sha256": "98497b1c5e858bcd056dd780ff08991c632a05118036fcf74238eb95ca4f4c95"
+  },
+  {
+    "blind_id": "05-C",
+    "condition": "candidate-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/05-candidate-profile.txt",
+    "sha256": "d5394e307e28c0a9161b556de50f257231716a0ef1ec0bd427784a61909b34c3"
+  },
+  {
+    "blind_id": "06-A",
+    "condition": "historical-full",
+    "file": "evaluation/readme-model-comparison-20261015/outputs/06-kp.txt",
+    "sha256": "00d38c7dbff15b47fe73a7eb88b5faae851db959a6aa20fa8687ea78d5070224"
+  },
+  {
+    "blind_id": "06-B",
+    "condition": "baseline-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/06-baseline-profile.txt",
+    "sha256": "00d38c7dbff15b47fe73a7eb88b5faae851db959a6aa20fa8687ea78d5070224"
+  },
+  {
+    "blind_id": "06-C",
+    "condition": "candidate-profile",
+    "file": "evaluation/readme-structure-r1-20261015/outputs/06-candidate-profile.txt",
+    "sha256": "00d38c7dbff15b47fe73a7eb88b5faae851db959a6aa20fa8687ea78d5070224"
+  }
+]
