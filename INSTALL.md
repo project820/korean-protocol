@@ -1,5 +1,27 @@
 # 에이전트가 Korean Protocol 0.7.0을 설치한다
 
+Korean Protocol은 한국어 답변을 쓰는 규약이다. 현재 배포는 Codex·Claude Code의 사용자 지침에 설치한다. 호출형 스킬·별도 모델·출력 후 필터가 아니며, 규약이 ON이면 설치한 호스트와 홈 환경의 새 대화에서 평소처럼 요청하면 된다. 매번 규약 이름을 호출할 필요는 없다.
+
+신규 설치는 규약 ON·높임말 OFF로 시작한다. 기존 설치의 두 선택은 유지한다. Codex에 설치한 지침이 Claude Code나 ChatGPT로 자동 전달되지는 않는다.
+
+## 설치 후 사용과 ON/OFF를 먼저 확인한다
+
+1. 설치가 끝나면 설치한 호스트에서 새 대화를 시작한다.
+2. “다음 문장을 뜻과 조건을 유지하며 다듬어 줘”처럼 평소 요청을 보낸다.
+3. 설치 상태와 실제 짧은 샘플 출력은 따로 확인한다.
+
+설정은 바꾸지 않고 상태만 확인하려면 설치 대상 에이전트에 다음을 보낸다.
+
+```text
+설치된 Korean Protocol의 버전, 적용 대상, ON/OFF와 높임말 설정을 확인해줘.
+설정은 바꾸지 말고 파일 검증 결과와 현재 대화의 로딩 확인 여부를 구분해 알려줘.
+확인할 수 없는 항목은 확인하지 못했다고 표시해줘.
+```
+
+[규약 OFF](docs/distribution/application-controls.md#에이전트에-복사해서-요청한다)·규약 ON·높임말 ON·높임말 OFF는 각각 복사 요청이나 관리 명령으로 바꿀 수 있다. 이 문구들은 내장 슬래시 명령이 아니라 에이전트 작업 요청이다. “이번 답변만 높임말로 써 줘” 같은 일회성 요청은 영구 설정을 바꾸지 않는다. 영구 변경 뒤에는 새 대화를 시작하며, 규약 OFF와 자동 갱신 OFF는 서로 다르다.
+
+## 설치 전 조건을 확인한다
+
 사용자가 설치를 요청한 Codex 또는 Claude Code 한 곳에 설치한다. 저장소 열람만으로 설치하지 않는다. Python 3.9 이상과 POSIX 환경이 필요하며 서명 설치에는 OpenSSH `ssh-keygen`도 필요하다.
 
 ## 사용할 경로를 고른다
@@ -102,7 +124,7 @@ ZIP에서는 루트 `agent-install.py`를 실행한다. 메뉴를 선호하면 Z
 
 현재 대화에 적용할 때는 상태 검사를 통과한 설치 대상의 관리 본문과 `state_dir/releases/<cache_id>/profiles/coding-agent.md`를 참조한다. 사전도 같은 검증 캐시의 `lexicon/`에서 읽는다. 미검증 checkout의 프로필을 설치본이라고 간주하지 않으며 규약 OFF이면 임의로 켜지 않는다. 사용자 요청과 상위 지침은 계속 따른다.
 
-새 세션은 호스트가 발견하는 설치 지침을 읽는다. 파일 검증과 실제 모델의 모든 규칙 준수는 별개다. 설치 버전·대상·신뢰 방식·설정·갱신 연결과 새 세션 안내를 보고하고 반환된 `management_commands`와 `runtime_argv`를 남긴다. 이 지속 관리 도구는 원래 복제본이 없어져도 사용할 수 있다.
+새 세션은 호스트가 발견하는 설치 지침을 읽는다. 새 세션의 로딩 정보나 읽기 기록을 확인할 수 있을 때 그 근거를 보고하며, 근거가 없으면 로딩을 확인하지 못했다고 보고한다. 모델의 자기 선언이나 짧은 샘플 출력만으로 로딩을 증명하지 않는다. 파일 검증과 실제 모델의 모든 규칙 준수는 별개다. 설치 버전·대상·신뢰 방식·설정·갱신 연결과 새 세션 안내를 보고하고 반환된 `management_commands`와 `runtime_argv`를 남긴다. 이 지속 관리 도구는 원래 복제본이 없어져도 사용할 수 있다.
 
 ## 규약 적용과 높임말을 바꾼다
 
@@ -114,10 +136,20 @@ ZIP에서는 루트 `agent-install.py`를 실행한다. 메뉴를 선호하면 Z
 python3 -B distribution/agent_install.py configure --host codex --protocol off
 ```
 
-규약을 켜고 높임말도 켜려면 다음 명령을 선택한다. 앞의 끄기 명령과 연속 실행하는 절차가 아니다.
+규약만 켜려면 다음 명령을 선택한다. 앞의 끄기 명령과 연속 실행하는 절차가 아니다.
 
 ```sh
-python3 -B distribution/agent_install.py configure --host codex --protocol on --honorifics on
+python3 -B distribution/agent_install.py configure --host codex --protocol on
+```
+
+높임말만 바꾸려면 원하는 명령 하나를 선택한다. 규약 ON/OFF는 유지한다.
+
+```sh
+python3 -B distribution/agent_install.py configure --host codex --honorifics on
+```
+
+```sh
+python3 -B distribution/agent_install.py configure --host codex --honorifics off
 ```
 
 선택한 변경 뒤 같은 경로의 상태를 확인한다.
