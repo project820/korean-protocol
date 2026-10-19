@@ -6,13 +6,13 @@ Korean Protocol(KP)은 Codex·Claude Code에서 **필요할 때 호출하는 한
 
 | 항목 | 내용 |
 | --- | --- |
-| 현재 버전 | **v0.8.0** · 호출형 스킬 |
+| 현재 버전 | **v0.9.0** · 호출형 스킬 |
 | 호출 | Codex `$korean-protocol` · Claude Code `/korean-protocol` |
 | 적용 범위 | 호출한 대화에만 적용한다. 자동 호출은 꺼져 있다. |
 | 설치 범위 | 사용자 범위에 설치하면 같은 계정의 다른 프로젝트에서도 호출한다. |
 | 기존 v0.7.0 | 상시 지침이다. 스킬과 함께 켜면 중복 적용되므로 [규약만 OFF로 전환](INSTALL.md#기존-07-상시-지침에서-전환한다)한다. |
 
-[설치](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [v0.7에서 전환](INSTALL.md#기존-07-상시-지침에서-전환한다) · [v0.8.0 검증 기록](evaluation/session-reports-20261015/README.md) · [릴리스](https://github.com/project820/korean-protocol/releases)
+[설치](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [v0.7에서 전환](INSTALL.md#기존-07-상시-지침에서-전환한다) · [v0.9.0 검증 기록](evaluation/clarity-20261016-r60/README.md) · [릴리스](https://github.com/project820/korean-protocol/releases)
 
 ## 설치한다
 
@@ -20,7 +20,7 @@ Korean Protocol(KP)은 Codex·Claude Code에서 **필요할 때 호출하는 한
 
 ```text
 https://github.com/project820/korean-protocol 의 INSTALL.md를 읽어줘.
-Korean Protocol v0.8.0 스킬을 지금 사용하는 호스트의 사용자 범위에 설치해줘.
+Korean Protocol v0.9.0 스킬을 지금 사용하는 호스트의 사용자 범위에 설치해줘.
 다른 프로젝트에서도 호출할 수 있게 하고 자동 호출은 꺼줘.
 기존 0.7 상시 설치가 있으면 같은 설치의 관리 명령으로 규약만 OFF로 전환해줘.
 높임말·자동 갱신·신뢰 키와 다른 사용자 지침은 보존해줘.
@@ -49,37 +49,44 @@ Korean Protocol v0.8.0 스킬을 지금 사용하는 호스트의 사용자 범�
 
 모델이 “적용했다”고 말한 것만으로 확인하지 않는다. 파일·발견·출력 확인 방법은 [호출 확인 안내](docs/distribution/on-demand-skill.md#설치와-호출을-확인한다)에 있다.
 
-## v0.8.0 검증 결과
+## v0.9.0 검증 결과
 
-**v0.8.0은 실제 Codex 세션 보고서로 원문·KP·STE를 1:1:1 비교했다.** 생성은 Opus 5.5·medium 요청, 조건별 1회다. 검토는 출력을 가린 모델 검토자(gpt-6.1-sol high)가 했다. STE 열은 [ASD-STE100 공개 원칙의 한국어 실험 적용본](evaluation/readme-model-comparison-20261015/ste-profile.md)이며 공식 한국어판이 아니다.
+**v0.9.0은 원문·KP·STE 3자 비교를 완료했으나 수락 기준을 통과하지 못했다.** 사례 12개(재작성 6개·자료 기반 새 글 6개)를 GPT-6.1 Sol과 Claude Opus 5.5의 low·medium 설정에서 조건별 2회 생성했다. 생성 576건과 출력을 가린 모델 검토 192건에 오류는 없었다. STE 열은 [ASD-STE100 공개 원칙의 한국어 실험 적용본](evaluation/clarity-20261016-r60/ste.md)이며 공식 한국어판이 아니다.
 
-| 시험 | KP v0.8.0 | STE 한국어 실험 적용본 |
-| --- | --- | --- |
-| 미공개 시험 6개 · 의미 실패 | 0개 | 0개 |
-| 미공개 시험 6개 · 구조 기준 실패 | 13건 | 28건 |
-| 미공개 시험 6개 · 최종 통과 | 1개 | 0개 |
-| 미공개 시험 6개 · 원문 대비 글자 수 | +9.8% | +12.5% |
-| 회귀 단문 6개 · 통과 | 6개 | 4개 |
-| 실전 미팅 보고서 | 통과. 주장 129개·구조 기준 13개 충족 | 실패. 주장 2개 변경·2개 추가 |
+| 모델·추론 | 의미 보존 통과/실패/미해결 (v0.9.0 · v0.8.0 · STE) | v0.8.0 대비 명료성 승/패/무 | STE 대비 명료성 승/패/무 |
+| --- | --- | --- | --- |
+| Sol · low | 23/0/1 · 21/1/2 · 18/3/3 | 16/3/5 | 13/6/5 |
+| Sol · medium | 24/0/0 · 21/2/1 · 16/2/6 | 11/9/4 | 9/6/9 |
+| Opus · low | 22/2/0 · 19/4/1 · 17/6/1 | 10/1/13 | 5/8/11 |
+| Opus · medium | 23/0/1 · 24/0/0 · 19/4/1 | 12/2/10 | 5/7/12 |
+
+수락 기준은 별도 평가 96건 모두의 의미 보존과, 네 설정 각각에서 v0.8.0·STE보다 명료성 승수가 많은 것이다. v0.9.0은 의미 실패 2건·미해결 2건이 남았고 Opus 두 설정에서 STE에 졌다. 사용자 지시로 이 결과를 공개하고 v0.8.0을 대체해 배포한다.
+
+v0.8.0 대비 변경은 다음과 같다.
+
+- 규칙을 작업 범위·근거·의미 보존·표현·최종 대조 순서로 다시 썼다. `SKILL.md`는 `o200k_base` 7,410토큰에서 3,471토큰으로 줄었다.
+- 원자료에 없는 사실·주체·원인·기한·승인자를 보태지 않는다. 전언·추정값으로 만든 합계를 확인된 값과 섞지 않는다.
+- 실행할 행동이 둘 이상이면 행동마다 줄을 나누고, 순서가 정해진 절차는 한 단계에 행동 하나를 둔다.
+- 의미 경계 사례를 [`references/meaning-boundaries.md`](skills/korean-protocol/references/meaning-boundaries.md)로 분리했다. 참고 파일이 없어도 핵심 규칙만으로 작동함을 Codex·Claude Code에서 확인했다.
 
 남은 한계는 다음과 같다.
 
-- **대상 목록화(G3)** 실패가 가장 많다. 미공개 시험 6개 중 5개에서 실패했다.
-- 출력이 원문보다 길다.
-- 생성 모델 1개, 조건별 1회 표본이다. 다른 모델과 반복 변동은 검증하지 않았다.
-- 사람의 읽기 시간은 측정하지 않았다.
+- 원자료가 정하지 않은 관계(전언의 서면 기재 여부, 승인 주체)를 채우는 오류가 남았다.
+- Opus에서는 역할별로 구분하고 단계를 나눈 STE 출력이 더 명료하다는 판정이 많았다.
+- 판정은 모델 검토자가 했다. 사람의 읽기 시간은 측정하지 않았다. 확인한 호스트는 로컬 macOS의 Codex·Claude Code다.
 
-세션 원문에는 업체 금액과 내부 경로가 있어 원문·출력은 공개하지 않는다. 비교 조건·세트별 결과·규칙 변경은 [세션 보고서 비교](evaluation/session-reports-20261015/README.md)에 공개한다.
+원시 출력은 내부 평가 자료로 보존하며 저장소에는 올리지 않았다. 사례별 결과는 [60차 비교 기록](evaluation/clarity-20261016-r60/README.md)에 있다. v0.8.0의 [세션 보고서 비교](evaluation/session-reports-20261015/README.md)는 이전 기준본의 기록이다.
 
 ## 버전 이력
 
 | 버전 | 형태 | 상태 |
 | --- | --- | --- |
-| **v0.8.0** | 호출형 스킬 | 현재 권장. 위 1:1:1 비교 결과를 따른다. |
+| **v0.9.0** | 호출형 스킬 | 현재 권장. 위 3자 비교 결과를 따르며 수락 기준은 통과하지 못했다. |
+| v0.8.0 | 호출형 스킬 | 이전 버전. [세션 보고서 비교](evaluation/session-reports-20261015/README.md) |
 | 중간본 `909dc9d` | 호출형 스킬 | v0.7.0과 v0.8.0 사이의 첫 스킬 검증본이다. 번호를 붙이지 않았다. [평가 기록](evaluation/field-report-20261015/README.md#보완-후보의-검증-범위를-밝힌다) |
 | v0.7.0 | 상시 지침·서명 배포 | 기존 사용자 유지용. 원본 `0.7.0-draft`, 서명 콘텐츠 `0.7.0·순번 3`, 엔진 `0.2.0`. [릴리스](https://github.com/project820/korean-protocol/releases/tag/v0.7.0) |
 
-평가 기록의 `r10`·`r11`·`r12`는 실험 회차 번호이며 공개 버전 번호가 아니다. `r10`은 중간본 `909dc9d`, `r12`는 v0.8.0이다. `r11`은 채택하지 않은 실험 후보다.
+평가 기록의 `r10`·`r11`·`r12`는 실험 회차 번호이며 공개 버전 번호가 아니다. `r10`은 중간본 `909dc9d`, `r12`는 v0.8.0이다. `r11`은 채택하지 않은 실험 후보다. `clarity-20261016-r60`은 v0.9.0의 후보다.
 
 <details>
 <summary>v0.7.0 상시 지침의 상태를 확인한다.</summary>
@@ -100,7 +107,7 @@ Korean Protocol v0.8.0 스킬을 지금 사용하는 호스트의 사용자 범�
 
 ## 문장과 구조를 함께 다듬는다
 
-**아래 표는 v0.7.0으로 생성한 과거 출력이며 v0.8.0 출력이 아니다.** 같은 원문 6개를 Opus 5.5·medium에서 KP 0.7과 STE 원칙 적용본으로 한 번씩 생성했다. 출력 12건은 교정하지 않았다. 굵게 표시와 줄바꿈만 화면에 맞게 표시하며 각 셀에서 출력 원문을 연다.
+**아래 표는 v0.7.0으로 생성한 과거 출력이며 v0.8.0·v0.9.0 출력이 아니다.** 같은 원문 6개를 Opus 5.5·medium에서 KP 0.7과 STE 원칙 적용본으로 한 번씩 생성했다. 출력 12건은 교정하지 않았다. 굵게 표시와 줄바꿈만 화면에 맞게 표시하며 각 셀에서 출력 원문을 연다.
 
 - 의미 검토: 11건 보존, 1건 보류. STE의 교육 신청 예문은 명단 제출자를 ‘신청자’로 표시했다. 원문이 두 역할의 관계를 정의하지 않아 보류했다.
 - KP 입력: 0.7 배포 프로필과 사전 2개 전체. 기존 대화와 설명용 답안은 넣지 않았다.
@@ -160,7 +167,7 @@ Korean Protocol v0.8.0 스킬을 지금 사용하는 호스트의 사용자 범�
 | 목적 | 문서 |
 | --- | --- |
 | 설치·호출·전환 | [설치 안내](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [호출 확인](docs/distribution/on-demand-skill.md) · [호스트 지원](docs/distribution/host-support.md) |
-| 평가 기록 | [평가 규칙](evaluation/README.md) · [v0.8.0 세션 보고서 비교](evaluation/session-reports-20261015/README.md) |
+| 평가 기록 | [평가 규칙](evaluation/README.md) · [v0.9.0 60차 비교](evaluation/clarity-20261016-r60/README.md) · [v0.8.0 세션 보고서 비교](evaluation/session-reports-20261015/README.md) |
 | 규칙과 어휘 | [한국어 세부 규칙](docs/spec/korean-rules.md) · [통제 어휘](docs/spec/lexicon.md) |
 | 기존 v0.7.0 관리 | [관리 설정](docs/distribution/application-controls.md) · [배포 계약](docs/distribution/README.md) · [채팅 안내](distribution/CHAT-START.md) |
 | 설계와 근거 | [문서 목차](docs/README.md) · [검증 상태](docs/status/requirements.md) · [연구 근거](docs/research-basis.md) |

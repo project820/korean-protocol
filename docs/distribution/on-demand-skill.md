@@ -1,6 +1,6 @@
 # 필요한 작업에서 Korean Protocol 스킬을 호출한다
 
-Korean Protocol v0.8.0 스킬은 사용자가 선택한 한국어 작성·재작성 작업에 적용한다. **사용자 범위에 설치하고 명시적으로 호출**하는 방식이다. 신규 사용자는 [설치 안내](../../INSTALL.md)를 따른다. 기존 0.7 사용자는 먼저 [상시 지침을 OFF로 전환](../../INSTALL.md#기존-07-상시-지침에서-전환한다)한다.
+Korean Protocol v0.9.0 스킬은 사용자가 선택한 한국어 작성·재작성 작업에 적용한다. **사용자 범위에 설치하고 명시적으로 호출**하는 방식이다. 신규 사용자는 [설치 안내](../../INSTALL.md)를 따른다. 기존 0.7 사용자는 먼저 [상시 지침을 OFF로 전환](../../INSTALL.md#기존-07-상시-지침에서-전환한다)한다.
 
 ## 설치 범위를 고른다
 
@@ -27,7 +27,7 @@ Claude Code를 선택하려면 위 명령 대신 다음을 사용한다.
 export KP_SKILL_HOST=claude-code
 ```
 
-다음 명령은 태그 `v0.8.0`에서 파일을 읽고 `SKILL.md` 해시를 대조한 뒤 복사한다. **기존 폴더나 링크가 있으면 덮어쓰지 않고 중단**한다. 기존 설치를 갱신할 때는 차이·출처·사용자 수정을 확인하고 백업한 뒤 별도로 교체한다.
+다음 명령은 태그 `v0.9.0`에서 파일을 읽고 `SKILL.md` 해시를 대조한 뒤 복사한다. **기존 폴더나 링크가 있으면 덮어쓰지 않고 중단**한다. 기존 설치를 갱신할 때는 차이·출처·사용자 수정을 확인하고 백업한 뒤 별도로 교체한다.
 
 ```sh
 python3 - <<'PY'
@@ -37,8 +37,8 @@ import json
 import os
 import subprocess
 
-version = 'v0.8.0'
-expected = '3637cbb6c4efb79ed6d9ef059fdf17d64115bdd0574fd279876cd95d6137815a'
+version = 'v0.9.0'
+expected = '4d8a6838bbad48e7a0120b366599ad7084b77d26f29c92de9ce8028873d4a7b2'
 host = os.environ.get('KP_SKILL_HOST')
 if host not in ('codex', 'claude-code'):
     raise SystemExit('KP_SKILL_HOST를 codex 또는 claude-code로 지정한다.')
@@ -58,6 +58,7 @@ if target.exists() or target.is_symlink():
 files = {
     'SKILL.md': 'skills/korean-protocol/SKILL.md',
     'agents/openai.yaml': 'skills/korean-protocol/agents/openai.yaml',
+    'references/meaning-boundaries.md': 'skills/korean-protocol/references/meaning-boundaries.md',
     'specification/rules.json': 'specification/rules.json',
     'lexicon/core.json': 'lexicon/core.json',
     'lexicon/domains/software.json': 'lexicon/domains/software.json',
@@ -133,8 +134,8 @@ $korean-protocol 설치된 사용자 스킬의 SKILL.md와 원문 전체를 읽�
 
 ## 갱신과 검증 범위를 확인한다
 
-v0.8.0은 태그에 고정한 수동 설치다. 자동 갱신기를 등록하지 않는다. 새 버전은 파일 차이·검증 결과를 검토한 뒤 백업하고 교체한다. 0.7의 서명 검증·콘텐츠 갱신은 스킬에 적용되지 않는다.
+v0.9.0은 태그에 고정한 수동 설치다. 자동 갱신기를 등록하지 않는다. 새 버전은 파일 차이·검증 결과를 검토한 뒤 백업하고 교체한다. 0.7의 서명 검증·콘텐츠 갱신은 스킬에 적용되지 않는다.
 
-[v0.8.0 비교 기록](../../evaluation/session-reports-20261015/README.md)은 실제 세션 보고서의 원문·KP·STE 1:1:1 결과다. `SKILL.md`는 `o200k_base` 7,410토큰, `cl100k_base` 11,368토큰이다. 호출하지 않은 대화에는 이 부담이 없다. 호출한 대화에는 원문·호스트 지침·도구·대화 이력이 더해진다.
+[v0.9.0 비교 기록](../../evaluation/clarity-20261016-r60/README.md)은 원문·KP·STE 3자 비교 결과이며 수락 기준을 통과하지 못했다. `SKILL.md`는 `o200k_base` 3,471토큰, `cl100k_base` 5,348토큰이다. 의미 경계 참고 파일은 판단이 헷갈릴 때만 읽는다. 호출하지 않은 대화에는 이 부담이 없다. 호출한 대화에는 원문·호스트 지침·도구·대화 이력이 더해진다.
 
 로컬 macOS의 호스트 확인은 중간본 `909dc9d` 설치 때 수행했다. Codex의 두 임시 작업 폴더 발견, Codex·Claude Code의 짧은 실제 호출, Codex의 전체 파일 읽기를 해시로 대조했다. 이 확인은 다른 운영체제·계정·원격 호스트나 모든 문서의 품질을 보장하지 않는다.

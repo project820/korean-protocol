@@ -1,0 +1,37 @@
+{
+  "drafted_at": "2026-10-19T11:18:02.724333+00:00",
+  "change": "No change to r59 rubric or acceptance; reader-action layout and calculation-scope rules changed.",
+  "previous_methodology": "evaluation/clarity-20261016-r59/review-methodology.json",
+  "previous_methodology_sha256": "83b6f94e256d80faf852a71a6f41b19c4517b6cf914329126bf539c17e485ca9",
+  "evidence": [
+    "output/clarity-20261016-r56/clarity-method-audit/protocol.json",
+    "output/clarity-20261016-r56/clarity-method-audit/packet.json",
+    "output/clarity-20261016-r56/clarity-method-audit/sol/output.md",
+    "output/clarity-20261016-r56/clarity-method-audit/opus/output.md",
+    "output/clarity-20261016-r56/clarity-method-audit/root-assessment.json",
+    "output/clarity-20261016-r56/clarity-method-audit/prospective-rubric.txt"
+  ],
+  "evidence_hashes": {
+    "output/clarity-20261016-r56/clarity-method-audit/protocol.json": "b0c87549d5712b0fa6df3c8a6a171723b1aa7abbe9a4f0c1883649e6a8c8fb11",
+    "output/clarity-20261016-r56/clarity-method-audit/packet.json": "31c25baa5b313412002380b8861d5b71d1e763619f12d77c51c9fb04ba89e324",
+    "output/clarity-20261016-r56/clarity-method-audit/sol/output.md": "f75da5377e09ff829ff3602aef3e7ef03bd1b5e9933bc9175f9d92c682339bd1",
+    "output/clarity-20261016-r56/clarity-method-audit/opus/output.md": "084b1e8833f954e71f8eb6f75ca878668eb9180a05790249035616cb54a1e821",
+    "output/clarity-20261016-r56/clarity-method-audit/root-assessment.json": "b9d7b1f2e5f02fa0d656fd9c63c2352e119dcff2f013d9aed8f191bdc901c2d4",
+    "output/clarity-20261016-r56/clarity-method-audit/prospective-rubric.txt": "4d26d5bb517e9e17a8202234f51db04975ab9b8abf92f9214f92cb02a61808da"
+  },
+  "unchanged": [
+    "Same task and source independently generated under baseline/candidate/STE",
+    "Same two models, low/medium, 2repetitions, 576generations192blindreviews",
+    "Unsupported assertions, omissions, role/modality/time/quantity changes fail",
+    "Unresolved is never pass",
+    "All96 heldout candidate meanings pass and each4group wins>loss vsbothcontrols",
+    "Knownscreen/development candidate errors blockadoption"
+  ],
+  "limits": "The r57 source-supported clarity clarification is inherited. No historical winner replacement or threshold change. Fresh heldout sources differ by round, so cross-round score changes are not causal estimates of core improvement.",
+  "timing": "Candidate frozen before independent fresh E authoring; plans frozen before calls.",
+  "rejected": [
+    "Neutralizing every unsupported expression regardless of retrieval impact",
+    "Requiring same layout feature to have same effect in every context",
+    "Changing any acceptance threshold or historical verdict"
+  ]
+}
