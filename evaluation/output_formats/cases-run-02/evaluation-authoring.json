@@ -1,0 +1,62 @@
+{
+  "authored_at": "2026-10-20T01:39:26.273022+00:00",
+  "generator": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "method": "Independent subagent authoring; no external model calls"
+  },
+  "candidate_frozen_at": "2026-10-20T01:37:54.675779+00:00",
+  "candidate_id": "67fb90294cc7c6588c8a5ab564578533afd167ca36ce1b8c3f69621936922d79",
+  "provenance": {
+    "source_type": "12 original synthetic Korean sources authored after run02 freeze",
+    "permitted_reference": "evaluation/output_formats/development.json",
+    "reference_use": "Avoid duplicate sources and themes",
+    "restricted_materials_read": false,
+    "run01_drafts_reused": false,
+    "answer_keys_or_output_examples_included": false
+  },
+  "checks": {
+    "case_count": 12,
+    "mode_counts": {
+      "rewrite": 6,
+      "compose": 6
+    },
+    "modality_counts": {
+      "L1": 3,
+      "L2": 3,
+      "L3": 3,
+      "L4": 3
+    },
+    "source_character_counts": {
+      "E01": 221,
+      "E02": 212,
+      "E03": 212,
+      "E04": 226,
+      "E05": 224,
+      "E06": 223,
+      "E07": 217,
+      "E08": 227,
+      "E09": 231,
+      "E10": 236,
+      "E11": 239,
+      "E12": 239
+    },
+    "normalized_source_uniqueness": true,
+    "normalized_source_overlap_with_development": 0,
+    "normalization": "Remove all Unicode whitespace, then casefold"
+  },
+  "source_sha256": {
+    "E01": "030fffea5c96ec2e01d5eac9bebbe93d5b7ec9f678c697e55f6ebb80f841d04c",
+    "E02": "cc21b63b3333a96dc3e595457bc8e2d2bac15eb54309cec9ac5d30f00cfbb150",
+    "E03": "91d916761cc199ba5b913b9ac12c496abf8993145c2611a13f866bacaf59fa86",
+    "E04": "e79056a7ea0fd2135c5355a575f72d569cb465978bc983603296f44518f7aa0a",
+    "E05": "65decf9e6cd79e7076a9d6f1cd5bff350a2fdb3dac665cc4864855e3e2b9d8b5",
+    "E06": "add23291492f2c2e001c4a1b3b1913f77e20773765dc4e83e0eac98efe9c425d",
+    "E07": "c0cac644b3c62e77ce626a4b0218a9465f0466b68069cfde1a4c02241aa1778e",
+    "E08": "d59cda7268e197544d395899b25336adaf0fab0ec9a1adf9245756b485e28532",
+    "E09": "40bb6a1a51e2defac0d11fd23d239ee0a328e2281cc9229a0c14186c4fb5741f",
+    "E10": "effa9e45185e9c0f231340bec262c5f8f18e1b1c1f7c7567dce4539ab3938fad",
+    "E11": "71651e44fcbe142353758e3b70bbc2c2c479f7bba6920c4fa225a5b26b7fe6ad",
+    "E12": "0ce6108cef186d608f57863cb6aef59b7858e2f36ffb084010d0d7318a6f7444"
+  }
+}

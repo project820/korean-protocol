@@ -1,0 +1,14 @@
+{
+  "url": "https://asd-ste100.org/STE_faq.html",
+  "retrieved": "2026-10-20",
+  "edition_context": "Issue 9 (January 2025); public FAQ principles, not the full standard",
+  "scope": "STE 원칙의 한국어 실험 적용본; 공식 한국어판 또는 인증 준수 결과가 아님",
+  "source_sha256": "9c7f4507fbaa83fb777dad33e1547c28665ee2f712aac0860dcb7af38452b2f6",
+  "source_path": "output/kp-output-formats-20261020/ste-faq.html",
+  "profile_sha256": "a9066e658f8af38f5fa7d2c4e36fa9ad385d1bb8f7166cd945b304333c5525d7",
+  "adaptation": "Existing r60 public-FAQ Korean adaptation retained verbatim; no English word-count/dictionary constraints imposed on Korean; same modality tasks supplied to all arms.",
+  "source": "https://asd-ste100.org/STE_faq.html",
+  "edition": "Issue 9 (January 2025); public FAQ principles, not the full standard",
+  "rules": "Public FAQ principles: short sentences, one topic, consistent terms, active voice with unknown-actor exception, conditions before action, ordered procedures, logical information arrangement, meaning preservation.",
+  "korean_application": "Existing r60 public-FAQ Korean adaptation retained verbatim; no English word-count/dictionary constraints imposed on Korean; same modality tasks supplied to all arms."
+}

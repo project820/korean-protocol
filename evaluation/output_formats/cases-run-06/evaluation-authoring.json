@@ -1,0 +1,66 @@
+{
+  "authored_at": "2026-10-20T02:25:17.105819+00:00",
+  "generator": {
+    "requested_model": "gpt-6.1-sol",
+    "requested_reasoning_effort": "high",
+    "returned_model": null,
+    "returned_effort": null,
+    "model_evidence": "collaboration spawn request; backend identity not echoed",
+    "method": "Independent subagent authoring; no external model calls"
+  },
+  "candidate_frozen_at": "2026-10-20T02:23:56.017202+00:00",
+  "candidate_id": "1a0720e42234695cb8618b0b6f5b82b313d92020c2c2463ec092b1036af64917",
+  "provenance": {
+    "source_type": "12 original synthetic Korean sources authored after run06 freeze",
+    "permitted_reference": "development.json, prior evaluation sources for deduplication, freeze metadata only, dataset structure",
+    "reference_use": "Avoid duplicate sources; obtain freeze timestamp and retain dataset structure",
+    "candidate_guides_or_outputs_read": false,
+    "prior_drafts_reused": false,
+    "answer_keys_or_output_examples_included": false
+  },
+  "checks": {
+    "case_count": 12,
+    "mode_counts": {
+      "rewrite": 6,
+      "compose": 6
+    },
+    "modality_counts": {
+      "L1": 3,
+      "L2": 3,
+      "L3": 3,
+      "L4": 3
+    },
+    "source_character_counts": {
+      "E01": 229,
+      "E02": 208,
+      "E03": 220,
+      "E04": 210,
+      "E05": 214,
+      "E06": 211,
+      "E07": 220,
+      "E08": 213,
+      "E09": 217,
+      "E10": 233,
+      "E11": 231,
+      "E12": 224
+    },
+    "normalized_source_uniqueness": true,
+    "normalized_source_overlap_with_development": 0,
+    "normalized_source_overlap_with_prior_sources": 0,
+    "normalization": "Remove all Unicode whitespace, then casefold"
+  },
+  "source_sha256": {
+    "E01": "179a228bb5730dfd7df9699f950159c7763e11e326a14de0347ecfa382216193",
+    "E02": "50a12ba8d4de845cd6e5b78c39a129cc7628bfdfd846d08d5be0a3990172893b",
+    "E03": "05a1dfd00dccee64a289e82b526d521b4d6cbe5df275e93ab9404ace1e54a49d",
+    "E04": "ce1610c79e6e3a8f2bf8cef4d8555bfcb1b4b3233a3463b681601d20320fbac5",
+    "E05": "250629898d2adfe1a722b37836b2c9f013f8ffcb3e88a3ad0d1a767c2192844c",
+    "E06": "73771e11bbf3349add0c45298da7bc0f3a4dd49d13f2b2a09a38b60d780e5ec9",
+    "E07": "72b765491b16257eeff4a67aa11f6fe9a826ccfd5f695bb472aa0bd6d026ccf3",
+    "E08": "b91124e1764f07f802afc114b6e996f04b3e75595f932fd6f749462e280f0a59",
+    "E09": "325c2e7a5413474bf20b45ff87162e91827a850dbce16be1b2a5ad40f86b3bbf",
+    "E10": "8d42a17764384dc3580b9bdc1e044ec6de3e023e2983c90ecbcbfc82b1a18ece",
+    "E11": "5a55f9b054e34fa7931f5d1a3e90a9efcafa39a0ea2c507d2f981b1c23545336",
+    "E12": "e35a3dd9d117657adfd505932d96d820fbf802a961661513d2debbdd37051bb2"
+  }
+}

@@ -6,13 +6,20 @@ Korean Protocol(KP)은 Codex·Claude Code에서 **필요할 때 호출하는 한
 
 | 항목 | 내용 |
 | --- | --- |
-| 현재 버전 | **v0.9.0** · 호출형 스킬 |
+| 공개 버전 | **v0.9.0** · 호출형 스킬 |
+| main 브랜치 | **0.10.0-candidate.local** · KP 코어와 L1~L4 출력 구조를 제공한다. |
 | 호출 | Codex `$korean-protocol` · Claude Code `/korean-protocol` |
 | 적용 범위 | 호출한 대화에만 적용한다. 자동 호출은 꺼져 있다. |
 | 설치 범위 | 사용자 범위에 설치하면 같은 계정의 다른 프로젝트에서도 호출한다. |
 | 기존 v0.7.0 | 상시 지침이다. 스킬과 함께 켜면 중복 적용되므로 [규약만 OFF로 전환](INSTALL.md#기존-07-상시-지침에서-전환한다)한다. |
 
 [설치](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [v0.7에서 전환](INSTALL.md#기존-07-상시-지침에서-전환한다) · [v0.9.0 검증 기록](evaluation/clarity-20261016-r60/README.md) · [릴리스](https://github.com/project820/korean-protocol/releases)
+
+## KP 코어에 네 단계 출력 형식을 연결했다
+
+main 브랜치의 스킬은 KP 텍스트·표와 도식·단일 HTML·요청 시 영상 제작 코드를 지원하도록 개편한 `0.10.0-candidate`다. 공개 설치 기준은 위의 v0.9.0을 유지한다. 후보는 명시 호출과 기존 의미 보존 규칙을 유지하며, Stylefusion 연구를 반영한 기본형을 자체 포함한다. 기본형이 맞지 않으면 에이전트가 사용자 형식과 자료에 맞는 배치를 선택한다.
+
+STE는 개발·개정의 독립 대조군으로만 사용한다. 정식 배포의 품질 게이트는 유지한다. 이번 로컬 설치는 사용자가 구조 적용을 먼저 하도록 지시해 기존 설치를 백업한 뒤 갱신했으며, 정식 비교 합격을 뜻하지 않는다. [개편 규칙 대응표](docs/spec/output-formats-rule-map.md), [평가 방법](evaluation/output_formats/README.md), [후보 패키지 안내](docs/distribution/output-formats-package.md)에서 구현과 검증 범위를 구분한다.
 
 ## 설치한다
 

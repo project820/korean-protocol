@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:,">
+  <title>사용 조건에 따른 전력 소비량을 계산한다</title>
+  <style>
+    :root {
+      --font-body: system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      --text: #17252d;
+      --muted: #4a5d66;
+      --surface: #ffffff;
+      --canvas: #f3f6f6;
+      --line: #b8c7cb;
+      --accent: #075d60;
+      --accent-soft: #e6f3ef;
+      --warning: #714a00;
+      --warning-surface: #fff4d6;
+      --error: #a32020;
+      --focus: #005fcc;
+      --space-1: 0.375rem;
+      --space-2: 0.75rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2.5rem;
+      --measure: 64ch;
+      --page-width: 72rem;
+    }
+    * { box-sizing: border-box; }
+    html { font-family: var(--font-body); color: var(--text); background: var(--canvas); line-height: 1.7; }
+    body { margin: 0; font-size: 1rem; }
+    main { max-width: var(--page-width); margin-inline: auto; padding: var(--space-5) var(--space-4); }
+    h1, h2, p { margin-block: 0 var(--space-3); }
+    h1 { max-width: 24ch; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.3; letter-spacing: -0.025em; }
+    h2 { font-size: 1.25rem; line-height: 1.45; }
+    p { max-width: var(--measure); }
+    .lead { color: var(--muted); }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-4); margin-block: var(--space-4); align-items: start; }
+    .panel { min-width: 0; border: 1px solid var(--line); background: var(--surface); padding: var(--space-4); border-radius: 0.75rem; }
+    .field { margin-block-end: var(--space-4); }
+    label { display: block; font-weight: 650; margin-block-end: var(--space-1); }
+    input { display: block; width: 100%; max-width: 18rem; padding: var(--space-2); border: 1px solid var(--muted); border-radius: 0.375rem; font: inherit; color: var(--text); background: var(--surface); }
+    input[aria-invalid="true"] { border: 2px solid var(--error); }
+    .hint { font-size: 0.9375rem; color: var(--muted); margin-block: var(--space-1) 0; }
+    .error { color: var(--error); margin-block: var(--space-1) 0; font-weight: 600; }
+    button { min-height: 2.75rem; padding: var(--space-2) var(--space-3); font: inherit; border: 1px solid var(--accent); border-radius: 0.375rem; color: var(--accent); background: var(--surface); cursor: pointer; }
+    button:hover { background: var(--accent-soft); }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    .result { background: var(--accent-soft); border-color: var(--accent); }
+    output { display: block; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.3; font-weight: 750; color: var(--accent); margin-block: var(--space-3); overflow-wrap: anywhere; }
+    .formula { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .notice { padding: var(--space-3); background: var(--warning-surface); color: var(--warning); border-left: 0.25rem solid var(--warning); }
+    .details { margin-block-start: var(--space-4); }
+    dl { margin: 0; }
+    dt { margin-block-start: var(--space-2); font-weight: 650; }
+    dd { margin-inline-start: 0; max-width: var(--measure); }
+    code { overflow-wrap: anywhere; }
+    [hidden] { display: none; }
+    @media (max-width: 42rem) {
+      main { padding: var(--space-4) var(--space-3); }
+      .layout { grid-template-columns: minmax(0, 1fr); }
+      .panel { padding: var(--space-3); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>사용 조건에 따른 전력 소비량을 계산한다</h1>
+      <p class="lead">소비전력이 일정하다고 가정한다. 소비전력·하루 사용 시간·사용 일수를 바꾸면 전력 소비량을 다시 계산한다.</p>
+      <p class="notice"><strong>이 계산은 교육용 가상 예시다.</strong> 실제 소비전력의 변화·대기 전력·전기 요금을 반영하지 않는다. 실제 설비의 관측값이나 안전·용량 보장으로 사용하지 않는다.</p>
+    </header>
+
+    <div class="layout">
+      <section class="panel" aria-labelledby="inputs-heading">
+        <h2 id="inputs-heading">사용 조건을 입력한다</h2>
+        <form id="calculator" novalidate>
+          <div class="field">
+            <label for="power">소비전력을 입력한다 (kW).</label>
+            <input id="power" name="power" type="number" value="0.8" min="0" max="100" step="0.01" required aria-describedby="power-hint power-error">
+            <p class="hint" id="power-hint">0~100kW를 0.01kW 단위로 입력한다.</p>
+            <p class="error" id="power-error" hidden>소비전력을 0~100kW 범위에서 0.01kW 단위로 입력해야 한다.</p>
+          </div>
+          <div class="field">
+            <label for="hours">하루 사용 시간을 입력한다 (시간/일).</label>
+            <input id="hours" name="hours" type="number" value="6" min="0" max="24" step="0.25" required aria-describedby="hours-hint hours-error">
+            <p class="hint" id="hours-hint">0~24시간을 0.25시간 단위로 입력한다.</p>
+            <p class="error" id="hours-error" hidden>하루 사용 시간을 0~24시간 범위에서 0.25시간 단위로 입력해야 한다.</p>
+          </div>
+          <div class="field">
+            <label for="days">사용 일수를 입력한다 (일).</label>
+            <input id="days" name="days" type="number" value="20" min="1" max="366" step="1" required aria-describedby="days-hint days-error">
+            <p class="hint" id="days-hint">1~366일을 정수로 입력한다.</p>
+            <p class="error" id="days-error" hidden>사용 일수를 1~366일 범위의 정수로 입력해야 한다.</p>
+          </div>
+          <button type="button" id="reset-calculator">예제의 초기값으로 되돌린다</button>
+        </form>
+      </section>
+
+      <section class="panel result" aria-labelledby="result-heading">
+        <h2 id="result-heading">가정에 따른 전력 소비량을 확인한다</h2>
+        <div aria-live="polite" aria-atomic="true">
+          <output id="energy" for="power hours days">96kWh</output>
+          <p class="formula" id="formula">0.8kW × 6시간/일 × 20일 = 96kWh</p>
+          <p class="error" id="result-error" hidden>입력 오류가 있어 결과 계산을 보류한다. 표시한 입력 조건을 확인해야 한다.</p>
+        </div>
+        <p>전력 소비량 = 소비전력 × 하루 사용 시간 × 사용 일수다. 이 식은 위의 일정 소비전력 가정에만 적용한다.</p>
+        <p class="hint">예제의 입력 범위는 화면 탐색을 위해 정했다. 설비의 허용 운전 범위를 뜻하지 않는다.</p>
+      </section>
+    </div>
+
+    <section class="panel details" aria-labelledby="basis-heading">
+      <h2 id="basis-heading">입력값과 계산 범위를 확인한다</h2>
+      <dl>
+        <dt>초기값은 가상 자료다.</dt>
+        <dd>소비전력은 0.8kW, 하루 사용 시간은 6시간, 사용 일수는 20일로 설정했다. 실제 관측 출처는 없다.</dd>
+        <dt>결과는 입력값으로 산출한다.</dt>
+        <dd>표시값은 소수점 아래 최대 네 자리로 반올림한다. 전기 요금·세금·장비 효율은 계산하지 않는다.</dd>
+        <dt>파일 안에서 계산한다.</dt>
+        <dd>입력값을 서버에 전송하거나 저장하지 않는다. 초기화하면 가상 자료의 초기값으로 돌아간다.</dd>
+      </dl>
+    </section>
+    <noscript><p class="notice">JavaScript가 꺼져 있어 입력 변경을 계산하지 못한다. 위 결과는 초기값의 산술 결과다.</p></noscript>
+  </main>
+  <script>
+    "use strict";
+    const form = document.getElementById("calculator");
+    const fields = ["power", "hours", "days"].map((id) => document.getElementById(id));
+    const energy = document.getElementById("energy");
+    const formula = document.getElementById("formula");
+    const resultError = document.getElementById("result-error");
+    const numberFormat = new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 4 });
+
+    function update() {
+      let valid = true;
+      fields.forEach((field) => {
+        const accepted = field.validity.valid && Number.isFinite(field.valueAsNumber);
+        field.setAttribute("aria-invalid", String(!accepted));
+        document.getElementById(field.id + "-error").hidden = accepted;
+        valid = valid && accepted;
+      });
+      resultError.hidden = valid;
+      if (!valid) {
+        energy.textContent = "계산을 보류한다";
+        formula.textContent = "입력 오류를 수정하면 결과를 다시 계산한다.";
+        return;
+      }
+      const [power, hours, days] = fields.map((field) => field.valueAsNumber);
+      const result = power * hours * days;
+      energy.textContent = numberFormat.format(result) + "kWh";
+      formula.textContent = numberFormat.format(power) + "kW × "
+        + numberFormat.format(hours) + "시간/일 × " + numberFormat.format(days)
+        + "일 = " + numberFormat.format(result) + "kWh";
+    }
+    form.addEventListener("input", update);
+    form.addEventListener("submit", (event) => { event.preventDefault(); update(); });
+    document.getElementById("reset-calculator").addEventListener("click", () => {
+      HTMLFormElement.prototype.reset.call(form);
+      update();
+    });
+    update();
+  </script>
+</body>
+</html>
