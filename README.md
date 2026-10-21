@@ -6,20 +6,28 @@ Korean Protocol(KP)은 Codex·Claude Code에서 **필요할 때 호출하는 한
 
 | 항목 | 내용 |
 | --- | --- |
-| 공개 버전 | **v0.9.0** · 호출형 스킬 |
-| main 브랜치 | **0.10.0-candidate.local** · KP 코어와 L1~L4 출력 구조를 제공한다. |
+| 현재 버전 | **v0.10.0** · 호출형 스킬 · KP 코어와 L1~L4 출력 형식 |
 | 호출 | Codex `$korean-protocol` · Claude Code `/korean-protocol` |
 | 적용 범위 | 호출한 대화에만 적용한다. 자동 호출은 꺼져 있다. |
 | 설치 범위 | 사용자 범위에 설치하면 같은 계정의 다른 프로젝트에서도 호출한다. |
 | 기존 v0.7.0 | 상시 지침이다. 스킬과 함께 켜면 중복 적용되므로 [규약만 OFF로 전환](INSTALL.md#기존-07-상시-지침에서-전환한다)한다. |
 
-[설치](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [v0.7에서 전환](INSTALL.md#기존-07-상시-지침에서-전환한다) · [v0.9.0 검증 기록](evaluation/clarity-20261016-r60/README.md) · [릴리스](https://github.com/project820/korean-protocol/releases)
+[설치](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [v0.7에서 전환](INSTALL.md#기존-07-상시-지침에서-전환한다) · [v0.10.0 변경·검증 상태](docs/distribution/output-formats-candidate-status.md) · [v0.9.0 검증 기록](evaluation/clarity-20261016-r60/README.md) · [릴리스](https://github.com/project820/korean-protocol/releases)
 
 ## KP 코어에 네 단계 출력 형식을 연결했다
 
-main 브랜치의 스킬은 KP 텍스트·표와 도식·단일 HTML·요청 시 영상 제작 코드를 지원하도록 개편한 `0.10.0-candidate`다. 공개 설치 기준은 위의 v0.9.0을 유지한다. 후보는 명시 호출과 기존 의미 보존 규칙을 유지하며, Stylefusion 연구를 반영한 기본형을 자체 포함한다. 기본형이 맞지 않으면 에이전트가 사용자 형식과 자료에 맞는 배치를 선택한다.
+v0.10.0은 기존 KP의 한국어 작성·의미 보존 규칙을 **L1 공통 기준**으로 두고, 필요할 때만 출력 형식을 바꾼다. 표의 셀, 도식의 라벨, HTML의 상태 문구, 영상의 내레이션에도 같은 규칙을 적용한다. 사용자가 형식을 지정하면 그 형식을 먼저 따른다.
 
-STE는 개발·개정의 독립 대조군으로만 사용한다. 정식 배포의 품질 게이트는 유지한다. 이번 로컬 설치는 사용자가 구조 적용을 먼저 하도록 지시해 기존 설치를 백업한 뒤 갱신했으며, 정식 비교 합격을 뜻하지 않는다. [개편 규칙 대응표](docs/spec/output-formats-rule-map.md), [평가 방법](evaluation/output_formats/README.md), [후보 패키지 안내](docs/distribution/output-formats-package.md)에서 구현과 검증 범위를 구분한다.
+| 단계 | 사용하는 경우 | 산출물 |
+| --- | --- | --- |
+| L1 | 기본값이다. | KP 문단·목록·절차 |
+| L2 | 아키텍처·프로세스·상태 변화·세 항목 이상 비교가 있을 때 | 표·Mermaid·ASCII 도식 |
+| L3 | 변수를 바꿔 보거나 상태를 전환해야 이해될 때, 또는 요청할 때 | 외부 의존성 없는 단일 `index.html` |
+| L4 | 영상·애니메이션을 명시 요청할 때만 | Manim 코드와 장면별 한국어 내레이션 |
+
+**v0.10.0의 원문·KP·STE 정식 비교는 완료하지 않았다.** 사용자 지시로 출력 구조를 먼저 배포한다. 중단한 비교에서는 생성 60건 중 59건이 도구 검사를 통과했고 1건은 서버 연결 종료로 완료되지 않았다. 익명 검토 10건에서 v0.10.0 후보의 의미는 9건 통과·1건 미해결, 형식은 10건 모두 통과했다. 미해결은 모호한 전언의 수식 범위를 표의 전달 경로 칸으로 확정한 사례이며, 이를 막는 지침을 보완했다. 보완본은 정식 비교를 거치지 않았다.
+
+STE는 개발·개정의 독립 대조군으로만 사용한다. [개편 규칙 대응표](docs/spec/output-formats-rule-map.md)는 기존 핵심 규칙 25개의 보존을, [변경·검증 상태](docs/distribution/output-formats-candidate-status.md)는 실험 기록과 한계를, [평가 방법](evaluation/output_formats/README.md)은 비교 도구를 설명한다.
 
 ## 설치한다
 
@@ -27,7 +35,7 @@ STE는 개발·개정의 독립 대조군으로만 사용한다. 정식 배포�
 
 ```text
 https://github.com/project820/korean-protocol 의 INSTALL.md를 읽어줘.
-Korean Protocol v0.9.0 스킬을 지금 사용하는 호스트의 사용자 범위에 설치해줘.
+Korean Protocol v0.10.0 스킬을 지금 사용하는 호스트의 사용자 범위에 설치해줘.
 다른 프로젝트에서도 호출할 수 있게 하고 자동 호출은 꺼줘.
 기존 0.7 상시 설치가 있으면 같은 설치의 관리 명령으로 규약만 OFF로 전환해줘.
 높임말·자동 갱신·신뢰 키와 다른 사용자 지침은 보존해줘.
@@ -88,12 +96,13 @@ v0.8.0 대비 변경은 다음과 같다.
 
 | 버전 | 형태 | 상태 |
 | --- | --- | --- |
-| **v0.9.0** | 호출형 스킬 | 현재 권장. 위 3자 비교 결과를 따르며 수락 기준은 통과하지 못했다. |
+| **v0.10.0** | 호출형 스킬 | 현재 권장. L1~L4 출력 형식을 추가했다. 정식 3자 비교는 완료하지 않았다. |
+| v0.9.0 | 호출형 스킬 | 이전 버전. 위 3자 비교 결과를 따르며 수락 기준은 통과하지 못했다. |
 | v0.8.0 | 호출형 스킬 | 이전 버전. [세션 보고서 비교](evaluation/session-reports-20261015/README.md) |
 | 중간본 `909dc9d` | 호출형 스킬 | v0.7.0과 v0.8.0 사이의 첫 스킬 검증본이다. 번호를 붙이지 않았다. [평가 기록](evaluation/field-report-20261015/README.md#보완-후보의-검증-범위를-밝힌다) |
 | v0.7.0 | 상시 지침·서명 배포 | 기존 사용자 유지용. 원본 `0.7.0-draft`, 서명 콘텐츠 `0.7.0·순번 3`, 엔진 `0.2.0`. [릴리스](https://github.com/project820/korean-protocol/releases/tag/v0.7.0) |
 
-평가 기록의 `r10`·`r11`·`r12`는 실험 회차 번호이며 공개 버전 번호가 아니다. `r10`은 중간본 `909dc9d`, `r12`는 v0.8.0이다. `r11`은 채택하지 않은 실험 후보다. `clarity-20261016-r60`은 v0.9.0의 후보다.
+평가 기록의 `r10`·`r11`·`r12`는 실험 회차 번호이며 공개 버전 번호가 아니다. `r10`은 중간본 `909dc9d`, `r12`는 v0.8.0이다. `r11`은 채택하지 않은 실험 후보다. `clarity-20261016-r60`은 v0.9.0의 후보다. `output_formats`의 `run-01`~`run-11`은 v0.10.0 출력 형식 개편의 평가 회차다.
 
 <details>
 <summary>v0.7.0 상시 지침의 상태를 확인한다.</summary>
@@ -114,7 +123,7 @@ v0.8.0 대비 변경은 다음과 같다.
 
 ## 문장과 구조를 함께 다듬는다
 
-**아래 표는 v0.7.0으로 생성한 과거 출력이며 v0.8.0·v0.9.0 출력이 아니다.** 같은 원문 6개를 Opus 5.5·medium에서 KP 0.7과 STE 원칙 적용본으로 한 번씩 생성했다. 출력 12건은 교정하지 않았다. 굵게 표시와 줄바꿈만 화면에 맞게 표시하며 각 셀에서 출력 원문을 연다.
+**아래 표는 v0.7.0으로 생성한 과거 출력이며 v0.8.0 이후의 출력이 아니다.** 같은 원문 6개를 Opus 5.5·medium에서 KP 0.7과 STE 원칙 적용본으로 한 번씩 생성했다. 출력 12건은 교정하지 않았다. 굵게 표시와 줄바꿈만 화면에 맞게 표시하며 각 셀에서 출력 원문을 연다.
 
 - 의미 검토: 11건 보존, 1건 보류. STE의 교육 신청 예문은 명단 제출자를 ‘신청자’로 표시했다. 원문이 두 역할의 관계를 정의하지 않아 보류했다.
 - KP 입력: 0.7 배포 프로필과 사전 2개 전체. 기존 대화와 설명용 답안은 넣지 않았다.
@@ -174,7 +183,7 @@ v0.8.0 대비 변경은 다음과 같다.
 | 목적 | 문서 |
 | --- | --- |
 | 설치·호출·전환 | [설치 안내](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [호출 확인](docs/distribution/on-demand-skill.md) · [호스트 지원](docs/distribution/host-support.md) |
-| 평가 기록 | [평가 규칙](evaluation/README.md) · [v0.9.0 60차 비교](evaluation/clarity-20261016-r60/README.md) · [v0.8.0 세션 보고서 비교](evaluation/session-reports-20261015/README.md) |
+| 평가 기록 | [평가 규칙](evaluation/README.md) · [v0.10.0 출력 형식 평가](evaluation/output_formats/README.md) · [v0.9.0 60차 비교](evaluation/clarity-20261016-r60/README.md) · [v0.8.0 세션 보고서 비교](evaluation/session-reports-20261015/README.md) |
 | 규칙과 어휘 | [한국어 세부 규칙](docs/spec/korean-rules.md) · [통제 어휘](docs/spec/lexicon.md) |
 | 기존 v0.7.0 관리 | [관리 설정](docs/distribution/application-controls.md) · [배포 계약](docs/distribution/README.md) · [채팅 안내](distribution/CHAT-START.md) |
 | 설계와 근거 | [문서 목차](docs/README.md) · [검증 상태](docs/status/requirements.md) · [연구 근거](docs/research-basis.md) |
