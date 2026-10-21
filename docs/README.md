@@ -1,6 +1,6 @@
 # Korean Protocol 문서를 찾는다
 
-현재 버전은 **v0.10.0 호출형 스킬**이다. 신규 사용자는 [스킬을 설치하고 호출](../INSTALL.md)한다. 기존 0.7 사용자는 [상시 지침을 끈 뒤 전환](../INSTALL.md#기존-07-상시-지침에서-전환한다)한다. v0.10.0은 L1~L4 출력 형식을 추가했다. 원문·KP·STE 정식 비교는 완료하지 않았으며 [변경·검증 상태](distribution/output-formats-candidate-status.md)에 기록했다. v0.9.0의 검증은 [60차 원문·KP·STE 비교](../evaluation/clarity-20261016-r60/README.md)를 따르며 수락 기준을 통과하지 못했다. v0.8.0의 검증은 [세션 보고서 비교](../evaluation/session-reports-20261015/README.md)에 있다.
+현재 버전은 **v0.10.1 호출형 스킬**이다. 신규 사용자는 [스킬을 설치하고 호출](../INSTALL.md)한다. 기존 0.7 사용자는 [상시 지침을 끈 뒤 전환](../INSTALL.md#기존-07-상시-지침에서-전환한다)한다. v0.10.0은 L1~L4 출력 형식을 추가했고 v0.10.1은 출력 문체와 분량 기준을 다듬었다. 원문·KP·STE 정식 비교는 완료하지 않았으며 [변경·검증 상태](distribution/output-formats-candidate-status.md)에 기록했다. v0.9.0의 검증은 [60차 원문·KP·STE 비교](../evaluation/clarity-20261016-r60/README.md)를 따르며 수락 기준을 통과하지 못했다. v0.8.0의 검증은 [세션 보고서 비교](../evaluation/session-reports-20261015/README.md)에 있다.
 
 기존 v0.7.0 상시 규약의 원본은 V7 이전 보완본 r2를 채택한 `0.7.0-draft`다. 서명 콘텐츠는 `0.7.0·순번 3`, 엔진은 `0.2.0`이다. 이 상시 규약의 발행·설치 상태와 기능 대응 설계 49개·검증 0개·부분 4개는 [검증 상태](status/requirements.md)를 따른다.
 
@@ -34,7 +34,7 @@
 
 | 검토할 내용 | 기록 |
 | --- | --- |
-| v0.10.0 출력 형식의 변경과 검증 상태를 확인한다. | [변경·검증 상태](distribution/output-formats-candidate-status.md)와 [규칙 대응표](spec/output-formats-rule-map.md)를 읽는다. |
+| v0.10.0·v0.10.1 출력 형식의 변경과 검증 상태를 확인한다. | [변경·검증 상태](distribution/output-formats-candidate-status.md)와 [규칙 대응표](spec/output-formats-rule-map.md)를 읽는다. |
 | v0.9.0 스킬의 비교 결과를 확인한다. | [60차 비교](../evaluation/clarity-20261016-r60/README.md)와 [평가 규칙](../evaluation/README.md)을 읽는다. v0.8.0은 [세션 보고서 비교](../evaluation/session-reports-20261015/README.md)를 읽는다. |
 | v0.7.0 상시 규약의 검증 상태를 확인한다. | [요구사항과 검증 상태](status/requirements.md)에서 완료와 미확인을 구분한다. |
 | V7 r2의 채택 이유를 확인한다. | [채택 기록](../experiments/v7/adoption.md)과 [고정 실험 기록](../experiments/v7/README.md)을 구분해 읽는다. |
