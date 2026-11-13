@@ -48,7 +48,7 @@ L3는 결과 패널을 입력 앞에 두는 화면 골격을 정했다.
 | 할 일 | 안내 |
 | --- | --- |
 | 설치 후 처음 사용한다. | [첫 사용 안내](distribution/quick-start.md)에서 스킬 설치·호출·적용 확인 방법을 읽는다. |
-| 문서 구조의 차이를 비교한다. | [원문·KP v0.11.0·STE 실제 출력](../README.md#문장과-구조를-함께-다듬는다) 여섯 사례를 세 열로 읽는다. v0.7.0 출력은 [이전 예문 비교](../evaluation/readme-model-comparison-20261015/README.md)에 있다. v0.8.0의 비교는 [세션 보고서 비교](../evaluation/session-reports-20261015/README.md)에 있다. |
+| 문서 구조의 차이를 비교한다. | [원문·KP v0.11.1·STE 실제 출력](../README.md#문장과-구조를-함께-다듬는다) 여섯 사례를 세 열로 읽는다. 이전 출력은 [v0.11.0 예문 비교](../evaluation/readme-model-comparison-20261113/README.md)와 [v0.7.0 예문 비교](../evaluation/readme-model-comparison-20261015/README.md)에 있다. v0.8.0의 비교는 [세션 보고서 비교](../evaluation/session-reports-20261015/README.md)에 있다. |
 | 코딩 에이전트에 설치한다. | [에이전트 설치 안내](../INSTALL.md)를 따른다. |
 | 기존 0.7에서 스킬로 전환한다. | [전환 절차](../INSTALL.md#기존-07-상시-지침에서-전환한다)에서 기존 규약만 OFF로 바꾼다. |
 | 사용할 도구를 고른다. | [빠른 시작](distribution/quick-start.md)에서 Codex·Claude Code의 호출문을 확인한다. |

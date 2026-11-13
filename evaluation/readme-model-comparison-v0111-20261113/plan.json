@@ -1,0 +1,29 @@
+{
+  "frozen_at": "2026-11-13T09:27:14.778133+00:00",
+  "source_tag": "v0.11.1",
+  "source_commit": "564c68f76e961e00e20cc2261b502f53cf0112b4",
+  "cases_origin": "evaluation/readme-model-comparison-20261015/cases.json (same six README sources)",
+  "cases_sha256": "9efe95b8270ca393e8ad05c63148328c9adf91be8abd147fc7f914dfc7513dda",
+  "model_requested": "anthropic/claude-opus-5-5",
+  "effort": "medium",
+  "temperature": "provider default (not sent)",
+  "seed": "not sent",
+  "samples_per_source_per_condition": 1,
+  "planned_calls": 12,
+  "source_count": 6,
+  "conditions": [
+    "kp",
+    "ste"
+  ],
+  "task": "다음 원문을 제공한 작성 지침에 따라 한국어로 정리해줘. 사실·조건·수치·기한·행위 주체·의무·자동 처리·확실성은 유지해줘. 정리한 본문만 출력하고 설명이나 자기 평가는 덧붙이지 마.",
+  "kp_inputs": {
+    "skills/korean-protocol/SKILL.md": "19ae7744da1d469225552b49e4108e52664f4f931c278d9f667c5ae7a4443604"
+  },
+  "ste_profile_origin": "evaluation/clarity-20261016-r60/ste.md (same STE profile as the v0.11.0 pilot and README comparison)",
+  "ste_profile_sha256": "a9066e658f8af38f5fa7d2c4e36fa9ad385d1bb8f7166cd945b304333c5525d7",
+  "runner_sha256": "604c234189a43ac3d92191e607230bfd6d834c3af72781e257a97b5ccbaf8723",
+  "output_policy": "Keep first completed response unchanged, including semantic failures; no automatic retry.",
+  "isolation": "Each request contains one user message, its condition and one source. No CLI, tools, memory, AGENTS, prior responses or authored example answers are loaded. Provider system defaults and proxy translation are outside this boundary.",
+  "scope": "KP v0.11.1 SKILL.md is supplied as text; referenced files are not loaded. This is a controlled prompt test, not an installation or invocation test. STE is a Korean adaptation of public principles, not full English-standard conformance.",
+  "review_policy": "Compare every source proposition in both directions, including conditions, scope, actor, deadlines, modality, automatic actions and uncertainty. Keep review separate from outputs."
+}

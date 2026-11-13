@@ -11,7 +11,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location(
-    "readme_comparison", ROOT / "evaluation/readme-model-comparison-20261113/render.py"
+    "readme_comparison", ROOT / "evaluation/readme-model-comparison-v0111-20261113/render.py"
 )
 renderer = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(renderer)
@@ -158,8 +158,8 @@ class TableTests(unittest.TestCase):
 class FrozenExperimentTests(unittest.TestCase):
     """Check shipped evidence, rather than claiming a synthetic model result."""
 
-    directory = ROOT / "evaluation/readme-model-comparison-20261113"
-    link_prefix = "evaluation/readme-model-comparison-20261113/outputs"
+    directory = ROOT / "evaluation/readme-model-comparison-v0111-20261113"
+    link_prefix = "evaluation/readme-model-comparison-v0111-20261113/outputs"
 
     def assert_public_evidence_matches_frozen_plan(self, directory):
         # Public hashes/labels bind the displayed sources and arms to the frozen
@@ -241,14 +241,24 @@ class FrozenExperimentTests(unittest.TestCase):
         renderer.verify_table(readme[start:end], cases, self.directory / "outputs", self.link_prefix)
 
 
+class V0110FrozenExperimentTests(FrozenExperimentTests):
+    """Keep the v0.11.0 comparison evidence verifiable after README moved to v0.11.1."""
+
+    directory = ROOT / "evaluation/readme-model-comparison-20261113"
+    link_prefix = "evaluation/readme-model-comparison-20261113/outputs"
+
+    def test_readme_table_matches_six_sources_and_twelve_actual_outputs(self):
+        self.skipTest("README shows the v0.11.1 comparison")
+
+
 class LegacyFrozenExperimentTests(FrozenExperimentTests):
-    """Keep the v0.7.0 comparison evidence verifiable after README moved to v0.11.0."""
+    """Keep the v0.7.0 comparison evidence verifiable after README moved to v0.11.1."""
 
     directory = ROOT / "evaluation/readme-model-comparison-20261015"
     link_prefix = "evaluation/readme-model-comparison-20261015/outputs"
 
     def test_readme_table_matches_six_sources_and_twelve_actual_outputs(self):
-        self.skipTest("README shows the v0.11.0 comparison")
+        self.skipTest("README shows the v0.11.1 comparison")
 
 
 if __name__ == "__main__":

@@ -29,6 +29,8 @@ STE는 필수 대조군이지만 변환 출력 자체가 정답은 아니다. ST
 | 허락·지시의 평정 이견을 확인한다. | [진단 보고서](llm/permission-diagnostic-20261012/report.md)와 [재판정](llm/permission-adjudication.md)을 읽는다. |
 | 압축 문체의 비교와 보완을 확인한다. | [규약·미적용·STE 비교](llm/controlled-korean-20261013/report.md)와 [새 입력 평가](llm/fresh-controlled-20261013/report.md)를 읽는다. |
 | 실제 Codex 세션 보고서로 원문·KP·STE를 비교한다. | [세션 보고서 비교](session-reports-20261015/README.md)를 읽는다. |
+| README 예문의 원문·KP·STE 출력을 비교한다. | [v0.11.1 예문 비교](readme-model-comparison-v0111-20261113/README.md)가 현재 README 표의 근거다. 이전 출력은 [v0.11.0 예문 비교](readme-model-comparison-20261113/README.md)와 [v0.7.0 예문 비교](readme-model-comparison-20261015/README.md)에 있다. |
+| v0.11 계열의 진단 결과를 확인한다. | [v0.11.1 형식 준수 진단](kp-v0111-output-formats-20261113/README.md)과 [v0.11.0 진단용 파일럿](kp-lean-pilot-20261113/README.md)을 읽는다. 둘 다 정식 3자 비교가 아니다. |
 | 0.3.0의 공개 갱신과 코드 이관을 확인한다. | [공개 업그레이드](release-0.3.0-20261013/public-upgrade.md)와 [구버전 관리 코드 이관](release-0.3.0-20261013/historical-helper-migration.md)을 구분한다. |
 
 더 많은 연구·평가의 연결 경로는 [근거 모음](../docs/status/research-evidence.md)에 있다. V7의 고정 프로필과 실패 집계는 [실험 기록](../experiments/v7/README.md)에서 관리한다.
