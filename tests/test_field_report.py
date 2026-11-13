@@ -448,6 +448,7 @@ class FieldReportTests(unittest.TestCase):
                     sock.sendall(b'HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n'
                                  b'4\r\nkept\r\n0\r\n')
                     chunk = b'X-Drip: x\r\n'
+                sock.sendall(chunk)
                 while not stop.wait(.025):
                     sock.sendall(chunk)
             with local_http(respond) as (url, _):
