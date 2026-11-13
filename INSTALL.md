@@ -1,41 +1,56 @@
 # Korean Protocol을 스킬로 설치하고 호출한다
 
-신규 사용자는 **Korean Protocol v0.10.1 호출형 스킬**을 설치한다. 사용자 범위에 설치하면 같은 컴퓨터·사용자 계정의 다른 프로젝트에서도 쓴다. 기존 **v0.7.0 상시 지침과는 별개**다. 0.7 ZIP·서명 콘텐츠·자동 갱신기에는 이 스킬이 없다.
+원문·KP·STE 정식 비교는 **미완료**다.
 
-v0.10.1은 v0.10.0의 L1~L4 출력 형식을 다듬은 버전이다. L1~L4 출력 형식의 참조 문서 3개, HTML 예제와 HTML 검사 스크립트를 함께 설치한다. 아래 파일 목록 13개를 모두 복사한다. 해시를 검증한 ZIP으로 설치하려면 [후보 패키지 절차](docs/distribution/output-formats-package.md)를 사용한다.
+**Korean Protocol v0.11.0은 사용자 범위에 설치하고 필요할 때 호출한다.**
+같은 컴퓨터·사용자 계정의 다른 프로젝트에서도 쓴다.
+자동 호출은 꺼져 있다.
 
-## 설치할 호스트를 고른다
+## 준비: 호스트와 설치 기준을 확인한다
 
 | 호스트 | 사용자 스킬 위치 | 호출문 |
 | --- | --- | --- |
 | Codex | `~/.agents/skills/korean-protocol/` | `$korean-protocol 이 보고서를 정리해줘.` |
 | Claude Code | `~/.claude/skills/korean-protocol/` | `/korean-protocol 이 보고서를 정리해줘.` |
 
-사용자가 요청한 호스트만 설치한다. 두 곳 모두 요청받으면 각 위치에 설치한다. Claude Code가 별도 `CLAUDE_CONFIG_DIR`을 쓰면 그 설정 디렉터리의 `skills/`를 사용한다. 다른 기기·원격 호스트·ChatGPT로 자동 전달하지 않는다. [공식 Codex 위치](https://learn.chatgpt.com/docs/build-skills)와 [Claude Code 위치·호출 설정](https://code.claude.com/docs/en/skills)을 따른다.
+요청한 호스트만 설치한다. 두 곳 모두 요청받으면 각각 설치한다.
+Claude Code가 별도 `CLAUDE_CONFIG_DIR`을 쓰면 그 아래 `skills/`를 사용한다.
+[Codex 위치](https://learn.chatgpt.com/docs/build-skills)와 [Claude Code 위치·호출 설정](https://code.claude.com/docs/en/skills)을 따른다.
 
-## v0.10.1 스킬을 설치한다
-
-1. 아래 **기존 0.7 전환 절차**로 상시 설치 여부를 확인한다. 설치가 있으면 규약만 OFF로 전환한다.
-2. 저장소 태그 `v0.10.1`에서 스킬과 참고 파일을 함께 복사한다.
-3. Codex의 `allow_implicit_invocation: false`를 유지한다. Claude Code에는 `disable-model-invocation: true`와 `user-invocable: true`를 YAML에 추가한다. 규약 본문은 바꾸지 않는다.
-4. 새 대화에서 스킬 발견과 짧은 실제 호출을 확인한다.
-
-설치 기준은 태그와 `SKILL.md`의 SHA-256이다. 이동하는 `main`을 설치 기준으로 쓰지 않는다.
+설치 기준은 고정 태그와 `SKILL.md`의 SHA-256이다.
 
 ```text
-태그: v0.10.1
-SKILL.md SHA-256: 49f7bb51ca1cbef5d7256b2a3dfff311cd945052c4339d59cc8795541a3b6495
+태그: v0.11.0
+SKILL.md SHA-256: c09172014b872636afad1cac194e9c634a99e9fe165711cdd405a5249dd983c6
 ```
 
-새 디렉터리에 복제한다. 이미 복제한 저장소의 변경 사항을 지우거나 강제로 덮어쓰지 않는다.
+## v0.11.0 스킬을 설치한다
 
-```sh
-git clone https://github.com/project820/korean-protocol.git korean-protocol-skill
-cd korean-protocol-skill
-git checkout --detach v0.10.1
+1. **기존 0.7 상시 설치 여부를 확인한다.**
+   설치가 있으면 아래 전환 절차로 규약만 OFF로 바꾼다.
+2. **새 디렉터리에 저장소를 복제한다.**
+   기존 복제본의 변경 사항은 보존한다.
+
+   ```sh
+   git clone https://github.com/project820/korean-protocol.git korean-protocol-skill
+   cd korean-protocol-skill
+   git checkout --detach v0.11.0
+   ```
+
+3. **해시를 검증하고 파일 13개를 복사한다.**
+   [수동 복사 명령](docs/distribution/on-demand-skill.md#검증한-파일을-복사한다)을 저장소 루트에서 실행한다.
+   기존 스킬 폴더가 있으면 아래 갱신 절차를 먼저 따른다.
+4. **새 대화에서 스킬을 호출한다.**
+   [확인 예문](docs/distribution/on-demand-skill.md#설치와-호출을-확인한다)으로 설치와 출력을 확인한다.
+
+Codex는 `allow_implicit_invocation: false`를 유지한다.
+Claude Code에는 수동 호출용 YAML만 추가한다.
+규약 본문은 유지한다.
+
+```yaml
+disable-model-invocation: true
+user-invocable: true
 ```
-
-[수동 복사 명령](docs/distribution/on-demand-skill.md#검증한-파일을-복사한다)은 태그의 파일을 읽고 해시를 대조한 뒤 사용자 범위에 설치한다. 기존 폴더가 있으면 중단한다. 파일을 직접 복사할 때도 아래 파일 목록과 호스트 설정을 따른다.
 
 | 원본 파일 | 스킬 폴더에 둘 위치 |
 | --- | --- |
@@ -52,7 +67,6 @@ git checkout --detach v0.10.1
 | `lexicon/domains/software.json` | `lexicon/domains/software.json` |
 | `LICENSE`·`NOTICE.md` | 같은 파일명을 유지한다. |
 
-참고 파일은 드문 표현 판단에만 조회하며 매번 전체를 읽지 않는다. 출력 형식 참조는 해당 형식을 선택한 경우에만 읽는다. 설치 폴더가 있으면 차이와 출처를 먼저 확인한다. 기존 파일은 백업하고 사용자의 수정 여부를 확인하기 전까지 교체하지 않는다.
 
 ## 기존 0.7 상시 지침에서 전환한다
 
@@ -87,17 +101,65 @@ Claude Code는 모든 명령의 `--host codex`를 `--host claude-code`로 바꾼
 | Codex | `$korean-protocol 아래 원문을 의미와 조건을 유지하며 정리해줘.` |
 | Claude Code | `/korean-protocol 아래 원문을 의미와 조건을 유지하며 정리해줘.` |
 
-호출문 뒤에 원문이나 파일을 제공한다. 자동 호출은 꺼 두며, 사용하지 않을 때는 새 대화에서 호출하지 않는다. 높임말은 “높임말로 써줘”처럼 요청한다. 0.7의 높임말 설정을 스킬이 읽거나 동기화하지 않는다.
+호출문 뒤에 원문이나 파일을 제공한다.
+높임말은 “높임말로 써줘”처럼 요청한다.
+스킬을 사용하지 않을 때는 새 대화에서 호출하지 않는다.
 
-[확인 예문](docs/distribution/on-demand-skill.md#설치와-호출을-확인한다)으로 파일·발견·호출·출력을 나눠 검사한다. 스킬 목록에 없으면 호스트를 다시 시작한다. 모델의 자기 선언만으로 적용을 확인하지 않는다.
+[확인 예문](docs/distribution/on-demand-skill.md#설치와-호출을-확인한다)으로 다음 항목을 각각 확인한다.
 
-## 갱신과 검증 범위를 구분한다
+- **설치 파일:** `INSTALLATION.json`의 커밋·해시와 실제 파일을 대조한다.
+- **호스트 발견:** 새 대화의 스킬 목록을 확인한다.
+- **실제 호출:** 읽기·호출 기록과 출력의 의미·조건 보존을 확인한다.
 
-스킬은 태그 `v0.10.1`에 고정한 **수동 설치**다. 자동 갱신하지 않는다. 새 버전으로 바꾸려면 설치 파일의 출처·차이를 확인하고 백업한 뒤 교체한다. 서명된 0.7 콘텐츠의 발행자 인증이나 자동 갱신은 이 복사본에 적용되지 않는다.
+스킬 목록에 없으면 호스트를 다시 시작한다.
+모델의 자기 선언만으로 적용을 확인하지 않는다.
 
-v0.10.0 이하 또는 중간본 `909dc9d` 스킬을 설치한 사용자는 기존 폴더를 백업한 뒤 위 절차로 v0.10.1 파일을 복사한다. 두 설치의 `INSTALLATION.json`에 남은 커밋으로 출처를 구분한다.
+## 기존 v0.10.1 스킬을 갱신한다
 
-v0.10.1의 원문·KP·STE 정식 비교는 완료하지 않았다. 중단한 비교의 결과와 한계는 [변경·검증 상태](docs/distribution/output-formats-candidate-status.md)에 있다. v0.9.0의 [원문·KP·STE 비교](evaluation/clarity-20261016-r60/README.md)는 수락 기준을 통과하지 못했다. 호스트 설치 확인은 비교와 별도다. 비교 결과는 모든 호스트·운영체제·문서의 준수를 입증하지 않는다. ChatGPT와 기존 0.7 오프라인 패키지는 아래의 기존 관리 경로를 사용한다.
+스킬은 태그에 고정한 **수동 설치**다. 자동 갱신기는 없다.
+v0.10.1 이하와 중간본 `909dc9d`도 다음 절차로 교체한다.
+
+1. **기존 설치의 출처와 차이를 확인한다.**
+   `INSTALLATION.json`의 커밋과 사용자 수정 내용을 확인한다.
+2. **기존 스킬 폴더를 백업한다.**
+   원래 설치 경로를 비운 뒤 위 복사 명령을 실행한다.
+3. **v0.11.0 설치와 호출을 확인한다.**
+   새 `INSTALLATION.json`과 실제 파일을 대조하고 새 대화에서 호출한다.
+
+## v0.11.0의 변경과 검증 범위를 확인한다
+
+v0.11.0은 코어 앞에 0절 “읽는 형태를 맞춘다”를 추가했다.
+작업 결과 보고의 요청자 결정 사항은 마지막 절에 두도록 보강했다.
+설치 파일 구성은 v0.10.1과 같으며 `SKILL.md`만 바뀌었다.
+
+- **문서 골격:** 고지와 결론을 앞에 두고 참고를 맨 아래 둔다.
+- **절차와 문장:** 굵은 핵심 행동과 세부를 나누고 중복을 줄인다.
+- **의미 보존:** 문장을 나눌 때 수식어·수량·기한을 원래 대상에 붙인다.
+
+[진단용 파일럿](evaluation/kp-lean-pilot-20261113/README.md)에서 사용자가 2026-11-13에 후보 5를 채택했다.
+모델 검토의 수락 기준을 통과해 채택한 결과가 아니다.
+v0.11.0의 의미 통과는 17/20이며 의미 실패 3건이 남았다.
+
+사례 5개·반복 1회·검토 모델 1개의 결과다.
+후보와 검토 기준에 같은 사용자 의견을 반영해 명료성 수치가 후보에 유리하다.
+일부 예시도 파일럿 사례에서 왔으며 사람 읽기 시간은 **미측정**이다.
+
+## 참고
+
+`SKILL.md`는 `o200k_base` 6,453토큰, `cl100k_base` 9,729토큰이다.
+크기는 이전 버전보다 약 38% 늘었다.
+의미 경계 참고 파일은 판단이 필요할 때만 읽는다.
+출력 형식 참조는 해당 형식을 선택할 때만 읽는다.
+
+**과거 기록:** v0.10.0은 L2~L4 출력 매체를 추가했다.
+v0.10.1은 문장과 출력 형식 기준을 다듬었다.
+두 버전의 정식 비교는 [변경·검증 상태](docs/distribution/output-formats-candidate-status.md)에 남겼다.
+후보 ZIP의 검증·설치 조건은 [패키지 기록](docs/distribution/output-formats-package.md)에 남겼다.
+[v0.9.0 비교](evaluation/clarity-20261016-r60/README.md)는 수락 기준을 통과하지 못했다.
+
+로컬 스킬은 다른 기기·원격 호스트·ChatGPT로 자동 전달되지 않는다.
+0.7의 높임말 설정과 서명 검증·자동 갱신은 스킬에 적용되지 않는다.
+기존 0.7 ZIP·채팅 파일·관리 명령은 아래 절차로 유지한다.
 
 <details>
 <summary>기존 0.7 상시 설치·서명·자동 갱신 명령을 확인한다.</summary>

@@ -1,10 +1,28 @@
 # Korean Protocol 문서를 찾는다
 
-현재 버전은 **v0.10.1 호출형 스킬**이다. 신규 사용자는 [스킬을 설치하고 호출](../INSTALL.md)한다. 기존 0.7 사용자는 [상시 지침을 끈 뒤 전환](../INSTALL.md#기존-07-상시-지침에서-전환한다)한다. v0.10.0은 L1~L4 출력 형식을 추가했고 v0.10.1은 출력 문체와 분량 기준을 다듬었다. 원문·KP·STE 정식 비교는 완료하지 않았으며 [변경·검증 상태](distribution/output-formats-candidate-status.md)에 기록했다. v0.9.0의 검증은 [60차 원문·KP·STE 비교](../evaluation/clarity-20261016-r60/README.md)를 따르며 수락 기준을 통과하지 못했다. v0.8.0의 검증은 [세션 보고서 비교](../evaluation/session-reports-20261015/README.md)에 있다.
+이 목차는 main의 현행 문서를 안내한다. 날짜가 붙은 기록은 당시 상태를 보존한다.
 
-기존 v0.7.0 상시 규약의 원본은 V7 이전 보완본 r2를 채택한 `0.7.0-draft`다. 서명 콘텐츠는 `0.7.0·순번 3`, 엔진은 `0.2.0`이다. 이 상시 규약의 발행·설치 상태와 기능 대응 설계 49개·검증 0개·부분 4개는 [검증 상태](status/requirements.md)를 따른다.
+**현재 권장 버전은 v0.11.0 호출형 스킬이다.** 신규 사용자는 [설치 안내](../INSTALL.md)를 따른다. 기존 0.7 사용자는 [상시 지침을 끈 뒤 전환](../INSTALL.md#기존-07-상시-지침에서-전환한다)한다.
 
-이 목차는 main의 현행 문서를 안내한다. [v0.7.0 다운로드](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)의 ZIP과 첨부 파일은 설치 도구·안내 원본 `7e01d53`에서 고정했으며 이후 문서 개정이 자동 반영되지 않는다.
+- **설치 기준:** 태그 `v0.11.0`을 사용한다.
+- **파일 확인:** `skills/korean-protocol/SKILL.md`의 SHA-256은 아래 값을 기준으로 확인한다.
+
+  ```text
+  c09172014b872636afad1cac194e9c634a99e9fe165711cdd405a5249dd983c6
+  ```
+
+- **호출:** Codex는 `$korean-protocol`, Claude Code는 `/korean-protocol`을 사용한다. 자동 호출은 꺼져 있다.
+- **설치 방식:** 사용자 범위에 수동 설치한다. 자동 갱신기는 없다.
+
+## v0.11.0의 변경과 한계를 확인한다
+
+0절 「읽는 형태를 맞춘다」를 추가했다. 문서 골격과 절차 배치를 정하고 중복 설명을 줄인다. 문장을 나눌 때 수식어·수량의 대상을 유지하도록 보강했다.
+
+**사용자가 2026-11-13에 비교 화면을 읽고 후보 5를 채택했다.** 정식 원문·KP·STE 비교는 **미완료**다.
+
+진단용 파일럿에서 v0.11.0의 의미 통과는 17/20이었다. v0.10.1은 19/20, STE는 17/20이었다. 남은 의미 실패는 한정 조건 이동 1건과 원문에 없는 관계·결정 추가 2건이다.
+
+검토 기준에는 후보 작성에 사용한 판독 의견도 반영됐다. 명료성 판정은 후보에 유리하다. 상세 조건과 한계는 [진단용 파일럿](../evaluation/kp-lean-pilot-20261113/README.md)에서 확인한다.
 
 ## 설치하고 사용한다
 
@@ -34,7 +52,8 @@
 
 | 검토할 내용 | 기록 |
 | --- | --- |
-| v0.10.0·v0.10.1 출력 형식의 변경과 검증 상태를 확인한다. | [변경·검증 상태](distribution/output-formats-candidate-status.md)와 [규칙 대응표](spec/output-formats-rule-map.md)를 읽는다. |
+| v0.11.0과 이전 출력 형식의 변경·검증 상태를 확인한다. | [변경·검증 상태](distribution/output-formats-candidate-status.md)와 [규칙 대응표](spec/output-formats-rule-map.md)를 읽는다. |
+| v0.11.0의 진단 조건과 의미 실패를 확인한다. | [진단용 파일럿](../evaluation/kp-lean-pilot-20261113/README.md)을 읽는다. |
 | v0.9.0 스킬의 비교 결과를 확인한다. | [60차 비교](../evaluation/clarity-20261016-r60/README.md)와 [평가 규칙](../evaluation/README.md)을 읽는다. v0.8.0은 [세션 보고서 비교](../evaluation/session-reports-20261015/README.md)를 읽는다. |
 | v0.7.0 상시 규약의 검증 상태를 확인한다. | [요구사항과 검증 상태](status/requirements.md)에서 완료와 미확인을 구분한다. |
 | V7 r2의 채택 이유를 확인한다. | [채택 기록](../experiments/v7/adoption.md)과 [고정 실험 기록](../experiments/v7/README.md)을 구분해 읽는다. |
@@ -45,4 +64,12 @@
 | 초기 규약과 개발 순서를 확인한다. | [초기 12개 규칙](protocol-draft.md)과 [2026-10-13까지의 연혁](status/chronology-20261013.md)을 읽는다. |
 | 공개 전 보안 점검을 확인한다. | [V7 보안 감사](security/v7-audit.md)에서 검사 범위와 남은 항목을 확인한다. |
 
-날짜가 붙은 평가·배포 기록과 `experiments/v7`의 고정 파일은 당시 상태를 보존한다. 현재 규칙으로 과거 해시·실패 결과를 덮어쓰지 않는다. 문서 배치와 근거는 [문서 설계 기록](maintenance/documentation-design.md)에 남긴다. [공개 파일 점검](maintenance/repository-inventory.md)은 보존할 평가 기록과 로컬에 둘 생성물을 구분한다.
+## 참고
+
+- **v0.10.0·v0.10.1:** L1~L4 출력 형식과 문체를 다듬은 이전 버전이다. 기록은 [변경·검증 상태](distribution/output-formats-candidate-status.md)에 있다.
+- **v0.9.0:** 정식 3자 비교의 수락 기준을 통과하지 못했다. [60차 비교](../evaluation/clarity-20261016-r60/README.md)를 보존한다.
+- **v0.7.0:** 상시 규약 원본은 `0.7.0-draft`다. 서명 콘텐츠는 `0.7.0·순번 3`, 엔진은 `0.2.0`이다.
+- **기존 발행물:** [v0.7.0 ZIP](https://github.com/project820/korean-protocol/releases/tag/v0.7.0)은 설치 도구·안내 원본 `7e01d53`에서 고정했다. 이후 문서 개정은 자동 반영되지 않는다.
+- **문서 관리:** 배치 근거는 [문서 설계 기록](maintenance/documentation-design.md)에 남긴다. 보존 범위는 [공개 파일 점검](maintenance/repository-inventory.md)에서 확인한다.
+
+`experiments/v7`의 고정 파일도 당시 상태를 보존한다. 현재 규칙으로 과거 해시·실패 결과를 덮어쓰지 않는다.
