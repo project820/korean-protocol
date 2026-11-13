@@ -1,6 +1,6 @@
 # Korean Protocol
 
-Korean Protocol은 ASD-STE100에서 출발한 독립 규약이며 공식 한국어판이 아니다.
+Korean Protocol은 ASD-STE100에서 출발한 독립 규약이다. ASD-STE100 공식 한국어판과 별개다.
 
 **한국어 답변에서 대상·판단·조건·기한을 바로 찾게 한다.**
 
@@ -14,7 +14,7 @@ Korean Protocol(KP)은 Codex·Claude Code에서 **필요할 때 호출하는 한
 | 설치 범위 | 사용자 범위에 설치하면 같은 계정의 다른 프로젝트에서도 호출한다. |
 | 기존 v0.7.0 | 상시 지침이다. 스킬과 함께 켜면 중복 적용되므로 [규약만 OFF로 전환](INSTALL.md#기존-07-상시-지침에서-전환한다)한다. |
 
-[설치](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [v0.7에서 전환](INSTALL.md#기존-07-상시-지침에서-전환한다) · [v0.11.0 변경·검증 상태](docs/distribution/output-formats-candidate-status.md) · [v0.9.0 검증 기록](evaluation/clarity-20261016-r60/README.md) · [릴리스](https://github.com/project820/korean-protocol/releases)
+[설치](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [v0.7에서 전환](INSTALL.md#기존-07-상시-지침에서-전환한다) · [v0.11.0 변경·검증 상태](docs/distribution/output-formats-candidate-status.md) · [v0.11.0 예문 비교](#문장과-구조를-함께-다듬는다) · [릴리스](https://github.com/project820/korean-protocol/releases)
 
 ## v0.11.0은 읽는 형태를 다듬었다
 
@@ -42,6 +42,66 @@ Korean Protocol(KP)은 Codex·Claude Code에서 **필요할 때 호출하는 한
 - **크기:** `SKILL.md`는 `o200k_base` 6,453토큰이다. v0.10.1의 4,683토큰보다 약 38% 늘었다.
 
 변경 경과는 [변경·검증 상태](docs/distribution/output-formats-candidate-status.md)에 기록한다. 조건별 결과와 한계는 [진단용 파일럿](evaluation/kp-lean-pilot-20261113/README.md)에서 확인한다.
+
+## 문장과 구조를 함께 다듬는다
+
+**아래 표는 v0.11.0 출력이다.** 같은 원문 6개를 Opus 5.5·medium에서 KP v0.11.0과 STE 원칙 적용본으로 한 번씩 생성했다. 출력 12건은 고치지 않았다. 굵게 표시와 줄바꿈만 화면에 맞게 바꿨고, 각 셀에서 출력 원문을 연다.
+
+- **의미 검토:** 12건 모두 보존이다. GPT-6.1 Sol·high가 조건명을 가리고 판정했다.
+- **KP 입력:** 태그 `v0.11.0`의 `SKILL.md` 전체다.
+- **STE 입력:** [ASD-STE100 공식 설명](https://asd-ste100.org/STE_faq.html)의 공개 원칙을 한국어에 적용한 실험 지침이다. v0.11.0 파일럿과 같은 지침이다.
+- **실행 조건·해시:** [v0.11.0 예문 비교 기록](evaluation/readme-model-comparison-20261113/README.md)
+- **v0.7.0 출력:** [이전 예문 비교 기록](evaluation/readme-model-comparison-20261015/README.md)에 보존한다.
+
+짧은 예문 6개의 예시다. v0.11.0의 원문·KP·STE 정식 비교는 **미완료**다.
+
+[대상 목록](#1-반납-대상을-먼저-찾는다) · [신청 방식](#2-신청-방식별-조건을-묶는다) · [조건부 처리](#3-조건과-후속-처리를-묶는다) · [기한 예외](#4-기한의-기산점과-예외를-구분한다) · [실패 보고](#5-실행-성공과-의미-오류를-구분한다) · [미확인 상태](#6-표기-없음과-지정-없음을-구분한다)
+
+<table>
+<thead>
+<tr><th width="33%" scope="col" nowrap>원문 · 사실과 조건의 기준</th><th width="33%" scope="col" nowrap>Korean Protocol 0.11</th><th width="33%" scope="col" nowrap>STE 원칙 적용 · 한국어 참고</th></tr>
+</thead>
+<tbody>
+<tr><th colspan="3" align="left"><a id="1-반납-대상을-먼저-찾는다"></a>1. 반납 대상을 먼저 찾는다</th></tr>
+<tr>
+<td valign="top">반납 대상은 노트북, 모니터, 출입카드이며 접수 담당은 총무팀이다. 접수 마감은 7월 5일 18:00이다.</td>
+<td valign="top">- <strong>반납 대상:</strong><br>  - 노트북<br>  - 모니터<br>  - 출입카드<br>- <strong>접수 담당:</strong> 총무팀<br>- <strong>접수 마감:</strong> 7월 5일 18:00<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/01-kp.txt">모델 출력 원문</a></td>
+<td valign="top">반납 대상은 다음과 같다.<br><br>- 노트북<br>- 모니터<br>- 출입카드<br><br>접수 담당은 총무팀이다.<br><br>접수 마감은 7월 5일 18:00이다.<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/01-ste.txt">모델 출력 원문</a></td>
+</tr>
+<tr><th colspan="3" align="left"><a id="2-신청-방식별-조건을-묶는다"></a>2. 신청 방식별 조건을 묶는다</th></tr>
+<tr>
+<td valign="top">교육 신청은 포털 신청과 부서 취합으로 나뉜다. 참석자가 20명 이상인 정기 과정은 본인이 포털에서 직접 신청하며 마감은 마감일 18:00이다. 소규모 실습이나 외부 강사 과정은 부서 담당자가 명단을 취합해 과정 시작 5영업일 전까지 제출한다. 법정 의무교육 대상자의 누락 여부는 신청 방식과 관계없이 자동 확인한다.</td>
+<td valign="top"><strong>교육 신청 방식 안내</strong><br><br>교육 신청은 포털 신청과 부서 취합으로 나뉜다.<br><br><strong>포털 신청</strong><br><br>- <strong>대상:</strong> 참석자가 20명 이상인 정기 과정<br>- <strong>신청:</strong> 본인이 포털에서 직접 신청한다.<br>- <strong>마감:</strong> 마감일 18:00<br><br><strong>부서 취합</strong><br><br>- <strong>대상:</strong> 소규모 실습이나 외부 강사 과정<br>- <strong>신청:</strong> 부서 담당자가 명단을 취합해 제출한다.<br>- <strong>마감:</strong> 과정 시작 5영업일 전까지<br><br><strong>법정 의무교육</strong><br><br>- <strong>누락 확인:</strong> 법정 의무교육 대상자의 누락 여부는 신청 방식과 관계없이 자동 확인한다.<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/02-kp.txt">모델 출력 원문</a></td>
+<td valign="top"><strong>교육 신청 방법</strong><br><br>교육 신청 방법은 포털 신청과 부서 취합 두 가지입니다.<br><br>| 과정 | 신청 방법 | 기한 |<br>|---|---|---|<br>| 참석자가 20명 이상인 정기 과정 | 참석자 본인이 포털에서 직접 신청합니다. | 마감일 18:00 |<br>| 소규모 실습 과정, 외부 강사 과정 | 부서 담당자가 명단을 모아 제출합니다. | 과정 시작 5영업일 전 |<br><br><strong>법정 의무교육 누락 확인</strong><br><br>법정 의무교육 대상자가 빠졌는지는 자동으로 확인됩니다. 이 확인은 신청 방법과 관계없이 이루어집니다.<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/02-ste.txt">모델 출력 원문</a></td>
+</tr>
+<tr><th colspan="3" align="left"><a id="3-조건과-후속-처리를-묶는다"></a>3. 조건과 후속 처리를 묶는다</th></tr>
+<tr>
+<td valign="top">확정자가 이용 24시간 전까지 취소하면 다음 대기자에게 자동 안내가 간다. 안내받은 대기자는 안내 수신 후 4시간 안에 응답해야 한다. 이 기한 안에 응답하지 않으면 다음 대기자에게 안내가 간다.</td>
+<td valign="top">- <strong>확정자가 이용 24시간 전까지 취소하면</strong> 다음 대기자에게 자동 안내가 간다.<br>- **안내받은 대기자**는 안내 수신 후 4시간 안에 응답해야 한다.<br>- <strong>이 기한 안에 응답하지 않으면</strong> 다음 대기자에게 안내가 간다.<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/03-kp.txt">모델 출력 원문</a></td>
+<td valign="top">확정자가 이용 24시간 전까지 취소하면 다음 대기자에게 안내가 자동으로 간다.<br><br>안내받은 대기자는 안내를 받은 후 4시간 안에 응답해야 한다.<br><br>대기자가 이 4시간 안에 응답하지 않으면 다음 대기자에게 안내가 간다.<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/03-ste.txt">모델 출력 원문</a></td>
+</tr>
+<tr><th colspan="3" align="left"><a id="4-기한의-기산점과-예외를-구분한다"></a>4. 기한의 기산점과 예외를 구분한다</th></tr>
+<tr>
+<td valign="top">승인 담당자는 알림함의 ‘수신 대기’ 목록을 확인한 뒤 4시간 안에 수신 확인을 남겨야 한다. 다만 근무시간 밖에 제출된 건은 이 4시간 기한 대신 다음 영업일 12:00까지 수신 확인을 남겨야 한다.</td>
+<td valign="top">- <strong>기본 기한:</strong> 승인 담당자는 알림함의 ‘수신 대기’ 목록을 확인한 뒤 4시간 안에 수신 확인을 남겨야 한다.<br>- <strong>근무시간 밖에 제출된 건:</strong> 승인 담당자는 이 4시간 기한 대신 다음 영업일 12:00까지 수신 확인을 남겨야 한다.<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/04-kp.txt">모델 출력 원문</a></td>
+<td valign="top"><strong>승인 담당자의 수신 확인 기한</strong><br><br><strong>기본 기한</strong><br>승인 담당자는 알림함의 &#x27;수신 대기&#x27; 목록을 확인한 뒤 4시간 안에 수신 확인을 남겨야 한다.<br><br><strong>예외: 근무시간 밖에 제출된 건</strong><br>이 건에는 4시간 기한을 적용하지 않는다. 승인 담당자는 다음 영업일 12:00까지 수신 확인을 남겨야 한다.<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/04-ste.txt">모델 출력 원문</a></td>
+</tr>
+<tr><th colspan="3" align="left"><a id="5-실행-성공과-의미-오류를-구분한다"></a>5. 실행 성공과 의미 오류를 구분한다</th></tr>
+<tr>
+<td valign="top">변환 12건은 모두 정상 실행되었다. 그러나 의미 검토에서 2건의 취소 조건 누락을 찾았다. 담당자는 해당 2건을 보완해야 한다. 재검토 전에는 배포할 수 없다.</td>
+<td valign="top">변환 12건은 모두 정상 실행됐다. 그러나 의미 검토에서 2건의 취소 조건 누락을 찾았다.<br><br>- <strong>보완:</strong> 담당자는 해당 2건을 보완해야 한다.<br>- <strong>배포:</strong> 재검토 전에는 배포할 수 없다.<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/05-kp.txt">모델 출력 원문</a></td>
+<td valign="top">변환 12건은 모두 정상 실행되었다.<br>그러나 의미 검토에서 취소 조건 누락 2건이 발견되었다.<br>담당자는 해당 누락 2건을 보완해야 한다.<br>재검토 전에는 배포할 수 없다.<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/05-ste.txt">모델 출력 원문</a></td>
+</tr>
+<tr><th colspan="3" align="left"><a id="6-표기-없음과-지정-없음을-구분한다"></a>6. 표기 없음과 지정 없음을 구분한다</th></tr>
+<tr>
+<td valign="top">자료에는 담당자가 표기되어 있지 않다. 담당자가 지정되었는지는 확인하지 못했다.</td>
+<td valign="top">- <strong>담당자 표기:</strong> 자료에 없다.<br>- <strong>담당자 지정 여부:</strong> <strong>미확인</strong><br><br><a href="evaluation/readme-model-comparison-20261113/outputs/06-kp.txt">모델 출력 원문</a></td>
+<td valign="top">자료에 담당자가 표기되어 있지 않다. 담당자가 지정되었는지는 확인하지 못했다.<br><br><a href="evaluation/readme-model-comparison-20261113/outputs/06-ste.txt">모델 출력 원문</a></td>
+</tr>
+</tbody>
+</table>
+
+모바일에서는 표를 좌우로 이동해 세 열을 비교한다. 사례별 판정과 구조 차이는 [비교 기록](evaluation/readme-model-comparison-20261113/README.md)에 있다.
 
 ## L1~L4에서 출력 형식을 고른다
 
@@ -119,83 +179,9 @@ v0.9.0은 정식 3자 비교를 완료했지만 수락 기준을 통과하지 �
 | v0.9.0 | 호출형 스킬 | 이전 버전. [60차 비교](evaluation/clarity-20261016-r60/README.md) 결과를 따르며 수락 기준은 통과하지 못했다. |
 | v0.8.0 | 호출형 스킬 | 이전 버전. [세션 보고서 비교](evaluation/session-reports-20261015/README.md) |
 | 중간본 `909dc9d` | 호출형 스킬 | v0.7.0과 v0.8.0 사이의 첫 스킬 검증본이다. 번호를 붙이지 않았다. [평가 기록](evaluation/field-report-20261015/README.md#보완-후보의-검증-범위를-밝힌다) |
-| v0.7.0 | 상시 지침·서명 배포 | 기존 사용자 유지용. 원본 `0.7.0-draft`, 서명 콘텐츠 `0.7.0·순번 3`, 엔진 `0.2.0`. [릴리스](https://github.com/project820/korean-protocol/releases/tag/v0.7.0) |
+| v0.7.0 | 상시 지침·서명 배포 | 기존 사용자 유지용. 원본 `0.7.0-draft`, 서명 콘텐츠 `0.7.0·순번 3`, 엔진 `0.2.0`. [릴리스](https://github.com/project820/korean-protocol/releases/tag/v0.7.0) · [채택 기록](experiments/v7/adoption.md) |
 
 평가 기록의 `r10`·`r11`·`r12`는 실험 회차 번호이며 공개 버전 번호가 아니다. `r10`은 중간본 `909dc9d`, `r12`는 v0.8.0이다. `r11`은 채택하지 않은 실험 후보다. `clarity-20261016-r60`은 v0.9.0의 후보다. `output_formats`의 `run-01`~`run-11`은 v0.10.0 출력 형식 개편의 평가 회차다.
-
-<details>
-<summary>v0.7.0 상시 지침의 상태를 확인한다.</summary>
-
-공개 배포본 `0.7.0`은 원본 `0.7.0-draft`에서 만들었다. `draft`는 연구·개발 품질 범위를 나타낸다.
-
-| 항목 | 상태 |
-| --- | --- |
-| 원본 버전 | **0.7.0-draft**. 규칙 72개·규칙 작성자 사례 296개·사전 193뜻. V7 이전 보완본 r2의 구조 규칙을 채택했다. |
-| 채택 기준 | 사용자가 r2의 가독성을 선택했다. 더 짧게 만든 r3는 채택하지 않았다. |
-| 콘텐츠 발행 | **0.7.0·순번 3**을 공개했다. 두 호스트의 서명 HTTPS 갱신과 기존 로컬 설치 갱신을 [검증했다](docs/distribution/public-0.7.0-verification.md). |
-| 기능 대응 | 현행 대응표는 설계 49개·검증 0개·부분 4개다. |
-| 효과 검증 | V7 실험의 의미 변경·미확정 결과가 남아 있다. 실제 독자 시험은 수행하지 않았다. |
-
-[채택 기록](experiments/v7/adoption.md)은 결정과 한계를, [고정 실험 기록](experiments/v7/README.md)은 당시 프로필과 실패 집계를 보존한다. 0.3.0 당시의 근거는 [연구·검증 기록](docs/status/research-evidence.md)에 있다.
-
-</details>
-
-## 문장과 구조를 함께 다듬는다
-
-**아래 표는 v0.7.0으로 생성한 과거 출력이며 v0.8.0 이후의 출력이 아니다.** 같은 원문 6개를 Opus 5.5·medium에서 KP 0.7과 STE 원칙 적용본으로 한 번씩 생성했다. 출력 12건은 교정하지 않았다. 굵게 표시와 줄바꿈만 화면에 맞게 표시하며 각 셀에서 출력 원문을 연다.
-
-- 의미 검토: 11건 보존, 1건 보류. STE의 교육 신청 예문은 명단 제출자를 ‘신청자’로 표시했다. 원문이 두 역할의 관계를 정의하지 않아 보류했다.
-- KP 입력: 0.7 배포 프로필과 사전 2개 전체. 기존 대화와 설명용 답안은 넣지 않았다.
-- STE 열: [ASD-STE100 공식 설명](https://asd-ste100.org/STE_faq.html)의 공개 원칙을 한국어에 적용한 실험이다.
-- 입력·출력 해시: [실행 조건·검토 결과](evaluation/readme-model-comparison-20261015/README.md)
-
-[대상 목록](#1-반납-대상을-먼저-찾는다) · [신청 방식](#2-신청-방식별-조건을-묶는다) · [조건부 처리](#3-조건과-후속-처리를-묶는다) · [기한 예외](#4-기한의-기산점과-예외를-구분한다) · [실패 보고](#5-실행-성공과-의미-오류를-구분한다) · [미확인 상태](#6-표기-없음과-지정-없음을-구분한다)
-
-<table>
-<thead>
-<tr><th width="33%" scope="col" nowrap>원문 · 사실과 조건의 기준</th><th width="33%" scope="col" nowrap>Korean Protocol 0.7</th><th width="33%" scope="col" nowrap>STE 원칙 적용 · 한국어 참고</th></tr>
-</thead>
-<tbody>
-<tr><th colspan="3" align="left"><a id="1-반납-대상을-먼저-찾는다"></a>1. 반납 대상을 먼저 찾는다</th></tr>
-<tr>
-<td valign="top">반납 대상은 노트북, 모니터, 출입카드이며 접수 담당은 총무팀이다. 접수 마감은 7월 5일 18:00이다.</td>
-<td valign="top"><strong>반납 대상</strong><br>- 노트북<br>- 모니터<br>- 출입카드<br><br>접수 기한: 7월 5일 18:00<br>접수 담당: 총무팀<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/01-kp.txt">모델 출력 원문</a></td>
-<td valign="top">반납 대상은 다음과 같다.<br><br>- 노트북<br>- 모니터<br>- 출입카드<br><br>접수 담당은 총무팀이다.<br><br>접수 마감은 7월 5일 18:00이다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/01-ste.txt">모델 출력 원문</a></td>
-</tr>
-<tr><th colspan="3" align="left"><a id="2-신청-방식별-조건을-묶는다"></a>2. 신청 방식별 조건을 묶는다</th></tr>
-<tr>
-<td valign="top">교육 신청은 포털 신청과 부서 취합으로 나뉜다. 참석자가 20명 이상인 정기 과정은 본인이 포털에서 직접 신청하며 마감은 마감일 18:00이다. 소규모 실습이나 외부 강사 과정은 부서 담당자가 명단을 취합해 과정 시작 5영업일 전까지 제출한다. 법정 의무교육 대상자의 누락 여부는 신청 방식과 관계없이 자동 확인한다.</td>
-<td valign="top">교육 신청은 포털 신청과 부서 취합으로 나뉜다.<br><br><strong>포털 신청</strong><br><br>- 대상: 참석자가 20명 이상인 정기 과정<br>- 신청 기한: 마감일 18:00<br>- 본인이 포털에서 직접 신청한다.<br><br><strong>부서 취합</strong><br><br>- 대상: 소규모 실습이나 외부 강사 과정<br>- 제출 기한: 과정 시작 5영업일 전까지<br>- 부서 담당자가 명단을 취합해 제출한다.<br><br><strong>두 방식 공통</strong><br><br>- 법정 의무교육 대상자의 누락 여부는 신청 방식과 관계없이 자동으로 확인한다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/02-kp.txt">모델 출력 원문</a></td>
-<td valign="top"><strong>교육 신청 방식</strong><br><br>교육 신청 방식은 포털 신청과 부서 취합 두 가지입니다.<br><br><strong>포털 신청</strong><br><br>- <strong>대상 과정:</strong> 참석자가 20명 이상인 정기 과정<br>- <strong>신청자:</strong> 참석자 본인<br>- <strong>방법:</strong> 포털에서 직접 신청합니다.<br>- <strong>마감:</strong> 마감일 18:00<br><br><strong>부서 취합</strong><br><br>- <strong>대상 과정:</strong> 소규모 실습 과정 또는 외부 강사 과정<br>- <strong>신청자:</strong> 부서 담당자<br>- <strong>방법:</strong> 참석자 명단을 취합하여 제출합니다.<br>- <strong>기한:</strong> 과정 시작 5영업일 전까지<br><br><strong>법정 의무교육 대상자 확인</strong><br><br>법정 의무교육 대상자의 누락 여부는 자동으로 확인됩니다. 이 확인은 신청 방식과 관계없이 적용됩니다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/02-ste.txt">모델 출력 원문</a></td>
-</tr>
-<tr><th colspan="3" align="left"><a id="3-조건과-후속-처리를-묶는다"></a>3. 조건과 후속 처리를 묶는다</th></tr>
-<tr>
-<td valign="top">확정자가 이용 24시간 전까지 취소하면 다음 대기자에게 자동 안내가 간다. 안내받은 대기자는 안내 수신 후 4시간 안에 응답해야 한다. 이 기한 안에 응답하지 않으면 다음 대기자에게 안내가 간다.</td>
-<td valign="top">확정자가 이용 24시간 전까지 취소하면 다음 대기자에게 안내가 자동으로 간다.<br><br>응답 기한: 안내 수신 후 4시간 안<br>안내받은 대기자는 이 기한 안에 응답해야 한다.<br><br>기한 안에 응답하지 않으면 다음 대기자에게 안내가 간다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/03-kp.txt">모델 출력 원문</a></td>
-<td valign="top">확정자가 이용 24시간 전까지 취소하면 다음 대기자에게 안내가 자동으로 간다.<br><br>안내받은 대기자는 안내를 받은 후 4시간 안에 응답해야 한다.<br><br>대기자가 이 기한 안에 응답하지 않으면 그다음 대기자에게 안내가 간다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/03-ste.txt">모델 출력 원문</a></td>
-</tr>
-<tr><th colspan="3" align="left"><a id="4-기한의-기산점과-예외를-구분한다"></a>4. 기한의 기산점과 예외를 구분한다</th></tr>
-<tr>
-<td valign="top">승인 담당자는 알림함의 ‘수신 대기’ 목록을 확인한 뒤 4시간 안에 수신 확인을 남겨야 한다. 다만 근무시간 밖에 제출된 건은 이 4시간 기한 대신 다음 영업일 12:00까지 수신 확인을 남겨야 한다.</td>
-<td valign="top">승인 담당자는 알림함의 ‘수신 대기’ 목록을 확인하고 아래 기한 안에 수신 확인을 남겨야 한다.<br><br><strong>기본</strong><br>- 수신 확인 기한: ‘수신 대기’ 목록을 확인한 뒤 4시간 안에<br><br><strong>근무시간 밖에 제출된 건</strong><br>- 수신 확인 기한: 다음 영업일 12:00까지<br>- 이 기한은 4시간 기한을 대신한다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/04-kp.txt">모델 출력 원문</a></td>
-<td valign="top">승인 담당자는 알림함의 &#x27;수신 대기&#x27; 목록을 확인한 뒤 수신 확인을 남겨야 한다. 수신 확인 기한은 건이 제출된 시각에 따라 다르다.<br><br>- <strong>근무시간 밖에 제출된 건:</strong> 다음 영업일 12:00까지 수신 확인을 남겨야 한다. 4시간 기한은 적용하지 않는다.<br>- <strong>그 밖의 건:</strong> &#x27;수신 대기&#x27; 목록을 확인한 뒤 4시간 안에 수신 확인을 남겨야 한다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/04-ste.txt">모델 출력 원문</a></td>
-</tr>
-<tr><th colspan="3" align="left"><a id="5-실행-성공과-의미-오류를-구분한다"></a>5. 실행 성공과 의미 오류를 구분한다</th></tr>
-<tr>
-<td valign="top">변환 12건은 모두 정상 실행되었다. 그러나 의미 검토에서 2건의 취소 조건 누락을 찾았다. 담당자는 해당 2건을 보완해야 한다. 재검토 전에는 배포할 수 없다.</td>
-<td valign="top">변환 12건은 모두 정상 실행됐다. 그러나 의미 검토에서 2건의 취소 조건 누락을 찾았다.<br><br>담당자는 해당 2건을 보완해야 한다. 재검토 전에는 배포할 수 없다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/05-kp.txt">모델 출력 원문</a></td>
-<td valign="top">변환 12건은 모두 정상 실행되었다.<br><br>그러나 의미 검토에서 취소 조건 누락 2건을 찾았다.<br><br>담당자는 해당 2건을 보완해야 한다.<br><br>재검토 전에는 배포할 수 없다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/05-ste.txt">모델 출력 원문</a></td>
-</tr>
-<tr><th colspan="3" align="left"><a id="6-표기-없음과-지정-없음을-구분한다"></a>6. 표기 없음과 지정 없음을 구분한다</th></tr>
-<tr>
-<td valign="top">자료에는 담당자가 표기되어 있지 않다. 담당자가 지정되었는지는 확인하지 못했다.</td>
-<td valign="top">자료에는 담당자가 표기되어 있지 않다. 담당자가 지정되었는지는 확인하지 못했다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/06-kp.txt">모델 출력 원문</a></td>
-<td valign="top">자료에는 담당자가 표기되어 있지 않다. 담당자가 지정되었는지는 확인하지 못했다.<br><br><a href="evaluation/readme-model-comparison-20261015/outputs/06-ste.txt">모델 출력 원문</a></td>
-</tr>
-</tbody>
-</table>
-
-모바일에서는 표를 좌우로 이동해 세 열을 비교한다. 문장·구조의 차이와 의미 판정은 [사례별 검토](evaluation/readme-model-comparison-20261015/README.md)에 있다.
 
 ## 문서를 찾는다
 
