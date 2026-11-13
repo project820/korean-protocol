@@ -1,0 +1,52 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회의실 예약 취소</title>
+<style>
+body {
+  margin: 0;
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  line-height: 1.5;
+  color: #1a1a1a;
+  background: #fff;
+}
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+h1 {
+  margin: 0 0 1.5rem;
+  font-size: 1.5rem;
+}
+h2 {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 1.125rem;
+}
+p {
+  margin: 0 0 0.75rem;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>회의실 예약 취소</h1>
+
+<h2>이용 시간 24시간 전까지 취소</h2>
+<p>예약이 확정된 사람이 이용 시간 24시간 전까지 예약을 취소하면, 시스템이 자동으로 대기자 명단의 다음 대기자에게 안내를 보낸다.</p>
+<p>안내를 받은 대기자는 안내를 받은 시점부터 4시간 이내에 응답해야 한다.</p>
+<p>대기자가 4시간 이내에 응답하지 않으면, 시스템이 그다음 대기자에게 안내를 보낸다.</p>
+
+<h2>이용 시간 24시간 이내에 취소</h2>
+<p>예약이 확정된 사람이 이용 시간 24시간 이내에 예약을 취소하면, 시스템은 자동으로 안내를 보내지 않는다.</p>
+<p>이 경우 총무팀이 직접 판단하고 처리한다.</p>
+
+<h2>남은 대기자가 없는 경우</h2>
+<p>대기자 명단에 남은 대기자가 없으면, 해당 시간대는 일반 예약으로 다시 열린다.</p>
+</main>
+</body>
+</html>
+```

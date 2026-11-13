@@ -1,0 +1,18 @@
+{
+ "skill_sha256": "729dd2ccb53d5045f3854062ff0494da32c9edb34bb7195307922842d88423bc",
+ "ste_sha256": "a9066e658f8af38f5fa7d2c4e36fa9ad385d1bb8f7166cd945b304333c5525d7",
+ "source_sha256": "608053e4296142de49664a6276ab9ef03a6d07077f832eb0594bf3155e6b709e",
+ "models": {
+  "sol": "gpt-6.1-sol",
+  "terra": "gpt-6.1-terra",
+  "sonnet": "anthropic/claude-sonnet-5-5",
+  "grok": "xai/grok-4.7"
+ },
+ "effort": "medium",
+ "jobs": [
+  "html-kp-skill-sonnet-r3",
+  "html-kp-refs-sonnet-r3",
+  "html-kp-skill-sonnet-r4",
+  "html-kp-refs-sonnet-r4"
+ ]
+}

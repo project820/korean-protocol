@@ -1,0 +1,1 @@
+{"name": "html-ste-grok-r1", "model": "xai/grok-4.7", "request_sha256": "9b34d4e589afa7171d6881ae95fde1ea766bec4dc975354b088d723e583f7604", "status": "completed", "returned": "grok-4.7-build", "chars": 925, "output_sha256": "326ce450c4291c1ba9480371865b62df0e94b97449348ae48a3901936368bca9", "seconds": 59}

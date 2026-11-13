@@ -1,0 +1,1 @@
+{"name": "qa-grok-r1", "model": "xai/grok-4.7", "request_sha256": "e9158ee866555ac64ec19ba1868bbade663ce3676c2eccd20e3776d2fec62b18", "status": "completed", "returned": "grok-4.7-build", "chars": 952, "output_sha256": "2c6cfc9ab5e448c4be88b64152aecb264464838df8ca1a29e87a7d48e81644d8", "seconds": 21}

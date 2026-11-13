@@ -1,0 +1,386 @@
+{
+ "html-kp-refs-grok-r1": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 자동으로 대기자 명단의 다음 순번에게 안내를 보낸다.\n\n근거: 이용 시간 24시간",
+   "resultCount": 2,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 자동으로 대기자 명단의 다음 순번에게 안내를 보낸다.\n\n근거: 이용 시간 24시간",
+   "resultCount": 2,
+   "w": 320
+  }
+ },
+ "html-kp-refs-grok-r2": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 안내를 자동으로 보낸다.\n안내를 받은 대기자는 안내를",
+   "resultCount": 2,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 안내를 자동으로 보낸다.\n안내를 받은 대기자는 안내를",
+   "resultCount": 2,
+   "w": 320
+  }
+ },
+ "html-kp-refs-sol-r1": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 다음 순번 대기자에게 자동으로 안내한다.\n\n이용 시간 24시간 전까지 취소했고, ",
+   "resultCount": 2,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 다음 순번 대기자에게 자동으로 안내한다.\n\n이용 시간 24시간 전까지 취소했고, ",
+   "resultCount": 2,
+   "w": 320
+  }
+ },
+ "html-kp-refs-sol-r2": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 다음 순번 대기자에게 자동으로 안내한다.\n\n조건: 이용 시간 24시간 전까지 취소",
+   "resultCount": 2,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 다음 순번 대기자에게 자동으로 안내한다.\n\n조건: 이용 시간 24시간 전까지 취소",
+   "resultCount": 2,
+   "w": 320
+  }
+ },
+ "html-kp-refs-sonnet-r1": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 안내를 보낸다. 안내받은 대기자는 4시간 이내에 응답",
+   "resultCount": 2,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 안내를 보낸다. 안내받은 대기자는 4시간 이내에 응답",
+   "resultCount": 2,
+   "w": 320
+  }
+ },
+ "html-kp-refs-sonnet-r2": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.\n\n근거: 이용 시간 24시간",
+   "resultCount": 2,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.\n\n근거: 이용 시간 24시간",
+   "resultCount": 2,
+   "w": 320
+  }
+ },
+ "html-kp-refs-terra-r1": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.\n\n조건: 이용 시간 24시간",
+   "resultCount": 2,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.\n\n조건: 이용 시간 24시간",
+   "resultCount": 2,
+   "w": 320
+  }
+ },
+ "html-kp-refs-terra-r2": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동으로 안내한다.\n\n취소 시점: 이용 시간 24시간",
+   "resultCount": 2,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 246)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동으로 안내한다.\n\n취소 시점: 이용 시간 24시간",
+   "resultCount": 2,
+   "w": 320
+  }
+ },
+ "html-kp-skill-grok-r1": {
+  "wide": {
+   "bg": "rgb(246, 245, 242)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "조건: 이용 24시간 전까지 취소다.\n\n조건: 대기자 명단에 다음 순번이 있다.\n\n처리: ",
+   "resultCount": 1,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgb(246, 245, 242)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "조건: 이용 24시간 전까지 취소다.\n\n조건: 대기자 명단에 다음 순번이 있다.\n\n처리: ",
+   "resultCount": 1,
+   "w": 320
+  }
+ },
+ "html-kp-skill-grok-r2": {
+  "wide": {
+   "bg": "rgb(255, 255, 255)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동 안내를 보낸다.\n\n대기자는 안내를 받은 시점으로",
+   "resultCount": 1,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgb(255, 255, 255)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동 안내를 보낸다.\n\n대기자는 안내를 받은 시점으로",
+   "resultCount": 1,
+   "w": 320
+  }
+ },
+ "html-kp-skill-sol-r1": {
+  "wide": {
+   "bg": "rgb(244, 246, 250)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "다음 대기자에게 자동 안내\n\n시스템이 대기자 명단의 다음 순번에게 안내를 보낸다.\n\n안내받",
+   "resultCount": 1,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgb(244, 246, 250)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "다음 대기자에게 자동 안내\n\n시스템이 대기자 명단의 다음 순번에게 안내를 보낸다.\n\n안내받",
+   "resultCount": 1,
+   "w": 320
+  }
+ },
+ "html-kp-skill-sol-r2": {
+  "wide": {
+   "bg": "rgb(244, 246, 250)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "다음 순번 대기자에게 자동으로 안내한다.\n\n시스템이 다음 순번 대기자에게 안내를 보낸다.\n",
+   "resultCount": 1,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgb(244, 246, 250)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "다음 순번 대기자에게 자동으로 안내한다.\n\n시스템이 다음 순번 대기자에게 안내를 보낸다.\n",
+   "resultCount": 1,
+   "w": 320
+  }
+ },
+ "html-kp-skill-sonnet-r1": {
+  "wide": {
+   "bg": "rgb(247, 248, 250)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.\n\n안내를 받은 대기자는 안내",
+   "resultCount": 1,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgb(247, 248, 250)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.\n\n안내를 받은 대기자는 안내",
+   "resultCount": 1,
+   "w": 320
+  }
+ },
+ "html-kp-skill-sonnet-r2": {
+  "wide": {
+   "bg": "rgb(245, 247, 250)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.\n\n안내를 받은 대기자는 안내",
+   "resultCount": 1,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgb(245, 247, 250)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.\n\n안내를 받은 대기자는 안내",
+   "resultCount": 1,
+   "w": 320
+  }
+ },
+ "html-kp-skill-terra-r1": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(244, 247, 250)",
+   "hscroll": false,
+   "result": "시스템이 다음 순번 대기자에게 자동으로 안내한다.\n\n안내받은 대기자는 안내받은 시점부터 4",
+   "resultCount": 1,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(244, 247, 250)",
+   "hscroll": false,
+   "result": "시스템이 다음 순번 대기자에게 자동으로 안내한다.\n\n안내받은 대기자는 안내받은 시점부터 4",
+   "resultCount": 1,
+   "w": 320
+  }
+ },
+ "html-kp-skill-terra-r2": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 250)",
+   "hscroll": false,
+   "result": "처리 결과\n\n시스템이 대기자 명단의 다음 순번에게 안내를 보낸다.\n\n안내를 받은 대기자는 ",
+   "resultCount": 1,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgb(243, 246, 250)",
+   "hscroll": false,
+   "result": "처리 결과\n\n시스템이 대기자 명단의 다음 순번에게 안내를 보낸다.\n\n안내를 받은 대기자는 ",
+   "resultCount": 1,
+   "w": 320
+  }
+ },
+ "html-ste-grok-r1": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 320
+  }
+ },
+ "html-ste-grok-r2": {
+  "wide": {
+   "bg": "rgb(255, 255, 255)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgb(255, 255, 255)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 320
+  }
+ },
+ "html-ste-sol-r1": {
+  "wide": {
+   "bg": "rgb(245, 247, 250)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgb(245, 247, 250)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 320
+  }
+ },
+ "html-ste-sol-r2": {
+  "wide": {
+   "bg": "rgb(245, 246, 248)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgb(245, 246, 248)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 320
+  }
+ },
+ "html-ste-sonnet-r1": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 320
+  }
+ },
+ "html-ste-sonnet-r2": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 320
+  }
+ },
+ "html-ste-terra-r1": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 320
+  }
+ },
+ "html-ste-terra-r2": {
+  "wide": {
+   "bg": "rgba(0, 0, 0, 0)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 1280
+  },
+  "narrow": {
+   "bg": "rgba(0, 0, 0, 0)|rgba(0, 0, 0, 0)",
+   "hscroll": false,
+   "result": "",
+   "resultCount": 0,
+   "w": 320
+  }
+ }
+}

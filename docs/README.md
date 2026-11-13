@@ -2,19 +2,38 @@
 
 이 목차는 main의 현행 문서를 안내한다. 날짜가 붙은 기록은 당시 상태를 보존한다.
 
-**현재 권장 버전은 v0.11.0 호출형 스킬이다.** 신규 사용자는 [설치 안내](../INSTALL.md)를 따른다. 기존 0.7 사용자는 [상시 지침을 끈 뒤 전환](../INSTALL.md#기존-07-상시-지침에서-전환한다)한다.
+**현재 권장 버전은 v0.11.1 호출형 스킬이다.** 신규 사용자는 [설치 안내](../INSTALL.md)를 따른다. 기존 0.7 사용자는 [상시 지침을 끈 뒤 전환](../INSTALL.md#기존-07-상시-지침에서-전환한다)한다.
 
-- **설치 기준:** 태그 `v0.11.0`을 사용한다.
+- **설치 기준:** 태그 `v0.11.1`을 사용한다.
 - **파일 확인:** `skills/korean-protocol/SKILL.md`의 SHA-256은 아래 값을 기준으로 확인한다.
 
   ```text
-  c09172014b872636afad1cac194e9c634a99e9fe165711cdd405a5249dd983c6
+  19ae7744da1d469225552b49e4108e52664f4f931c278d9f667c5ae7a4443604
   ```
 
 - **호출:** Codex는 `$korean-protocol`, Claude Code는 `/korean-protocol`을 사용한다. 자동 호출은 꺼져 있다.
 - **설치 방식:** 사용자 범위에 수동 설치한다. 자동 갱신기는 없다.
 
-## v0.11.0의 변경과 한계를 확인한다
+## v0.11.1의 변경과 한계를 확인한다
+
+L1~L4의 산출물과 참조 읽기 의무를 정의했다.
+L2는 표·Mermaid 도식의 작성 규칙을 보강했다.
+L3는 결과 패널을 입력 앞에 두는 화면 골격을 정했다.
+
+설치 파일은 v0.11.0과 같은 13개다. 바뀐 파일은 5개다.
+
+| 파일 | 역할 |
+| --- | --- |
+| `SKILL.md` | 코어 지침을 담는다. |
+| `references/interactive-html.md` | HTML 작성 지침을 담는다. |
+| `references/output-formats.md` | 출력 형식 지침을 담는다. |
+| `assets/interactive-explainer.html` | 재사용 HTML 예제를 제공한다. |
+| `scripts/check_html.py` | HTML 진단을 수행한다. |
+
+[v0.11.1 형식 준수 진단](../evaluation/kp-v0111-output-formats-20261113/README.md)은 예약 취소 안내 1종을 사용했다.
+수치 원문은 시험하지 않았다. 정식 원문·KP·STE 비교는 **미완료**다.
+
+### v0.11.0 파일럿 기록을 보존한다
 
 0절 「읽는 형태를 맞춘다」를 추가했다. 문서 골격과 절차 배치를 정하고 중복 설명을 줄인다. 문장을 나눌 때 수식어·수량의 대상을 유지하도록 보강했다.
 
@@ -52,7 +71,8 @@
 
 | 검토할 내용 | 기록 |
 | --- | --- |
-| v0.11.0과 이전 출력 형식의 변경·검증 상태를 확인한다. | [변경·검증 상태](distribution/output-formats-candidate-status.md)와 [규칙 대응표](spec/output-formats-rule-map.md)를 읽는다. |
+| v0.11.1과 이전 출력 형식의 변경·검증 상태를 확인한다. | [변경·검증 상태](distribution/output-formats-candidate-status.md)와 [규칙 대응표](spec/output-formats-rule-map.md)를 읽는다. |
+| v0.11.1의 형식 준수 진단을 확인한다. | [진단 기록](../evaluation/kp-v0111-output-formats-20261113/README.md)을 읽는다. |
 | v0.11.0의 진단 조건과 의미 실패를 확인한다. | [진단용 파일럿](../evaluation/kp-lean-pilot-20261113/README.md)을 읽는다. |
 | v0.9.0 스킬의 비교 결과를 확인한다. | [60차 비교](../evaluation/clarity-20261016-r60/README.md)와 [평가 규칙](../evaluation/README.md)을 읽는다. v0.8.0은 [세션 보고서 비교](../evaluation/session-reports-20261015/README.md)를 읽는다. |
 | v0.7.0 상시 규약의 검증 상태를 확인한다. | [요구사항과 검증 상태](status/requirements.md)에서 완료와 미확인을 구분한다. |

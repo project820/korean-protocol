@@ -18,7 +18,7 @@ import uuid
 import zipfile
 
 
-VERSION = '0.11.0-candidate'
+VERSION = '0.11.1-candidate'
 SKILL_PREFIX = 'skills/korean-protocol/'
 ZIP_PREFIX = 'korean-protocol/'
 SUPPORT = ('specification/rules.json', 'lexicon/core.json',

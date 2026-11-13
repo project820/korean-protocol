@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>회의실 예약 취소에 따른 처리 경로를 확인한다</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --font-body: system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      --text: #17252d;
+      --muted: #4a5d66;
+      --surface: #fff;
+      --canvas: #f3f6f6;
+      --line: #b8c7cb;
+      --accent: #075d60;
+      --accent-soft: #e6f3ef;
+      --focus: #005fcc;
+      --space-1: 0.375rem;
+      --space-2: 0.75rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2.5rem;
+      --measure: 64ch;
+      --page-width: 72rem;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--canvas);
+      line-height: 1.7;
+    }
+
+    body { margin: 0; }
+
+    main {
+      max-width: var(--page-width);
+      margin-inline: auto;
+      padding: var(--space-5) var(--space-4);
+    }
+
+    h1, h2, p { margin-block: 0 var(--space-3); }
+
+    h1 {
+      max-width: 28ch;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      line-height: 1.3;
+      letter-spacing: -0.025em;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      line-height: 1.45;
+    }
+
+    p { max-width: var(--measure); }
+    .lead, .hint { color: var(--muted); }
+
+    .panel_layout {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+      align-items: start;
+    }
+
+    .panel_layout > * { min-inline-size: 0; }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: var(--space-4);
+      border-radius: 0.75rem;
+    }
+
+    .panel_layout, .details { margin-block-start: var(--space-4); }
+
+    .result {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    output {
+      display: block;
+      margin-block: var(--space-3);
+      color: var(--accent);
+      font-size: 1.35rem;
+      font-weight: 750;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    fieldset {
+      min-inline-size: 0;
+      margin: 0 0 var(--space-4);
+      padding: 0;
+      border: 0;
+    }
+
+    legend {
+      margin-block-end: var(--space-2);
+      font-weight: 700;
+    }
+
+    .choice {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      margin-block: var(--space-2);
+    }
+
+    .choice input { flex: none; }
+    .choice label { cursor: pointer; }
+    fieldset:disabled { color: var(--muted); }
+    fieldset:disabled label { cursor: default; }
+    .hint { font-size: 0.9375rem; }
+
+    button {
+      min-height: 2.75rem;
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--accent);
+      border-radius: 0.375rem;
+      color: var(--accent);
+      background: var(--surface);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:hover { background: var(--accent-soft); }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+    ul { padding-inline-start: 1.25rem; }
+    li + li { margin-block-start: var(--space-2); }
+    [hidden] { display: none; }
+
+    @media (max-width: 42rem) {
+      main { padding: var(--space-4) var(--space-3); }
+      .panel { padding: var(--space-3); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>회의실 예약 취소에 따른 처리 경로를 확인한다</h1>
+      <p class="lead">확정된 예약의 취소 시점과 대기 상태에 따른 처리 내용을 보여준다.</p>
+    </header>
+
+    <div class="panel_layout">
+      <section class="panel result" aria-labelledby="result-heading">
+        <h2 id="result-heading">처리 경로</h2>
+        <div aria-live="polite" aria-atomic="true">
+          <output id="result" for="cancel-early cancel-late wait-yes wait-no response-pending response-missed">시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.</output>
+          <p id="basis">조건: 이용 시간 24시간 전까지 취소했고 남은 대기자가 있다.</p>
+          <p id="condition">안내받은 대기자는 안내받은 시점부터 4시간 이내에 응답해야 한다.</p>
+          <p id="extra" hidden></p>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="input-heading">
+        <h2 id="input-heading">취소와 대기 상태</h2>
+        <form id="scenario">
+          <fieldset>
+            <legend>취소 시점</legend>
+            <div class="choice">
+              <input type="radio" id="cancel-early" name="cancel-time" value="early" checked>
+              <label for="cancel-early">이용 시간 24시간 전까지</label>
+            </div>
+            <div class="choice">
+              <input type="radio" id="cancel-late" name="cancel-time" value="late">
+              <label for="cancel-late">이용 24시간 이내</label>
+            </div>
+            <p class="hint">선택지는 원문의 시간 표현을 따른다.</p>
+          </fieldset>
+
+          <fieldset>
+            <legend>남은 대기자</legend>
+            <div class="choice">
+              <input type="radio" id="wait-yes" name="wait-status" value="yes" checked>
+              <label for="wait-yes">있음</label>
+            </div>
+            <div class="choice">
+              <input type="radio" id="wait-no" name="wait-status" value="no">
+              <label for="wait-no">없음</label>
+            </div>
+          </fieldset>
+
+          <fieldset id="response-field">
+            <legend>안내받은 대기자의 응답 상태</legend>
+            <div class="choice">
+              <input type="radio" id="response-pending" name="response" value="pending" checked>
+              <label for="response-pending">4시간 이내 응답 기한 적용</label>
+            </div>
+            <div class="choice">
+              <input type="radio" id="response-missed" name="response" value="missed">
+              <label for="response-missed">4시간 이내에 응답하지 않음</label>
+            </div>
+            <p class="hint">이용 시간 24시간 전까지 취소하고 남은 대기자가 있을 때 적용한다.</p>
+          </fieldset>
+
+          <button type="button" id="reset-scenario">초기화</button>
+        </form>
+      </section>
+    </div>
+
+    <section class="panel details" aria-labelledby="rules-heading">
+      <h2 id="rules-heading">처리 규칙</h2>
+      <ul>
+        <li>예약이 확정된 사람이 이용 시간 24시간 전까지 취소하면 시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.</li>
+        <li>안내받은 대기자는 안내받은 시점부터 4시간 이내에 응답해야 한다.</li>
+        <li>그 시간 안에 응답하지 않으면 그다음 대기자에게 안내가 넘어간다.</li>
+        <li>이용 24시간 이내에 취소하면 자동 안내가 가지 않는다. 총무팀이 직접 판단해서 처리한다.</li>
+        <li>남은 대기자가 없으면 해당 시간대가 일반 예약으로 다시 열린다.</li>
+      </ul>
+    </section>
+
+    <section class="panel details" aria-labelledby="reference-heading">
+      <h2 id="reference-heading">참고</h2>
+      <p>취소 시점의 선택지는 제공된 원문의 표현을 유지했다. 정확히 24시간 전의 경계 적용은 원문에서 별도로 구분하지 않았다.</p>
+      <p>입력 상태는 서버에 전송하거나 저장하지 않는다.</p>
+    </section>
+
+    <noscript>
+      <p>JavaScript가 꺼져 있어 선택에 따른 처리 경로를 바꾸어 표시하지 못한다. 위 결과는 초기 선택에 따른 내용이다.</p>
+    </noscript>
+  </main>
+
+  <script>
+    "use strict";
+
+    const form = document.getElementById("scenario");
+    const responseField = document.getElementById("response-field");
+    const result = document.getElementById("result");
+    const basis = document.getElementById("basis");
+    const condition = document.getElementById("condition");
+    const extra = document.getElementById("extra");
+
+    function update() {
+      const early = document.getElementById("cancel-early").checked;
+      const hasWaiter = document.getElementById("wait-yes").checked;
+      const missed = document.getElementById("response-missed").checked;
+
+      responseField.disabled = !(early && hasWaiter);
+      extra.hidden = true;
+      extra.textContent = "";
+
+      if (!hasWaiter) {
+        result.textContent = "해당 시간대가 일반 예약으로 다시 열린다.";
+        basis.textContent = "조건: 남은 대기자가 없다.";
+
+        if (early) {
+          condition.textContent = "취소 시점: 이용 시간 24시간 전까지.";
+        } else {
+          condition.textContent = "이용 24시간 이내 취소에는 자동 안내가 가지 않는다.";
+          extra.textContent = "총무팀이 직접 판단해서 처리한다.";
+          extra.hidden = false;
+        }
+        return;
+      }
+
+      if (!early) {
+        result.textContent = "총무팀이 직접 판단해서 처리한다.";
+        basis.textContent = "조건: 이용 24시간 이내에 취소했다.";
+        condition.textContent = "자동 안내가 가지 않는다.";
+        return;
+      }
+
+      if (missed) {
+        result.textContent = "그다음 대기자에게 안내가 넘어간다.";
+        basis.textContent = "조건: 안내받은 대기자가 4시간 이내에 응답하지 않았다.";
+        condition.textContent = "응답 기한은 안내받은 시점부터 4시간 이내다.";
+        return;
+      }
+
+      result.textContent = "시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.";
+      basis.textContent = "조건: 이용 시간 24시간 전까지 취소했고 남은 대기자가 있다.";
+      condition.textContent = "안내받은 대기자는 안내받은 시점부터 4시간 이내에 응답해야 한다.";
+    }
+
+    form.addEventListener("change", update);
+    form.addEventListener("submit", (event) => event.preventDefault());
+    document.getElementById("reset-scenario").addEventListener("click", () => {
+      HTMLFormElement.prototype.reset.call(form);
+      update();
+    });
+
+    update();
+  </script>
+</body>
+</html>

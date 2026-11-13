@@ -1,0 +1,52 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회의실 예약 취소 안내</title>
+<style>
+  body { font-family: sans-serif; line-height: 1.7; max-width: 42rem; margin: 2rem auto; padding: 0 1rem; color: #222; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.2rem; margin-top: 2rem; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #999; padding: 0.5rem; text-align: left; vertical-align: top; }
+  th { background: #f0f0f0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>회의실 예약 취소 안내</h1>
+
+  <p>예약이 확정된 사람이 예약을 취소할 수 있습니다. 처리 방법은 취소 시점에 따라 다릅니다.</p>
+
+  <h2>취소 시점별 처리</h2>
+  <table>
+    <thead>
+      <tr><th>취소 시점</th><th>처리</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>이용 시간 24시간 전까지</td>
+        <td>시스템이 자동으로 대기자 명단의 다음 순번에게 안내를 보냅니다.</td>
+      </tr>
+      <tr>
+        <td>이용 시간 24시간 이내</td>
+        <td>자동 안내를 보내지 않습니다. 총무팀이 직접 판단해서 처리합니다.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>이용 시간 24시간 전까지 취소한 경우</h2>
+  <ol>
+    <li>시스템이 대기자 명단의 다음 순번에게 안내를 보냅니다.</li>
+    <li>안내를 받은 대기자는 안내를 받은 시점부터 4시간 이내에 응답해야 합니다.</li>
+    <li>대기자가 4시간 이내에 응답하지 않으면, 시스템이 그다음 대기자에게 안내를 보냅니다.</li>
+  </ol>
+
+  <h2>남은 대기자가 없는 경우</h2>
+  <p>남은 대기자가 없으면, 해당 시간대는 일반 예약으로 다시 열립니다.</p>
+</main>
+</body>
+</html>
+```

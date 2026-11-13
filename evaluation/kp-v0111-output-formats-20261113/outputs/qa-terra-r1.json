@@ -1,0 +1,1 @@
+{"name": "qa-terra-r1", "model": "gpt-6.1-terra", "request_sha256": "bcd20339fd60f5c3c73e1eeb0586a09e6ca37f3960e691d40a0c69c08fff40af", "status": "completed", "returned": "gpt-6.1-terra", "chars": 868, "output_sha256": "93cca9be3cb29177f6444078761d372b7882d18899fb91ebff6bfdb03dc8454e", "seconds": 17}

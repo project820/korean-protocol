@@ -23,6 +23,7 @@ FORM_MEMBERS = frozenset(['reset', 'submit', 'requestSubmit', 'checkValidity', '
 CODE_TAGS = frozenset(['code', 'pre', 'kbd', 'samp'])
 LIMITATIONS = [
     'No browser execution: layout, computed visibility, dynamic states, keyboard behavior and calculations are unverified.',
+    'L3 mutation, result-order and dark-theme diagnostics are static checks; empty initial results and required calculation buttons are not judged without browser execution.',
     'Kana/Han detection is a diagnostic signal, not a language classifier; Han can be valid Korean source text and requires review.',
     'No semantic, source-preservation, accessibility-conformance or STE/KP certification is performed.',
     'JavaScript literals are scanned without data-flow analysis; a flagged literal is not proven to be displayed.',
@@ -69,45 +70,124 @@ def _decode_js_string(text):
 
 
 def _javascript_literals(text):
-    """Return string tokens and code with comments/strings blanked, preserving positions."""
+    """Mask lexical text, retaining executable template interpolations and positions."""
     literals, masked = [], list(text)
-    i = 0
-    while i < len(text):
-        if text.startswith('//', i):
-            end = text.find('\n', i)
-            end = len(text) if end < 0 else end
-        elif text.startswith('/*', i):
-            close = text.find('*/', i + 2)
-            end = len(text) if close < 0 else close + 2
-        elif text[i] in ('"', "'", '`'):
-            quote, start = text[i], i
-            i += 1
-            while i < len(text):
-                if text[i] == '\\':
-                    i += 2
-                elif text[i] == quote:
-                    break
-                else:
-                    i += 1
-            end = min(len(text), i + 1)
-            raw = text[start + 1:i]
-            # Expressions are not static UI text. Nested/runtime expressions remain unverified.
-            if quote == '`':
-                raw = re.sub(r'\$\{[^{}]*\}', '', raw)
-            prefix = text[max(0, start - 120):start]
-            lookup = bool(re.search(
-                r'\b(?:getElementById|getElementsByName|getElementsByClassName|querySelector|querySelectorAll|addEventListener)\s*\(\s*$', prefix))
-            literals.append({'text': _decode_js_string(raw), 'start': start,
-                             'lookup_identifier': lookup})
-            i = start
-        else:
-            i += 1
-            continue
-        for index in range(i, end):
+    regex_keywords = frozenset('return throw case delete void typeof new in of instanceof yield await else do'.split())
+
+    def mask(start, end):
+        for index in range(start, end):
             if masked[index] not in ('\n', '\r'):
                 masked[index] = ' '
-        i = end
+
+    def literal(start, end, raw):
+        prefix = text[max(0, start - 120):start]
+        lookup = bool(re.search(
+            r'\b(?:getElementById|getElementsByName|getElementsByClassName|querySelector|querySelectorAll|addEventListener)\s*\(\s*$', prefix))
+        literals.append({'text': _decode_js_string(raw), 'start': start, 'end': end,
+                         'lookup_identifier': lookup})
+
+    def template(start):
+        i, segment, parts = start + 1, start + 1, []
+        while i < len(text):
+            if text[i] == '\\':
+                i = min(len(text), i + 2)
+            elif text[i] == '`':
+                parts.append(text[segment:i])
+                mask(segment, i + 1)
+                literal(start, i + 1, ''.join(parts))
+                return i + 1
+            elif text.startswith('${', i):
+                parts.append(text[segment:i])
+                mask(segment, i + 2)
+                i = scan(i + 2, interpolation=True)
+                segment = i
+            else:
+                i += 1
+        parts.append(text[segment:i])
+        mask(segment, i)
+        literal(start, i, ''.join(parts))
+        return i
+
+    def scan(i, interpolation=False):
+        # This is a bounded lexer, not a JS parser. An operator, opening delimiter
+        # or expression-prefix keyword permits a regex; a value token permits division.
+        regex_allowed, braces = True, 0
+        while i < len(text):
+            char = text[i]
+            if char.isspace():
+                i += 1
+                continue
+            if text.startswith('//', i):
+                end = text.find('\n', i)
+                end = len(text) if end < 0 else end
+            elif text.startswith('/*', i):
+                close = text.find('*/', i + 2)
+                end = len(text) if close < 0 else close + 2
+            elif char in ('"', "'"):
+                end = i + 1
+                while end < len(text):
+                    if text[end] == '\\':
+                        end = min(len(text), end + 2)
+                    elif text[end] == char:
+                        end += 1
+                        break
+                    else:
+                        end += 1
+                literal(i, end, text[i + 1:end - 1] if text[end - 1] == char else text[i + 1:end])
+                regex_allowed = False
+            elif char == '`':
+                mask(i, i + 1)
+                i = template(i)
+                regex_allowed = False
+                continue
+            elif char == '/' and regex_allowed:
+                end, in_class = i + 1, False
+                while end < len(text) and text[end] not in ('\n', '\r'):
+                    current = text[end]
+                    if current == '\\':
+                        end = min(len(text), end + 2)
+                        continue
+                    if current == '[':
+                        in_class = True
+                    elif current == ']':
+                        in_class = False
+                    elif current == '/' and not in_class:
+                        end += 1
+                        while end < len(text) and text[end].isalpha():
+                            end += 1
+                        break
+                    end += 1
+                regex_allowed = False
+            else:
+                token = re.match(r'[A-Za-z_$][\w$]*|\d[\w.]*', text[i:])
+                if token:
+                    regex_allowed = token.group() in regex_keywords
+                    i += len(token.group())
+                    continue
+                if char == '{':
+                    braces += 1
+                elif char == '}':
+                    if interpolation and not braces:
+                        mask(i, i + 1)
+                        return i + 1
+                    braces -= 1
+                if text[i:i + 2] in ('++', '--'):
+                    i += 2
+                    continue
+                regex_allowed = char in '([{=,:;!?&|+*-/%^~<>'
+                i += 1
+                continue
+            mask(i, end)
+            i = end
+        return i
+
+    scan(0)
     return literals, ''.join(masked)
+
+
+def _dark_only(value):
+    schemes = set(re.findall(r'[\w-]+', value.lower()))
+    return 'dark' in schemes and 'light' not in schemes
 
 
 class _Document(HTMLParser):
@@ -120,7 +200,7 @@ class _Document(HTMLParser):
         attributes = dict(attrs)
         line, column = self.getpos()
         node = {'tag': tag, 'attrs': attributes, 'line': line, 'column': column + 1,
-                'parents': list(self.stack), 'text': ''}
+                'parents': list(self.stack), 'text': '', 'source': self.get_starttag_text()}
         self.nodes.append(node)
         if len(attributes) != len(attrs):
             self.duplicate_attributes.append(node)
@@ -218,6 +298,10 @@ def check_html(text, file='<memory>', language='ko', protected_text=None):
     for node in parser.nodes:
         attrs, tag = node['attrs'], node['tag']
         line, column = node['line'], node['column']
+        if (tag == 'meta' and (attrs.get('name') or '').strip().lower() == 'color-scheme'
+                and _dark_only(attrs.get('content') or '')):
+            add('dark-default-theme', 'error', line, column, 'meta@content', node['source'],
+                'The color-scheme meta tag supports only dark; include a light scheme.')
         if attrs.get('id'):
             if attrs['id'] in ids:
                 add('duplicate-id', 'error', line, column, tag, attrs['id'], 'HTML id is duplicated.')
@@ -249,6 +333,26 @@ def check_html(text, file='<memory>', language='ko', protected_text=None):
     for node in parser.duplicate_attributes:
         add('duplicate-attribute', 'error', node['line'], node['column'], node['tag'], '',
             'Duplicate HTML attributes can change the parsed UI; review the source.')
+
+    result_candidates = [(index, node) for index, node in enumerate(parser.nodes)
+                         if (node['attrs'].get('aria-live') or '').strip().lower() != 'off'
+                         and not any(ancestor['tag'] == 'template'
+                                     or 'hidden' in ancestor['attrs']
+                                     or (ancestor['attrs'].get('aria-hidden') or '').strip().lower() == 'true'
+                                     for ancestor in node['parents'] + [node])]
+    first_result = next((index for index, node in result_candidates if node['tag'] == 'output'), None)
+    if first_result is None:
+        first_result = next((index for index, node in result_candidates
+                             if (node['attrs'].get('aria-live') or '').strip().lower()
+                             in ('polite', 'assertive')), None)
+    first_input = next((index for index, node in enumerate(parser.nodes)
+                        if node['tag'] in ('input', 'select', 'textarea')
+                        and not (node['tag'] == 'input'
+                                 and (node['attrs'].get('type') or '').lower() == 'hidden')), None)
+    if first_result is not None and first_input is not None and first_result > first_input:
+        node = parser.nodes[first_result]
+        add('result-after-input', 'error', node['line'], node['column'], node['tag'], node['source'],
+            'The first result region follows the first form input in DOM order; put the result region first.')
 
     html_nodes = [node for node in parser.nodes if node['tag'] == 'html']
     if not html_nodes or (html_nodes[0]['attrs'].get('lang') or '').lower().split('-')[0] != language:
@@ -294,6 +398,18 @@ def check_html(text, file='<memory>', language='ko', protected_text=None):
 
     for style, origin in parser.styles:
         css = re.sub(r'/\*.*?\*/', lambda match: ' ' * len(match.group()), style, flags=re.S)
+        # Mask strings and comments together so comment markers inside strings
+        # cannot consume real declarations. Preserve offsets for source locations.
+        theme_css = re.sub(r'/\*.*?\*/|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'',
+                           lambda match: re.sub(r'[^\r\n]', ' ', match.group()), style, flags=re.S)
+        for match in re.finditer(
+                r'@media\b[^{};]*\(\s*prefers-color-scheme\s*:\s*dark\s*\)'
+                r'|(?<![\w-])color-scheme\s*:\s*([^;{}]*)', theme_css, re.I):
+            if match.group(1) is not None and not _dark_only(match.group(1)):
+                continue
+            line, column = _position(style, match.start(), origin)
+            add('dark-default-theme', 'error', line, column, 'css', match.group(),
+                'Use one light theme; remove dark color-scheme declarations and dark preference media queries.')
         for match in re.finditer(r'@import\b|url\(\s*[\'"]?([^\)\'"\s]+)', css, re.I):
             value = match.group(1)
             if value and value.lower().startswith(('data:', '#')):
@@ -304,6 +420,24 @@ def check_html(text, file='<memory>', language='ko', protected_text=None):
 
     for script, origin in parser.scripts:
         literals, code = _javascript_literals(script)
+        assignment = r'(?:=(?!=|>)|[+\-*/%&|^]=|&&=|\|\|=|\?\?=)'
+        for match in re.finditer(
+                r'\.\s*(?:(?:innerHTML|outerHTML)\s*' + assignment
+                + r'|insertAdjacentHTML\s*\()', code):
+            line, column = _position(script, match.start(), origin)
+            add('innerhtml-assignment', 'error', line, column, 'javascript',
+                script[match.start():match.end()],
+                'HTML mutation can interpret data as markup; use textContent for source strings.')
+        for literal in literals:
+            if script[literal['start']] not in ('"', "'") or literal['text'] not in ('innerHTML', 'outerHTML'):
+                continue
+            opening = re.search(r'\[\s*$', code[:literal['start']])
+            closing = re.match(r'\s*\]\s*' + assignment, code[literal['end']:])
+            if opening and closing:
+                line, column = _position(script, opening.start(), origin)
+                add('innerhtml-assignment', 'error', line, column, 'javascript',
+                    script[opening.start():literal['end'] + closing.end()],
+                    'HTML mutation can interpret data as markup; use textContent for source strings.')
         coverage['javascript_literal_count'] += len(literals)
         for literal in literals:
             if re.search(r'(?<![\w$.])import\s*\(\s*$', code[:literal['start']]):

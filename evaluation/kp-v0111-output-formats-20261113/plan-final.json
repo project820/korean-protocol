@@ -1,0 +1,30 @@
+{
+ "skill_sha256": "19ae7744da1d469225552b49e4108e52664f4f931c278d9f667c5ae7a4443604",
+ "ste_sha256": "a9066e658f8af38f5fa7d2c4e36fa9ad385d1bb8f7166cd945b304333c5525d7",
+ "source_sha256": "608053e4296142de49664a6276ab9ef03a6d07077f832eb0594bf3155e6b709e",
+ "models": {
+  "sol": "gpt-6.1-sol",
+  "terra": "gpt-6.1-terra",
+  "sonnet": "anthropic/claude-sonnet-5-5",
+  "grok": "xai/grok-4.7"
+ },
+ "effort": "medium",
+ "jobs": [
+  "final-qa-sol",
+  "final-l2-kp-skill-sol",
+  "final-l2-kp-refs-sol",
+  "final-html-kp-refs-sol",
+  "final-qa-terra",
+  "final-l2-kp-skill-terra",
+  "final-l2-kp-refs-terra",
+  "final-html-kp-refs-terra",
+  "final-qa-sonnet",
+  "final-l2-kp-skill-sonnet",
+  "final-l2-kp-refs-sonnet",
+  "final-html-kp-refs-sonnet",
+  "final-qa-grok",
+  "final-l2-kp-skill-grok",
+  "final-l2-kp-refs-grok",
+  "final-html-kp-refs-grok"
+ ]
+}

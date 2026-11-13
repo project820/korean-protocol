@@ -1,0 +1,1 @@
+{"name": "final-html-kp-refs-sonnet", "model": "anthropic/claude-sonnet-5-5", "request_sha256": "b4c0e595ec9dbd571b9239d8b91bf35c6898724e57234aaba875ce06a47f5950", "status": "completed", "returned": "anthropic/claude-sonnet-5-5", "chars": 8341, "output_sha256": "cc012c4450efee8b56e730de9f66ba8eb7a7f9cda8aa999e0cf9169e95c88dc9", "seconds": 20}

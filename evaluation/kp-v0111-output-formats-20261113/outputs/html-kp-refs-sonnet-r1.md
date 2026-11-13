@@ -1,0 +1,223 @@
+```html
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:,">
+  <title>회의실 예약 취소 후 처리 경로를 확인한다</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --font-body: system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      --text: #17252d;
+      --muted: #4a5d66;
+      --surface: #ffffff;
+      --canvas: #f3f6f6;
+      --line: #b8c7cb;
+      --accent: #075d60;
+      --accent-soft: #e6f3ef;
+      --warning: #714a00;
+      --warning-surface: #fff4d6;
+      --error: #a32020;
+      --focus: #005fcc;
+      --space-1: 0.375rem;
+      --space-2: 0.75rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2.5rem;
+      --measure: 64ch;
+      --page-width: 72rem;
+    }
+    * { box-sizing: border-box; }
+    html { font-family: var(--font-body); color: var(--text); background: var(--canvas); line-height: 1.7; }
+    body { margin: 0; font-size: 1rem; }
+    main { max-width: var(--page-width); margin-inline: auto; padding: var(--space-5) var(--space-4); }
+    h1, h2, p { margin-block: 0 var(--space-3); }
+    h1 { max-width: 28ch; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.3; letter-spacing: -0.025em; }
+    h2 { font-size: 1.25rem; line-height: 1.45; }
+    p { max-width: var(--measure); }
+    .lead { color: var(--muted); }
+    .panel_layout { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); align-items: start; margin-block: var(--space-4); }
+    .panel_layout > * { min-inline-size: 0; }
+    .panel { border: 1px solid var(--line); background: var(--surface); padding: var(--space-4); border-radius: 0.75rem; }
+    .field { margin-block-end: var(--space-4); border: 0; padding: 0; margin-inline: 0; min-inline-size: 0; }
+    legend, label { display: block; font-weight: 650; margin-block-end: var(--space-1); padding: 0; }
+    .choice { display: flex; align-items: center; gap: var(--space-2); font-weight: 400; margin-block-end: var(--space-1); }
+    .choice input { width: auto; margin: 0; }
+    input[type="number"] { display: block; width: 100%; max-width: 18rem; padding: var(--space-2); border: 1px solid var(--muted); border-radius: 0.375rem; font: inherit; color: var(--text); background: var(--surface); }
+    input[aria-invalid="true"] { border: 2px solid var(--error); }
+    .hint { font-size: 0.9375rem; color: var(--muted); margin-block: var(--space-1) 0; }
+    .error { color: var(--error); margin-block: var(--space-1) 0; font-weight: 600; }
+    button { min-height: 2.75rem; padding: var(--space-2) var(--space-3); font: inherit; border: 1px solid var(--accent); border-radius: 0.375rem; color: var(--accent); background: var(--surface); cursor: pointer; }
+    button:hover { background: var(--accent-soft); }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    .result { background: var(--accent-soft); border-color: var(--accent); }
+    output { display: block; font-size: clamp(1.25rem, 3vw, 1.75rem); line-height: 1.4; font-weight: 750; color: var(--accent); margin-block: var(--space-3); overflow-wrap: anywhere; }
+    .basis { overflow-wrap: anywhere; }
+    .notice { padding: var(--space-3); background: var(--warning-surface); color: var(--warning); border-left: 0.25rem solid var(--warning); }
+    .details { margin-block-start: var(--space-4); }
+    ol, ul { margin-block: 0 var(--space-3); padding-inline-start: 1.5rem; max-width: var(--measure); }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid var(--line); padding: var(--space-2); text-align: left; vertical-align: top; }
+    .table_scroll { overflow-x: auto; }
+    [hidden] { display: none; }
+    @media (max-width: 42rem) {
+      main { padding: var(--space-4) var(--space-3); }
+      .panel { padding: var(--space-3); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>회의실 예약 취소 후 대기자 안내 경로를 확인한다</h1>
+      <p class="lead">취소 시점과 대기자 상태를 바꾸면 처리 경로를 다시 보여 준다.</p>
+    </header>
+
+    <div class="panel_layout">
+      <section class="panel result" aria-labelledby="result-heading">
+        <h2 id="result-heading">처리 경로</h2>
+        <div aria-live="polite" aria-atomic="true">
+          <output id="outcome" for="timing waiting" role="none"></output>
+          <p class="basis" id="basis"></p>
+          <div id="conditions"></div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="inputs-heading">
+        <h2 id="inputs-heading">취소 조건</h2>
+        <form id="flow" novalidate>
+          <fieldset class="field">
+            <legend>취소 시점</legend>
+            <label class="choice" for="timing-early"><input type="radio" id="timing-early" name="timing" value="early" checked>이용 시간 24시간 전까지 취소</label>
+            <label class="choice" for="timing-late"><input type="radio" id="timing-late" name="timing" value="late">이용 24시간 이내에 취소</label>
+          </fieldset>
+          <fieldset class="field">
+            <legend>대기자 명단</legend>
+            <label class="choice" for="waiting-yes"><input type="radio" id="waiting-yes" name="waiting" value="yes" checked>대기자가 있다</label>
+            <label class="choice" for="waiting-no"><input type="radio" id="waiting-no" name="waiting" value="no">남은 대기자가 없다</label>
+            <p class="hint" id="waiting-hint">자동 안내 경로에서 대기자 명단을 따른다.</p>
+          </fieldset>
+          <div class="field">
+            <label for="elapsed">안내 후 경과 시간(시간)</label>
+            <input id="elapsed" name="elapsed" type="number" value="0" min="0" max="48" step="0.5" required aria-describedby="elapsed-hint elapsed-error">
+            <p class="hint" id="elapsed-hint">현재 안내받은 대기자가 응답하지 않은 경우의 경과 시간이다. 0~48시간을 0.5시간 단위로 입력한다. 가정: 이 입력 범위는 화면 탐색용이다.</p>
+            <p class="error" id="elapsed-error" hidden>경과 시간을 0~48시간 범위에서 0.5시간 단위로 입력해야 한다.</p>
+          </div>
+          <button type="button" id="reset-flow">초기화</button>
+        </form>
+      </section>
+    </div>
+
+    <section class="panel details" aria-labelledby="rules-heading">
+      <h2 id="rules-heading">처리 규칙</h2>
+      <div class="table_scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">조건</th><th scope="col">처리</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>예약이 확정된 사람이 이용 시간 24시간 전까지 취소한다.</td><td>시스템이 자동으로 대기자 명단의 다음 순번에게 안내를 보낸다.</td></tr>
+            <tr><td>안내를 받은 대기자가 안내받은 시점으로부터 4시간 이내에 응답한다.</td><td>원문은 응답 이후의 처리를 밝히지 않는다.</td></tr>
+            <tr><td>안내를 받은 대기자가 그 시간 안에 응답하지 않는다.</td><td>그다음 대기자에게 안내가 넘어간다.</td></tr>
+            <tr><td>이용 24시간 이내에 취소한다.</td><td>자동 안내가 가지 않는다. 총무팀이 직접 판단해서 처리한다.</td></tr>
+            <tr><td>남은 대기자가 없다.</td><td>해당 시간대가 일반 예약으로 다시 열린다.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel details" aria-labelledby="reference-heading">
+      <h2 id="reference-heading">참고</h2>
+      <ul>
+        <li>이용 24시간 이내 취소에서 남은 대기자가 없을 때의 처리는 원문에 구분이 없다. 화면은 두 규칙을 함께 표시한다.</li>
+        <li>입력값을 서버에 전송하거나 저장하지 않는다.</li>
+      </ul>
+    </section>
+    <noscript><p class="notice">JavaScript가 꺼져 있어 입력 변경을 반영하지 못한다. 위 처리 규칙 표를 따른다.</p></noscript>
+  </main>
+  <script>
+    "use strict";
+    const form = document.getElementById("flow");
+    const elapsed = document.getElementById("elapsed");
+    const elapsedError = document.getElementById("elapsed-error");
+    const outcome = document.getElementById("outcome");
+    const basis = document.getElementById("basis");
+    const conditions = document.getElementById("conditions");
+    const waitingHint = document.getElementById("waiting-hint");
+    const numberFormat = new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 2 });
+
+    function selected(name) {
+      return form.querySelector('input[name="' + name + '"]:checked').value;
+    }
+
+    function addNote(text, warn) {
+      const p = document.createElement("p");
+      if (warn) { p.className = "notice"; }
+      p.textContent = text;
+      conditions.appendChild(p);
+    }
+
+    function update() {
+      const timing = selected("timing");
+      const waiting = selected("waiting");
+      const accepted = elapsed.validity.valid && Number.isFinite(elapsed.valueAsNumber);
+      elapsed.setAttribute("aria-invalid", String(!accepted));
+      elapsedError.hidden = accepted;
+      conditions.textContent = "";
+      elapsed.disabled = !(timing === "early" && waiting === "yes");
+      waitingHint.textContent = timing === "early"
+        ? "자동 안내 경로에서 대기자 명단을 따른다."
+        : "이용 24시간 이내 취소에서는 자동 안내가 가지 않는다.";
+
+      if (!accepted && !elapsed.disabled) {
+        outcome.textContent = "계산을 보류한다";
+        basis.textContent = "경과 시간 오류를 수정하면 결과를 다시 계산한다.";
+        return;
+      }
+
+      if (timing === "late") {
+        outcome.textContent = "총무팀이 직접 판단해서 처리한다.";
+        basis.textContent = "근거: 이용 24시간 이내에 취소했다.";
+        addNote("자동 안내가 가지 않는다.", true);
+        if (waiting === "no") {
+          addNote("남은 대기자가 없는 경우 해당 시간대가 일반 예약으로 다시 열린다. 원문은 이 규칙과 총무팀 판단의 관계를 밝히지 않는다.", false);
+        }
+        return;
+      }
+
+      if (waiting === "no") {
+        outcome.textContent = "해당 시간대가 일반 예약으로 다시 열린다.";
+        basis.textContent = "근거: 24시간 전까지 취소했고 남은 대기자가 없다.";
+        return;
+      }
+
+      const value = elapsed.valueAsNumber;
+      if (value < 4) {
+        outcome.textContent = "시스템이 대기자 명단의 다음 순번에게 안내를 보낸다. 안내받은 대기자는 4시간 이내에 응답해야 한다.";
+        basis.textContent = "근거: 경과 " + numberFormat.format(value) + "시간 < 응답 기한 4시간.";
+        addNote("4시간 안에 응답하지 않으면 그다음 대기자에게 안내가 넘어간다.", true);
+      } else {
+        outcome.textContent = "안내가 그다음 대기자에게 넘어간다.";
+        basis.textContent = "근거: 응답 없이 경과 " + numberFormat.format(value) + "시간 ≥ 응답 기한 4시간.";
+        addNote("가정: 입력한 경과 시간 동안 대기자가 응답하지 않았다.", true);
+      }
+    }
+
+    form.addEventListener("input", update);
+    form.addEventListener("change", update);
+    form.addEventListener("submit", (event) => { event.preventDefault(); update(); });
+    document.getElementById("reset-flow").addEventListener("click", () => {
+      HTMLFormElement.prototype.reset.call(form);
+      update();
+    });
+    update();
+  </script>
+</body>
+</html>
+```

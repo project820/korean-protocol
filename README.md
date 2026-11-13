@@ -8,13 +8,60 @@ Korean Protocol(KP)은 Codex·Claude Code에서 **필요할 때 호출하는 한
 
 | 항목 | 내용 |
 | --- | --- |
-| 현재 버전 | **v0.11.0** · 호출형 스킬 · 읽는 형태와 L1~L4 출력 형식 |
+| 현재 버전 | **v0.11.1** · 호출형 스킬 · 읽는 형태와 L1~L4 출력 형식 |
 | 호출 | Codex `$korean-protocol` · Claude Code `/korean-protocol` |
 | 적용 범위 | 호출한 대화에만 적용한다. 자동 호출은 꺼져 있다. |
 | 설치 범위 | 사용자 범위에 설치하면 같은 계정의 다른 프로젝트에서도 호출한다. |
 | 기존 v0.7.0 | 상시 지침이다. 스킬과 함께 켜면 중복 적용되므로 [규약만 OFF로 전환](INSTALL.md#기존-07-상시-지침에서-전환한다)한다. |
 
-[설치](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [v0.7에서 전환](INSTALL.md#기존-07-상시-지침에서-전환한다) · [v0.11.0 변경·검증 상태](docs/distribution/output-formats-candidate-status.md) · [v0.11.0 예문 비교](#문장과-구조를-함께-다듬는다) · [릴리스](https://github.com/project820/korean-protocol/releases)
+[설치](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [v0.7에서 전환](INSTALL.md#기존-07-상시-지침에서-전환한다) · [v0.11.1 변경·검증 상태](docs/distribution/output-formats-candidate-status.md) · [v0.11.0 예문 비교](#문장과-구조를-함께-다듬는다) · [릴리스](https://github.com/project820/korean-protocol/releases)
+
+## v0.11.1은 L1~L4 출력 지침을 정의했다
+
+**v0.11.1 진단은 형식 준수 결과다. 원문·KP·STE 정식 비교는 미완료다.**
+
+**L2~L4를 선택하면 작성 전에 지정한 참조 파일을 읽는다.**
+`SKILL.md`의 description과 4A절에 단계별 산출물과 읽을 파일을 명시했다.
+참조를 읽을 수 없을 때 지킬 하한도 본문에 뒀다.
+
+| 단계 | 산출물 | 적용 조건 |
+| --- | --- | --- |
+| L1 | 텍스트 | 기본 문단·목록·절차를 쓴다. |
+| L2 | 표·Mermaid 도식 | 비교와 분기·관계를 표현한다. |
+| L3 | 단일 `index.html` | 변수 조작·상태 전환이 이해에 필요하거나 사용자가 요청할 때 쓴다. |
+| L4 | Manim 코드·내레이션 | 사용자가 영상화·애니메이션 코드를 명시 요청할 때 쓴다. |
+
+L3는 결과 패널을 입력 앞에 둔다. 입력은 원자료의 범주·수치에 맞춘다.
+HTML 검사에는 `innerhtml-assignment`·`result-after-input`·`dark-default-theme` 진단을 추가했다.
+
+### 형식 준수 진단을 기록한다
+
+원문은 회의실 예약 취소 안내 1종이다. 모델은 Sonnet 5.5·Sol·Terra·Grok 4.7이다.
+추론은 `medium`이다. 기본 실험은 KP·STE 모두 모델마다 2회 반복했다. Sonnet L3는 규칙 보강 뒤 KP만 2회 더 돌렸다.
+
+| 항목 | v0.11.0 | v0.11.1 |
+| --- | --- | --- |
+| L2 질문에 Mermaid 언급·SKILL.md만 제공 | 0/4 | 8/8 |
+| L3 결과 패널이 입력보다 앞·참조 포함 | 미측정 | 10/10 |
+| L3 `.panel_layout` 격자·참조 포함 | 미측정 | 10/10 |
+| L3 밝은 배경·첫 화면 결과·브라우저 확인 | Grok 어두운 테마 1건 | 16/16 |
+| L3 320px 가로 스크롤 | 미측정 | 0/16 |
+| Mermaid 11 파서 통과 | 미측정 | 8/8·KP 6, STE 2 |
+
+STE는 기본 실험과 같은 모델·요청·반복으로 L3 8건과 L2 4건을 생성했다.
+STE L3는 8건 모두 입력 없는 정적 문서였다.
+
+- **남은 문제:** Sonnet은 `SKILL.md`만 받은 조건에서 원자료에 없는 수치 입력을 4/4회 만들었다.
+- **참조 효과:** 규칙 보강 뒤 참조 포함 조건에서는 2/2회 모두 해당 입력이 없었다.
+- **적용 한계:** `SKILL.md`만 받은 조건의 격자 CSS 사용은 0/10이었다.
+- **진단 범위:** 수치 원문은 시험하지 않았다. 위 결과는 형식 준수 진단이다.
+- **L1 회귀:** 파일럿 사례 5개를 4모델로 한 번씩 생성하고 Astra high가 가려서 1회 판정했다. v0.11.1의 의미 통과는 16/20(실패 3, 미해결 1)이고 1,000자당 문체 위반은 2.4다. 같은 검토에서 v0.10.1은 19/20, STE는 14/20이었다. v0.11.0의 이전 검토 값은 17/20, 2.3이다. 같은 STE 출력이 두 검토에서 17/20과 14/20을 받아, 검토 1회의 차이는 3건 안팎으로 흔들린다.
+- **L2·L3 의미 보존:** Astra high가 원문과 대조했다. 출력 파일명에 KP·STE가 드러나 있어 가린 검토는 아니다. KP 출력은 16건 중 11건, STE 출력은 8건 중 5건이 보존이다. KP 실패 5건 중 3건은 HTML이 원문에 없는 시간 경계(24시간 정각, 4시간 정각)를 판정한 경우다.
+- **판본:** 기본 실험은 중간본 `6ef3520b`로 실행했다. 최종본(`19ae7744`)으로 4모델 확인 프로브 16건을 다시 돌렸다. L2 Mermaid 언급 4/4, L3 결과 먼저·격자 4/4, 검사기 진단 0건이었다.
+
+품질 향상·최종 합격은 이 진단으로 선언하지 않는다.
+상세 결과는 [v0.11.1 진단 기록](evaluation/kp-v0111-output-formats-20261113/README.md)에 보존한다.
+`SKILL.md`는 `o200k_base` 7,243토큰이다. v0.11.0보다 790토큰·약 12% 늘었다.
 
 ## v0.11.0은 읽는 형태를 다듬었다
 
@@ -118,15 +165,15 @@ KP 코어를 L1 공통 기준으로 사용한다. 사용자가 형식을 지정�
 
 ## 설치한다
 
-**설치 기준은 태그 `v0.11.0`이다.** 사용할 호스트에 설치를 요청한다.
+**설치 기준은 태그 `v0.11.1`이다.** 사용할 호스트에 설치를 요청한다.
 
 두 곳 모두 설치하려면 Codex와 Claude Code를 명시한다.
 
 ```text
 https://github.com/project820/korean-protocol 의 INSTALL.md를 읽어줘.
-태그 v0.11.0을 기준으로 Korean Protocol 스킬을 사용자 범위에 설치해줘.
+태그 v0.11.1을 기준으로 Korean Protocol 스킬을 사용자 범위에 설치해줘.
 skills/korean-protocol/SKILL.md의 SHA-256을 확인해줘.
-기준 해시: c09172014b872636afad1cac194e9c634a99e9fe165711cdd405a5249dd983c6
+기준 해시: 19ae7744da1d469225552b49e4108e52664f4f931c278d9f667c5ae7a4443604
 태그가 없거나 해시가 다르면 설치를 멈추고 결과를 알려줘.
 다른 프로젝트에서도 호출할 수 있게 하고 자동 호출은 꺼줘.
 기존 0.7 상시 설치가 있으면 같은 설치의 관리 명령으로 규약만 OFF로 전환해줘.
@@ -134,11 +181,20 @@ skills/korean-protocol/SKILL.md의 SHA-256을 확인해줘.
 기존 스킬 폴더는 덮어쓰기 전에 차이를 확인하고 설치·발견·호출 결과를 알려줘.
 ```
 
-설치는 수동이며 자동 갱신기는 없다. 설치 파일은 v0.10.1과 같은 13개다. 바뀐 파일은 `skills/korean-protocol/SKILL.md` 하나다.
+설치는 수동이며 자동 갱신기는 없다.
+설치 파일은 v0.11.0과 같은 13개다. 바뀐 파일은 5개다.
+
+| 파일 | 역할 |
+| --- | --- |
+| `SKILL.md` | 코어 지침을 담는다. |
+| `references/interactive-html.md` | HTML 작성 지침을 담는다. |
+| `references/output-formats.md` | 출력 형식 지침을 담는다. |
+| `assets/interactive-explainer.html` | 재사용 HTML 예제를 제공한다. |
+| `scripts/check_html.py` | HTML 진단을 수행한다. |
 
 설치 위치와 검증 절차는 [설치 안내](INSTALL.md)에 있다. **0.7 ZIP과 `agent_install.py install`은 이 스킬을 설치하지 않는다.**
 
-## v0.11.0을 호출한다
+## v0.11.1을 호출한다
 
 | 호스트 | 새 대화에 입력한다. |
 | --- | --- |
@@ -173,7 +229,8 @@ v0.9.0은 정식 3자 비교를 완료했지만 수락 기준을 통과하지 �
 
 | 버전 | 형태 | 상태 |
 | --- | --- | --- |
-| **v0.11.0** | 호출형 스킬 | 현재 권장이다. 읽는 형태를 다듬었다. 진단용 파일럿을 거쳤으며 정식 3자 비교는 미완료다. |
+| **v0.11.1** | 호출형 스킬 | 현재 권장이다. L1~L4 출력 지침과 참조 읽기 의무를 정의했다. 형식 준수 진단을 기록했으며 정식 3자 비교는 미완료다. |
+| v0.11.0 | 호출형 스킬 | 이전 버전이다. 읽는 형태를 다듬었다. 진단용 파일럿을 거쳤으며 정식 3자 비교는 미완료다. |
 | v0.10.1 | 호출형 스킬 | 이전 버전이다. 높임말 없는 짧은 문장, 보고용 앞부분과 부록, HTML·영상 표현 기준을 다듬었다. 정식 3자 비교는 완료하지 않았다. |
 | v0.10.0 | 호출형 스킬 | 이전 버전. L1~L4 출력 형식을 추가했다. 정식 3자 비교는 완료하지 않았다. |
 | v0.9.0 | 호출형 스킬 | 이전 버전. [60차 비교](evaluation/clarity-20261016-r60/README.md) 결과를 따르며 수락 기준은 통과하지 못했다. |
@@ -188,7 +245,7 @@ v0.9.0은 정식 3자 비교를 완료했지만 수락 기준을 통과하지 �
 | 목적 | 문서 |
 | --- | --- |
 | 설치·호출·전환 | [설치 안내](INSTALL.md) · [처음 사용](docs/distribution/quick-start.md) · [호출 확인](docs/distribution/on-demand-skill.md) · [호스트 지원](docs/distribution/host-support.md) |
-| 평가 기록 | [v0.11.0 진단용 파일럿](evaluation/kp-lean-pilot-20261113/README.md) · [평가 규칙](evaluation/README.md) · [v0.10.0 출력 형식 평가](evaluation/output_formats/README.md) · [v0.9.0 60차 비교](evaluation/clarity-20261016-r60/README.md) · [v0.8.0 세션 보고서 비교](evaluation/session-reports-20261015/README.md) |
+| 평가 기록 | [v0.11.1 형식 준수 진단](evaluation/kp-v0111-output-formats-20261113/README.md) · [v0.11.0 진단용 파일럿](evaluation/kp-lean-pilot-20261113/README.md) · [평가 규칙](evaluation/README.md) · [v0.10.0 출력 형식 평가](evaluation/output_formats/README.md) · [v0.9.0 60차 비교](evaluation/clarity-20261016-r60/README.md) · [v0.8.0 세션 보고서 비교](evaluation/session-reports-20261015/README.md) |
 | 규칙과 어휘 | [한국어 세부 규칙](docs/spec/korean-rules.md) · [통제 어휘](docs/spec/lexicon.md) |
 | 기존 v0.7.0 관리 | [관리 설정](docs/distribution/application-controls.md) · [배포 계약](docs/distribution/README.md) · [채팅 안내](distribution/CHAT-START.md) |
 | 설계와 근거 | [문서 목차](docs/README.md) · [검증 상태](docs/status/requirements.md) · [연구 근거](docs/research-basis.md) |

@@ -51,6 +51,167 @@ class SkillHtmlCheckTests(unittest.TestCase):
         self.assertEqual(result['status'], 'no_findings', result)
         self.assertIn('browser', ' '.join(result['limitations']).lower())
 
+    def test_html_mutations_are_diagnosed_with_source_locations(self):
+        for expression in ['node.innerHTML = value;', 'node.outerHTML += value;',
+                           'node.insertAdjacentHTML("beforeend", value);']:
+            with self.subTest(expression=expression):
+                result = self.check(page(script='\n' + expression))
+                diagnostic = next(d for d in result['diagnostics']
+                                  if d['code'] == 'innerhtml-assignment')
+                self.assertEqual(result['status'], 'issues_found')
+                self.assertEqual(diagnostic['line'], 2)
+                self.assertEqual(diagnostic['context'], 'javascript')
+                self.assertIn('HTML', diagnostic['snippet'])
+
+    def test_html_reads_comments_and_string_examples_are_not_mutations(self):
+        script = ('const markup = node.innerHTML;\n'
+                  'node.innerHTML === value; node.outerHTML != value;\n'
+                  'node.textContent = "node.innerHTML = value";\n'
+                  '// node.outerHTML = value;\n'
+                  '/* node.insertAdjacentHTML("beforeend", value); */')
+        self.assertNotIn('innerhtml-assignment', self.codes(self.check(page(script=script))))
+
+    def test_regex_literal_contents_are_not_html_mutations(self):
+        for script in [r'const pattern = /node.innerHTML = value/;',
+                       r'const pattern = /node\.innerHTML = [a/]+/g;',
+                       r'const pattern = (/node.outerHTML += value/);',
+                       r'function pattern() { return /node.innerHTML = value/; }',
+                       r'const pattern = true && /node.innerHTML = value/;',
+                       r'const pattern = /node["innerHTML"] = value/;']:
+            with self.subTest(script=script):
+                self.assertNotIn('innerhtml-assignment', self.codes(self.check(page(script=script))))
+
+    def test_static_bracket_html_assignments_are_diagnosed(self):
+        for expression in ['node["innerHTML"] = source;', "node['outerHTML'] = source;",
+                           'node[ /* property */ "innerHTML" ] += source;']:
+            with self.subTest(expression=expression):
+                result = self.check(page(script='\n' + expression))
+                diagnostic = next(d for d in result['diagnostics']
+                                  if d['code'] == 'innerhtml-assignment')
+                self.assertEqual(diagnostic['line'], 2)
+                self.assertIn('HTML', diagnostic['snippet'])
+
+    def test_template_interpolation_html_assignments_are_diagnosed(self):
+        for script in ['const view = `${node.innerHTML = source}`;',
+                       'const view = `결과: ${node["outerHTML"] = source}`;',
+                       'const view = `${({ value: node.innerHTML = source }).value}`;',
+                       'const view = `${`결과: ${node.innerHTML = source}`}`;']:
+            with self.subTest(script=script):
+                self.assertIn('innerhtml-assignment', self.codes(self.check(page(script=script))))
+
+    def test_html_mutation_scanner_keeps_division_and_template_text_distinct(self):
+        for script in ['const value = total / count; node.innerHTML = source;',
+                       'const value = total / node.innerHTML / count; node.outerHTML = source;']:
+            with self.subTest(script=script):
+                self.assertIn('innerhtml-assignment', self.codes(self.check(page(script=script))))
+        for script in ['const view = `node.innerHTML = source`;',
+                       r'const view = `\${node.innerHTML = source}`;',
+                       'const view = `${"node.innerHTML = source"}`;',
+                       'const view = `${/node.innerHTML = source/}`;',
+                       'const value = node["innerHTML"];',
+                       'node["outerHTML"] === source;']:
+            with self.subTest(script=script):
+                self.assertNotIn('innerhtml-assignment', self.codes(self.check(page(script=script))))
+
+    def test_result_after_first_input_is_diagnosed(self):
+        for control in ['<input aria-label="값">', '<select aria-label="값"></select>',
+                        '<textarea aria-label="값"></textarea>']:
+            for result_area in ['<output>96kWh</output>', '<div aria-live="polite">96kWh</div>']:
+                with self.subTest(control=control, result_area=result_area):
+                    result = self.check(page(control + '\n' + result_area))
+                    diagnostic = next(d for d in result['diagnostics']
+                                      if d['code'] == 'result-after-input')
+                    self.assertEqual(result['status'], 'issues_found')
+                    self.assertEqual(diagnostic['line'], 2)
+                    self.assertIn(diagnostic['context'], ('output', 'div'))
+                    self.assertIn(result_area.split('>')[0] + '>', diagnostic['snippet'])
+
+    def test_result_order_uses_first_result_and_ignores_hidden_inputs(self):
+        for body in ['<input type="hidden"><output>96kWh</output><input aria-label="값">',
+                     '<div aria-live="polite">96kWh<input aria-label="값"></div>',
+                     '<output>96kWh</output><input aria-label="값"><output>150kWh</output>',
+                     '<input aria-label="값">', '<output>96kWh</output>',
+                     '<input type="HIDDEN"><output>96kWh</output>', '']:
+            with self.subTest(body=body):
+                self.assertNotIn('result-after-input', self.codes(self.check(page(body))))
+
+    def test_result_order_prioritizes_visible_output_over_status_or_inert_regions(self):
+        for prefix in ['<div aria-live="polite">저장 상태</div>',
+                       '<div aria-live="off">저장 상태</div>',
+                       '<output hidden>이전 결과</output>',
+                       '<template><output>결과 서식</output></template>',
+                       '<output aria-hidden="true">이전 결과</output>',
+                       '<div hidden><output>이전 결과</output></div>',
+                       '<div aria-hidden="true"><output>이전 결과</output></div>',
+                       '<output aria-live="off">이전 결과</output>']:
+            with self.subTest(prefix=prefix):
+                result = self.check(page(prefix + '<input aria-label="입력">\n<output>결과</output>'))
+                diagnostic = next(d for d in result['diagnostics']
+                                  if d['code'] == 'result-after-input')
+                self.assertEqual(diagnostic['line'], 2)
+                self.assertEqual(diagnostic['context'], 'output')
+
+    def test_result_order_ignores_inactive_result_regions(self):
+        for result_area in ['<output hidden>결과</output>',
+                            '<output aria-hidden="true">결과</output>',
+                            '<template><output>결과</output></template>',
+                            '<div aria-live="off">결과</div>',
+                            '<div aria-live="polite" hidden>결과</div>']:
+            with self.subTest(result_area=result_area):
+                result = self.check(page('<input aria-label="입력">' + result_area))
+                self.assertNotIn('result-after-input', self.codes(result))
+
+    def test_dark_theme_css_is_diagnosed_with_source_locations(self):
+        for css in ['@media (prefers-color-scheme: dark) { body { color: white; } }',
+                    ':root { color-scheme: dark; }', ':root { COLOR-SCHEME: only DARK; }']:
+            with self.subTest(css=css):
+                result = self.check(page(head='<style>\n' + css + '</style>'))
+                diagnostic = next(d for d in result['diagnostics']
+                                  if d['code'] == 'dark-default-theme')
+                self.assertEqual(result['status'], 'issues_found')
+                self.assertEqual(diagnostic['line'], 2)
+                self.assertEqual(diagnostic['context'], 'css')
+                self.assertIn('dark', diagnostic['snippet'].lower())
+
+    def test_light_theme_and_commented_dark_css_are_not_diagnosed(self):
+        css = (':root { color-scheme: light; }\n'
+               '@media (prefers-color-scheme: light) { body { color: black; } }\n'
+               '/* @media (prefers-color-scheme: dark) {} color-scheme: dark; */')
+        result = self.check(page(head='<style>' + css + '</style>'))
+        self.assertNotIn('dark-default-theme', self.codes(result))
+
+    def test_css_string_contents_are_not_dark_theme_declarations(self):
+        for css in ['p::before { content: "color-scheme: dark"; }',
+                    "p::before { content: '@media (prefers-color-scheme: dark) {}'; }",
+                    r'p::before { content: "\"color-scheme: dark"; }',
+                    'p::before { content: "/*"; } :root { color-scheme: light; }']:
+            with self.subTest(css=css):
+                self.assertNotIn('dark-default-theme', self.codes(
+                    self.check(page(head='<style>' + css + '</style>'))))
+
+    def test_dark_only_color_scheme_meta_is_diagnosed(self):
+        for content in ['dark', 'only dark', 'DARK']:
+            with self.subTest(content=content):
+                result = self.check(page(head='\n<meta name="color-scheme" content="' + content + '">'))
+                diagnostic = next(d for d in result['diagnostics']
+                                  if d['code'] == 'dark-default-theme')
+                self.assertEqual(diagnostic['line'], 2)
+                self.assertEqual(diagnostic['context'], 'meta@content')
+
+    def test_light_and_dark_color_schemes_are_not_dark_only(self):
+        for value in ['light', 'light dark', 'DARK light', 'normal']:
+            with self.subTest(value=value):
+                for head in ['<meta name="color-scheme" content="' + value + '">',
+                             '<style>:root { color-scheme: ' + value + '; }</style>']:
+                    self.assertNotIn('dark-default-theme', self.codes(self.check(page(head=head))))
+
+    def test_dark_theme_declaration_after_css_string_keeps_source_location(self):
+        css = 'p::before { content: "/* not a comment */"; }\n:root { color-scheme: dark; }'
+        result = self.check(page(head='<style>' + css + '</style>'))
+        diagnostic = next(d for d in result['diagnostics'] if d['code'] == 'dark-default-theme')
+        self.assertEqual(diagnostic['line'], 2)
+        self.assertEqual(diagnostic['column'], 9)
+
     def test_initial_text_and_accessible_attributes_are_checked(self):
         for body in ['<h1>テスト</h1>', '<button aria-label="テスト">실행한다</button>',
                      '<input type="button" value="テスト">', '<p title="テスト">설명한다</p>']:

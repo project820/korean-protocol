@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>회의실 예약 취소와 대기자 안내</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f5f7fa;
+      color: #202936;
+      font-family: system-ui, -apple-system, "Malgun Gothic", sans-serif;
+      line-height: 1.7;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+    main {
+      max-width: 760px;
+      margin: 48px auto;
+      padding: 32px;
+      background: #fff;
+      border: 1px solid #dce2e9;
+      border-radius: 12px;
+    }
+    h1 { margin: 0 0 28px; font-size: 1.8rem; line-height: 1.4; }
+    h2 { margin: 0 0 12px; font-size: 1.2rem; }
+    h3 { margin: 20px 0 8px; font-size: 1rem; }
+    section + section { margin-top: 28px; padding-top: 24px; border-top: 1px solid #dce2e9; }
+    p { margin: 8px 0; }
+    @media (max-width: 600px) {
+      main { margin: 16px; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>회의실 예약 취소와 대기자 안내</h1>
+
+    <section aria-labelledby="cancellation">
+      <h2 id="cancellation">취소 시점에 따른 처리</h2>
+
+      <h3>이용 시간 24시간 전까지 취소한 경우</h3>
+      <p>예약이 확정된 사람이 이용 시간 24시간 전까지 취소하면, 시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보냅니다.</p>
+
+      <h3>이용 시간 24시간 이내에 취소한 경우</h3>
+      <p>자동 안내는 발송되지 않습니다.</p>
+      <p>총무팀이 직접 판단하여 처리합니다.</p>
+    </section>
+
+    <section aria-labelledby="response">
+      <h2 id="response">안내를 받은 대기자의 응답</h2>
+      <p>안내를 받으면, 안내를 받은 시점부터 <strong>4시간 이내에 응답하세요.</strong></p>
+      <p>4시간 이내에 응답하지 않으면, 시스템이 그다음 대기자에게 안내를 보냅니다.</p>
+    </section>
+
+    <section aria-labelledby="no-waiters">
+      <h2 id="no-waiters">남은 대기자가 없는 경우</h2>
+      <p>해당 시간대가 일반 예약으로 다시 열립니다.</p>
+    </section>
+  </main>
+</body>
+</html>

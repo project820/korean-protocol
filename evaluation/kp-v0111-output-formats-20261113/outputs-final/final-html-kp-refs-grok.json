@@ -1,0 +1,1 @@
+{"name": "final-html-kp-refs-grok", "model": "xai/grok-4.7", "request_sha256": "0734362364fff7920f8b716b51e15e05c90aadb624539e4e7285dbffcdcd57d9", "status": "completed", "returned": "grok-4.7-build", "chars": 9578, "output_sha256": "0100655681d82cfeaf64ba81441a5bbcd6c0f93ba669a4254a3891d78b59b62b", "seconds": 306}

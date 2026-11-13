@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회의실 확정 예약 취소는 시점과 대기자로 처리한다</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #ffffff;
+    color: #1c1c1c;
+    font-family: system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .wrap {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  h1, h2 { line-height: 1.35; font-size: 1.15rem; margin: 0 0 0.75rem; }
+  h1 { font-size: 1.35rem; }
+  p { margin: 0 0 0.6rem; }
+  .scope { margin-bottom: 1rem; }
+  section {
+    margin: 0 0 1rem;
+    padding: 0.9rem;
+    border: 1px solid #d8dee6;
+    background: #ffffff;
+  }
+  #result-panel { background: #f3f6fa; }
+  .conditions {
+    margin-top: 0.8rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid #d8dee6;
+  }
+  fieldset {
+    margin: 0 0 0.9rem;
+    padding: 0.7rem;
+    border: 1px solid #d8dee6;
+  }
+  legend { font-weight: 700; padding: 0 0.2rem; }
+  label { display: block; margin: 0.35rem 0; }
+  .hint, .error { min-height: 1.2em; margin: 0.2rem 0 0; }
+  .error { color: #8a1f1f; }
+  button {
+    font: inherit;
+    background: #ffffff;
+    color: #1c1c1c;
+    border: 1px solid #1f4e79;
+    padding: 0.4rem 0.7rem;
+  }
+  button:focus, input:focus { outline: 2px solid #1f4e79; outline-offset: 2px; }
+  ul { margin: 0; padding-left: 1.2rem; }
+  li { margin: 0 0 0.8rem; }
+  @media (max-width: 320px) {
+    .wrap { padding: 0.75rem; }
+    section, fieldset { padding: 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>회의실 확정 예약 취소는 시점과 대기자로 처리한다</h1>
+  <p class="scope"><strong>대상·범위</strong> 확정 예약자가 회의실 예약을 취소할 때의 처리</p>
+
+  <section id="result-panel">
+    <h2>결과</h2>
+    <div id="result-body" aria-live="polite"></div>
+  </section>
+
+  <section>
+    <h2>입력</h2>
+    <form id="rule-form">
+      <fieldset>
+        <legend>취소 시점</legend>
+        <label for="timing-before"><input id="timing-before" type="radio" name="timing" value="before" checked> 이용 시간 24시간 전까지</label>
+        <label for="timing-within"><input id="timing-within" type="radio" name="timing" value="within"> 이용 24시간 이내</label>
+        <p id="timing-error" class="error"></p>
+      </fieldset>
+      <fieldset>
+        <legend>대기자 명단</legend>
+        <label for="waiter-next"><input id="waiter-next" type="radio" name="waiter" value="next" checked> 다음 순번이 있다</label>
+        <label for="waiter-none"><input id="waiter-none" type="radio" name="waiter" value="none"> 남은 대기자가 없다</label>
+        <p id="waiter-error" class="error"></p>
+      </fieldset>
+      <fieldset>
+        <legend>안내 후 응답</legend>
+        <label for="reply-in"><input id="reply-in" type="radio" name="reply" value="in" checked> 4시간 이내 응답</label>
+        <label for="reply-out"><input id="reply-out" type="radio" name="reply" value="out"> 4시간 이내 미응답</label>
+        <p id="reply-note" class="hint"></p>
+        <p id="reply-error" class="error"></p>
+      </fieldset>
+      <button type="button" id="restore-initial">초기값</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>규칙</h2>
+    <ul>
+      <li>
+        <strong>이용 시간 24시간 전 취소</strong>
+        <p>확정 예약자가 이용 시간 24시간 전까지 취소하면 시스템이 자동 안내를 보낸다.</p>
+        <p>안내 대상은 대기자 명단의 다음 순번이다.</p>
+      </li>
+      <li>
+        <strong>응답 기한</strong>
+        <p>안내를 받은 대기자는 그 안내를 받은 시점으로부터 4시간 이내에 응답한다.</p>
+      </li>
+      <li>
+        <strong>기한 내 미응답</strong>
+        <p>그 시간 안에 응답하지 않으면 안내가 그다음 대기자에게 넘어간다.</p>
+      </li>
+      <li>
+        <strong>이용 24시간 이내 취소</strong>
+        <p>이용 24시간 이내에 취소하면 자동 안내가 가지 않는다.</p>
+        <p>총무팀이 직접 판단해서 처리한다.</p>
+      </li>
+      <li>
+        <strong>남은 대기자 없음</strong>
+        <p>남은 대기자가 없으면 해당 시간대가 일반 예약으로 다시 열린다.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>참고</h2>
+    <p>원문은 이용 24시간 이내 취소와 남은 대기자 없음을 각각 말한다.</p>
+  </section>
+</div>
+<script>
+(function () {
+  var form = document.getElementById("rule-form");
+  var resultBody = document.getElementById("result-body");
+  var replyNote = document.getElementById("reply-note");
+  var errors = {
+    timing: document.getElementById("timing-error"),
+    waiter: document.getElementById("waiter-error"),
+    reply: document.getElementById("reply-error")
+  };
+
+  function selected(name) {
+    var el = form.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : "";
+  }
+
+  function clear(node) {
+    while (node.firstChild) node.removeChild(node.firstChild);
+  }
+
+  function addAction(text) {
+    var p = document.createElement("p");
+    var strong = document.createElement("strong");
+    strong.textContent = text;
+    p.appendChild(strong);
+    resultBody.appendChild(p);
+  }
+
+  function addGap(text) {
+    var p = document.createElement("p");
+    var strong = document.createElement("strong");
+    strong.textContent = "미기재";
+    p.appendChild(strong);
+    p.appendChild(document.createTextNode(" " + text));
+    resultBody.appendChild(p);
+  }
+
+  function addConditions(lines) {
+    var box = document.createElement("div");
+    var head = document.createElement("p");
+    var strong = document.createElement("strong");
+    box.className = "conditions";
+    strong.textContent = "조건";
+    head.appendChild(strong);
+    box.appendChild(head);
+    lines.forEach(function (line) {
+      var p = document.createElement("p");
+      p.textContent = line;
+      box.appendChild(p);
+    });
+    resultBody.appendChild(box);
+  }
+
+  function render() {
+    var timing = selected("timing");
+    var waiter = selected("waiter");
+    var reply = selected("reply");
+    var replyUsed = timing === "before" && waiter === "next";
+    var valid = true;
+
+    clear(resultBody);
+    errors.timing.textContent = timing ? "" : "취소 시점을 고른다.";
+    errors.waiter.textContent = waiter ? "" : "대기자 상태를 고른다.";
+    errors.reply.textContent = reply ? "" : "응답 상태를 고른다.";
+    if (!timing || !waiter || !reply) valid = false;
+    replyNote.textContent = replyUsed || !valid ? "" : "이 결과는 응답 시각을 쓰지 않는다.";
+    if (!valid) return;
+
+    if (timing === "before" && waiter === "next" && reply === "in") {
+      addAction("시스템이 대기자 명단의 다음 순번에게 자동 안내를 보낸다.");
+      addAction("대기자는 안내를 받은 시점으로부터 4시간 이내에 응답한다.");
+      addGap("기한 안에 응답한 뒤의 처리.");
+      addConditions([
+        "취소 시점은 이용 시간 24시간 전까지다.",
+        "대기자 명단에 다음 순번이 있다.",
+        "대기자가 안내 시점으로부터 4시간 이내에 응답했다."
+      ]);
+      return;
+    }
+
+    if (timing === "before" && waiter === "next" && reply === "out") {
+      addAction("시스템이 대기자 명단의 다음 순번에게 자동 안내를 보낸다.");
+      addAction("그 시간 안에 응답하지 않으면 안내가 그다음 대기자에게 넘어간다.");
+      addConditions([
+        "취소 시점은 이용 시간 24시간 전까지다.",
+        "대기자 명단에 다음 순번이 있다.",
+        "그 대기자가 4시간 이내에 응답하지 않았다."
+      ]);
+      return;
+    }
+
+    if (timing === "before" && waiter === "none") {
+      addAction("해당 시간대가 일반 예약으로 다시 열린다.");
+      addConditions([
+        "취소 시점은 이용 시간 24시간 전까지다.",
+        "남은 대기자가 없다."
+      ]);
+      return;
+    }
+
+    if (timing === "within" && waiter === "next") {
+      addAction("자동 안내가 가지 않는다.");
+      addAction("총무팀이 직접 판단해서 처리한다.");
+      addGap("총무팀 판단의 구체적 결과.");
+      addConditions([
+        "취소 시점은 이용 24시간 이내다.",
+        "대기자 명단에 다음 순번이 있어도 자동 안내는 가지 않는다."
+      ]);
+      return;
+    }
+
+    addAction("자동 안내가 가지 않는다.");
+    addAction("총무팀이 직접 판단해서 처리한다.");
+    addAction("해당 시간대가 일반 예약으로 다시 열린다.");
+    addGap("총무팀 판단의 구체적 결과.");
+    addConditions([
+      "취소 시점은 이용 24시간 이내다.",
+      "남은 대기자가 없다."
+    ]);
+  }
+
+  form.addEventListener("change", render);
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+  });
+  document.getElementById("restore-initial").addEventListener("click", function () {
+    document.getElementById("timing-before").checked = true;
+    document.getElementById("waiter-next").checked = true;
+    document.getElementById("reply-in").checked = true;
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

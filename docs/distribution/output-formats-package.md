@@ -1,18 +1,28 @@
-# v0.11.0 후보 패키지의 검증·설치 절차
+# v0.11.1 후보 패키지의 검증·설치 절차
 
 이 도구는 서명 없는 로컬 후보 ZIP을 만든다. 원문·KP·STE 정식 비교는 미완료다.
 
-- **기본 버전:** `0.11.0-candidate`를 사용한다.
-- **수동 공개 스킬 설치 기준:** 태그 `v0.11.0`을 사용한다. 아래 후보 ZIP 도구는 현재 작업 트리의 바이트를 사용한다.
-- **SKILL.md SHA-256:** `c09172014b872636afad1cac194e9c634a99e9fe165711cdd405a5249dd983c6`이다.
+- **기본 버전:** `0.11.1-candidate`를 사용한다.
+- **수동 공개 스킬 설치 기준:** 태그 `v0.11.1`을 사용한다. 아래 후보 ZIP 도구는 현재 작업 트리의 바이트를 사용한다.
+- **SKILL.md SHA-256:** `19ae7744da1d469225552b49e4108e52664f4f931c278d9f667c5ae7a4443604`이다.
 
-**v0.11.0 파일럿은 이 도구의 설치 통과 근거가 아니다.** 설치 계획에는 독립 평가·매체·호스트 근거가 필요하다. 수동 스킬 설치는 [INSTALL.md](../../INSTALL.md)를 따른다.
+**v0.11.0 파일럿과 v0.11.1 형식 준수 진단은 이 도구의 설치 통과 근거가 아니다.** 설치 계획에는 독립 평가·매체·호스트 근거가 필요하다. 수동 스킬 설치는 [INSTALL.md](../../INSTALL.md)를 따른다.
 
 ## 준비
 
 저장소 루트에서 [패키지 도구](../../distribution/skill_package.py)를 실행한다. 아래 `study`는 실제 검증 근거를 둘 예시 경로다.
 
-설치 구성은 이전 v0.10.1과 같은 13개 파일이다. v0.11.0에서는 `SKILL.md`만 바뀌었다. 새 0절과 4절의 추가 문장은 [변경·검증 상태](output-formats-candidate-status.md)에 기록한다.
+설치 파일은 v0.11.0과 같은 13개다. 바뀐 파일은 5개다.
+
+| 파일 | 역할 |
+| --- | --- |
+| `SKILL.md` | 코어 지침을 담는다. |
+| `references/interactive-html.md` | HTML 작성 지침을 담는다. |
+| `references/output-formats.md` | 출력 형식 지침을 담는다. |
+| `assets/interactive-explainer.html` | 재사용 HTML 예제를 제공한다. |
+| `scripts/check_html.py` | HTML 진단을 수행한다. |
+
+출력 지침과 진단 결과는 [변경·검증 상태](output-formats-candidate-status.md)에 기록한다.
 
 ### 포함 파일을 확인한다
 
@@ -50,14 +60,14 @@
 
    ```sh
    python3 -B distribution/skill_package.py build \
-     --output output/kp-v0.11.0/korean-protocol-0.11.0-candidate.zip
+     --output output/kp-v0.11.1/korean-protocol-0.11.1-candidate.zip
    ```
 
 2. **후보 바이트를 검증한다.**
 
    ```sh
    python3 -B distribution/skill_package.py verify \
-     --package output/kp-v0.11.0/korean-protocol-0.11.0-candidate.zip
+     --package output/kp-v0.11.1/korean-protocol-0.11.1-candidate.zip
    ```
 
 3. **평가 근거로 설치 계획을 확인한다.**
@@ -65,8 +75,8 @@
 
    ```sh
    python3 -B distribution/skill_package.py plan \
-     --package output/kp-v0.11.0/korean-protocol-0.11.0-candidate.zip \
-     --evidence output/kp-v0.11.0/study \
+     --package output/kp-v0.11.1/korean-protocol-0.11.1-candidate.zip \
+     --evidence output/kp-v0.11.1/study \
      --host codex --host claude-code
    ```
 
@@ -75,8 +85,8 @@
 
    ```sh
    python3 -B distribution/skill_package.py install \
-     --package output/kp-v0.11.0/korean-protocol-0.11.0-candidate.zip \
-     --evidence output/kp-v0.11.0/study \
+     --package output/kp-v0.11.1/korean-protocol-0.11.1-candidate.zip \
+     --evidence output/kp-v0.11.1/study \
      --host codex --host claude-code
    ```
 

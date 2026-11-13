@@ -1,0 +1,142 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회의실 예약 취소 처리 확인</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --text:#1f2933; --muted:#52606d; --line:#d9dee4; --accent:#1c5fb8; --warn:#9a4b00; --err:#b42318; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:16px; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif; line-height:1.6; }
+  main { max-width:760px; margin:0 auto; }
+  h1 { font-size:1.4rem; margin:0 0 4px; }
+  h2 { font-size:1.05rem; margin:0 0 10px; }
+  .scope { color:var(--muted); margin:0 0 16px; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:14px; }
+  .field { margin-bottom:14px; }
+  .field > label, .field > .legend { display:block; font-weight:600; margin-bottom:6px; }
+  .opt { display:block; margin:4px 0; font-weight:400; }
+  input[type=number], select { width:100%; max-width:260px; padding:8px; font-size:1rem; border:1px solid var(--line); border-radius:6px; }
+  .error { color:var(--err); font-size:.9rem; margin-top:4px; min-height:1em; }
+  #result { border-left:4px solid var(--accent); }
+  #resultMain { font-weight:700; font-size:1.1rem; margin:0 0 8px; }
+  #resultList { margin:0; padding-left:20px; }
+  .warn { color:var(--warn); }
+  button { padding:8px 16px; font-size:1rem; border:1px solid var(--accent); background:#fff; color:var(--accent); border-radius:6px; cursor:pointer; }
+  button:focus-visible, input:focus-visible, select:focus-visible { outline:3px solid #8ab4f8; outline-offset:2px; }
+  ul.rules { margin:0; padding-left:20px; }
+  @media (max-width:320px) { body { padding:8px; } section { padding:12px; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>취소 시점에 따라 대기자 안내 처리를 확인한다.</h1>
+  <p class="scope">대상: 확정된 회의실 예약의 취소</p>
+
+  <section id="result" aria-live="polite">
+    <h2>결과</h2>
+    <p id="resultMain"></p>
+    <ul id="resultList"></ul>
+  </section>
+
+  <section>
+    <h2>입력</h2>
+    <div class="field">
+      <label for="hours">취소 시점 (이용 시작 몇 시간 전)</label>
+      <input type="number" id="hours" name="hours" value="24" min="0" step="any">
+      <div class="error" id="hoursError"></div>
+    </div>
+    <div class="field">
+      <span class="legend" id="waitLegend">대기자 상태</span>
+      <div role="radiogroup" aria-labelledby="waitLegend">
+        <label class="opt"><input type="radio" name="waiting" value="yes" checked> 대기자 있음</label>
+        <label class="opt"><input type="radio" name="waiting" value="no"> 남은 대기자 없음</label>
+      </div>
+    </div>
+    <button type="button" id="reset">초기화</button>
+  </section>
+
+  <section>
+    <h2>규칙</h2>
+    <ul class="rules">
+      <li>이용 시간 24시간 전까지 취소하면 시스템이 대기자 명단의 다음 순번에게 자동으로 안내를 보낸다.</li>
+      <li>안내를 받은 대기자는 안내를 받은 시점으로부터 4시간 이내에 응답한다.</li>
+      <li>그 시간 안에 응답하지 않으면 안내가 그다음 대기자에게 넘어간다.</li>
+      <li>이용 24시간 이내에 취소하면 자동 안내가 가지 않고 총무팀이 직접 판단해서 처리한다.</li>
+      <li>남은 대기자가 없으면 해당 시간대가 일반 예약으로 다시 열린다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>참고</h2>
+    <ul class="rules">
+      <li>정확히 24시간 전 취소는 "24시간 전까지"에 해당하는 것으로 입력을 처리한다. 이는 가정이다.</li>
+      <li>원문은 이용 24시간 이내 취소 시 남은 대기자가 없을 때의 처리를 밝히지 않는다.</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+(function () {
+  var hoursEl = document.getElementById('hours');
+  var errEl = document.getElementById('hoursError');
+  var mainEl = document.getElementById('resultMain');
+  var listEl = document.getElementById('resultList');
+  var radios = document.getElementsByName('waiting');
+
+  function waiting() {
+    for (var i = 0; i < radios.length; i++) if (radios[i].checked) return radios[i].value;
+    return 'yes';
+  }
+  function setList(items) {
+    listEl.textContent = '';
+    items.forEach(function (t) {
+      var li = document.createElement('li');
+      li.textContent = t;
+      listEl.appendChild(li);
+    });
+  }
+  function calc() {
+    var raw = hoursEl.value.trim();
+    var h = Number(raw);
+    if (raw === '' || !isFinite(h) || h < 0) {
+      errEl.textContent = '0 이상의 숫자를 입력한다.';
+      hoursEl.setAttribute('aria-invalid', 'true');
+      mainEl.textContent = '입력을 확인한 뒤 결과를 표시한다.';
+      setList([]);
+      return;
+    }
+    errEl.textContent = '';
+    hoursEl.removeAttribute('aria-invalid');
+    var has = waiting() === 'yes';
+    if (h >= 24) {
+      if (has) {
+        mainEl.textContent = '시스템이 다음 순번 대기자에게 자동으로 안내를 보낸다.';
+        setList([
+          '안내를 받은 대기자는 안내를 받은 시점으로부터 4시간 이내에 응답한다.',
+          '4시간 안에 응답하지 않으면 안내가 그다음 대기자에게 넘어간다.',
+          '남은 대기자가 없어지면 해당 시간대가 일반 예약으로 다시 열린다.'
+        ]);
+      } else {
+        mainEl.textContent = '해당 시간대가 일반 예약으로 다시 열린다.';
+        setList([]);
+      }
+    } else {
+      mainEl.textContent = '자동 안내가 가지 않고 총무팀이 직접 판단해서 처리한다.';
+      setList(has ? [] : ['이 경우의 일반 예약 재개방 여부는 원문에 밝혀져 있지 않다.']);
+    }
+  }
+  hoursEl.addEventListener('input', calc);
+  for (var i = 0; i < radios.length; i++) radios[i].addEventListener('change', calc);
+  document.getElementById('reset').addEventListener('click', function () {
+    hoursEl.value = '24';
+    radios[0].checked = true;
+    calc();
+  });
+  calc();
+})();
+</script>
+</body>
+</html>
+```
