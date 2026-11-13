@@ -442,7 +442,7 @@ class FieldReportTests(unittest.TestCase):
                     sock.sendall(b'HTTP/1.1 200 OK\r\n')
                     chunk = b'X-Drip: x\r\n'
                 elif phase == 'body':
-                    sock.sendall(b'HTTP/1.1 200 OK\r\nContent-Length: 99999\r\n\r\n')
+                    sock.sendall(b'HTTP/1.1 200 OK\r\nContent-Length: 99999\r\n\r\nx')
                     chunk = b'x'
                 else:
                     sock.sendall(b'HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n'
